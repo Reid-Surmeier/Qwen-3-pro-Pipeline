@@ -1,0 +1,4 @@
+interface:
+  display_name: "Figma Qwen UI Pipeline"
+  short_description: "Fast FigJam asset and UI iteration loop"
+  default_prompt: "Use $figma-qwen-ui-pipeline to inspect the board, upload or edit assets, and keep the UI implementation synchronized."
