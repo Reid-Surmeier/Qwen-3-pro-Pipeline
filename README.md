@@ -15,6 +15,10 @@ Figma/FigJam, and deterministic application code.
 - OpenRouter and Alibaba keys are injected from Bitwarden Secrets Manager by
   the service wrapper; they are not stored in this repository.
 
+Sanitized copies of the service unit, secret-injection wrapper, and Codex MCP
+registration live in [`deploy/`](deploy/README.md) so the host setup can be
+recreated without copying credentials.
+
 Check the service and API:
 
 ```bash
