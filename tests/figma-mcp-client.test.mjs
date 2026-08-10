@@ -42,6 +42,23 @@ test("upload URL extraction ignores commit URLs and deduplicates", () => {
   ]);
 });
 
+test("upload URL extraction accepts current Figma MCP submit URLs", () => {
+  const result = {
+    content: [{
+      type: "text",
+      text: JSON.stringify({
+        uploads: [{
+          submitUrl: "https://mcp.figma.com/mcp/upload/asset-id/submit?scaleMode=FILL",
+        }],
+      }),
+    }],
+  };
+
+  assert.deepEqual(extractUploadUrls(result, 1), [
+    "https://mcp.figma.com/mcp/upload/asset-id/submit?scaleMode=FILL",
+  ]);
+});
+
 test("content types cover supported UI asset formats", () => {
   assert.equal(guessContentType("asset.png"), "image/png");
   assert.equal(guessContentType("asset.svg"), "image/svg+xml");

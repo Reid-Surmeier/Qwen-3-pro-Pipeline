@@ -5,6 +5,13 @@
     "editorType": "figjam",
     "url": "https://www.figma.com/board/WoDxYYenXVCLjiQD8nL3V7/Untitled?node-id=0-1",
     "rootNodeId": "0:1",
-    "plantStudioNodeId": "1:41"
+    "plantStudioNodeId": "1:41",
+    "plantStudioNodeStatus": "missing as of 2026-08-10",
+    "plantStudioSourceUrl": "https://www.kurtz-fernhout.com/PlantStudio/screenMainWindow.gif",
+    "golfUiNodes": {
+      "selectedRender": "4:146",
+      "contactSheet": "4:147",
+      "exactAssembly": "6:146"
+    }
   }
 }

@@ -49,7 +49,7 @@ function collectUrls(value, keyHint = "", output = []) {
 export function extractUploadUrls(result, expectedCount) {
   const candidates = collectUrls(result)
     .filter(({ keyHint, url }) => !/commit/i.test(keyHint) && !/commit/i.test(url))
-    .filter(({ url }) => !url.startsWith(FIGMA_MCP_URL));
+    .filter(({ url }) => !url.startsWith(FIGMA_MCP_URL) || url.includes("/mcp/upload/"));
   const unique = [...new Set(candidates.map(({ url }) => url))];
   if (unique.length < expectedCount) {
     throw new Error(`Figma returned ${unique.length} upload URL(s), expected ${expectedCount}`);
@@ -195,6 +195,10 @@ async function main(argv) {
 
   if (command === "tools") {
     const result = await client.request("tools/list");
+    if (options.json === "true") {
+      process.stdout.write(`${JSON.stringify(result.tools ?? [], null, 2)}\n`);
+      return;
+    }
     for (const tool of result.tools ?? []) process.stdout.write(`${tool.name}\n`);
     return;
   }

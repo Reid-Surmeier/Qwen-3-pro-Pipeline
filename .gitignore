@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Discovery screenshots are reproducible from the Figma board.
+artifacts/figma/candidates/
+artifacts/figma/uploaded-node-4-146.png
+artifacts/figma/uploaded-node-4-147.png
