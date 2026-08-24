@@ -7,20 +7,20 @@ import base64
 import hashlib
 import json
 import mimetypes
-import os
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
 from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
 from .prompt_manifest import compile_edit_brief
-from .providers.openrouter import (
-    OpenRouterImageClient,
-    build_openrouter_request,
-    write_run_artifacts,
+from .providers.openrouter import write_run_artifacts
+from .providers.alibaba import build_alibaba_request
+from .workflow_contract import (
+    WorkflowContractError,
+    validate_assembly_gate,
+    validate_workflow_contract,
+    verify_approved_output_hash,
+    verify_reference_hash,
 )
-from .providers.alibaba import AlibabaImageClient, build_alibaba_request
-from .providers.router import generate_with_provider
 
 
 def image_data_url(path: Path) -> str:
@@ -36,11 +36,6 @@ def _load_brief(path: Path) -> dict:
     return value
 
 
-def _default_run_directory() -> Path:
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    return Path("artifacts/runs") / timestamp
-
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="qwen-ui-pipeline")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -49,7 +44,15 @@ def build_parser() -> argparse.ArgumentParser:
     compile_parser.add_argument("brief", type=Path)
     compile_parser.add_argument("--json", action="store_true", dest="as_json")
 
-    generate_parser = subparsers.add_parser("generate", help="run a provider-routed Render Pass")
+    preflight_parser = subparsers.add_parser(
+        "preflight", help="validate the full Qwen + ComfyUI workflow contract"
+    )
+    preflight_parser.add_argument("brief", type=Path)
+    preflight_parser.add_argument("--reference", required=True, type=Path)
+
+    generate_parser = subparsers.add_parser(
+        "generate", help="reject direct generation; strict runs must go through ComfyUI"
+    )
     generate_parser.add_argument("brief", type=Path)
     generate_parser.add_argument("--reference", action="append", default=[], type=Path)
     generate_parser.add_argument("--output-dir", type=Path, default=None)
@@ -64,6 +67,9 @@ def build_parser() -> argparse.ArgumentParser:
         "assembly-workflow",
         help="write a deterministic ComfyUI region-assembly workflow",
     )
+    assembly_parser.add_argument("brief", type=Path)
+    assembly_parser.add_argument("--reference", required=True, type=Path)
+    assembly_parser.add_argument("--generated", required=True, type=Path)
     assembly_parser.add_argument("--reference-filename", required=True)
     assembly_parser.add_argument("--generated-filename", required=True)
     assembly_parser.add_argument("--region", required=True)
@@ -74,7 +80,7 @@ def build_parser() -> argparse.ArgumentParser:
         "record-comfy", help="record completed ComfyUI outputs as a reproducible run"
     )
     record_parser.add_argument("brief", type=Path)
-    record_parser.add_argument("--provider", choices=["openrouter", "alibaba"], required=True)
+    record_parser.add_argument("--provider", choices=["alibaba"], required=True)
     record_parser.add_argument("--reference", action="append", default=[], type=Path)
     record_parser.add_argument("--image", action="append", required=True, type=Path)
     record_parser.add_argument("--output-dir", required=True, type=Path)
@@ -87,7 +93,12 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "assembly-workflow":
+        brief = _load_brief(args.brief)
+        validate_assembly_gate(brief)
+        verify_reference_hash(brief, args.reference)
+        verify_approved_output_hash(brief, args.generated)
         workflow = build_comfyui_assembly_workflow(
+            brief,
             reference_filename=args.reference_filename,
             generated_filename=args.generated_filename,
             region=args.region,
@@ -101,6 +112,29 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     brief = _load_brief(args.brief)
+    validate_workflow_contract(brief)
+    if args.command == "preflight":
+        reference_sha256 = verify_reference_hash(brief, args.reference)
+        compiled = compile_edit_brief(brief)
+        print(
+            json.dumps(
+                {
+                    "workflow_profile": brief["workflow_profile"],
+                    "runtime": brief["runtime"],
+                    "provider": brief["provider"],
+                    "model": brief["model"],
+                    "reference_sha256": reference_sha256,
+                    "decision_count": len(brief["regions"]),
+                    "candidate_count": brief["output"]["count"],
+                    "seed": brief["output"]["seed"],
+                    "prompt_metrics": vars(compiled.metrics),
+                    "status": "ready_for_comfyui",
+                },
+                indent=2,
+            )
+        )
+        return 0
+
     if args.command == "compile":
         compiled = compile_edit_brief(brief)
         if args.as_json:
@@ -115,6 +149,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     if args.command == "workflow":
+        verify_reference_hash(brief, Path(brief["reference"]["path"]))
         workflow = build_comfyui_api_workflow(
             brief,
             reference_filename=args.reference_filename,
@@ -127,13 +162,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(args.output)
         return 0
 
+    if args.command == "generate":
+        raise WorkflowContractError(
+            "direct provider generation is disabled by "
+            f"{brief['workflow_profile']}; create and queue a ComfyUI workflow instead"
+        )
+
     reference_urls = [image_data_url(path) for path in args.reference]
 
     if args.command == "record-comfy":
-        if args.provider == "alibaba":
-            request_body = build_alibaba_request(brief, reference_urls=reference_urls)
-        else:
-            request_body = build_openrouter_request(brief, reference_urls=reference_urls)
+        if not args.reference:
+            raise WorkflowContractError("record-comfy requires the immutable reference")
+        if len(args.image) != brief["output"]["count"]:
+            raise WorkflowContractError(
+                "record-comfy must receive exactly "
+                f"{brief['output']['count']} fixed-seed candidate images"
+            )
+        verify_reference_hash(brief, args.reference[0])
+        request_body = build_alibaba_request(brief, reference_urls=reference_urls)
         response_body = {
             "data": [
                 {
@@ -164,24 +210,4 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(json.dumps({"output_directory": str(args.output_dir), **record}, indent=2))
         return 0
 
-    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
-    alibaba_key = os.environ.get("DASHSCOPE_API_KEY", "")
-    result = generate_with_provider(
-        brief,
-        reference_urls=reference_urls,
-        openrouter_client=(OpenRouterImageClient(openrouter_key) if openrouter_key else None),
-        alibaba_client=(AlibabaImageClient(alibaba_key) if alibaba_key else None),
-    )
-    output_directory = args.output_dir or _default_run_directory()
-    record = write_run_artifacts(
-        output_directory,
-        brief,
-        result.request,
-        result.response,
-        provenance={
-            "provider": result.provider,
-            "prompt_id": result.response.get("request_id"),
-        },
-    )
-    print(json.dumps({"output_directory": str(output_directory), **record}, indent=2))
-    return 0
+    raise AssertionError(f"unhandled command: {args.command}")

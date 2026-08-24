@@ -39,7 +39,11 @@ The local estimator conservatively uses three characters per token and refuses a
 - Alibaba's direct API currently documents one to three input images for image-to-image. It offers `prompt_extend`; editing must use `direct`, because `agent` enhancement is text-to-image only.
 - Alibaba accepts an explicit `width*height` output within its documented pixel-area and aspect-ratio bounds. Use it when the source ratio is not in OpenRouter's fixed ratio allowlist.
 - OpenRouter's current Alibaba endpoint advertises no provider-specific passthrough parameters, so `prompt_extend` is not assumed there. The prompt compiler must supply the complete instruction directly.
-- The current OpenRouter account enforces a privacy/ZDR guardrail that excludes Alibaba's endpoint. `provider: auto` tries OpenRouter first and falls back to direct Alibaba only for this pre-generation privacy error; it does not fall back after timeouts or ambiguous failures, which could cause duplicate billing.
+- Historical v001 experiments used `provider: auto` with a narrow pre-generation
+  privacy fallback. That route is retained only for provenance and provider-unit
+  tests. Current production runs use
+  `qwen-source-locked-single-decision-v1`, require Alibaba Qwen Image 3 Pro
+  through ComfyUI, and never substitute providers or retry ambiguous failures.
 - OpenRouter returns image bytes as base64. Alibaba direct returns expiring URLs; those outputs must be downloaded promptly because the documented retention window is 24 hours.
 
 ## Why final assembly remains deterministic

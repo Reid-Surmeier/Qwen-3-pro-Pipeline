@@ -1,4 +1,4 @@
-"""ComfyUI node for Qwen Image 3 through OpenRouter."""
+"""Fail-closed ComfyUI nodes for source-locked Qwen Image 3 runs."""
 
 from __future__ import annotations
 
@@ -9,8 +9,8 @@ import os
 from typing import Any
 
 from .providers.alibaba import AlibabaImageClient
-from .providers.openrouter import OpenRouterImageClient
 from .providers.router import generate_with_provider
+from .workflow_contract import validate_assembly_gate, validate_workflow_contract
 
 
 def _reference_data_urls(reference_images: Any) -> list[str]:
@@ -72,14 +72,11 @@ class QwenImage3Render:
         brief = json.loads(edit_brief_json)
         if not isinstance(brief, dict):
             raise ValueError("Edit Brief must be a JSON object")
-        openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
+        validate_workflow_contract(brief)
         alibaba_key = os.environ.get("DASHSCOPE_API_KEY", "")
         result = generate_with_provider(
             brief,
             reference_urls=_reference_data_urls(reference_images),
-            openrouter_client=(
-                OpenRouterImageClient(openrouter_key) if openrouter_key else None
-            ),
             alibaba_client=(AlibabaImageClient(alibaba_key) if alibaba_key else None),
         )
         request = result.request
@@ -104,6 +101,9 @@ class QwenImage3Render:
                 "count": count,
                 "seed": seed,
                 "usage": response.get("usage", {}),
+                "workflow_profile": brief["workflow_profile"],
+                "runtime": brief["runtime"],
+                "stage": brief["stage"],
             },
             sort_keys=True,
         )
@@ -127,11 +127,33 @@ class ReferenceRegionComposite:
                     "STRING",
                     {"default": "0,0,64,64", "multiline": False},
                 ),
+                "approval_manifest_json": (
+                    "STRING",
+                    {"multiline": True, "default": "{}"},
+                ),
             }
         }
 
-    def composite(self, reference_images, generated_images, region: str):
+    def composite(
+        self,
+        reference_images,
+        generated_images,
+        region: str,
+        approval_manifest_json: str,
+    ):
         import torch.nn.functional as functional
+
+        brief = json.loads(approval_manifest_json)
+        if not isinstance(brief, dict):
+            raise ValueError("Approval manifest must be a JSON object")
+        validate_assembly_gate(brief)
+        expected_region = ",".join(
+            str(value) for value in brief["regions"][0]["bounds"]
+        )
+        if region != expected_region:
+            raise ValueError(
+                f"Region must match approved brief bounds: {expected_region}"
+            )
 
         try:
             x, y, width, height = (int(value.strip()) for value in region.split(","))

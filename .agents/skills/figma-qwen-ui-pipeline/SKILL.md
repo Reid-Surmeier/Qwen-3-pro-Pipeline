@@ -39,6 +39,13 @@ The helper reads the existing Codex Figma OAuth credential without printing it. 
 
 ## Upload an image
 
+Before uploading a generated production raster, load
+`$qwen-source-locked-image-generation` and verify that its stage manifest names
+workflow profile `qwen-source-locked-single-decision-v1`, provider `alibaba`,
+runtime `comfyui`, the immutable source hash, fixed seed, and approved output
+hash. Historical OpenAI artifacts may remain on the board as rejected evidence,
+but do not present them as current production candidates.
+
 Upload a new board asset without changing an existing node:
 
 ```bash

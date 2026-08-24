@@ -1,6 +1,17 @@
 {
+  "workflow_profile": "qwen-source-locked-single-decision-v1",
+  "runtime": "comfyui",
   "provider": "alibaba",
   "model": "qwen/qwen-image-3-pro",
+  "stage": {
+    "id": "01-golf-club-object",
+    "decision": "Replace only the selected flower with one seven-iron golf club.",
+    "status": "planned"
+  },
+  "reference": {
+    "path": "artifacts/references/plantstudio-main-window.gif",
+    "sha256": "fec3c83f72dd0127a4ce9f09d8008638cf308752545a05eba25c3f254a11c4ea"
+  },
   "objective": "Perform one surgical image edit: replace the single selected pink flower in the plant canvas with one upright seven-iron golf club. Change nothing else.",
   "reference_role": "Reference image 1 is the authoritative PlantStudio main-window screenshot. Match it exactly outside the named edit region; do not reinterpret, redesign, clean up, or restyle the application.",
   "preservation_invariants": [
@@ -17,6 +28,7 @@
   "regions": [
     {
       "name": "selected plant inside the red rectangle",
+      "bounds": [182, 78, 37, 165],
       "change": "Remove the tall thin selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint. Put the grip at the top, a straight steel shaft through the center, and the compact angled iron head near the bottom. Render it as if PlantStudio itself drew the club using the screenshot's crisp one-pixel outlines, flat fills, and slightly aliased late-1990s raster graphics.",
       "preserve": [
         "the red selection rectangle",

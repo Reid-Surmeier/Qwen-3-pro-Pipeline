@@ -3,31 +3,93 @@
   "$id": "https://reidsurmeier.wtf/schemas/qwen-ui-edit-brief.schema.json",
   "title": "Qwen UI Edit Brief",
   "type": "object",
-  "required": ["objective", "reference_role", "preservation_invariants", "output"],
+  "required": [
+    "workflow_profile",
+    "runtime",
+    "provider",
+    "model",
+    "stage",
+    "reference",
+    "objective",
+    "reference_role",
+    "preservation_invariants",
+    "canvas",
+    "regions",
+    "style",
+    "negative_constraints",
+    "quality_checks",
+    "output"
+  ],
   "properties": {
+    "workflow_profile": {
+      "const": "qwen-source-locked-single-decision-v1"
+    },
+    "runtime": {
+      "const": "comfyui"
+    },
     "provider": {
-      "enum": ["auto", "openrouter", "alibaba"]
+      "const": "alibaba"
     },
     "model": {
-      "enum": ["qwen/qwen-image-3-pro", "qwen/qwen-image-3"]
+      "const": "qwen/qwen-image-3-pro"
+    },
+    "stage": {
+      "type": "object",
+      "required": ["id", "decision", "status"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "decision": {"type": "string", "minLength": 1},
+        "status": {
+          "enum": ["planned", "rendered", "awaiting_approval", "approved", "rejected"]
+        },
+        "approved_output_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "reference": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
     },
     "objective": {"type": "string", "minLength": 1},
     "reference_role": {"type": "string", "minLength": 1},
     "preservation_invariants": {
       "type": "array",
-      "items": {"type": "string"}
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
     },
     "canvas": {
       "type": "array",
-      "items": {"type": "string"}
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
     },
     "regions": {
       "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
       "items": {
         "type": "object",
-        "required": ["name", "change"],
+        "required": ["name", "bounds", "change"],
         "properties": {
           "name": {"type": "string"},
+          "bounds": {
+            "type": "array",
+            "prefixItems": [
+              {"type": "integer", "minimum": 0},
+              {"type": "integer", "minimum": 0},
+              {"type": "integer", "minimum": 1},
+              {"type": "integer", "minimum": 1}
+            ],
+            "minItems": 4,
+            "maxItems": 4
+          },
           "change": {"type": "string"},
           "preserve": {"type": "array", "items": {"type": "string"}}
         },
@@ -46,20 +108,18 @@
         "additionalProperties": false
       }
     },
-    "style": {"type": "array", "items": {"type": "string"}},
+    "style": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
     "asset_rules": {"type": "array", "items": {"type": "string"}},
-    "negative_constraints": {"type": "array", "items": {"type": "string"}},
-    "quality_checks": {"type": "array", "items": {"type": "string"}},
+    "negative_constraints": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "quality_checks": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
     "output": {
       "type": "object",
-      "required": ["resolution", "aspect_ratio", "count"],
+      "required": ["resolution", "aspect_ratio", "size", "count", "seed"],
       "properties": {
         "resolution": {"enum": ["1K", "2K"]},
-        "aspect_ratio": {
-          "enum": ["source", "1:1", "1:2", "1:4", "2:1", "2:3", "3:2", "3:4", "4:1", "4:3", "4:5", "5:4", "9:16", "16:9"]
-        },
+        "aspect_ratio": {"const": "source"},
         "size": {"type": "string", "pattern": "^[1-9][0-9]*\\*[1-9][0-9]*$"},
-        "count": {"type": "integer", "minimum": 1, "maximum": 6},
+        "count": {"const": 4},
         "seed": {"type": "integer", "minimum": 0, "maximum": 2147483647}
       },
       "additionalProperties": false

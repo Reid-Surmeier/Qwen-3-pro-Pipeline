@@ -5,6 +5,12 @@ from __future__ import annotations
 import json
 from typing import Any, Mapping
 
+from .workflow_contract import (
+    WorkflowContractError,
+    validate_assembly_gate,
+    validate_workflow_contract,
+)
+
 
 def build_comfyui_api_workflow(
     brief: Mapping[str, Any],
@@ -13,6 +19,8 @@ def build_comfyui_api_workflow(
     filename_prefix: str,
 ) -> dict[str, Any]:
     """Build the smallest reference-edit graph accepted by ComfyUI's API."""
+
+    validate_workflow_contract(brief)
 
     return {
         "1": {
@@ -37,6 +45,7 @@ def build_comfyui_api_workflow(
 
 
 def build_comfyui_assembly_workflow(
+    brief: Mapping[str, Any],
     *,
     reference_filename: str,
     generated_filename: str,
@@ -44,6 +53,13 @@ def build_comfyui_assembly_workflow(
     filename_prefix: str,
 ) -> dict[str, Any]:
     """Build a deterministic graph that preserves the reference outside a region."""
+
+    validate_assembly_gate(brief)
+    expected_region = ",".join(str(value) for value in brief["regions"][0]["bounds"])
+    if region != expected_region:
+        raise WorkflowContractError(
+            f"assembly region must match approved brief bounds: {expected_region}"
+        )
 
     return {
         "1": {
@@ -60,6 +76,7 @@ def build_comfyui_assembly_workflow(
                 "reference_images": ["1", 0],
                 "generated_images": ["2", 0],
                 "region": region,
+                "approval_manifest_json": json.dumps(brief, sort_keys=True),
             },
         },
         "4": {

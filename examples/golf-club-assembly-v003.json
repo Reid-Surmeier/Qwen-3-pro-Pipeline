@@ -1,0 +1,57 @@
+{
+  "workflow_profile": "qwen-source-locked-single-decision-v1",
+  "runtime": "comfyui",
+  "provider": "alibaba",
+  "model": "qwen/qwen-image-3-pro",
+  "stage": {
+    "id": "01-golf-club-object",
+    "decision": "Replace only the selected flower with one seven-iron golf club.",
+    "status": "approved",
+    "approved_output_sha256": "7684df37b3cfcbd4ee660d8694781ca59ef5dde19960bae687b5308d8775297b"
+  },
+  "reference": {
+    "path": "artifacts/references/plantstudio-main-window.png",
+    "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d"
+  },
+  "objective": "Assemble only the approved golf-club donor region over the immutable PlantStudio source. Change nothing else.",
+  "reference_role": "Reference image 1 is the immutable PlantStudio main-window source and owns every pixel outside the approved region.",
+  "preservation_invariants": [
+    "Keep every source pixel outside x=182, y=78, width=37, height=165 byte-identical.",
+    "Keep the complete 474 by 403 crop, geometry, text, controls, and source color values unchanged outside the approved region."
+  ],
+  "canvas": [
+    "Preserve the 474 by 403 source canvas with no scaling, translation, crop, padding, or color conversion."
+  ],
+  "regions": [
+    {
+      "name": "approved selected-plant replacement",
+      "bounds": [182, 78, 37, 165],
+      "change": "Copy only this bounded region from the approved Qwen donor onto the immutable source.",
+      "preserve": [
+        "all pixels outside the bounds",
+        "the source canvas dimensions"
+      ]
+    }
+  ],
+  "exact_copy": [],
+  "style": [
+    "Retain the source's authentic late-1990s Windows raster character."
+  ],
+  "asset_rules": [
+    "Use only the donor whose SHA-256 is frozen in stage.approved_output_sha256."
+  ],
+  "negative_constraints": [
+    "No model render, global redraw, retouching, typography change, or provider call during assembly."
+  ],
+  "quality_checks": [
+    "Outside-region absolute pixel error is zero.",
+    "The final source dimensions are exactly 474 by 403."
+  ],
+  "output": {
+    "resolution": "1K",
+    "aspect_ratio": "source",
+    "size": "474*403",
+    "count": 4,
+    "seed": 1786
+  }
+}

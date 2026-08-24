@@ -14,6 +14,14 @@ from .providers.openrouter import (
     build_openrouter_request,
     write_run_artifacts,
 )
+from .workflow_contract import (
+    WORKFLOW_PROFILE,
+    WorkflowContractError,
+    validate_assembly_gate,
+    validate_workflow_contract,
+    verify_approved_output_hash,
+    verify_reference_hash,
+)
 
 __all__ = [
     "CompiledEditBrief",
@@ -29,4 +37,10 @@ __all__ = [
     "compile_edit_brief",
     "write_run_artifacts",
     "generate_with_provider",
+    "WORKFLOW_PROFILE",
+    "WorkflowContractError",
+    "validate_assembly_gate",
+    "validate_workflow_contract",
+    "verify_approved_output_hash",
+    "verify_reference_hash",
 ]

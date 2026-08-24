@@ -45,6 +45,22 @@ loopback alias.
 8. Rebuild labels, layout, controls, and animation as native Figma and web
    elements.
 
+Production image generation is fail-closed under workflow profile
+`qwen-source-locked-single-decision-v1`. The profile requires Alibaba Qwen Image
+3 Pro through ComfyUI, one bounded visual decision, an immutable source hash, an
+explicit source-ratio size, four fixed-seed candidates, and an approval gate
+before deterministic assembly. Built-in OpenAI image generation and direct
+provider execution are not production paths in this repository.
+
+Preflight the source, workflow, provider, decision count, candidate batch, seed,
+and prompt budget before compiling or rendering:
+
+```bash
+python3 -m qwen_ui_pipeline preflight \
+  examples/golf-club-object-v002.json \
+  --reference artifacts/references/plantstudio-main-window.gif
+```
+
 Compile and inspect a brief:
 
 ```bash
@@ -65,6 +81,9 @@ Generate a deterministic assembly graph:
 
 ```bash
 python3 -m qwen_ui_pipeline assembly-workflow \
+  examples/golf-club-assembly-v003.json \
+  --reference artifacts/references/plantstudio-main-window.png \
+  --generated artifacts/runs/golf-club-object-v002/image-02.png \
   --reference-filename plantstudio-main-window.png \
   --generated-filename golf-club-v002-2.png \
   --region 182,78,37,165 \
@@ -72,9 +91,10 @@ python3 -m qwen_ui_pipeline assembly-workflow \
   --output workflows/golf-club-assembly-v003.api.json
 ```
 
-`provider: auto` tries OpenRouter first. It falls back to direct Alibaba only
-for OpenRouter's pre-generation privacy/guardrail rejection, not after a
-timeout or ambiguous error that could create duplicate billing.
+The approved brief must set `stage.status` to `approved` and record the selected
+donor's `stage.approved_output_sha256`. Failed preflight, provider errors, and
+ambiguous timeouts stop the stage; they never trigger a provider substitution or
+automatic paid retry.
 
 ## First golf test
 
