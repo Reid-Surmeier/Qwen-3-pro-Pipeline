@@ -1,5 +1,5 @@
 [Unit]
-Description=ComfyUI for the Qwen UI pipeline
+Description=Concurrent ComfyUI pool for the Qwen UI pipeline
 After=network-online.target
 
 [Service]

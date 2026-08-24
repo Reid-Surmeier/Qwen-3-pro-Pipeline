@@ -6,6 +6,8 @@ Figma/FigJam, and deterministic application code.
 ## Current machine setup
 
 - ComfyUI `0.31.0` runs as the enabled user service `qwen-comfyui.service`.
+- The service can run a five-worker pool behind the same ComfyUI API address,
+  allowing separate agents' Render Passes to execute without one local FIFO.
 - The local UI/API is `http://10.255.255.254:8188` on this WSL host.
 - `Qwen Image 3 Render` calls the provider API without exposing keys in a
   workflow.
@@ -29,6 +31,11 @@ curl -fsS http://10.255.255.254:8188/system_stats
 The MCP registration becomes available automatically in a new Codex session.
 No ComfyUI API key is required while the service remains bound to the local WSL
 loopback alias.
+
+The worker router changes only queue assignment. Edit Brief compilation,
+workflow JSON, provider selection and fallback, fixed seeds, image outputs,
+Assembly, and provenance remain inside the existing pipeline. See
+[`deploy/README.md`](deploy/README.md) for pool configuration and installation.
 
 ## Pipeline
 
