@@ -10,6 +10,7 @@ readonly WORKER_LISTEN_ADDRESS="${QWEN_COMFYUI_WORKER_LISTEN_ADDRESS:-$PUBLIC_LI
 readonly WORKER_BASE_PORT="${QWEN_COMFYUI_WORKER_BASE_PORT:-8191}"
 readonly WORKER_COUNT="${QWEN_COMFYUI_WORKERS:-5}"
 readonly WORKER_STATE_ROOT="${QWEN_COMFYUI_WORKER_STATE_ROOT:-$PIPELINE_ROOT/workers}"
+readonly ROUTER_SCRIPT="${QWEN_COMFYUI_ROUTER_SCRIPT:-$PIPELINE_ROOT/comfyui_router.py}"
 
 if [[ ! "$WORKER_COUNT" =~ ^[1-9][0-9]*$ ]]; then
   echo "QWEN_COMFYUI_WORKERS must be a positive integer" >&2
@@ -17,6 +18,10 @@ if [[ ! "$WORKER_COUNT" =~ ^[1-9][0-9]*$ ]]; then
 fi
 if [[ ! "$WORKER_BASE_PORT" =~ ^[0-9]+$ ]] || (( WORKER_BASE_PORT < 1 )); then
   echo "QWEN_COMFYUI_WORKER_BASE_PORT must be a positive integer" >&2
+  exit 2
+fi
+if [[ ! -r "$ROUTER_SCRIPT" ]]; then
+  echo "ComfyUI router script is not readable: $ROUTER_SCRIPT" >&2
   exit 2
 fi
 
@@ -51,7 +56,7 @@ for (( worker_index = 0; worker_index < WORKER_COUNT; worker_index++ )); do
   router_args+=(--backend "http://$WORKER_LISTEN_ADDRESS:$worker_port")
 done
 
-"$PYTHON" -m qwen_ui_pipeline.comfyui_router "${router_args[@]}" &
+"$PYTHON" "$ROUTER_SCRIPT" "${router_args[@]}" &
 child_pids+=("$!")
 
 # Any unexpected child exit restarts the complete, consistent pool through

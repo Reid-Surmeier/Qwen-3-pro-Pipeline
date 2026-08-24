@@ -36,16 +36,22 @@ export QWEN_ALIBABA_SECRET_NAME="Alibaba Singapour"
 Install the templates after reviewing the paths:
 
 ```bash
-"$HOME/.local/share/qwen-image-pipeline/ComfyUI/.venv/bin/python" -m pip install -e .
 install -m 0755 deploy/run-comfyui.sh \
   "$HOME/.local/share/qwen-image-pipeline/run-comfyui.sh"
 install -m 0755 deploy/run-comfyui-pool.sh \
   "$HOME/.local/share/qwen-image-pipeline/run-comfyui-pool.sh"
+install -m 0644 qwen_ui_pipeline/comfyui_router.py \
+  "$HOME/.local/share/qwen-image-pipeline/comfyui_router.py"
 install -m 0644 deploy/systemd/qwen-comfyui.service \
   "$HOME/.config/systemd/user/qwen-comfyui.service"
 systemctl --user daemon-reload
 systemctl --user enable --now qwen-comfyui.service
 ```
+
+The router is installed as a standalone script. Deployment deliberately does
+not reinstall or repoint the `qwen_ui_pipeline` Python package, so every worker
+continues to use the already deployed custom nodes, provider clients, timeout
+policy, and image procedure.
 
 The defaults keep the public API at `10.255.255.254:8188` and bind workers to
 the same WSL loopback alias at ports `8191` through `8195`. To use a different
