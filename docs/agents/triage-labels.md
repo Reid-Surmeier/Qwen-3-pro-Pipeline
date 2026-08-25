@@ -4,10 +4,11 @@ These labels describe whether work is ready and who should act next. They are wo
 
 | Label | Meaning | Exit condition |
 | --- | --- | --- |
-| `needs-triage` | Maintainer evaluation is required. | Scope and next owner are identified. |
+| `needs-triage` | Maintainer or agent analysis is required; implementation is forbidden. | An agent posts a triage brief and moves the Issue to `needs-human-decision`, or a maintainer chooses another state. |
 | `needs-info` | A material question blocks safe implementation. | The missing information is added and acceptance criteria are testable. |
-| `ready-for-agent` | The Issue is fully specified for agent implementation. | An isolated branch/worktree is created and work begins. |
-| `ready-for-human` | Human judgment or direct human execution is required. | The human decision/action is recorded. |
+| `needs-human-decision` | Agent triage is complete; a human must approve, revise, split, or reject it. | The human records a decision and either authorizes `ready-for-agent`, requests changes, or closes/splits the Issue. |
+| `ready-for-agent` | The Issue body contains the human-approved implementation specification. | An isolated branch/worktree is created and work begins. |
+| `ready-for-human` | Direct human judgment or execution is required; this is not the agent-plan approval state. | The human decision/action is recorded. |
 | `wontfix` | The work will not be actioned. | The reason is documented and the Issue is closed. |
 
 ## `ready-for-agent` checklist

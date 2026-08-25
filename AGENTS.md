@@ -16,13 +16,21 @@ If these sources conflict, stop and surface the conflict. Do not silently choose
 
 ## Work-readiness gate
 
+While an Issue is labeled `needs-triage`, an agent may inspect relevant context and post a triage brief, but must not create a branch, edit repository files, or begin implementation. The brief must cover interpretation, material open decisions, proposed scope, proposed acceptance/verification, and a recommendation.
+
+After posting the brief, replace `needs-triage` with `needs-human-decision`. While that label is present, wait for the human to approve, revise, split, or reject the proposal. Silence is not approval. Only a human may authorize the transition from `needs-human-decision` to `ready-for-agent`.
+
+Before applying `ready-for-agent`, update the Issue body so the approved specification—not the comment thread—is the canonical work packet.
+
 Implementation may begin only when:
 
 - one authoritative GitHub Issue identifies the problem or desired outcome,
+- the Issue body contains the human-approved specification,
 - the Issue has testable acceptance criteria,
 - in-scope and out-of-scope boundaries are clear,
 - the expected verification method is named,
 - dependencies and human approvals are identified,
+- neither `needs-triage`, `needs-info`, nor `needs-human-decision` is present,
 - the Issue is labeled `ready-for-agent`.
 
 If a material requirement is missing, return the Issue to `needs-info`. Do not fill product or architectural gaps by guessing.
