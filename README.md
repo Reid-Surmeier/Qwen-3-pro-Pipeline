@@ -79,6 +79,32 @@ python3 -m qwen_ui_pipeline assembly-workflow \
   --output workflows/golf-club-assembly-v003.api.json
 ```
 
+For stickers and other non-rectangular assets, build an additive mask-owned
+Assembly graph. This keeps the original rectangle path intact while assigning
+approved artwork, white cutline, and generated material contact to separate
+masks:
+
+```bash
+python3 -m qwen_ui_pipeline mask-assembly-workflow \
+  --reference-filename device.png \
+  --artwork-filename approved-sticker.png \
+  --mask-filename approved-sticker-mask.png \
+  --integration-filename qwen-contact-donor.png \
+  --canvas-width 1024 \
+  --canvas-height 768 \
+  --target-quad 120,90,430,72,448,350,105,366 \
+  --cutline-width 3 \
+  --contact-width 2 \
+  --filename-prefix stickers/mask-owned/v001 \
+  --output workflows/sticker-mask-assembly-v001.api.json
+```
+
+The contact donor must already be a full-canvas image. Only its narrow contact
+band is used. The approved artwork is warped together with its mask, then
+composited deterministically; the graph fails before saving if source pixels
+outside the editable union or artwork-owned pixels drift. See
+[`docs/adr/0004-mask-owned-sticker-assembly.md`](docs/adr/0004-mask-owned-sticker-assembly.md).
+
 `provider: auto` tries OpenRouter first. It falls back to direct Alibaba only
 for OpenRouter's pre-generation privacy/guardrail rejection, not after a
 timeout or ambiguous error that could create duplicate billing.

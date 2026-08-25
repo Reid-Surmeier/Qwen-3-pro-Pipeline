@@ -21,6 +21,8 @@ Pinned runtime versions used by the verified installation:
 - `systemd/qwen-comfyui.service` runs that wrapper as an enabled user service.
 - `codex/comfyui-mcp.toml` is the isolated MCP section to merge into
   `~/.codex/config.toml`; replace `USER` with the local account name.
+- `install-sticker-tooling.sh` installs the additive mask/warp/fidelity custom
+  node pack without reinstalling or repointing the provider package.
 
 The verified WSL host uses `10.255.255.254`, a loopback alias, because ordinary
 `127.0.0.1` traffic is unreliable in that environment. Override
@@ -47,6 +49,19 @@ install -m 0644 deploy/systemd/qwen-comfyui.service \
 systemctl --user daemon-reload
 systemctl --user enable --now qwen-comfyui.service
 ```
+
+Install or refresh only the additive sticker tooling:
+
+```bash
+deploy/install-sticker-tooling.sh
+curl -fsS http://10.255.255.254:8188/queue
+systemctl --user restart qwen-comfyui.service
+```
+
+Restart only when the aggregate queue reports zero running and zero pending
+jobs. The installer copies the custom-node pack into ComfyUI and does not alter
+the five-worker router, provider package, credentials, model paths, or existing
+workflow JSON.
 
 The router is installed as a standalone script. Deployment deliberately does
 not reinstall or repoint the `qwen_ui_pipeline` Python package, so every worker
