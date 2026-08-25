@@ -10,7 +10,6 @@ requires-python = ">=3.12"
 
 [project.scripts]
 qwen-ui-pipeline = "qwen_ui_pipeline.cli:main"
-qwen-comfyui-router = "qwen_ui_pipeline.comfyui_router:main"
 
 [tool.setuptools.packages.find]
 include = ["qwen_ui_pipeline*"]

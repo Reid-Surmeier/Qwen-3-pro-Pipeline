@@ -14,15 +14,9 @@ Pinned runtime versions used by the verified installation:
 - `run-comfyui.sh` injects OpenRouter and Alibaba keys through the local
   `stored_bws.sh` Bitwarden Secrets Manager wrapper. It contains secret names,
   never secret values.
-- `run-comfyui-pool.sh` starts five independent ComfyUI workers by default and
-  one API-compatible router on the existing public port. Each worker loads the
-  same custom nodes and uses the same input/output directories; the router only
-  selects a worker and never modifies a workflow.
 - `systemd/qwen-comfyui.service` runs that wrapper as an enabled user service.
 - `codex/comfyui-mcp.toml` is the isolated MCP section to merge into
   `~/.codex/config.toml`; replace `USER` with the local account name.
-- `install-sticker-tooling.sh` installs the additive mask/warp/fidelity custom
-  node pack without reinstalling or repointing the provider package.
 
 The verified WSL host uses `10.255.255.254`, a loopback alias, because ordinary
 `127.0.0.1` traffic is unreliable in that environment. Override
@@ -40,54 +34,8 @@ Install the templates after reviewing the paths:
 ```bash
 install -m 0755 deploy/run-comfyui.sh \
   "$HOME/.local/share/qwen-image-pipeline/run-comfyui.sh"
-install -m 0755 deploy/run-comfyui-pool.sh \
-  "$HOME/.local/share/qwen-image-pipeline/run-comfyui-pool.sh"
-install -m 0644 qwen_ui_pipeline/comfyui_router.py \
-  "$HOME/.local/share/qwen-image-pipeline/comfyui_router.py"
 install -m 0644 deploy/systemd/qwen-comfyui.service \
   "$HOME/.config/systemd/user/qwen-comfyui.service"
 systemctl --user daemon-reload
 systemctl --user enable --now qwen-comfyui.service
 ```
-
-Install or refresh only the additive sticker tooling:
-
-```bash
-deploy/install-sticker-tooling.sh
-curl -fsS http://10.255.255.254:8188/queue
-systemctl --user restart qwen-comfyui.service
-```
-
-Restart only when the aggregate queue reports zero running and zero pending
-jobs. The installer copies the custom-node pack into ComfyUI and does not alter
-the five-worker router, provider package, credentials, model paths, or existing
-workflow JSON.
-
-The router is installed as a standalone script. Deployment deliberately does
-not reinstall or repoint the `qwen_ui_pipeline` Python package, so every worker
-continues to use the already deployed custom nodes, provider clients, timeout
-policy, and image procedure.
-
-The defaults keep the public API at `10.255.255.254:8188` and bind workers to
-the same WSL loopback alias at ports `8191` through `8195`. To use a different
-pool size or port range, add environment overrides to the service:
-
-```ini
-Environment=QWEN_COMFYUI_WORKERS=5
-Environment=QWEN_COMFYUI_WORKER_BASE_PORT=8191
-```
-
-Workers share ComfyUI's image input and output directories so existing upload,
-view, and Save Image behavior is unchanged. Each worker gets a separate SQLite
-metadata database under `$QWEN_PIPELINE_ROOT/workers/worker-N/`, avoiding the
-database lock that occurs when multiple ComfyUI processes use one state file.
-
-Five workers allow five Codex sessions to have one Render Pass executing in
-each local queue. This removes the local FIFO wait but does not raise Alibaba
-or OpenRouter account limits; provider throttles and errors still pass back
-through the unchanged `Qwen Image 3 Render` node.
-
-The router aggregates `/queue` and `/history`, and keeps
-`/history/<prompt_id>` on the worker that accepted the prompt. WebSocket
-progress is intentionally rejected so clients fall back to HTTP history
-polling; `comfyui-mcp` supports that fallback.

@@ -7,40 +7,6 @@ from qwen_ui_pipeline.cli import main
 
 
 class RecordComfyRunTests(unittest.TestCase):
-    def test_writes_mask_owned_sticker_workflow(self):
-        with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "sticker-mask.api.json"
-
-            status = main(
-                [
-                    "mask-assembly-workflow",
-                    "--reference-filename",
-                    "device.png",
-                    "--artwork-filename",
-                    "sticker.png",
-                    "--mask-filename",
-                    "sticker-mask.png",
-                    "--integration-filename",
-                    "contact-donor.png",
-                    "--canvas-width",
-                    "1024",
-                    "--canvas-height",
-                    "768",
-                    "--target-quad",
-                    "120,90,430,72,448,350,105,366",
-                    "--filename-prefix",
-                    "stickers/mask-owned/v001",
-                    "--output",
-                    str(output),
-                ]
-            )
-
-            self.assertEqual(status, 0)
-            workflow = json.loads(output.read_text(encoding="utf-8"))
-            self.assertEqual(workflow["4"]["class_type"], "StickerPerspectiveWarp")
-            self.assertEqual(workflow["11"]["class_type"], "MaskedReferenceFidelityGate")
-            self.assertEqual(workflow["13"]["class_type"], "SaveImage")
-
     def test_records_existing_comfy_outputs_with_provider_provenance(self):
         brief = {
             "objective": "Replace the flower with a golf club.",
