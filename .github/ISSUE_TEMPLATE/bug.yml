@@ -1,0 +1,89 @@
+name: Bug report
+description: Report reproducible incorrect behavior or a regression
+title: "[Bug]: "
+labels:
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe observable behavior. Do not include credentials, private URLs, or unredacted provider responses.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is happening, and why is it a problem?
+      placeholder: Describe the incorrect behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest reliable sequence, including non-secret inputs.
+      placeholder: |
+        1. Run ...
+        2. Provide ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and evidence
+      description: Include sanitized logs, manifests, hashes, images, or metrics when relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Record relevant commit SHA, Python version, provider/model, workflow profile, and platform. Never include keys.
+      placeholder: |
+        Commit SHA:
+        Python:
+        Provider/model:
+        Workflow profile:
+        Platform:
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List objective conditions that would demonstrate the bug is fixed.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope boundaries
+      description: What is explicitly in scope and out of scope?
+      placeholder: |
+        In scope:
+        Out of scope:
+    validations:
+      required: true
+
+  - type: textarea
+    id: approvals
+    attributes:
+      label: Dependencies and approvals
+      description: Identify credentials, paid calls, external systems, or subjective visual decisions that require human approval.
