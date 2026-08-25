@@ -1,0 +1,200 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "device.png"
+    }
+  },
+  "10": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "8",
+        0
+      ],
+      "mask": [
+        "5",
+        2
+      ],
+      "resize_source": false,
+      "source": [
+        "9",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "11": {
+    "class_type": "MaskedReferenceFidelityGate",
+    "inputs": {
+      "allowed_masks": [
+        "5",
+        3
+      ],
+      "candidate_images": [
+        "10",
+        0
+      ],
+      "exact_outside_mask": true,
+      "mask_threshold": 0.5,
+      "max_global_normalized_rmse": 1.0,
+      "min_inside_changed_pixels": 1,
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "ArtworkFidelityGate",
+    "inputs": {
+      "approved_images": [
+        "4",
+        0
+      ],
+      "approved_masks": [
+        "5",
+        0
+      ],
+      "candidate_images": [
+        "11",
+        0
+      ],
+      "candidate_masks": [
+        "5",
+        0
+      ],
+      "exact_artwork": true,
+      "mask_threshold": 0.5,
+      "max_centroid_drift_px": 0.5,
+      "max_masked_normalized_rmse": 0.0,
+      "max_scale_drift": 0.001,
+      "min_edge_iou": 0.99,
+      "min_masked_ssim": 0.999,
+      "min_silhouette_iou": 0.999
+    }
+  },
+  "13": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "stickers/mask-owned/v001",
+      "images": [
+        "12",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "qwen-contact-donor.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "approved-sticker.png"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "approved-sticker-mask.png"
+    }
+  },
+  "4": {
+    "class_type": "StickerPerspectiveWarp",
+    "inputs": {
+      "artwork_images": [
+        "2",
+        0
+      ],
+      "canvas_height": 768,
+      "canvas_width": 1024,
+      "sticker_masks": [
+        "3",
+        1
+      ],
+      "target_quad": "120,90,430,72,448,350,105,366"
+    }
+  },
+  "5": {
+    "class_type": "StickerMaskBands",
+    "inputs": {
+      "artwork_inset": 0,
+      "contact_width": 2,
+      "cutline_width": 3,
+      "sticker_masks": [
+        "4",
+        1
+      ],
+      "threshold": 0.5
+    }
+  },
+  "6": {
+    "class_type": "EmptyImage",
+    "inputs": {
+      "batch_size": 1,
+      "color": 16777215,
+      "height": 768,
+      "width": 1024
+    }
+  },
+  "7": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "mask": [
+        "5",
+        1
+      ],
+      "resize_source": false,
+      "source": [
+        "6",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "8": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "7",
+        0
+      ],
+      "mask": [
+        "5",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "4",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "9": {
+    "class_type": "ColorTransfer",
+    "inputs": {
+      "image_ref": [
+        "1",
+        0
+      ],
+      "image_target": [
+        "14",
+        0
+      ],
+      "method": "reinhard_lab",
+      "source_stats": "per_frame",
+      "strength": 0.35
+    }
+  }
+}

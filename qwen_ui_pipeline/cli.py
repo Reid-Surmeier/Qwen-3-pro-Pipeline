@@ -12,7 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
-from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from .comfyui_workflow import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_sticker_mask_assembly_workflow,
+)
 from .prompt_manifest import compile_edit_brief
 from .providers.openrouter import (
     OpenRouterImageClient,
@@ -70,6 +74,23 @@ def build_parser() -> argparse.ArgumentParser:
     assembly_parser.add_argument("--filename-prefix", required=True)
     assembly_parser.add_argument("--output", required=True, type=Path)
 
+    mask_parser = subparsers.add_parser(
+        "mask-assembly-workflow",
+        help="write an opt-in mask-owned sticker Assembly workflow",
+    )
+    mask_parser.add_argument("--reference-filename", required=True)
+    mask_parser.add_argument("--artwork-filename", required=True)
+    mask_parser.add_argument("--mask-filename", required=True)
+    mask_parser.add_argument("--integration-filename", required=True)
+    mask_parser.add_argument("--canvas-width", required=True, type=int)
+    mask_parser.add_argument("--canvas-height", required=True, type=int)
+    mask_parser.add_argument("--target-quad", required=True)
+    mask_parser.add_argument("--artwork-inset", default=0, type=int)
+    mask_parser.add_argument("--cutline-width", default=3, type=int)
+    mask_parser.add_argument("--contact-width", default=2, type=int)
+    mask_parser.add_argument("--filename-prefix", required=True)
+    mask_parser.add_argument("--output", required=True, type=Path)
+
     record_parser = subparsers.add_parser(
         "record-comfy", help="record completed ComfyUI outputs as a reproducible run"
     )
@@ -86,6 +107,27 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    if args.command == "mask-assembly-workflow":
+        workflow = build_sticker_mask_assembly_workflow(
+            reference_filename=args.reference_filename,
+            artwork_filename=args.artwork_filename,
+            mask_filename=args.mask_filename,
+            integration_filename=args.integration_filename,
+            canvas_width=args.canvas_width,
+            canvas_height=args.canvas_height,
+            target_quad=args.target_quad,
+            artwork_inset=args.artwork_inset,
+            cutline_width=args.cutline_width,
+            contact_width=args.contact_width,
+            filename_prefix=args.filename_prefix,
+        )
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(workflow, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        print(args.output)
+        return 0
+
     if args.command == "assembly-workflow":
         workflow = build_comfyui_assembly_workflow(
             reference_filename=args.reference_filename,
