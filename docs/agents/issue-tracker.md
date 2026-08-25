@@ -48,9 +48,34 @@ An Issue can receive `ready-for-agent` only when:
 - scope boundaries are stated,
 - dependencies are available,
 - verification is possible,
-- paid operations, credentials, and human approvals are identified.
+- paid operations, credentials, and human approvals are identified,
+- the human has approved the final work packet.
 
-Use `needs-info` when an unanswered question could materially change the solution. Use `ready-for-human` when direct human judgment or execution is required.
+Use `needs-info` when an unanswered question could materially change the solution. Use `needs-human-decision` after an agent has proposed a complete triage brief and a human must approve, revise, split, or reject it. Use `ready-for-human` when direct human judgment or execution—not approval of an agent plan—is required.
+
+## Conversational triage gate
+
+While an Issue has `needs-triage`, an agent may investigate and comment but must not create a branch or modify repository files. The comment uses this structure:
+
+```markdown
+## Agent triage brief
+
+### 1. Interpretation
+
+### 2. Open decisions
+
+### 3. Proposed scope
+
+### 4. Proposed acceptance and verification
+
+### 5. Recommendation
+```
+
+The recommendation is one of: proceed, revise, split, investigate first, or do not pursue. After commenting, the agent replaces `needs-triage` with `needs-human-decision` and stops.
+
+The human then approves, revises, splits, or rejects the proposal. Silence, an unaddressed comment, or the absence of objections is not approval. Only the human may authorize `ready-for-agent`.
+
+After approval, update the Issue body with the final outcome, scope, acceptance criteria, verification, dependencies, and approvals. Comments remain the decision history; the Issue body becomes the canonical implementation specification.
 
 ## Linking work
 

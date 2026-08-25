@@ -11,6 +11,9 @@ The lifecycle is:
 ```text
 not-ready
   -> needs-triage / needs-info
+  -> agent triage brief
+  -> needs-human-decision
+  -> human approves, revises, splits, or rejects
   -> ready-for-agent
   -> in-progress branch or worktree
   -> locally verified
@@ -60,19 +63,21 @@ Do not require the Issue author to prescribe code structure unless that structur
 
 Use the canonical workflow labels in [`triage-labels.md`](triage-labels.md).
 
-`ready-for-agent` is a gate, not a general priority label. Apply it only when an agent can act without inventing product, architecture, security, or cost decisions.
+While an Issue has `needs-triage`, an agent may inspect repository context and post the five-part triage brief defined in [`issue-tracker.md`](issue-tracker.md). It must not create a branch, modify files, or begin implementation.
 
-Move an Issue to `needs-info` when a missing answer could change:
+After commenting, the agent replaces `needs-triage` with `needs-human-decision` and stops. The human then chooses one outcome:
 
-- behavior,
-- architecture,
-- external side effects,
-- security or credentials,
-- paid execution,
-- acceptance criteria,
-- verification.
+- approve the proposed work packet,
+- request revisions,
+- split the work into smaller Issues,
+- request more investigation,
+- reject or close the work.
 
-Use `ready-for-human` when the work requires direct human judgment or execution that should not be delegated.
+Only the human may authorize the transition to `ready-for-agent`. Before that transition, update the Issue body with the approved outcome, scope, acceptance criteria, verification, dependencies, and approval boundaries. The body is the canonical work packet; comments remain the decision history.
+
+`ready-for-agent` is a gate, not a general priority label. Apply it only when an agent can act without inventing product, architecture, security, cost, or acceptance decisions.
+
+Move an Issue to `needs-info` when a missing answer could materially change the solution. Use `ready-for-human` when the work requires direct human judgment or execution rather than approval of an agent proposal.
 
 ## 3. Create one isolated branch or worktree
 
