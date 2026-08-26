@@ -91,6 +91,11 @@
     }
   },
   "experiment": "english-structural-edit-v002",
+  "git": {
+    "baseline_commit": "27bee23bf6089f5587ec8994eab7a87621b2dd94",
+    "candidate_evidence_commit": "0f466d23bfed38836758413ae2cb6fa08880b58f",
+    "note": "The candidate commit contains the exact workflows, provider record, outputs, comparison, report, generator, and tests. This later metadata commit records its exact SHA."
+  },
   "human_visual_approval": "pending",
   "issue": 34,
   "node_assisted_review": {

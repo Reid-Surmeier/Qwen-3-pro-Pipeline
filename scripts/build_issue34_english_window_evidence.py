@@ -23,6 +23,8 @@ SOURCE_SHA256 = (
 SOURCE_SIZE = (1572, 718)
 TARGET_SIZE = (3144, 1436)
 SEED = 2026082602
+BASELINE_COMMIT = "27bee23bf6089f5587ec8994eab7a87621b2dd94"
+EVIDENCE_COMMIT = "0f466d23bfed38836758413ae2cb6fa08880b58f"
 
 
 def build_english_edit_brief() -> dict[str, Any]:
@@ -381,6 +383,15 @@ def finalize_experiment(root: Path) -> None:
         "issue": 34,
         "experiment": "english-structural-edit-v002",
         "classification": "comparison evidence and reproducibility metadata",
+        "git": {
+            "baseline_commit": BASELINE_COMMIT,
+            "candidate_evidence_commit": EVIDENCE_COMMIT,
+            "note": (
+                "The candidate commit contains the exact workflows, provider record, "
+                "outputs, comparison, report, generator, and tests. This later metadata "
+                "commit records its exact SHA."
+            ),
+        },
         "prior_experiment": {
             "path": "artifacts/issue-34/alpha-window-2x",
             "classification": "failed test design",
