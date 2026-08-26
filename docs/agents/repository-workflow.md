@@ -217,17 +217,19 @@ limitations. A preview helps a human judge the result; it does not make the
 output authoritative or replace a Fidelity Check.
 
 Use existing reviewed outputs when they already answer the verification
-question. When fresh paid verification is necessary under an authoritative
-Issue, use OpenRouter explicitly and the smallest useful batch. The cumulative
-maximum is 10 output images for the linked Issue/PR: never submit a request that
-could produce image 11, and stop earlier when the evidence is sufficient. Do
-not use provider auto-selection or direct Alibaba under this allowance.
+question. When fresh paid verification is necessary, the authoritative,
+human-approved Issue must name the question, model, initial batch, stopping
+condition, and any authorization for further output. Use OpenRouter explicitly,
+submit the smallest useful batch, and stop when the named question is answered.
+The absence of a repository-wide numeric cap does not authorize a broader
+batch. Do not use provider auto-selection or direct Alibaba under this
+allowance.
 
 Count requested and completed images in the run record. Treat an ambiguous
-possibly billed request as spent capacity until reconciled, and never retry it
-blindly. Record the provider/model, request or task ID, estimated and actual
-cost when exposed, output paths, hashes, provenance, and limitations. This
-allowance does not enable paid/model-backed generation in ordinary PR CI.
+possibly billed request as spent until reconciled, and never retry it blindly.
+Record the provider/model, request or task ID, estimated and actual cost when
+exposed, output paths, hashes, provenance, and limitations. This allowance does
+not enable paid/model-backed generation in ordinary PR CI.
 
 Keep credentials, tokens, unsafe raw provider responses, and unrelated large
 artifacts out of the PR.

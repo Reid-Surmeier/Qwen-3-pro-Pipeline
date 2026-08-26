@@ -1,6 +1,6 @@
 # Bound paid verification to OpenRouter
 
-Status: accepted on 2026-08-26.
+Status: superseded by ADR 0004 on 2026-08-26.
 
 Fresh paid generation may be used when an authoritative Issue requires visual
 verification, but only through an explicitly selected OpenRouter provider. Use
