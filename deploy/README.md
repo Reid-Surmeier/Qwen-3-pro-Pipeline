@@ -17,6 +17,8 @@ Pinned runtime versions used by the verified installation:
 - `systemd/qwen-comfyui.service` runs that wrapper as an enabled user service.
 - `codex/comfyui-mcp.toml` is the isolated MCP section to merge into
   `~/.codex/config.toml`; replace `USER` with the local account name.
+- `install-sticker-tooling.sh` installs the opt-in deterministic mask,
+  perspective, and Fidelity Check nodes. It does not restart ComfyUI.
 
 The verified WSL host uses `10.255.255.254`, a loopback alias, because ordinary
 `127.0.0.1` traffic is unreliable in that environment. Override
@@ -39,3 +41,20 @@ install -m 0644 deploy/systemd/qwen-comfyui.service \
 systemctl --user daemon-reload
 systemctl --user enable --now qwen-comfyui.service
 ```
+
+Install or refresh the mask-aware Assembly nodes from this checkout:
+
+```bash
+deploy/install-sticker-tooling.sh
+curl -fsS http://10.255.255.254:8188/queue
+```
+
+Only restart after the aggregate queue reports no running or pending work:
+
+```bash
+systemctl --user restart qwen-comfyui.service
+```
+
+The installer prints SHA-256 values for the deployed files. Compare them with
+the checkout before treating a live schema or workflow run as proof of the
+candidate code.

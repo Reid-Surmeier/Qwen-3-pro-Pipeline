@@ -1,0 +1,39 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-2-truth-social-inside-sticker-v001.png"
+    }
+  },
+  "2": {
+    "class_type": "QwenImage3Render",
+    "inputs": {
+      "edit_brief_json": "{\"provider\":\"openrouter\",\"model\":\"qwen/qwen-image-3-pro\",\"objective\":\"Create one isolated production-ready sticker asset from Reference 1. Preserve the sticker artwork and exact copy, while making the outside of the rounded sticker boundary a flat saturated green #00FF00 for deterministic removal.\",\"reference_role\":\"Reference 1 is the authoritative sticker artwork. If Reference 2 is present, it is only a spatial guide: white is approved sticker interior; cyan is the cutline; orange is the narrow contact boundary; black is outside. Do not copy the guide colors into the sticker artwork.\",\"preservation_invariants\":[\"Preserve the compact rounded-square proportions, cyan oval orbit, cyan lower band, white pearlescent field, italic early-2000s lettering, spacing, and printed texture.\",\"Preserve every intended white pixel inside the rounded sticker.\",\"Keep the sticker front-facing, centered, complete, and at the same scale.\"],\"canvas\":[\"Square 1:1 output.\",\"Everything outside the rounded sticker boundary is exactly one flat saturated green field (#00FF00).\"],\"regions\":[{\"name\":\"sticker interior\",\"change\":\"Clean only accidental boundary contamination and keep the approved artwork visually unchanged.\",\"preserve\":[\"all logo geometry\",\"all intended white artwork\",\"cyan band and orbit\",\"printed OEM texture\"]},{\"name\":\"outside sticker boundary\",\"change\":\"Replace checkerboard, white rectangle, halo, shadow, and stray pixels with flat #00FF00.\",\"preserve\":[]}],\"exact_copy\":[{\"region\":\"upper logo line\",\"text\":\"Truth social\"},{\"region\":\"lower logo line\",\"text\":\"Inside\"}],\"style\":[\"Photographic scan of a vintage OEM laptop sticker; no redesign.\"],\"asset_rules\":[\"Reference 2, when present, is a guide only and must not appear in the final artwork.\"],\"negative_constraints\":[\"No checkerboard pattern.\",\"No rectangular white box.\",\"No added logo or icon.\",\"No changed spelling or capitalization.\",\"No crop of the sticker.\"],\"quality_checks\":[\"Clean continuous rounded boundary.\",\"No pale halo outside the sticker.\",\"Exact Copy remains legible and unchanged.\"],\"output\":{\"resolution\":\"1K\",\"aspect_ratio\":\"1:1\",\"count\":2,\"seed\":20260826}}",
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/generation/b0-reference-only",
+      "images": [
+        "2",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "SaveText",
+    "inputs": {
+      "text": [
+        "2",
+        1
+      ],
+      "filename_prefix": "issue-2/generation/b0-reference-only-metadata",
+      "format": "json"
+    }
+  }
+}

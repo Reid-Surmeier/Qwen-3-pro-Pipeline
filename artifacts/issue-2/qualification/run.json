@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "issue": 2,
+  "classification": "comparison evidence",
+  "date": "2026-08-26",
+  "fixture": {
+    "reference_path": "artifacts/issue-2/qualification/issue-2-truth-social-inside-sticker-v001.png",
+    "reference_sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab",
+    "ground_truth_mask_path": "artifacts/issue-2/qualification/issue-2-rounded-alpha-mask.png",
+    "ground_truth_mask_sha256": "cb844236266eb24aa67ef503d1a13121d654d7543ba557df2e0f13fe5f2f15bd",
+    "width": 988,
+    "height": 944,
+    "ground_truth_rule": "Reference alpha >= 128; this mask predates and is independent of both compared paths."
+  },
+  "runtime": {
+    "endpoint": "http://10.255.255.254:8188",
+    "comfyui": "0.31.0",
+    "frontend": "1.48.7",
+    "python": "3.12.4",
+    "pytorch": "2.13.0+cu130",
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "queue_before": {
+      "running": 0,
+      "pending": 0
+    }
+  },
+  "node_pack": {
+    "origin_repository": "ReidSurmeier/maga-sticker-generation-snapshot",
+    "origin_commit": "b8e226cb12f7cea8a201da73a852542938fdad9f",
+    "installed_nodes_sha256": "36cf6a299c66f1c4fc808720142b34e44f658a14ce04350c19c29128cbbf381c",
+    "installed_init_sha256": "56d68fae07911f72b681120c0a6da265405a64d1566dfc0dfce6d89afa5a2aa4",
+    "source_matches_installed": true,
+    "dependencies": [
+      "ComfyUI IMAGE and MASK tensors",
+      "PyTorch already provided by ComfyUI"
+    ]
+  },
+  "live_runs": {
+    "custom_mask_path": {
+      "prompt_id": "01325c90-2c6d-4b70-9a65-534d04b10989",
+      "status": "success",
+      "workflow": "artifacts/issue-2/qualification/custom-mask-live-workflow.api.json",
+      "output": "artifacts/issue-2/qualification/sticker-mask-v001_00001_.png",
+      "output_sha256": "2183a4b1ed1665a01076c92867bac825c878837853c02cc21e73d79dbbe7a908"
+    },
+    "core_alpha_path": {
+      "prompt_id": "a2ed378a-87af-45f3-a372-0eed289d15b9",
+      "status": "success",
+      "duration_ms": 157,
+      "workflow": "artifacts/issue-2/qualification/core-alpha-live-workflow.api.json",
+      "output": "artifacts/issue-2/qualification/core-alpha-v001_00001_.png",
+      "output_sha256": "0423af8fdbeb4ee920245fca1217c12640003df30fdcd497636e3198f29bfab8"
+    }
+  },
+  "pixel_comparison": {
+    "total_pixels": 932672,
+    "ground_truth_foreground_pixels": 928180,
+    "core_false_opaque_pixels": 0,
+    "core_false_transparent_pixels": 0,
+    "custom_false_opaque_pixels": 0,
+    "custom_false_transparent_pixels": 0,
+    "core_vs_custom_changed_rgb_pixels": 0,
+    "note": "The PNG bytes differ because of encoding metadata; decoded RGB pixels are identical. False opaque/transparent and geometry values compare the explicit custom/core masks with the independent ground-truth mask, not RGB color inferred from the black composite."
+  },
+  "deterministic_evaluation": {
+    "path": "artifacts/issue-2/qualification/evaluation.json",
+    "outside_mask_changed_pixels": 0,
+    "silhouette_iou": 1.0,
+    "centroid_drift_px": 0.0,
+    "scale_drift": 0.0,
+    "boundary_error_fraction": 0.0,
+    "custom_transparent_cutout": "artifacts/issue-2/qualification/transparent-cutout-v001.png",
+    "core_transparent_cutout": "artifacts/issue-2/qualification/core-transparent-cutout-v001.png",
+    "background_contact_sheet": "artifacts/issue-2/qualification/background-contact-sheet-v001.png",
+    "backgrounds": [
+      "checker",
+      "black",
+      "white",
+      "gray",
+      "bright green"
+    ],
+    "transparency_scope": "Each contact-sheet row combines the actual candidate RGB output with that path's actual candidate mask. StickerMaskBands thresholds soft mask input at the declared threshold. No RGBA SaveImage output is claimed."
+  },
+  "selection": {
+    "chosen_path": "explicit ownership bands plus core ImageCompositeMasked and fail-closed fidelity gates",
+    "reason": "The core-only path produces the same fixture pixels. The selected path additionally names artwork, cutline, contact, editable, and immutable ownership and rejects protected-pixel or artwork drift.",
+    "birefnet_status": "not executed because the model weight is not installed; no dependency or model download was needed after the deterministic path passed",
+    "human_visual_approval": "pending"
+  }
+}

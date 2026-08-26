@@ -1,0 +1,157 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-2-truth-social-inside-sticker-v001.png"
+    }
+  },
+  "2": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "1",
+        1
+      ]
+    }
+  },
+  "3": {
+    "class_type": "StickerMaskBands",
+    "inputs": {
+      "sticker_masks": [
+        "2",
+        0
+      ],
+      "threshold": 0.5,
+      "artwork_inset": 0,
+      "cutline_width": 3,
+      "contact_width": 2
+    }
+  },
+  "4": {
+    "class_type": "EmptyImage",
+    "inputs": {
+      "width": 988,
+      "height": 944,
+      "batch_size": 1,
+      "color": 0
+    }
+  },
+  "5": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "4",
+        0
+      ],
+      "source": [
+        "1",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "mask": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "MaskedReferenceFidelityGate",
+    "inputs": {
+      "reference_images": [
+        "4",
+        0
+      ],
+      "candidate_images": [
+        "5",
+        0
+      ],
+      "allowed_masks": [
+        "3",
+        3
+      ],
+      "mask_threshold": 0.5,
+      "exact_outside_mask": true,
+      "max_global_normalized_rmse": 1.0,
+      "min_inside_changed_pixels": 1
+    }
+  },
+  "7": {
+    "class_type": "ArtworkFidelityGate",
+    "inputs": {
+      "approved_images": [
+        "1",
+        0
+      ],
+      "candidate_images": [
+        "6",
+        0
+      ],
+      "approved_masks": [
+        "3",
+        0
+      ],
+      "candidate_masks": [
+        "3",
+        0
+      ],
+      "mask_threshold": 0.5,
+      "exact_artwork": true,
+      "max_masked_normalized_rmse": 0.0,
+      "min_masked_ssim": 0.999,
+      "min_edge_iou": 0.99,
+      "min_silhouette_iou": 0.999,
+      "max_centroid_drift_px": 0.5,
+      "max_scale_drift": 0.001
+    }
+  },
+  "8": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/qualification/sticker-mask-v001",
+      "images": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "MaskToImage",
+    "inputs": {
+      "mask": [
+        "3",
+        0
+      ]
+    }
+  },
+  "10": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/qualification/artwork-mask-v001",
+      "images": [
+        "9",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "MaskToImage",
+    "inputs": {
+      "mask": [
+        "3",
+        3
+      ]
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/qualification/editable-mask-v001",
+      "images": [
+        "11",
+        0
+      ]
+    }
+  }
+}

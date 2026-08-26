@@ -1,0 +1,201 @@
+{
+  "conditions": {
+    "b0-reference-only": {
+      "images": [
+        {
+          "border_mean_absolute_error_to_00ff00": 16.339258337533604,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.3627357482910156,
+          "path": "artifacts/issue-2/generation/b0-reference-only/b0-reference-only_00001_.png",
+          "sha256": "d08b8329a53f6dcecb0aac74bf1f8eed1c8ffdb7b84648ee487682819b14995f",
+          "subject_bbox": [
+            98,
+            133,
+            925,
+            947
+          ],
+          "subject_bbox_fraction": [
+            0.095703125,
+            0.1298828125,
+            0.9033203125,
+            0.9248046875
+          ],
+          "subject_centroid_fraction": [
+            0.49927504607623613,
+            0.5269347707926468
+          ],
+          "subject_fraction": 0.6372642517089844,
+          "width": 1024
+        },
+        {
+          "border_mean_absolute_error_to_00ff00": 22.203048870127688,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.45882415771484375,
+          "path": "artifacts/issue-2/generation/b0-reference-only/b0-reference-only_00002_.png",
+          "sha256": "3c410b17979d1488cce257beba56ba52a0509b210349899e08309e9df99e3872",
+          "subject_bbox": [
+            103,
+            164,
+            923,
+            860
+          ],
+          "subject_bbox_fraction": [
+            0.1005859375,
+            0.16015625,
+            0.9013671875,
+            0.83984375
+          ],
+          "subject_centroid_fraction": [
+            0.5007294825365574,
+            0.4995608907156445
+          ],
+          "subject_fraction": 0.5411758422851562,
+          "width": 1024
+        }
+      ],
+      "mean_border_near_green_fraction": 1.0,
+      "mean_near_green_fraction": 0.4107799530029297,
+      "mean_subject_fraction": 0.5892200469970703
+    },
+    "b1-plain-mask": {
+      "images": [
+        {
+          "border_mean_absolute_error_to_00ff00": 17.027509135584676,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.3955984115600586,
+          "path": "artifacts/issue-2/generation/b1-plain-mask/b1-plain-mask_00001_.png",
+          "sha256": "12212cb712ccd2a2f3fa897af6126dabe2d391932abeaed61d974755feafd937",
+          "subject_bbox": [
+            117,
+            139,
+            910,
+            942
+          ],
+          "subject_bbox_fraction": [
+            0.1142578125,
+            0.1357421875,
+            0.888671875,
+            0.919921875
+          ],
+          "subject_centroid_fraction": [
+            0.501002512801553,
+            0.5274021115979644
+          ],
+          "subject_fraction": 0.6044015884399414,
+          "width": 1024
+        },
+        {
+          "border_mean_absolute_error_to_00ff00": 23.169234080981184,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.618255615234375,
+          "path": "artifacts/issue-2/generation/b1-plain-mask/b1-plain-mask_00002_.png",
+          "sha256": "e1257840ba44b986a4fed5ff21330fe3d2202d83ad1ef0f85be39afebdb9c59c",
+          "subject_bbox": [
+            194,
+            198,
+            834,
+            829
+          ],
+          "subject_bbox_fraction": [
+            0.189453125,
+            0.193359375,
+            0.814453125,
+            0.8095703125
+          ],
+          "subject_centroid_fraction": [
+            0.5013467891009098,
+            0.5004649020869036
+          ],
+          "subject_fraction": 0.381744384765625,
+          "width": 1024
+        }
+      ],
+      "mean_border_near_green_fraction": 1.0,
+      "mean_near_green_fraction": 0.5069270133972168,
+      "mean_subject_fraction": 0.4930729866027832
+    },
+    "b2-ownership-guide": {
+      "images": [
+        {
+          "border_mean_absolute_error_to_00ff00": 16.993179813508064,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.36840152740478516,
+          "path": "artifacts/issue-2/generation/b2-ownership-guide/b2-ownership-guide_00001_.png",
+          "sha256": "13e6ea7f6868dc0407e19e6ec29a76fdc8858cabf9de40a4fdd275eb05a85304",
+          "subject_bbox": [
+            99,
+            137,
+            921,
+            949
+          ],
+          "subject_bbox_fraction": [
+            0.0966796875,
+            0.1337890625,
+            0.8994140625,
+            0.9267578125
+          ],
+          "subject_centroid_fraction": [
+            0.497399232659121,
+            0.5300034727386419
+          ],
+          "subject_fraction": 0.6315984725952148,
+          "width": 1024
+        },
+        {
+          "border_mean_absolute_error_to_00ff00": 24.84225102906586,
+          "border_near_green_fraction": 1.0,
+          "exact_green_fraction": 0.0,
+          "height": 1024,
+          "near_green_fraction": 0.5333518981933594,
+          "path": "artifacts/issue-2/generation/b2-ownership-guide/b2-ownership-guide_00002_.png",
+          "sha256": "84e8646d6747987cf3aa0c5961e3d752e45508d6c5187e9f1863d582b24e657d",
+          "subject_bbox": [
+            145,
+            163,
+            858,
+            854
+          ],
+          "subject_bbox_fraction": [
+            0.1416015625,
+            0.1591796875,
+            0.837890625,
+            0.833984375
+          ],
+          "subject_centroid_fraction": [
+            0.48954614547398817,
+            0.4960251693339529
+          ],
+          "subject_fraction": 0.4666481018066406,
+          "width": 1024
+        }
+      ],
+      "mean_border_near_green_fraction": 1.0,
+      "mean_near_green_fraction": 0.45087671279907227,
+      "mean_subject_fraction": 0.5491232872009277
+    }
+  },
+  "method": {
+    "border_width_pixels": 32,
+    "limitations": [
+      "These measurements test background uniformity and geometry only.",
+      "They do not establish text correctness or subjective visual fidelity."
+    ],
+    "near_green_rule": "green >= 180 and green-red >= 150 and green-blue >= 150",
+    "target_background_rgb": [
+      0,
+      255,
+      0
+    ]
+  },
+  "schema_version": 1
+}

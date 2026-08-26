@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "issue": 2,
+  "classification": "comparison evidence",
+  "date": "2026-08-26",
+  "hypothesis": "A raw mask or labeled ownership guide supplied as a second visual reference may improve a later Qwen Render Pass.",
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "resolution": "1K",
+  "aspect_ratio": "1:1",
+  "seed": 20260826,
+  "generator_runtime": {
+    "repository": "/home/reidsurmeier/orca/workspaces/Qwen Image pipeline/gorgonian",
+    "commit": "1e6f7e6fabba7537612586ac2759fccabc22eaa6",
+    "comfyui_node_sha256": "a9418e99bde86a0680f8c933c9c6cd0af226aafb065e9038ed54c7414eebb63d",
+    "openrouter_adapter_sha256": "bcb2f4978d44eea64c16548f9d8d8c7bd1984131177fd7478be5064f6c834762",
+    "note": "Unrelated files in this worktree were dirty; both recorded runtime files matched the named commit."
+  },
+  "inputs": {
+    "reference": {
+      "path": "artifacts/issue-2/qualification/issue-2-truth-social-inside-sticker-v001.png",
+      "sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab"
+    },
+    "plain_mask": {
+      "path": "artifacts/issue-2/qualification/issue-2-rounded-alpha-mask.png",
+      "sha256": "cb844236266eb24aa67ef503d1a13121d654d7543ba557df2e0f13fe5f2f15bd"
+    },
+    "ownership_guide": {
+      "path": "artifacts/issue-2/qualification/ownership-guide-v001_00001_.png",
+      "sha256": "c7b01330bf9ef65760019344b3ac966ea1f116ca5648bce8f304b6024373685f"
+    }
+  },
+  "provider_attempts": [
+    {
+      "prompt_id": "59c1b20d-33d9-4914-82e8-8c3013a6a7e2",
+      "condition": "b0-reference-only",
+      "requested_outputs": 2,
+      "completed_outputs": 0,
+      "result": "OpenRouter HTTP 402 insufficient credits before generation",
+      "billing_ambiguity": false,
+      "retry": "not automatic; the human added credits before a new submission"
+    },
+    {
+      "prompt_id": "6702a58d-673e-4f83-b0a0-b8d908bc7bbf",
+      "condition": "b0-reference-only",
+      "requested_outputs": 2,
+      "completed_outputs": 2,
+      "input_reference_count": 1,
+      "actual_cost_usd": 0.083,
+      "workflow": "artifacts/issue-2/generation/b0-reference-only/workflow.api.json",
+      "metadata": "artifacts/issue-2/generation/b0-reference-only/metadata.json"
+    },
+    {
+      "prompt_id": "68dde8ec-091a-4fc7-b8a9-d30f02cf6fb8",
+      "condition": "b1-plain-mask",
+      "requested_outputs": 2,
+      "completed_outputs": 2,
+      "input_reference_count": 2,
+      "actual_cost_usd": 0.086,
+      "workflow": "artifacts/issue-2/generation/b1-plain-mask/workflow.api.json",
+      "metadata": "artifacts/issue-2/generation/b1-plain-mask/metadata.json"
+    },
+    {
+      "prompt_id": "4ff3e999-b3e0-4c3d-94e4-21a1789e5d46",
+      "condition": "b2-ownership-guide",
+      "requested_outputs": 2,
+      "completed_outputs": 2,
+      "input_reference_count": 2,
+      "actual_cost_usd": 0.086,
+      "workflow": "artifacts/issue-2/generation/b2-ownership-guide/workflow.api.json",
+      "metadata": "artifacts/issue-2/generation/b2-ownership-guide/metadata.json"
+    }
+  ],
+  "allowance": {
+    "effective_issue_cap": 10,
+    "completed_outputs": 6,
+    "ambiguous_possibly_billed_outputs": 0,
+    "effective_used_count": 6,
+    "additional_generation_submitted_after_evidence": 0
+  },
+  "cost": {
+    "pre_submission_estimate": "not captured; this is a limitation",
+    "actual_total_usd": 0.255,
+    "source": "OpenRouter usage metadata returned by each successful Render Pass"
+  },
+  "outputs": [
+    {
+      "condition": "b0-reference-only",
+      "path": "artifacts/issue-2/generation/b0-reference-only/b0-reference-only_00001_.png",
+      "sha256": "d08b8329a53f6dcecb0aac74bf1f8eed1c8ffdb7b84648ee487682819b14995f"
+    },
+    {
+      "condition": "b0-reference-only",
+      "path": "artifacts/issue-2/generation/b0-reference-only/b0-reference-only_00002_.png",
+      "sha256": "3c410b17979d1488cce257beba56ba52a0509b210349899e08309e9df99e3872"
+    },
+    {
+      "condition": "b1-plain-mask",
+      "path": "artifacts/issue-2/generation/b1-plain-mask/b1-plain-mask_00001_.png",
+      "sha256": "12212cb712ccd2a2f3fa897af6126dabe2d391932abeaed61d974755feafd937"
+    },
+    {
+      "condition": "b1-plain-mask",
+      "path": "artifacts/issue-2/generation/b1-plain-mask/b1-plain-mask_00002_.png",
+      "sha256": "e1257840ba44b986a4fed5ff21330fe3d2202d83ad1ef0f85be39afebdb9c59c"
+    },
+    {
+      "condition": "b2-ownership-guide",
+      "path": "artifacts/issue-2/generation/b2-ownership-guide/b2-ownership-guide_00001_.png",
+      "sha256": "13e6ea7f6868dc0407e19e6ec29a76fdc8858cabf9de40a4fdd275eb05a85304"
+    },
+    {
+      "condition": "b2-ownership-guide",
+      "path": "artifacts/issue-2/generation/b2-ownership-guide/b2-ownership-guide_00002_.png",
+      "sha256": "84e8646d6747987cf3aa0c5961e3d752e45508d6c5187e9f1863d582b24e657d"
+    }
+  ],
+  "evaluation": "artifacts/issue-2/generation/evaluation.json",
+  "contact_sheet": {
+    "path": "artifacts/issue-2/generation/contact-sheet-v001.png",
+    "sha256": "d1cfdd2b930f53d14c1223da102ee442ad924f478dc8e7334557ab875b8ce374"
+  },
+  "finding": "The two mask-guided conditions did not show a consistent improvement over the reference-only pair. The guide conditions changed scale and the labeled guide also shifted the cyan artwork color. Deterministic Assembly remains the selected boundary-control mechanism.",
+  "human_visual_approval": "pending"
+}

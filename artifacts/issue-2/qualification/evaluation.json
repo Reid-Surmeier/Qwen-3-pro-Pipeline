@@ -1,0 +1,123 @@
+{
+  "alpha_and_mask_convention": {
+    "assembly_output": "RGB composited onto black; transparency is carried by the candidate mask, not claimed for SaveImage output",
+    "candidate_alpha": "each background row uses the actual candidate mask; StickerMaskBands thresholds soft input at the declared threshold",
+    "comfyui_load_image_mask": "inverse alpha; the live graph uses InvertMask",
+    "truth_background": "L < 128 means protected/transparent background",
+    "truth_foreground": "L >= 128 means editable/opaque foreground"
+  },
+  "artifacts": {
+    "background_contact_sheet": {
+      "path": "artifacts/issue-2/qualification/background-contact-sheet-v001.png",
+      "sha256": "5e87e722cb2c18ce9f78e3281bc5f9f9b8b6985e56ac2948617c3a5103c6d259"
+    },
+    "core_output": {
+      "path": "artifacts/issue-2/qualification/core-alpha-v001_00001_.png",
+      "sha256": "0423af8fdbeb4ee920245fca1217c12640003df30fdcd497636e3198f29bfab8"
+    },
+    "core_transparent_cutout": {
+      "path": "artifacts/issue-2/qualification/core-transparent-cutout-v001.png",
+      "sha256": "1a0cf64417f1a7695fbd4bf029b96a66611946cc75b35cea3e1b537ed4fc3044"
+    },
+    "custom_mask_output": {
+      "path": "artifacts/issue-2/qualification/artwork-mask-v001_00001_.png",
+      "sha256": "fd01a4ace56a1a77693c9b7f94c98a34f18192c801f5b199404f13cda9152e37"
+    },
+    "custom_output": {
+      "path": "artifacts/issue-2/qualification/sticker-mask-v001_00001_.png",
+      "sha256": "2183a4b1ed1665a01076c92867bac825c878837853c02cc21e73d79dbbe7a908"
+    },
+    "custom_transparent_cutout": {
+      "path": "artifacts/issue-2/qualification/transparent-cutout-v001.png",
+      "sha256": "1a0cf64417f1a7695fbd4bf029b96a66611946cc75b35cea3e1b537ed4fc3044"
+    },
+    "mask": {
+      "path": "artifacts/issue-2/qualification/issue-2-rounded-alpha-mask.png",
+      "sha256": "cb844236266eb24aa67ef503d1a13121d654d7543ba557df2e0f13fe5f2f15bd"
+    },
+    "reference": {
+      "path": "artifacts/issue-2/qualification/issue-2-truth-social-inside-sticker-v001.png",
+      "sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab"
+    }
+  },
+  "core_path": {
+    "boundary_error_fraction": 0.0,
+    "boundary_symmetric_difference_pixels": 0,
+    "candidate_geometry": {
+      "bbox": [
+        1,
+        1,
+        987,
+        943
+      ],
+      "centroid": [
+        493.5,
+        471.5
+      ],
+      "foreground_pixels": 928180
+    },
+    "centroid_drift_px": 0.0,
+    "false_opaque_pixels": 0,
+    "false_transparent_pixels": 0,
+    "outside_mask_changed_pixels": 0,
+    "scale_drift": 0.0,
+    "silhouette_iou": 1.0,
+    "truth_geometry": {
+      "bbox": [
+        1,
+        1,
+        987,
+        943
+      ],
+      "centroid": [
+        493.5,
+        471.5
+      ],
+      "foreground_pixels": 928180
+    }
+  },
+  "custom_path": {
+    "boundary_error_fraction": 0.0,
+    "boundary_symmetric_difference_pixels": 0,
+    "candidate_geometry": {
+      "bbox": [
+        1,
+        1,
+        987,
+        943
+      ],
+      "centroid": [
+        493.5,
+        471.5
+      ],
+      "foreground_pixels": 928180
+    },
+    "centroid_drift_px": 0.0,
+    "false_opaque_pixels": 0,
+    "false_transparent_pixels": 0,
+    "outside_mask_changed_pixels": 0,
+    "scale_drift": 0.0,
+    "silhouette_iou": 1.0,
+    "truth_geometry": {
+      "bbox": [
+        1,
+        1,
+        987,
+        943
+      ],
+      "centroid": [
+        493.5,
+        471.5
+      ],
+      "foreground_pixels": 928180
+    }
+  },
+  "custom_vs_core_changed_rgb_pixels": 0,
+  "dimensions": {
+    "height": 944,
+    "live_output_mode": "RGB",
+    "reference_mode": "RGBA",
+    "width": 988
+  },
+  "schema_version": 1
+}

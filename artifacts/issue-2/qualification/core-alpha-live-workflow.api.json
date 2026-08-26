@@ -1,0 +1,56 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-2-truth-social-inside-sticker-v001.png"
+    }
+  },
+  "2": {
+    "class_type": "EmptyImage",
+    "inputs": {
+      "width": 988,
+      "height": 944,
+      "batch_size": 1,
+      "color": 0
+    }
+  },
+  "3": {
+    "class_type": "InvertMask",
+    "inputs": {
+      "mask": [
+        "1",
+        1
+      ]
+    }
+  },
+  "4": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "2",
+        0
+      ],
+      "source": [
+        "1",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "mask": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/qualification/core-alpha-v001",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  }
+}
