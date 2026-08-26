@@ -1,0 +1,201 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-intel-source-v001.png"
+    }
+  },
+  "13": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-source-region-v001.png"
+    }
+  },
+  "14": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "13",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-target-region-v001.png"
+    }
+  },
+  "16": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "MaskComposite",
+    "inputs": {
+      "destination": [
+        "14",
+        0
+      ],
+      "operation": "or",
+      "source": [
+        "16",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "baseline-selected-donor-v001.png"
+    }
+  },
+  "23": {
+    "class_type": "RepeatImageBatch",
+    "inputs": {
+      "amount": 2,
+      "image": [
+        "1",
+        0
+      ]
+    }
+  },
+  "24": {
+    "class_type": "GrowMask",
+    "inputs": {
+      "expand": 8,
+      "mask": [
+        "17",
+        0
+      ],
+      "tapered_corners": true
+    }
+  },
+  "25": {
+    "class_type": "FeatherMask",
+    "inputs": {
+      "bottom": 8,
+      "left": 8,
+      "mask": [
+        "24",
+        0
+      ],
+      "right": 8,
+      "top": 8
+    }
+  },
+  "26": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "23",
+        0
+      ],
+      "mask": [
+        "25",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "6",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "27": {
+    "class_type": "MaskedReferenceFidelityGate",
+    "inputs": {
+      "allowed_masks": [
+        "24",
+        0
+      ],
+      "candidate_images": [
+        "26",
+        0
+      ],
+      "exact_outside_mask": true,
+      "mask_threshold": 0.5,
+      "max_global_normalized_rmse": 1.0,
+      "min_inside_changed_pixels": 1,
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "28": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/feathered-union-v003",
+      "images": [
+        "27",
+        0
+      ]
+    }
+  },
+  "29": {
+    "class_type": "SaveText",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/feathered-union-v003-fidelity",
+      "format": "json",
+      "text": [
+        "27",
+        1
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "guided-selected-donor-v001.png"
+    }
+  },
+  "4": {
+    "class_type": "BatchImagesNode",
+    "inputs": {
+      "images.image0": [
+        "2",
+        0
+      ],
+      "images.image1": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "SolidMask",
+    "inputs": {
+      "height": 684,
+      "value": 1.0,
+      "width": 1024
+    }
+  },
+  "6": {
+    "class_type": "StickerPerspectiveWarp",
+    "inputs": {
+      "artwork_images": [
+        "4",
+        0
+      ],
+      "canvas_height": 800,
+      "canvas_width": 1136,
+      "sticker_masks": [
+        "5",
+        0
+      ],
+      "target_quad": "0,0,1135,0,1135,799,0,799"
+    }
+  }
+}

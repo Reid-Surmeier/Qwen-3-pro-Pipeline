@@ -1,0 +1,256 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-intel-source-v001.png"
+    }
+  },
+  "10": {
+    "class_type": "MaskedReferenceFidelityGate",
+    "inputs": {
+      "allowed_masks": [
+        "8",
+        0
+      ],
+      "candidate_images": [
+        "9",
+        0
+      ],
+      "exact_outside_mask": true,
+      "mask_threshold": 0.5,
+      "max_global_normalized_rmse": 1.0,
+      "min_inside_changed_pixels": 1,
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/exact-green-v001",
+      "images": [
+        "10",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "SaveText",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/exact-green-v001-fidelity",
+      "format": "json",
+      "text": [
+        "10",
+        1
+      ]
+    }
+  },
+  "13": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-source-region-v001.png"
+    }
+  },
+  "14": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "13",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-target-region-v001.png"
+    }
+  },
+  "16": {
+    "class_type": "ImageToMask",
+    "inputs": {
+      "channel": "red",
+      "image": [
+        "15",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "MaskComposite",
+    "inputs": {
+      "destination": [
+        "14",
+        0
+      ],
+      "operation": "or",
+      "source": [
+        "16",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "18": {
+    "class_type": "GrowMask",
+    "inputs": {
+      "expand": 4,
+      "mask": [
+        "17",
+        0
+      ],
+      "tapered_corners": true
+    }
+  },
+  "19": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "mask": [
+        "18",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "6",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "baseline-selected-donor-v001.png"
+    }
+  },
+  "20": {
+    "class_type": "MaskedReferenceFidelityGate",
+    "inputs": {
+      "allowed_masks": [
+        "18",
+        0
+      ],
+      "candidate_images": [
+        "19",
+        0
+      ],
+      "exact_outside_mask": true,
+      "mask_threshold": 0.5,
+      "max_global_normalized_rmse": 1.0,
+      "min_inside_changed_pixels": 1,
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "21": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/grown-union-v001",
+      "images": [
+        "20",
+        0
+      ]
+    }
+  },
+  "22": {
+    "class_type": "SaveText",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/assembly/grown-union-v001-fidelity",
+      "format": "json",
+      "text": [
+        "20",
+        1
+      ]
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "guided-selected-donor-v001.png"
+    }
+  },
+  "4": {
+    "class_type": "BatchImagesNode",
+    "inputs": {
+      "images.image0": [
+        "2",
+        0
+      ],
+      "images.image1": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "SolidMask",
+    "inputs": {
+      "height": 684,
+      "value": 1.0,
+      "width": 1024
+    }
+  },
+  "6": {
+    "class_type": "StickerPerspectiveWarp",
+    "inputs": {
+      "artwork_images": [
+        "4",
+        0
+      ],
+      "canvas_height": 800,
+      "canvas_width": 1136,
+      "sticker_masks": [
+        "5",
+        0
+      ],
+      "target_quad": "0,0,1135,0,1135,799,0,799"
+    }
+  },
+  "7": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue2-useful-edit-green-key-v001.png"
+    }
+  },
+  "8": {
+    "class_type": "ImageColorToMask",
+    "inputs": {
+      "color": 65280,
+      "image": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "mask": [
+        "8",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "6",
+        0
+      ],
+      "x": 0,
+      "y": 0
+    }
+  }
+}

@@ -71,7 +71,7 @@
     "boundary_error_fraction": 0.0,
     "custom_transparent_cutout": "artifacts/issue-2/qualification/transparent-cutout-v001.png",
     "core_transparent_cutout": "artifacts/issue-2/qualification/core-transparent-cutout-v001.png",
-    "background_contact_sheet": "artifacts/issue-2/qualification/background-contact-sheet-v001.png",
+    "background_contact_sheet": "artifacts/issue-2/rejected-historical/no-cost-qualification/background-contact-sheet-v001.png",
     "backgrounds": [
       "checker",
       "black",
@@ -79,7 +79,7 @@
       "gray",
       "bright green"
     ],
-    "transparency_scope": "Each contact-sheet row combines the actual candidate RGB output with that path's actual candidate mask. StickerMaskBands thresholds soft mask input at the declared threshold. No RGBA SaveImage output is claimed."
+    "transparency_scope": "Rejected historical technical evidence only. Each contact-sheet row combines the actual candidate RGB output with that path's actual candidate mask. StickerMaskBands thresholds soft mask input at the declared threshold. No RGBA SaveImage output is claimed."
   },
   "selection": {
     "chosen_path": "explicit ownership bands plus core ImageCompositeMasked and fail-closed fidelity gates",

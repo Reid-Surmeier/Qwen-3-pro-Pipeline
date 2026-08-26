@@ -1,0 +1,27 @@
+{
+  "aspect_ratio": "3:2",
+  "count": 2,
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "resolution": "1K",
+  "seed": 20260826,
+  "usage": {
+    "completion_tokens": 8350,
+    "completion_tokens_details": {
+      "image_tokens": 8350,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.083,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.08,
+      "upstream_inference_cost": 0.083,
+      "upstream_inference_prompt_cost": 0.003
+    },
+    "is_byok": false,
+    "prompt_tokens": 708,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 9058
+  }
+}

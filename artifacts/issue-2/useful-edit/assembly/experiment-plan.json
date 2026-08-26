@@ -1,0 +1,73 @@
+{
+  "acceptance": {
+    "human_visual_approval": "pending",
+    "outside_allowed_mask_changed_pixels": 0,
+    "visual_review": "compare source removal, white target e, and boundary seams"
+  },
+  "alignment": {
+    "canvas_size": [
+      1136,
+      800
+    ],
+    "limitation": "planar whole-canvas registration; not curved-surface displacement",
+    "node": "StickerPerspectiveWarp",
+    "source_size": [
+      1024,
+      684
+    ],
+    "target_quad": [
+      0,
+      0,
+      1135,
+      0,
+      1135,
+      799,
+      0,
+      799
+    ]
+  },
+  "classification": "comparison evidence plan",
+  "donor_order": [
+    {
+      "candidate": 2,
+      "condition": "baseline",
+      "path": "artifacts/issue-2/useful-edit/qwen/results/baseline-v001_00002_.png",
+      "reason": "completed the requested edit and retained lowercase source lettering more closely"
+    },
+    {
+      "candidate": 1,
+      "condition": "guided",
+      "path": "artifacts/issue-2/useful-edit/qwen/results/guided-v001_00001_.png",
+      "reason": "completed the requested edit; guided candidate 2 left the source e in place"
+    }
+  ],
+  "issue": 2,
+  "mask_options": [
+    {
+      "name": "exact-green",
+      "nodes": [
+        "ImageColorToMask",
+        "ImageCompositeMasked"
+      ],
+      "settings": {
+        "green_integer": 65280
+      }
+    },
+    {
+      "name": "grown-union",
+      "nodes": [
+        "ImageToMask",
+        "MaskComposite",
+        "GrowMask",
+        "ImageCompositeMasked"
+      ],
+      "settings": {
+        "expand": 4,
+        "operation": "or",
+        "tapered_corners": true
+      }
+    }
+  ],
+  "paid_generation_outputs": 0,
+  "schema_version": 1
+}

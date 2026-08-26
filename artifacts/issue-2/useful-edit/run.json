@@ -1,0 +1,313 @@
+{
+  "assembly": {
+    "allowed_mask_pixels": 6913,
+    "experiments": [
+      {
+        "plan": {
+          "path": "artifacts/issue-2/useful-edit/assembly/experiment-plan.json",
+          "role": "rejected v1 plan",
+          "sha256": "be4de0713a6568ca5871526f6ddbc26efb72e0db569fdd552c00c1acc770dd0d"
+        },
+        "prompt_id": "49c1f29a-c6ae-425c-a455-f064316d0199",
+        "result": "rejected because the destination batch was not repeated",
+        "revision": 1,
+        "workflow": {
+          "path": "artifacts/issue-2/useful-edit/assembly/workflow.api.json",
+          "role": "rejected v1 workflow",
+          "sha256": "c3323eb3f99a6a68dd3b679fa5f9dc0bf841e49fd614e544793565b80cb4d0cf"
+        }
+      },
+      {
+        "plan": {
+          "path": "artifacts/issue-2/useful-edit/assembly/experiment-plan-v002.json",
+          "role": "v2 plan",
+          "sha256": "c5bd2b92d336405ecc68b6740bb08f2a3a4dedea960db8534c20d606af1740e9"
+        },
+        "prompt_id": "c52b258f-f458-4e89-894a-4c012084b2a9",
+        "result": "zero outside-mask changes; hard patch edge remained",
+        "revision": 2,
+        "workflow": {
+          "path": "artifacts/issue-2/useful-edit/assembly/workflow-v002.api.json",
+          "role": "exact-key and grown-union workflow",
+          "sha256": "d20846bd203786b0a59b0adeed6ae741102bde414c932340af28cb2e90cb5018"
+        }
+      },
+      {
+        "plan": {
+          "path": "artifacts/issue-2/useful-edit/assembly/experiment-plan-v003.json",
+          "role": "v3 plan",
+          "sha256": "cf62e5b5e48e58f567317b09f36414fa0e80f0ae4661837d028d46f122421ec8"
+        },
+        "prompt_id": "0d493a16-4b8e-471a-bf72-f8b55440837d",
+        "result": "zero outside-mask changes; feathered donor patch remained",
+        "revision": 3,
+        "workflow": {
+          "path": "artifacts/issue-2/useful-edit/assembly/workflow-v003-feather.api.json",
+          "role": "feathered-union workflow",
+          "sha256": "92959c46a7baa640c13ce4e04dec72b3d0f5d7f17fe491034c17cec87b8df32c"
+        }
+      },
+      {
+        "plan": {
+          "path": "artifacts/issue-2/useful-edit/assembly/experiment-plan-v004.json",
+          "role": "v4 plan",
+          "sha256": "0aa2cc523c28d74cd5d850855d6a768e5533ae6ef35032d2c9550d9c4d951231"
+        },
+        "prompt_id": "0c20bc4d-05a7-4ef6-96f3-755a8e2e7fce",
+        "result": "rejected because source blur produced a blue-gray smudge",
+        "revision": 4,
+        "workflow": {
+          "path": "artifacts/issue-2/useful-edit/assembly/workflow-v004-final.api.json",
+          "role": "source-blur workflow",
+          "sha256": "f7b8c38c1db6e7b43d57af74d59d3c2e0eb8fcc51075ce5600f3a363581fa558"
+        }
+      },
+      {
+        "plan": {
+          "path": "artifacts/issue-2/useful-edit/assembly/experiment-plan-v005.json",
+          "role": "v5 plan",
+          "sha256": "ac04630e7b001f715025cc9182cd443317e3e29fab0049b8c5a8b2ef8478dcb6"
+        },
+        "prompt_id": "237eb308-1bfe-485d-aaf8-c9dc7f133c02",
+        "result": "best bounded candidate; visible texture patch remains",
+        "revision": 5,
+        "workflow": {
+          "path": "artifacts/issue-2/useful-edit/assembly/workflow-v005-precise.api.json",
+          "role": "precise-mask workflow",
+          "sha256": "ce2e5a9aa2c22ff7b680144320995304a68e377bd886615ce4eda60bc8d83a94"
+        }
+      }
+    ],
+    "limitation": "Exact ownership passed, but donor/source texture mismatch remains visible at the removed glyph. This candidate is evidence, not an approved final.",
+    "nodes_tested": [
+      "ImageColorToMask",
+      "ImageToMask",
+      "MaskComposite",
+      "GrowMask",
+      "FeatherMask",
+      "RepeatImageBatch",
+      "ImageBlur",
+      "StickerPerspectiveWarp",
+      "ImageCompositeMasked",
+      "MaskedReferenceFidelityGate"
+    ],
+    "options_tested": [
+      {
+        "color_integer": 65280,
+        "name": "exact green key"
+      },
+      {
+        "expand": 4,
+        "name": "grown union",
+        "tapered_corners": true
+      },
+      {
+        "allowed_expand": 8,
+        "feather": {
+          "bottom": 8,
+          "left": 8,
+          "right": 8,
+          "top": 8
+        },
+        "name": "feathered union"
+      },
+      {
+        "blur_radius": 31,
+        "name": "source-derived blur",
+        "sigma": 10.0
+      },
+      {
+        "feather": 4,
+        "name": "precise source and target",
+        "source_expand": 4,
+        "target_expand": 4
+      }
+    ],
+    "outside_allowed_mask_changed_pixels": 0,
+    "provider_outputs": 0,
+    "selected_baseline": {
+      "path": "artifacts/issue-2/useful-edit/assembly/results/exact-green-v002_00001_.png",
+      "role": "rejected deterministic baseline; target glyph was partial",
+      "sha256": "e07e26a8d73c17d79bac1270c9ff0bb1680d209559b96c4e06db4e210633f1d3",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "selected_guided": {
+      "path": "artifacts/issue-2/useful-edit/assembly/results/precise-guided-v005_00001_.png",
+      "role": "best bounded deterministic candidate; visible source patch remains",
+      "sha256": "f31ee8992513040f8c2d6dfab616cb5463db8af862c38a7e0464d972530143a9",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "selected_guided_prompt_id": "237eb308-1bfe-485d-aaf8-c9dc7f133c02"
+  },
+  "classification": "comparison evidence and reproducibility metadata",
+  "contact_sheet": {
+    "path": "artifacts/issue-2/useful-edit/useful-edit-comparison-v001.png",
+    "role": "human comparison evidence",
+    "sha256": "b33f1a0ad41ca13dc55e9700a549eccc53e5a307c7fe966dfa61c81db5e4c257",
+    "size": [
+      1120,
+      2315
+    ]
+  },
+  "generation": {
+    "actual_cost_usd": 0.169,
+    "baseline_prompt_id": "ec5370d4-103b-467a-90d0-53393e6e4f44",
+    "completed_outputs": 4,
+    "cumulative_issue_cost_usd": 0.424,
+    "effective_issue_output_count_after_run": 10,
+    "finding": "Baseline completed the edit in 2 of 2 outputs; guided completed it in 1 of 2. The guide did not improve generation consistency, but selected guided candidate 1 aligned the relocated e more completely in deterministic Assembly.",
+    "guided_prompt_id": "d1773803-431d-490b-915d-885d60403354",
+    "historical_rejected_cost_usd": 0.255,
+    "matched_variable": "presence of the green selection guide as Reference 2",
+    "model": "qwen/qwen-image-3-pro",
+    "outputs": [
+      {
+        "path": "artifacts/issue-2/useful-edit/qwen/results/baseline-v001_00001_.png",
+        "role": "baseline candidate 1; requested edit completed",
+        "sha256": "a347e6fc39361b886b37704034a81feb00f60935efebc62ca680bdacb60c974a",
+        "size": [
+          1024,
+          684
+        ]
+      },
+      {
+        "path": "artifacts/issue-2/useful-edit/qwen/results/baseline-v001_00002_.png",
+        "role": "baseline candidate 2; requested edit completed and selected baseline donor",
+        "sha256": "7e98996758501da9215063e4adb56e3f55a505c24af519114547b22c3bdd6fbe",
+        "size": [
+          1024,
+          684
+        ]
+      },
+      {
+        "path": "artifacts/issue-2/useful-edit/qwen/results/guided-v001_00001_.png",
+        "role": "guided candidate 1; requested edit completed and selected guided donor",
+        "sha256": "e11f67f08ada438df22345743d39c3acb163b3711fa34615bcf3f4c2a1a6b110",
+        "size": [
+          1024,
+          684
+        ]
+      },
+      {
+        "path": "artifacts/issue-2/useful-edit/qwen/results/guided-v001_00002_.png",
+        "role": "guided candidate 2; rejected because source e remained",
+        "sha256": "567ecaca835a8c342eff0ecb0243f1f0bdffbe9b4275eb7132da00a70d2999b0",
+        "size": [
+          1024,
+          684
+        ]
+      }
+    ],
+    "provider": "openrouter",
+    "settings": {
+      "aspect_ratio": "3:2",
+      "count_per_condition": 2,
+      "resolution": "1K",
+      "seed": 20260826
+    },
+    "workflow_evidence": {
+      "baseline": {
+        "path": "artifacts/issue-2/useful-edit/qwen/baseline-v001.api.json",
+        "role": "source-only Qwen workflow",
+        "sha256": "5efc11e19c433b57ab5a74eb7d252b3e444c2722c203ce6ebf48d9efd9956c45"
+      },
+      "guided": {
+        "path": "artifacts/issue-2/useful-edit/qwen/guided-v001.api.json",
+        "role": "source-plus-guide Qwen workflow",
+        "sha256": "a3b558ea31e74bf87cd7f9e7f94bb61f32800029c61382decfe2346bb2b9a6c1"
+      },
+      "plan": {
+        "path": "artifacts/issue-2/useful-edit/qwen/plan.json",
+        "role": "paid run plan and cap check",
+        "sha256": "5f2d310563c55a2785079983690b21e25a053011d03dca6bcccbb6c6d2150753"
+      }
+    }
+  },
+  "guide": {
+    "path": "artifacts/issue-2/useful-edit/fixture/green-selection-guide-v001.png",
+    "role": "Reference 2 in guided condition only",
+    "sha256": "ec6485a1ba6821c92aebfbabd4d8786d2dca4c2b28f617334b38f6b8640de5fa",
+    "size": [
+      1136,
+      800
+    ]
+  },
+  "human_visual_approval": "pending",
+  "issue": 2,
+  "schema_version": 1,
+  "selection_masks": {
+    "combined_region": {
+      "path": "artifacts/issue-2/useful-edit/fixture/combined-region-mask-v001.png",
+      "role": "union of allowed source and target regions",
+      "sha256": "5fbf78dd448da9170aacc6d615622df429c7ee509def0c4b125026d4b8099c92",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "source_letter": {
+      "path": "artifacts/issue-2/useful-edit/fixture/source-e-mask-v001.png",
+      "role": "selected final source e",
+      "sha256": "6da4f1463af93d317a7a73fb934a3ffb037957ce607aede89160cc72b0098350",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "source_region": {
+      "path": "artifacts/issue-2/useful-edit/fixture/source-region-mask-v001.png",
+      "role": "allowed source removal region",
+      "sha256": "f41a89d5dbf2e7b0a044363761980aae694010c157bb964df305ae732bbe2da2",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "target_letter": {
+      "path": "artifacts/issue-2/useful-edit/fixture/target-e-mask-v001.png",
+      "role": "translated e target shape",
+      "sha256": "e658ad3137991a233ace3bff70be5d2678f9a62bed8e5ea737ea0fbc336ecb81",
+      "size": [
+        1136,
+        800
+      ]
+    },
+    "target_region": {
+      "path": "artifacts/issue-2/useful-edit/fixture/target-region-mask-v001.png",
+      "role": "allowed target placement region",
+      "sha256": "9295cfab5c8d7acf204cd0ca87f41f2b94c0f6f296d5c59a453da9fc545eb4c7",
+      "size": [
+        1136,
+        800
+      ]
+    }
+  },
+  "source_authority": {
+    "forbidden_prior_output_sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab",
+    "full_export": {
+      "path": "artifacts/issue-2/useful-edit/source/intel-inside-source-node-67-710.png",
+      "role": "FigJam node 67:710 source identity and crop provenance",
+      "sha256": "c72cd0ec91e6e8490a5549dea015c0e866b126b674a3d255ffff071c06a5ff23",
+      "size": [
+        298,
+        508
+      ]
+    },
+    "prior_output_used_in_corrected_test": false,
+    "reference_1": {
+      "path": "artifacts/issue-2/useful-edit/source/intel-inside-celeron-crop.png",
+      "role": "only authoritative Qwen image input in both conditions",
+      "sha256": "7c8e8767f72b72ce4fa4c888507f5ad060003a6cab7802f3e0deef44c8de35d7",
+      "size": [
+        1136,
+        800
+      ]
+    }
+  }
+}

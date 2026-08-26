@@ -1,0 +1,92 @@
+{
+  "artifacts": {
+    "combined_region_mask": {
+      "path": "artifacts/issue-2/useful-edit/fixture/combined-region-mask-v001.png",
+      "sha256": "5fbf78dd448da9170aacc6d615622df429c7ee509def0c4b125026d4b8099c92"
+    },
+    "green_key": {
+      "path": "artifacts/issue-2/useful-edit/fixture/green-selection-key-v001.png",
+      "sha256": "c9e508636703eb61d191a251ca4bf936c4ab8321667c0eacb0ccf315b2cb2a1b"
+    },
+    "guide": {
+      "path": "artifacts/issue-2/useful-edit/fixture/green-selection-guide-v001.png",
+      "sha256": "ec6485a1ba6821c92aebfbabd4d8786d2dca4c2b28f617334b38f6b8640de5fa"
+    },
+    "source_letter_mask": {
+      "path": "artifacts/issue-2/useful-edit/fixture/source-e-mask-v001.png",
+      "sha256": "6da4f1463af93d317a7a73fb934a3ffb037957ce607aede89160cc72b0098350"
+    },
+    "source_region_mask": {
+      "path": "artifacts/issue-2/useful-edit/fixture/source-region-mask-v001.png",
+      "sha256": "f41a89d5dbf2e7b0a044363761980aae694010c157bb964df305ae732bbe2da2"
+    },
+    "target_letter_mask": {
+      "path": "artifacts/issue-2/useful-edit/fixture/target-e-mask-v001.png",
+      "sha256": "e658ad3137991a233ace3bff70be5d2678f9a62bed8e5ea737ea0fbc336ecb81"
+    },
+    "target_region_mask": {
+      "path": "artifacts/issue-2/useful-edit/fixture/target-region-mask-v001.png",
+      "sha256": "9295cfab5c8d7acf204cd0ca87f41f2b94c0f6f296d5c59a453da9fc545eb4c7"
+    }
+  },
+  "reference": {
+    "height": 800,
+    "path": "artifacts/issue-2/useful-edit/source/intel-inside-celeron-crop.png",
+    "role": "authoritative Reference 1 for both matched Qwen conditions",
+    "sha256": "7c8e8767f72b72ce4fa4c888507f5ad060003a6cab7802f3e0deef44c8de35d7",
+    "width": 1136
+  },
+  "schema_version": 1,
+  "selection": {
+    "combined_region_pixels": 7302,
+    "green_integer": 65280,
+    "green_rgb": [
+      0,
+      255,
+      0
+    ],
+    "region_expansion": 8,
+    "source_letter_box": [
+      587,
+      263,
+      635,
+      314
+    ],
+    "source_letter_pixels": 1701,
+    "source_region_box": [
+      579,
+      255,
+      643,
+      322
+    ],
+    "source_search_box": [
+      575,
+      230,
+      665,
+      335
+    ],
+    "source_seed": [
+      610,
+      285
+    ],
+    "target_letter_box": [
+      360,
+      640,
+      408,
+      691
+    ],
+    "target_letter_pixels": 1701,
+    "target_region_box": [
+      352,
+      632,
+      416,
+      699
+    ]
+  },
+  "source_export": {
+    "figjam_node_id": "67:710",
+    "path": "artifacts/issue-2/useful-edit/source/intel-inside-source-node-67-710.png",
+    "role": "source identity and crop provenance; not a Qwen input",
+    "sha256": "c72cd0ec91e6e8490a5549dea015c0e866b126b674a3d255ffff071c06a5ff23"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-2/useful-edit/intel-inside-celeron-crop-v001.png"
+    }
+  },
+  "2": {
+    "class_type": "QwenImage3Render",
+    "inputs": {
+      "edit_brief_json": "{\"asset_rules\": [\"Use only the original source crop as artwork authority.\", \"A second image, when present, is a selection guide rather than replacement artwork.\"], \"canvas\": [\"Keep the same landscape composition and include the full original crop.\", \"The only editable areas are the marked source e and its marked destination on the blue band.\"], \"exact_copy\": [{\"region\": \"upper word inside oval\", \"text\": \"intel\"}, {\"region\": \"lower word remaining inside oval\", \"text\": \"insid\"}, {\"region\": \"processor line\", \"text\": \"celeron\"}, {\"region\": \"lower blue band right side\", \"text\": \"M\"}, {\"region\": \"moved glyph on lower blue band\", \"text\": \"e\"}], \"model\": \"qwen/qwen-image-3-pro\", \"negative_constraints\": [\"No green pixels, guide outline, arrow, box, or selection mark in the output.\", \"No new logo, icon, word, letter, shadow, border, or background.\", \"No duplicate e and no change to the existing M.\", \"No reinterpretation of the original source as a clean modern sticker.\"], \"objective\": \"Perform one surgical edit on Reference 1. Move only the final lowercase e from the lower word inside the blue oval to the empty left-center of the blue band below. Remove it cleanly from the original word, restore the pale sticker field behind it, and recolor the moved e opaque white.\", \"output\": {\"aspect_ratio\": \"3:2\", \"count\": 2, \"resolution\": \"1K\", \"seed\": 20260826}, \"preservation_invariants\": [\"Preserve the complete crop, camera perspective, blur, lighting, print texture, and resolution character.\", \"Preserve the Intel oval, every other Intel Inside letter, Celeron word and registered mark, blue band, and white M.\", \"Do not redraw, straighten, sharpen, upscale, recrop, translate, or redesign the sticker.\"], \"provider\": \"openrouter\", \"quality_checks\": [\"The final e is absent from its original position and appears exactly once on the blue band in white.\", \"The preceding letters remain in place and the blue oval remains continuous.\", \"Everything outside the two declared regions remains visually unchanged.\"], \"reference_role\": \"Reference 1 is the authoritative original Intel Inside/Celeron source crop. If Reference 2 is present, it is only a spatial guide: the green halo marks the source e and the green e on the blue band marks the exact destination. Never copy green into the output.\", \"regions\": [{\"change\": \"Remove that e so the remaining lower word reads insid. Fill the vacated glyph area with the matching pale photographed sticker field.\", \"name\": \"final lowercase e in the lower word inside the oval\", \"preserve\": [\"the preceding d\", \"the surrounding blue oval\", \"all other letters\"]}, {\"change\": \"Place one lowercase e there at the guide position. Match the source glyph's italic shape, scale, orientation, blur, and print texture, but render the moved glyph white.\", \"name\": \"empty left-center area of the lower blue band\", \"preserve\": [\"the blue band geometry\", \"the existing white M\"]}], \"style\": [\"Unretouched low-resolution photograph of the original OEM laptop sticker.\", \"Keep the existing soft focus and perspective instead of creating clean vector art.\"]}",
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/qwen/baseline-v001",
+      "images": [
+        "2",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "SaveText",
+    "inputs": {
+      "filename_prefix": "issue-2/useful-edit/qwen/baseline-v001-metadata",
+      "format": "json",
+      "text": [
+        "2",
+        1
+      ]
+    }
+  }
+}

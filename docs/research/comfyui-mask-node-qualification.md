@@ -73,14 +73,18 @@ recorded silhouette IoU 1.0, zero centroid/scale drift, and zero boundary-band
 error. The decoded RGB composites were identical; their PNG hashes differ
 because their encodings differ. The RGB result is composited onto a destination
 canvas, so transparency is carried and tested as a separate mask rather than
-claimed as RGBA `SaveImage` output. A deterministic contact sheet shows two
-rows: the actual custom output with its candidate mask and the actual core
-output with its candidate mask, each over checker, black, white, gray, and
-bright green backgrounds. `StickerMaskBands` intentionally thresholds soft
-input at the declared threshold; a tensor test locks the `0.49` versus `0.50`
-boundary.
-See `artifacts/issue-2/qualification/run.json`, `evaluation.json`, and both
-qualification contact sheets for the durable evidence.
+claimed as RGBA `SaveImage` output. `StickerMaskBands` intentionally thresholds
+soft input at the declared threshold; a tensor test locks the `0.49` versus
+`0.50` boundary.
+See `artifacts/issue-2/qualification/run.json` and `evaluation.json` for the
+durable machine-readable evidence. The repetitive no-cost contact sheets were
+removed from review and archived under `rejected-historical/` because they did
+not demonstrate a useful edit.
+
+Those no-cost sheets used a prior generated sticker as a convenient frozen
+technical fixture. They establish tensor and mask behavior only. They do not
+show a meaningful source-image edit and are no longer presented as human-review
+evidence in the Issue report.
 
 The live proof workflow reused the approved mask as the candidate mask in
 `ArtworkFidelityGate`. Its exact-artwork check was meaningful, but its reported
@@ -107,6 +111,49 @@ show a consistent improvement, so deterministic Assembly remains the selected
 boundary-control mechanism. Human visual acceptance is still pending. See
 `artifacts/issue-2/generation/run.json`, `evaluation.json`, and the generation
 contact sheet.
+
+### Corrected source-based edit test
+
+The earlier Phase B test also used the generated Truth Social sticker as its
+Qwen reference. That was a provenance error for the requested user-facing
+comparison: a prior output must not become the source authority. The six images
+are preserved as rejected historical evidence and still count toward the paid
+output cap, but they do not validate the source-based workflow.
+
+The corrected matched test used the original Intel Inside/Celeron crop as
+Reference 1 in both conditions. The full FigJam node `67:710` export has SHA-256
+`c72cd0ec91e6e8490a5549dea015c0e866b126b674a3d255ffff071c06a5ff23`;
+the exact crop supplied to Qwen has SHA-256
+`7c8e8767f72b72ce4fa4c888507f5ad060003a6cab7802f3e0deef44c8de35d7`.
+The baseline received only that crop. The guided condition received that same
+crop plus the green selection guide. Both used the same edit brief, 1K 3:2
+settings, two outputs, and seed `20260826`.
+
+| Condition | References | Outputs completing edit | Actual cost | Finding |
+| --- | ---: | ---: | ---: | --- |
+| source-only baseline | 1 | 2 of 2 | $0.083 | both moved and recolored the final `e` |
+| source plus green guide | 2 | 1 of 2 | $0.086 | second output added an `e` but failed to remove the source `e` |
+
+The corrected run cost $0.169 against a recorded $0.17 estimate. Together with
+the six rejected historical outputs, Issue #2 reached its 10-output cap and no
+further paid generation was performed. The cumulative recorded Issue cost is
+$0.424: $0.255 for the rejected historical outputs plus $0.169 for the corrected
+source-based run.
+
+The guide did not improve Qwen consistency. It did help the selected guided
+donor align the relocated glyph more completely during deterministic Assembly.
+Core and project-owned nodes tested included `ImageColorToMask`, `ImageToMask`,
+`MaskComposite`, `GrowMask`, `FeatherMask`, `RepeatImageBatch`, `ImageBlur`,
+`StickerPerspectiveWarp`, `ImageCompositeMasked`, and
+`MaskedReferenceFidelityGate`. The bounded candidates changed zero pixels
+outside their approved masks. The best candidate still has a visible patch at
+the removed source glyph, so it is comparison evidence rather than an approved
+final.
+
+See `artifacts/issue-2/useful-edit/run.json` and
+`useful-edit-comparison-v001.png` for the corrected source identities, Qwen
+outputs, workflow prompts, node experiments, deterministic metrics, and visual
+comparison.
 
 ## Discovery is not deployment
 
@@ -388,9 +435,11 @@ preservation. Exact claims remain byte-level checks outside the editable mask.
   and hashing a weight revision, reviewing its license, and measuring cold/warm
   time and memory. It is not required for the selected deterministic fixture.
 - The Phase B pre-submission price estimate was not captured. Actual provider
-  costs and every request/output are recorded.
-- Objective checks passed, but the generated comparison and selected contact
-  sheet still require human visual acceptance.
+  costs and every request/output are recorded. The corrected source-based test
+  did capture its estimate.
+- The corrected bounded candidate passed exact outside-mask preservation, but a
+  donor/source texture patch remains visible. It still requires human visual
+  acceptance and is not an approved final.
 - Remote Mac access to the Pugnet ComfyUI interface and Partner-compatible local
   Qwen node inputs are tracked separately in Issue #32.
 

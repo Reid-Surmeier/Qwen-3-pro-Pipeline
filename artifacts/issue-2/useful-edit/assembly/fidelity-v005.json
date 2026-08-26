@@ -1,0 +1,15 @@
+{
+  "candidates": [
+    {
+      "allowed_mask_pixels": 6913,
+      "candidate_index": 0,
+      "failed_checks": [],
+      "global_normalized_rmse": 0.028816651552915573,
+      "inside_mask_changed_pixels": 6913,
+      "outside_mask_changed_pixels": 0,
+      "passed": true
+    }
+  ],
+  "ownership": "mask",
+  "schema_version": 1
+}

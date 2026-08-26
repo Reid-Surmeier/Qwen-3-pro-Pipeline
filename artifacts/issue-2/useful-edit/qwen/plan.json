@@ -1,0 +1,45 @@
+{
+  "allowance": {
+    "completed_before_corrected_test": 6,
+    "effective_issue_cap": 10,
+    "maximum_after_plan": 10,
+    "planned_outputs": 4
+  },
+  "classification": "comparison evidence plan",
+  "cost": {
+    "basis": "four outputs at the prior six-output average of $0.0425 each",
+    "pre_submission_estimate_usd": 0.17
+  },
+  "forbidden_generation_input": {
+    "path": "artifacts/issue-2/qualification/issue-2-truth-social-inside-sticker-v001.png",
+    "reason": "prior generated output, not a source image",
+    "sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab"
+  },
+  "guide": {
+    "comfyui_filename": "issue-2/useful-edit/green-selection-guide-v001.png",
+    "path": "artifacts/issue-2/useful-edit/fixture/green-selection-guide-v001.png",
+    "role": "additional visual reference in the guided condition only"
+  },
+  "issue": 2,
+  "matched_variable": "presence of Reference 2 green selection guide",
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "reference_1": {
+    "comfyui_filename": "issue-2/useful-edit/intel-inside-celeron-crop-v001.png",
+    "path": "artifacts/issue-2/useful-edit/source/intel-inside-celeron-crop.png",
+    "role": "authoritative Qwen input in both conditions",
+    "sha256": "7c8e8767f72b72ce4fa4c888507f5ad060003a6cab7802f3e0deef44c8de35d7"
+  },
+  "schema_version": 1,
+  "settings": {
+    "aspect_ratio": "3:2",
+    "count": 2,
+    "resolution": "1K",
+    "seed": 20260826
+  },
+  "source_export": {
+    "path": "artifacts/issue-2/useful-edit/source/intel-inside-source-node-67-710.png",
+    "role": "source identity and crop provenance; not a Qwen input",
+    "sha256": "c72cd0ec91e6e8490a5549dea015c0e866b126b674a3d255ffff071c06a5ff23"
+  }
+}

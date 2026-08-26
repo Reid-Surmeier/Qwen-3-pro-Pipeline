@@ -8,7 +8,7 @@
   },
   "artifacts": {
     "background_contact_sheet": {
-      "path": "artifacts/issue-2/qualification/background-contact-sheet-v001.png",
+      "path": "artifacts/issue-2/rejected-historical/no-cost-qualification/background-contact-sheet-v001.png",
       "sha256": "5e87e722cb2c18ce9f78e3281bc5f9f9b8b6985e56ac2948617c3a5103c6d259"
     },
     "core_output": {
