@@ -191,14 +191,11 @@ def build_alpha_resize_workflow(
     reference_filename: str,
     filename_prefix: str,
     image_method: str,
-    mask_method: str = "nearest-exact",
 ) -> dict[str, Any]:
     """Build the installed native image/mask resize and alpha join graph."""
 
     if image_method not in {"nearest-exact", "lanczos"}:
         raise ValueError("image_method must be nearest-exact or lanczos")
-    if mask_method != "nearest-exact":
-        raise ValueError("the authoritative alpha boundary must use nearest-exact")
     return {
         "1": {
             "class_type": "LoadImage",
@@ -219,7 +216,7 @@ def build_alpha_resize_workflow(
                 "input": ["1", 1],
                 "resize_type": "scale by multiplier",
                 "resize_type.multiplier": 2.0,
-                "scale_method": mask_method,
+                "scale_method": "nearest-exact",
             },
         },
         "4": {
@@ -331,12 +328,18 @@ def compare_to_authoritative_2x(
     authority_alpha = authority.getchannel("A").getdata()
     candidate_alpha = candidate.getchannel("A").getdata()
     alpha_pairs = list(zip(authority_alpha, candidate_alpha, strict=True))
+    authority_rgb = authority.convert("RGB").getdata()
+    candidate_rgb = candidate.convert("RGB").getdata()
     return {
         "changed_rgba_pixels": sum(
             source != output
             for source, output in zip(authority.getdata(), candidate.getdata(), strict=True)
         ),
         "alpha_value_errors": sum(source != output for source, output in alpha_pairs),
+        "changed_rgb_pixels": sum(
+            source != output
+            for source, output in zip(authority_rgb, candidate_rgb, strict=True)
+        ),
         "transparent_membership_errors": sum(
             (source == 0) != (output == 0) for source, output in alpha_pairs
         ),
@@ -425,6 +428,7 @@ def finalize_experiment(root: Path) -> None:
         )
 
     failed_split = root / "deterministic/nearest-exact-2x_00001_.png"
+    failed_split_lanczos = root / "deterministic/lanczos-2x_00001_.png"
     native_nearest = root / "deterministic/nearest-exact-alpha-2x_00001_.png"
     native_lanczos = root / "deterministic/lanczos-alpha-2x_00001_.png"
     raw_1 = root / "qwen/raw/source-only-v001_00001_.png"
@@ -434,6 +438,7 @@ def finalize_experiment(root: Path) -> None:
     required = [
         source,
         failed_split,
+        failed_split_lanczos,
         native_nearest,
         native_lanczos,
         raw_1,
@@ -484,7 +489,16 @@ def finalize_experiment(root: Path) -> None:
                     "LoadImage output 0 is RGB, so SplitImageWithAlpha could not "
                     "recover the uploaded PNG alpha; both outputs were fully opaque."
                 ),
-                "nearest_output": _artifact(failed_split, "rejected fully opaque evidence"),
+                "outputs": [
+                    _artifact(
+                        failed_split,
+                        "rejected nearest-exact fully opaque evidence",
+                    ),
+                    _artifact(
+                        failed_split_lanczos,
+                        "rejected Lanczos fully opaque evidence",
+                    ),
+                ],
                 "workflows": [
                     _file_artifact(
                         root / "deterministic/failed-split-nearest-exact-2x.api.json",

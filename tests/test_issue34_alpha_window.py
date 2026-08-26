@@ -79,6 +79,7 @@ class Issue34AlphaWindowTests(unittest.TestCase):
         )
 
         self.assertEqual(comparison["opaque_membership_errors"], 0)
+        self.assertEqual(comparison["changed_rgb_pixels"], 0)
         self.assertGreater(comparison["transparent_membership_errors"], 0)
 
     def test_qwen_postprocess_fits_target_and_reuses_source_mask(self):

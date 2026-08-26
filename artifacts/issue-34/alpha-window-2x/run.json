@@ -40,23 +40,42 @@
     "corrected_graph": "LoadImage IMAGE -> ResizeImageMaskNode; LoadImage MASK -> ResizeImageMaskNode; both -> JoinImageWithAlpha",
     "failed_split_after_load": {
       "finding": "LoadImage output 0 is RGB, so SplitImageWithAlpha could not recover the uploaded PNG alpha; both outputs were fully opaque.",
-      "nearest_output": {
-        "alpha": {
-          "max": 255,
-          "min": 255,
-          "opaque_pixels": 4514784,
-          "partial_pixels": 0,
-          "transparent_pixels": 0
+      "outputs": [
+        {
+          "alpha": {
+            "max": 255,
+            "min": 255,
+            "opaque_pixels": 4514784,
+            "partial_pixels": 0,
+            "transparent_pixels": 0
+          },
+          "mode": "RGBA",
+          "path": "artifacts/issue-34/alpha-window-2x/deterministic/nearest-exact-2x_00001_.png",
+          "role": "rejected nearest-exact fully opaque evidence",
+          "sha256": "9b8c2667c1f68ed8b8832bc9b645b7a0b230e756ad41ce8ec364a84b6599da63",
+          "size": [
+            3144,
+            1436
+          ]
         },
-        "mode": "RGBA",
-        "path": "artifacts/issue-34/alpha-window-2x/deterministic/nearest-exact-2x_00001_.png",
-        "role": "rejected fully opaque evidence",
-        "sha256": "9b8c2667c1f68ed8b8832bc9b645b7a0b230e756ad41ce8ec364a84b6599da63",
-        "size": [
-          3144,
-          1436
-        ]
-      },
+        {
+          "alpha": {
+            "max": 255,
+            "min": 255,
+            "opaque_pixels": 4514784,
+            "partial_pixels": 0,
+            "transparent_pixels": 0
+          },
+          "mode": "RGBA",
+          "path": "artifacts/issue-34/alpha-window-2x/deterministic/lanczos-2x_00001_.png",
+          "role": "rejected Lanczos fully opaque evidence",
+          "sha256": "cf20a9dc9128cc773eb6f41ced100c3beba259765d85c65de20ba4ccc5d9b64f",
+          "size": [
+            3144,
+            1436
+          ]
+        }
+      ],
       "prompt_ids": [
         "d7d486ba-7ab3-4f57-a788-e555e65fbb44",
         "fc26f22b-9f27-4dad-bc80-05702841390d"
@@ -94,6 +113,7 @@
       },
       "comparison": {
         "alpha_value_errors": 192820,
+        "changed_rgb_pixels": 1575451,
         "changed_rgba_pixels": 1598029,
         "opaque_membership_errors": 0,
         "transparent_membership_errors": 55052
@@ -120,6 +140,7 @@
       },
       "comparison": {
         "alpha_value_errors": 192820,
+        "changed_rgb_pixels": 0,
         "changed_rgba_pixels": 192820,
         "opaque_membership_errors": 0,
         "transparent_membership_errors": 55052
@@ -158,6 +179,7 @@
         {
           "alpha_comparison": {
             "alpha_value_errors": 192820,
+            "changed_rgb_pixels": 4250923,
             "changed_rgba_pixels": 4262438,
             "opaque_membership_errors": 0,
             "transparent_membership_errors": 55052
@@ -183,6 +205,7 @@
         {
           "alpha_comparison": {
             "alpha_value_errors": 192820,
+            "changed_rgb_pixels": 3716746,
             "changed_rgba_pixels": 3735496,
             "opaque_membership_errors": 0,
             "transparent_membership_errors": 55052
