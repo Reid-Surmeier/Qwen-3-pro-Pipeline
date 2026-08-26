@@ -83,7 +83,10 @@ A failed preflight is a stop condition.
 - Use exact baseline and candidate commit SHAs for reproducible comparisons.
 - Do not place provider keys, tokens, passwords, or credentials in source, logs, prompts, issues, pull requests, workflow YAML, or artifacts.
 - Paid or model-backed evaluation must not run automatically in ordinary pull-request CI.
+- Issue-scoped paid verification may use OpenRouter only. Use the smallest useful batch, never exceed 10 cumulative output images for the linked Issue/PR, and stop before submitting any request that could produce image 11. Do not use `provider: auto` or direct Alibaba under this allowance.
+- Record requested and completed image counts, provider/model, prompt or task ID, estimate and actual cost when exposed, output paths, hashes, and provenance for every paid verification run.
 - Do not blindly retry an ambiguous provider failure that might create duplicate billing.
+- Count an ambiguous possibly billed request against the 10-image verification allowance until it is reconciled.
 
 ## Verification gate
 

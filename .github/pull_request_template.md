@@ -1,6 +1,16 @@
-## Summary
+## What changed?
 
-<!-- What changed, and why is this the smallest coherent change? -->
+<!-- Use plain language. Two or three sentences is usually enough. -->
+
+## Why was it needed?
+
+<!-- Name the problem this fixes. -->
+
+## What should the human check?
+
+<!-- Point to the decision, behavior, or output that needs attention. -->
+
+-
 
 ## Linked Issue
 
@@ -16,26 +26,70 @@ Closes #
 
 -
 
-## Verification
+## Checks run
 
-<!-- List commands that were actually run and their real results. -->
+<!-- List only checks that actually ran. Include the real result. -->
 
 ```text
 command:
 result:
 ```
 
-## Evidence or artifacts
+## Visual or generation proof
 
-<!-- Add sanitized manifests, hashes, images, diffs, or metrics when relevant. -->
+<!--
+For a non-visual PR, write:
+Not applicable — this PR does not change or generate visual output.
+
+For a visual or generation PR, replace that line and complete the short form
+below. Embed the important previews by dragging them into the PR. If embedding
+is impractical, explain why and link a durable contact sheet or output artifact.
+Fresh paid verification may use OpenRouter only and must stop before exceeding
+10 cumulative output images for the linked Issue/PR. Use the smallest useful
+batch; do not use provider auto-selection or Alibaba. Do not paste credentials,
+tokens, or unsafe raw provider responses.
+-->
+
+Not applicable — this PR does not change or generate visual output.
+
+<!--
+### Preview
+
+![Reference Screen or before](paste-image-or-durable-url-here)
+![Selected or final output](paste-image-or-durable-url-here)
+
+### Proof
+
+- Evidence shown: generated candidate / selected donor / deterministic Assembly / final output
+- Reference Screen or source:
+- Output or contact sheet:
+- Run or validated manifest:
+- Provider and model, if generated:
+- Requested and completed image counts:
+- Estimated and actual cost, if paid:
+- Base and candidate commit SHAs:
+- SHA-256 or provenance record:
+
+### Fidelity Check, if strict preservation is claimed
+
+- Dimensions:
+- Declared edit region:
+- Changed pixels outside the edit region:
+- Exact Copy result:
+- Remaining limitations:
+-->
 
 ## Risks and limitations
 
 -
 
-## Human approvals
+## Human decisions and side effects
 
-<!-- Identify subjective visual decisions, paid calls, credentials, external side effects, or production changes. Write "None" when none apply. -->
+<!--
+Say what is approved and what still needs a decision. Include donor selection,
+final visual acceptance, FigJam placement/readback, paid calls, credential use,
+or production effects when they apply. Write "None" when none apply.
+-->
 
 -
 
@@ -45,7 +99,9 @@ result:
 
 - [ ] The change satisfies the linked Issue and acceptance criteria.
 - [ ] Scope did not expand without approval.
-- [ ] Required evidence and human approvals are present.
+- [ ] The PR tells the human what to check.
+- [ ] Required visual or generation proof is present, or clearly not applicable.
+- [ ] Required human decisions are recorded.
 
 ### Engineering review
 
