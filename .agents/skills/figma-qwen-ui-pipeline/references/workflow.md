@@ -9,6 +9,30 @@
 
 Do not mistake a raster screenshot on FigJam for an editable UI. Text inside node `1:41` is part of the PlantStudio image; changing it requires an image edit/replacement or a separately reconstructed native Figma screen.
 
+## Final-output board
+
+The canonical delivery endpoint for completed image sessions is the Agent
+FigJam board target `agent-final-output-board` (`lO1Eo2Xsjnk0HqDPLtOiXT`, root
+`0:1`). This endpoint is distinct from research and source-reference boards.
+
+Each run is one untitled white section. Sessions append top-to-bottom. Images
+inside a session follow the explicit run order from left-to-right and then
+top-to-bottom. Every source file is an independent FigJam image node at its
+native pixel dimensions; large sessions are never flattened into a contact
+sheet. Variable-width columns and variable-height rows prevent overlap while
+`FIT` keeps the full image visible without cropping.
+
+The pipeline must not add visible titles, captions, labels, arrows, legends,
+numbers, borders, or decorative colors. Text already present inside the raster
+image is image content and remains untouched. Session identity, hashes, order,
+node IDs, geometry, and readback evidence belong in `figjam-placement.json`,
+not on the board.
+
+The delivery command writes intent before upload and marks incomplete or
+uncertain work `ambiguous`. Any existing placement record is a stop condition
+until its live nodes are reconciled; never create a second session by blindly
+retrying.
+
 ## Iteration contract
 
 For every generated variant, retain:

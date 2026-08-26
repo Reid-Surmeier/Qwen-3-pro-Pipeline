@@ -37,6 +37,39 @@ node .agents/skills/figma-qwen-ui-pipeline/scripts/figma-mcp.mjs get-figjam \
 
 The helper reads the existing Codex Figma OAuth credential without printing it. Never pass tokens on the command line or place them in project files.
 
+## Deliver final outputs
+
+The stable final-output destination is `agent-final-output-board`. Deliver one
+ordered run as one image-only session grid:
+
+```bash
+node .agents/skills/figma-qwen-ui-pipeline/scripts/figma-mcp.mjs deliver-grid \
+  --target agent-final-output-board \
+  --run-dir /absolute/path/to/artifacts/runs/session-id
+```
+
+For an explicit ordered list, repeat `--asset` in display order and provide
+both `--session-id` and `--provenance-out`. Every file is uploaded as its own
+FigJam node at its native pixel dimensions; the command never combines a large
+set into a contact sheet. It creates an untitled white section, places images
+left-to-right then top-to-bottom with `FIT`, and appends later sessions below
+earlier sessions. It adds no visible text, captions, arrows, labels, numbering,
+borders, or decorative color. Large sessions negotiate upload URLs in bounded
+chunks, but every raw file is still posted and placed separately.
+
+`figjam-placement.json` is the duplicate-delivery guard. If it already exists,
+or if an upload or placement becomes ambiguous, reconcile the recorded Figma
+nodes before another upload. Do not delete the record merely to force a retry.
+When live inspection identifies all existing upload node IDs in source order,
+finish without uploading again:
+
+```bash
+node .agents/skills/figma-qwen-ui-pipeline/scripts/figma-mcp.mjs reconcile-grid \
+  --target agent-final-output-board \
+  --provenance-out /absolute/path/to/figjam-placement.json \
+  --placed-node 1:2 --placed-node 1:3
+```
+
 ## Upload an image
 
 Upload a new board asset without changing an existing node:
