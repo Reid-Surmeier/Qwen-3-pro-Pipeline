@@ -183,31 +183,57 @@ If Git author identity is not configured, stop. The agent must not invent a name
 
 ## 8. Open a pull request
 
-A pull request should contain:
+A pull request should use [the repository template](../../.github/pull_request_template.md)
+and answer four questions in plain language:
 
-```markdown
-## Summary
+1. What changed?
+2. Why was it needed?
+3. What should the human check?
+4. Which checks actually ran, and what happened?
 
-## Linked Issue
+Keep the scope, risks, and outstanding human decisions explicit. Use draft
+status while acceptance criteria or evidence are incomplete.
 
-Closes #<issue>
+### Visual or generation proof
 
-## Scope
+When a pull request changes or generates visual output, put the result before
+the technical provenance so a human can inspect it quickly:
 
-### In scope
+- embed the important Reference Screen, candidate, selected donor, or final
+  output previews in the PR when practical;
+- otherwise explain why embedding is impractical and link a durable contact
+  sheet or output artifact;
+- identify what each preview represents: a probabilistic Render Pass, selected
+  donor, deterministic Assembly, or final output;
+- link the source identity, run or validated manifest, output path, provider
+  and model, exact commits, hashes, and objective Fidelity Check from one
+  traceable record when they apply;
+- state which donor, final visual, FigJam placement/readback, cost, credential,
+  or production decisions are approved and which remain open.
 
-### Out of scope
+For strict preservation, include dimensions, the declared edit region, the
+outside-region changed-pixel count, Exact Copy results, and remaining
+limitations. A preview helps a human judge the result; it does not make the
+output authoritative or replace a Fidelity Check.
 
-## Verification
+Use existing reviewed outputs when they already answer the verification
+question. When fresh paid verification is necessary under an authoritative
+Issue, use OpenRouter explicitly and the smallest useful batch. The cumulative
+maximum is 10 output images for the linked Issue/PR: never submit a request that
+could produce image 11, and stop earlier when the evidence is sufficient. Do
+not use provider auto-selection or direct Alibaba under this allowance.
 
-## Evidence or artifacts
+Count requested and completed images in the run record. Treat an ambiguous
+possibly billed request as spent capacity until reconciled, and never retry it
+blindly. Record the provider/model, request or task ID, estimated and actual
+cost when exposed, output paths, hashes, provenance, and limitations. This
+allowance does not enable paid/model-backed generation in ordinary PR CI.
 
-## Risks and limitations
+Keep credentials, tokens, unsafe raw provider responses, and unrelated large
+artifacts out of the PR.
 
-## Human approvals
-```
-
-Use draft status while acceptance criteria or evidence are incomplete.
+For a non-visual change, write one line: `Not applicable — this PR does not
+change or generate visual output.`
 
 ## 9. Review in two passes
 
