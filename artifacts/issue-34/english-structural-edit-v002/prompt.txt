@@ -1,0 +1,56 @@
+[TASK]
+Regenerate the complete Reference Screen as an English options window at exactly twice the source width and height. Remove one complete control row and reflow the remaining controls uniformly. This is a structural interface edit, not a simple upscale or redesign.
+
+[REFERENCE ROLE]
+Reference 1 is the only image input and the authority for the window theme, pixel-era raster style, palette, borders, controls, and states.
+
+[PRESERVATION INVARIANTS]
+- Keep the entire transparent window visible with no surrounding scene or crop.
+- Keep the magenta outer frame, blue-grey title bar, white panel, checker-shadow edge, left tabs, dropdown, bevels, and limited palette.
+- Keep authentic enlarged aliased raster lettering and controls; do not modernize, vectorize, anti-alias into a contemporary UI, or invent decoration.
+- Keep the BGM slider handle and retained checkbox states in the same relative state as the Reference Screen.
+
+[REGION EDITS]
+- REGION: title
+  CHANGE: Replace the Japanese title with the English word Options.
+- REGION: second slider row
+  CHANGE: Remove the complete Effect row: its label, left and right arrows, slider track, handle, checkbox, and adjacent on label.
+- REGION: remaining body
+  CHANGE: Reflow the BGM, Skin, and bottom-option rows with intentional, even vertical spacing; leave no Effect-shaped blank gap.
+- REGION: bottom Japanese label
+  CHANGE: Replace the Japanese label with the English word Snap.
+
+[EXACT COPY]
+- title bar: "Options"
+- left tab: "option"
+- left tab: "info"
+- remaining slider: "BGM"
+- dropdown: "Skin"
+- BGM checkbox: "on"
+- bottom option: "opaque"
+- bottom option: "Snap"
+- bottom option: "attack"
+- bottom option: "skill"
+- bottom option: "item"
+
+[STYLE SYSTEM]
+- Faithful late-1990s or early-2000s Japanese PC game options dialog translated into English.
+- Crisp 2x raster pixels, restrained bevels, original geometry language, and original colors.
+
+[ASSET RULES]
+- Return exactly one complete window per output.
+- Use no image other than Reference 1 and add no mask, guide, annotation, or highlighted region.
+- The review canvas is exactly 3144 by 1436 with the source composition enlarged to fill it.
+
+[NEGATIVE CONSTRAINTS]
+- No Effect word, Effect slider, second slider track, second slider arrows, second handle, second checkbox, or second on label.
+- No Japanese text remains anywhere in the edited interface.
+- No green guide, mask color, selection outline, annotation, glow, or donor image.
+- No empty horizontal band where the Effect row was removed.
+- No new words, icons, controls, decoration, background, or content.
+
+[QUALITY GATE]
+- Every Exact Copy string is legible and character-for-character correct.
+- There is exactly one slider, labeled BGM, and no Effect row remains.
+- BGM, Skin, and bottom options use even, intentional vertical spacing.
+- The complete window silhouette, title bar, tabs, dropdown, and bottom controls remain recognizable as the same interface.

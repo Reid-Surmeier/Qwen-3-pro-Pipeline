@@ -1,0 +1,21 @@
+Tesseract 5.3.0 default-layout readback
+
+Candidate 1:
+Ciptions
+Bis hl
+
+Skin
+
+Clopaque Snap |Wlattack [lskill (J item
+
+Candidate 2:
+vies}
+Bis hil
+
+Skin
+
+opaque ‘Snap Wlattack [skill Yitem
+
+Finding: inconclusive. The aliased pixel font causes obvious OCR errors, including
+misreading the visibly recognizable Options title. Do not use this output as an
+Exact Copy acceptance result; human visual review remains required.

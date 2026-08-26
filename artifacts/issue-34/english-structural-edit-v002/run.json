@@ -1,0 +1,223 @@
+{
+  "classification": "comparison evidence and reproducibility metadata",
+  "contact_sheet": {
+    "alpha": {
+      "max": 255,
+      "min": 255,
+      "opaque_pixels": 5236800,
+      "partial_pixels": 0,
+      "transparent_pixels": 0
+    },
+    "mode": "RGB",
+    "path": "artifacts/issue-34/english-structural-edit-v002/comparison-v002.png",
+    "role": "human comparison evidence",
+    "sha256": "bf682873b8db2079d74ecd1cc1eb647872455ba4d436ba59033bcd7f7d90a204",
+    "size": [
+      2400,
+      2182
+    ]
+  },
+  "direct_baseline": {
+    "actual_cost_usd": 0.083,
+    "completed_outputs": 2,
+    "duration_seconds": 92.24,
+    "model": "qwen/qwen-image-3-pro",
+    "outputs": [
+      {
+        "alpha": {
+          "max": 255,
+          "min": 255,
+          "opaque_pixels": 2097152,
+          "partial_pixels": 0,
+          "transparent_pixels": 0
+        },
+        "mode": "RGB",
+        "path": "artifacts/issue-34/english-structural-edit-v002/raw/candidate-01.png",
+        "role": "raw baseline candidate 1",
+        "sha256": "d2280fb5eb9abba117edaf38b885020e44d3abbbffc0ff5a09f5bf84845dfacf",
+        "size": [
+          2048,
+          1024
+        ]
+      },
+      {
+        "alpha": {
+          "max": 255,
+          "min": 255,
+          "opaque_pixels": 2097152,
+          "partial_pixels": 0,
+          "transparent_pixels": 0
+        },
+        "mode": "RGB",
+        "path": "artifacts/issue-34/english-structural-edit-v002/raw/candidate-02.png",
+        "role": "raw baseline candidate 2",
+        "sha256": "10531520cd9037a2dba29563aa1bf6e2fd63f79a37a988869114adf43cd5760b",
+        "size": [
+          2048,
+          1024
+        ]
+      }
+    ],
+    "pre_submission_estimate_usd": 0.083,
+    "prompt_id": "179dd12b-bd20-430b-a5f3-3f072823c196",
+    "provider": "openrouter",
+    "reference_count": 1,
+    "requested_outputs": 2,
+    "seed": 2026082602,
+    "usage": {
+      "completion_tokens": 8350,
+      "completion_tokens_details": {
+        "image_tokens": 8350,
+        "reasoning_tokens": 0
+      },
+      "cost": 0.083,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.08,
+        "upstream_inference_cost": 0.083,
+        "upstream_inference_prompt_cost": 0.003
+      },
+      "is_byok": false,
+      "prompt_tokens": 753,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 9103
+    },
+    "visual_preprocessing_or_guide": false,
+    "workflow": {
+      "path": "artifacts/issue-34/english-structural-edit-v002/direct-baseline.api.json",
+      "role": "direct source-only baseline workflow",
+      "sha256": "c9de018002ef5118b2d22f911ea1190bef1f166da25658c25941e0e561b9cced"
+    }
+  },
+  "experiment": "english-structural-edit-v002",
+  "human_visual_approval": "pending",
+  "issue": 34,
+  "node_assisted_review": {
+    "finding": "The nodes provide exact dimensions and a transparent exterior. They do not alter or improve the generated English text, removed row, or internal reflow.",
+    "model_calls": 0,
+    "nodes": [
+      "ResizeImageMaskNode",
+      "JoinImageWithAlpha"
+    ],
+    "outputs": [
+      {
+        "alpha": {
+          "max": 255,
+          "min": 0,
+          "opaque_pixels": 4294976,
+          "partial_pixels": 145748,
+          "transparent_pixels": 74060
+        },
+        "alpha_comparison": {
+          "alpha_value_errors": 192820,
+          "opaque_membership_errors": 0,
+          "transparent_membership_errors": 55052
+        },
+        "mode": "RGBA",
+        "path": "artifacts/issue-34/english-structural-edit-v002/node-assisted/candidate-01.png",
+        "role": "node-assisted review candidate 1",
+        "sha256": "9db1742d716f472f95329049a33ea2751c4f91690b09800c2b699ed0796ddf93",
+        "size": [
+          3144,
+          1436
+        ]
+      },
+      {
+        "alpha": {
+          "max": 255,
+          "min": 0,
+          "opaque_pixels": 4294976,
+          "partial_pixels": 145748,
+          "transparent_pixels": 74060
+        },
+        "alpha_comparison": {
+          "alpha_value_errors": 192820,
+          "opaque_membership_errors": 0,
+          "transparent_membership_errors": 55052
+        },
+        "mode": "RGBA",
+        "path": "artifacts/issue-34/english-structural-edit-v002/node-assisted/candidate-02.png",
+        "role": "node-assisted review candidate 2",
+        "sha256": "042d22ae15831aca85d5e725eaf69dc5f81756038266de16d128d56c48bed0f2",
+        "size": [
+          3144,
+          1436
+        ]
+      }
+    ],
+    "prompt_ids": [
+      "ccd19935-f1d5-422a-bd3f-5109993bcec5",
+      "f9ad2767-25bb-48a3-9cfd-3ad185878e30"
+    ],
+    "scope": "exact target size and source-derived exterior alpha only",
+    "workflows": [
+      {
+        "path": "artifacts/issue-34/english-structural-edit-v002/node-assisted-candidate-01.api.json",
+        "role": "candidate 1 exact-size and source-alpha workflow",
+        "sha256": "640081b0e85851631298275db3d135c5d695de02248a9a06e6e9245437a83e26"
+      },
+      {
+        "path": "artifacts/issue-34/english-structural-edit-v002/node-assisted-candidate-02.api.json",
+        "role": "candidate 2 exact-size and source-alpha workflow",
+        "sha256": "4a4b7fa4235e6f634721a4aa007241215c4aeb156eb07e42097f0e488b349945"
+      }
+    ]
+  },
+  "prior_experiment": {
+    "classification": "failed test design",
+    "path": "artifacts/issue-34/alpha-window-2x",
+    "reason": "It asked only for enlargement, so it did not test a meaningful generative or node-assisted edit."
+  },
+  "schema_version": 1,
+  "source": {
+    "alpha": {
+      "max": 255,
+      "min": 0,
+      "opaque_pixels": 1073744,
+      "partial_pixels": 50200,
+      "transparent_pixels": 4752
+    },
+    "mode": "RGBA",
+    "path": "artifacts/issue-34/alpha-window-2x/source/options-window-source.png",
+    "role": "immutable Reference Screen",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "stopping_reason": "The initial pair answers the revised question: Qwen performs the real structural edit, while the nodes help only with canvas and alpha.",
+  "target_size": [
+    3144,
+    1436
+  ],
+  "visible_review": {
+    "candidate_1": [
+      "meets the requested structural edit",
+      "remaining rows are less evenly balanced than candidate 2"
+    ],
+    "candidate_2": [
+      "meets the requested structural edit",
+      "cleaner spacing and alignment than candidate 1"
+    ],
+    "limitations": [
+      "Tesseract OCR is inconclusive on the aliased pixel font; Exact Copy still requires human visual review",
+      "the raw 2:1 provider canvas is horizontally fitted to the 2.19:1 target",
+      "source-alpha postprocessing retains the known low-alpha precision limitation"
+    ],
+    "ocr": {
+      "path": "artifacts/issue-34/english-structural-edit-v002/ocr.txt",
+      "role": "inconclusive Tesseract readback for human context only",
+      "sha256": "f84e76e961bd9e7283921b0eedb3fa3b6e970309776aed8afd6e0d5c1dc3a33c"
+    },
+    "shared_successes": [
+      "Options and Snap replace the two Japanese labels",
+      "the complete Effect row is absent",
+      "one BGM slider remains with an approximately preserved handle position",
+      "BGM, Skin, and bottom controls are redistributed without an Effect-shaped gap",
+      "the magenta frame, title bar, left tabs, dropdown, checkbox pattern, and pixel-era theme remain recognizable"
+    ],
+    "stronger_review_candidate": 2
+  }
+}

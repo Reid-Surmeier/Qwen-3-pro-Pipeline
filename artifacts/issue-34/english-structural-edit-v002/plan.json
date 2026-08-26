@@ -1,0 +1,29 @@
+{
+  "classification": "pre-submission comparison evidence plan",
+  "cost": {
+    "basis": "Issue #34 v001 two-output run cost $0.083",
+    "pre_submission_estimate_usd": 0.083
+  },
+  "experimental_question": "Can source-only Qwen Image 3 Pro perform the English translation, complete Effect-row removal, and uniform reflow while preserving the Reference Screen theme; and do exact-size/alpha nodes add review value?",
+  "issue": 34,
+  "model": "qwen/qwen-image-3-pro",
+  "node_hypothesis": "ResizeImageMaskNode and JoinImageWithAlpha may fix canvas dimensions and exterior transparency only; they cannot fix text or internal layout.",
+  "provider": "openrouter",
+  "requested_outputs": 2,
+  "schema_version": 1,
+  "seed": 2026082602,
+  "source": {
+    "path": "artifacts/issue-34/alpha-window-2x/source/options-window-source.png",
+    "role": "only baseline image input and immutable Reference Screen",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "stopping_condition": "Inspect both baseline candidates and their node-assisted review outputs. Stop if they answer whether the edit and nodes work. Record a diagnosed brief weakness before using the separately authorized revised pair.",
+  "target_size": [
+    3144,
+    1436
+  ]
+}
