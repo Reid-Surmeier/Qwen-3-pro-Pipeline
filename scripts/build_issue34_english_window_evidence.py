@@ -25,6 +25,7 @@ TARGET_SIZE = (3144, 1436)
 SEED = 2026082602
 BASELINE_COMMIT = "27bee23bf6089f5587ec8994eab7a87621b2dd94"
 EVIDENCE_COMMIT = "0f466d23bfed38836758413ae2cb6fa08880b58f"
+REVIEW_EVIDENCE_COMMIT = "6b1688a1d07142d3b1128f5ae4791fb421288fc1"
 
 
 def build_english_edit_brief() -> dict[str, Any]:
@@ -386,10 +387,12 @@ def finalize_experiment(root: Path) -> None:
         "git": {
             "baseline_commit": BASELINE_COMMIT,
             "candidate_evidence_commit": EVIDENCE_COMMIT,
+            "review_evidence_commit": REVIEW_EVIDENCE_COMMIT,
             "note": (
                 "The candidate commit contains the exact workflows, provider record, "
-                "outputs, comparison, report, generator, and tests. This later metadata "
-                "commit records its exact SHA."
+                "and outputs. The review commit adds the corrected per-candidate rubric, "
+                "live validation, report, and tests. This later metadata commit records "
+                "both exact SHAs."
             ),
         },
         "prior_experiment": {
