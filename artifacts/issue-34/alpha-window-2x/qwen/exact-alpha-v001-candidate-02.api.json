@@ -1,0 +1,65 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-qwen-raw-02.png"
+    }
+  },
+  "2": {
+    "class_type": "ResizeImageMaskNode",
+    "inputs": {
+      "input": [
+        "1",
+        0
+      ],
+      "resize_type": "scale dimensions",
+      "resize_type.crop": "disabled",
+      "resize_type.height": 1436,
+      "resize_type.width": 3144,
+      "scale_method": "lanczos"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-options-window-source.png"
+    }
+  },
+  "4": {
+    "class_type": "ResizeImageMaskNode",
+    "inputs": {
+      "input": [
+        "3",
+        1
+      ],
+      "resize_type": "scale dimensions",
+      "resize_type.crop": "disabled",
+      "resize_type.height": 1436,
+      "resize_type.width": 3144,
+      "scale_method": "nearest-exact"
+    }
+  },
+  "5": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "alpha": [
+        "4",
+        0
+      ],
+      "image": [
+        "2",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/qwen/exact-alpha-v001-candidate-02",
+      "images": [
+        "5",
+        0
+      ]
+    }
+  }
+}

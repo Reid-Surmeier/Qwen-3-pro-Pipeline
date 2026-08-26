@@ -1,0 +1,50 @@
+[TASK]
+Regenerate the complete Reference Screen as the same transparent Japanese options window at twice its original visual size. This is an enlargement and fidelity test, not a redesign.
+
+[REFERENCE ROLE]
+Reference 1 is the only image input and the authoritative source for every pixel, string, control, position, color, border, and shadow.
+
+[PRESERVATION INVARIANTS]
+- Keep the entire window and every edge visible; do not crop or add a surrounding scene.
+- Keep the exact window geometry, magenta outer frame, blue-grey title bar, white panel, checker-shadow edge, and transparent exterior.
+- Keep both sliders, arrow buttons, handles, checkbox positions and states, dropdown, tabs, labels, and spacing unchanged.
+- Keep the authentic aliased pixel-era raster character; do not modernize, smooth into vector UI, or invent detail.
+
+[CANVAS AND LAYOUT]
+- The source is 1572 by 718 and the review target is exactly 3144 by 1436.
+- Preserve the full source composition and approximately 2.19 to 1 aspect ratio.
+- Make controls and lettering twice as large while retaining their relative placement.
+
+[EXACT COPY]
+- title bar: "オプション"
+- left tabs: "option"
+- left tabs: "info"
+- first slider label: "BGM"
+- second slider label: "Effect"
+- dropdown label: "Skin"
+- right of first checkbox: "on"
+- right of second checkbox: "on"
+- bottom option: "opaque"
+- bottom option: "スナップ"
+- bottom option: "attack"
+- bottom option: "skill"
+- bottom option: "item"
+
+[STYLE SYSTEM]
+- Faithful late-1990s or early-2000s Japanese PC game options dialog.
+- Crisp enlarged raster pixels, restrained bevels, and the original limited palette.
+
+[ASSET RULES]
+- Return exactly one complete options window per output.
+- Use no image other than Reference 1 and add no selection mark or guide.
+
+[NEGATIVE CONSTRAINTS]
+- No green mask, guide, outline, annotation, glow, or highlighted region.
+- No new words, icons, controls, decoration, background, or content.
+- No missing, substituted, translated, duplicated, or misspelled text.
+- No changed slider values, checkbox states, tab selection, or dropdown state.
+
+[QUALITY GATE]
+- All listed Exact Copy is legible and character-for-character correct.
+- The raw output preserves the window silhouette, control count, and state.
+- After exact-size fitting, the authoritative 2x alpha boundary can be reapplied without cutting into the window.

@@ -1,0 +1,35 @@
+{
+  "classification": "comparison evidence plan",
+  "cost": {
+    "basis": "Issue #2's latest four-output run cost $0.169 total",
+    "estimated_cost_per_output_usd": 0.04225,
+    "pre_submission_estimate_usd": 0.0845
+  },
+  "experimental_question": "Can a source-only Qwen Image 3 Pro Render Pass produce a more useful enlarged reconstruction than native interpolation while preserving the window's text, controls, geometry, and visual character?",
+  "issue": 34,
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "requested_outputs": 2,
+  "schema_version": 1,
+  "selection_guide_used": false,
+  "settings": {
+    "aspect_ratio": "2:1",
+    "count": 2,
+    "resolution": "2K",
+    "seed": 20260826
+  },
+  "source": {
+    "path": "artifacts/issue-34/alpha-window-2x/source/options-window-source.png",
+    "role": "only Qwen image input and immutable Reference Screen",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "stopping_condition": "Inspect the initial pair before requesting more output. Continue only for a named question left unanswered by both candidates.",
+  "target_size": [
+    3144,
+    1436
+  ]
+}

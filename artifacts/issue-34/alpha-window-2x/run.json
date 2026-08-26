@@ -1,0 +1,340 @@
+{
+  "classification": "comparison evidence and reproducibility metadata",
+  "contact_sheet": {
+    "alpha": {
+      "max": 255,
+      "min": 255,
+      "opaque_pixels": 8352000,
+      "partial_pixels": 0,
+      "transparent_pixels": 0
+    },
+    "mode": "RGB",
+    "path": "artifacts/issue-34/alpha-window-2x/comparison-v001.png",
+    "role": "human comparison evidence",
+    "sha256": "c58a1c35ec577ae1a7a5ee8162bd87c8271d9eba4ba133ff821aa309d410feb7",
+    "size": [
+      2400,
+      3480
+    ]
+  },
+  "human_visual_approval": "pending",
+  "issue": 34,
+  "native_alpha_experiment": {
+    "authoritative_control": {
+      "alpha": {
+        "max": 255,
+        "min": 0,
+        "opaque_pixels": 4294976,
+        "partial_pixels": 200800,
+        "transparent_pixels": 19008
+      },
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/alpha-window-2x/deterministic/authoritative-nearest-2x.png",
+      "role": "exact nearest-neighbor 2x control generated outside ComfyUI",
+      "sha256": "89ff5799fc15aabbdf88ed2a8315833ef4599048e2f5c2e9d30546e9218338d1",
+      "size": [
+        3144,
+        1436
+      ]
+    },
+    "corrected_graph": "LoadImage IMAGE -> ResizeImageMaskNode; LoadImage MASK -> ResizeImageMaskNode; both -> JoinImageWithAlpha",
+    "failed_split_after_load": {
+      "finding": "LoadImage output 0 is RGB, so SplitImageWithAlpha could not recover the uploaded PNG alpha; both outputs were fully opaque.",
+      "nearest_output": {
+        "alpha": {
+          "max": 255,
+          "min": 255,
+          "opaque_pixels": 4514784,
+          "partial_pixels": 0,
+          "transparent_pixels": 0
+        },
+        "mode": "RGBA",
+        "path": "artifacts/issue-34/alpha-window-2x/deterministic/nearest-exact-2x_00001_.png",
+        "role": "rejected fully opaque evidence",
+        "sha256": "9b8c2667c1f68ed8b8832bc9b645b7a0b230e756ad41ce8ec364a84b6599da63",
+        "size": [
+          3144,
+          1436
+        ]
+      },
+      "prompt_ids": [
+        "d7d486ba-7ab3-4f57-a788-e555e65fbb44",
+        "fc26f22b-9f27-4dad-bc80-05702841390d"
+      ],
+      "workflows": [
+        {
+          "path": "artifacts/issue-34/alpha-window-2x/deterministic/failed-split-nearest-exact-2x.api.json",
+          "role": "rejected nearest-exact split-after-load graph",
+          "sha256": "cc0abfd79a0fdadd36b197d91a8f08e6c2d7e05fd1a84491eb9cc795fe17ac75"
+        },
+        {
+          "path": "artifacts/issue-34/alpha-window-2x/deterministic/failed-split-lanczos-2x.api.json",
+          "role": "rejected Lanczos split-after-load graph",
+          "sha256": "298b62e812330684053cae7127b05c9ea0c92849883c523d7438af8e934abaf2"
+        }
+      ]
+    },
+    "lanczos": {
+      "artifact": {
+        "alpha": {
+          "max": 255,
+          "min": 0,
+          "opaque_pixels": 4294976,
+          "partial_pixels": 145748,
+          "transparent_pixels": 74060
+        },
+        "mode": "RGBA",
+        "path": "artifacts/issue-34/alpha-window-2x/deterministic/lanczos-alpha-2x_00001_.png",
+        "role": "native smoothed enlargement",
+        "sha256": "bdb621b8ed3740aa69f8cb0df9a0f46e00c5384a53705c9e7ce24a4fbf882cb2",
+        "size": [
+          3144,
+          1436
+        ]
+      },
+      "comparison": {
+        "alpha_value_errors": 192820,
+        "changed_rgba_pixels": 1598029,
+        "opaque_membership_errors": 0,
+        "transparent_membership_errors": 55052
+      },
+      "finding": "RGB is smoothed; the same low-alpha fringe precision changes remain."
+    },
+    "nearest_exact": {
+      "artifact": {
+        "alpha": {
+          "max": 255,
+          "min": 0,
+          "opaque_pixels": 4294976,
+          "partial_pixels": 145748,
+          "transparent_pixels": 74060
+        },
+        "mode": "RGBA",
+        "path": "artifacts/issue-34/alpha-window-2x/deterministic/nearest-exact-alpha-2x_00001_.png",
+        "role": "native pixel-art enlargement",
+        "sha256": "5fac3aab61c0acfec4269eda2285cb3b641806be4b18f6b23e8f79da2248c82b",
+        "size": [
+          3144,
+          1436
+        ]
+      },
+      "comparison": {
+        "alpha_value_errors": 192820,
+        "changed_rgba_pixels": 192820,
+        "opaque_membership_errors": 0,
+        "transparent_membership_errors": 55052
+      },
+      "finding": "RGB is exact; low-alpha fringe precision changes remain."
+    },
+    "prompt_ids": {
+      "lanczos": "4470001f-1909-4954-8a46-12694baffc29",
+      "nearest_exact": "a73397d8-4972-439d-99b7-61b7a40793fb"
+    },
+    "workflows": [
+      {
+        "path": "artifacts/issue-34/alpha-window-2x/deterministic/nearest-exact-alpha-2x.api.json",
+        "role": "corrected nearest-exact image and source-mask graph",
+        "sha256": "234adac4ddd4ce2799046bd4a12a5b098ee53f746ecd49357327b2f3caacb153"
+      },
+      {
+        "path": "artifacts/issue-34/alpha-window-2x/deterministic/lanczos-alpha-2x.api.json",
+        "role": "corrected Lanczos image and source-mask graph",
+        "sha256": "ffad2b2a1edb9ec3f5300f32ff07cc25c6a50a6d7130ebde79db3925bffbe09a"
+      }
+    ]
+  },
+  "policy": {
+    "additional_paid_outputs_requested": 0,
+    "decision": "ADR 0004",
+    "fixed_repository_cap_removed": true,
+    "smallest_useful_batch": 2,
+    "stopping_reason": "the initial pair answered the named comparison question"
+  },
+  "qwen_render_pass": {
+    "actual_cost_usd": 0.083,
+    "completed_outputs": 2,
+    "exact_size_alpha_postprocess": {
+      "outputs": [
+        {
+          "alpha_comparison": {
+            "alpha_value_errors": 192820,
+            "changed_rgba_pixels": 4262438,
+            "opaque_membership_errors": 0,
+            "transparent_membership_errors": 55052
+          },
+          "artifact": {
+            "alpha": {
+              "max": 255,
+              "min": 0,
+              "opaque_pixels": 4294976,
+              "partial_pixels": 145748,
+              "transparent_pixels": 74060
+            },
+            "mode": "RGBA",
+            "path": "artifacts/issue-34/alpha-window-2x/qwen/exact-alpha/exact-alpha-v001-candidate-01_00001_.png",
+            "role": "Qwen candidate 1 fitted and masked",
+            "sha256": "2a9bdd1975eb5d3d34d431aeefa2dca44e3c964d069c9c0c3c2a72a35e1e85e1",
+            "size": [
+              3144,
+              1436
+            ]
+          }
+        },
+        {
+          "alpha_comparison": {
+            "alpha_value_errors": 192820,
+            "changed_rgba_pixels": 3735496,
+            "opaque_membership_errors": 0,
+            "transparent_membership_errors": 55052
+          },
+          "artifact": {
+            "alpha": {
+              "max": 255,
+              "min": 0,
+              "opaque_pixels": 4294976,
+              "partial_pixels": 145748,
+              "transparent_pixels": 74060
+            },
+            "mode": "RGBA",
+            "path": "artifacts/issue-34/alpha-window-2x/qwen/exact-alpha/exact-alpha-v001-candidate-02_00001_.png",
+            "role": "Qwen candidate 2 fitted and masked",
+            "sha256": "d586c30fd2b41fb2a884c8598047d37b097de96d8b3d44045a97d240c1d3cd31",
+            "size": [
+              3144,
+              1436
+            ]
+          }
+        }
+      ],
+      "prompt_ids": [
+        "a56696d2-74b2-4f5d-bea9-021e53977c58",
+        "1a13b123-68ff-467e-882b-0534dab07d59"
+      ]
+    },
+    "model": "qwen/qwen-image-3-pro",
+    "pre_submission_estimate_usd": 0.0845,
+    "prompt_id": "ba31ea51-05f1-4992-8ab7-148a4668095f",
+    "provider": "openrouter",
+    "raw_outputs": [
+      {
+        "alpha": {
+          "max": 255,
+          "min": 255,
+          "opaque_pixels": 2097152,
+          "partial_pixels": 0,
+          "transparent_pixels": 0
+        },
+        "mode": "RGB",
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/raw/source-only-v001_00001_.png",
+        "role": "source-only raw Qwen candidate 1",
+        "sha256": "c27978d9defaa2a8199797185208445f333df9e227ab83c210e38fe0757d70f1",
+        "size": [
+          2048,
+          1024
+        ]
+      },
+      {
+        "alpha": {
+          "max": 255,
+          "min": 255,
+          "opaque_pixels": 2097152,
+          "partial_pixels": 0,
+          "transparent_pixels": 0
+        },
+        "mode": "RGB",
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/raw/source-only-v001_00002_.png",
+        "role": "source-only raw Qwen candidate 2",
+        "sha256": "be59c430332b46a7f13719534250cfb70416a6fd593cf2d324325441c795e74c",
+        "size": [
+          2048,
+          1024
+        ]
+      }
+    ],
+    "requested_outputs": 2,
+    "selection_guide_used": false,
+    "settings": {
+      "aspect_ratio": "2:1",
+      "resolution": "2K",
+      "seed": 20260826
+    },
+    "usage": {
+      "completion_tokens": 8350,
+      "image_tokens": 8350,
+      "prompt_tokens": 610,
+      "total_tokens": 8960
+    },
+    "visible_review": {
+      "drift": [
+        "Effect slider handle moved left in both candidates",
+        "outer border and crop geometry changed",
+        "raw outputs are opaque RGB at 2048 x 1024, not the 3144 x 1436 RGBA target",
+        "exact-size alpha postprocessing cannot repair interior geometry drift"
+      ],
+      "finding": "Qwen did not improve this pure enlargement over the native nearest-exact result. No additional paid outputs are justified.",
+      "preserved": [
+        "recognizable overall window and palette",
+        "BGM, Effect, Skin, on, opaque, attack, skill, and item labels",
+        "checked and unchecked checkbox pattern",
+        "BGM slider handle is approximately retained",
+        "Japanese title and bottom label remain recognizable but were not asserted character-exact by automated OCR"
+      ]
+    },
+    "workflow_evidence": {
+      "brief": {
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/brief.json",
+        "role": "structured Edit Brief",
+        "sha256": "9f7945eeb1d5951164b23c4c6beaac3372072a632e8c06239b01b1404d2431b4"
+      },
+      "exact_alpha": [
+        {
+          "path": "artifacts/issue-34/alpha-window-2x/qwen/exact-alpha-v001-candidate-01.api.json",
+          "role": "candidate 1 exact-size and source-mask postprocess",
+          "sha256": "84d13112284de43d1e075c09c08abd5189ddbef11eec274ee4847b0056ef65d2"
+        },
+        {
+          "path": "artifacts/issue-34/alpha-window-2x/qwen/exact-alpha-v001-candidate-02.api.json",
+          "role": "candidate 2 exact-size and source-mask postprocess",
+          "sha256": "105ed2b5bbdf69abe0e748c5d369fc9a6e045e7da5641629a2f91835bf97d3c8"
+        }
+      ],
+      "plan": {
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/plan.json",
+        "role": "pre-submission plan and estimate",
+        "sha256": "3712f9f7bf54a62822b49a20096a9bf826c88e4e4e7123e89be42d18f91639c5"
+      },
+      "prompt": {
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/prompt.txt",
+        "role": "compiled provider prompt",
+        "sha256": "db5766a8af6de1ce157a081de06c4b0e1126c6aabc0a8ed7e48ec426380a38cb"
+      },
+      "render": {
+        "path": "artifacts/issue-34/alpha-window-2x/qwen/source-only-v001.api.json",
+        "role": "source-only paid Render Pass",
+        "sha256": "90c34814e5e217a895fb95c29cd1a92a083a35b4bcd0440b2ff131b7244ffac0"
+      }
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "alpha": {
+      "max": 255,
+      "min": 0,
+      "opaque_pixels": 1073744,
+      "partial_pixels": 50200,
+      "transparent_pixels": 4752
+    },
+    "mode": "RGBA",
+    "path": "artifacts/issue-34/alpha-window-2x/source/options-window-source.png",
+    "role": "immutable Reference Screen and only Qwen input",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "target_size": [
+    3144,
+    1436
+  ]
+}
