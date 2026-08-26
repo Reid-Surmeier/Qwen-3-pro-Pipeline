@@ -17,6 +17,11 @@
       3480
     ]
   },
+  "git": {
+    "baseline_commit": "27bee23bf6089f5587ec8994eab7a87621b2dd94",
+    "candidate_evidence_commit": "abcc948eccc241e15d2b1c01120e44fa768885c0",
+    "note": "The candidate commit contains the experiment inputs, outputs, comparison code, classifications, and tests. This later metadata commit records its exact SHA."
+  },
   "human_visual_approval": "pending",
   "issue": 34,
   "native_alpha_experiment": {

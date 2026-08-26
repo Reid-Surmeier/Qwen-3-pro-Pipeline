@@ -22,6 +22,8 @@ SOURCE_SHA256 = (
 )
 SOURCE_SIZE = (1572, 718)
 TARGET_SIZE = (3144, 1436)
+BASELINE_COMMIT = "27bee23bf6089f5587ec8994eab7a87621b2dd94"
+EVIDENCE_COMMIT = "abcc948eccc241e15d2b1c01120e44fa768885c0"
 
 
 def build_qwen_brief() -> dict[str, Any]:
@@ -470,6 +472,15 @@ def finalize_experiment(root: Path) -> None:
         "schema_version": 1,
         "issue": 34,
         "classification": "comparison evidence and reproducibility metadata",
+        "git": {
+            "baseline_commit": BASELINE_COMMIT,
+            "candidate_evidence_commit": EVIDENCE_COMMIT,
+            "note": (
+                "The candidate commit contains the experiment inputs, outputs, "
+                "comparison code, classifications, and tests. This later metadata "
+                "commit records its exact SHA."
+            ),
+        },
         "source": _artifact(source, "immutable Reference Screen and only Qwen input"),
         "target_size": list(TARGET_SIZE),
         "policy": {
