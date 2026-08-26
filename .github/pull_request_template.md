@@ -44,10 +44,12 @@ Not applicable — this PR does not change or generate visual output.
 For a visual or generation PR, replace that line and complete the short form
 below. Embed the important previews by dragging them into the PR. If embedding
 is impractical, explain why and link a durable contact sheet or output artifact.
-Fresh paid verification may use OpenRouter only and must stop before exceeding
-10 cumulative output images for the linked Issue/PR. Use the smallest useful
-batch; do not use provider auto-selection or Alibaba. Do not paste credentials,
-tokens, or unsafe raw provider responses.
+Fresh paid verification may use OpenRouter only. The authoritative,
+human-approved Issue must name the question, model, initial batch, stopping
+condition, and any authorization for further output. Use the smallest useful
+batch and stop when the named question is answered; do not use provider
+auto-selection or Alibaba. Do not paste credentials, tokens, or unsafe raw
+provider responses.
 -->
 
 Not applicable — this PR does not change or generate visual output.

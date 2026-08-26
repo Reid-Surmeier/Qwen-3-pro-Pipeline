@@ -454,6 +454,10 @@ def finalize_experiment(root: Path) -> None:
             ),
         },
         "visible_review": {
+            "live_validation": _file_artifact(
+                root / "live-validation.json",
+                "live ComfyUI health, schema, validation, and execution evidence",
+            ),
             "ocr": _file_artifact(
                 root / "ocr.txt",
                 "inconclusive Tesseract readback for human context only",
@@ -465,14 +469,28 @@ def finalize_experiment(root: Path) -> None:
                 "BGM, Skin, and bottom controls are redistributed without an Effect-shaped gap",
                 "the magenta frame, title bar, left tabs, dropdown, checkbox pattern, and pixel-era theme remain recognizable",
             ],
-            "candidate_1": [
-                "meets the requested structural edit",
-                "remaining rows are less evenly balanced than candidate 2",
-            ],
-            "candidate_2": [
-                "meets the requested structural edit",
-                "cleaner spacing and alignment than candidate 1",
-            ],
+            "candidate_1": {
+                "classification": "partial evidence; not a passing candidate",
+                "criteria": {
+                    "exact_english_copy": "pending human review; OCR inconclusive",
+                    "complete_effect_row_removal": "pass",
+                    "preserved_bgm_state": "fail; slider handle moved left",
+                    "uniform_reflow": "partial; no empty Effect gap, but spacing is less even",
+                    "source_theme": "pass by visual inspection",
+                    "crop_and_geometry": "partial; raw provider aspect differs and outer geometry changed",
+                },
+            },
+            "candidate_2": {
+                "classification": "stronger review candidate; human approval pending",
+                "criteria": {
+                    "exact_english_copy": "pending human review; OCR inconclusive",
+                    "complete_effect_row_removal": "pass",
+                    "preserved_bgm_state": "pass by visual inspection",
+                    "uniform_reflow": "pass by visual inspection",
+                    "source_theme": "pass by visual inspection",
+                    "crop_and_geometry": "partial; node arm restores exact canvas and exterior alpha but not interior pixel identity",
+                },
+            },
             "limitations": [
                 "Tesseract OCR is inconclusive on the aliased pixel font; Exact Copy still requires human visual review",
                 "the raw 2:1 provider canvas is horizontally fitted to the 2.19:1 target",
@@ -496,9 +514,10 @@ def finalize_experiment(root: Path) -> None:
         "The first experiment was a failed test design because it asked only for an "
         "upscale. This v002 experiment requires real changes: English copy, complete "
         "Effect-row removal, and uniform reflow.\n\n"
-        "Both direct Qwen candidates perform those structural changes. Candidate 2 is "
-        "the cleaner result because its remaining controls are more evenly aligned. "
-        "It is the stronger review candidate, not an approved output.\n\n"
+        "Candidate 1 is partial evidence: it removes the Effect row, but moves the BGM "
+        "handle left and has weaker spacing. Candidate 2 is the cleaner result because "
+        "its remaining controls are more evenly aligned and its BGM state is closer to "
+        "the source. It is the stronger review candidate, not an approved output.\n\n"
         "The ComfyUI nodes help with delivery rather than design. They convert each "
         "2048 x 1024 opaque raw output to the exact 3144 x 1436 review size and apply "
         "the source-derived exterior alpha. They do not improve the English text, "

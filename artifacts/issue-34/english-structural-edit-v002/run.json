@@ -198,19 +198,38 @@
     1436
   ],
   "visible_review": {
-    "candidate_1": [
-      "meets the requested structural edit",
-      "remaining rows are less evenly balanced than candidate 2"
-    ],
-    "candidate_2": [
-      "meets the requested structural edit",
-      "cleaner spacing and alignment than candidate 1"
-    ],
+    "candidate_1": {
+      "classification": "partial evidence; not a passing candidate",
+      "criteria": {
+        "complete_effect_row_removal": "pass",
+        "crop_and_geometry": "partial; raw provider aspect differs and outer geometry changed",
+        "exact_english_copy": "pending human review; OCR inconclusive",
+        "preserved_bgm_state": "fail; slider handle moved left",
+        "source_theme": "pass by visual inspection",
+        "uniform_reflow": "partial; no empty Effect gap, but spacing is less even"
+      }
+    },
+    "candidate_2": {
+      "classification": "stronger review candidate; human approval pending",
+      "criteria": {
+        "complete_effect_row_removal": "pass",
+        "crop_and_geometry": "partial; node arm restores exact canvas and exterior alpha but not interior pixel identity",
+        "exact_english_copy": "pending human review; OCR inconclusive",
+        "preserved_bgm_state": "pass by visual inspection",
+        "source_theme": "pass by visual inspection",
+        "uniform_reflow": "pass by visual inspection"
+      }
+    },
     "limitations": [
       "Tesseract OCR is inconclusive on the aliased pixel font; Exact Copy still requires human visual review",
       "the raw 2:1 provider canvas is horizontally fitted to the 2.19:1 target",
       "source-alpha postprocessing retains the known low-alpha precision limitation"
     ],
+    "live_validation": {
+      "path": "artifacts/issue-34/english-structural-edit-v002/live-validation.json",
+      "role": "live ComfyUI health, schema, validation, and execution evidence",
+      "sha256": "4566deda20cc04280e410318716c1119d027835051f7984bd87d0c169aa44859"
+    },
     "ocr": {
       "path": "artifacts/issue-34/english-structural-edit-v002/ocr.txt",
       "role": "inconclusive Tesseract readback for human context only",

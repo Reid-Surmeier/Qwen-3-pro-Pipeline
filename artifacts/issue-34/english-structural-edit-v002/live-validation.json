@@ -1,0 +1,92 @@
+{
+  "checked_on": "2026-08-26",
+  "classification": "live ComfyUI validation evidence",
+  "endpoint": "http://10.255.255.254:8188",
+  "health_before_paid_run": {
+    "comfyui": "0.31.0",
+    "frontend": "1.48.7",
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "gpu_vram_free_gb": 10.8,
+    "gpu_vram_total_gb": 12.0,
+    "python": "3.12.4",
+    "pytorch": "2.13.0+cu130",
+    "queue_pending": 0,
+    "queue_running": 0,
+    "system_ram_free_gb": 9.5,
+    "warning": "Local model categories were empty; this is not used by the OpenRouter QwenImage3Render provider node."
+  },
+  "node_schemas": {
+    "JoinImageWithAlpha": {
+      "inputs": ["image:IMAGE", "alpha:MASK"],
+      "output": "IMAGE",
+      "status": "installed"
+    },
+    "QwenImage3Render": {
+      "inputs": ["edit_brief_json:STRING", "reference_images:IMAGE optional"],
+      "outputs": ["images:IMAGE", "run_metadata:STRING"],
+      "status": "installed"
+    },
+    "ReferenceRegionComposite": {
+      "status": "installed but intentionally excluded because the entire language and layout change"
+    },
+    "ResizeImageMaskNode": {
+      "inputs": ["input:IMAGE or MASK", "resize_type", "scale_method"],
+      "methods_checked": ["lanczos", "nearest-exact"],
+      "output": "same type as input",
+      "status": "installed"
+    }
+  },
+  "workflow_validation": [
+    {
+      "file": "direct-baseline.api.json",
+      "nodes": 4,
+      "result": "valid with no issues"
+    },
+    {
+      "file": "node-assisted-candidate-01.api.json",
+      "nodes": 6,
+      "result": "valid with no issues after staging exact raw candidate filename"
+    },
+    {
+      "file": "node-assisted-candidate-02.api.json",
+      "nodes": 6,
+      "result": "valid with no issues after staging exact raw candidate filename"
+    }
+  ],
+  "executions": [
+    {
+      "duration_seconds": 92.24,
+      "outputs": 2,
+      "prompt_id": "179dd12b-bd20-430b-a5f3-3f072823c196",
+      "result": "success",
+      "workflow": "direct baseline"
+    },
+    {
+      "duration_seconds": 0.53,
+      "outputs": 1,
+      "prompt_id": "ccd19935-f1d5-422a-bd3f-5109993bcec5",
+      "result": "success",
+      "workflow": "node-assisted candidate 1"
+    },
+    {
+      "duration_seconds": 0.45,
+      "outputs": 1,
+      "prompt_id": "f9ad2767-25bb-48a3-9cfd-3ad185878e30",
+      "result": "success",
+      "workflow": "node-assisted candidate 2"
+    }
+  ],
+  "inspection": {
+    "contact_sheet": "comparison-v002.png",
+    "outputs_visually_inspected": 4,
+    "result": "candidate 1 partial; candidate 2 stronger but human approval pending"
+  },
+  "tools": [
+    "get_system_stats health",
+    "create_workflow node_info",
+    "create_workflow validate",
+    "enqueue_workflow enqueue",
+    "queue status",
+    "get_history list"
+  ]
+}

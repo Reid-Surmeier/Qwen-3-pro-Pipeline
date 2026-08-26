@@ -1,4 +1,5 @@
 import unittest
+import json
 from pathlib import Path
 
 from qwen_ui_pipeline.prompt_manifest import compile_edit_brief
@@ -86,6 +87,22 @@ class Issue34EnglishWindowTests(unittest.TestCase):
             self.assertEqual(assisted["mode"], "RGBA")
             self.assertEqual(alpha["opaque_membership_errors"], 0)
             self.assertGreater(alpha["transparent_membership_errors"], 0)
+
+    def test_run_record_does_not_overstate_partial_candidate(self):
+        run = json.loads(
+            Path("artifacts/issue-34/english-structural-edit-v002/run.json").read_text()
+        )
+
+        candidate_1 = run["visible_review"]["candidate_1"]
+        candidate_2 = run["visible_review"]["candidate_2"]
+        self.assertIn("partial", candidate_1["classification"])
+        self.assertIn("fail", candidate_1["criteria"]["preserved_bgm_state"])
+        self.assertIn("stronger", candidate_2["classification"])
+        self.assertEqual(
+            candidate_2["criteria"]["complete_effect_row_removal"],
+            "pass",
+        )
+        self.assertEqual(run["human_visual_approval"], "pending")
 
 
 if __name__ == "__main__":
