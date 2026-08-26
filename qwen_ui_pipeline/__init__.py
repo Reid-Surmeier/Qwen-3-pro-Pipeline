@@ -1,5 +1,14 @@
 """Public interface for the reference-preserving Qwen UI pipeline."""
 
+from .capacity import (
+    CapacityPlanningError,
+    CapacityPolicy,
+    CapacityRecommendation,
+    CapacityScenario,
+    MemorySnapshot,
+    plan_capacity_scenarios,
+    plan_worker_capacity,
+)
 from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
 from .providers.alibaba import AlibabaImageClient, build_alibaba_request
 from .providers.router import ProviderResult, generate_with_provider
@@ -16,7 +25,12 @@ from .providers.openrouter import (
 )
 
 __all__ = [
+    "CapacityPlanningError",
+    "CapacityPolicy",
+    "CapacityRecommendation",
+    "CapacityScenario",
     "CompiledEditBrief",
+    "MemorySnapshot",
     "PromptBudgetExceeded",
     "PromptMetrics",
     "OpenRouterImageClient",
@@ -29,4 +43,6 @@ __all__ = [
     "compile_edit_brief",
     "write_run_artifacts",
     "generate_with_provider",
+    "plan_capacity_scenarios",
+    "plan_worker_capacity",
 ]
