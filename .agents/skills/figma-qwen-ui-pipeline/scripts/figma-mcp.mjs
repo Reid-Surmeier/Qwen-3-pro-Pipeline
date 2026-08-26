@@ -268,6 +268,15 @@ export function extractFigJamFrames(xml) {
   return frames.sort((left, right) => left.y - right.y || left.x - right.x || left.nodeId.localeCompare(right.nodeId));
 }
 
+export function parseIntegerOption(name, value, { min = 0, max = Number.MAX_SAFE_INTEGER } = {}) {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < min || parsed > max) {
+    const range = max === Number.MAX_SAFE_INTEGER ? `at least ${min}` : `from ${min} through ${max}`;
+    throw new Error(`${name} must be an integer ${range}`);
+  }
+  return parsed;
+}
+
 function parseOptions(argv) {
   const options = { asset: [], placedNode: [] };
   for (let index = 0; index < argv.length; index += 1) {
@@ -493,9 +502,15 @@ async function readExistingJson(filePath) {
 }
 
 async function finishGridPlacement(client, target, options, record, provenancePath, grid, nodeIds) {
+  const sessionGap = parseIntegerOption(
+    "session-gap", options.sessionGap ?? record.layout.sessionGap ?? 240, { min: 0 },
+  );
+  const maxDimension = parseIntegerOption(
+    "max-dimension", options.maxDimension ?? 4096, { min: 1 },
+  );
   const createResult = parseToolResult(await client.call("use_figma", {
     fileKey: target.fileKey,
-    code: createSessionSectionCode(grid, Number(options.sessionGap ?? record.layout.sessionGap ?? 240)),
+    code: createSessionSectionCode(grid, sessionGap),
     description: `Create one untitled white image-session section for ${record.sessionId}`,
     skillNames: "figma-use,figma-use-figjam",
   }));
@@ -527,7 +542,7 @@ async function finishGridPlacement(client, target, options, record, provenancePa
     fileKey: target.fileKey,
     code: normalizeSessionSectionCode(
       createResult.sectionId,
-      Number(options.sessionGap ?? record.layout.sessionGap ?? 240),
+      sessionGap,
     ),
     description: `Append the completed native-resolution session ${record.sessionId} below prior sessions`,
     skillNames: "figma-use,figma-use-figjam",
@@ -554,7 +569,7 @@ async function finishGridPlacement(client, target, options, record, provenancePa
   const screenshotResult = await client.call("get_screenshot", {
     fileKey: target.fileKey,
     nodeId: createResult.sectionId,
-    maxDimension: Number(options.maxDimension ?? 4096),
+    maxDimension,
     enableBase64Response: false,
     contentsOnly: true,
   });
@@ -587,7 +602,9 @@ async function reconcileGrid(client, target, options) {
   const provenancePath = path.resolve(options.provenanceOut);
   const record = await readExistingJson(provenancePath);
   if (!record) throw new Error("The placement record does not exist");
-  if (record.status !== "ambiguous") throw new Error(`Only an ambiguous delivery can be reconciled; found ${record.status}`);
+  if (!["ambiguous", "uploading", "uploaded"].includes(record.status)) {
+    throw new Error(`Only an incomplete delivery can be reconciled; found ${record.status}`);
+  }
   if (record.section || record.placements?.length) {
     throw new Error("This delivery already has placement state; inspect its section before reconciliation");
   }
@@ -653,10 +670,9 @@ async function deliverGrid(client, target, options) {
   }
   if (!assets.length) throw new Error("deliver-grid requires --run-dir or at least one --asset");
 
-  const uploadUrlChunkSize = Number(options.uploadUrlChunkSize ?? 20);
-  if (!Number.isInteger(uploadUrlChunkSize) || uploadUrlChunkSize < 1 || uploadUrlChunkSize > 60) {
-    throw new Error("upload-url-chunk-size must be an integer from 1 through 60");
-  }
+  const uploadUrlChunkSize = parseIntegerOption(
+    "upload-url-chunk-size", options.uploadUrlChunkSize ?? 20, { min: 1, max: 60 },
+  );
 
   const sessionId = options.sessionId ?? (runDirectory ? path.basename(runDirectory) : null);
   if (!sessionId) throw new Error("Explicit assets require --session-id");

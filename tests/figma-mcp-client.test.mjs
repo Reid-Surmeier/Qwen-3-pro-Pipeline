@@ -9,6 +9,7 @@ import {
   extractUploadUrls,
   guessContentType,
   imageDimensions,
+  parseIntegerOption,
   parseSsePayload,
   resultText,
 } from "../.agents/skills/figma-qwen-ui-pipeline/scripts/figma-mcp.mjs";
@@ -147,6 +148,19 @@ test("large sessions retain one native-size placement per source image", () => {
     assert.equal(placement.width, dimensions[index].width);
     assert.equal(placement.height, dimensions[index].height);
   }
+});
+
+test("delivery geometry options reject overlap and invalid screenshot bounds", () => {
+  assert.equal(parseIntegerOption("session-gap", "0", { min: 0 }), 0);
+  assert.equal(parseIntegerOption("max-dimension", "4096", { min: 1 }), 4096);
+  assert.throws(
+    () => parseIntegerOption("session-gap", "-1", { min: 0 }),
+    /session-gap must be an integer at least 0/,
+  );
+  assert.throws(
+    () => parseIntegerOption("upload-url-chunk-size", "61", { min: 1, max: 60 }),
+    /upload-url-chunk-size must be an integer from 1 through 60/,
+  );
 });
 
 test("PNG dimensions are read without rewriting the image", () => {
