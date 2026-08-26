@@ -20,6 +20,13 @@ BACKGROUNDS = (
 )
 
 
+def _pixels(image: Image.Image):
+    """Use Pillow's current flat-pixel API with compatibility for 10.x."""
+
+    flattened = getattr(image, "get_flattened_data", None)
+    return flattened() if flattened is not None else image.getdata()
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -50,8 +57,8 @@ def _outside_nonblack_pixels(output: Image.Image, truth: Image.Image) -> int:
     return sum(
         any(channel for channel in pixel) and not foreground
         for pixel, foreground in zip(
-            output.convert("RGB").getdata(),
-            (bool(value) for value in truth.getdata()),
+            _pixels(output.convert("RGB")),
+            (bool(value) for value in _pixels(truth)),
             strict=True,
         )
     )
@@ -74,7 +81,7 @@ def _geometry(mask: Image.Image) -> dict[str, Any]:
     top = height
     right = -1
     bottom = -1
-    for index, value in enumerate(mask.getdata()):
+    for index, value in enumerate(_pixels(mask)):
         if not value:
             continue
         x = index % width
@@ -94,8 +101,8 @@ def _geometry(mask: Image.Image) -> dict[str, Any]:
 
 
 def _compare_masks(truth: Image.Image, candidate: Image.Image) -> dict[str, Any]:
-    truth_values = tuple(bool(value) for value in truth.getdata())
-    candidate_values = tuple(bool(value) for value in candidate.getdata())
+    truth_values = tuple(bool(value) for value in _pixels(truth))
+    candidate_values = tuple(bool(value) for value in _pixels(candidate))
     false_opaque = sum(
         candidate_value and not truth_value
         for truth_value, candidate_value in zip(
@@ -142,8 +149,8 @@ def _compare_masks(truth: Image.Image, candidate: Image.Image) -> dict[str, Any]
     )
     truth_boundary = _boundary(truth)
     candidate_boundary = _boundary(candidate)
-    boundary_truth = tuple(bool(value) for value in truth_boundary.getdata())
-    boundary_candidate = tuple(bool(value) for value in candidate_boundary.getdata())
+    boundary_truth = tuple(bool(value) for value in _pixels(truth_boundary))
+    boundary_candidate = tuple(bool(value) for value in _pixels(candidate_boundary))
     boundary_difference = sum(
         left != right
         for left, right in zip(boundary_truth, boundary_candidate, strict=True)
@@ -264,7 +271,7 @@ def evaluate_qualification(
     )
     changed_rgb_pixels = sum(
         left != right
-        for left, right in zip(custom.getdata(), core.getdata(), strict=True)
+        for left, right in zip(_pixels(custom), _pixels(core), strict=True)
     )
     return {
         "schema_version": 1,

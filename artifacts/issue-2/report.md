@@ -82,6 +82,8 @@ credits before the successful submissions.
 - `git diff --check` — passed.
 - Explicit installer copy check — passed with byte-identical source and
   destination files; the installer did not restart ComfyUI.
+- Fresh virtual environment: `pip install -e .`, `pip check`, and the full
+  Python suite passed with the declared Pillow dependency.
 
 The full research record and remaining limitations are in
 [the qualification note](../../docs/research/comfyui-mask-node-qualification.md).
