@@ -6,7 +6,7 @@ import argparse
 import json
 import sys
 from dataclasses import asdict, dataclass
-from math import ceil
+from math import ceil, isfinite
 from pathlib import Path
 from typing import Sequence, TextIO
 
@@ -57,6 +57,30 @@ class CapacityScenario:
 
 
 def _validate_evidence(snapshot: MemorySnapshot, policy: CapacityPolicy) -> None:
+    numeric_evidence = (
+        ("total memory", snapshot.total_bytes),
+        ("available memory", snapshot.available_bytes),
+        ("service memory", snapshot.service_current_bytes),
+        ("configured workers", snapshot.configured_workers),
+        ("memory measurement age", snapshot.measurement_age_seconds),
+        ("memory ceiling", policy.memory_ceiling_bytes),
+        ("host reserve", policy.host_reserve_bytes),
+        ("worker reserve", policy.worker_reserved_bytes),
+        ("worker safety factor", policy.worker_safety_factor),
+        ("queue limit", policy.queue_limit),
+        ("maximum measurement age", policy.max_measurement_age_seconds),
+    )
+    if policy.provider_concurrency_limit is not None:
+        numeric_evidence += (
+            ("provider concurrency limit", policy.provider_concurrency_limit),
+        )
+    for name, value in numeric_evidence:
+        try:
+            finite = isfinite(value)
+        except TypeError as error:
+            raise CapacityPlanningError(f"{name} must be numeric") from error
+        if not finite:
+            raise CapacityPlanningError(f"{name} must be finite")
     if snapshot.total_bytes <= 0:
         raise CapacityPlanningError("total memory must be positive")
     if snapshot.configured_workers <= 0:

@@ -498,6 +498,47 @@ class WorkerCapacityTests(unittest.TestCase):
         self.assertEqual(result["status"], "error")
         self.assertIn("worker reserve", result["error"])
 
+    def test_cli_rejects_non_finite_capacity_evidence(self):
+        request = {
+            "snapshot": {
+                "total_bytes": 50_510_004_224,
+                "available_bytes": 21_926_240_256,
+                "service_current_bytes": 3_546_509_312,
+                "configured_workers": 5,
+                "measurement_age_seconds": 0,
+            },
+            "policy": {
+                "memory_ceiling_bytes": 45 * GIB,
+                "host_reserve_bytes": 8 * GIB,
+                "worker_reserved_bytes": 2 * GIB,
+                "worker_safety_factor": float("nan"),
+                "queue_limit": 64,
+                "max_measurement_age_seconds": 300,
+                "worker_peak_validated": False,
+            },
+            "requested_workers": 12,
+            "submitted_jobs": 24,
+            "sensitivity": {
+                "requested_worker_counts": [5, 6, 8, 10, 12],
+                "submitted_job_counts": [6, 12, 24],
+            },
+        }
+
+        with tempfile.TemporaryDirectory() as directory:
+            request_path = Path(directory) / "request.json"
+            request_path.write_text(json.dumps(request), encoding="utf-8")
+            output = io.StringIO()
+
+            status = capacity_main(
+                ["--input", str(request_path)],
+                stdout=output,
+            )
+
+        result = json.loads(output.getvalue())
+        self.assertEqual(status, 2)
+        self.assertEqual(result["status"], "error")
+        self.assertIn("finite", result["error"])
+
     def test_cli_reports_missing_measurement_as_machine_readable_error(self):
         request = {
             "snapshot": {
