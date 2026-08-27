@@ -1,0 +1,4 @@
+interface:
+  display_name: "To Spec"
+  short_description: "Iterate an icon animation until it demonstrably meets its spec"
+  default_prompt: "Use $to-spec to translate the design spec into a motion brief, pick the control variables, and iterate cost-gated studies until every spec clause has evidence."

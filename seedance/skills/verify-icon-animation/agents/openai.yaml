@@ -1,0 +1,4 @@
+interface:
+  display_name: "Verify Icon Animation"
+  short_description: "Audit style fidelity, endpoints, and loop seams"
+  default_prompt: "Use $verify-icon-animation to independently audit this animation against its locked source and brief."
