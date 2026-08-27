@@ -1,12 +1,11 @@
 import importlib.util
 import json
 import shutil
+import struct
 import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
-
-from PIL import Image
 
 
 SCRIPT = Path(__file__).resolve().parent.parent / "scripts" / "issue72_aspect_text.py"
@@ -17,6 +16,12 @@ SPEC.loader.exec_module(MODULE)
 
 
 class Issue72AspectTextTest(unittest.TestCase):
+    def _png_dimensions(self, path):
+        header = Path(path).read_bytes()[:24]
+        self.assertEqual(header[:8], b"\x89PNG\r\n\x1a\n")
+        self.assertEqual(header[12:16], b"IHDR")
+        return struct.unpack(">II", header[16:24])
+
     def _copy_prepared_packet(self, destination):
         destination = Path(destination)
         for name in ("plan.json", "brief-4x3.json", "prompt.txt"):
@@ -200,8 +205,7 @@ class Issue72AspectTextTest(unittest.TestCase):
                 )
                 image_path = run_dir / output["file"]
                 self.assertEqual(MODULE._sha256(image_path), output["sha256"])
-                with Image.open(image_path) as image:
-                    self.assertEqual(image.size, (1024, 768))
+                self.assertEqual(self._png_dimensions(image_path), (1024, 768))
 
     def test_bounded_review_records_null_incidence(self):
         review = json.loads(
