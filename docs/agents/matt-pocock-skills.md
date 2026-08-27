@@ -81,7 +81,7 @@ Audit the checked-in inventory without reading or changing user-global agent dir
 python3.12 scripts/audit_project_skills.py
 ```
 
-The audit requires exactly 37 provenance and lock entries, readable canonical `SKILL.md` files, the required engineering-chain skills, and project-contained Claude compatibility links. The pre-existing `figma-qwen-ui-pipeline` skill remains a separate repository-owned skill and is not counted as part of the upstream 37.
+The audit requires exactly 37 provenance and lock entries, installer-compatible folder hashes, readable canonical `SKILL.md` files, the required engineering-chain skills, and project-contained Claude compatibility links. It uses Node's `localeCompare` so hash ordering matches the pinned installer exactly. The pre-existing `figma-qwen-ui-pipeline` skill remains a separate repository-owned skill and is not counted as part of the upstream 37.
 
 Updates are deliberate repository changes:
 

@@ -3,9 +3,9 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -25,45 +25,29 @@ REQUIRED_SKILLS = {
     "triage",
 }
 HASH_PATTERN = re.compile(r"[0-9a-f]{64}")
-EXCLUDED_HASH_DIRECTORIES = {".git", "node_modules"}
+HASH_HELPER = Path(__file__).with_name("compute_skill_folder_hash.mjs")
 
 
 def compute_skill_folder_hash(skill_dir: Path) -> str:
-    """Reproduce the folder hash written by skills CLI 1.5.23.
+    """Reproduce the exact folder hash written by skills CLI 1.5.23."""
 
-    The installer sorts relative paths with JavaScript ``localeCompare``. The
-    pinned inventory uses ASCII paths without case-fold collisions, for which
-    case-fold sorting produces the same order while staying deterministic in
-    Python. Rejecting a future collision is safer than silently writing an
-    order-dependent hash.
-    """
-
-    records: list[tuple[str, Path]] = []
-
-    def collect(directory: Path) -> None:
-        for entry in directory.iterdir():
-            if entry.is_symlink():
-                continue
-            if entry.is_dir():
-                if entry.name not in EXCLUDED_HASH_DIRECTORIES:
-                    collect(entry)
-            elif entry.is_file():
-                relative_path = entry.relative_to(skill_dir).as_posix()
-                if not relative_path.isascii():
-                    raise ValueError(f"non-ASCII skill path is unsupported: {relative_path}")
-                records.append((relative_path, entry))
-
-    collect(skill_dir)
-    folded_paths = [relative_path.casefold() for relative_path, _path in records]
-    if len(folded_paths) != len(set(folded_paths)):
-        raise ValueError("case-fold-colliding skill paths are unsupported")
-    records.sort(key=lambda record: record[0].casefold())
-
-    digest = hashlib.sha256()
-    for relative_path, path in records:
-        digest.update(relative_path.encode("utf-8"))
-        digest.update(path.read_bytes())
-    return digest.hexdigest()
+    result = subprocess.run(
+        ["node", str(HASH_HELPER), str(skill_dir)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.strip() or f"Node exited with {result.returncode}"
+        raise RuntimeError(detail)
+    try:
+        records = json.loads(result.stdout)
+        computed_hash = records[0]["hash"]
+    except (IndexError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        raise RuntimeError("hash helper returned invalid JSON") from exc
+    if not isinstance(computed_hash, str) or HASH_PATTERN.fullmatch(computed_hash) is None:
+        raise RuntimeError("hash helper returned an invalid SHA-256")
+    return computed_hash
 
 
 def _load_json(path: Path, errors: list[str]) -> dict[str, Any]:
@@ -207,7 +191,7 @@ def audit_repository(repo_root: Path) -> list[str]:
         else:
             try:
                 actual_hash = compute_skill_folder_hash(skill_dir)
-            except (OSError, ValueError) as exc:
+            except (OSError, RuntimeError) as exc:
                 errors.append(f"cannot hash canonical skill {name}: {exc}")
             else:
                 if actual_hash != computed_hash:
