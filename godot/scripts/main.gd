@@ -7,6 +7,7 @@ const WINDOW_LAYOUT := {
 	"StatusWindow": Vector2(10, 8),
 	"MinimapWindow": Vector2(1403, 4),
 	"PmWindow": Vector2(88, 1018),
+	"ChatRoomWindow": Vector2(1262, 690),
 }
 
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 	desktop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(desktop)
 
-	for entry in [[StatusWindow, "StatusWindow"], [MinimapWindow, "MinimapWindow"], [PmWindow, "PmWindow"]]:
+	for entry in [[StatusWindow, "StatusWindow"], [MinimapWindow, "MinimapWindow"], [PmWindow, "PmWindow"], [ChatRoomWindow, "ChatRoomWindow"]]:
 		var win: ReplicaWindow = entry[0].new()
 		win.name = entry[1]
 		win.position = WINDOW_LAYOUT[entry[1]]

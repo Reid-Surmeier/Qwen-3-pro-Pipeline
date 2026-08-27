@@ -111,6 +111,20 @@ func _initialize() -> void:
 		check("pm-input-cleared", pm.input.text == "", pm.input.text)
 		check("pm-seed-log", before_lines == 6, str(before_lines))
 
+	# Chat room contracts.
+	var room = main.get_node_or_null("ChatRoomWindow")
+	check("chatroom-exists", room != null)
+	if room:
+		check("chatroom-seed", room.lines.size() == 10 and room.members.size() == 13,
+			"%d lines %d members" % [room.lines.size(), room.members.size()])
+		room.input.text = "移動します"
+		room.send()
+		check("chatroom-send", room.lines[-1]["text"] == "移動します")
+		var joined: bool = room.join("Newcomer")
+		check("chatroom-join", joined and room.members.size() == 14 \
+			and room.title_text.contains("(14/20)"), room.title_text)
+		check("chatroom-join-dup-rejected", not room.join("Newcomer"))
+
 	_finish()
 
 
