@@ -98,6 +98,10 @@ if [ ! -d "$PROFILE_DIR" ]; then
   printf '%s\n' "You are an independent blind artifact reviewer. You judge only what you can observe in your sandbox. You are rigorous, literal about evidence, and you never speculate about how an artifact was made." > "$PROFILE_DIR/SOUL.md"
 fi
 
+# container_persistent keeps one container (and the background app +
+# Xvfb) alive across the round's terminal calls; persist_across_processes
+# stays off so a new spawn can never inherit a stale container whose
+# mounts point at a previous round's deleted workspace.
 cat > "$PROFILE_DIR/config.yaml" <<EOF
 terminal:
   backend: docker
@@ -108,7 +112,11 @@ terminal:
   timeout: 300
   lifetime_seconds: 3600
   container_persistent: true
+  docker_persist_across_processes: false
 EOF
+
+echo "==> Removing stale sandbox containers"
+docker ps -aq --filter "ancestor=$IMAGE" | xargs -r docker rm -f >/dev/null
 
 HERMES_CMD=(
   hermes -p "$PROFILE" chat
