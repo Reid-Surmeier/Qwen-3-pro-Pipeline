@@ -28,6 +28,10 @@
     "lock_status": "not generated: MCP process cannot inspect the remote custom_nodes Git state without COMFYUI_PATH",
     "verified_graph": "LoadImage source + LoadImage donor -> ReferenceRegionComposite with source MASK -> SaveImage"
   },
+  "commits": {
+    "baseline": "37c87b8a071c1ab8bd15f0d0c55dfd8a59b3de43",
+    "candidate": "d25cf4f27e81ab8b8a61d4869a07da3683cc3ff1"
+  },
   "contact_sheet": {
     "bytes": 837375,
     "mode": "RGB",

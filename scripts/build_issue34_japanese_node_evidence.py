@@ -22,6 +22,8 @@ SOURCE_SHA256 = (
     "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16"
 )
 SOURCE_SIZE = (1572, 718)
+BASELINE_COMMIT = "37c87b8a071c1ab8bd15f0d0c55dfd8a59b3de43"
+CANDIDATE_COMMIT = "d25cf4f27e81ab8b8a61d4869a07da3683cc3ff1"
 SEED = 2026082603
 CONTEXT_RECT = (160, 64, 1250, 625)
 EDIT_RECT = (160, 130, 1250, 395)
@@ -667,6 +669,10 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
     run = {
         "issue": 34,
         "classification": "comparison evidence",
+        "commits": {
+            "baseline": BASELINE_COMMIT,
+            "candidate": CANDIDATE_COMMIT,
+        },
         "source": analyze_image(SOURCE_PATH),
         "provider": "openrouter",
         "model": "qwen/qwen-image-3-pro",
@@ -771,6 +777,7 @@ The direct Qwen outputs successfully removed the Effect row, but they redrew the
 ## Measured result
 
 - Two independent node outputs completed successfully.
+- Baseline commit: `{BASELINE_COMMIT}`; candidate commit: `{CANDIDATE_COMMIT}`.
 - Candidate 1 changed {comparison['inside_rgba_changed_pixels']:,} pixels inside the declared edit rectangle.
 - Candidate 1 changed **{comparison['outside_rgba_changed_pixels']} RGBA pixels outside** the rectangle.
 - Against the matched full-canvas donor, the node restored {node_effect['outside_rgba_changed_pixels']:,} exterior RGBA pixels and changed **{node_effect['inside_rgba_changed_pixels']} pixels inside** the edit rectangle. This isolates the node contribution from Qwen's edit.
@@ -884,6 +891,10 @@ def prepare_experiment(root: Path = EXPERIMENT_ROOT) -> None:
         root / "plan.json",
         {
             "issue": 34,
+            "commits": {
+                "baseline": BASELINE_COMMIT,
+                "candidate": CANDIDATE_COMMIT,
+            },
             "source": {
                 "path": str(source),
                 "sha256": SOURCE_SHA256,

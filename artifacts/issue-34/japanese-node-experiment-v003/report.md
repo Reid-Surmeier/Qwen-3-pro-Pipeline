@@ -5,6 +5,7 @@ The direct Qwen outputs successfully removed the Effect row, but they redrew the
 ## Measured result
 
 - Two independent node outputs completed successfully.
+- Baseline commit: `37c87b8a071c1ab8bd15f0d0c55dfd8a59b3de43`; candidate commit: `d25cf4f27e81ab8b8a61d4869a07da3683cc3ff1`.
 - Candidate 1 changed 378,801 pixels inside the declared edit rectangle.
 - Candidate 1 changed **0 RGBA pixels outside** the rectangle.
 - Against the matched full-canvas donor, the node restored 601,136 exterior RGBA pixels and changed **0 pixels inside** the edit rectangle. This isolates the node contribution from Qwen's edit.

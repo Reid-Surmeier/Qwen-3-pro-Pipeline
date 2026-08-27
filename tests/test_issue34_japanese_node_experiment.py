@@ -8,6 +8,8 @@ from PIL import Image
 from qwen_ui_pipeline.prompt_manifest import compile_edit_brief
 from scripts.build_issue34_japanese_node_evidence import (
     ASSEMBLY_RECT,
+    BASELINE_COMMIT,
+    CANDIDATE_COMMIT,
     CONTEXT_RECT,
     DONOR_RECT,
     EDIT_RECT,
@@ -29,6 +31,14 @@ class Issue34JapaneseNodeExperimentTests(unittest.TestCase):
         prompt = compile_edit_brief(brief).prompt
 
         self.assertEqual(SOURCE_SIZE, (1572, 718))
+        self.assertEqual(
+            BASELINE_COMMIT,
+            "37c87b8a071c1ab8bd15f0d0c55dfd8a59b3de43",
+        )
+        self.assertEqual(
+            CANDIDATE_COMMIT,
+            "d25cf4f27e81ab8b8a61d4869a07da3683cc3ff1",
+        )
         self.assertEqual(
             SOURCE_SHA256,
             "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
