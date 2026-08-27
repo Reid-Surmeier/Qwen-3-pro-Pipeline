@@ -26,7 +26,7 @@
         80
       ],
       "check": "mean-color",
-      "tolerance": 60
+      "tolerance": 50
     },
     {
       "name": "guild-title-band",
@@ -37,7 +37,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "party-title-band",
@@ -48,7 +48,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "chatroom-title-band",
@@ -59,7 +59,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "createroom-title-band",
@@ -70,7 +70,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "trade-title-band",
@@ -81,7 +81,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "pm-title-band",
@@ -92,7 +92,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "minimap-title-band",
@@ -103,7 +103,7 @@
         24
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     },
     {
       "name": "bottombar-strip",
@@ -114,7 +114,7 @@
         30
       ],
       "check": "mean-color",
-      "tolerance": 70
+      "tolerance": 30
     }
   ]
 }

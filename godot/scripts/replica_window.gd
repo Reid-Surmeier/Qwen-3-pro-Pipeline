@@ -4,11 +4,11 @@ extends Control
 ## title bar, raises on click, minimize button with the source's collapse
 ## behavior (window folds to its title bar).
 
-const BODY_COLOR := Color8(243, 246, 250)
-const BORDER_COLOR := Color8(96, 121, 160)
+const BODY_COLOR := Color8(215, 217, 220)
+const BORDER_COLOR := Color8(126, 158, 199)
 const TITLE_TEXT_COLOR := Color8(40, 60, 90)
-const TITLE_GRAD_TOP := Color8(252, 253, 255)
-const TITLE_GRAD_BOTTOM := Color8(196, 216, 240)
+const TITLE_GRAD_TOP := Color8(209, 227, 241)
+const TITLE_GRAD_BOTTOM := Color8(173, 198, 224)
 
 var title_text := ""
 var window_size := Vector2(400, 300)
@@ -203,7 +203,7 @@ static func make_side_button(text: String, pos: Vector2,
 	button.position = pos
 	button.size = btn_size
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color8(238, 244, 250)
+	sb.bg_color = Color8(224, 232, 238)
 	sb.border_color = Color8(120, 140, 170)
 	sb.set_border_width_all(2)
 	sb.set_corner_radius_all(8)
