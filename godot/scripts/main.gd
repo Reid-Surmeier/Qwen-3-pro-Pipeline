@@ -149,7 +149,7 @@ func _send_chat(window_id: String, text: String) -> void:
 			window.overlays["live-log"] = label
 			for line in SOURCE_LOG.get(window_id, []):
 				label.append_text("[color=%s]%s[/color] : %s\n" % [line[1], line[0], line[2]])
-		label.append_text("[color=#4a6edc]SakumaRiri[/color] : %s\n" % text)
+		label.append_text("[color=#3a9948]SakumaRiri[/color] : %s\n" % text)
 	var edit: Control = window.overlays.get("input")
 	if edit == null:
 		edit = window.overlays.get("chat-entry")

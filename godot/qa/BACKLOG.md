@@ -20,8 +20,9 @@ SHA when visually verified and pushed.
   visible scroll. Decide the deterministic behavior (stepped scroll of the
   plate viewport is fine) and make the thumb + content visibly move,
   reversibly.
-- [ ] Outgoing chat name color: live-sent lines render the sender name in
-  blue (#4a6edc); the source PM log shows SakumaRiri in green. Match source.
+- [x] Outgoing chat name color (round 17): sent lines now use the source
+  green (#3a9948); the live log reads as one continuous conversation.
+  Verified visually in the PM window at 2x.
 - [ ] Minimized-bar corner nit: the donor closing border carries a small
   cyan shadow curl at the right corner (visible at 3x). Rebuild the donor
   crop to end cleanly.
