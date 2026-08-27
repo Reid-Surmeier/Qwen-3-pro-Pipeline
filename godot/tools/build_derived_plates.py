@@ -201,3 +201,35 @@ meta["create-room"]["radio-private"] = {
 
 (ROOT / "data/state-patches.json").write_text(json.dumps(meta, indent=1))
 print("wrote", ROOT / "data/state-patches.json")
+
+# --- tab active-state patches (party) ---------------------------------------
+# The source shows no distinct active-tab chrome, so we borrow the source's
+# own active-state language: the blue-tinted status button in basic-info.
+# Multiply-tint each tab's background with that sampled tint (ink survives).
+# All tabs get source_state=false so the untouched frame stays exact; the
+# highlight appears only once the user interacts with the tab group.
+bpx = plate_px("basic-info")
+sx, sy, sw, sh = hit_rect("basic-info", "btn-status")
+sseg = bpx[sy + 8:sy + sh - 8, sx + 8:sx + sw - 8].astype(int)
+light = sseg[(sseg > 170).all(axis=-1)]
+tint = np.median(light.reshape(-1, 3), axis=0)  # the active blue background
+
+# the visual tab band sits between two horizontal border lines; clamp the
+# patch to it (hit rects are looser than the drawn cell)
+tx, ty, tw, th = hit_rect("party", "tab-party")
+lines = [yy for yy in range(ty - 30, ty + th + 30)
+         if ((ppx[yy, 12:518].astype(int) < 190).all(axis=-1)).mean() > 0.5]
+band_top = min(l for l in lines) + 2
+band_bot = max(l for l in lines if l > band_top + 10)
+for hid in ["tab-friends", "tab-party", "tab-guild"]:
+    x, y, w, h = hit_rect("party", hid)
+    gx, gy, gw, gh = x + 2, band_top, w - 4, band_bot - band_top - 1
+    crop = ppx[gy:gy + gh, gx:gx + gw].astype(float)
+    on = (crop * (tint / 255.0) ** 1.6).clip(0, 255)
+    on_asset = save_patch(f"party-{hid}-on", on)
+    meta.setdefault("party", {})[hid] = {
+        "pos": [gx, gy], "size": [gw, gh], "source_state": False,
+        "on_asset": on_asset, "off_asset": None}
+
+(ROOT / "data/state-patches.json").write_text(json.dumps(meta, indent=1))
+print("tab patches written")

@@ -61,7 +61,10 @@ func _initialize() -> void:
 	party.activate("tab-guild")
 	check("tab-exclusive", party.toggle_state["tab-guild"] \
 		and not party.toggle_state["tab-party"])
+	check("tab-visible-active", party.overlays.has("state-tab-guild"))
 	party.activate("tab-party")
+	check("tab-visible-moves", party.overlays.has("state-tab-party") \
+		and not party.overlays.has("state-tab-guild"))
 
 	var form = main.windows["create-room"]
 	form.activate("radio-private")

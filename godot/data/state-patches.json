@@ -25,6 +25,45 @@
    "source_state": true,
    "on_asset": null,
    "off_asset": "res://plates/patches/party-check-item-off.png"
+  },
+  "tab-friends": {
+   "pos": [
+    14,
+    347
+   ],
+   "size": [
+    154,
+    39
+   ],
+   "source_state": false,
+   "on_asset": "res://plates/patches/party-tab-friends-on.png",
+   "off_asset": null
+  },
+  "tab-party": {
+   "pos": [
+    180,
+    347
+   ],
+   "size": [
+    162,
+    39
+   ],
+   "source_state": false,
+   "on_asset": "res://plates/patches/party-tab-party-on.png",
+   "off_asset": null
+  },
+  "tab-guild": {
+   "pos": [
+    354,
+    347
+   ],
+   "size": [
+    162,
+    39
+   ],
+   "source_state": false,
+   "on_asset": "res://plates/patches/party-tab-guild-on.png",
+   "off_asset": null
   }
  },
  "create-room": {
