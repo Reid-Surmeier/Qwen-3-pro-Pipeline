@@ -1,0 +1,33 @@
+{
+  "built": "2026-08-27",
+  "source_issue": {
+    "title": "VIBE, premiere issue",
+    "date": "September 1993",
+    "cover_story": "Bow Wow Wow — Snoop Doggy Dogg has his day, by Kevin Powell; cover photograph by Dan Winters",
+    "scan": "Google Books scan mirrored at https://archive.org/details/bub_gb_IigEAAAAMBAJ",
+    "cover_input": "source/vibe-sept-1993-cover.png (owner-supplied Google Books scan of the cover), composited onto a 640x640 charcoal ground as source/cover-anchor-640.png"
+  },
+  "pages": {
+    "vibe-n52-hot-dogg-opener.jpg": {
+      "leaf": "n52",
+      "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n52_w640.jpg",
+      "what": "Opening page of the cover story: 'HOT DOGG — His album is the most eagerly anticipated debut in hip hop history. Join Kevin Powell for a Snoop Dogg-day afternoon. Photographs by Dan Winters'"
+    },
+    "vibe-n54-snoop-portrait.jpg": {
+      "leaf": "n54",
+      "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n54_w640.jpg",
+      "what": "Black-and-white profile portrait of Snoop in a knit cap facing the story opener"
+    },
+    "vibe-n68-cornel-u.jpg": {
+      "leaf": "n68",
+      "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n68_w640.jpg",
+      "what": "'CORNEL U.' feature opener by James Ledbetter"
+    },
+    "vibe-n86-daughters-of-the-dance.jpg": {
+      "leaf": "n86",
+      "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n86_w640.jpg",
+      "what": "'Daughters of the Dance' feature opener by Elena Oumano"
+    }
+  },
+  "note": "Video-generation image references are passed as the archive.org HTTPS URLs above (the API rejects data URLs); these local copies exist for the strategy gate, provenance, and visual comparison."
+}
