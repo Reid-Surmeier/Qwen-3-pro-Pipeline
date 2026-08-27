@@ -17,7 +17,7 @@ from .capabilities import (
 )
 from .openrouter import OpenRouterVideoClient, asset_reference, request_digest, sanitized_request
 from .runs import create_run, read_job_id, write_json
-from .strategy import check_strategy, gate_record, submit_allowed
+from .strategy import DEFAULT_GRAMMAR, check_strategy, gate_record, submit_allowed
 from .verify import verify_video
 
 
@@ -72,8 +72,10 @@ def _plan(args: argparse.Namespace) -> tuple[dict, ModelProfile, Decimal]:
 def cmd_plan(args: argparse.Namespace) -> None:
     request, profile, cost = _plan(args)
     brief_path = Path(args.brief)
+    brief = load_brief(brief_path)
+    grammar = str(brief.get("grammar") or DEFAULT_GRAMMAR)
     violations = check_strategy(
-        load_brief(brief_path), brief_path, request["prompt"], args.first_frame, args.last_frame
+        brief, brief_path, request["prompt"], args.first_frame, args.last_frame
     )
     waiver = args.waive_strategy_gate
     if violations and waiver is None:
@@ -88,7 +90,7 @@ def cmd_plan(args: argparse.Namespace) -> None:
         listing = "\n".join(f"  - {item}" for item in violations)
         print(f"STRATEGY GATE WAIVED ({waiver}); violations on record:\n{listing}")
     run = create_run(Path(args.runs), args.slug)
-    write_json(run / "brief.json", load_brief(Path(args.brief)))
+    write_json(run / "brief.json", brief)
     write_json(run / "request.json", sanitized_request(request))
     write_json(run / "request.payload.json", request)
     write_json(run / "capabilities.json", {"models": [profile.to_dict()]})
@@ -101,7 +103,7 @@ def cmd_plan(args: argparse.Namespace) -> None:
             "estimated_cost_usd": str(cost),
             "estimate_only_not_invoice": True,
             "paid_submission_performed": False,
-            "strategy_gate": gate_record(violations, waiver),
+            "strategy_gate": gate_record(violations, waiver, grammar),
         },
     )
     print(

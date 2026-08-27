@@ -141,5 +141,69 @@ def test_submit_allows_pass_and_waiver():
 
 
 def test_gate_record_round_trips_through_json():
-    record = gate_record(["a"], "reason")
+    record = gate_record(["a"], "reason", "smooth")
     assert json.loads(json.dumps(record)) == record
+    assert record["grammar"] == "smooth"
+
+
+SMOOTH_BRIEF = {
+    "grammar": "smooth",
+    "motion_basis": (
+        "Material Design ripple acknowledgment: radial ink expands from the touch "
+        "point and fades, per the published motion spec"
+    ),
+    "real_reference": "references/ref-coin-spin.gif",
+}
+
+
+def test_smooth_grammar_accepts_soft_anchor(tmp_path):
+    brief_path = write_reference(tmp_path)
+    soft = tmp_path / "soft.png"
+    make_soft_anchor(soft)
+    violations = check_strategy(SMOOTH_BRIEF, brief_path, LONG_PROMPT, str(soft), str(soft))
+    assert violations == []
+
+
+def test_smooth_grammar_still_requires_basis_reference_and_anchors(tmp_path):
+    brief_path = write_reference(tmp_path)
+    violations = check_strategy({"grammar": "smooth"}, brief_path, "short", None, None)
+    assert any("motion_basis" in v for v in violations)
+    assert any("real_reference" in v for v in violations)
+    assert any("compiled prompt" in v for v in violations)
+    assert any("first_frame anchor is required" in v for v in violations)
+
+
+def test_smooth_grammar_rejects_missing_anchor_file(tmp_path):
+    brief_path = write_reference(tmp_path)
+    missing = tmp_path / "nope.png"
+    violations = check_strategy(
+        SMOOTH_BRIEF, brief_path, LONG_PROMPT, str(missing), str(missing)
+    )
+    assert any("anchor not found" in v for v in violations)
+
+
+def test_default_grammar_is_retro_sprite(tmp_path):
+    brief_path = write_reference(tmp_path)
+    soft = tmp_path / "soft.png"
+    make_soft_anchor(soft)
+    brief = dict(GOOD_BRIEF)  # no grammar declared
+    violations = check_strategy(brief, brief_path, LONG_PROMPT, str(soft), str(soft))
+    assert any("non-matte colors" in v for v in violations)
+
+
+def test_unknown_grammar_fails(tmp_path):
+    brief_path = write_reference(tmp_path)
+    anchor = tmp_path / "anchor.png"
+    make_crisp_anchor(anchor)
+    brief = dict(GOOD_BRIEF, grammar="freeform")
+    violations = check_strategy(brief, brief_path, LONG_PROMPT, str(anchor), str(anchor))
+    assert any("not recognized" in v for v in violations)
+
+
+def test_smooth_grammar_accepts_era_basis_as_fallback(tmp_path):
+    brief_path = write_reference(tmp_path)
+    soft = tmp_path / "soft.png"
+    make_soft_anchor(soft)
+    brief = dict(GOOD_BRIEF, grammar="smooth")  # has era_idiom_basis, no motion_basis
+    violations = check_strategy(brief, brief_path, LONG_PROMPT, str(soft), str(soft))
+    assert violations == []

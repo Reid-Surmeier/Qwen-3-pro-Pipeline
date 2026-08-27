@@ -46,6 +46,15 @@ A plan is refused unless:
 `submit` independently refuses any plan whose `plan.json` lacks a passing (or explicitly
 waived) `strategy_gate` record, so pre-gate plans cannot be submitted either.
 
+The gate is profile-aware for sources outside game/pixel art. The brief declares
+`"grammar"`: **`retro-sprite`** (the default when undeclared — the full rules above,
+unchanged) or **`smooth`** (logos, brand marks, anti-aliased icons). Smooth briefs keep
+the general principles — a `motion_basis` citation of the real-world behavior imitated,
+a resolving `real_reference` (visible evidence, not a cited guess), the ≥ 350-word
+prompt, and both anchors present as local files — but skip the crisp-pixel palette
+check, which is a property of quantized pixel art only. An unrecognized grammar is a
+violation: a run must say what kind of source it is.
+
 Deliberate experiments remain possible — `--waive-strategy-gate "reason"` — but the
 waiver is loud: the reason and the full violation list are stored in `plan.json` and
 printed at plan time. There is no silent bypass.

@@ -66,7 +66,8 @@ estimate → explicit approval → `submit --acknowledge-cost` with the exact es
 
 `plan` enforces the batch-3 strategy gate (see `docs/run-contract.md` § Strategy gate):
 era-idiom citation, a resolving real-game `real_reference`, a ≥ 350-word beat-by-beat
-compiled prompt, and crisp quantized anchors for both frames. A refusal is a brief/anchor
+compiled prompt, and crisp quantized anchors for both frames. Non-pixel-art sources
+declare `"grammar": "smooth"` in the brief — same principles, no crisp-pixel check. A refusal is a brief/anchor
 problem, not a CLI bug — fix the inputs; `--waive-strategy-gate "reason"` exists only for
 owner-approved experiments and records the deviation in plan.json.
 

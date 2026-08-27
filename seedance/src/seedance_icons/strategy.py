@@ -11,6 +11,11 @@ The enforced strategy, each element traceable to a measured outcome:
 - crisp anchors as both frame inputs: hard pixels, quantized palette (batch 3 first
   RMSE 4.0-4.3 vs 4.6-5.1 for soft screenshot texture).
 
+The gate is profile-aware: the brief declares `grammar` — "retro-sprite" (default,
+full pixel-art rules) or "smooth" (non-pixel-art sources: the general principles apply,
+the crisp-pixel palette check does not). Undeclared briefs get retro-sprite, so the
+original strictness never relaxes silently.
+
 A waiver exists for deliberate experiments, but it is loud: the reason is recorded in
 plan.json and printed, never silent.
 """
@@ -27,6 +32,14 @@ MIN_PROMPT_WORDS = 350
 MIN_IDIOM_WORDS = 8
 MAX_ANCHOR_COLORS = 32
 BLOCK_FACTORS = (4, 2)
+
+# The brief declares its grammar; undeclared briefs default to retro-sprite so the
+# original batch-3 strictness never relaxes silently. "retro-sprite" carries the full
+# pixel-art rules (crisp quantized anchors); "smooth" keeps the general principles —
+# reference pairing, motion-basis citation, prompt depth, anchors — for sources that
+# legitimately are not pixel art (logos, brand marks, anti-aliased icons).
+DEFAULT_GRAMMAR = "retro-sprite"
+GRAMMARS = ("retro-sprite", "smooth")
 
 
 def anchor_is_crisp(path: Path) -> tuple[bool, str]:
@@ -84,19 +97,36 @@ def check_strategy(
     """Return the list of strategy violations (empty means the plan may proceed)."""
     violations: list[str] = []
 
-    idiom = str(brief.get("era_idiom_basis") or "").strip()
-    if len(idiom.split()) < MIN_IDIOM_WORDS:
+    grammar = str(brief.get("grammar") or DEFAULT_GRAMMAR).strip()
+    if grammar not in GRAMMARS:
         violations.append(
-            "era_idiom_basis is missing or too thin: cite the shipped-game behavior the "
-            "motion imitates (see docs/research/era-ui-animation-reference-corpus.md)"
+            f"grammar {grammar!r} is not recognized (one of {', '.join(GRAMMARS)}); "
+            "declare what kind of source this is so the right rules apply"
         )
+        grammar = DEFAULT_GRAMMAR
+    retro = grammar == "retro-sprite"
+
+    basis_field = "era_idiom_basis" if retro else "motion_basis"
+    basis = str(brief.get(basis_field) or brief.get("era_idiom_basis") or "").strip()
+    if len(basis.split()) < MIN_IDIOM_WORDS:
+        hint = (
+            "cite the shipped-game behavior the motion imitates "
+            "(see docs/research/era-ui-animation-reference-corpus.md)"
+            if retro
+            else "cite the real-world motion behavior this run imitates and where it is from"
+        )
+        violations.append(f"{basis_field} is missing or too thin: {hint}")
 
     reference = str(brief.get("real_reference") or "").strip()
     if not reference:
-        violations.append(
-            "real_reference is missing: pair the run with a real-game animation asset "
+        hint = (
+            "pair the run with a real-game animation asset "
             "(docs/evidence/board-icons-test/references/) or an explicit era-corpus citation"
+            if retro
+            else "pair the run with a real example of the motion (a clip, recording, or "
+            "documented asset on disk) — visible evidence, not a cited guess"
         )
+        violations.append(f"real_reference is missing: {hint}")
     elif not _reference_resolves(reference, brief_path):
         violations.append(
             f"real_reference does not resolve to any existing file: {reference!r}"
@@ -109,12 +139,15 @@ def check_strategy(
             "beat by beat — the terse grammar is what the era-corpus redesign replaced"
         )
 
+    anchor_kind = "crisp anchor" if retro else "anchor"
     for label, frame in (("first_frame", first_frame), ("last_frame", last_frame)):
         if not frame:
-            violations.append(f"{label} anchor is required (first = last = crisp anchor)")
+            violations.append(f"{label} anchor is required (first = last = {anchor_kind})")
         elif frame.startswith(("https://", "data:")):
-            violations.append(f"{label} must be a local crisp anchor file, not a URL")
-        else:
+            violations.append(f"{label} must be a local {anchor_kind} file, not a URL")
+        elif not Path(frame).is_file():
+            violations.append(f"{label} anchor not found: {frame}")
+        elif retro:
             ok, detail = anchor_is_crisp(Path(frame))
             if not ok:
                 violations.append(f"{label}: {detail}")
@@ -122,9 +155,15 @@ def check_strategy(
     return violations
 
 
-def gate_record(violations: list[str], waiver: str | None) -> dict[str, Any]:
+def gate_record(
+    violations: list[str], waiver: str | None, grammar: str = DEFAULT_GRAMMAR
+) -> dict[str, Any]:
     """The strategy_gate entry stored in plan.json; submission requires it."""
-    record: dict[str, Any] = {"passed": not violations, "violations": violations}
+    record: dict[str, Any] = {
+        "grammar": grammar,
+        "passed": not violations,
+        "violations": violations,
+    }
     if waiver is not None:
         record["waived"] = waiver
     return record
