@@ -9,7 +9,11 @@ from .capacity import (
     plan_capacity_scenarios,
     plan_worker_capacity,
 )
-from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from .comfyui_workflow import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_comfyui_component_extraction_workflow,
+)
 from .providers.alibaba import AlibabaImageClient, build_alibaba_request
 from .providers.router import ProviderResult, generate_with_provider
 from .prompt_manifest import (

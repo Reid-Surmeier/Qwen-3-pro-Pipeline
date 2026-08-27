@@ -12,7 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
-from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from .comfyui_workflow import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_comfyui_component_extraction_workflow,
+)
 from .prompt_manifest import compile_edit_brief
 from .providers.openrouter import (
     OpenRouterImageClient,
@@ -70,6 +74,15 @@ def build_parser() -> argparse.ArgumentParser:
     assembly_parser.add_argument("--filename-prefix", required=True)
     assembly_parser.add_argument("--output", required=True, type=Path)
 
+    component_parser = subparsers.add_parser(
+        "component-workflow",
+        help="write a lossless reference-component extraction workflow",
+    )
+    component_parser.add_argument("--reference-filename", required=True)
+    component_parser.add_argument("--components", required=True, type=Path)
+    component_parser.add_argument("--filename-prefix", required=True)
+    component_parser.add_argument("--output", required=True, type=Path)
+
     record_parser = subparsers.add_parser(
         "record-comfy", help="record completed ComfyUI outputs as a reproducible run"
     )
@@ -91,6 +104,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             reference_filename=args.reference_filename,
             generated_filename=args.generated_filename,
             region=args.region,
+            filename_prefix=args.filename_prefix,
+        )
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(workflow, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        print(args.output)
+        return 0
+
+    if args.command == "component-workflow":
+        raw_components = json.loads(args.components.read_text(encoding="utf-8"))
+        components = {
+            name: tuple(int(value) for value in rectangle)
+            for name, rectangle in raw_components.items()
+        }
+        workflow = build_comfyui_component_extraction_workflow(
+            reference_filename=args.reference_filename,
+            components=components,
             filename_prefix=args.filename_prefix,
         )
         args.output.parent.mkdir(parents=True, exist_ok=True)
