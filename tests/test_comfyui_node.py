@@ -1,6 +1,7 @@
 import unittest
 import json
-import numpy
+import sys
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from qwen_ui_pipeline.comfyui_node import (
@@ -16,10 +17,22 @@ from qwen_ui_pipeline.providers.router import ProviderResult
 
 class QwenImage3RenderTests(unittest.TestCase):
     def test_legacy_node_still_uses_only_the_first_four_batch_images(self):
-        class FakeTensor:
-            def __init__(self, value):
-                self.value = value
+        test_case = self
 
+        class FakePixels:
+            def clip(self, _minimum, _maximum):
+                return self
+
+            def __mul__(self, _value):
+                return self
+
+            def round(self):
+                return self
+
+            def astype(self, _name):
+                return self
+
+        class FakeTensor:
             def detach(self):
                 return self
 
@@ -27,9 +40,21 @@ class QwenImage3RenderTests(unittest.TestCase):
                 return self
 
             def numpy(self):
-                return numpy.full((1, 1, 3), self.value, dtype=numpy.float32)
+                return FakePixels()
 
-        encoded = _reference_data_urls([FakeTensor(index / 10) for index in range(5)])
+        class FakeImage:
+            @staticmethod
+            def fromarray(_pixels, mode):
+                test_case.assertEqual(mode, "RGB")
+                return FakeImage()
+
+            def save(self, buffer, format):
+                test_case.assertEqual(format, "PNG")
+                buffer.write(b"fake-png")
+
+        pil_module = SimpleNamespace(Image=FakeImage)
+        with patch.dict(sys.modules, {"PIL": pil_module}):
+            encoded = _reference_data_urls([FakeTensor() for _index in range(5)])
 
         self.assertEqual(len(encoded), 4)
 

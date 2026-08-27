@@ -43,9 +43,6 @@ def _reference_data_urls(reference_images: Any) -> list[str]:
 
 def _partner_reference_records(*named_images: Any) -> list[dict[str, Any]]:
     """Encode one image per visible socket so role names remain unambiguous."""
-
-    from PIL import Image
-
     records = []
     missing_role = None
     for index, images in enumerate(named_images, start=1):
@@ -53,15 +50,17 @@ def _partner_reference_records(*named_images: Any) -> list[dict[str, Any]]:
             missing_role = missing_role or f"image_{index}"
         elif missing_role is not None:
             raise ValueError(f"image_{index} requires {missing_role} to be connected")
-
-    for index, images in enumerate(named_images, start=1):
-        if images is None:
-            continue
-        if len(images) != 1:
+        elif len(images) != 1:
             raise ValueError(
                 f"image_{index} must contain exactly one image; batches would make "
                 "the visible @ImageN roles ambiguous"
             )
+
+    from PIL import Image
+
+    for index, images in enumerate(named_images, start=1):
+        if images is None:
+            continue
         tensor = images[0]
         pixels = tensor.detach().cpu().numpy()
         pixels = (pixels.clip(0, 1) * 255).round().astype("uint8")
