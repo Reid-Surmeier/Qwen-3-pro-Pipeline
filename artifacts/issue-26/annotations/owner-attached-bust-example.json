@@ -1,0 +1,47 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/issue-26/examples/owner-attached-bust-example.png",
+  "sha256": "d83f03d0eb8cb55a40bf9e6c6de00f8e13dd92ddcb523f9becfe8f95d473425d",
+  "role": "context_limited_example",
+  "source_ref": null,
+  "provenance": "Owner-attached example on Issue #26 (github user-attachments ed421e94-abff-404c-a1ca-12ddd7daf499), 750x828 RGBA.",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate; source and Edit Brief unknown (context_missing)",
+  "defects": [
+    {
+      "class": "T12",
+      "region": [
+        200,
+        260,
+        560,
+        470
+      ],
+      "strength": "strong",
+      "note": "Bust chest/shoulder cross-section protrudes as a shelf-like spout; neck-to-chest transition cannot exist in 3D."
+    },
+    {
+      "class": "T10",
+      "region": [
+        190,
+        60,
+        340,
+        220
+      ],
+      "strength": "weak",
+      "note": "Hair volume reads as fused lumps rather than distinct curls."
+    },
+    {
+      "class": "T02",
+      "region": [
+        40,
+        620,
+        660,
+        720
+      ],
+      "strength": "strong",
+      "note": "Caption reads \u30d5\u30af\u30ed\u30da\u30f3\u30ae\u30f3 ('sack penguin'); legible katakana but semantically mismatched with a marble bust. Cannot verify intended copy without the source."
+    }
+  ],
+  "disposition": "context_missing",
+  "note": "Included as an explicitly context-limited anatomy/topology example per the triage boundary; do not treat as a scored corpus item until its source and brief are supplied."
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/golf-club-object-v001/image-02.png",
+  "sha256": "4bf29943e86d35955e39a1480683d6063680fad5d721aa7c0fde0a7fc2347ebe",
+  "role": "rejected_candidate",
+  "source_ref": "artifacts/references/plantstudio-main-window.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T01",
+      "region": [
+        0,
+        0,
+        700,
+        30
+      ],
+      "strength": "strong",
+      "note": "Title reads 'PlantStudo - Librarv of wildflnuwers'."
+    },
+    {
+      "class": "T10",
+      "region": [
+        440,
+        440,
+        540,
+        530
+      ],
+      "strength": "strong",
+      "note": "Club head and hosel melt into a single L-shaped block."
+    },
+    {
+      "class": "T21",
+      "region": null,
+      "strength": "hard",
+      "note": "Same 4:3 drift as image-01."
+    }
+  ],
+  "disposition": "rejected",
+  "note": "Corrupted Exact Copy in the title bar plus melted club-head topology."
+}

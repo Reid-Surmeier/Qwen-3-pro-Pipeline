@@ -1,0 +1,30 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/golf-club-object-v001/image-03.png",
+  "sha256": "daae6288fcf107261fee83b9eda247b7182db5bfbbceaa66772b69d8505dc6dc",
+  "role": "rejected_candidate",
+  "source_ref": "artifacts/references/plantstudio-main-window.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T11",
+      "region": [
+        440,
+        430,
+        540,
+        530
+      ],
+      "strength": "strong",
+      "note": "Head reads as rounded putter/wood blob, not the requested seven-iron."
+    },
+    {
+      "class": "T21",
+      "region": null,
+      "strength": "hard",
+      "note": "Same 4:3 drift."
+    }
+  ],
+  "disposition": "rejected",
+  "note": "Cleanest v001 text (title exact); fails on object identity and canvas contract."
+}

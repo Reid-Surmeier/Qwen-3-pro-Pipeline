@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Second-pass exploratory review derived from Reid's recurring corrections. Run only after deterministic gates pass; promote every credible finding into a reproducible automated regression before retrying.",
+  "prompts": [
+    {
+      "id": "no-reference-underlay",
+      "source_correction": "Do not put an interactive overlay on top of the original screenshot.",
+      "review_prompt": "Hide or move each editable layer in turn. Is any part of the original reference screenshot still acting as the runtime background or supplying duplicate controls?",
+      "applies_to": ["*"],
+      "required_evidence": ["runtime network log", "hidden-layer screenshots", "source-import scan"],
+      "promotion_rule": "Turn any suspected underlay into a reproducible asset-request or hide-layer test before revision."
+    },
+    {
+      "id": "independent-elements",
+      "source_correction": "Every header, icon, button, label, slider, checkbox, and panel must be independent and editable.",
+      "review_prompt": "Can every semantic element be selected, moved, hidden, and replaced without carrying a neighbor or exposing a baked duplicate?",
+      "applies_to": ["*"],
+      "required_evidence": ["component manifest", "move-hide-replace trace", "Figma node inventory"],
+      "promotion_rule": "Turn every fused region into a reproducible manifest-coverage failure before splitting it."
+    },
+    {
+      "id": "preserve-japanese-source-style",
+      "source_correction": "Keep to the Japanese, and do not replace pixel-styled Japanese with a smooth text overlay.",
+      "review_prompt": "Compare wording, glyph footprint, antialiasing, weight, spacing, and baseline against the source at high zoom. Does any Japanese text look newly typeset or stylistically foreign?",
+      "applies_to": ["*"],
+      "required_evidence": ["source crop", "settled runtime crop", "OCR text inventory", "font or Exact Copy authority"],
+      "promotion_rule": "Turn each mismatch into a reproducible OCR, font-readback, or local pixel-region assertion."
+    },
+    {
+      "id": "no-pink-donor-pixels",
+      "source_correction": "Remove the pink background and the pink border around labels and the BGM and Effect window.",
+      "review_prompt": "Inspect one-to-three-pixel rings around the window and every extracted element over dark and light contrast plates. Did any magenta donor pixel, rectangular crop edge, or neighbor color travel with it?",
+      "applies_to": ["*"],
+      "required_evidence": ["transparent asset", "dark contrast screenshot", "light contrast screenshot", "edge-ring pixel count"],
+      "promotion_rule": "Turn each colored seam into a reproducible forbidden-color or alpha-ring test before re-isolation."
+    },
+    {
+      "id": "pixel-rounded-window-edges",
+      "source_correction": "The edges of the windows are too cropped and do not preserve the original rounding.",
+      "review_prompt": "Inspect every corner and one-to-three-pixel perimeter at high zoom. Did cleanup delete the original stepped corner, flatten the border, or replace a rounded source edge with a hard rectangular crop?",
+      "applies_to": ["*"],
+      "required_evidence": ["corner alpha readback", "source and runtime corner crops", "perimeter occupancy trace"],
+      "promotion_rule": "Turn every flattened or over-cropped perimeter into a reproducible corner-alpha and border-occupancy assertion before revision."
+    },
+    {
+      "id": "checkbox-anchor-and-stray-pixel",
+      "source_correction": "When I click a checkbox it moves, and there is a random black pixel above the bottom checkboxes.",
+      "review_prompt": "Toggle every checkbox twice. Is its outer geometry invariant, and do before/after difference pixels stay inside the declared state region with no dead pixel above it?",
+      "applies_to": ["options", "chat"],
+      "required_evidence": ["off screenshot", "on screenshot", "toggle-back screenshot", "difference bounding box"],
+      "promotion_rule": "Turn any motion or stray pixel into a reproducible geometry-invariance and clear-row test."
+    },
+    {
+      "id": "checkbox-label-overlap",
+      "source_correction": "The on label is overlapped by the checkbox.",
+      "review_prompt": "At both checkbox states, do the checkbox and its Japanese or on label occupy disjoint declared boxes while matching source spacing?",
+      "applies_to": ["options", "chat"],
+      "required_evidence": ["checkbox bounds", "label bounds", "dark-pixel footprints"],
+      "promotion_rule": "Turn any overlap into a reproducible bounding-box intersection assertion."
+    },
+    {
+      "id": "title-placement-and-white-box",
+      "source_correction": "The top header Japanese is misplaced and there is a weird white box around it.",
+      "review_prompt": "Compare the title glyph origin, baseline, surrounding transparency, and title-bar texture. Is the title displaced or enclosed by a new rectangular fill?",
+      "applies_to": ["*"],
+      "required_evidence": ["title source crop", "runtime title crop", "alpha or background ring"],
+      "promotion_rule": "Turn title drift or a box into a reproducible local-geometry and perimeter-pixel test."
+    },
+    {
+      "id": "generated-minimize-endpoint",
+      "source_correction": "The minimize button does not regenerate the UI; it just crops it. There needs to be a generation pass.",
+      "review_prompt": "Is the minimized endpoint a coherent independent surface with Qwen provenance, or merely the top strip of the expanded window with its body clipped?",
+      "applies_to": ["*"],
+      "required_evidence": ["expanded endpoint", "minimized endpoint", "Qwen request artifact", "crop-equivalence comparison"],
+      "promotion_rule": "Turn crop equivalence or missing provenance into a reproducible endpoint-difference and provenance test."
+    },
+    {
+      "id": "minimized-title-authority-continuity",
+      "source_correction": "Generated interaction states and animations must remain complete rather than loading as blank or partial UI.",
+      "review_prompt": "At every minimize animation frame and at the settled compact endpoint, are the window-specific Japanese title, icon, and right-end controls still visible, independently editable, and aligned to the generated chrome?",
+      "applies_to": ["options", "basic-info", "status", "inventory", "equipment"],
+      "required_evidence": ["generated compact plate", "title component inventory", "transition geometry samples", "settled Stagehand screenshot", "restore trace"],
+      "promotion_rule": "Turn every blank or partial compact state into a reproducible title-authority visibility, endcap alignment, and restore-geometry test before revising assembly."
+    },
+    {
+      "id": "tab-boundary-mapping",
+      "source_correction": "The button mapping on info and options is not correct to the tab.",
+      "review_prompt": "Click the center and both sides of every tab boundary. Does each pixel activate only the visually corresponding tab and show the correct panel?",
+      "applies_to": ["options", "chat", "inventory", "party"],
+      "required_evidence": ["elementFromPoint scan", "boundary-click trace", "selected-tab screenshots"],
+      "promotion_rule": "Turn every ambiguous pixel into a reproducible hit-map ownership assertion."
+    },
+    {
+      "id": "slider-full-endpoint-and-grey-block",
+      "source_correction": "Some sliders moved to the right do not go fully to the end and have a grey thing.",
+      "review_prompt": "Drive every range to minimum and maximum by keyboard, arrows, and dragging. Does the visual thumb center reach both source endpoints without a native grey thumb or rectangular donor crop?",
+      "applies_to": ["options", "basic-info", "card", "inventory"],
+      "required_evidence": ["minimum screenshot", "maximum screenshot", "thumb center geometry", "native style readback"],
+      "promotion_rule": "Turn every inset or grey block into a reproducible endpoint-center and native-thumb-visibility test."
+    },
+    {
+      "id": "continuous-motion-not-four-frames",
+      "source_correction": "The slider was choppy and not fully smooth because there were only four frames.",
+      "review_prompt": "Replay slow and fast drags plus direction reversal. Are there more than four distinct values and enough distinct visual positions to look continuous?",
+      "applies_to": ["options", "basic-info", "card", "inventory"],
+      "required_evidence": ["input event trace", "distinct-value count", "motion-frame contact sheet"],
+      "promotion_rule": "Turn discontinuity into a reproducible sample-count, monotonicity, or interruption test."
+    },
+    {
+      "id": "settled-button-effects",
+      "source_correction": "Pay attention to what happens when buttons are pressed; all buttons must be interactable.",
+      "review_prompt": "Inventory every enabled button. After pointer-down feedback settles and focus is removed where appropriate, does each action produce a meaningful visible or application-state change?",
+      "applies_to": ["*"],
+      "required_evidence": ["enabled-control inventory", "before and settled screenshots", "application-state trace"],
+      "promotion_rule": "Turn each dead or focus-only response into a reproducible before-after signature test."
+    },
+    {
+      "id": "drag-cutoff-and-z-order",
+      "source_correction": "Pay attention to movement cutting off and movable window panel interactions.",
+      "review_prompt": "Drag the window beyond every host edge, across every overlapping window, then minimize and restore it. Does it stay recoverable, rise predictably, and avoid cutting off body or controls?",
+      "applies_to": ["*"],
+      "required_evidence": ["edge-drag trace", "window-host intersection", "z-order readback", "motion screenshots"],
+      "promotion_rule": "Turn each cutoff or stacking surprise into a reproducible containment or z-order sequence test."
+    },
+    {
+      "id": "text-overlap-and-pixel-aesthetic",
+      "source_correction": "Japanese text must conform to the pixelated aesthetic and not overlap.",
+      "review_prompt": "At every state and menu choice, does text remain within its source-shaped region, avoid neighboring controls, and preserve the pixel aesthetic?",
+      "applies_to": ["*"],
+      "required_evidence": ["text bounds", "overflow audit", "state screenshots", "source-local comparison"],
+      "promotion_rule": "Turn any collision or style drift into a reproducible containment, OCR, or local-pixel assertion."
+    },
+    {
+      "id": "figma-link-and-page-parity",
+      "source_correction": "Figma prototypes were not using the full advantage of linking and page viewing.",
+      "review_prompt": "Do all runtime states have stable Figma counterparts, correct prototype reactions, root-relative coordinates, and links that navigate to the intended page or overlay?",
+      "applies_to": ["*"],
+      "required_evidence": ["Figma node inventory", "reaction audit", "focused node screenshot", "runtime-Figma stable-ID parity"],
+      "promotion_rule": "Turn each drift into a reproducible reaction, geometry-readback, or stable-ID parity test."
+    },
+    {
+      "id": "complete-user-flow-not-screenshot-only",
+      "source_correction": "A user is not a screenshot; the user goes in, inputs, clicks things, and does things.",
+      "review_prompt": "Complete the window's realistic user journey using only user inputs, including reversal, cancel, reopen, and recovery. Is any required state unreachable despite passing screenshots?",
+      "applies_to": ["*"],
+      "required_evidence": ["critical flow trace", "console log", "state checkpoints", "retained failure artifacts"],
+      "promotion_rule": "Turn every unreachable or inconsistent state into a reproducible end-to-end user-flow test."
+    },
+    {
+      "id": "interaction-animation-source-fit",
+      "source_correction": "Many generated interaction states and animations are still not done.",
+      "review_prompt": "Replay every state-changing control from idle through pointer-down, transition, settled, reversal, and restore. Does the response use a complete source-fitting state or generated endpoint, and does motion expose enough distinct frames without clipping, fading to an unrelated surface, or substituting a generic asset from another window?",
+      "applies_to": ["*"],
+      "required_evidence": ["idle/down/transition/settled contact sheet", "distinct geometry or visual-state samples", "state-asset provenance and hash", "reversal trace"],
+      "promotion_rule": "Turn every missing, generic, or visually foreign state and every choppy transition into a reproducible state-hash, sample-count, and clipping test before revision."
+    }
+  ]
+}

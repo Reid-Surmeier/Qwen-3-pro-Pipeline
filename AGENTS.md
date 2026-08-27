@@ -90,14 +90,16 @@ A failed preflight is a stop condition.
 
 ## Verification gate
 
-Run focused checks while developing, then run the repository baseline before requesting review:
+Run focused checks while developing, then run the canonical repository
+baseline before requesting review:
 
 ```bash
-python3.12 -m unittest discover -s tests -v
-node --test tests/figma-mcp-client.test.mjs tests/figma-oauth-bootstrap.test.mjs
-python3.12 -m compileall -q qwen_ui_pipeline tests scripts
-git diff --check
+scripts/verify.sh
 ```
+
+The script runs the Python unit tests, Node tests, Python compilation, and
+`git diff --check`, fails non-zero when any check fails, and is the same
+entry point GitHub Actions invokes. Do not maintain a separate command list.
 
 If the change affects JavaScript tooling, ComfyUI integration, deployment, or artifacts, run the relevant additional checks and record them in the pull request.
 

@@ -57,6 +57,36 @@ class RecordComfyRunTests(unittest.TestCase):
             self.assertEqual(run["provenance"]["figma_file_key"], "figma-key")
             self.assertEqual(len(run["provenance"]["reference_sha256"]), 64)
 
+class ComponentWorkflowTests(unittest.TestCase):
+    def test_writes_an_exact_component_extraction_workflow(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            components = root / "components.json"
+            components.write_text(json.dumps({"toolbar": [10, 44, 101, 25]}), encoding="utf-8")
+            output = root / "workflow.json"
+
+            status = main(
+                [
+                    "component-workflow",
+                    "--reference-filename",
+                    "golfstudio-approved-baseline.png",
+                    "--components",
+                    str(components),
+                    "--filename-prefix",
+                    "golf-ui/reference-components/v001",
+                    "--output",
+                    str(output),
+                ]
+            )
+
+            self.assertEqual(status, 0)
+            workflow = json.loads(output.read_text())
+            self.assertEqual(workflow["2"]["class_type"], "ImageCrop")
+            self.assertEqual(
+                workflow["3"]["inputs"]["filename_prefix"],
+                "golf-ui/reference-components/v001/toolbar",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
