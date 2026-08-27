@@ -1,4 +1,4 @@
-# Visual failure taxonomy — v0.1.0
+# Visual failure taxonomy — v0.3.0
 
 Issue: [#26 — When results look "AI"](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/26)
 
@@ -69,7 +69,7 @@ rejection.
 | T30 | `style-smoothing` | Pixel-era aliased artwork returned as smooth anti-aliased or photoreal rendering. | strong | golf-club v001 club shaft gradient |
 | T31 | `micro-texture-worms` | Halftone or grain replaced by worm-like repeating micro-glyph noise, visible at 100%. | weak | maga v003 flag/field texture |
 | T32 | `template-remnant` | A structural element of the style-donor template survives into the new design where it has no role. | strong | maga v003 retained XP swoosh |
-| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit. **Hypothesized only — no confirmed instance.** The Issue #18 evidence was retracted: its source was the genuine ENERGY STAR sticker mislabeled as the parody, and the model preserved it faithfully. Issue #70 tests the class against real parody sources. | unconfirmed | none (Issue #18 instance retracted 2026-08-26) |
+| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit. **Hypothesized only — no confirmed instance.** The Issue #18 evidence was retracted (mislabeled source; the model was faithful), and the Issue #70 test on the two verified parody sources observed zero reversion in 5/5 completed arms, including unprotected ones. | unconfirmed, incidence 0 observed | Issue #70 (PR #74): 0/5 |
 | T34 | `source-character-beautification` | A degraded source (blurry photo, compressed scan) is silently sharpened into a clean studio render while the requested edits are applied. | weak | Issue #18 dense-multi-region pair, both arms (PR #64) |
 
 ### Assembly and alpha (deterministically checkable today)
@@ -103,13 +103,15 @@ enough. Observed mappings from the seed corpus:
   arm, but even the lowest arm changed 28.42% of normalized outside-region
   pixels above the luma threshold. Use deterministic Assembly plus Fidelity
   Check when the contract requires zero outside-region changes.
-- Companion observation (the parallel Issue #52 run in PR #67, plus PR #66):
-  under strong mismatch the model adapts by **uniform anisotropic scaling** of
-  the whole window (squash at 16:9, stretch at 1:1) rather than chaotic
-  collapse, and fine-grained text damage across aspects sat within Issue
-  #53's measured per-seed noise — attribute text defects to geometry only
-  with multi-seed evidence. The historical v001 collapse likely came from
-  that run's brief/provider settings, not geometry alone.
+- Companion observation (the parallel, superseded Issue #52 run in PR #67,
+  plus PR #66): under strong mismatch that run saw **uniform anisotropic
+  scaling** (squash at 16:9, stretch at 1:1) rather than chaotic collapse —
+  note this differs from the authoritative run's 16:9 result (teal
+  pillarboxing), so the adaptation mode itself varies between runs and
+  neither should be assumed. Fine-grained text damage across aspects sat
+  within Issue #53's measured per-seed noise — attribute text defects to
+  geometry only with multi-seed evidence. The historical v001 collapse
+  likely came from that run's brief/provider settings, not geometry alone.
 - T01/T03 (copy/logotype corruption) → shrink the generation surface
   (focused crop), or move text into source-owned pixels via deterministic
   Assembly (ADR 0002); regenerate only non-text regions.
@@ -121,8 +123,9 @@ enough. Observed mappings from the seed corpus:
   resolution near source scale, and review at 100%.
 - T32 (template remnant) → enumerate donor-template elements to drop in the
   negative constraints.
-- T33 (memorized-brand reversion) → unconfirmed; treat as a watch-for
-  class until Issue #70 reports. Independent of T33, the retracted #18
+- T33 (memorized-brand reversion) → unconfirmed and, in Issue #70's test on
+  verified parody sources, not observed (0/5 including bare arms); keep as a
+  watch-for class for heavier edits only. Independent of T33, the retracted #18
   instance yielded a real datum: when a brief's words contradict the source
   pixels, the model follows the pixels — so reviewer source-identity errors
   masquerade as model failures. Verify the source before blaming the model.
@@ -133,9 +136,6 @@ enough. Observed mappings from the seed corpus:
 
 ## Versioning
 
-- `v0.2.0` (2026-08-27): replaced the anecdotal combined T20/T21/T22 canvas
-  guidance with the measured Issue #52 four-arm result; canvas match reduces
-  T21/T22 severity but does not satisfy strict T20 preservation.
 - `v0.1.0` (2026-08-26): initial 18 classes from the zero-cost audit of 8
   preserved runs plus the Issue #26 attached example. Annotated by Claude
   (Fable 5) model vision as the advisory layer; every record carries
@@ -146,8 +146,12 @@ enough. Observed mappings from the seed corpus:
   (PR #64).
 - `v0.2.1` (2026-08-26): retracted T33's evidence — the #18 source was the
   genuine ENERGY STAR sticker mislabeled as the parody; the model was
-  source-faithful. T33 stays as an unconfirmed watch-for class pending
-  Issue #70. T34 is unaffected (observed in both arms of a different task).
+  source-faithful. T34 is unaffected (observed in both arms of a different
+  task).
+- `v0.3.0` (2026-08-27, release v0.2.0 integration): replaced the anecdotal
+  canvas guidance with the measured Issue #52 four-arm result plus the
+  parallel run's divergent adaptation observation; recorded Issue #70's
+  zero-reversion outcome against T33 (PR #74).
 
 New classes append; renames supersede with a note. A class may only be
 promoted from advisory to hard-gate when a deterministic check exists for it
