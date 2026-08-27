@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reidsurmeier.wtf/schemas/blind-review-verdict.schema.json",
+  "title": "Blind Review Verdict",
+  "description": "The structured verdict a blind reviewer must produce. A response that cannot be parsed into this shape is blocked, never interpreted.",
+  "type": "object",
+  "required": ["schema_version", "candidate_commit", "verdict", "findings", "unverified", "positive", "followups"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "candidate_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Must equal the packet's candidate_commit; a verdict binds to exactly one SHA."
+    },
+    "verdict": {"enum": ["pass", "fail", "blocked"]},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "contract_clause", "state", "steps", "expected", "actual", "evidence", "severity"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^BR-[0-9]{2,}$"},
+          "title": {"type": "string", "minLength": 1},
+          "contract_clause": {"type": "string", "minLength": 1},
+          "state": {"type": "string", "minLength": 1},
+          "steps": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "expected": {"type": "string", "minLength": 1},
+          "actual": {"type": "string", "minLength": 1},
+          "evidence": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["blocking", "minor"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "unverified": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["clause", "reason"],
+        "properties": {
+          "clause": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "positive": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "followups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["note", "class"],
+        "properties": {
+          "note": {"type": "string", "minLength": 1},
+          "class": {"enum": ["regression", "exploratory", "enhancement"]}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -106,6 +106,26 @@ Verdict: PASS | FAIL | BLOCKED
 
 Packet validation and label mechanics are free and deterministic. A blind reviewer that spends paid vision-model calls operates under ADR 0003 and the active milestone allowance, recorded in the generation ledger like any other paid verification.
 
+## Reviewer harness
+
+The spawnable reviewer is Gemini 3.7 Flash (`google/gemini-3.7-flash` via OpenRouter) running as a Hermes agent whose observable world is a Docker sandbox. Blindness is structural, not prompt discipline:
+
+- **Hermes on the host, sandbox in Docker.** The Hermes process runs from the owner's install with the configured OpenRouter key, spawned with `--ignore-user-config --ignore-rules` so Hermes memory, rules, and skills never reach the reviewer's context. Its terminal backend is Docker (`TERMINAL_ENV=docker`); every command, file read, and screenshot happens inside the container, and Hermes's vision resolver reads captured frames from inside it.
+- **The container has no network** (`--network none`). Model calls happen host-side; no credential exists in the sandbox.
+- **`/workspace` is read-only and packet-derived.** `scripts/blind_review/build_workspace.py` extracts it with `git archive` at the candidate SHA: contract, hash-locked references, declared evidence, and the runtime tree passed with `--include` — no `.git`, no history, no implementer notes, no working-tree drift. The build refuses to proceed if a reference hash does not match at that SHA.
+- **`/out` is the only writable path.** The reviewer must leave `review.json` there, conforming to [`schemas/blind-review-verdict.schema.json`](../../schemas/blind-review-verdict.schema.json). `scripts/blind_review/validate_verdict.py` checks it fail-closed: unparseable, self-contradictory (a pass carrying a blocking finding), SHA-mismatched, or missing-evidence verdicts are all `blind-review-blocked`.
+- **Posting stays with the host.** The agent never holds `gh` credentials; the operator posts the rendered comment (`render_comment.py`) and applies the verdict label.
+
+One round:
+
+```bash
+scripts/blind_review/run_blind_review.sh \
+  --packet artifacts/reviews/issue-86/packet.json \
+  --include godot
+```
+
+Add `--dry-run` to inspect the exact spawn without building the image or spending. A live round makes paid OpenRouter calls and is recorded in the generation ledger; it never runs in ordinary PR CI.
+
 ## Calibration
 
 Before trusting a new blind-reviewer implementation, run it against a known-bad candidate (it must fail with specific findings) and a known-good candidate (it must not invent blocking defects). The packet validator's own calibration lives in `tests/test_blind_review_packet.py`. An uncalibrated reviewer is another green light wired to nothing.
