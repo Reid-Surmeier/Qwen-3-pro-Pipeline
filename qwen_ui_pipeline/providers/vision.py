@@ -19,14 +19,16 @@ import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping
 
-from PIL import Image
-
 from ..verifier import RegionReview, VisionClient
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 #: Families that build images in this pipeline; a reviewer must be none of them.
 BUILDER_FAMILIES = ("qwen/",)
+
+#: Pillow's nearest-neighbour resampling filter, named by value so this module
+#: needs no import of Pillow and stays testable on a host without it.
+NEAREST_NEIGHBOUR = 0
 
 SYSTEM_PROMPT = """You review one region of a reconstructed user interface against \
 the approved source for that same region.
@@ -67,7 +69,7 @@ def _encode(image: Any, scale: int = 1) -> str:
     image = image.convert("RGB")
     if scale > 1:
         image = image.resize(
-            (image.width * scale, image.height * scale), Image.NEAREST
+            (image.width * scale, image.height * scale), NEAREST_NEIGHBOUR
         )
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
