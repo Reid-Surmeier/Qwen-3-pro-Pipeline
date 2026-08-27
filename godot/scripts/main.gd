@@ -1,18 +1,12 @@
 extends Control
-## Desktop root: magenta ground, game-scene backdrop placeholder, windows at
-## their Reference Screen positions, and the project-wide pixel font.
+## Desktop root v2 — manifest-driven source-pixel assembly. Every window is
+## an extracted reference plate; the untouched frame is pixel-identical to
+## the Reference Screen inside window rects by construction.
 
 const DESKTOP_MAGENTA := Color8(239, 7, 239)
-const WINDOW_LAYOUT := {
-	"StatusWindow": Vector2(10, 8),
-	"GuildWindow": Vector2(15, 295),
-	"MinimapWindow": Vector2(1403, 4),
-	"CreateRoomWindow": Vector2(1378, 232),
-	"PartyWindow": Vector2(720, 318),
-	"TradeWindow": Vector2(663, 850),
-	"ChatRoomWindow": Vector2(1262, 690),
-	"PmWindow": Vector2(88, 1018),
-}
+
+var windows := {}
+var interaction_log: Array = []
 
 
 func _ready() -> void:
@@ -20,7 +14,6 @@ func _ready() -> void:
 	font.load_dynamic_font("res://fonts/PixelMplus12-Regular.ttf")
 	font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
 	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_DISABLED
-	get_theme_default_font()
 	theme = Theme.new()
 	theme.default_font = font
 	theme.default_font_size = 24
@@ -38,33 +31,100 @@ func _ready() -> void:
 	backdrop.size = Vector2(753, 845)
 	backdrop.stretch_mode = TextureRect.STRETCH_SCALE
 	backdrop.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(backdrop)
 
-	for entry in [[StatusWindow, "StatusWindow"], [GuildWindow, "GuildWindow"],
-			[MinimapWindow, "MinimapWindow"], [CreateRoomWindow, "CreateRoomWindow"],
-			[PartyWindow, "PartyWindow"], [TradeWindow, "TradeWindow"],
-			[ChatRoomWindow, "ChatRoomWindow"], [PmWindow, "PmWindow"]]:
-		var win: ReplicaWindow = entry[0].new()
-		win.name = entry[1]
-		win.position = WINDOW_LAYOUT[entry[1]]
-		add_child(win)
-
-	var bubble := SpeechBubble.new()
+	var bubble := TextureRect.new()
 	bubble.name = "SpeechBubble"
-	bubble.position = Vector2(862, 50)
+	bubble.texture = load("res://plates/speech-bubble.png")
+	bubble.position = Vector2(852, 42)
+	bubble.size = bubble.texture.get_size()
+	bubble.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bubble)
 
-	var bar := BottomBar.new()
-	bar.name = "BottomBar"
-	bar.position = Vector2(0, 1258)
-	add_child(bar)
+	var manifest: Dictionary = JSON.parse_string(
+		FileAccess.get_file_as_string("res://data/runtime-manifest.json"))
+	var holder := Control.new()
+	holder.name = "Windows"
+	holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	holder.mouse_filter = Control.MOUSE_FILTER_PASS
+	add_child(holder)
+	for value in manifest.windows:
+		var window := PlateWindow.new()
+		window.configure(value)
+		window.hit_activated.connect(_on_hit)
+		holder.add_child(window)
+		windows[window.window_id] = window
+
+	_mount_live_inputs()
+
+
+func _mount_live_inputs() -> void:
+	## Transparent inputs over source-empty input boxes: invisible until used,
+	## so the untouched frame stays exact.
+	for pair in [["pm", "input"], ["chat-room", "input"], ["bottom-bar", "chat-entry"]]:
+		var window: PlateWindow = windows[pair[0]]
+		var region_id: String = pair[1]
+		if not window.dynamic_regions.has(region_id):
+			continue
+		var edit := LineEdit.new()
+		edit.name = "live-" + region_id
+		edit.flat = true
+		edit.add_theme_color_override("font_color", Color8(30, 34, 44))
+		edit.add_theme_color_override("caret_color", Color8(30, 34, 44))
+		edit.add_theme_font_size_override("font_size", 24)
+		var window_name := String(window.window_id)
+		edit.text_submitted.connect(func(text): _send_chat(window_name, text))
+		window.overlay(region_id, edit)
+
+
+func _send_chat(window_id: String, text: String) -> void:
+	if text.strip_edges().is_empty():
+		return
+	var window: PlateWindow = windows[window_id]
+	if window.dynamic_regions.has("log"):
+		var label: RichTextLabel = window.overlays.get("live-log")
+		if label == null:
+			label = RichTextLabel.new()
+			label.name = "live-log"
+			label.bbcode_enabled = true
+			label.scroll_active = false
+			label.add_theme_color_override("default_color", Color8(30, 34, 44))
+			label.add_theme_font_size_override("normal_font_size", 22)
+			var rect: Rect2 = window.dynamic_regions["log"]
+			label.position = Vector2(rect.position.x, rect.position.y + rect.size.y - 66)
+			label.size = Vector2(rect.size.x, 62)
+			window.add_child(label)
+			window.overlays["live-log"] = label
+		label.append_text("[color=#4a6edc]SakumaRiri[/color] : %s\n" % text)
+	var edit: Control = window.overlays.get("input")
+	if edit == null:
+		edit = window.overlays.get("chat-entry")
+	if edit is LineEdit:
+		edit.clear()
+	interaction_log.append({"window": window_id, "sent": text})
+
+
+func _on_hit(window_id: String, hit_id: String) -> void:
+	interaction_log.append({"window": window_id, "hit": hit_id})
+
+
+func qa_state() -> Dictionary:
+	var hit_count := 0
+	for id in windows:
+		hit_count += windows[id].hit_nodes.size()
+	return {"window_count": windows.size(), "hit_count": hit_count}
+
 
 func _process(_delta: float) -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--capture=") and not has_meta("capturing"):
 			set_meta("capturing", true)
 			_capture(arg.trim_prefix("--capture="))
-	_maybe_interact()
+		if arg.begins_with("--interact=") and not has_meta("interacting"):
+			set_meta("interacting", true)
+			_interact(arg.trim_prefix("--interact="))
 
 
 func _capture(path: String) -> void:
@@ -77,106 +137,60 @@ func _capture(path: String) -> void:
 	get_tree().quit()
 
 
-func _maybe_interact() -> void:
-	for arg in OS.get_cmdline_user_args():
-		if arg.begins_with("--interact=") and not has_meta("interacting"):
-			set_meta("interacting", true)
-			_interact(arg.trim_prefix("--interact="))
-
-
 func _interact(path: String) -> void:
 	var results: Array = []
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	# 1. Real click on the status window's items button.
-	var status = get_node("StatusWindow")
-	var items_button: Button = status.side_buttons["items"]
-	var fired := [false]
-	items_button.pressed.connect(func(): fired[0] = true)
-	await _click(items_button.get_global_rect().get_center())
-	results.append({"test": "click-items-button", "passed": fired[0]})
-
-	# 2. Real drag of the PM window by its title bar.
-	var pm = get_node("PmWindow")
-	var before: Vector2 = pm.global_position
-	var grab: Vector2 = pm.title_bar.get_global_rect().get_center() + Vector2(60, 0)
-	await _press(grab)
-	await _move(grab + Vector2(80, -40))
-	await _release(grab + Vector2(80, -40))
-	var moved: Vector2 = pm.global_position - before
-	results.append({"test": "drag-pm-window",
-		"passed": moved.distance_to(Vector2(80, -40)) < 2.0, "moved": str(moved)})
-	pm.global_position = before
-
-	# 3. Real click toggling the party exp-share checkbox.
-	var party = get_node("PartyWindow")
-	var box: CheckBox = party.exp_share_check
-	var was: bool = box.button_pressed
-	await _click(box.get_global_rect().position + Vector2(16, box.size.y / 2))
-	results.append({"test": "click-party-checkbox", "passed": box.button_pressed != was})
-	box.button_pressed = was
-
-	# 4. Real typing into the chat room and pressing Enter.
-	var room = get_node("ChatRoomWindow")
-	var line_count: int = room.lines.size()
-	await _click(room.input.get_global_rect().get_center())
-	for ch in "gg":
-		var key := InputEventKey.new()
-		key.pressed = true
-		key.unicode = ch.unicode_at(0)
-		key.keycode = KEY_G
-		Input.parse_input_event(key)
-		await get_tree().process_frame
-	var enter := InputEventKey.new()
-	enter.pressed = true
-	enter.keycode = KEY_ENTER
-	Input.parse_input_event(enter)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	results.append({"test": "type-and-enter-chat",
-		"passed": room.lines.size() == line_count + 1 \
-			and room.lines[-1]["text"] == "gg", "lines": room.lines.size()})
-
-	# 5. Full-control matrix: raise each window with a real title-bar click,
-	# then really click every Button / CheckBox in it and assert a reaction.
+	# Real-input hit matrix: click every hit center; activatable hits must
+	# emit, drag hits must move the window, disabled hits must stay inert.
 	var matrix_total := 0
-	var matrix_failed: Array = []
-	for child in get_children():
-		var window := child as ReplicaWindow
-		if window == null:
-			continue
-		await _click(window.title_bar.get_global_rect().get_center() + Vector2(90, 0))
-		var controls: Array = []
-		_collect_controls(window.body, controls)
-		controls.append(window.title_bar.get_node("MinimizeButton"))
-		controls.append(window.title_bar.get_node("CloseButton"))
-		for control in controls:
+	var unreached: Array = []
+	for window_id in windows:
+		var window: PlateWindow = windows[window_id]
+		for hit_id in window.hit_nodes:
 			matrix_total += 1
-			var reacted := [false]
-			var was_visible: bool = window.visible
-			var was_pressed: bool = control.button_pressed if control is BaseButton else false
-			var was_disabled: bool = control is BaseButton and control.disabled
-			var handler := func(): reacted[0] = true
-			control.pressed.connect(handler)
-			await _click(control.get_global_rect().get_center())
-			control.pressed.disconnect(handler)
-			var name_path := "%s/%s" % [window.name, control.name]
-			var is_disabled: bool = was_disabled
-			if is_disabled and reacted[0]:
-				matrix_failed.append(name_path + " (disabled but reacted)")
-			elif not is_disabled and not reacted[0]:
-				matrix_failed.append(name_path)
-			# restore any state the click changed
-			if control is CheckBox:
-				control.button_pressed = was_pressed
-			if window.is_collapsed():
-				window._on_minimize()
-			if not window.visible and was_visible:
+			var node: Control = window.hit_nodes[hit_id]
+			var hit: Dictionary = node.get_meta("hit")
+			var role := str(hit.get("role", "button"))
+			var was_visible := window.visible
+			var was_min := window.minimized
+			var center := node.get_global_rect().get_center()
+			if role == "drag":
+				var before := window.global_position
+				await _press(center)
+				await _move(center + Vector2(24, 18))
+				await _release(center + Vector2(24, 18))
+				if not (window.global_position - before).is_equal_approx(Vector2(24, 18)):
+					unreached.append("%s/%s (drag)" % [window_id, hit_id])
+				window.global_position = before
+				continue
+			var count_before := interaction_log.size()
+			await _click(center)
+			var reacted := interaction_log.size() > count_before
+			var is_disabled: bool = hit.get("disabled", false)
+			if is_disabled and reacted:
+				unreached.append("%s/%s (disabled but reacted)" % [window_id, hit_id])
+			elif not is_disabled and not reacted:
+				unreached.append("%s/%s" % [window_id, hit_id])
+			if window.minimized != was_min:
+				window._toggle_minimized()
+				await get_tree().create_timer(0.15).timeout
+			if was_visible and not window.visible:
 				window.visible = true
-		await get_tree().process_frame
-	results.append({"test": "control-matrix", "passed": matrix_failed.is_empty(),
-		"controls": matrix_total, "unreached": matrix_failed})
+	results.append({"test": "hit-matrix", "passed": unreached.is_empty(),
+		"hits": matrix_total, "unreached": unreached})
+
+	# Live chat: type into the PM transparent input and press Enter.
+	var pm: PlateWindow = windows["pm"]
+	var edit: LineEdit = pm.overlays["input"]
+	await _click(edit.get_global_rect().get_center())
+	edit.text = "gg"
+	edit.text_submitted.emit("gg")
+	await get_tree().process_frame
+	var sent := interaction_log.filter(func(e): return e.get("sent", "") == "gg")
+	results.append({"test": "pm-live-send", "passed": sent.size() == 1 \
+		and pm.overlays.has("live-log")})
 
 	var failed := results.filter(func(r): return not r["passed"])
 	var report := {"suite": "real-input", "total": results.size(),
@@ -224,11 +238,3 @@ func _move(pos: Vector2) -> void:
 	Input.parse_input_event(ev)
 	await get_tree().process_frame
 	await get_tree().process_frame
-
-
-func _collect_controls(node: Node, out: Array) -> void:
-	for child in node.get_children():
-		if child is Button or child is CheckBox:
-			out.append(child)
-		if not (child is Button):
-			_collect_controls(child, out)

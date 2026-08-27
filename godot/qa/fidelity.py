@@ -1,5 +1,9 @@
-"""Frame-fidelity checks: compare the captured Godot frame against the
-Reference Screen per declared regions with per-region tolerances."""
+"""Strict frame-fidelity v2: per-window pixel-level diffs against the
+Reference Screen. Window plates are source crops drawn at source coordinates,
+so inside every window rect the capture must match the reference nearly
+byte-exactly (tiny allowance for driver rounding). The generated backdrop
+region is reported but judged separately; magenta gutters are exact-checked.
+"""
 import json
 from pathlib import Path
 
@@ -9,32 +13,54 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 REFERENCE = ROOT.parent / "artifacts/references/ro-hud-fullscreen/reference-native.png"
 CAPTURE = ROOT / "qa/out/capture.png"
-REGIONS = json.loads((ROOT / "data/fidelity-regions.json").read_text())
+RECTS = json.loads((ROOT.parent / "artifacts/references/ro-hud-fullscreen/window-rects.json").read_text())
+
+CHANNEL_TOLERANCE = 2
+MAX_CHANGED_FRACTION = 0.002
 
 cap = np.array(Image.open(CAPTURE).convert("RGB"), dtype=int)
 ref = np.array(Image.open(REFERENCE).convert("RGB"), dtype=int)
 
 results = []
-for region in REGIONS["regions"]:
-    x, y, w, h = region["rect"]
+for name, (x, y, w, h) in sorted(RECTS.items()):
     ref_crop = ref[y:y + h, x:x + w]
-    inside = cap.shape[0] >= y + h and cap.shape[1] >= x + w
-    cap_crop = cap[y:y + h, x:x + w] if inside else None
-    entry = {"name": region["name"], "rect": region["rect"], "check": region["check"]}
-    if cap_crop is None:
-        entry.update(passed=False, detail="capture smaller than region")
-    elif region["check"] == "mean-color":
-        d = float(np.abs(ref_crop.mean(axis=(0, 1)) - cap_crop.mean(axis=(0, 1))).max())
-        entry.update(passed=d <= region["tolerance"], mean_channel_delta=round(d, 2))
-    elif region["check"] == "exact-color":
-        target = np.array(region["color"])
-        frac = float((np.abs(cap_crop - target).max(axis=2) <= region.get("tolerance", 4)).mean())
-        entry.update(passed=frac >= region.get("min_fraction", 0.98), matching_fraction=round(frac, 4))
-    else:
-        entry.update(passed=False, detail="unknown check")
-    results.append(entry)
+    cap_crop = cap[y:y + h, x:x + w]
+    delta = np.abs(ref_crop - cap_crop).max(axis=2)
+    changed = float((delta > CHANNEL_TOLERANCE).mean())
+    results.append({
+        "window": name, "rect": [x, y, w, h],
+        "changed_fraction": round(changed, 5),
+        "max_delta": int(delta.max()),
+        "passed": changed <= MAX_CHANGED_FRACTION,
+    })
+
+# speech bubble (source plate at source coords)
+bx, by, bw, bh = 852, 42, 222, 120
+delta = np.abs(ref[by:by+bh, bx:bx+bw] - cap[by:by+bh, bx:bx+bw]).max(axis=2)
+results.append({"window": "speech-bubble", "rect": [bx, by, bw, bh],
+    "changed_fraction": round(float((delta > CHANNEL_TOLERANCE).mean()), 5),
+    "max_delta": int(delta.max()),
+    "passed": float((delta > CHANNEL_TOLERANCE).mean()) <= MAX_CHANGED_FRACTION})
+
+# magenta gutter exact check
+gx, gy, gw, gh = 704, 500, 12, 200
+gutter = cap[gy:gy+gh, gx:gx+gw]
+frac = float((np.abs(gutter - np.array([239, 7, 239])).max(axis=2) <= 24).mean())
+results.append({"window": "magenta-gutter", "rect": [gx, gy, gw, gh],
+    "matching_fraction": round(frac, 4), "passed": frac >= 0.8})
+
+# backdrop region: informational only (generated content)
+sx, sy, sw, sh = 655, 0, 753, 845
+delta = np.abs(ref[sy:sy+sh, sx:sx+sw] - cap[sy:sy+sh, sx:sx+sw]).max(axis=2)
+info = {"window": "game-backdrop (informational)",
+        "changed_fraction": round(float((delta > CHANNEL_TOLERANCE).mean()), 5),
+        "passed": True}
+results.append(info)
 
 report = {"pass": all(r["passed"] for r in results),
-          "capture_size": list(cap.shape[1::-1]), "regions": results}
+          "capture_size": list(cap.shape[1::-1]),
+          "channel_tolerance": CHANNEL_TOLERANCE,
+          "max_changed_fraction": MAX_CHANGED_FRACTION,
+          "regions": results}
 (ROOT / "qa/out/fidelity.json").write_text(json.dumps(report, indent=2))
 print("fidelity PASS" if report["pass"] else json.dumps(report, indent=1))

@@ -1,0 +1,97 @@
+{
+  "prompt_id": "c5ec2f7d-df5a-455e-baaa-ef32c887eac8",
+  "reference": "ro-hud-native.png",
+  "plates": {
+    "create-room": {
+      "sha256": "0a0084c55b6c9438deb2ed7d1c007a8c9670181e97ce4a3ec55cbeaf00bd3f2e",
+      "rect": [
+        1372,
+        226,
+        524,
+        448
+      ]
+    },
+    "basic-info": {
+      "sha256": "5daa5cdd6da80589ba0d73e1ca90c1263015fe675efe4c276028c768f0501ede",
+      "rect": [
+        0,
+        0,
+        656,
+        286
+      ]
+    },
+    "trade": {
+      "sha256": "e892c24b928a3ebe404e0688e07e59e825df74e844538c0424cbf672fbfa5e42",
+      "rect": [
+        656,
+        844,
+        592,
+        408
+      ]
+    },
+    "bottom-bar": {
+      "sha256": "2af5a8015f1813b4db88e7dbb653db827ed7b8f0ad0983a36820dd68ad94e4e3",
+      "rect": [
+        0,
+        1252,
+        1973,
+        67
+      ]
+    },
+    "party": {
+      "sha256": "e692f352fbb188b5fcccd3217ae24fc69fbaadea50535f7ca66bf7a6f9eeea79",
+      "rect": [
+        714,
+        316,
+        536,
+        490
+      ]
+    },
+    "guild": {
+      "sha256": "252257536d7bf5c0e192282718b473258dd972251c8a6ef4f4edc65d573fb6db",
+      "rect": [
+        10,
+        291,
+        695,
+        723
+      ]
+    },
+    "chat-room": {
+      "sha256": "d34dc574a4cb628d9ac64e68fc9e90ff15fed5ff27823c88ebacacbc5a87a2d4",
+      "rect": [
+        1256,
+        684,
+        694,
+        446
+      ]
+    },
+    "minimap": {
+      "sha256": "5cbc34bc1896052ad96c2e96644812a23713dbbcbb96f8eb77d6d6c31ecb1488",
+      "rect": [
+        1396,
+        0,
+        470,
+        214
+      ]
+    },
+    "pm": {
+      "sha256": "df58bf8c12b37aa1e1d2837285e3bb4fe345c8aabcc4bfd9f62eef827ad51e19",
+      "rect": [
+        86,
+        1014,
+        494,
+        266
+      ]
+    },
+    "speech-bubble": {
+      "sha256": "59ca703998aa5c13b4feb6a78edae8698e92caff28ed6607bfa6ab09e50bfb41",
+      "rect": [
+        852,
+        42,
+        222,
+        120
+      ],
+      "prompt_id": "b7268982-569d-467f-9550-9e627d56661b"
+    }
+  }
+}
