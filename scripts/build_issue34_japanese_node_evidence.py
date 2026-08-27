@@ -9,7 +9,12 @@ from pathlib import Path
 import sys
 from typing import Any
 
-from PIL import Image, ImageDraw, ImageFont
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ModuleNotFoundError:  # Pillow is optional outside evidence finalization.
+    Image = None
+    ImageDraw = None
+    ImageFont = None
 
 if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -416,6 +421,8 @@ def analyze_file(path: Path) -> dict[str, Any]:
 def analyze_image(path: Path) -> dict[str, Any]:
     """Record stable identity and basic raster properties for one artifact."""
 
+    if Image is None:
+        raise RuntimeError("Pillow is required to analyze image evidence")
     with Image.open(path) as opened:
         size = list(opened.size)
         mode = opened.mode
@@ -433,6 +440,8 @@ def compare_declared_region(
 ) -> dict[str, int | list[int]]:
     """Count RGBA changes inside and outside one declared edit rectangle."""
 
+    if Image is None:
+        raise RuntimeError("Pillow is required to compare image evidence")
     with Image.open(source_path) as opened:
         source = opened.convert("RGBA")
     with Image.open(candidate_path) as opened:
@@ -490,6 +499,8 @@ def compare_declared_region(
 
 
 def _contact_sheet_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    if ImageFont is None:
+        raise RuntimeError("Pillow is required to build visual evidence")
     for candidate in (
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf",
@@ -505,6 +516,8 @@ def build_contact_sheet(
 ) -> None:
     """Build one plain-language visual comparison without changing source files."""
 
+    if Image is None or ImageDraw is None:
+        raise RuntimeError("Pillow is required to build visual evidence")
     columns = 2
     cell_width = 800
     preview_height = 365
@@ -546,6 +559,8 @@ def build_edit_region_audit(
 ) -> None:
     """Show the declared region for review; this image is never sent to Qwen."""
 
+    if Image is None or ImageDraw is None:
+        raise RuntimeError("Pillow is required to build visual evidence")
     with Image.open(source_path) as opened:
         source = opened.convert("RGBA")
     x, y, width, height = rectangle

@@ -1,9 +1,8 @@
+import importlib.util
 import json
 from pathlib import Path
 import tempfile
 import unittest
-
-from PIL import Image
 
 from qwen_ui_pipeline.prompt_manifest import compile_edit_brief
 from scripts.build_issue34_japanese_node_evidence import (
@@ -148,7 +147,10 @@ class Issue34JapaneseNodeExperimentTests(unittest.TestCase):
         self.assertEqual(workflow["13"]["inputs"]["images"], ["7", 0])
         self.assertEqual(workflow["14"]["inputs"]["images"], ["8", 0])
 
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow is optional")
     def test_region_comparison_proves_rgba_exterior_is_unchanged(self):
+        from PIL import Image
+
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source = Image.new("RGBA", (4, 4), (10, 20, 30, 40))
