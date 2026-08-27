@@ -113,42 +113,8 @@ func _send_chat(window_id: String, text: String) -> void:
 		return
 	var window: PlateWindow = windows[window_id]
 	if window.dynamic_regions.has("log"):
-		var label: RichTextLabel = window.overlays.get("live-log")
-		if label == null:
-			# First send: swap the log region to the Qwen clean plate so live
-			# text owns a blank panel instead of stacking on source text.
-			var clean_path := "res://plates/%s-clean.png" % window_id
-			if ResourceLoader.exists(clean_path):
-				var clean_tex: Texture2D = load(clean_path)
-				var rect: Rect2 = window.dynamic_regions["log"]
-				var atlas := AtlasTexture.new()
-				atlas.atlas = clean_tex
-				atlas.region = rect
-				var patch := TextureRect.new()
-				patch.name = "clean-log-patch"
-				patch.texture = atlas
-				patch.position = rect.position
-				patch.size = rect.size
-				patch.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-				patch.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				window.add_child(patch)
-				window.overlays["clean-log-patch"] = patch
-		if label == null:
-			label = RichTextLabel.new()
-			label.name = "live-log"
-			label.bbcode_enabled = true
-			label.scroll_active = true
-			label.scroll_following = true
-			label.get_v_scroll_bar().modulate = Color(1, 1, 1, 0)
-			label.add_theme_color_override("default_color", Color8(30, 34, 44))
-			label.add_theme_font_size_override("normal_font_size", 24)
-			var rect2: Rect2 = window.dynamic_regions["log"]
-			label.position = rect2.position + Vector2(6, 4)
-			label.size = rect2.size - Vector2(12, 8)
-			window.add_child(label)
-			window.overlays["live-log"] = label
-			for line in SOURCE_LOG.get(window_id, []):
-				label.append_text("[color=%s]%s[/color] : %s\n" % [line[1], line[0], line[2]])
+		var label := _live_log(window_id)
+		label.scroll_following = true  # sending returns the view to the tail
 		label.append_text("[color=#3a9948]SakumaRiri[/color] : %s\n" % text)
 	var edit: Control = window.overlays.get("input")
 	if edit == null:
@@ -158,8 +124,57 @@ func _send_chat(window_id: String, text: String) -> void:
 	interaction_log.append({"window": window_id, "sent": text})
 
 
+func _live_log(window_id: String) -> RichTextLabel:
+	## Swap the log region to its clean plate and mount the seeded live log
+	## (transcribed source history), so live text owns a real scrolling panel.
+	var window: PlateWindow = windows[window_id]
+	var label: RichTextLabel = window.overlays.get("live-log")
+	if label != null:
+		return label
+	var clean_path := "res://plates/%s-clean.png" % window_id
+	if ResourceLoader.exists(clean_path):
+		var clean_tex: Texture2D = load(clean_path)
+		var rect: Rect2 = window.dynamic_regions["log"]
+		var atlas := AtlasTexture.new()
+		atlas.atlas = clean_tex
+		atlas.region = rect
+		var patch := TextureRect.new()
+		patch.name = "clean-log-patch"
+		patch.texture = atlas
+		patch.position = rect.position
+		patch.size = rect.size
+		patch.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		patch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		window.add_child(patch)
+		window.overlays["clean-log-patch"] = patch
+	label = RichTextLabel.new()
+	label.name = "live-log"
+	label.bbcode_enabled = true
+	label.scroll_active = true
+	label.scroll_following = true
+	label.get_v_scroll_bar().modulate = Color(1, 1, 1, 0)
+	label.add_theme_color_override("default_color", Color8(30, 34, 44))
+	label.add_theme_font_size_override("normal_font_size", 24)
+	label.add_theme_constant_override("line_separation", 6)  # source ~33px rows
+	var rect2: Rect2 = window.dynamic_regions["log"]
+	label.position = rect2.position + Vector2(6, 4)
+	label.size = rect2.size - Vector2(12, 8)
+	window.add_child(label)
+	window.overlays["live-log"] = label
+	for line in SOURCE_LOG.get(window_id, []):
+		label.append_text("[color=%s]%s[/color] : %s\n" % [line[1], line[0], line[2]])
+	return label
+
+
 func _on_hit(window_id: String, hit_id: String) -> void:
 	interaction_log.append({"window": window_id, "hit": hit_id})
+	if hit_id == "log-scroll" and windows[window_id].dynamic_regions.has("log"):
+		var label := _live_log(window_id)
+		var bar := label.get_v_scroll_bar()
+		label.scroll_following = false
+		# step two rows and snap to the row grid — era clients scroll whole lines
+		var row := 33.0
+		bar.value = round((bar.value + windows[window_id].last_scroll_dir * 2.0 * row) / row) * row
 
 
 func _unhandled_input(event: InputEvent) -> void:

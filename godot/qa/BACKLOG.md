@@ -15,11 +15,16 @@ SHA when visually verified and pushed.
   Alt+M minimap, Alt+R create-room, Alt+T trade, Alt+P pm. Reopen raises
   the window. Contract close-reopens-by-key; browser playtest closes via
   the title X and reopens with real Alt+V keystrokes.
-- [ ] Roster/log scrolling: guild roster, chat-room log, and party list have
-  scroll hits (`roster-scroll`, `log-scroll`, `list-scroll`) that produce no
-  visible scroll. Decide the deterministic behavior (stepped scroll of the
-  plate viewport is fine) and make the thumb + content visibly move,
-  reversibly.
+- [x] Log scrolling (round 18): chat-room log-scroll steps the live log two
+  whole rows per click (upper/lower half of the scrollbar = up/down), snapped
+  to the source's 33px row grid; sending returns the view to the tail.
+  Line separation now matches the source pitch. Contract-checked
+  (log-scroll-up-moves, log-scroll-send-refollows).
+  Guild roster / party list / chat roster scroll: all source rows are already
+  visible — the guild's 11 unlisted members (24/28 shown as 13 rows) have no
+  source-attested names, so full roster scrolling is blocked on a content
+  decision (generate continuation rows with provenance, or cap the scroll).
+  Press feedback exists; needs-human-decision recorded here.
 - [x] Outgoing chat name color (round 17): sent lines now use the source
   green (#3a9948); the live log reads as one continuous conversation.
   Verified visually in the PM window at 2x.

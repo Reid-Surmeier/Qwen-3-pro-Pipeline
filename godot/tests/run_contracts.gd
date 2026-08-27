@@ -113,6 +113,26 @@ func _initialize() -> void:
 	check("live-send-appends", main.windows["pm"].overlays.has("live-log"))
 	check("clean-plate-patch", main.windows["pm"].overlays.has("clean-log-patch"))
 
+	# Log scrolling: grow the chat-room log past its viewport with two live
+	# sends, then a scroll-up step must move the view off the tail (and a
+	# send must return it there).
+	main._send_chat("chat-room", "スクロールテスト1")
+	main._send_chat("chat-room", "スクロールテスト2")
+	await process_frame
+	var chat = main.windows["chat-room"]
+	var log_label: RichTextLabel = chat.overlays["live-log"]
+	await process_frame
+	var at_tail: float = log_label.get_v_scroll_bar().value
+	chat.last_scroll_dir = -1
+	chat.activate("log-scroll")
+	await process_frame
+	check("log-scroll-up-moves", log_label.get_v_scroll_bar().value < at_tail,
+		"%f -> %f" % [at_tail, log_label.get_v_scroll_bar().value])
+	main._send_chat("chat-room", "スクロールテスト3")
+	await process_frame
+	await process_frame
+	check("log-scroll-send-refollows", log_label.scroll_following)
+
 	var info = main.windows["basic-info"]
 	info.set_dynamic_text("hp-value", "999 / 1109")
 	check("dynamic-text-live", info.overlays.has("patch-hp-value") \

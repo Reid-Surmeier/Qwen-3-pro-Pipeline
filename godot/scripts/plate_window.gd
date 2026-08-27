@@ -22,6 +22,7 @@ var dynamic_regions := {}
 var overlays := {}
 var minimized := false
 var state_patches := {}
+var last_scroll_dir := 0
 var _dragging := false
 var _drag_offset := Vector2.ZERO
 var _expanded_size := Vector2.ZERO
@@ -220,6 +221,9 @@ func _on_hit_input(event: InputEvent, node: Control) -> void:
 				_dragging = true
 				_drag_offset = event.global_position - global_position
 			elif not hit.get("disabled", false):
+				if role == "scroll":
+					# upper half scrolls up, lower half scrolls down
+					last_scroll_dir = -1 if event.position.y < node.size.y / 2.0 else 1
 				_show_press_flash(node)
 		else:
 			_clear_press_flash()
