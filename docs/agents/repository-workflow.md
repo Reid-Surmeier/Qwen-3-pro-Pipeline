@@ -1,5 +1,10 @@
 # Repository workflow
 
+> **Owner directive (2026-08-27):** work is reviewed as release versions, not
+> fragment PRs — see "Release train and the integration line" in
+> [`AGENTS.md`](../../AGENTS.md). The lifecycle below still governs issues and
+> verification, but the review/merge surface is the standing release PR.
+
 This document explains how work moves through `Qwen-3-Pro-Pipeline`. It is written for humans and agents. The enforceable agent rules live in [`../../AGENTS.md`](../../AGENTS.md).
 
 ## Goal
