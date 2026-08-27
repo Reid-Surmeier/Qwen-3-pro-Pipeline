@@ -5,6 +5,8 @@ extends Control
 const DESKTOP_MAGENTA := Color8(255, 0, 230)
 const WINDOW_LAYOUT := {
 	"StatusWindow": Vector2(10, 8),
+	"MinimapWindow": Vector2(1403, 4),
+	"PmWindow": Vector2(88, 1018),
 }
 
 
@@ -24,10 +26,11 @@ func _ready() -> void:
 	desktop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(desktop)
 
-	var status := StatusWindow.new()
-	status.name = "StatusWindow"
-	status.position = WINDOW_LAYOUT["StatusWindow"]
-	add_child(status)
+	for entry in [[StatusWindow, "StatusWindow"], [MinimapWindow, "MinimapWindow"], [PmWindow, "PmWindow"]]:
+		var win: ReplicaWindow = entry[0].new()
+		win.name = entry[1]
+		win.position = WINDOW_LAYOUT[entry[1]]
+		add_child(win)
 
 func _process(_delta: float) -> void:
 	for arg in OS.get_cmdline_user_args():

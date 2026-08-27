@@ -49,12 +49,12 @@ func _build_body() -> void:
 	sp_bar.max_value = sp_max
 	sp_bar.value = sp
 	body.add_child(sp_bar)
-	sp_value_label = make_label("%d / %d" % [sp, sp_max], Vector2(300, 116), 26)
+	sp_value_label = make_label("%d / %d" % [sp, sp_max], Vector2(300, 114), 24)
 	body.add_child(sp_value_label)
 
 	var lv_panel := Panel.new()
 	lv_panel.name = "LevelPanel"
-	lv_panel.position = Vector2(24, 138)
+	lv_panel.position = Vector2(24, 150)
 	lv_panel.size = Vector2(420, 74)
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color8(232, 238, 246)
@@ -70,7 +70,7 @@ func _build_body() -> void:
 
 	weight_label = make_label(
 		"Weight : %d / %d    Zeny : %s" % [weight, weight_max, _fmt(zeny)],
-		Vector2(16, 214), 26)
+		Vector2(16, 218), 24)
 	body.add_child(weight_label)
 
 	for i in BUTTON_NAMES.size():

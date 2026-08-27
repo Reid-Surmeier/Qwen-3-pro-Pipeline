@@ -88,6 +88,29 @@ func _initialize() -> void:
 	check("minimize-restores", not win.is_collapsed() and win.body.visible)
 	win.size = full
 
+	# Minimap contracts.
+	var mini = main.get_node_or_null("MinimapWindow")
+	check("minimap-exists", mini != null)
+	if mini:
+		var z0: float = mini.zoom
+		mini.zoom_in_button.emit_signal("pressed")
+		check("minimap-zoom-in", mini.zoom > z0, str(mini.zoom))
+		mini.zoom_out_button.emit_signal("pressed")
+		check("minimap-zoom-back", is_equal_approx(mini.zoom, z0), str(mini.zoom))
+		check("minimap-plate-texture", mini.plate.texture != null)
+
+	# PM window contracts.
+	var pm = main.get_node_or_null("PmWindow")
+	check("pm-exists", pm != null)
+	if pm:
+		var before_lines: int = pm.lines.size()
+		pm.input.text = "テスト送信"
+		pm.send()
+		check("pm-send-appends", pm.lines.size() == before_lines + 1 \
+			and pm.lines[-1]["text"] == "テスト送信", str(pm.lines.size()))
+		check("pm-input-cleared", pm.input.text == "", pm.input.text)
+		check("pm-seed-log", before_lines == 6, str(before_lines))
+
 	_finish()
 
 
