@@ -1,0 +1,137 @@
+name: Blind review gate
+
+# Mechanical half of docs/agents/blind-review.md:
+#  - a new commit invalidates any SHA-bound verdict label, and
+#  - applying ready-for-blind-review runs the deterministic packet validator.
+# Free and deterministic only; the review itself is performed by an agent.
+
+on:
+  pull_request:
+    types: [synchronize, labeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: blind-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  invalidate-stale-verdict:
+    name: Invalidate verdict on new commit
+    if: github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Remove SHA-bound labels made stale by the push
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const stale = [
+              'blind-review-passed',
+              'blind-review-failed',
+              'blind-review-in-progress',
+              'ready-for-blind-review',
+            ];
+            const { owner, repo } = context.repo;
+            const number = context.payload.pull_request.number;
+            const current = context.payload.pull_request.labels.map((l) => l.name);
+            const removed = [];
+            for (const name of stale.filter((n) => current.includes(n))) {
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: number, name });
+              removed.push(name);
+            }
+            if (removed.length > 0) {
+              const sha = context.payload.pull_request.head.sha;
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: number,
+                body: [
+                  `New commit \`${sha}\` invalidates the prior blind-review state`,
+                  `(removed: ${removed.map((n) => `\`${n}\``).join(', ')}).`,
+                  'Reapply `ready-for-blind-review` with an updated packet to request a new round.',
+                ].join(' '),
+              });
+            }
+
+  validate-packet:
+    name: Validate blind-review packet
+    if: >-
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'ready-for-blind-review'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the candidate commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate the packet declared in the PR body
+        id: packet
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          path="$(printf '%s\n' "$PR_BODY" | sed -n 's/^Blind-Review-Packet:[[:space:]]*//p' | head -n 1 | tr -d '\r')"
+          if [ -z "$path" ]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "path=$path" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate the packet against the candidate SHA
+        id: validate
+        if: steps.packet.outputs.found == 'true'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python scripts/validate_blind_review_packet.py \
+            --packet "${{ steps.packet.outputs.path }}" \
+            --repo . \
+            --expect-sha "${{ github.event.pull_request.head.sha }}" \
+            | tee verdict.json
+
+      - name: Block the review round on a failed prerequisite
+        if: steps.packet.outputs.found == 'false' || steps.validate.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { owner, repo } = context.repo;
+            const number = context.payload.pull_request.number;
+            let detail = 'The PR body has no `Blind-Review-Packet: <path>` line.';
+            if (fs.existsSync('verdict.json')) {
+              detail = '```json\n' + fs.readFileSync('verdict.json', 'utf8').trim() + '\n```';
+            }
+            await github.rest.issues.removeLabel({
+              owner, repo, issue_number: number, name: 'ready-for-blind-review',
+            }).catch(() => {});
+            await github.rest.issues.addLabels({
+              owner, repo, issue_number: number, labels: ['blind-review-blocked'],
+            });
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: number,
+              body: [
+                '## Blind review blocked',
+                '',
+                `Candidate: \`${context.payload.pull_request.head.sha}\``,
+                '',
+                'A packet prerequisite failed; the review did not run.',
+                '',
+                detail,
+                '',
+                'Fix the packet, then reapply `ready-for-blind-review`.',
+              ].join('\n'),
+            });
+            core.setFailed('Blind-review packet prerequisites failed.');
