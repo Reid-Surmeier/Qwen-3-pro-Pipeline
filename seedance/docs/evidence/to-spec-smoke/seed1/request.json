@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied square favicon is the exact identity authority. Preserve its silhouette, proportions, negative space, and color boundaries.\n\nLOCKED STYLE:\n- flat vector appearance with crisp edges\n- centered inside an 80% safe area\n- no added text, texture, shadow, highlights, particles, or extra objects\n- remain readable when downsampled to 16, 32, 48, and 64 pixels\n\nMOTION:\nOne restrained, purposeful brand gesture that returns exactly to the starting pose. Prefer transform-like motion over freeform morphing.\n\nTIMING:\nHold 8% at start, ease into one action, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency will be produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the logo\n- do not change stroke weight or corner radii\n- do not introduce edge shimmer or color pulsing\n- do not leave a visible loop seam",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=aee1fa2faa7f460f3bd321f2360c4d1e9101b26a8e8f506b7e9b957c53236efb>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=aee1fa2faa7f460f3bd321f2360c4d1e9101b26a8e8f506b7e9b957c53236efb>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}

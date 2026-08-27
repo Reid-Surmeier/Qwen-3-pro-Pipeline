@@ -1,0 +1,10 @@
+{
+  "source_authority": "The supplied first and last frames are exact endpoint authorities.",
+  "style_lock": ["preserve both endpoint geometries", "preserve palette and line treatment", "no new objects"],
+  "motion": "Create the shortest coherent transformation between the supplied endpoints, with legible intermediate silhouettes.",
+  "timing": "Brief endpoint holds, smooth ease-in/ease-out, no bounce unless shown in the storyboard.",
+  "camera": "Locked camera and framing.",
+  "background": "Use the exact background present in the endpoint frames.",
+  "negative_constraints": ["no cut", "no camera move", "no typography drift", "no unrequested effects"]
+}
+

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Seedance Capabilities"
+  short_description: "Verify live Seedance capabilities and costs"
+  default_prompt: "Use $research-seedance-capabilities to verify the current Seedance model facts for this decision."

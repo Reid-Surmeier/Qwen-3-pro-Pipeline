@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "seedance-icon-animation-pipeline"
+version = "0.1.0"
+description = "Evidence-first Seedance pipeline for style-locked icon animation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = ["httpx>=0.27,<1", "Pillow>=10,<12"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "PyYAML>=6,<7", "ruff>=0.6,<1"]
+
+[project.scripts]
+seedance-icons = "seedance_icons.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/seedance_icons"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

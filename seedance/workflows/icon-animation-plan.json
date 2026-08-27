@@ -1,0 +1,42 @@
+{
+  "last_node_id": 2,
+  "last_link_id": 1,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "SeedanceIconPrompt",
+      "pos": [80, 80],
+      "size": [420, 520],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{"name": "compiled_prompt", "type": "STRING", "links": [1], "slot_index": 0}],
+      "properties": {"Node name for S&R": "SeedanceIconPrompt"},
+      "widgets_values": ["Exact source authority", "Locked vector style", "One restrained gesture", "Hold, act, settle", "Locked camera", "Solid matte", "No drift"]
+    },
+    {
+      "id": 2,
+      "type": "SeedancePlanRequest",
+      "pos": [600, 80],
+      "size": [460, 420],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{"name": "compiled_prompt", "type": "STRING", "link": 1}],
+      "outputs": [
+        {"name": "request_json", "type": "STRING", "links": null, "slot_index": 0},
+        {"name": "canonical_model", "type": "STRING", "links": null, "slot_index": 1},
+        {"name": "estimated_cost_usd", "type": "STRING", "links": null, "slot_index": 2}
+      ],
+      "properties": {"Node name for S&R": "SeedancePlanRequest"},
+      "widgets_values": ["Paste a live capability profile here", "bytedance/seedance-2.0-mini", 6, "720x720", false, 1]
+    }
+  ],
+  "links": [[1, 1, 0, 2, 0, "STRING"]],
+  "groups": [],
+  "config": {},
+  "extra": {"note": "Planning only. This workflow cannot trigger a paid request."},
+  "version": 0.4
+}
+

@@ -39,6 +39,8 @@ and
 | [`docs/agents/`](docs/agents/) | Issue lifecycle, labels, and workflow documentation |
 | [`docs/research/`](docs/research/) | Primary-source research notes |
 | [`deploy/`](deploy/) | systemd service and MCP configuration for the ComfyUI host |
+| [`seedance/`](seedance/) | Self-contained Seedance icon-animation addon (own AGENTS/CONTEXT, isolated video cost gate) |
+| [`godot/`](godot/) | The RO-HUD Interactive Replica (milestone #86): source-pixel plates, self-verifying QA loop |
 
 ## CLI
 
