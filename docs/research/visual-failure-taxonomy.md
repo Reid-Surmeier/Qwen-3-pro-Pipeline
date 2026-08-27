@@ -86,11 +86,17 @@ rejection.
 The owner's framing in Issue #26: artifacts mean the model was not guided
 enough. Observed mappings from the seed corpus:
 
-- T20/T21/T22 (global redraw, aspect, crop) → **match the source canvas**.
-  The strongest single lever in the corpus: golf-club v002 re-ran v001 with
-  `size: 948*806` (source-proportioned) and all four candidates kept layout,
-  chrome, and copy intact; failures narrowed to club-head variance. v001 at
-  4:3/1152x864 lost all four to global drift.
+- T20/T21/T22 (global redraw, aspect, crop) → **prefer the nearest
+  supported aspect, but geometry is not the whole story**. The original
+  corpus inference (v001 at 4:3 lost all four candidates to global drift
+  while source-proportioned v002 kept layout) was tested under control in
+  Issue #52: on the current route with the canonical brief, aspect mismatch
+  did not reproduce the collapse — the model adapts by uniform anisotropic
+  scaling of the whole window (squash at 16:9, stretch at 1:1) with the UI
+  inventory intact. Mismatch costs proportion fidelity, predictably;
+  fine-grained text damage across aspects sat within Issue #53's measured
+  seed noise. The v001 collapse likely came from that run's brief/provider
+  settings, not geometry alone.
 - T01/T03 (copy/logotype corruption) → shrink the generation surface
   (focused crop), or move text into source-owned pixels via deterministic
   Assembly (ADR 0002); regenerate only non-text regions.
