@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 		if arg.begins_with("--capture=") and not has_meta("capturing"):
 			set_meta("capturing", true)
 			_capture(arg.trim_prefix("--capture="))
+	_maybe_interact()
 
 
 func _capture(path: String) -> void:
@@ -74,3 +75,112 @@ func _capture(path: String) -> void:
 	img.save_png(path)
 	print("CAPTURED ", path, " ", img.get_width(), "x", img.get_height())
 	get_tree().quit()
+
+
+func _maybe_interact() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--interact=") and not has_meta("interacting"):
+			set_meta("interacting", true)
+			_interact(arg.trim_prefix("--interact="))
+
+
+func _interact(path: String) -> void:
+	var results: Array = []
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	# 1. Real click on the status window's items button.
+	var status = get_node("StatusWindow")
+	var items_button: Button = status.side_buttons["items"]
+	var fired := [false]
+	items_button.pressed.connect(func(): fired[0] = true)
+	await _click(items_button.get_global_rect().get_center())
+	results.append({"test": "click-items-button", "passed": fired[0]})
+
+	# 2. Real drag of the PM window by its title bar.
+	var pm = get_node("PmWindow")
+	var before: Vector2 = pm.global_position
+	var grab: Vector2 = pm.title_bar.get_global_rect().get_center() + Vector2(60, 0)
+	await _press(grab)
+	await _move(grab + Vector2(80, -40))
+	await _release(grab + Vector2(80, -40))
+	var moved: Vector2 = pm.global_position - before
+	results.append({"test": "drag-pm-window",
+		"passed": moved.distance_to(Vector2(80, -40)) < 2.0, "moved": str(moved)})
+	pm.global_position = before
+
+	# 3. Real click toggling the party exp-share checkbox.
+	var party = get_node("PartyWindow")
+	var box: CheckBox = party.exp_share_check
+	var was: bool = box.button_pressed
+	await _click(box.get_global_rect().position + Vector2(16, box.size.y / 2))
+	results.append({"test": "click-party-checkbox", "passed": box.button_pressed != was})
+	box.button_pressed = was
+
+	# 4. Real typing into the chat room and pressing Enter.
+	var room = get_node("ChatRoomWindow")
+	var line_count: int = room.lines.size()
+	await _click(room.input.get_global_rect().get_center())
+	for ch in "gg":
+		var key := InputEventKey.new()
+		key.pressed = true
+		key.unicode = ch.unicode_at(0)
+		key.keycode = KEY_G
+		Input.parse_input_event(key)
+		await get_tree().process_frame
+	var enter := InputEventKey.new()
+	enter.pressed = true
+	enter.keycode = KEY_ENTER
+	Input.parse_input_event(enter)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	results.append({"test": "type-and-enter-chat",
+		"passed": room.lines.size() == line_count + 1 \
+			and room.lines[-1]["text"] == "gg", "lines": room.lines.size()})
+
+	var failed := results.filter(func(r): return not r["passed"])
+	var report := {"suite": "real-input", "total": results.size(),
+		"failed": failed.size(), "results": results}
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  "))
+	f.close()
+	print("INTERACT %d/%d passed" % [results.size() - failed.size(), results.size()])
+	get_tree().quit(1 if failed.size() > 0 else 0)
+
+
+func _click(pos: Vector2) -> void:
+	await _press(pos)
+	await _release(pos)
+
+
+func _press(pos: Vector2) -> void:
+	await _mouse_button(pos, true)
+
+
+func _release(pos: Vector2) -> void:
+	await _mouse_button(pos, false)
+
+
+func _mouse_button(pos: Vector2, pressed: bool) -> void:
+	var move := InputEventMouseMotion.new()
+	move.position = pos
+	move.global_position = pos
+	Input.parse_input_event(move)
+	await get_tree().process_frame
+	var ev := InputEventMouseButton.new()
+	ev.position = pos
+	ev.global_position = pos
+	ev.button_index = MOUSE_BUTTON_LEFT
+	ev.pressed = pressed
+	Input.parse_input_event(ev)
+	await get_tree().process_frame
+
+
+func _move(pos: Vector2) -> void:
+	var ev := InputEventMouseMotion.new()
+	ev.position = pos
+	ev.global_position = pos
+	ev.button_mask = MOUSE_BUTTON_MASK_LEFT
+	Input.parse_input_event(ev)
+	await get_tree().process_frame
+	await get_tree().process_frame

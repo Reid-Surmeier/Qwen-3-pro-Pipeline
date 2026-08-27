@@ -18,20 +18,24 @@ contracts_rc=$?
 
 capture_rc=-1
 fidelity_rc=-1
+interact_rc=-1
 if [ "${QA_CAPTURE:-1}" = "1" ]; then
   echo "==> frame capture (DISPLAY=${DISPLAY:-:99})"
-  timeout 90 "$GODOT" --path . -- --capture=qa/out/capture.png > qa/out/capture.log 2>&1
+  timeout 120 "$GODOT" --path . -- --capture=qa/out/capture.png > qa/out/capture.log 2>&1
   capture_rc=$?
   if [ -f qa/out/capture.png ]; then
     echo "==> fidelity"
     python3.12 qa/fidelity.py > qa/out/fidelity.log 2>&1
     fidelity_rc=$?
   fi
+  echo "==> real-input interaction"
+  timeout 120 "$GODOT" --path . -- --interact=qa/out/interact.json > qa/out/interact.log 2>&1
+  interact_rc=$?
 fi
 
-python3.12 - "$import_rc" "$contracts_rc" "$capture_rc" "$fidelity_rc" <<'PY'
+python3.12 - "$import_rc" "$contracts_rc" "$capture_rc" "$fidelity_rc" "$interact_rc" <<'PY'
 import json, sys, pathlib
-import_rc, contracts_rc, capture_rc, fidelity_rc = map(int, sys.argv[1:5])
+import_rc, contracts_rc, capture_rc, fidelity_rc, interact_rc = map(int, sys.argv[1:6])
 out = pathlib.Path("qa/out")
 report = {
     "import": {"exit": import_rc,
@@ -42,13 +46,16 @@ report = {
     "capture": {"exit": capture_rc, "file": "qa/out/capture.png" if out.joinpath("capture.png").exists() else None},
     "fidelity": json.loads(out.joinpath("fidelity.json").read_text())
                 if out.joinpath("fidelity.json").exists() else {"exit": fidelity_rc},
+    "interact": json.loads(out.joinpath("interact.json").read_text())
+                if out.joinpath("interact.json").exists() else {"exit": interact_rc},
 }
-hard_fail = bool(report["import"]["errors"]) or report["contracts"].get("failed", 1) != 0
+hard_fail = bool(report["import"]["errors"]) or report["contracts"].get("failed", 1) != 0 or report["interact"].get("failed", 1) != 0
 report["pass"] = not hard_fail
 out.joinpath("report.json").write_text(json.dumps(report, indent=2))
 print(json.dumps({"pass": report["pass"],
                   "import_errors": len(report["import"]["errors"]),
                   "contracts_failed": report["contracts"].get("failed"),
                   "capture": report["capture"]["file"],
-                  "fidelity_pass": report["fidelity"].get("pass")}))
+                  "fidelity_pass": report["fidelity"].get("pass"),
+                  "interact_failed": report["interact"].get("failed")}))
 PY

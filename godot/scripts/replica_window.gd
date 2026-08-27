@@ -118,12 +118,20 @@ func _on_title_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			_dragging = true
-			_drag_offset = get_global_mouse_position() - global_position
+			_drag_offset = event.global_position - global_position
 			move_to_front()
 		else:
 			_dragging = false
-	elif event is InputEventMouseMotion and _dragging:
-		global_position = get_global_mouse_position() - _drag_offset
+
+
+func _input(event: InputEvent) -> void:
+	if not _dragging:
+		return
+	if event is InputEventMouseMotion:
+		global_position = event.global_position - _drag_offset
+	elif event is InputEventMouseButton \
+			and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		_dragging = false
 
 
 func _gui_input(event: InputEvent) -> void:
