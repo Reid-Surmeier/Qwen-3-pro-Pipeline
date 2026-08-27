@@ -1,0 +1,38 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-options-window-source.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-japanese-v003-baseline-01.png"
+    }
+  },
+  "3": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {
+      "generated_images": [
+        "2",
+        0
+      ],
+      "reference_images": [
+        "1",
+        0
+      ],
+      "region": "0,0,1572,718"
+    }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/matched-donor/candidate-01",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  }
+}

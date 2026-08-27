@@ -53,6 +53,20 @@
       "duration_ms": 148,
       "prompt_id": "9fdc375a-07b2-4b99-8826-3ccb35954c85",
       "status": "success"
+    },
+    {
+      "candidate": 1,
+      "duration_ms": 173,
+      "prompt_id": "5de5f1be-828f-47ff-baef-e2aaa468be7b",
+      "role": "full-canvas matched donor control",
+      "status": "success"
+    },
+    {
+      "candidate": 2,
+      "duration_ms": 141,
+      "prompt_id": "76bcc00e-be87-41fa-bb65-2848ab2fbac3",
+      "role": "full-canvas matched donor control",
+      "status": "success"
     }
   ],
   "paid_runs": [
@@ -437,6 +451,16 @@
       "sha256": "7d498b39e15d8522390b243bba9bb549ca5fe27e3b2a2d23e943327cb7914291"
     },
     {
+      "bytes": 672,
+      "path": "artifacts/issue-34/japanese-node-experiment-v003/matched-donor-candidate-01.api.json",
+      "sha256": "6dd8c4c764b1cb0c6e97a4469a67a61c8fbb80fdd92dd507b5a04c0c9d50ea9d"
+    },
+    {
+      "bytes": 672,
+      "path": "artifacts/issue-34/japanese-node-experiment-v003/matched-donor-candidate-02.api.json",
+      "sha256": "1b4ee6b58f8cc0e42a7074a683952ecde2d53e766cd4343f6d8401e031c565a2"
+    },
+    {
       "bytes": 2598,
       "path": "artifacts/issue-34/japanese-node-experiment-v003/tested-assembly-candidate-01.api.json",
       "sha256": "f1e98f72ad06b887e3376a752ea56e83c9eefc29ebe35fd7bf423fc0779c86a5"
@@ -499,6 +523,19 @@
         ]
       },
       "mode": "RGBA",
+      "node_effect_vs_matched_donor": {
+        "inside_rgba_changed_pixels": 0,
+        "max_outside_channel_delta": 255,
+        "outside_alpha_changed_pixels": 54952,
+        "outside_rgb_changed_pixels": 592680,
+        "outside_rgba_changed_pixels": 601136,
+        "rectangle": [
+          160,
+          130,
+          1350,
+          350
+        ]
+      },
       "path": "artifacts/issue-34/japanese-node-experiment-v003/winner/candidate-01_00001_.png",
       "qualifies_exact_exterior": true,
       "sha256": "1820a517278e8419e3e93869f444616f610b1dbdbb82714c4f83f37706c3e7ab",
@@ -523,6 +560,19 @@
         ]
       },
       "mode": "RGBA",
+      "node_effect_vs_matched_donor": {
+        "inside_rgba_changed_pixels": 0,
+        "max_outside_channel_delta": 255,
+        "outside_alpha_changed_pixels": 54952,
+        "outside_rgb_changed_pixels": 615308,
+        "outside_rgba_changed_pixels": 623413,
+        "rectangle": [
+          160,
+          130,
+          1350,
+          350
+        ]
+      },
       "path": "artifacts/issue-34/japanese-node-experiment-v003/winner/candidate-02_00001_.png",
       "qualifies_exact_exterior": true,
       "sha256": "bf140967bc1e7306cb33a22f3923f1411816ccfe4fdc172f76fde8251410564c",
