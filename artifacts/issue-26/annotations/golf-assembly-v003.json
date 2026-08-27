@@ -1,0 +1,12 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/golf-club-assembly-v003/image-01.png",
+  "sha256": "1386229c8dd5f3d804751aebf20fa051904939f844aa512322ae6faa20fd6160",
+  "role": "approved_output",
+  "source_ref": "artifacts/references/plantstudio-main-window.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [],
+  "disposition": "accepted",
+  "note": "Deterministic Assembly control: club composited into the authoritative 474x403 reference; pixels outside the rectangle source-owned."
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/maga-operating-system-xe-sticker-v003/maga-operating-system-xe-sticker-v003.png",
+  "sha256": "4e6c882a5063d41bc74c4890e15006573e297f16819bd638aa62531ca23fee8c",
+  "role": "rejected_candidate",
+  "source_ref": null,
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T32",
+      "region": [
+        100,
+        90,
+        1050,
+        470
+      ],
+      "strength": "strong",
+      "note": "XP badge swoosh retained as embossed curve with no role in the square design."
+    },
+    {
+      "class": "T24",
+      "region": [
+        100,
+        100,
+        320,
+        470
+      ],
+      "strength": "strong",
+      "note": "Swoosh terminates into the rounded border."
+    },
+    {
+      "class": "T31",
+      "region": [
+        300,
+        230,
+        1030,
+        600
+      ],
+      "strength": "weak",
+      "note": "Field texture shows repeating micro-glyph noise at 100%."
+    }
+  ],
+  "disposition": "rejected",
+  "note": "Square variant carries donor-template structure and worm texture."
+}
