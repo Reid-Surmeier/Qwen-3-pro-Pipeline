@@ -27,6 +27,9 @@ func _initialize() -> void:
 		check("desktop-magenta", desktop.color.is_equal_approx(Color8(239, 7, 239)),
 			str(desktop.color))
 
+	var backdrop = main.get_node_or_null("GameBackdrop")
+	check("backdrop-exists", backdrop != null and backdrop.texture != null)
+
 	var win = main.get_node_or_null("StatusWindow")
 	check("status-window-exists", win != null)
 	if win == null:

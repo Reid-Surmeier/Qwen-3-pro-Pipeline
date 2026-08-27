@@ -31,6 +31,15 @@ func _ready() -> void:
 	desktop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(desktop)
 
+	var backdrop := TextureRect.new()
+	backdrop.name = "GameBackdrop"
+	backdrop.texture = load("res://textures/game-backdrop.png")
+	backdrop.position = Vector2(655, 0)
+	backdrop.size = Vector2(753, 845)
+	backdrop.stretch_mode = TextureRect.STRETCH_SCALE
+	backdrop.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	add_child(backdrop)
+
 	for entry in [[StatusWindow, "StatusWindow"], [GuildWindow, "GuildWindow"],
 			[MinimapWindow, "MinimapWindow"], [CreateRoomWindow, "CreateRoomWindow"],
 			[PartyWindow, "PartyWindow"], [TradeWindow, "TradeWindow"],
