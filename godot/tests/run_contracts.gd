@@ -202,6 +202,12 @@ func _initialize() -> void:
 		win.resize_to(Vector2(10, 10))
 		check("window-resize-min-clamped", win.size == win.min_size, str(win.size))
 		win.resize_to(orig)
+	if win:
+		var close: Button = win.title_bar.get_node("CloseButton")
+		close.emit_signal("pressed")
+		check("close-hides-window", not win.visible)
+		win.visible = true
+
 	var bubble = main.get_node_or_null("SpeechBubble")
 	check("bubble-exists", bubble != null)
 	if bubble:

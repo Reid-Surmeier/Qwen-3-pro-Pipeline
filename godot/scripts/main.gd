@@ -138,6 +138,46 @@ func _interact(path: String) -> void:
 		"passed": room.lines.size() == line_count + 1 \
 			and room.lines[-1]["text"] == "gg", "lines": room.lines.size()})
 
+	# 5. Full-control matrix: raise each window with a real title-bar click,
+	# then really click every Button / CheckBox in it and assert a reaction.
+	var matrix_total := 0
+	var matrix_failed: Array = []
+	for child in get_children():
+		var window := child as ReplicaWindow
+		if window == null:
+			continue
+		await _click(window.title_bar.get_global_rect().get_center() + Vector2(90, 0))
+		var controls: Array = []
+		_collect_controls(window.body, controls)
+		controls.append(window.title_bar.get_node("MinimizeButton"))
+		controls.append(window.title_bar.get_node("CloseButton"))
+		for control in controls:
+			matrix_total += 1
+			var reacted := [false]
+			var was_visible: bool = window.visible
+			var was_pressed: bool = control.button_pressed if control is BaseButton else false
+			var was_disabled: bool = control is BaseButton and control.disabled
+			var handler := func(): reacted[0] = true
+			control.pressed.connect(handler)
+			await _click(control.get_global_rect().get_center())
+			control.pressed.disconnect(handler)
+			var name_path := "%s/%s" % [window.name, control.name]
+			var is_disabled: bool = was_disabled
+			if is_disabled and reacted[0]:
+				matrix_failed.append(name_path + " (disabled but reacted)")
+			elif not is_disabled and not reacted[0]:
+				matrix_failed.append(name_path)
+			# restore any state the click changed
+			if control is CheckBox:
+				control.button_pressed = was_pressed
+			if window.is_collapsed():
+				window._on_minimize()
+			if not window.visible and was_visible:
+				window.visible = true
+		await get_tree().process_frame
+	results.append({"test": "control-matrix", "passed": matrix_failed.is_empty(),
+		"controls": matrix_total, "unreached": matrix_failed})
+
 	var failed := results.filter(func(r): return not r["passed"])
 	var report := {"suite": "real-input", "total": results.size(),
 		"failed": failed.size(), "results": results}
@@ -184,3 +224,11 @@ func _move(pos: Vector2) -> void:
 	Input.parse_input_event(ev)
 	await get_tree().process_frame
 	await get_tree().process_frame
+
+
+func _collect_controls(node: Node, out: Array) -> void:
+	for child in node.get_children():
+		if child is Button or child is CheckBox:
+			out.append(child)
+		if not (child is Button):
+			_collect_controls(child, out)

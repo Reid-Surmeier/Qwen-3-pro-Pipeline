@@ -83,6 +83,20 @@ func _build_chrome() -> void:
 	minimize.pressed.connect(_on_minimize)
 	title_bar.add_child(minimize)
 
+	var close := Button.new()
+	close.name = "CloseButton"
+	close.text = "⊖"
+	close.flat = true
+	close.size = Vector2(28, 28)
+	close.anchor_left = 1.0
+	close.anchor_right = 1.0
+	close.offset_left = -32
+	close.offset_top = 1
+	close.add_theme_color_override("font_color", Color8(40, 90, 200))
+	close.add_theme_font_size_override("font_size", 24)
+	close.pressed.connect(func(): visible = false)
+	title_bar.add_child(close)
+
 	var title := Label.new()
 	title.name = "Title"
 	title.text = title_text
