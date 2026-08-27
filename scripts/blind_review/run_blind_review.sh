@@ -82,37 +82,54 @@ if [ "$SKIP_BUILD" != "true" ]; then
   docker build -f "$SCRIPT_DIR/sandbox.Dockerfile" -t "$IMAGE" "$SCRIPT_DIR"
 fi
 
+# The reviewer runs under a dedicated Hermes profile. Hermes treats the
+# profile's config.yaml terminal section as authoritative over env vars
+# (hermes_cli/config.py apply_terminal_config_to_env), so the orchestrator
+# writes the sandbox settings there each round — the one channel that cannot
+# be silently overridden back to a host shell. The profile is created fresh
+# (no user memory, rules, or history) with only the OpenRouter key copied in.
+PROFILE="${HERMES_PROFILE:-blind-review}"
+PROFILE_DIR="$HOME/.hermes/profiles/$PROFILE"
+if [ ! -d "$PROFILE_DIR" ]; then
+  echo "==> Creating Hermes profile $PROFILE"
+  hermes profile create "$PROFILE"
+  grep "^OPENROUTER_API_KEY=" "$HOME/.hermes/.env" > "$PROFILE_DIR/.env"
+  chmod 600 "$PROFILE_DIR/.env"
+  printf '%s\n' "You are an independent blind artifact reviewer. You judge only what you can observe in your sandbox. You are rigorous, literal about evidence, and you never speculate about how an artifact was made." > "$PROFILE_DIR/SOUL.md"
+fi
+
+cat > "$PROFILE_DIR/config.yaml" <<EOF
+terminal:
+  backend: docker
+  docker_image: $IMAGE
+  docker_volumes: ["$WORKSPACE:/workspace:ro", "$OUT:/out:rw"]
+  docker_network: none
+  cwd: /workspace
+  timeout: 300
+  lifetime_seconds: 3600
+  container_persistent: true
+EOF
+
 HERMES_CMD=(
-  hermes chat
+  hermes -p "$PROFILE" chat
   --query-file "$WORKDIR/prompt.md"
   -m "$MODEL" --provider openrouter
   -t terminal,file,vision,todo
-  --ignore-user-config --ignore-rules
   --cli -Q --yolo
   --max-turns "$MAX_TURNS" --run-budget "$RUN_BUDGET"
 )
 
-SANDBOX_ENV=(
-  "TERMINAL_ENV=docker"
-  "TERMINAL_DOCKER_IMAGE=$IMAGE"
-  "TERMINAL_DOCKER_VOLUMES=[\"$WORKSPACE:/workspace:ro\",\"$OUT:/out:rw\"]"
-  "TERMINAL_DOCKER_EXTRA_ARGS=[\"--network\",\"none\"]"
-  "TERMINAL_CWD=/workspace"
-  "TERMINAL_TIMEOUT=300"
-  "TERMINAL_LIFETIME_SECONDS=3600"
-)
-
 if [ "$DRY_RUN" = "true" ]; then
-  echo "==> Dry run; would spawn:"
-  printf '  %s \\\n' "${SANDBOX_ENV[@]}"
+  echo "==> Dry run; would spawn with $PROFILE_DIR/config.yaml:"
+  cat "$PROFILE_DIR/config.yaml"
   printf '  %q ' "${HERMES_CMD[@]}"
   echo
   echo "workdir: $WORKDIR"
   exit 0
 fi
 
-echo "==> Spawning blind reviewer ($MODEL)"
-env "${SANDBOX_ENV[@]}" "${HERMES_CMD[@]}"
+echo "==> Spawning blind reviewer ($MODEL, profile $PROFILE)"
+"${HERMES_CMD[@]}"
 
 echo "==> Validating verdict (fail-closed)"
 if python3 "$SCRIPT_DIR/validate_verdict.py" \

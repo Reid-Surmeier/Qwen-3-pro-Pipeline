@@ -106,6 +106,12 @@ Clean-state command: {clean_state_command}
    in `positive` so it is protected from the next change. Anything real but
    outside the contract goes in `followups`, never in blocking findings.
 
+   Write your first draft of `/out/review.json` immediately after the visual
+   pass (a "blocked" verdict listing every not-yet-checked clause in
+   `unverified` is a valid draft), then rewrite it after every clause you
+   disposition. The file on disk must always be your current verdict; never
+   save it for the end.
+
 Your review is complete when `/out/review.json` is written, every contract
 clause is dispositioned, every behavioral clause has its named before/after
 screenshot pair in `/out/`, and every finding's evidence file exists in
