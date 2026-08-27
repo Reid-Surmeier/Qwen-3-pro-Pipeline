@@ -1,0 +1,88 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Design the FEATURES contents page of DIS Magazine's Data Issue in the layout bones of the reference 1990s music-magazine contents page: saturated color-field background, oversized page numbers, stacked feature list, one dominant photograph.",
+ "reference_role": "Reference image 1 is the layout authority: color-field treatment, header type scale, list rhythm, photo placement. None of its words or images may appear. Reference image 2 supplies the sole photograph: a colorful abstract browser-window artwork used as the contents-page art.",
+ "preservation_invariants": [
+  "Keep the donor's structure: big section word at top, issue identifier line under it, vertical list of feature entries each with an oversized page number, one large photograph anchoring the layout.",
+  "Keep the period print finish and the donor's confident use of one saturated background color."
+ ],
+ "canvas": [
+  "Portrait magazine page, 3:4 aspect, full bleed color field.",
+  "The reference 2 artwork sits as the single large tilted photograph, styled as a printed photo with a thin white border and drop shadow, occupying the same zone the donor photo occupies."
+ ],
+ "regions": [
+  {
+   "name": "section header",
+   "change": "Top reads 'CONTENTS' in the donor's huge condensed caps, with the line 'THE DATA ISSUE \u00b7 TOO BIG TO SCALE' beneath it in small caps."
+  },
+  {
+   "name": "feature list",
+   "change": "Exactly six entries, each an article title in bold caps with the author name in lighter small caps beneath and an oversized two-digit page number beside it: 'LANDING SITES / TREVOR PAGLEN / 08', 'CULTS AT SCALE / KATE LOSSE / 14', 'WHAT CAN AN ALGORITHM DO? / JOSH SCANNELL / 20', 'METAPHORS OF BIG DATA / SARA M. WATSON / 26', 'BITS AND ATOMS / HOLLY HERNDON & HANNES GRASSEGGER / 32', 'MACHINE VISION / BENJAMIN BRATTON / 38'.",
+   "preserve": [
+    "The donor's list rhythm, rules between entries, and number scale."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "section header",
+   "text": "CONTENTS"
+  },
+  {
+   "region": "issue identifier",
+   "text": "THE DATA ISSUE \u00b7 TOO BIG TO SCALE"
+  },
+  {
+   "region": "feature list entry 1",
+   "text": "LANDING SITES TREVOR PAGLEN 08"
+  },
+  {
+   "region": "feature list entry 2",
+   "text": "CULTS AT SCALE KATE LOSSE 14"
+  },
+  {
+   "region": "feature list entry 3",
+   "text": "WHAT CAN AN ALGORITHM DO? JOSH SCANNELL 20"
+  },
+  {
+   "region": "feature list entry 4",
+   "text": "METAPHORS OF BIG DATA SARA M. WATSON 26"
+  },
+  {
+   "region": "feature list entry 5",
+   "text": "BITS AND ATOMS HOLLY HERNDON & HANNES GRASSEGGER 32"
+  },
+  {
+   "region": "feature list entry 6",
+   "text": "MACHINE VISION BENJAMIN BRATTON 38"
+  }
+ ],
+ "style": [
+  "Mid-1990s American music-magazine interior: heavy condensed and outlined display type, aggressive section headers, layered photo collage energy, warm coated-paper white, CMYK halftone grain.",
+  "Typography classification only: condensed grotesque display, outlined slab accents, small dense sans body columns; no digital-era fonts."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, advertisements, products, celebrities, phone numbers, or brand marks; the donor supplies layout bones and typographic idiom only.",
+  "No New York Magazine masthead, no VIBE masthead, no Newport/Absolut/Levi's or any real advertisement, no barcode with real digits, no real cover price.",
+  "No watermark, no border artifacts from the reference matte, no gray letterbox bars carried into the composition.",
+  "No misspelled masthead, no duplicated headline, no extra unrelated cover lines, no modern flat-UI aesthetic, no smartphone-era design elements.",
+  "No table-of-contents entries other than the six specified."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic mid-1990s printed magazine page: coated-paper tone, slight halftone grain, period type rendering.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The transplanted DIS photograph is clearly recognizable and undistorted, integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

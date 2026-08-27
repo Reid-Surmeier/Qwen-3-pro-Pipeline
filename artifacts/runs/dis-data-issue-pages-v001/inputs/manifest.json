@@ -1,0 +1,87 @@
+[
+ {
+  "page": "p1-cover",
+  "donor_source": "scout/ny-18.png",
+  "art_source": "scout/dis-intro-large.jpg",
+  "donor_png": "inputs/p1-cover-donor.png",
+  "art_png": "inputs/p1-cover-art.png",
+  "donor_size": [
+   800,
+   1073
+  ],
+  "art_matte_size": [
+   800,
+   1073
+  ],
+  "donor_sha256": "fed9b8e9bc9018914d2efeaf58579b1877394f30d90509257baf491baf233b69",
+  "art_sha256": "23113f0c7785d915b0e4346656f3c27a31e043b85fdfbb9fa0f3f16d35e36ca5"
+ },
+ {
+  "page": "p2-contents",
+  "donor_source": "scout/vibe/n10.jpg",
+  "art_source": "scout/dis-rozendaal.png",
+  "donor_png": "inputs/p2-contents-donor.png",
+  "art_png": "inputs/p2-contents-art.png",
+  "donor_size": [
+   1479,
+   1800
+  ],
+  "art_matte_size": [
+   1479,
+   1800
+  ],
+  "donor_sha256": "d730ffc81de5c097ec47b8022d27862b8cdd0d7af51922f1cce96141186aa2f3",
+  "art_sha256": "788ea84eb4a2e35fd9cc27be6c93d928abd954d924cea723128ffb0cdb709fad"
+ },
+ {
+  "page": "p3-paglen",
+  "donor_source": "scout/vibe/n32.jpg",
+  "art_source": "scout/dis-paglen.jpg",
+  "donor_png": "inputs/p3-paglen-donor.png",
+  "art_png": "inputs/p3-paglen-art.png",
+  "donor_size": [
+   1478,
+   1800
+  ],
+  "art_matte_size": [
+   1478,
+   1800
+  ],
+  "donor_sha256": "305bf95efa7cb39e85f250e4c17ab4946af41ebf957f0768ae94f263dc02eda8",
+  "art_sha256": "29f6a102da775590a40ae5b4b7d9323bec6f437cec9dcd227621f28cff89ef90"
+ },
+ {
+  "page": "p4-losse",
+  "donor_source": "scout/vibe/n33.jpg",
+  "art_source": "scout/dis-losse-large.jpg",
+  "donor_png": "inputs/p4-losse-donor.png",
+  "art_png": "inputs/p4-losse-art.png",
+  "donor_size": [
+   1481,
+   1800
+  ],
+  "art_matte_size": [
+   1481,
+   1800
+  ],
+  "donor_sha256": "7b9e408a89dc199826034b642533195ecfcba33ce3114cb6ba237a0800b5910e",
+  "art_sha256": "26caa95bd8fcacf2734ec3eafa196d0443ae9f1bb742a8a80b8b57544d4f9f4c"
+ },
+ {
+  "page": "p5-herndon",
+  "donor_source": "scout/vibe/n35.jpg",
+  "art_source": "scout/dis-herndon.jpg",
+  "donor_png": "inputs/p5-herndon-donor.png",
+  "art_png": "inputs/p5-herndon-art.png",
+  "donor_size": [
+   1486,
+   1800
+  ],
+  "art_matte_size": [
+   1486,
+   1800
+  ],
+  "donor_sha256": "a882fcdc9b303f5de24be19186422c0e73e5a0bddad4698562f397783d6d5765",
+  "art_sha256": "7c2753799ac84c4599f090a0f02d1c236b07dcb2d2c95531f2203170d0d4d350"
+ }
+]

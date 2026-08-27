@@ -1,0 +1,80 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Design the feature-opener page for Trevor Paglen's Data Issue piece in the layout bones of the reference 1990s magazine section opener: dominant full-width photograph, huge yellow condensed display headline over a dark image, section slug at top, byline line under the headline.",
+ "reference_role": "Reference image 1 is the layout authority: photo-to-headline proportion, yellow display type over dark photo, slug placement, dek column position. None of its words or images may appear. Reference image 2 supplies the sole photograph: a coastal landing-site image that becomes the full-width feature photo.",
+ "preservation_invariants": [
+  "Keep the donor's structure: section slug top-left, full-width dark photograph bleeding to three edges, display headline knocked out in warm yellow across the photo's lower third, short dek column below.",
+  "Keep the ominous documentary mood: the photograph reads as evidence, not decoration."
+ ],
+ "canvas": [
+  "Portrait magazine page, 3:4 aspect.",
+  "Photograph occupies roughly the upper two thirds; the lower third carries the dek column and greeked body text opening."
+ ],
+ "regions": [
+  {
+   "name": "section slug",
+   "change": "Top-left reads 'DATA' in the donor's compact bold caps with a thin rule."
+  },
+  {
+   "name": "display headline",
+   "change": "Across the photo's lower area: 'NSA-TAPPED CABLE LANDING SITE' in large warm-yellow condensed caps, broken over two lines.",
+   "preserve": [
+    "Donor's knockout treatment and scale relative to the page."
+   ]
+  },
+  {
+   "name": "byline and dek",
+   "change": "Under the headline: 'BY TREVOR PAGLEN' in small caps, then a two-line dek in italic reading 'Mastic Beach, New York: where the ocean hands the internet to the shore, and someone is listening.'"
+  },
+  {
+   "name": "body opening",
+   "change": "One or two columns of greeked, unreadable period body type with a large drop cap letter M."
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "section slug",
+   "text": "DATA"
+  },
+  {
+   "region": "display headline",
+   "text": "NSA-TAPPED CABLE LANDING SITE"
+  },
+  {
+   "region": "byline",
+   "text": "BY TREVOR PAGLEN"
+  },
+  {
+   "region": "dek",
+   "text": "Mastic Beach, New York: where the ocean hands the internet to the shore, and someone is listening."
+  }
+ ],
+ "style": [
+  "Mid-1990s American music-magazine interior: heavy condensed and outlined display type, aggressive section headers, layered photo collage energy, warm coated-paper white, CMYK halftone grain.",
+  "Typography classification only: condensed grotesque display, outlined slab accents, small dense sans body columns; no digital-era fonts."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, advertisements, products, celebrities, phone numbers, or brand marks; the donor supplies layout bones and typographic idiom only.",
+  "No New York Magazine masthead, no VIBE masthead, no Newport/Absolut/Levi's or any real advertisement, no barcode with real digits, no real cover price.",
+  "No watermark, no border artifacts from the reference matte, no gray letterbox bars carried into the composition.",
+  "No misspelled masthead, no duplicated headline, no extra unrelated cover lines, no modern flat-UI aesthetic, no smartphone-era design elements.",
+  "The photograph must stay recognizably the supplied coastal scene; do not replace it with a generic beach."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic mid-1990s printed magazine page: coated-paper tone, slight halftone grain, period type rendering.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The transplanted DIS photograph is clearly recognizable and undistorted, integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}
