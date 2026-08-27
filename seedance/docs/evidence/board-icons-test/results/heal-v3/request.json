@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the heal icon \u2014 the white heart glyph and its red beveled square frame \u2014 must remain exactly as captured except the one described repeating movement.\n\nLOCKED STYLE:\n- the heart keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted\n- all movement is a whole-glyph position change between fixed poses; the glyph never deforms, stretches, or morphs\n- stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending\n\nMOTION:\nThe white heart runs a continuous two-pose idle loop for the whole clip, exactly like a handheld-game party icon. Pose A is the image exactly as captured. Pose B is the identical heart shifted up by one small step of its own blocky grid, with its bottom edge sitting one step higher. The clip alternates A, B, A, B without ever stopping: each pose is held for about a tenth of a second, then the picture snaps to the other pose. There are roughly twenty A-B rounds across the clip. Nothing accelerates, decelerates, eases, or drifts \u2014 the two poses are the only two pictures that ever exist, traded at a metronome-steady rate. The frame and background hold perfectly still through every swap.\n\nTIMING:\nBegin on pose A, the exact start image. Alternate A and B at a steady beat of about one tenth of a second per pose for the entire duration, with crisp instant swaps. Time the final swaps so the clip ends holding pose A, pixel-identical to the first frame.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, shadows, or added objects\n- no smooth motion, no fades, no motion blur; only instant swaps between the two held poses\n- no third pose: the heart is only ever in pose A or pose B\n- do not change any color or redraw any part of the image\n- the loop must not slow down, pause mid-clip, or change rhythm",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=3f56500882ca979b2314b08f6b45486936615a28a20d0e94a71dcebdd071b899>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=3f56500882ca979b2314b08f6b45486936615a28a20d0e94a71dcebdd071b899>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}

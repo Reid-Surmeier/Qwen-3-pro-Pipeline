@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the blessing icon \u2014 the small bottle and its beveled square frame \u2014 must remain exactly as captured except the one described presentation, which adds only the small sparkle shapes explicitly licensed below.\n\nLOCKED STYLE:\n- the bottle keeps its exact shape, colors, and soft blocky texture exactly as captured; it never deforms, stretches, or morphs\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted\n- the licensed sparkles are tiny flat blocky shapes in the same chunky structure as the captured art \u2014 plus-shaped four-block twinkles, pure white, at most a few grid steps across\n- stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending\n\nMOTION:\nAn item-get presentation plays once, exactly like a Game Boy Advance treasure reveal. Beat 1: the tile holds exactly as captured. Beat 2, the pop: the whole bottle jumps up by two small steps of its own blocky grid in one instant snap, holds that raised pose briefly, then snaps down to one step below its captured position for one brief held pose, then snaps back to exactly its captured position \u2014 a two-position quantized bounce, three snaps in all, with no easing and no stretching. Beat 3, the twinkle: right as the bottle lands, two tiny white plus-shaped sparkles appear in the empty tile area above the bottle, one upper-left and one upper-right of the bottle neck; each sparkle steps through a small grow-shrink cycle of three held poses \u2014 a single dot, the full plus shape, back to a dot \u2014 and vanishes completely, the pair offset so one twinkles a beat after the other. The sparkle cycle takes under a second in total. Beat 4: the tile holds exactly as captured, with no trace of the sparkles, through to the end.\n\nTIMING:\nHold the exact start image for roughly the first third, play the three-snap bounce, run the short two-sparkle twinkle immediately after the landing, and hold the exact start image again through the final third so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the sparkles exist only inside the square tile, never on the background.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, halos, or soft particles; the two plus-shaped sparkles are the only added elements, and they are flat, hard-edged, and temporary\n- the bottle is never redrawn, recolored, tilted, squashed, or stretched \u2014 it only changes position in whole steps\n- no smooth motion, no fades, no motion blur; only instant snaps between held poses\n- the sparkles must be gone well before the clip ends, leaving the image exactly as captured\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=fc5f2a03704ea05ecf473045400a7a3ddfabb784dcb6a1e8a068de8f0f18d819>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=fc5f2a03704ea05ecf473045400a7a3ddfabb784dcb6a1e8a068de8f0f18d819>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}
