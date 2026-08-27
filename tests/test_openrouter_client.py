@@ -4,6 +4,7 @@ import unittest
 import urllib.error
 from io import BytesIO
 from pathlib import Path
+from unittest import mock
 
 from qwen_ui_pipeline import OpenRouterImageClient, write_run_artifacts
 
@@ -42,7 +43,43 @@ class OpenRouterImageClientTests(unittest.TestCase):
 
         self.assertEqual(captured["authorization"], "Bearer test-key")
         self.assertEqual(captured["body"]["prompt"], "golf")
+        self.assertEqual(captured["timeout"], 180)
         self.assertEqual(response["usage"]["cost"], 0.04)
+
+    def test_forwards_an_explicit_positive_finite_timeout(self):
+        captured = {}
+
+        def open_request(_request, *, timeout):
+            captured["timeout"] = timeout
+            return _Response({"data": []})
+
+        client = OpenRouterImageClient(
+            "test-key", opener=open_request, timeout=600.5
+        )
+        client.generate({"model": "qwen/qwen-image-3-pro", "prompt": "golf"})
+
+        self.assertEqual(captured["timeout"], 600.5)
+
+    def test_rejects_invalid_timeouts_before_network_access(self):
+        invalid_timeouts = (
+            0,
+            -1,
+            True,
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+            "180",
+            None,
+        )
+
+        for timeout in invalid_timeouts:
+            with self.subTest(timeout=timeout):
+                opener = mock.Mock()
+                with self.assertRaisesRegex(ValueError, "timeout"):
+                    OpenRouterImageClient(
+                        "test-key", opener=opener, timeout=timeout
+                    )
+                opener.assert_not_called()
 
     def test_writes_reproducible_artifacts_without_copying_base64_into_metadata(self):
         response = {

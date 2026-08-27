@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import base64
 import hashlib
+import math
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -15,6 +16,7 @@ from ..prompt_manifest import compile_edit_brief
 
 DEFAULT_MODEL = "qwen/qwen-image-3-pro"
 DEFAULT_ENDPOINT = "https://openrouter.ai/api/v1/images"
+DEFAULT_TIMEOUT_SECONDS = 180
 
 
 class OpenRouterImageClient:
@@ -26,12 +28,21 @@ class OpenRouterImageClient:
         *,
         endpoint: str = DEFAULT_ENDPOINT,
         opener: Callable[..., Any] = urllib.request.urlopen,
+        timeout: float = DEFAULT_TIMEOUT_SECONDS,
     ):
         if not api_key:
             raise ValueError("OpenRouter API key is required")
+        if (
+            isinstance(timeout, bool)
+            or not isinstance(timeout, (int, float))
+            or not math.isfinite(timeout)
+            or timeout <= 0
+        ):
+            raise ValueError("timeout must be a finite positive number of seconds")
         self._api_key = api_key
         self._endpoint = endpoint
         self._opener = opener
+        self._timeout = timeout
 
     def generate(self, request_body: Mapping[str, Any]) -> dict[str, Any]:
         body = json.dumps(dict(request_body)).encode("utf-8")
@@ -46,7 +57,7 @@ class OpenRouterImageClient:
             },
         )
         try:
-            with self._opener(request, timeout=180) as response:
+            with self._opener(request, timeout=self._timeout) as response:
                 payload = json.loads(response.read())
         except urllib.error.HTTPError as error:
             detail = ""
