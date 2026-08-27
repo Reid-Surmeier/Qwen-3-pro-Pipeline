@@ -23,6 +23,19 @@ from .fidelity import (
     parse_fidelity_contract,
     verify_against_baseline,
 )
+from .verifier import (
+    DEFECT_ROUTES,
+    RegionReview,
+    RegionVerdict,
+    VerificationError,
+    VerificationResult,
+    VisionClient,
+    build_region_reviews,
+    describe_verification,
+    parse_region_verdict,
+    route_findings,
+    run_verification,
+)
 from .comfyui_workflow import (
     build_comfyui_api_workflow,
     build_comfyui_assembly_workflow,
@@ -43,6 +56,17 @@ from .providers.openrouter import (
 )
 
 __all__ = [
+    "DEFECT_ROUTES",
+    "RegionReview",
+    "RegionVerdict",
+    "VerificationError",
+    "VerificationResult",
+    "VisionClient",
+    "build_region_reviews",
+    "describe_verification",
+    "parse_region_verdict",
+    "route_findings",
+    "run_verification",
     "FidelityContract",
     "FidelityContractError",
     "FidelityEvidenceError",
