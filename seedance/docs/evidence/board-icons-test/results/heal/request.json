@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Heal skill icon (pink pixel-art heart marked 'AB' in a red beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe heart glyph alone performs one soft heartbeat pulse: a slight scale-up of about 5 percent and back, like a single gentle beat. The tile frame does not move.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=1685d3e1707bf96f404564d9143e30c8b07361d6c5db4b186db98746a29614d3>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=1685d3e1707bf96f404564d9143e30c8b07361d6c5db4b186db98746a29614d3>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}
