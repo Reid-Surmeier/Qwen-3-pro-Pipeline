@@ -69,6 +69,8 @@ rejection.
 | T30 | `style-smoothing` | Pixel-era aliased artwork returned as smooth anti-aliased or photoreal rendering. | strong | golf-club v001 club shaft gradient |
 | T31 | `micro-texture-worms` | Halftone or grain replaced by worm-like repeating micro-glyph noise, visible at 100%. | weak | maga v003 flag/field texture |
 | T32 | `template-remnant` | A structural element of the style-donor template survives into the new design where it has no role. | strong | maga v003 retained XP swoosh |
+| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit (cursive "palantir" returned as the real ENERGY STAR script and band text). | strong | Issue #18 object-removal pair, both arms (PR #64) |
+| T34 | `source-character-beautification` | A degraded source (blurry photo, compressed scan) is silently sharpened into a clean studio render while the requested edits are applied. | weak | Issue #18 dense-multi-region pair, both arms (PR #64) |
 
 ### Assembly and alpha (deterministically checkable today)
 
@@ -100,6 +102,12 @@ enough. Observed mappings from the seed corpus:
   resolution near source scale, and review at 100%.
 - T32 (template remnant) → enumerate donor-template elements to drop in the
   negative constraints.
+- T33 (memorized-brand reversion) → prompt explicitness does not protect
+  (measured in Issue #18: identical failure in a 300-token and a 3,300-token
+  brief). Keep parody-critical text and marks in source-owned pixels via
+  deterministic Assembly, or supply the parody wordmark as its own reference.
+- T34 (beautification) → if photographic character matters, say so as a named
+  invariant; expect sharpening of degraded sources by default.
 - T40–T43 → deterministic Assembly and Fidelity Check; these are pipeline
   contracts, not prompt problems.
 
@@ -110,6 +118,9 @@ enough. Observed mappings from the seed corpus:
   (Fable 5) model vision as the advisory layer; every record carries
   `annotator` and `evidence_strength` so later blind tests can score misses
   and false rejects by class.
+- `v0.2.0` (2026-08-26): appended T33 `memorized-brand-reversion` and T34
+  `source-character-beautification` from the Issue #18 controlled experiment
+  (PR #64), where both prompt-length arms reproduced them identically.
 
 New classes append; renames supersede with a note. A class may only be
 promoted from advisory to hard-gate when a deterministic check exists for it
