@@ -38,11 +38,11 @@ outside-region drift; visible artifacts (Issue #26 taxonomy classes).
 | --- | --- | --- | --- |
 | localized-replacement | A | **near-ceiling** | Slight: full title bar retained, crisper grooved iron head; B (canonical) top-clipped. Both succeed at the edit; both mildly re-render plants. |
 | exact-copy-edit | A | **canonical** | Slight: crop only. Both arms render the new title character-exact and correctly change nothing else. |
-| object-removal | tie (both fail) | — | Both arms removed the star but committed identity substitution: the parody's cursive "palantir" became the memorized ENERGY STAR mark ("energy" script, band text replaced by "ENERGY STAR"). Prompt length gave no protection. |
+| object-removal | tie (both pass) | — | **Corrected 2026-08-26:** both arms removed the star and faithfully preserved the source's real identity. The source file is the genuine ENERGY STAR sticker ("energy" script, "ENERGY STAR" band); the palantir parody exists only in generated outputs of that run. The original "identity substitution" reading was an annotation error — the Edit Brief itself mislabeled the source as the parody, and the model correctly followed the pixels over the wrong name. |
 | style-material | A | **near-ceiling** | Marginal: both excellent gold-foil re-renders with exact copy; near-ceiling converted flag panes to permitted gold tints, canonical kept original hues. |
 | dense-multi-region | A | **canonical** | All three edits applied by both; canonical matched the source's lowercase letter style ("pentium"), near-ceiling capitalized ("Pentium"). Both sharpened the blurry photo source (shared beautification deviation). |
 
-Tally: near-ceiling 2, canonical 2, 1 tie-fail. Every margin was small and
+Tally: near-ceiling 2, canonical 2, 1 tie (both arms succeeded after the correction below). Every margin was small and
 none tracked prompt length (the top-crop defect appeared once in each arm).
 Same-seed pairs were near-twins in composition despite roughly 10x the prompt
 tokens, so (source, seed, output geometry) dominates the visual solution and
@@ -63,11 +63,14 @@ content requires.
 
 Incidental findings that outrank the hypothesis:
 
-1. **Memorized-brand reversion**: with an Energy-Star-style parody source,
-   both arms silently restored the real ENERGY STAR trademark while
-   performing the requested star removal. This is a new failure class for the
-   Issue #26 taxonomy (prior-capture of famous marks defeats preservation
-   invariants regardless of prompt length or explicitness).
+1. **Corrected — annotation error, not brand reversion**: the object-removal
+   source was the genuine ENERGY STAR sticker, mislabeled as the palantir
+   parody in the Edit Brief. Both arms preserved the source faithfully while
+   removing the star — the model followed the pixels over the brief's wrong
+   name (a robustness datum, and a caution for reviewer source-identity
+   checks). Memorized-brand reversion (T33) remains a hypothesis with no
+   confirmed instance; Issue #70 now tests it against the actual approved
+   parody outputs.
 2. **Seed dominance**: matched seeds produced near-identical compositions
    across a 10x prompt-length gap — strong support for Issue #53's
    seed-variance study before trusting any single-seed A/B.
