@@ -50,5 +50,70 @@
       "generate_audio": false,
       "seed": 1
     }
+  },
+  "resurrection-v2": {
+    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+    "estimated_cost_usd": "0.0756",
+    "era_idiom_basis": "FF6 save-point shimmer: 2 frames @ 200 ms, palette band one step brighter",
+    "request": {
+      "model": "bytedance/seedance-2.0-mini",
+      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the resurrection icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe bright core of the circular orb alternates between two brightness states in visible held steps, like a slow blink. Nothing moves and nothing else changes.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+      "duration": 4,
+      "size": "480x480",
+      "generate_audio": false,
+      "seed": 1
+    }
+  },
+  "aqua-benedicta-v2": {
+    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+    "estimated_cost_usd": "0.0756",
+    "era_idiom_basis": "RO cursor-sparkle idiom: 3 frames @ 150 ms, 2x1 px glint walks the water line",
+    "request": {
+      "model": "bytedance/seedance-2.0-mini",
+      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the aqua benedicta icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nA tiny spark of light steps across the water surface from left to right in three separate held positions, one visible jump at a time. Everything else is frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+      "duration": 4,
+      "size": "480x480",
+      "generate_audio": false,
+      "seed": 1
+    }
+  },
+  "sanctuary-v2": {
+    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+    "estimated_cost_usd": "0.0756",
+    "era_idiom_basis": "ALttP blink: 2 frames 350/150 ms asymmetric, mid-tones remap brighter",
+    "request": {
+      "model": "bytedance/seedance-2.0-mini",
+      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the sanctuary icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe golden tones of the figure flash one step brighter and settle back, a slow two-state blink. Zero movement anywhere; only the gold shades change.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+      "duration": 4,
+      "size": "480x480",
+      "generate_audio": false,
+      "seed": 1
+    }
+  },
+  "angelus-v2": {
+    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+    "estimated_cost_usd": "0.0756",
+    "era_idiom_basis": "RO sprite flap quantum: 3 frames (1-2-3-2) @ 125 ms, wing tips 1 px",
+    "request": {
+      "model": "bytedance/seedance-2.0-mini",
+      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the angelus icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe two wing tips shift up by one tiny step, return, then down by one tiny step, each pose held, like a slow sprite wing flap. The skull and frame are frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+      "duration": 4,
+      "size": "480x480",
+      "generate_audio": false,
+      "seed": 1
+    }
+  },
+  "gloria-v2": {
+    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+    "estimated_cost_usd": "0.0756",
+    "era_idiom_basis": "1UP/pokered \u25bc binary toggle: 2 frames @ 250 ms",
+    "request": {
+      "model": "bytedance/seedance-2.0-mini",
+      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the gloria icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe four outer ray tips of the emblem blink on and off together while the small center switches to its brightest shade, a simple two-state twinkle in held steps.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+      "duration": 4,
+      "size": "480x480",
+      "generate_audio": false,
+      "seed": 1
+    }
   }
 }
