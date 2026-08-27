@@ -7,6 +7,7 @@ The direct Qwen outputs successfully removed the Effect row, but they redrew the
 - Two independent node outputs completed successfully.
 - Candidate 1 changed 378,801 pixels inside the declared edit rectangle.
 - Candidate 1 changed **0 RGBA pixels outside** the rectangle.
+- Against the matched full-canvas donor, the node restored 601,136 exterior RGBA pixels and changed **0 pixels inside** the edit rectangle. This isolates the node contribution from Qwen's edit.
 - Original Japanese title `オプション` and footer `スナップ` are source-owned, not regenerated.
 - Feathered Assembly was rejected because it adds a visible horizontal seam.
 - The focused-crop paid arm timed out ambiguously after 180.352 seconds. It was counted as possibly billed and was not retried.

@@ -19,6 +19,7 @@ from scripts.build_issue34_japanese_node_evidence import (
     build_focused_crop_workflow,
     build_japanese_edit_brief,
     compare_declared_region,
+    prepare_experiment,
 )
 
 
@@ -159,6 +160,17 @@ class Issue34JapaneseNodeExperimentTests(unittest.TestCase):
         self.assertEqual(comparison["outside_alpha_changed_pixels"], 0)
         self.assertEqual(comparison["inside_rgba_changed_pixels"], 1)
         self.assertEqual(comparison["max_outside_channel_delta"], 0)
+
+    def test_preparation_retains_a_full_canvas_matched_donor_control(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            prepare_experiment(root)
+            workflow = json.loads(
+                (root / "matched-donor-candidate-01.api.json").read_text()
+            )
+
+        self.assertEqual(workflow["3"]["inputs"]["region"], "0,0,1572,718")
+        self.assertNotIn("reference_masks", workflow["3"]["inputs"])
 
 
 if __name__ == "__main__":

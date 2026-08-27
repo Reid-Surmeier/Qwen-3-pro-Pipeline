@@ -570,13 +570,21 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
         root / "winner/candidate-01_00001_.png",
         root / "winner/candidate-02_00001_.png",
     ]
-    required = [SOURCE_PATH, *baseline_paths, *winner_paths]
+    matched_donor_paths = [
+        root / "matched-donor/candidate-01_00001_.png",
+        root / "matched-donor/candidate-02_00001_.png",
+    ]
+    required = [SOURCE_PATH, *baseline_paths, *matched_donor_paths, *winner_paths]
     missing = [path.as_posix() for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError(f"missing experiment artifacts: {missing}")
 
     winners = []
-    for path in winner_paths:
+    for path, matched_donor_path in zip(
+        winner_paths,
+        matched_donor_paths,
+        strict=True,
+    ):
         comparison = compare_declared_region(SOURCE_PATH, path, ASSEMBLY_RECT)
         qualifies = (
             comparison["outside_rgba_changed_pixels"] == 0
@@ -586,6 +594,11 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
             {
                 **analyze_image(path),
                 "comparison_to_source": comparison,
+                "node_effect_vs_matched_donor": compare_declared_region(
+                    matched_donor_path,
+                    path,
+                    ASSEMBLY_RECT,
+                ),
                 "qualifies_exact_exterior": qualifies,
             }
         )
@@ -697,6 +710,20 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
                 "status": "success",
                 "duration_ms": 148,
             },
+            {
+                "prompt_id": "5de5f1be-828f-47ff-baef-e2aaa468be7b",
+                "candidate": 1,
+                "role": "full-canvas matched donor control",
+                "status": "success",
+                "duration_ms": 173,
+            },
+            {
+                "prompt_id": "76bcc00e-be87-41fa-bb65-2848ab2fbac3",
+                "candidate": 2,
+                "role": "full-canvas matched donor control",
+                "status": "success",
+                "duration_ms": 141,
+            },
         ],
         "visual_adjudication": {
             "baseline": (
@@ -736,6 +763,7 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
     _write_json(root / "run.json", run)
 
     comparison = winners[0]["comparison_to_source"]
+    node_effect = winners[0]["node_effect_vs_matched_donor"]
     report = f"""# Issue 34 result: hard region Assembly is the useful node path
 
 The direct Qwen outputs successfully removed the Effect row, but they redrew the whole interface. The implemented node path uses that successful output only as a donor inside `{ASSEMBLY_RECT[0]},{ASSEMBLY_RECT[1]},{ASSEMBLY_RECT[2]},{ASSEMBLY_RECT[3]}` and keeps the original source everywhere else.
@@ -745,6 +773,7 @@ The direct Qwen outputs successfully removed the Effect row, but they redrew the
 - Two independent node outputs completed successfully.
 - Candidate 1 changed {comparison['inside_rgba_changed_pixels']:,} pixels inside the declared edit rectangle.
 - Candidate 1 changed **{comparison['outside_rgba_changed_pixels']} RGBA pixels outside** the rectangle.
+- Against the matched full-canvas donor, the node restored {node_effect['outside_rgba_changed_pixels']:,} exterior RGBA pixels and changed **{node_effect['inside_rgba_changed_pixels']} pixels inside** the edit rectangle. This isolates the node contribution from Qwen's edit.
 - Original Japanese title `オプション` and footer `スナップ` are source-owned, not regenerated.
 - Feathered Assembly was rejected because it adds a visible horizontal seam.
 - The focused-crop paid arm timed out ambiguously after 180.352 seconds. It was counted as possibly billed and was not retried.
@@ -835,6 +864,20 @@ def prepare_experiment(root: Path = EXPERIMENT_ROOT) -> None:
                     f"candidate-{candidate_number:02d}"
                 ),
                 preserve_reference_alpha=True,
+            ),
+        )
+        _write_json(
+            root / f"matched-donor-candidate-{candidate_number:02d}.api.json",
+            build_comfyui_assembly_workflow(
+                reference_filename="issue-34-options-window-source.png",
+                generated_filename=(
+                    f"issue-34-japanese-v003-baseline-{candidate_number:02d}.png"
+                ),
+                region=f"0,0,{SOURCE_SIZE[0]},{SOURCE_SIZE[1]}",
+                filename_prefix=(
+                    "issue-34/japanese-v003/matched-donor/"
+                    f"candidate-{candidate_number:02d}"
+                ),
             ),
         )
     _write_json(
