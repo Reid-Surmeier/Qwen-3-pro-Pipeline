@@ -1,9 +1,9 @@
 {
   "cap": 200,
-  "requested": 6,
-  "completed": 3,
-  "ambiguous": 3,
-  "actual_cost_usd": 0.129,
+  "requested": 9,
+  "completed": 5,
+  "ambiguous": 4,
+  "actual_cost_usd": 0.215,
   "batches": [
     {
       "name": "backdrop-v1",
@@ -116,6 +116,76 @@
           "sha256": "31010d2f078b59418ac9371a6cb5a6a190856ed0ae77d8d61fb2977053706e5b"
         }
       ]
+    },
+    {
+      "name": "clean-basic-info",
+      "prompt_id": "fb375fcc-b328-4c21-8375-c90e9dc5013d",
+      "status": "success",
+      "seed": 2026086012,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 194,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4369
+      },
+      "files": [
+        {
+          "file": "artifacts/references/ro-hud-fullscreen/clean-raw-basic-info.png",
+          "sha256": "09562f818572517c0d01ae25c50b6b8856e834b207d00ac49748f5bb55d42ec6"
+        }
+      ]
+    },
+    {
+      "name": "clean-party",
+      "prompt_id": "e805f9f2-61fa-4f00-a0fc-68604786cd78",
+      "status": "success",
+      "seed": 2026086013,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 199,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4374
+      },
+      "files": [
+        {
+          "file": "artifacts/references/ro-hud-fullscreen/clean-raw-party.png",
+          "sha256": "ed0f21b47063d3b69f9a2dc6ca8f726426a915ca61375aebf5cd0c88d9b2f8c0"
+        }
+      ]
+    },
+    {
+      "name": "clean-bottom-bar",
+      "prompt_id": "c3be849a-a52a-4793-9ffa-c0ac0551d7cc",
+      "status": "error",
+      "seed": 2026086014,
+      "usage": null,
+      "files": []
     }
   ]
 }

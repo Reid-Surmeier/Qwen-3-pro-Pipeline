@@ -111,6 +111,24 @@
         "input",
         "roster"
       ]
+    },
+    "basic-info": {
+      "file": "godot/plates/basic-info-clean.png",
+      "sha256": "e2bc3f7d7ee7da6aefc5c7f46a62fe13726e136edaf315f3b5091a2a980a79f2",
+      "method": "deterministic-row-flank-lerp"
+    },
+    "party": {
+      "file": "godot/plates/party-clean.png",
+      "sha256": "b4f56e73ae335de9604fb071001262f7bc74d4f6ad46c45f369c8d70ed100246",
+      "method": "qwen-splice-wide"
+    },
+    "bottom-bar": {
+      "file": "godot/plates/bottom-bar-clean.png",
+      "sha256": "09ca4e31e371d135c69f0114c586d1ddda5e65eae80a1ea1dcc7ea5e7653b91a",
+      "spliced_regions": [
+        "location"
+      ],
+      "method": "deterministic-flat-fill"
     }
   }
 }

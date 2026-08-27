@@ -98,6 +98,42 @@ func _toggle_minimized() -> void:
 		tween.tween_property(self, "size", _expanded_size, 0.12)
 
 
+func set_dynamic_text(region_id: String, text: String, font_size: int = 24,
+		color: Color = Color8(30, 34, 44)) -> void:
+	## Swap a dynamic region to its clean-plate patch and mount live text.
+	var rect: Rect2 = dynamic_regions[region_id]
+	if not overlays.has("patch-" + region_id):
+		var clean_path := "res://plates/%s-clean.png" % window_id
+		if ResourceLoader.exists(clean_path):
+			var atlas := AtlasTexture.new()
+			atlas.atlas = load(clean_path)
+			atlas.region = rect
+			var patch := TextureRect.new()
+			patch.name = "patch-" + region_id
+			patch.texture = atlas
+			patch.position = rect.position
+			patch.size = rect.size
+			patch.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			patch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			add_child(patch)
+			overlays["patch-" + region_id] = patch
+	var label: Label = overlays.get("text-" + region_id)
+	if label == null:
+		label = Label.new()
+		label.name = "text-" + region_id
+		label.position = rect.position
+		label.size = rect.size
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(label)
+		overlays["text-" + region_id] = label
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", color)
+	label.text = text
+	state_changed.emit(window_id)
+
+
 func overlay(region_id: String, node: Control) -> void:
 	## Place a live node over a dynamic region; source pixels stay everywhere else.
 	if overlays.has(region_id):

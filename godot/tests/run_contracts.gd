@@ -96,6 +96,14 @@ func _initialize() -> void:
 	check("live-send-appends", main.windows["pm"].overlays.has("live-log"))
 	check("clean-plate-patch", main.windows["pm"].overlays.has("clean-log-patch"))
 
+	var info = main.windows["basic-info"]
+	info.set_dynamic_text("hp-value", "999 / 1109")
+	check("dynamic-text-live", info.overlays.has("patch-hp-value") \
+		and info.overlays.has("text-hp-value") \
+		and info.overlays["text-hp-value"].text == "999 / 1109")
+	info.set_dynamic_text("hp-value", "1092 / 1109")
+	check("dynamic-text-updates", info.overlays["text-hp-value"].text == "1092 / 1109")
+
 	_finish()
 
 
