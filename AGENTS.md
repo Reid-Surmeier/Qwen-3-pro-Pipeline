@@ -54,6 +54,54 @@ Then confirm:
 
 A failed preflight is a stop condition.
 
+## Release train and the integration line (owner directive, 2026-08-27)
+
+The owner reviews **versions, not fragments**. Main is not the review surface:
+
+- The standing integration line is the `release/v0.2.0` branch and its PR
+  (#82). It merges to `main` only when the owner declares the final version
+  done; no agent merges it.
+- Do not present individual feature/test PRs to the owner for review. Land
+  work by merging your branch into the current integration line (resolve
+  conflicts there, then run the full baseline on the integrated tree). A
+  fragment PR may exist briefly for CI, but park it as a draft with a pointer
+  to the release PR once folded in.
+- The release PR body is the changelog: every folded change gets a line, a
+  steward review verdict, and — for anything visual — embedded evidence.
+  Non-blocking review findings are collected into a follow-up issue, never
+  dropped.
+- Direct pushes to `main` are limited to what the owner explicitly names
+  (this procedure section itself was one such push).
+
+### Current milestone: Godot Interactive Replica
+
+The repository's end goal is reverse-engineering the RO-style Japanese HUD
+Reference Screen (`artifacts/references/ro-hud-fullscreen/` on the
+integration line) into a living Godot 4.7.2 replica (`godot/` directory):
+every window draggable, text live, checkboxes and buttons functional, with
+animations mimicking or referenced exactly from the source. The Figma Design
+componentization layer is retired; FigJam remains reference intake only. The
+extraction, fidelity-contract, palette, and vision-verifier machinery of the
+integration line is validated by being used for this — treat gaps found
+while building as defects to fix on the line, not reasons to bypass it.
+
+The replica must be **self-verifying**: headless import, engine contract
+tests, rendered-frame fidelity checks, and error capture that produces
+machine-readable reports an agent can consume and course-correct from,
+without the owner relaying errors by hand. Multiple testing rounds are
+required before anything is called engineered.
+
+### Paid generation for this milestone run
+
+The owner set a cap of **200 Qwen generations** for the current milestone
+run (2026-08-27), superseding ADR 0003's per-issue ceiling for work on this
+milestone only. Everything else in ADR 0003 stands: explicit OpenRouter
+only, smallest useful batch, pre-submission records before spending, full
+provenance, ambiguous requests counted as spent and never blindly retried,
+no paid execution in ordinary CI. Maintain the running count in
+`artifacts/references/ro-hud-fullscreen/generation-ledger.json` on the
+integration line; stop before any request that could exceed 200.
+
 ## Branch and worktree rules
 
 - Treat `main` as the known-good shared baseline.
