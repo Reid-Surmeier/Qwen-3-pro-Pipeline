@@ -15,6 +15,8 @@ from ..prompt_manifest import compile_edit_brief
 
 DEFAULT_MODEL = "qwen/qwen-image-3-pro"
 DEFAULT_ENDPOINT = "https://openrouter.ai/api/v1/images"
+SUPPORTED_MODELS = {"qwen/qwen-image-3-pro", "qwen/qwen-image-3"}
+MAX_SEED = 2_147_483_647
 
 
 class OpenRouterImageClient:
@@ -77,17 +79,37 @@ def build_openrouter_request(
 
     if len(reference_urls) > 4:
         raise ValueError("Qwen Image 3 accepts at most 4 reference images")
+    model = str(brief.get("model", DEFAULT_MODEL))
+    if model not in SUPPORTED_MODELS:
+        raise ValueError(f"Unsupported OpenRouter Qwen Image 3 model: {model}")
+    negative_prompt = brief.get("negative_prompt")
+    if isinstance(negative_prompt, str) and negative_prompt.strip():
+        raise ValueError("OpenRouter does not support negative_prompt")
     compiled = compile_edit_brief(brief)
     output = brief.get("output", {})
+    if output.get("prompt_extend"):
+        raise ValueError("OpenRouter does not support prompt_extend")
+    if output.get("watermark"):
+        raise ValueError("OpenRouter does not support watermark")
+    if output.get("size") is not None:
+        raise ValueError("OpenRouter does not support size")
+    if output.get("size_mode") == "auto":
+        raise ValueError("OpenRouter does not support size_mode auto")
+    count = int(output.get("count", 1))
+    if not 1 <= count <= 6:
+        raise ValueError("OpenRouter output count must be between 1 and 6")
     request: dict[str, Any] = {
-        "model": str(brief.get("model", DEFAULT_MODEL)),
+        "model": model,
         "prompt": compiled.prompt,
         "resolution": str(output.get("resolution", "2K")),
         "aspect_ratio": str(output.get("aspect_ratio", "16:9")),
-        "n": int(output.get("count", 1)),
+        "n": count,
     }
     if "seed" in output:
-        request["seed"] = int(output["seed"])
+        seed = int(output["seed"])
+        if not 0 <= seed <= MAX_SEED:
+            raise ValueError(f"Seed must be between 0 and {MAX_SEED}")
+        request["seed"] = seed
     if reference_urls:
         request["input_references"] = [
             {"type": "image_url", "image_url": {"url": url}}

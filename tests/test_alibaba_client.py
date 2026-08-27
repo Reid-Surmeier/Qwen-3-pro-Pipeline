@@ -59,6 +59,25 @@ class AlibabaImageClientTests(unittest.TestCase):
 
         self.assertEqual(request["parameters"]["size"], "948*806")
 
+    def test_honors_partner_prompt_expansion_watermark_and_negative_prompt(self):
+        brief = {
+            "objective": "Edit Image 1.",
+            "negative_prompt": "no extra text",
+            "output": {
+                "size_mode": "auto",
+                "count": 2,
+                "prompt_extend": False,
+                "watermark": True,
+            },
+        }
+
+        request = build_alibaba_request(brief)
+
+        self.assertNotIn("size", request["parameters"])
+        self.assertFalse(request["parameters"]["prompt_extend"])
+        self.assertTrue(request["parameters"]["watermark"])
+        self.assertEqual(request["parameters"]["negative_prompt"], "no extra text")
+
     def test_rejects_an_explicit_size_outside_the_documented_pixel_range(self):
         brief = {
             "objective": "Replace the flower with a golf club.",
@@ -72,6 +91,16 @@ class AlibabaImageClientTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "pixel area"):
             build_alibaba_request(brief)
+
+    def test_validates_count_and_seed_before_alibaba_submission(self):
+        for output, message in (
+            ({"count": 7}, "count"),
+            ({"seed": -1}, "Seed"),
+        ):
+            with self.subTest(output=output), self.assertRaisesRegex(ValueError, message):
+                build_alibaba_request(
+                    {"objective": "Render a monochrome interface.", "output": output}
+                )
 
     def test_normalizes_expiring_result_urls_to_image_bytes_immediately(self):
         captured = {}

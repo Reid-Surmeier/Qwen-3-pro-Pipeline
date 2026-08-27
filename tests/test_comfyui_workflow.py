@@ -1,6 +1,12 @@
 import unittest
+import json
+from pathlib import Path
 
-from qwen_ui_pipeline import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from qwen_ui_pipeline import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_partner_edit_workflow,
+)
 
 
 class ComfyUiWorkflowTests(unittest.TestCase):
@@ -37,6 +43,56 @@ class ComfyUiWorkflowTests(unittest.TestCase):
         self.assertEqual(workflow["3"]["inputs"]["generated_images"], ["2", 0])
         self.assertEqual(workflow["3"]["inputs"]["region"], "182,78,37,165")
         self.assertEqual(workflow["4"]["inputs"]["images"], ["3", 0])
+
+    def test_builds_three_reference_partner_graph_with_visible_preview_and_save(self):
+        workflow = build_partner_edit_workflow(
+            reference_filenames=["layout.png", "style.png", "asset.png"],
+            filename_prefix="partner/edit-preview",
+            provider="openrouter",
+            prompt="Use @Image1 layout, @Image2 style, and @Image3 asset.",
+        )
+
+        self.assertEqual(
+            [workflow[str(index)]["class_type"] for index in range(1, 4)],
+            ["LoadImage", "LoadImage", "LoadImage"],
+        )
+        self.assertEqual(workflow["4"]["class_type"], "QwenImage3Edit")
+        self.assertEqual(workflow["4"]["inputs"]["image_1"], ["1", 0])
+        self.assertEqual(workflow["4"]["inputs"]["image_2"], ["2", 0])
+        self.assertEqual(workflow["4"]["inputs"]["image_3"], ["3", 0])
+        for node_id, load_id in zip(("5", "6", "7"), ("1", "2", "3")):
+            self.assertEqual(workflow[node_id]["class_type"], "PreviewImage")
+            self.assertEqual(workflow[node_id]["inputs"]["images"], [load_id, 0])
+        self.assertEqual(workflow["8"]["class_type"], "PreviewImage")
+        self.assertEqual(workflow["9"]["class_type"], "SaveImage")
+        self.assertEqual(workflow["8"]["inputs"]["images"], ["4", 0])
+        self.assertEqual(workflow["9"]["inputs"]["images"], ["4", 0])
+
+    def test_partner_workflow_requires_exactly_three_portable_references(self):
+        with self.assertRaisesRegex(ValueError, "exactly three"):
+            build_partner_edit_workflow(
+                reference_filenames=["only-one.png"],
+                filename_prefix="partner/edit-preview",
+                provider="alibaba",
+                prompt="Edit @Image1.",
+            )
+
+    def test_saved_canvas_exposes_three_named_load_preview_lanes(self):
+        path = Path("workflows/partner-three-reference.workflow.json")
+        canvas = json.loads(path.read_text(encoding="utf-8"))
+        nodes = {node["id"]: node for node in canvas["nodes"]}
+
+        self.assertEqual(nodes[4]["type"], "QwenImage3Edit")
+        self.assertEqual(
+            [item["name"] for item in nodes[4]["inputs"]],
+            ["image_1", "image_2", "image_3"],
+        )
+        self.assertEqual(
+            [group["title"].split(" — ", 1)[0] for group in canvas["groups"]],
+            ["image_1", "image_2", "image_3"],
+        )
+        for preview_id in (5, 6, 7, 8):
+            self.assertEqual(nodes[preview_id]["type"], "PreviewImage")
 
 
 if __name__ == "__main__":

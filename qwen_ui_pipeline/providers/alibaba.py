@@ -40,9 +40,12 @@ DEFAULT_ENDPOINT = (
     "https://dashscope-intl.aliyuncs.com"
     "/api/v1/services/aigc/multimodal-generation/generation"
 )
+MAX_SEED = 2_147_483_647
 
 
-def _resolve_size(output: Mapping[str, Any]) -> str:
+def _resolve_size(output: Mapping[str, Any]) -> str | None:
+    if output.get("size_mode") == "auto":
+        return None
     explicit_size = output.get("size")
     if explicit_size is not None:
         match = re.fullmatch(r"([1-9][0-9]*)\*([1-9][0-9]*)", str(explicit_size))
@@ -156,15 +159,25 @@ def build_alibaba_request(
         raise ValueError("Unsupported Qwen Image 3 model")
     content = [{"image": url} for url in reference_urls]
     content.append({"text": compiled.prompt})
+    count = int(output.get("count", 1))
+    if not 1 <= count <= 6:
+        raise ValueError("Alibaba output count must be between 1 and 6")
     parameters: dict[str, Any] = {
-        "prompt_extend": True,
+        "prompt_extend": bool(output.get("prompt_extend", True)),
         "prompt_extend_mode": "direct",
-        "n": int(output.get("count", 1)),
-        "size": size,
-        "watermark": False,
+        "n": count,
+        "watermark": bool(output.get("watermark", False)),
     }
+    if size is not None:
+        parameters["size"] = size
+    negative_prompt = brief.get("negative_prompt")
+    if isinstance(negative_prompt, str) and negative_prompt:
+        parameters["negative_prompt"] = negative_prompt
     if "seed" in output:
-        parameters["seed"] = int(output["seed"])
+        seed = int(output["seed"])
+        if not 0 <= seed <= MAX_SEED:
+            raise ValueError(f"Seed must be between 0 and {MAX_SEED}")
+        parameters["seed"] = seed
     return {
         "model": model,
         "input": {"messages": [{"role": "user", "content": content}]},
