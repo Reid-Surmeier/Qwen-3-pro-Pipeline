@@ -10,11 +10,8 @@ The lifecycle is:
 
 ```text
 not-ready
-  -> needs-triage / needs-info
-  -> agent triage brief
-  -> needs-human-decision
-  -> human approves, revises, splits, or rejects
-  -> ready-for-agent
+  -> needs-triage / needs-info / blocked
+  -> agent triage brief and Issue-body sharpening
   -> in-progress branch or worktree
   -> locally verified
   -> pull request
@@ -63,21 +60,23 @@ Do not require the Issue author to prescribe code structure unless that structur
 
 Use the canonical workflow labels in [`triage-labels.md`](triage-labels.md).
 
-While an Issue has `needs-triage`, an agent may inspect repository context and post the five-part triage brief defined in [`issue-tracker.md`](issue-tracker.md). It must not create a branch, modify files, or begin implementation.
+Triage still happens, but it no longer waits for an Issue-level human
+decision ([ADR 0004](../adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+An agent posts the five-part triage brief defined in
+[`issue-tracker.md`](issue-tracker.md), sharpens the Issue body into a
+testable specification, records the interpretation it takes, and proceeds to
+an isolated branch or worktree. The human vetoes or redirects at the pull
+request, which is the only approval gate.
 
-After commenting, the agent replaces `needs-triage` with `needs-human-decision` and stops. The human then chooses one outcome:
+Pause instead of proceeding only for:
 
-- approve the proposed work packet,
-- request revisions,
-- split the work into smaller Issues,
-- request more investigation,
-- reject or close the work.
+- `needs-info` — a material question the agent cannot answer from the
+  repository, primary sources, or bounded experimentation;
+- `blocked` — a named dependency (`Blocked by #N`) whose observable
+  completion event has not happened yet.
 
-Only the human may authorize the transition to `ready-for-agent`. Before that transition, update the Issue body with the approved outcome, scope, acceptance criteria, verification, dependencies, and approval boundaries. The body is the canonical work packet; comments remain the decision history.
-
-`ready-for-agent` is a gate, not a general priority label. Apply it only when an agent can act without inventing product, architecture, security, cost, or acceptance decisions.
-
-Move an Issue to `needs-info` when a missing answer could materially change the solution. Use `ready-for-human` when the work requires direct human judgment or execution rather than approval of an agent proposal.
+`ready-for-agent` is descriptive, not a permission. Use `ready-for-human`
+when the work itself requires direct human judgment or execution.
 
 ## 3. Create one isolated branch or worktree
 
