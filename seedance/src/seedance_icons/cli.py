@@ -17,6 +17,7 @@ from .capabilities import (
 )
 from .openrouter import OpenRouterVideoClient, asset_reference, request_digest, sanitized_request
 from .runs import create_run, read_job_id, write_json
+from .strategy import check_strategy, gate_record, submit_allowed
 from .verify import verify_video
 
 
@@ -70,6 +71,22 @@ def _plan(args: argparse.Namespace) -> tuple[dict, ModelProfile, Decimal]:
 
 def cmd_plan(args: argparse.Namespace) -> None:
     request, profile, cost = _plan(args)
+    brief_path = Path(args.brief)
+    violations = check_strategy(
+        load_brief(brief_path), brief_path, request["prompt"], args.first_frame, args.last_frame
+    )
+    waiver = args.waive_strategy_gate
+    if violations and waiver is None:
+        listing = "\n".join(f"  - {item}" for item in violations)
+        raise SystemExit(
+            "Strategy gate failed — this run does not follow the batch-3 method "
+            f"(Issue #87):\n{listing}\n"
+            "Fix the brief/anchors, or record a deliberate experiment with "
+            '--waive-strategy-gate "reason".'
+        )
+    if violations:
+        listing = "\n".join(f"  - {item}" for item in violations)
+        print(f"STRATEGY GATE WAIVED ({waiver}); violations on record:\n{listing}")
     run = create_run(Path(args.runs), args.slug)
     write_json(run / "brief.json", load_brief(Path(args.brief)))
     write_json(run / "request.json", sanitized_request(request))
@@ -84,6 +101,7 @@ def cmd_plan(args: argparse.Namespace) -> None:
             "estimated_cost_usd": str(cost),
             "estimate_only_not_invoice": True,
             "paid_submission_performed": False,
+            "strategy_gate": gate_record(violations, waiver),
         },
     )
     print(
@@ -102,6 +120,9 @@ def cmd_submit(args: argparse.Namespace) -> None:
         )
     request = json.loads(payload_path.read_text())
     plan = json.loads((run / "plan.json").read_text())
+    allowed, reason = submit_allowed(plan)
+    if not allowed:
+        raise SystemExit(f"Strategy gate refuses submission: {reason}")
     required = Decimal(plan["estimated_cost_usd"])
     acknowledged = Decimal(args.acknowledge_cost)
     if acknowledged != required:
@@ -199,6 +220,14 @@ def parser() -> argparse.ArgumentParser:
     plan.add_argument("--slug", default="icon-motion")
     plan.add_argument("--runs", default="runs")
     plan.add_argument("--capabilities")
+    plan.add_argument(
+        "--waive-strategy-gate",
+        metavar="REASON",
+        help=(
+            "Record a deliberate deviation from the enforced batch-3 strategy; the reason "
+            "is stored in plan.json and printed, never silent"
+        ),
+    )
     plan.set_defaults(func=cmd_plan)
     submit = sub.add_parser("submit", help="Submit exactly one approved paid request")
     submit.add_argument("run")
