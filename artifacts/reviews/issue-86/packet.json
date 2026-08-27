@@ -20,7 +20,7 @@
     ]
   },
   "launch": {
-    "command": "rm -rf /tmp/g && cp -r /workspace/godot /tmp/g && xvfb-run --auto-servernum godot --path /tmp/g",
+    "command": "rm -rf /tmp/g && cp -r /workspace/godot /tmp/g && godot --path /tmp/g",
     "clean_state_command": "rm -rf /tmp/g && cp -r /workspace/godot /tmp/g"
   }
 }
