@@ -103,6 +103,17 @@ func _initialize() -> void:
 	trade.activate("btn-trade")
 	check("disabled-hit-inert", main.interaction_log.size() == before)
 
+	trade.activate("btn-cancel")
+	check("cancel-closes-trade", not trade.visible)
+	var reopen_t := InputEventKey.new()
+	reopen_t.keycode = KEY_T
+	reopen_t.alt_pressed = true
+	reopen_t.pressed = true
+	Input.parse_input_event(reopen_t)
+	await process_frame
+	await process_frame
+	check("cancel-reopen-by-key", trade.visible)
+
 	check("live-inputs-mounted", main.windows["pm"].overlays.has("input") \
 		and main.windows["chat-room"].overlays.has("input") \
 		and main.windows["bottom-bar"].overlays.has("chat-entry"))

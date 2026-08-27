@@ -62,7 +62,7 @@ print("wrote", out)
 # Donor bottom border: every window shares the same chrome, and windows that
 # abut a neighbor have contaminated bottom rows — so close every collapsed bar
 # with basic-info's clean bottom border (corners kept, middle tiled to width).
-bx, by, bw, bh = rects["basic-info"]
+bx, by, bw, bh = rects["create-room"]
 bsrc = a[by:by + bh, bx:bx + bw]
 bbot = bh - 1
 while bbot > 0:
@@ -76,7 +76,10 @@ CORNER = 14
 def closing_border(width):
     mid = donor[:, CORNER:CORNER + 1]
     middle = np.repeat(mid, max(width - 2 * CORNER, 0), axis=1)
-    return np.concatenate([donor[:, :CORNER], middle, donor[:, -CORNER:]], axis=1)
+    # right corner = mirrored left corner: the donor's own right corner
+    # carries a cyan shadow wedge from its neighbourhood in the reference
+    right = donor[:, :CORNER][:, ::-1]
+    return np.concatenate([donor[:, :CORNER], middle, right], axis=1)
 
 for wid, (x, y, w, h) in rects.items():
     if wid == "bottom-bar":

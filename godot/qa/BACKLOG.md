@@ -28,12 +28,18 @@ SHA when visually verified and pushed.
 - [x] Outgoing chat name color (round 17): sent lines now use the source
   green (#3a9948); the live log reads as one continuous conversation.
   Verified visually in the PM window at 2x.
-- [ ] Minimized-bar corner nit: the donor closing border carries a small
-  cyan shadow curl at the right corner (visible at 3x). Rebuild the donor
-  crop to end cleanly.
-- [ ] Trade window buttons: OK/cancel activate but produce no visible
-  consequence; decide and implement the minimal visible, reversible
-  response (e.g. press-flash only is acceptable — then mark done with
-  rationale).
-- [ ] Bottom-bar tray icons: hits exist (`tray`) but no visible response;
-  same treatment as above.
+- [x] Minimized-bar corner nit (round 19): donor border switched to
+  create-room's clean bottom border with the left corner mirrored for the
+  right side — no cyan curl, no screen-edge contamination. Verified at 6x.
+- [x] Trade/create-room cancel (round 19): cancel dismisses its window —
+  era behavior — reversible via Alt+T / Alt+R (contracts cancel-closes-trade,
+  cancel-reopen-by-key). OK keeps press-flash only: the issue defines no
+  terminal state for trade completion or room creation (the acceptance
+  contract instructs reviewers to report those as unverified, not failures).
+- [x] Bottom-bar tray icons (round 19): press-flash is the visible response.
+  The source defines no tray-icon destinations; opening invented windows
+  would fabricate surfaces the reference does not attest. Rationale recorded.
+- [ ] OPEN (needs-human-decision): guild-roster full scroll — the 11
+  unlisted guild members have no source-attested names. Either authorize
+  generated continuation rows (with provenance) or cap the scroll at the
+  source rows.

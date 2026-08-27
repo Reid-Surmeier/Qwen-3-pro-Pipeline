@@ -168,6 +168,9 @@ func _live_log(window_id: String) -> RichTextLabel:
 
 func _on_hit(window_id: String, hit_id: String) -> void:
 	interaction_log.append({"window": window_id, "hit": hit_id})
+	# Era behavior: cancel dismisses its form/trade window (reopen via Alt key).
+	if hit_id == "btn-cancel" and window_id in ["trade", "create-room"]:
+		windows[window_id].visible = false
 	if hit_id == "log-scroll" and windows[window_id].dynamic_regions.has("log"):
 		var label := _live_log(window_id)
 		var bar := label.get_v_scroll_bar()
