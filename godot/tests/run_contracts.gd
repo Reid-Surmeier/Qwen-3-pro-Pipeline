@@ -125,6 +125,45 @@ func _initialize() -> void:
 			and room.title_text.contains("(14/20)"), room.title_text)
 		check("chatroom-join-dup-rejected", not room.join("Newcomer"))
 
+	# Create-room contracts.
+	var form = main.get_node_or_null("CreateRoomWindow")
+	check("createroom-exists", form != null)
+	if form:
+		var got: Array = []
+		form.room_created.connect(func(cfg): got.append(cfg))
+		form._on_ok()
+		check("createroom-ok-emits", got.size() == 1 \
+			and got[0]["name"] == "ET登頂作戦部屋" and got[0]["min_level"] == 40 \
+			and got[0]["public"] and got[0]["limit"] == 20, str(got))
+		form.room_name_edit.text = ""
+		form._on_ok()
+		check("createroom-empty-name-rejected", got.size() == 1)
+		form.room_name_edit.text = "ET登頂作戦部屋"
+		form.private_radio.button_pressed = true
+		check("createroom-radio-exclusive", not form.public_radio.button_pressed)
+		form.public_radio.button_pressed = true
+		form.cancel_button.emit_signal("pressed")
+		check("createroom-cancel-hides", not form.visible)
+		form.visible = true
+
+	# Party contracts.
+	var party = main.get_node_or_null("PartyWindow")
+	check("party-exists", party != null)
+	if party:
+		check("party-five-rows", party.rows.size() == 5, str(party.rows.size()))
+		party.set_member_hp(0, 500)
+		check("party-hp-live", int(party.rows[0].get_node("HpBar").value) == 500 \
+			and party.rows[0].get_node("HpLabel").text == "500/1109")
+		party.set_member_hp(0, 1092)
+		var was: bool = party.exp_share_check.button_pressed
+		party.exp_share_check.button_pressed = not was
+		check("party-checkbox-toggles", party.exp_share_check.button_pressed != was)
+		party.exp_share_check.button_pressed = was
+		party._on_tab("ギルド")
+		check("party-tab-exclusive", party.tabs["ギルド"].button_pressed \
+			and not party.tabs["パーティー"].button_pressed)
+		party._on_tab("パーティー")
+
 	_finish()
 
 
