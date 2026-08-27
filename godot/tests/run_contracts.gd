@@ -190,6 +190,22 @@ func _initialize() -> void:
 			bar.location_label.text == "プロンテラ [座標 45, 200]", bar.location_label.text)
 		bar.set_location("ETダンジョン 02F", Vector2i(158, 94))
 
+	# Resize + bubble contracts.
+	if win:
+		var orig: Vector2 = win.size
+		win.resize_to(orig + Vector2(60, 40))
+		check("window-resizable", win.size.is_equal_approx(orig + Vector2(60, 40)) \
+			and win.body.size.is_equal_approx(win.size - Vector2(8, 38)), str(win.size))
+		win.resize_to(Vector2(10, 10))
+		check("window-resize-min-clamped", win.size == win.min_size, str(win.size))
+		win.resize_to(orig)
+	var bubble = main.get_node_or_null("SpeechBubble")
+	check("bubble-exists", bubble != null)
+	if bubble:
+		bubble.set_text("テスト")
+		check("bubble-live-text", bubble.label.text == "テスト")
+		bubble.set_text("集合したら\nいくよー")
+
 	_finish()
 
 

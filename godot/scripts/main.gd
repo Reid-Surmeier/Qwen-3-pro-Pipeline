@@ -40,6 +40,11 @@ func _ready() -> void:
 		win.position = WINDOW_LAYOUT[entry[1]]
 		add_child(win)
 
+	var bubble := SpeechBubble.new()
+	bubble.name = "SpeechBubble"
+	bubble.position = Vector2(862, 50)
+	add_child(bubble)
+
 	var bar := BottomBar.new()
 	bar.name = "BottomBar"
 	bar.position = Vector2(0, 1258)

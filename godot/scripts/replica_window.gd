@@ -18,12 +18,17 @@ var _dragging := false
 var _drag_offset := Vector2.ZERO
 var _collapsed := false
 var _expanded_size := Vector2.ZERO
+var resizable := true
+var _resizing := false
+var _resize_start_size := Vector2.ZERO
+var _resize_start_mouse := Vector2.ZERO
+var min_size := Vector2(180, 80)
 
 const TITLE_H := 34.0
 
 
 func _ready() -> void:
-	custom_minimum_size = window_size
+	custom_minimum_size = min_size
 	size = window_size
 	_expanded_size = window_size
 	_build_chrome()
@@ -90,6 +95,20 @@ func _build_chrome() -> void:
 
 	title_bar.gui_input.connect(_on_title_input)
 
+	if resizable:
+		var grip := Control.new()
+		grip.name = "ResizeGrip"
+		grip.size = Vector2(20, 20)
+		grip.anchor_left = 1.0
+		grip.anchor_top = 1.0
+		grip.anchor_right = 1.0
+		grip.anchor_bottom = 1.0
+		grip.offset_left = -20
+		grip.offset_top = -20
+		grip.mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
+		grip.gui_input.connect(_on_grip_input)
+		add_child(grip)
+
 
 func _build_body() -> void:
 	pass  # subclasses populate body
@@ -110,6 +129,23 @@ func _on_title_input(event: InputEvent) -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		move_to_front()
+
+
+func _on_grip_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		_resizing = event.pressed
+		_resize_start_size = size
+		_resize_start_mouse = get_global_mouse_position()
+	elif event is InputEventMouseMotion and _resizing and not _collapsed:
+		var new_size: Vector2 = _resize_start_size + get_global_mouse_position() - _resize_start_mouse
+		resize_to(new_size)
+
+
+func resize_to(new_size: Vector2) -> void:
+	size = new_size.max(min_size)
+	_expanded_size = size
+	title_bar.size.x = size.x - 4
+	body.size = size - Vector2(8, TITLE_H + 4)
 
 
 func _on_minimize() -> void:
