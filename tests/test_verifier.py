@@ -66,8 +66,7 @@ def passing_fidelity():
             RegionChange("title", 4, 6),
             RegionChange("footer", 2, 12),
         ),
-        invariant_violations=0,
-        first_violation=None,
+        invariant_violations=(),
     )
 
 
@@ -89,8 +88,7 @@ class GateOrderingTests(unittest.TestCase):
         failed = FidelityResult(
             passed=False,
             region_changes=(),
-            invariant_violations=17,
-            first_violation=(9, 0),
+            invariant_violations=tuple((index, 0) for index in range(17)),
         )
         client = StubVisionClient({})
 

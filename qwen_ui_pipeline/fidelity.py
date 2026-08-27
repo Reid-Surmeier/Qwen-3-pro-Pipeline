@@ -87,8 +87,30 @@ class FidelityResult:
 
     passed: bool
     region_changes: tuple[RegionChange, ...]
-    invariant_violations: int
-    first_violation: tuple[int, int] | None
+    invariant_violations: tuple[tuple[int, int], ...]
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.invariant_violations, tuple) or any(
+            not isinstance(coordinate, tuple)
+            or len(coordinate) != 2
+            or any(isinstance(value, bool) or not isinstance(value, int) for value in coordinate)
+            for coordinate in self.invariant_violations
+        ):
+            raise FidelityEvidenceError(
+                "invariant violations must be a tuple of integer (x, y) coordinates"
+            )
+        if self.passed != (not self.invariant_violations):
+            raise FidelityEvidenceError(
+                "fidelity passed flag contradicts the invariant-violation evidence"
+            )
+
+    @property
+    def invariant_violation_count(self) -> int:
+        return len(self.invariant_violations)
+
+    @property
+    def first_violation(self) -> tuple[int, int] | None:
+        return self.invariant_violations[0] if self.invariant_violations else None
 
     def change(self, name: str) -> RegionChange:
         for candidate in self.region_changes:
@@ -181,11 +203,46 @@ def _as_pixel_rows(image: Any) -> tuple[int, int, Sequence[Any]]:
 
     if isinstance(image, tuple) and len(image) == 3:
         width, height, pixels = image
-        return int(width), int(height), list(pixels)
+        if (
+            isinstance(width, bool)
+            or not isinstance(width, int)
+            or isinstance(height, bool)
+            or not isinstance(height, int)
+            or width <= 0
+            or height <= 0
+        ):
+            raise FidelityEvidenceError(
+                "explicit image dimensions must be positive integers"
+            )
+        try:
+            pixel_rows = list(pixels)
+        except TypeError as error:
+            raise FidelityEvidenceError(
+                "explicit image pixels must be an iterable"
+            ) from error
+        expected = width * height
+        if len(pixel_rows) != expected:
+            raise FidelityEvidenceError(
+                f"explicit {width}x{height} image declares {expected} pixels but "
+                f"provides {len(pixel_rows)}"
+            )
+        return width, height, pixel_rows
 
-    converted = image.convert("RGBA")
+    try:
+        converted = image.convert("RGBA")
+    except (AttributeError, TypeError, ValueError) as error:
+        raise FidelityEvidenceError(
+            "image evidence must be a PIL-compatible image or an explicit pixel triple"
+        ) from error
     width, height = converted.size
-    return width, height, list(converted.getdata())
+    pixel_rows = list(converted.getdata())
+    expected = width * height
+    if len(pixel_rows) != expected:
+        raise FidelityEvidenceError(
+            f"converted {width}x{height} image declares {expected} pixels but "
+            f"provides {len(pixel_rows)}"
+        )
+    return width, height, pixel_rows
 
 
 def verify_against_baseline(
@@ -214,8 +271,7 @@ def verify_against_baseline(
         )
 
     changed_counts = {region.name: 0 for region in contract.mutable_regions}
-    invariant_violations = 0
-    first_violation: tuple[int, int] | None = None
+    invariant_violations: list[tuple[int, int]] = []
 
     for index, (candidate_pixel, baseline_pixel) in enumerate(
         zip(candidate_pixels, baseline_pixels)
@@ -229,9 +285,7 @@ def verify_against_baseline(
             None,
         )
         if owner is None:
-            invariant_violations += 1
-            if first_violation is None:
-                first_violation = (x, y)
+            invariant_violations.append((x, y))
         else:
             changed_counts[owner.name] += 1
 
@@ -245,10 +299,9 @@ def verify_against_baseline(
     )
 
     return FidelityResult(
-        passed=invariant_violations == 0,
+        passed=not invariant_violations,
         region_changes=region_changes,
-        invariant_violations=invariant_violations,
-        first_violation=first_violation,
+        invariant_violations=tuple(invariant_violations),
     )
 
 
@@ -261,7 +314,7 @@ def describe_result(result: FidelityResult) -> str:
     if not result.passed:
         x, y = result.first_violation or (0, 0)
         lines.append(
-            f"  {result.invariant_violations} pixel(s) changed outside every licensed "
+            f"  {result.invariant_violation_count} pixel(s) changed outside every licensed "
             f"region, first at ({x}, {y})"
         )
     for change in result.region_changes:
@@ -276,17 +329,47 @@ def load_correction_prompts(path: Path) -> tuple[dict[str, Any], ...]:
     """Load the correction-replay corpus, failing closed on a malformed entry."""
 
     document = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(document, Mapping):
+        raise FidelityContractError("correction corpus must be a JSON object")
     prompts = document.get("prompts")
-    if not isinstance(prompts, Sequence) or not prompts:
+    if (
+        not isinstance(prompts, Sequence)
+        or isinstance(prompts, (str, bytes))
+        or not prompts
+    ):
         raise FidelityContractError("correction corpus must carry a non-empty prompts list")
 
-    required = ("id", "source_correction", "review_prompt", "applies_to", "promotion_rule")
+    required = (
+        "id",
+        "source_correction",
+        "review_prompt",
+        "applies_to",
+        "required_evidence",
+        "promotion_rule",
+    )
     seen: set[str] = set()
     for prompt in prompts:
+        if not isinstance(prompt, Mapping):
+            raise FidelityContractError("every correction prompt must be an object")
         for field in required:
             if not prompt.get(field):
                 raise FidelityContractError(
                     f"correction prompt {prompt.get('id', '<unnamed>')} is missing {field}"
+                )
+        for field in ("applies_to", "required_evidence"):
+            if not isinstance(prompt[field], Sequence) or isinstance(
+                prompt[field], (str, bytes)
+            ):
+                raise FidelityContractError(
+                    f"correction prompt {prompt['id']} {field} must be a list"
+                )
+            if any(
+                not isinstance(value, str) or not value.strip()
+                for value in prompt[field]
+            ):
+                raise FidelityContractError(
+                    f"correction prompt {prompt['id']} {field} must contain only "
+                    "non-empty strings"
                 )
         if prompt["id"] in seen:
             raise FidelityContractError(f"duplicate correction prompt {prompt['id']}")

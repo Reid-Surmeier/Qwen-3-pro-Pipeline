@@ -258,7 +258,8 @@ def run_verification(
             verified=False,
             status="revision-required",
             reason=(
-                f"deterministic gate failed with {fidelity.invariant_violations} "
+                f"deterministic gate failed with "
+                f"{fidelity.invariant_violation_count} "
                 "invariant violation(s); the vision layer is not consulted"
             ),
         )

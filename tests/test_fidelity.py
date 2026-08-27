@@ -6,6 +6,7 @@ from pathlib import Path
 from qwen_ui_pipeline.fidelity import (
     FidelityContractError,
     FidelityEvidenceError,
+    FidelityResult,
     corrections_for,
     describe_result,
     load_correction_prompts,
@@ -82,6 +83,24 @@ class FidelityContractTests(unittest.TestCase):
 
 
 class VerifyAgainstBaselineTests(unittest.TestCase):
+    def test_result_cannot_claim_a_pass_with_invariant_violations(self):
+        with self.assertRaisesRegex(FidelityEvidenceError, "contradicts"):
+            FidelityResult(
+                passed=True,
+                region_changes=(),
+                invariant_violations=((9, 0),),
+            )
+
+    def test_result_rejects_malformed_invariant_violation_evidence(self):
+        for malformed in (17, "bad", ((False, 2),), ((1,),), ([1, 2],)):
+            with self.subTest(malformed=malformed):
+                with self.assertRaisesRegex(FidelityEvidenceError, "integer.*coordinates"):
+                    FidelityResult(
+                        passed=False,
+                        region_changes=(),
+                        invariant_violations=malformed,
+                    )
+
     def test_passes_when_only_licensed_regions_changed(self):
         contract = parse_fidelity_contract(CONTRACT)
         baseline = canvas()
@@ -90,7 +109,7 @@ class VerifyAgainstBaselineTests(unittest.TestCase):
         result = verify_against_baseline(contract, candidate, baseline)
 
         self.assertTrue(result.passed)
-        self.assertEqual(result.invariant_violations, 0)
+        self.assertEqual(result.invariant_violations, ())
         self.assertEqual(result.change("title").changed_pixels, 1)
         self.assertEqual(result.change("footer").changed_pixels, 1)
         self.assertEqual(result.change("title").total_pixels, 6)
@@ -104,17 +123,32 @@ class VerifyAgainstBaselineTests(unittest.TestCase):
         self.assertTrue(result.passed)
         self.assertFalse(any(change.changed for change in result.region_changes))
 
-    def test_fails_on_a_single_pixel_changed_outside_every_region(self):
+    def test_reports_every_pixel_changed_outside_every_region(self):
         contract = parse_fidelity_contract(CONTRACT)
         baseline = canvas()
-        candidate = with_pixel(baseline, 9, 0, BLUE)
+        candidate = with_pixel(with_pixel(baseline, 9, 0, BLUE), 0, 9, BLUE)
 
         result = verify_against_baseline(contract, candidate, baseline)
 
         self.assertFalse(result.passed)
-        self.assertEqual(result.invariant_violations, 1)
+        self.assertEqual(result.invariant_violations, ((9, 0), (0, 9)))
+        self.assertEqual(result.invariant_violation_count, 2)
         self.assertEqual(result.first_violation, (9, 0))
         self.assertIn("first at (9, 0)", describe_result(result))
+
+    def test_fails_closed_when_explicit_pixel_evidence_is_incomplete(self):
+        contract = parse_fidelity_contract(CONTRACT)
+        complete = canvas()
+        incomplete = (10, 10, [RED] * 99)
+
+        with self.assertRaisesRegex(FidelityEvidenceError, "declares 100 pixels"):
+            verify_against_baseline(contract, incomplete, complete)
+
+    def test_fails_closed_when_explicit_dimensions_are_not_exact_integers(self):
+        contract = parse_fidelity_contract(CONTRACT)
+
+        with self.assertRaisesRegex(FidelityEvidenceError, "positive integers"):
+            verify_against_baseline(contract, (10.5, 10, [RED] * 100), canvas())
 
     def test_fails_closed_when_the_images_disagree_on_size(self):
         contract = parse_fidelity_contract(CONTRACT)
@@ -169,6 +203,59 @@ class CorrectionCorpusTests(unittest.TestCase):
 
             with self.assertRaises(FidelityContractError):
                 load_correction_prompts(path)
+
+    def test_rejects_a_prompt_missing_required_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "corpus.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "prompts": [
+                            {
+                                "id": "incomplete",
+                                "source_correction": "x",
+                                "review_prompt": "y",
+                                "applies_to": ["*"],
+                                "promotion_rule": "z",
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(FidelityContractError, "required_evidence"):
+                load_correction_prompts(path)
+
+    def test_rejects_a_non_object_corpus_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "corpus.json"
+            path.write_text(json.dumps([]), encoding="utf-8")
+
+            with self.assertRaisesRegex(FidelityContractError, "JSON object"):
+                load_correction_prompts(path)
+
+    def test_rejects_non_string_correction_list_items(self):
+        prompt = {
+            "id": "malformed-list",
+            "source_correction": "x",
+            "review_prompt": "y",
+            "applies_to": ["*"],
+            "required_evidence": ["screenshot"],
+            "promotion_rule": "z",
+        }
+        for field, value in (("applies_to", None), ("required_evidence", {})):
+            with self.subTest(field=field):
+                malformed = json.loads(json.dumps(prompt))
+                malformed[field] = [value]
+                with tempfile.TemporaryDirectory() as directory:
+                    path = Path(directory) / "corpus.json"
+                    path.write_text(
+                        json.dumps({"prompts": [malformed]}), encoding="utf-8"
+                    )
+
+                    with self.assertRaisesRegex(FidelityContractError, "non-empty strings"):
+                        load_correction_prompts(path)
 
 
 if __name__ == "__main__":
