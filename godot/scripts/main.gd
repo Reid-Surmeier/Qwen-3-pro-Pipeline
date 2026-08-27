@@ -5,43 +5,55 @@ extends Control
 
 const DESKTOP_MAGENTA := Color8(239, 7, 239)
 
+# Source log history, transcribed from the reference plates. Seeds the live
+# log when it replaces the static plate, so sending a message appends to the
+# conversation instead of wiping it.
+const SOURCE_LOG := {
+	"pm": [
+		["Sebas'", "#3a9948", "さっきの宝箱 あけた？"],
+		["SakumaRiri", "#3a9948", "あけたよ～"],
+		["Sebas'", "#3a9948", "お、何でた？"],
+		["SakumaRiri", "#3a9948", "イミュンマフラー！"],
+		["Sebas'", "#3a9948", "うまw"],
+		["SakumaRiri", "#3a9948", "今回ついてるかもw"],
+	],
+	"chat-room": [
+		["AyanaIshizuka", "#3a9948", "どもー"],
+		["SakumaRiri", "#3a9948", "支援いきますー"],
+		["Sebas'", "#3a9948", "盾まかせてっ"],
+		["Ragna-X", "#3a9948", "火力おっけー"],
+		["Meltina", "#3a9948", "ヒール全開で！"],
+		["Choco-L", "#c83737", "SWありますー"],
+		["Aero", "#3a9948", "材料いける？"],
+		["AyanaIshizuka", "#3a9948", "いけますー"],
+		["Show_A", "#3a9948", "ではいくよー"],
+		["SakumaRiri", "#3a9948", "集合したらいくよー"],
+	],
+}
+
 var windows := {}
 var interaction_log: Array = []
 
 
 func _ready() -> void:
-	var font := FontFile.new()
-	font.load_dynamic_font("res://fonts/PixelMplus12-Regular.ttf")
+	var font: FontFile = load("res://fonts/PixelMplus12-Regular.ttf")
 	font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
 	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_DISABLED
 	theme = Theme.new()
 	theme.default_font = font
 	theme.default_font_size = 24
 
-	var desktop := ColorRect.new()
+	# Desktop plate: the reference frame itself with every window rect filled
+	# magenta — world pixels, speech bubble, and desktop are source-exact, and
+	# a window that fails to draw exposes magenta instead of a static fake.
+	var desktop := TextureRect.new()
 	desktop.name = "Desktop"
-	desktop.color = DESKTOP_MAGENTA
+	desktop.texture = load("res://textures/desktop-plate.png")
 	desktop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	desktop.stretch_mode = TextureRect.STRETCH_SCALE
+	desktop.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	desktop.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(desktop)
-
-	var backdrop := TextureRect.new()
-	backdrop.name = "GameBackdrop"
-	backdrop.texture = load("res://textures/game-backdrop.png")
-	backdrop.position = Vector2(655, 0)
-	backdrop.size = Vector2(753, 845)
-	backdrop.stretch_mode = TextureRect.STRETCH_SCALE
-	backdrop.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(backdrop)
-
-	var bubble := TextureRect.new()
-	bubble.name = "SpeechBubble"
-	bubble.texture = load("res://plates/speech-bubble.png")
-	bubble.position = Vector2(852, 42)
-	bubble.size = bubble.texture.get_size()
-	bubble.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(bubble)
 
 	var manifest: Dictionary = JSON.parse_string(
 		FileAccess.get_file_as_string("res://data/runtime-manifest.json"))
@@ -50,9 +62,12 @@ func _ready() -> void:
 	holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	holder.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(holder)
+	var state_patches: Dictionary = JSON.parse_string(
+		FileAccess.get_file_as_string("res://data/state-patches.json"))
 	for value in manifest.windows:
 		var window := PlateWindow.new()
 		window.configure(value)
+		window.state_patches = state_patches.get(str(value.id), {})
 		window.hit_activated.connect(_on_hit)
 		holder.add_child(window)
 		windows[window.window_id] = window
@@ -108,14 +123,18 @@ func _send_chat(window_id: String, text: String) -> void:
 			label = RichTextLabel.new()
 			label.name = "live-log"
 			label.bbcode_enabled = true
-			label.scroll_active = false
+			label.scroll_active = true
+			label.scroll_following = true
+			label.get_v_scroll_bar().modulate = Color(1, 1, 1, 0)
 			label.add_theme_color_override("default_color", Color8(30, 34, 44))
-			label.add_theme_font_size_override("normal_font_size", 22)
+			label.add_theme_font_size_override("normal_font_size", 24)
 			var rect2: Rect2 = window.dynamic_regions["log"]
 			label.position = rect2.position + Vector2(6, 4)
 			label.size = rect2.size - Vector2(12, 8)
 			window.add_child(label)
 			window.overlays["live-log"] = label
+			for line in SOURCE_LOG.get(window_id, []):
+				label.append_text("[color=%s]%s[/color] : %s\n" % [line[1], line[0], line[2]])
 		label.append_text("[color=#4a6edc]SakumaRiri[/color] : %s\n" % text)
 	var edit: Control = window.overlays.get("input")
 	if edit == null:

@@ -23,10 +23,8 @@ func _initialize() -> void:
 	check("main-scene-loads", true)
 
 	var desktop = main.get_node_or_null("Desktop")
-	check("desktop-magenta", desktop != null \
-		and desktop.color.is_equal_approx(Color8(239, 7, 239)))
-	check("backdrop-loaded", main.get_node("GameBackdrop").texture != null)
-	check("bubble-loaded", main.get_node("SpeechBubble").texture != null)
+	check("desktop-plate-loaded", desktop != null and desktop is TextureRect \
+		and desktop.texture != null)
 
 	# Exact inventory: every manifest window exists with its plate and hits.
 	var expected_hits := 0
@@ -51,12 +49,15 @@ func _initialize() -> void:
 	check("inventory-hit-count", state.hit_count == expected_hits,
 		"%d/%d" % [state.hit_count, expected_hits])
 
-	# Behavior contracts through activate().
+	# Behavior contracts through activate(). Source state: check-exp starts
+	# checked, so the first toggle unchecks and must show the derived patch.
 	var party = main.windows["party"]
+	check("checkbox-source-state", party.toggle_state["check-exp"] == true)
 	party.activate("check-exp")
-	check("checkbox-toggles", party.toggle_state["check-exp"] == true)
+	check("checkbox-toggles", party.toggle_state["check-exp"] == false)
+	check("checkbox-visible-off", party.overlays.has("state-check-exp"))
 	party.activate("check-exp")
-	check("checkbox-restores", party.toggle_state["check-exp"] == false)
+	check("checkbox-restores", party.toggle_state["check-exp"] == true)
 	party.activate("tab-guild")
 	check("tab-exclusive", party.toggle_state["tab-guild"] \
 		and not party.toggle_state["tab-party"])
@@ -66,16 +67,22 @@ func _initialize() -> void:
 	form.activate("radio-private")
 	check("radio-exclusive", form.toggle_state["radio-private"] \
 		and not form.toggle_state["radio-public"])
+	check("radio-visible-swap", form.overlays.has("state-radio-private") \
+		and form.overlays.has("state-radio-public"))
 	form.activate("radio-public")
 
 	var basic = main.windows["basic-info"]
 	var full: Vector2 = basic.size
+	var full_texture: Texture2D = basic.plate.texture
 	basic.activate("minimize")
 	await create_timer(0.2).timeout
 	check("minimize-folds", basic.minimized and basic.size.y <= 47.0, str(basic.size))
+	check("minimize-real-asset", basic.plate.texture != full_texture,
+		"collapsed state must be the composited plate, not a clipped frame")
 	basic.activate("minimize")
 	await create_timer(0.2).timeout
-	check("minimize-restores", not basic.minimized and basic.size == full)
+	check("minimize-restores", not basic.minimized and basic.size == full \
+		and basic.plate.texture == full_texture)
 
 	basic.activate("close")
 	check("close-hides", not basic.visible)

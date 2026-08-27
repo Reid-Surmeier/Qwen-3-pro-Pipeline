@@ -1,0 +1,58 @@
+{
+ "party": {
+  "check-exp": {
+   "pos": [
+    10,
+    400
+   ],
+   "size": [
+    39,
+    41
+   ],
+   "source_state": true,
+   "on_asset": null,
+   "off_asset": "res://plates/patches/party-check-exp-off.png"
+  },
+  "check-item": {
+   "pos": [
+    10,
+    440
+   ],
+   "size": [
+    39,
+    41
+   ],
+   "source_state": true,
+   "on_asset": null,
+   "off_asset": "res://plates/patches/party-check-item-off.png"
+  }
+ },
+ "create-room": {
+  "radio-public": {
+   "pos": [
+    167,
+    160
+   ],
+   "size": [
+    26,
+    26
+   ],
+   "source_state": true,
+   "on_asset": "res://plates/patches/create-room-radio-on.png",
+   "off_asset": "res://plates/patches/create-room-radio-off.png"
+  },
+  "radio-private": {
+   "pos": [
+    288,
+    160
+   ],
+   "size": [
+    26,
+    26
+   ],
+   "source_state": false,
+   "on_asset": "res://plates/patches/create-room-radio-on.png",
+   "off_asset": "res://plates/patches/create-room-radio-off.png"
+  }
+ }
+}
