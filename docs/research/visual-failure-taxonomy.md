@@ -86,17 +86,30 @@ rejection.
 The owner's framing in Issue #26: artifacts mean the model was not guided
 enough. Observed mappings from the seed corpus:
 
-- T20/T21/T22 (global redraw, aspect, crop) → **prefer the nearest
-  supported aspect, but geometry is not the whole story**. The original
-  corpus inference (v001 at 4:3 lost all four candidates to global drift
-  while source-proportioned v002 kept layout) was tested under control in
-  Issue #52: on the current route with the canonical brief, aspect mismatch
-  did not reproduce the collapse — the model adapts by uniform anisotropic
-  scaling of the whole window (squash at 16:9, stretch at 1:1) with the UI
-  inventory intact. Mismatch costs proportion fidelity, predictably;
-  fine-grained text damage across aspects sat within Issue #53's measured
-  seed noise. The v001 collapse likely came from that run's brief/provider
-  settings, not geometry alone.
+- T21/T22 (aspect and crop) → **match the source canvas**. Issue #52 measured
+  this with one frozen PlantStudio edit, seed, and Qwen Image 3 Pro model over
+  four OpenRouter arms. Exact `size: 948x806` had 0% aspect error and only mild
+  bottom cropping; nearest `5:4` had 6.17% aspect error and moderate bottom
+  truncation at both 1K and 2K; mismatched `16:9` had 51.15% aspect error and
+  severe teal pillarboxing. Its outside-region and edge-strip pixel indicators
+  were respectively 1.97x and 1.69x the exact arm. Prefer exact explicit pixel
+  size, otherwise the closest supported aspect. Increasing resolution does not
+  repair a mismatched canvas.
+- T20 (global redraw) → **canvas match reduces disturbance but is not a
+  preservation mechanism**. Issue #52 bounded independent review found T20 in
+  every arm: typography, icons, plants, graph, and controls were regenerated
+  outside the licensed edit region. Exact size and the nearest aspect reduced
+  the raw changed-pixel fraction, while mismatched `16:9` was 1.97x the exact
+  arm, but even the lowest arm changed 28.42% of normalized outside-region
+  pixels above the luma threshold. Use deterministic Assembly plus Fidelity
+  Check when the contract requires zero outside-region changes.
+- Companion observation (the parallel Issue #52 run in PR #67, plus PR #66):
+  under strong mismatch the model adapts by **uniform anisotropic scaling** of
+  the whole window (squash at 16:9, stretch at 1:1) rather than chaotic
+  collapse, and fine-grained text damage across aspects sat within Issue
+  #53's measured per-seed noise — attribute text defects to geometry only
+  with multi-seed evidence. The historical v001 collapse likely came from
+  that run's brief/provider settings, not geometry alone.
 - T01/T03 (copy/logotype corruption) → shrink the generation surface
   (focused crop), or move text into source-owned pixels via deterministic
   Assembly (ADR 0002); regenerate only non-text regions.
@@ -120,6 +133,9 @@ enough. Observed mappings from the seed corpus:
 
 ## Versioning
 
+- `v0.2.0` (2026-08-27): replaced the anecdotal combined T20/T21/T22 canvas
+  guidance with the measured Issue #52 four-arm result; canvas match reduces
+  T21/T22 severity but does not satisfy strict T20 preservation.
 - `v0.1.0` (2026-08-26): initial 18 classes from the zero-cost audit of 8
   preserved runs plus the Issue #26 attached example. Annotated by Claude
   (Fable 5) model vision as the advisory layer; every record carries
