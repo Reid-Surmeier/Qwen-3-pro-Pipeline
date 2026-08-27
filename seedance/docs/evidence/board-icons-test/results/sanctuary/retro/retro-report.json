@@ -2,20 +2,20 @@
   "unique_frames": 8,
   "effective_fps": 2.0,
   "out_of_palette_pixels": 0,
-  "min_silhouette_iou": 0.7593,
-  "frame0_identity": 0.724,
+  "min_silhouette_iou": 0.9988,
+  "frame0_identity": 0.7491,
   "grid": 160,
   "palette_colors": 16,
-  "reference": "docs/evidence/board-icons-test/anchors/blessing-anchor-640.png",
+  "reference": "docs/evidence/board-icons-test/anchors/sanctuary-anchor-640.png",
   "checks": {
     "unique_frames_in_range": true,
     "effective_fps_ok": true,
     "palette_locked": true,
-    "silhouette_stable": false
+    "silhouette_stable": true
   },
   "diagnostics": {
-    "frame0_identity": 0.724
+    "frame0_identity": 0.7491
   },
-  "certified": false,
+  "certified": true,
   "hold_frames_at_24fps": 4
 }

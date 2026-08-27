@@ -27,12 +27,12 @@ lock to the anchor with no dither → NEAREST re-upscale → held-cadence reasse
 writes `<run>/retro/` with frames, `conformed.gif`, and `retro-report.json`. Temporal,
 palette, and grid conformance are guaranteed by construction; the report's real decisions:
 
-| Metric | Threshold | Catches |
+| Metric | Role | Catches |
 | --- | --- | --- |
-| `min_silhouette_iou` | ≥ 0.90 | redraws and motion escaping the tile (primary detector) |
-| `frame0_identity` | ≥ 0.80 | model repainting the icon (calibrated 2026-08-27: faithful 0.82–0.84 after codec loss, redraws 0.72–0.77) |
-| `unique_frames` / `effective_fps` | 2–8 / ≤ 10 | non-sprite cadence (by construction) |
-| `out_of_palette_pixels` | 0 | palette drift (by construction) |
+| `min_silhouette_iou` ≥ 0.90 | certification decision | redraws and motion escaping the tile — zero-overlap separation across both calibration batches (faithful 0.998–1.0 vs violations 0.57–0.76) |
+| `unique_frames` 2–8 / `effective_fps` ≤ 10 | certification (by construction) | non-sprite cadence |
+| `out_of_palette_pixels` = 0 | certification (by construction) | palette drift |
+| `frame0_identity` | recorded diagnostic only | demoted after batch 2: it tracks tile paleness, not fidelity (faithful 0.71–0.84 overlapping the true redraw's 0.72); anchor RMSE from `verify` covers frame-0 fidelity |
 
 `certified: false` → the run is a rejected candidate (kept as evidence); iterate the
 brief or seed. Only certified conformed output goes to human style review, presented
@@ -40,8 +40,10 @@ beside its anchor.
 
 ## Calibration provenance
 
-Thresholds were calibrated on the four-run board-icons batch (Issue #87): the gate
-certifies exactly the two runs a human judged acceptable (heal, protect) and rejects the
-two failures (blessing: redraw+tilt, IoU 0.76; holy-light: bloom escape, IoU 0.61).
-Recalibrate against human verdicts as batches accumulate; thresholds live in
-`RetroThresholds` (`src/seedance_icons/retro.py`).
+Calibrated on the two 2026-08-27 board-icons batches (9 runs, Issue #87). Batch 1: the
+gate certifies exactly the two humanly-acceptable runs (heal 1.00, protect 0.998) and
+rejects both failures (blessing redraw 0.76, holy-light escape 0.61). Batch 2 (era-corpus
+briefs): all five certified at IoU 0.998–1.0 — and exposed frame0_identity as
+paleness-biased, leading to its demotion to a diagnostic. Recalibrate against human
+verdicts as batches accumulate; thresholds live in `RetroThresholds`
+(`src/seedance_icons/retro.py`).

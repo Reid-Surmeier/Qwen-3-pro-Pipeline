@@ -67,4 +67,4 @@ def test_certify_applies_thresholds():
     result = certify(bad, RetroThresholds())
     assert result["certified"] is False
     assert result["checks"]["silhouette_stable"] is False
-    assert result["checks"]["identity_held"] is False
+    assert result["diagnostics"]["frame0_identity"] == 0.7

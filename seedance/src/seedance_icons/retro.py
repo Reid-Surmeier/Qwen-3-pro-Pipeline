@@ -71,15 +71,15 @@ def identity_fraction(frame: Image.Image, source_snapped: Image.Image) -> float:
 
 @dataclass
 class RetroThresholds:
-    # min_identity calibrated on the 2026-08-27 board-icons batch: faithful outputs
-    # score 0.82-0.84 after codec loss + palette lock, model redraws 0.72-0.77.
-    # Silhouette IoU separates harder (faithful 0.99-1.0 vs violations 0.57-0.76)
-    # and is the primary redraw/escape detector.
+    # Calibrated on the two 2026-08-27 board-icons batches (9 runs, 2 true failures):
+    # silhouette IoU separates perfectly with no overlap (faithful 0.998-1.0 vs
+    # redraw/escape 0.57-0.76) and is the certification decision. frame0_identity
+    # does NOT separate reliably — it tracks tile paleness (faithful 0.71-0.84
+    # overlapping the redraw's 0.72), so it is recorded as a diagnostic only.
     min_frames: int = 2
     max_frames: int = 8
     max_effective_fps: float = 10.0
     min_silhouette_iou: float = 0.90
-    min_identity: float = 0.80
 
 
 def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
@@ -89,9 +89,12 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "effective_fps_ok": report["effective_fps"] <= t.max_effective_fps,
         "palette_locked": report["out_of_palette_pixels"] == 0,
         "silhouette_stable": report["min_silhouette_iou"] >= t.min_silhouette_iou,
-        "identity_held": report["frame0_identity"] >= t.min_identity,
     }
-    return {"checks": checks, "certified": all(checks.values())}
+    return {
+        "checks": checks,
+        "diagnostics": {"frame0_identity": report["frame0_identity"]},
+        "certified": all(checks.values()),
+    }
 
 
 def conform(

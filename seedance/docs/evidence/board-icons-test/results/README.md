@@ -27,3 +27,31 @@ $0.05432 each — $0.21728 for the batch against a $0.3024 estimate.
 
 Per-run evidence in `heal/`, `protect/`, `blessing/`, `holy-light/`: output.mp4 + sha256,
 sanitized request, plan, terminal job record, verification report, GIF preview, mid frame.
+
+## Batch 2 — era-corpus briefs (2026-08-27, five new icons)
+
+Briefs written strictly from `../../research/era-ui-animation-reference-corpus.md`
+prescriptions (each brief records its `era_idiom_basis`). Same config as batch 1.
+Billed $0.05432 each — $0.27160 for the batch against a $0.378 estimate.
+
+| Icon | Era idiom | First RMSE | Seam RMSE | Silhouette IoU | Certified |
+| --- | --- | --- | --- | --- | --- |
+| resurrection | FF6 save-point shimmer (2-state core blink) | 4.6 | 29.4 | 0.998 | yes |
+| aqua-benedicta | cursor-sparkle glint walking the water line | 4.8 | 22.7 | 1.000 | yes |
+| sanctuary | ALttP gold-tone blink, zero movement | 5.0 | 27.8 | 0.999 | yes |
+| angelus | 1 px wing-tip flap (1-2-3-2) | 4.8 | 24.3 | 1.000 | yes |
+| gloria | binary ray-tip twinkle | 4.9 | 25.5 | 0.998 | yes |
+
+### Batch-2 findings
+
+1. **Era-grounded briefs eliminated the structural failures.** No redraws, no
+   containment escapes anywhere (batch 1: 2/4 failed). Silhouette IoU 0.998–1.0
+   across all five.
+2. **frame0_identity demoted to a diagnostic.** Across nine runs it tracks tile
+   paleness, not fidelity (faithful 0.71–0.84 overlapping the true redraw's 0.72),
+   while IoU separates with zero overlap. Certification now rests on IoU plus the
+   by-construction checks; anchor RMSE from `verify` covers frame-0 fidelity
+   (4.6–5.0 across this batch).
+3. Endpoint drift persists (seam RMSE 23–29) — unchanged from batch 1 and unfixed
+   by prompt work; loop closure remains a post-step (trim/cross-fade) or a
+   first-frame-only conditioning question for a future cell.

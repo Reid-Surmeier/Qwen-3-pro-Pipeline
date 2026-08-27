@@ -11,8 +11,10 @@
     "unique_frames_in_range": true,
     "effective_fps_ok": true,
     "palette_locked": true,
-    "silhouette_stable": false,
-    "identity_held": false
+    "silhouette_stable": false
+  },
+  "diagnostics": {
+    "frame0_identity": 0.7494
   },
   "certified": false,
   "hold_frames_at_24fps": 4
