@@ -1,0 +1,24 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/maga-operating-system-xe-sticker-v001/maga-operating-system-xe-sticker-v001.png",
+  "sha256": "050333e3035b22ff2cb4cb6cb14ae850d90c22f28dd8cbffcd54906038924041",
+  "role": "approved_output",
+  "source_ref": "artifacts/references/maga-operating-system-xe-sticker-v001/windows-xp-designed-for-badge-node-67-714.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T31",
+      "region": [
+        220,
+        160,
+        860,
+        760
+      ],
+      "strength": "weak",
+      "note": "Flag halftone slightly worm-like at 100%; plausible as print grain."
+    }
+  ],
+  "disposition": "accepted",
+  "note": "Faithful Designed-for-XP badge parody; structure, copy, and metallic gradient consistent."
+}

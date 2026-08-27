@@ -1,0 +1,46 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/golf-club-object-v001/image-04.png",
+  "sha256": "8ac8b3cd8f2cbb33e9bbf9abbae1c11d4013b1b2754f673a0ae5d22a099fc535",
+  "role": "rejected_candidate",
+  "source_ref": "artifacts/references/plantstudio-main-window.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T01",
+      "region": [
+        0,
+        0,
+        700,
+        30
+      ],
+      "strength": "strong",
+      "note": "Title garbled: 'PlantStudio - Libroy (diveuldflowers'."
+    },
+    {
+      "class": "T13",
+      "region": [
+        620,
+        180,
+        1150,
+        560
+      ],
+      "strength": "strong",
+      "note": "Ghosted/duplicated stems and semi-transparent leaf echoes in right plant group."
+    },
+    {
+      "class": "T22",
+      "region": [
+        0,
+        830,
+        1152,
+        864
+      ],
+      "strength": "strong",
+      "note": "Tab row nearly gone."
+    }
+  ],
+  "disposition": "rejected",
+  "note": "Worst v001 candidate: copy corruption plus ghost geometry."
+}
