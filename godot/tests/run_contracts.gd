@@ -89,7 +89,14 @@ func _initialize() -> void:
 
 	basic.activate("close")
 	check("close-hides", not basic.visible)
-	basic.visible = true
+	var reopen := InputEventKey.new()
+	reopen.keycode = KEY_V
+	reopen.alt_pressed = true
+	reopen.pressed = true
+	Input.parse_input_event(reopen)
+	await process_frame
+	await process_frame
+	check("close-reopens-by-key", basic.visible, "Alt+V must restore the window")
 
 	var trade = main.windows["trade"]
 	var before: int = main.interaction_log.size()

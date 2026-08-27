@@ -5,6 +5,20 @@ extends Control
 
 const DESKTOP_MAGENTA := Color8(239, 7, 239)
 
+# Era window shortcuts (close → reopen reversibility). Canon RO 1.x keys
+# where they exist (Alt+V status, Alt+Z party, Alt+G guild, Alt+C chat room);
+# the rest are assigned in the same idiom and documented in qa/BACKLOG.md.
+const WINDOW_KEYS := {
+	KEY_V: "basic-info",
+	KEY_Z: "party",
+	KEY_G: "guild",
+	KEY_C: "chat-room",
+	KEY_M: "minimap",
+	KEY_R: "create-room",
+	KEY_T: "trade",
+	KEY_P: "pm",
+}
+
 # Source log history, transcribed from the reference plates. Seeds the live
 # log when it replaces the static plate, so sending a message appends to the
 # conversation instead of wiping it.
@@ -146,6 +160,18 @@ func _send_chat(window_id: String, text: String) -> void:
 
 func _on_hit(window_id: String, hit_id: String) -> void:
 	interaction_log.append({"window": window_id, "hit": hit_id})
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.alt_pressed and WINDOW_KEYS.has(event.keycode):
+		var window: PlateWindow = windows[WINDOW_KEYS[event.keycode]]
+		window.visible = not window.visible
+		if window.visible:
+			window.move_to_front()
+		interaction_log.append({"window": window.window_id,
+			"key_toggle": window.visible})
+		get_viewport().set_input_as_handled()
 
 
 func qa_state() -> Dictionary:
