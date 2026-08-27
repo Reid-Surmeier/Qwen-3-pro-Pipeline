@@ -1,0 +1,24 @@
+{
+  "source_authority": "The supplied image is the exact identity authority. Every pixel of the protect icon — the silver-blue shield and its beveled square frame — must remain exactly as captured underneath the described overlay effect. The shield art itself is never altered, only covered and uncovered.",
+  "style_lock": [
+    "the shield keeps its exact shape, colors, and soft blocky texture exactly as captured; it never moves, scales, or redraws",
+    "the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip",
+    "the cooldown effect is a flat dark cover layer ON TOP of the icon, like a piece of dark glass — the icon pixels underneath are unchanged and reappear exactly as captured when uncovered",
+    "the cover's edge is a hard straight radius line from the center, aliased and crisp, never soft or feathered",
+    "stop-motion feel: the sweep advances in small visible increments, each briefly held, never as one continuous smear"
+  ],
+  "motion": "A skill-cooldown sweep plays once, exactly like a 2004 MMO action bar. Beat 1: the icon holds exactly as captured for a moment. Beat 2: a flat dark semi-transparent cover snaps on instantly over the whole square tile, darkening the shield to about forty percent brightness — the shield is still recognizable underneath, merely dimmed. Beat 3: the cover is eaten away clockwise, starting from the twelve o'clock position: a hard straight edge line from the tile center sweeps clockwise like a clock hand, and everything the line passes is uncovered back to full captured brightness, while everything not yet reached stays dimmed. The sweep advances in about twelve visible held increments, taking most of the clip, so the bright wedge grows from a sliver at twelve o'clock through three o'clock, six o'clock, nine o'clock, until the last dark sliver just before twelve vanishes. Beat 4: the instant the cover is fully gone, a small bright white-gold flat flash overlay appears across the shield at full strength and fades out in three visible held steps, each dimmer than the last, within half a second. Beat 5: the tile holds exactly as captured to the end.",
+  "timing": "Hold the exact start image briefly, snap the dark cover on, spend most of the clip on the stepped clockwise sweep, play the three-step end flash right as the sweep completes, and hold the exact start image again for the final portion so the last frame is pixel-identical to the first.",
+  "camera": "Static camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.",
+  "background": "Plain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the dark cover and the flash exist only inside the square tile.",
+  "negative_constraints": [
+    "nothing may cross the edge of the square onto the background",
+    "no glow, bloom, soft light rays, particles, or added objects; the flash is a flat overlay, not a bloom",
+    "the shield art is never redrawn, recolored, or moved — dimming comes only from the flat cover above it",
+    "the sweep edge is never blurred, curved, or feathered",
+    "no smooth continuous rotation; the sweep advances in distinct held increments",
+    "do not leave a visible loop seam; the final frame returns exactly to the first frame"
+  ],
+  "era_idiom_basis": "WoW 1.12 cooldown clock-wipe: dark radial cover scrubbed clockwise from 12 o'clock over an unchanged icon, with a one-shot end flash of ~0.3-0.5 s in discrete alpha steps (tekkub/wow-ui-source 1.12.1 UI-Cooldown-Indicator model + corpus B.4a); Guild Wars 2005 confirms the clock-hand recharge sweep",
+  "real_reference": "era corpus Tier B (docs/research/era-ui-animation-reference-corpus.md B.1.1, B.4a) — no real cooldown-wipe frame data is redistributable, so this cell is grounded in the quoted FrameXML mechanism instead of a reference GIF"
+}

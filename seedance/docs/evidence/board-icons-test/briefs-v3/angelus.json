@@ -1,0 +1,24 @@
+{
+  "source_authority": "The supplied image is the exact identity authority. Every pixel of the angelus icon — the small winged skull and its beveled square frame — must remain exactly as captured except the one described repeating movement.",
+  "style_lock": [
+    "the skull and both wings keep their exact shapes, colors, and soft blocky texture exactly as captured",
+    "the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip",
+    "nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted",
+    "wing movement is a tiny position shift of the outer wing tips only, in whole steps of the image's own blocky grid; the wing shapes never bend, stretch, or morph",
+    "stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending"
+  ],
+  "motion": "The two outer wing tips run a continuous four-beat flap cycle for the whole clip while the skull and everything else stay frozen. The cycle has exactly three poses used in the order 1-2-3-2: pose 1 is the image exactly as captured; pose 2 has each outer wing tip shifted up by one small step of the blocky grid; pose 3 has each tip up by two steps. The clip walks 1, 2, 3, 2, 1, 2, 3, 2 continuously, each pose held for about an eighth of a second, snapping between poses with no blending. Both wings move together in perfect mirror symmetry. The inner wing roots next to the skull never move — only the outermost tip region rises and falls. Roughly eight full flap cycles fit across the clip at a steady, unhurried rhythm.",
+  "timing": "Begin on pose 1, the exact start image. Step through the 1-2-3-2 cycle at a steady beat of about one eighth of a second per pose for the entire duration. Time the final beats so the clip ends holding pose 1, pixel-identical to the first frame.",
+  "camera": "Static camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.",
+  "background": "Plain still uniform #00FF00 background with no gradient, texture, shadow, or spill.",
+  "negative_constraints": [
+    "nothing may cross the edge of the square onto the background",
+    "no glow, bloom, light rays, particles, shadows, or added objects",
+    "no smooth motion, no fades, no motion blur; only instant swaps between the three held poses",
+    "the skull, the frame, and the wing roots never move; only the outer wing tips shift",
+    "do not change any color or redraw any part of the image",
+    "the flap must not slow down, pause mid-clip, or change rhythm"
+  ],
+  "era_idiom_basis": "Quantized sprite offset cycle at fixed step positions, the Emerald textbox-arrow pattern 0/+1/+2/+1 at 8 ticks per step (pret/pokeemerald src/text.c sDownArrowYCoords) applied as a wing flap; RO sprite flap quantum is the same 1 px step",
+  "real_reference": "references/ref-textbox-arrow-bob.gif"
+}
