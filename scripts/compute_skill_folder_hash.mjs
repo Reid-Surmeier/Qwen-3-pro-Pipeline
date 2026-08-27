@@ -25,7 +25,7 @@ async function computeSkillFolderHash(skillDirectory) {
   const records = files
     .map((filePath) => ({
       filePath,
-      relativePath: path.relative(skillDirectory, filePath).split(path.sep).join("/"),
+      relativePath: path.relative(skillDirectory, filePath).split("\\").join("/"),
     }))
     .sort((left, right) => left.relativePath.localeCompare(right.relativePath));
 
