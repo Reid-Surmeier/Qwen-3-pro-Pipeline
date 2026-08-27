@@ -260,3 +260,247 @@ ranges rather than counted; TCRF's RO page returned tampered content and contrib
 RO skill-icon dimensions asserted from the same 24-px item-icon convention rather than a
 separate primary citation; RO status-icon expiry behavior in the *2002* client specifically
 (vs. later clients) remains unconfirmed.
+
+---
+
+## GBA-generation addendum (owner reference: Pokémon Emerald)
+
+Appended 2026-08-27. Owner's exemplar: *Pokémon Emerald* (Game Freak, GBA, 2004-05 US) —
+reference footage: [Full Game Walkthrough, YouTube owRVh3-eZxM](https://www.youtube.com/watch?v=owRVh3-eZxM).
+Primary source for every Emerald claim below: the **pret/pokeemerald decompilation**
+([github.com/pret/pokeemerald](https://github.com/pret/pokeemerald)), files read verbatim
+(raw `master` branch, fetched 2026-08-27). GBA = 240×160 @ ~59.73 Hz; all cadences below are
+in hardware frames ("f"), 1 f ≈ 16.7 ms.
+
+### A. Pokémon Emerald UI animation, from source
+
+#### A.1 Party-menu Pokémon icons — continuous 2-frame loop, cadence IS a state channel
+**[OBSERVED — `src/pokemon_icon.c`]** Icons are 32×32 4bpp sprites with exactly **2 stored
+frames**. Five anim tables (`sAnim_0`–`sAnim_4` in `sMonIconAnims`), commented
+"fastest to slowest":
+
+| anim | pattern | per-frame hold | full cycle |
+|---|---|---|---|
+| 0 | frames 0,1 loop | 6 f (~100 ms) | 12 f (~200 ms) |
+| 1 | frames 0,1 loop | 8 f (~133 ms) | 16 f (~267 ms) |
+| 2 | frames 0,1 loop | 14 f (~233 ms) | 28 f (~467 ms) |
+| 3 | frames 0,1 loop | 22 f (~367 ms) | 44 f (~733 ms) |
+| 4 | frame 0 only (twice) | 29 f | effectively **static** |
+
+**[OBSERVED — `src/party_menu.c` `UpdateHPBar` → `SetPartyHPBarSprite` (pokemon_icon.c)]**
+The anim number is selected **by HP bar level**: HP_BAR_FULL→0, GREEN→1, YELLOW→2, RED→3,
+fainted/empty→4. So a healthy Pokémon's icon flips frames every 6–8 f *forever*; a hurt one
+visibly slows; a fainted one freezes. Animation speed is a live status display, not decoration.
+Frame flips are done by `UpdateMonIconFrame` (pokemon_icon.c) via DMA sprite-copy of the other
+32×32 frame — pixels swap wholesale, nothing tweens.
+
+**[OBSERVED — `party_menu.c` `SpriteCB_BouncePartyMonIcon`]** The **selected** slot's icon
+additionally bounces: on each frame-flip tick, `y2` is set to **−3 px** (odd cmd index) or
+**+1 px** (even). The bounce is therefore hard-quantized to 2 positions, asymmetric around
+rest (−3/+1, total travel 4 px), and its period equals the icon's HP-tied flip period
+(e.g. 16 f at green). Unselected icons hold a fixed offset and keep frame-flipping without
+positional motion (`AnimateSelectedPartyIcon`). No easing, no sinusoid — two positions.
+
+#### A.2 Battle/dialogue textbox ▼ arrow — 4-step positional bob, not a blink
+**[OBSERVED — `src/text.c` `TextPrinterDrawDownArrow`]**
+`sDownArrowYCoords[] = { 0, 1, 2, 1 }` — the 8×16 arrow bitmap is re-blitted at y-offset
+0→1→2→1, each position held **8 f (~133 ms)** (`downArrowDelay = 8`), i.e. a **32 f (~533 ms)
+bob period with 2 px amplitude**. This is the key generational upgrade from Gen 1's on/off
+tile blink (§1.8): same waiting-prompt role, but the art now *moves* by whole pixels through
+a quantized triangle wave. Same routine serves field and battle textboxes.
+
+#### A.3 Menu selection cursor — still static
+**[OBSERVED — `src/menu.c` `RedrawMenuCursor`]** The list-menu cursor is the text glyph
+`gText_SelectorArrow3` ("▶") printed at the new row; the old row is erased with a pixel fill.
+**Zero animation frames** — instant reposition, exactly the FF6/Pokémon-Gen-1 idiom. Text
+print speed (`sTextSpeedFrameDelays`, menu.c): **8/4/1 f per character** (slow/mid/fast).
+
+#### A.4 HP/EXP bars — stepped drain with fixed-point sub-stepping
+**[OBSERVED — `src/battle_interface.c` `MoveBattleBar`, `CalcNewBarValue`]**
+HP bar = **48 px** (`B_HEALTHBAR_PIXELS`), EXP bar = **64 px**. Per call (one per frame during
+the drain), HP moves by **1 HP-unit** (`toAdd = 1`); when maxHP < 48 the code switches to
+Q24.8 fixed point and steps `maxValue/48` per frame so the drain never exceeds ~1 px/frame.
+Rendering is whole-pixel tile writes — the bar *ticks*, never glides. EXP speed is scaled by
+`GetScaledExpFraction` so any gain animates in a bounded time. Bar color is a **discrete
+3-state palette swap** at >50% green / >20% yellow / ≤20% red (`HEALTHBOX_GFX_HP_BAR_*`).
+Party-menu HP bars (`party_menu.c` `DisplayPartyPokemonHPBar`) are drawn as pixel-rect fills
+with the same 3-state palette selection — no drain animation at all in that screen.
+
+#### A.5 Bag (pocket icons and switch gesture)
+**[OBSERVED — `src/item_menu_icons.c`]**
+- Pocket change is an **instant frame swap**: each pocket is one single-frame anim
+  (`ANIMCMD_FRAME(0/64/128/192/256/320, 4)`) — the bag art per pocket does not itself loop.
+- On switch, the bag sprite does a **pop-and-settle**: `y2 = −5`, then +1 px/frame back to 0
+  (5 f total) (`SetBagVisualPocketId` / `SpriteCB_BagVisualSwitchingPockets`).
+- A small **rotating Poké Ball** sprite spins in the corner during the switch and is removed
+  after **16 f** (`SpriteCB_SwitchPocketRotatingBallContinue`).
+- Rejected action = **affine shake**: `sSpriteAffineAnim_BagShake` rotates −2 units/f × 2 f,
+  +2 × 4 f, −2 × 4 f, +2 × 2 f (256 units = 360°, so ±~5.6° wobble) — a **12 f (~200 ms)
+  one-shot**, then snap to normal. Hardware rotation used as a micro-gesture, never as an
+  idle loop.
+
+#### A.6 Save flow and PC / storage screens
+- **[OBSERVED — `src/start_menu.c`]** The save dialog has **no dedicated animation**: static
+  info window, text printed at player speed, ▼ bob, palette fade on exit (`BlendPalettes`).
+  Feedback is textual, not a spinner.
+- **[OBSERVED — `src/pokemon_storage_system.c`]** The PC is Emerald's busiest UI:
+  - Background **waveform** sprites (Lanette's PC decoration): "on" state loops **3 unique
+    frames × 8 f** (~400 ms cycle) (`sAnim_Waveform_LeftOn/RightOn`); "off" is a held frame.
+  - **Box scroll arrows** nudge horizontally: +speed px every 4th frame, 6 steps then reset
+    (`SpriteCB_Arrow`) — a marching quantized loop.
+  - Box-title color cycles (`CycleBoxTitleColor`) and box changes slide title sprites in/out;
+    the choose-box popup uses affine anims (`sAffineAnim_ChooseBoxMenu`).
+- **[OBSERVED — `src/pokenav_main_menu.c`]** The **PokéNav spinning device icon** is the
+  frame-count outlier: **8 frames × 8 f each = 64 f (~1.07 s) per revolution**
+  (`sSpinningPokenavAnims`) — pre-rendered rotation frames, not affine.
+
+#### A.7 Status-condition icons — static, palette-differentiated
+**[OBSERVED — `battle_interface.c` `UpdateStatusIconInHealthbox`]** PSN/PAR/SLP/FRZ/BRN
+icons are single 3-tile graphics copied into the healthbox with a per-status palette
+(`sStatusIconColors`). **No animation.** Party-menu ailment icons likewise swap a single
+frame per status (`SetPartyMonAilmentGfx`).
+
+#### A.8 Where Emerald actually uses hardware alpha
+**[OBSERVED — `battle_interface.c` `Task_HidePartyStatusSummary`]** The battle-start party
+summary tray (Poké Ball row) fades out by stepping `BLDALPHA` from 16→0 while sliding
+offscreen — hardware alpha is used for **transitions of whole UI surfaces**, with sprites
+flipped to `ST_OAM_OBJ_BLEND` for the fade. Icons at rest never alpha-pulse; `item_menu.c`
+explicitly zeroes `BLDCNT` for the bag screen. So: GBA *had* alpha, and Emerald's UI spends
+it on enter/exit fades only.
+
+### B. Named-titles catalog (GBA-centered, 1998–2006)
+
+Entries ordered by relevance to the owner's reference. TSR = The Spriters Resource.
+
+1. **Pokémon Emerald (2004, GBA)** — everything in §A. Links: [pret/pokeemerald](https://github.com/pret/pokeemerald);
+   [TSR Emerald](https://www.spriters-resource.com/game_boy_advance/pokemonemerald/);
+   [PKMN.NET Emerald animations](https://pkmn.net/?action=content&page=viewpage&id=8632&parentsection=87);
+   [walkthrough owRVh3-eZxM](https://www.youtube.com/watch?v=owRVh3-eZxM).
+2. **Pokémon Ruby/Sapphire (2002, GBA)** — same engine, same 2-frame icon system
+   ([pret/pokeruby](https://github.com/pret/pokeruby)); party icons + HP-tied cadence identical
+   idiom. [TSR R/S](https://www.spriters-resource.com/game_boy_advance/pokemonrubysapphire/),
+   [PKMN.NET gen-3 icons](http://pkmn.net/?action=content&page=viewpage&id=8532).
+3. **Pokémon FireRed/LeafGreen (2004, GBA)** — [pret/pokefirered](https://github.com/pret/pokefirered)
+   is fully decompiled; same `TextPrinterDrawDownArrow` 4-step ▼ bob and mon-icon anim system
+   (see its `src/text.c`, `src/pokemon_icon.c`). Useful as a second in-source witness.
+4. **Golden Sun (2001, GBA)** — animated **finger cursor** (small horizontal bob) and
+   **rotating battle-menu icon carousel**; Psynergy icons themselves static.
+   [TSR Icons and HUD sheet](https://www.spriters-resource.com/game_boy_advance/gs/asset/40088/),
+   [TSR Golden Sun](https://www.spriters-resource.com/game_boy_advance/gs/). **[INFERENCE from
+   footage/sheets]** for frame counts (cursor ~2 positions).
+5. **Fire Emblem: The Blazing Blade / The Sacred Stones (2003/2004, GBA)** — the map **cursor
+   corner-brackets pulse open/closed** in a short loop; **map unit sprites idle-animate
+   continuously** (~3-frame loops) with a **grey palette swap** for "already moved" — the era's
+   clearest "grid of continuously animating icons + palette state" exemplar next to Emerald's
+   party. Combat HP bars drain in 1-unit steps.
+   [TSR Blazing Blade map sprites](https://www.spriters-resource.com/game_boy_advance/fireemblemtheblazingblade/asset/47384/),
+   [TSR Sacred Stones](https://www.spriters-resource.com/game_boy_advance/fireemblemthesacredstones/).
+   **[INFERENCE from sheets/footage]** for cadences.
+6. **Advance Wars (2001, GBA)** — animated unit map icons (2–3 frame idle loops), moved-unit
+   grey-out (palette swap), stepped CO-power meter segments, bracket cursor pulse.
+   [TSR Advance Wars](https://www.spriters-resource.com/game_boy_advance/advwars/). **[INFERENCE]**.
+7. **Mario & Luigi: Superstar Saga (2003, GBA)** — battle **command-icon carousel** (selected
+   icon enlarges/bobs, others recede), **numeric HP tick-down** per digit; action icons above
+   heads bounce. [TSR M&L:SS](https://www.spriters-resource.com/game_boy_advance/mlss/),
+   [Battle Start sheet](https://www.spriters-resource.com/game_boy_advance/mlss/asset/7583/). **[INFERENCE]**.
+8. **Final Fantasy Tactics Advance (2003, GBA)** — pointing-hand cursor with a small 2-position
+   bob; static command menus; stepped charge/AT indicators.
+   [TSR FFTA](https://www.spriters-resource.com/game_boy_advance/fftacticsadv/),
+   [videogamesprites.net FFTA objects (cursors)](http://www.videogamesprites.net/FinalFantasyTacticsAdvance/Objects/). **[INFERENCE]**.
+9. **The Legend of Zelda: The Minish Cap (2004, GBA)** — hearts and item buttons static; the
+   feedback budget goes to instant icon swaps and the text prompt; low-health is audio + static
+   art (ALttP lineage, §1.9).
+   [TSR Minish Cap](https://www.spriters-resource.com/game_boy_advance/thelegendofzeldatheminishcap/). **[INFERENCE]**.
+10. **Metroid Fusion (2002, GBA)** — map screen **current-position room blinks on/off** (~2 Hz
+    binary toggle); energy refills tick in discrete units.
+    [TSR Fusion map screen sheet](https://www.spriters-resource.com/game_boy_advance/metfusion/sheet/1660/),
+    [TSR Fusion](https://www.spriters-resource.com/game_boy_advance/metfusion/). Zero Mission
+    (2004) identical idiom. **[INFERENCE]**.
+11. **WarioWare, Inc.: Mega Microgames! (2003, GBA)** — the **bomb timer**: fuse burns through
+    a small number of discrete art states, one per beat — countdown as frame swap, not sweep.
+    [TSR Bomb Timer sheet](https://www.spriters-resource.com/game_boy_advance/wariowareincmegamicrogames/asset/97625/). **[OBSERVED sheet / INFERENCE cadence]**.
+12. **Kirby & the Amazing Mirror (2004, GBA)** — cell-phone **battery meter depletes in discrete
+    segments**; ability icon swap is instant.
+    [TSR Amazing Mirror](https://www.spriters-resource.com/game_boy_advance/kirbyandtheamazingmirror/). **[INFERENCE]**.
+13. **MapleStory (2003, PC)** and **Ragnarok Online (2002, PC)** — already cataloged (§1.5,
+    §1.1); retained here as the PC-side contrast: their *item/skill icons stay static* while
+    Emerald's same-generation handheld UI animates its icons continuously.
+
+### C. Deltas: what the GBA generation adds/changes vs. §2's conclusions
+
+The old corpus default ("icons static; 2–4 held frames when animated; palette-band/on-off
+idioms") stands for PC clients but is **too conservative for the GBA exemplar**:
+
+1. **Continuous icon loops are normal, not exceptional.** Emerald party icons (and FE/AW map
+   units) flip 2 frames *forever*. The 2-frame count matches §2, but "icons never idle-loop"
+   does not hold on GBA.
+2. **Cadence is a semantic channel.** Emerald's 6/8/14/22 f holds encode HP state; FE/AW encode
+   "moved" via palette. Animation *speed* itself carries meaning — new vs. the PC corpus.
+3. **The waiting prompt graduated from blink to bob.** Gen 1 ▼ = on/off; Gen 3 ▼ = 4-step
+   2-px positional cycle at 8 f/step. Positional micro-motion (1–3 px, whole-pixel, quantized)
+   replaces visibility toggling for "alive" elements. List cursors (▶, hand) mostly stay static.
+4. **One-shot micro-gestures appear**: bag pop (−5 px, settle 1 px/f), 12 f affine shake,
+   16 f rotating ball. Short (≤16 f ≈ 267 ms), hard-quantized, then dead still.
+5. **Affine + alpha exist but are rationed**: rotation/scale for one-shot gestures and popups;
+   alpha only for whole-surface enter/exit fades (§A.8). **Still no idle alpha glow on any
+   icon** — that part of §2 survives intact.
+6. **Bars still step** (1 unit or 1 px per frame, fixed-point beneath, whole-pixel on screen;
+   discrete 3-color palette thresholds). §2's "no gradient sweep, no easing" fully confirmed
+   in source.
+7. **Frame-count ceiling rises for special elements only**: waveform 3 frames, PokéNav spinner
+   8 frames; ordinary icons stay at 2.
+
+**What "a bit off" plausibly means for our current outputs**, ranked:
+(a) **cadence** — our §4 prescriptions (150–250 ms holds) read as Emerald's *hurt/slow* state;
+the owner's reference feel is the healthy-state 100–133 ms flip; (b) **motion shape** — any
+symmetric/eased bounce reads wrong; Emerald's is 2-position, asymmetric (−3/+1), synced to the
+frame flip; (c) **motion size** — >3 px travel or sub-pixel rendering breaks the idiom;
+(d) **soft 104-px crops** — GBA art is crisp native 32×32 4bpp with hard edges; soft matte
+crops/AA halos are the most visible anachronism; (e) **any alpha glow/pulse** — never occurs.
+
+### D. Revised motion prescriptions — 9 icons, Emerald-centered
+
+Supersedes §4 *if the owner's Emerald reference governs* (§4 remains correct for the RO/PC
+2002 idiom). Model: **every icon gets exactly 2 stored frames** (base + accent), looped
+continuously at Emerald party-icon cadence; state is expressed by cadence + palette, one-shot
+gestures by ≤16 f quantized motion. All holds in 60 Hz frames.
+
+**Global state table (from §A.1):** active/ready **6 f** per frame (12 f cycle); idle/normal
+**8 f** (16 f cycle); degraded/low-resource **14 f**; critical **22 f**; disabled **frozen on
+frame 0**. Selected/hovered: add the −3/+1 px two-position bounce synced to the frame flip
+(§A.1); on-activate: 12 f shake or 5 f pop-and-settle (§A.5); never both at once.
+
+1. **Heal** — 2 frames: cross/hands base; accent frame brightens the core band one palette
+   step (~10 px). Loop at 8 f/frame. On use: bag-style pop −5 px, settle +1 px/f.
+2. **Protect** — 2 frames: shield base; accent adds a 1-px rim highlight. 8 f/frame. On block
+   proc: 12 f affine-style wobble (±1 px shear if no affine available).
+3. **Blessing** — 2 frames: accent lifts the halo/beam band one step. 8 f/frame idle; 6 f when
+   the buff is active on the party (cadence-as-state, §C.2).
+4. **Holy Light** — 2 frames: ray tips extend 1 px + core to brightest index (the Gloria
+   twinkle from §4.5, retimed). **6 f/frame** — this is the "full HP" fast flip.
+5. **Resurrection** — keep §4.1's 2-frame orb shimmer but retime: 8 f/frame normally, drop to
+   **22 f/frame** while on cooldown, frozen frame 0 when unusable (Emerald fainted idiom).
+6. **Aqua Benedicta** — §4.2's traveling 2×1 glint needs 3 frames; alternative that fits the
+   2-frame model: glint toggles between two positions. 8 f/frame. (3-frame version stays legal —
+   PC waveform uses 3×8 f, §A.6.)
+7. **Sanctuary** — replace §4.3's asymmetric slow blink with the ▼-style quantized bob for its
+   ground-glyph: y-offset 0/1/2/1 at **8 f/step** (§A.2), art otherwise rigid.
+8. **Angelus** — §4.4's 3-frame wing cycle retimed to **8 f/frame** (24 f cycle ~400 ms);
+   selected-state adds the −3/+1 bounce instead of extra wing frames.
+9. **Gloria** — 2-frame twinkle at **6 f/frame** (fastest, celebratory); every 4th cycle may
+   hold frame 0 for 22 f as a rest beat (period break, keeps it from strobing).
+
+Hard rules carried over, now source-backed: whole-pixel motion only; ≤3 px travel; palette-step
+brightness (never alpha); one-shot gestures ≤16 f; status = palette swap or cadence change,
+never new artwork; crisp native-resolution pixels, no soft crops.
+
+### Addendum confidence & gaps
+
+**High (read verbatim from pret/pokeemerald):** all of §A — icon anim tables and HP mapping,
+bounce offsets, ▼ coords/delay, static ▶, text speeds, bar constants and stepping math, bag
+anims, PC waveform/arrows, PokéNav spinner, static status icons, alpha usage.
+**Medium (sheets/footage, not frame-counted):** catalog entries 4–12 cadences; Golden Sun
+cursor frame count; FE/AW idle-loop lengths. **Gaps:** TSR pages could not be fetched directly
+(bot-blocked) — links verified via search results only; walkthrough video owRVh3-eZxM not
+inspected frame-by-frame; FireRed source asserted identical from shared-engine knowledge, its
+files not re-read this session.
