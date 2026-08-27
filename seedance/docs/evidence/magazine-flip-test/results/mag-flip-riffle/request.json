@@ -1,0 +1,44 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority: the September 1993 premiere issue of VIBE magazine \u2014 the black-and-white Snoop Doggy Dogg cover with the large cropped VIBE masthead and the magenta BOW WOW WOW cover line \u2014 lying flat on a dark charcoal surface. Every element of the cover art, its typography, its photograph, and the framing of the magazine on the surface must look exactly as captured whenever the cover is visible, and the magazine must return to exactly this captured state at the end.\n\nLOCKED STYLE:\n- the cover photograph, masthead, and cover lines are never redrawn, retouched, recolored, sharpened, or modernized; the slightly worn 1993 print scan character is the identity\n- the magazine keeps its exact printed proportions; it never changes size, position on the surface, or perspective while closed\n- the pages glimpsed during the riffle look like genuine early-1990s editorial print: dense serif text columns, black-and-white photography, bold display headlines \u2014 consistent with this exact issue\n- paper behaves like real coated magazine stock throughout: thin flexible sheets that bow under tension and release crisply\n- the dark charcoal surface under the magazine stays perfectly still and empty for the entire clip\n\nMOTION:\nThe magazine performs one fast thumb-riffle, the way a person fans through a print magazine to sample it. Beat 1: the closed magazine holds exactly as captured. Beat 2: the front cover and the block of pages beneath it bow upward slightly from the right edge, held under tension as a gently curved stack. Beat 3: the pages release in a rapid cascade from front to back \u2014 a quick continuous flutter in which many individual sheets flash past in well under two seconds, each briefly glimpsed page carrying believable editorial print texture: text columns, black-and-white photographs, headline typography racing by too fast to read but unmistakably this magazine's design language. The cascade runs smoothly right to left, sheet after sheet, with natural accelerating rhythm like a released spring. Beat 4: the last sheet settles, the block flattens, and the closed magazine lies exactly as captured again. Beat 5: the closed magazine holds identical to the first frame through to the end. The magazine body never slides or rotates during the riffle; only the sheets move.\n\nTIMING:\nHold the exact captured cover for the opening moment, spend a short beat on the tensioned bow, let the cascade itself run fast \u2014 a blur of successive sheets \u2014 then settle cleanly, and hold the closed magazine exactly as captured for the entire final stretch so the last frame is identical to the first.\n\nCAMERA:\nStatic camera, directly above-front of the magazine at the captured angle. No zoom, no pan, no rotation, no dolly, no perspective change, no depth-of-field shift, no lighting change.\n\nBACKGROUND / MATTE:\nThe dark charcoal surface exactly as captured: uniform, still, no texture change, no shadows appearing or disappearing beyond the natural soft flicker of moving pages, nothing else ever enters the frame.\n\nMUST NOT:\n- no hands, fingers, or any person visible; the riffle happens as if thumbed but no one is shown\n- no added objects, text overlays, logos, watermarks, or reflections\n- the cover must never be redrawn or reinterpreted when it returns; final frame identical to the first\n- no camera motion of any kind and no lighting shifts\n- pages never tear, crumple, scatter, or detach from the spine\n- the magazine never levitates, slides, rotates, or changes size on the surface",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0e192e0cc42d67e45a65024c83b4ec7bd018d6e7931e99caa902c3a02fc84132>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0e192e0cc42d67e45a65024c83b4ec7bd018d6e7931e99caa902c3a02fc84132>"
+      },
+      "frame_type": "last_frame"
+    }
+  ],
+  "input_references": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n52_w640.jpg"
+      }
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n68_w640.jpg"
+      }
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n86_w640.jpg"
+      }
+    }
+  ]
+}
