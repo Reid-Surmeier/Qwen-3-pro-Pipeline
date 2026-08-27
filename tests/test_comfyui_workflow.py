@@ -1,10 +1,11 @@
-import unittest
 import json
+import unittest
 from pathlib import Path
 
 from qwen_ui_pipeline import (
     build_comfyui_api_workflow,
     build_comfyui_assembly_workflow,
+    build_comfyui_component_extraction_workflow,
     build_partner_edit_workflow,
     build_partner_text_workflow,
 )
@@ -120,6 +121,38 @@ class ComfyUiWorkflowTests(unittest.TestCase):
                 self.assertEqual(reopened["nodes"], original["nodes"])
                 self.assertEqual(reopened["links"], original["links"])
                 self.assertGreater(len(reopened["nodes"]), 0)
+
+    def test_extracts_reference_components_without_regenerating_their_pixels(self):
+        workflow = build_comfyui_component_extraction_workflow(
+            reference_filename="golfstudio-approved-baseline.png",
+            components={
+                "toolbar": (10, 44, 101, 25),
+                "animate": (393, 350, 77, 26),
+            },
+            filename_prefix="golf-ui/reference-components/v001",
+        )
+
+        self.assertEqual(workflow["1"]["class_type"], "LoadImage")
+        crop_nodes = [node for node in workflow.values() if node["class_type"] == "ImageCrop"]
+        self.assertEqual(len(crop_nodes), 2)
+        self.assertEqual(
+            crop_nodes[0]["inputs"],
+            {"image": ["1", 0], "x": 10, "y": 44, "width": 101, "height": 25},
+        )
+        save_nodes = [node for node in workflow.values() if node["class_type"] == "SaveImage"]
+        self.assertEqual(
+            save_nodes[0]["inputs"]["filename_prefix"],
+            "golf-ui/reference-components/v001/toolbar",
+        )
+
+    def test_rejects_invalid_component_rectangles(self):
+        for bad in ({"toolbar": (-1, 0, 10, 10)}, {"toolbar": (0, 0, 0, 10)}):
+            with self.assertRaises(ValueError):
+                build_comfyui_component_extraction_workflow(
+                    reference_filename="golfstudio-approved-baseline.png",
+                    components=bad,
+                    filename_prefix="golf-ui/reference-components/v001",
+                )
 
 
 if __name__ == "__main__":

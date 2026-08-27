@@ -169,3 +169,41 @@ def build_partner_edit_workflow(
         },
     }
     return workflow
+
+
+def build_comfyui_component_extraction_workflow(
+    *,
+    reference_filename: str,
+    components: Mapping[str, tuple[int, int, int, int]],
+    filename_prefix: str,
+) -> dict[str, Any]:
+    """Crop exact reference components without asking an image model to redraw them."""
+
+    workflow: dict[str, Any] = {
+        "1": {"class_type": "LoadImage", "inputs": {"image": reference_filename}}
+    }
+    next_node_id = 2
+    for name, (x, y, width, height) in components.items():
+        if min(x, y, width, height) < 0 or width == 0 or height == 0:
+            raise ValueError(f"Invalid component rectangle for {name}")
+        crop_id = str(next_node_id)
+        save_id = str(next_node_id + 1)
+        workflow[crop_id] = {
+            "class_type": "ImageCrop",
+            "inputs": {
+                "image": ["1", 0],
+                "x": x,
+                "y": y,
+                "width": width,
+                "height": height,
+            },
+        }
+        workflow[save_id] = {
+            "class_type": "SaveImage",
+            "inputs": {
+                "images": [crop_id, 0],
+                "filename_prefix": f"{filename_prefix}/{name}",
+            },
+        }
+        next_node_id += 2
+    return workflow
