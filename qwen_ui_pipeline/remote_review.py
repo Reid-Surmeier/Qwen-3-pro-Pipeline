@@ -3,6 +3,33 @@
 from __future__ import annotations
 
 from typing import Any, Iterable
+from urllib.parse import urlsplit
+
+
+def validate_router_url(
+    router_url: str,
+    *,
+    loopback_addresses: Iterable[str],
+    router_port: int = 8188,
+) -> str:
+    """Require the audited API URL to be the local routed ComfyUI listener."""
+
+    try:
+        parsed = urlsplit(router_url)
+        port = parsed.port
+    except ValueError as error:
+        raise ValueError("router URL is malformed") from error
+    if parsed.scheme != "http" or not parsed.hostname:
+        raise ValueError("router URL must be an HTTP URL with an explicit host")
+    if parsed.username or parsed.password:
+        raise ValueError("router URL must not contain credentials")
+    if parsed.path not in {"", "/"} or parsed.query or parsed.fragment:
+        raise ValueError("router URL must contain only the routed service origin")
+    if parsed.hostname not in set(loopback_addresses):
+        raise ValueError("router URL host is not assigned to the local loopback device")
+    if port != router_port:
+        raise ValueError(f"router URL must use routed port {router_port}")
+    return router_url.rstrip("/")
 
 
 def _split_host_port(value: str) -> tuple[str, int] | None:

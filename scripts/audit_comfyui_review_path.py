@@ -9,7 +9,7 @@ import subprocess
 import urllib.request
 from typing import Any
 
-from qwen_ui_pipeline.remote_review import audit_comfyui_listeners
+from qwen_ui_pipeline.remote_review import audit_comfyui_listeners, validate_router_url
 
 
 def _json_url(base_url: str, path: str) -> Any:
@@ -48,14 +48,19 @@ def main() -> int:
         capture_output=True,
         text=True,
     )
+    loopback_addresses = _loopback_addresses()
+    router_url = validate_router_url(
+        args.router_url,
+        loopback_addresses=loopback_addresses,
+    )
     listener_audit = audit_comfyui_listeners(
         sockets.stdout,
-        loopback_addresses=_loopback_addresses(),
+        loopback_addresses=loopback_addresses,
     )
-    system_stats = _json_url(args.router_url, "/system_stats")
-    queue = _json_url(args.router_url, "/queue")
-    text_schema = _json_url(args.router_url, "/object_info/QwenImage3TextToImage")
-    edit_schema = _json_url(args.router_url, "/object_info/QwenImage3Edit")
+    system_stats = _json_url(router_url, "/system_stats")
+    queue = _json_url(router_url, "/queue")
+    text_schema = _json_url(router_url, "/object_info/QwenImage3TextToImage")
+    edit_schema = _json_url(router_url, "/object_info/QwenImage3Edit")
     if "QwenImage3TextToImage" not in text_schema:
         raise RuntimeError("routed endpoint does not expose QwenImage3TextToImage")
     if "QwenImage3Edit" not in edit_schema:

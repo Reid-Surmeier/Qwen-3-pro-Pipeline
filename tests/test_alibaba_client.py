@@ -61,6 +61,7 @@ class AlibabaImageClientTests(unittest.TestCase):
 
     def test_honors_partner_prompt_expansion_watermark_and_negative_prompt(self):
         brief = {
+            "interface": {"name": "partner-compatible", "version": 1},
             "objective": "Edit Image 1.",
             "negative_prompt": "no extra text",
             "output": {
@@ -99,8 +100,34 @@ class AlibabaImageClientTests(unittest.TestCase):
         ):
             with self.subTest(output=output), self.assertRaisesRegex(ValueError, message):
                 build_alibaba_request(
-                    {"objective": "Render a monochrome interface.", "output": output}
+                    {
+                        "interface": {"name": "partner-compatible", "version": 1},
+                        "objective": "Render a monochrome interface.",
+                        "output": output,
+                    }
                 )
+
+    def test_legacy_builder_keeps_permissive_defaults_and_ignored_fields(self):
+        request = build_alibaba_request(
+            {
+                "objective": "Keep the old adapter behavior.",
+                "negative_prompt": "legacy ignored value",
+                "output": {
+                    "count": 7,
+                    "seed": -1,
+                    "prompt_extend": False,
+                    "watermark": True,
+                    "size_mode": "auto",
+                },
+            }
+        )
+
+        self.assertEqual(request["parameters"]["n"], 7)
+        self.assertEqual(request["parameters"]["seed"], -1)
+        self.assertTrue(request["parameters"]["prompt_extend"])
+        self.assertFalse(request["parameters"]["watermark"])
+        self.assertEqual(request["parameters"]["size"], "2048*1152")
+        self.assertNotIn("negative_prompt", request["parameters"])
 
     def test_normalizes_expiring_result_urls_to_image_bytes_immediately(self):
         captured = {}
