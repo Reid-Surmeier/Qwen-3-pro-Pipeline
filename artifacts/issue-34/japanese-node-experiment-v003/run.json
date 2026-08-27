@@ -44,6 +44,28 @@
   },
   "estimated_initial_cost_usd": 0.166,
   "issue": 34,
+  "matched_donors": [
+    {
+      "bytes": 599961,
+      "mode": "RGB",
+      "path": "artifacts/issue-34/japanese-node-experiment-v003/matched-donor/candidate-01_00001_.png",
+      "sha256": "13167649d353f5d4f275bd483bee248d425f586c83ef054c94040b4ed5d27775",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "bytes": 600463,
+      "mode": "RGB",
+      "path": "artifacts/issue-34/japanese-node-experiment-v003/matched-donor/candidate-02_00001_.png",
+      "sha256": "69dd648fff6363720647c15a9756f33eb2936f04d9c494a58df1962a74dcbc12",
+      "size": [
+        1572,
+        718
+      ]
+    }
+  ],
   "model": "qwen/qwen-image-3-pro",
   "no_cost_node_runs": [
     {

@@ -679,6 +679,9 @@ def finalize_experiment(root: Path = EXPERIMENT_ROOT) -> dict[str, Any]:
         "seed": SEED,
         "estimated_initial_cost_usd": 0.166,
         "baselines": [analyze_image(path) for path in baseline_paths],
+        "matched_donors": [
+            analyze_image(path) for path in matched_donor_paths
+        ],
         "tested_workflows": [
             analyze_file(path) for path in sorted(root.glob("*.api.json"))
         ],

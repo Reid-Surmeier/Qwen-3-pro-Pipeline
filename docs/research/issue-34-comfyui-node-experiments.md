@@ -41,6 +41,13 @@ hashes, prompt IDs, cost, and measurements are under
 
 ## What the previous "masking" did
 
+The earlier green selection-guide experiment was harmful for this UI case. In
+the human review, only the unmarked baseline donor made the intended edit; the
+green-guide outputs targeted the wrong pixels, retained or damaged the wrong
+lettering, and introduced visible guide/patch artifacts. It is rejected
+evidence, not a weaker version of the winning method. No green guide was used
+as a Qwen input in the experiment documented here.
+
 The previous assisted graph did not select an internal edit area. It resized
 `LoadImage`'s transparency-mask output, resized the complete Qwen candidate,
 and joined them with `JoinImageWithAlpha`. This restored the transparent
@@ -78,6 +85,26 @@ control, not a new workflow to reimplement.
 A read-only live `/object_info` check on 2026-08-26 confirmed the node schemas
 used below. ComfyUI builds this endpoint from loaded node mappings
 ([official server source](https://github.com/Comfy-Org/ComfyUI/blob/master/server.py)).
+
+The current ComfyUI MCP discovery surfaces were checked explicitly:
+
+- `list_packs` reported 56 bundled local/free workflow packs. The Qwen edit
+  guidance and workflows target a local Qwen Image Edit 2511 stack, so they are
+  not interchangeable with the required provider-backed Qwen Image 3 Pro node.
+- `list_templates` returned zero custom-node-registered templates and warned
+  that this endpoint cannot enumerate ComfyUI core frontend templates. An empty
+  result was therefore recorded as a scope limitation, not proof that no core
+  template exists.
+- The subgraph/blueprint guidance recommends saved subgraphs for reusable large
+  graph sections. The winning graph has only two loaders, one composite, and
+  one save node; wrapping it in an extra subgraph would not improve auditability.
+  The complete graph was saved directly to the workflow library instead.
+- The Qwen edit prompting guide states that it has no official vendor prompt
+  source and describes the different local 2511 model. The generic prompting
+  guide is CLIP/sampler-oriented and does not control the provider-backed node.
+  Therefore this test retained the repository's structured Edit Brief, exact
+  Japanese copy, negative constraints, fixed seed, and explicit output fields
+  rather than importing unrelated CLIP weights or sampler settings.
 
 ## Ranked experiment matrix
 
