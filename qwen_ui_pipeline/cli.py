@@ -12,7 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
-from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from .comfyui_workflow import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_comfyui_component_assembly_workflow,
+)
 from .prompt_manifest import compile_edit_brief
 from .providers.openrouter import (
     OpenRouterImageClient,
@@ -68,7 +72,27 @@ def build_parser() -> argparse.ArgumentParser:
     assembly_parser.add_argument("--generated-filename", required=True)
     assembly_parser.add_argument("--region", required=True)
     assembly_parser.add_argument("--filename-prefix", required=True)
+    assembly_parser.add_argument(
+        "--preserve-reference-alpha",
+        action="store_true",
+        help="reconstruct the exact reference alpha channel",
+    )
     assembly_parser.add_argument("--output", required=True, type=Path)
+
+    component_parser = subparsers.add_parser(
+        "component-assembly-workflow",
+        help="write an opt-in source-component repair workflow",
+    )
+    component_parser.add_argument("layout", type=Path)
+    component_parser.add_argument("--reference-filename", required=True)
+    component_parser.add_argument("--generated-filename", required=True)
+    component_parser.add_argument("--filename-prefix", required=True)
+    component_parser.add_argument(
+        "--preserve-reference-alpha",
+        action="store_true",
+        help="reconstruct the exact reference alpha channel",
+    )
+    component_parser.add_argument("--output", required=True, type=Path)
 
     record_parser = subparsers.add_parser(
         "record-comfy", help="record completed ComfyUI outputs as a reproducible run"
@@ -92,10 +116,28 @@ def main(argv: Sequence[str] | None = None) -> int:
             generated_filename=args.generated_filename,
             region=args.region,
             filename_prefix=args.filename_prefix,
+            preserve_reference_alpha=args.preserve_reference_alpha,
         )
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(
             json.dumps(workflow, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        print(args.output)
+        return 0
+
+    if args.command == "component-assembly-workflow":
+        layout = _load_brief(args.layout)
+        workflow = build_comfyui_component_assembly_workflow(
+            reference_filename=args.reference_filename,
+            generated_filename=args.generated_filename,
+            layout=layout,
+            filename_prefix=args.filename_prefix,
+            preserve_reference_alpha=args.preserve_reference_alpha,
+        )
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(
+            json.dumps(workflow, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
         )
         print(args.output)
         return 0

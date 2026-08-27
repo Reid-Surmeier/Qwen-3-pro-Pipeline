@@ -1,0 +1,41 @@
+{
+  "1": {"class_type": "LoadImage", "inputs": {"image": "options-window-source.png"}},
+  "2": {"class_type": "LoadImage", "inputs": {"image": "raw_00001_.png"}},
+  "3": {"class_type": "LoadImage", "inputs": {"image": "raw_00002_.png"}},
+  "4": {
+    "class_type": "ImageScale",
+    "inputs": {"image": ["2", 0], "upscale_method": "nearest-exact", "width": 1572, "height": 718, "crop": "disabled"}
+  },
+  "5": {
+    "class_type": "ImageScale",
+    "inputs": {"image": ["2", 0], "upscale_method": "nearest-exact", "width": 1572, "height": 718, "crop": "center"}
+  },
+  "6": {
+    "class_type": "ImageScale",
+    "inputs": {"image": ["3", 0], "upscale_method": "nearest-exact", "width": 1572, "height": 718, "crop": "disabled"}
+  },
+  "7": {
+    "class_type": "ImageScale",
+    "inputs": {"image": ["3", 0], "upscale_method": "nearest-exact", "width": 1572, "height": 718, "crop": "center"}
+  },
+  "8": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {"reference_images": ["1", 0], "generated_images": ["4", 0], "region": "160,130,1350,350", "reference_masks": ["1", 1]}
+  },
+  "9": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {"reference_images": ["1", 0], "generated_images": ["5", 0], "region": "160,130,1350,350", "reference_masks": ["1", 1]}
+  },
+  "10": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {"reference_images": ["1", 0], "generated_images": ["6", 0], "region": "160,130,1350,350", "reference_masks": ["1", 1]}
+  },
+  "11": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {"reference_images": ["1", 0], "generated_images": ["7", 0], "region": "160,130,1350,350", "reference_masks": ["1", 1]}
+  },
+  "12": {"class_type": "SaveImage", "inputs": {"images": ["8", 0], "filename_prefix": "issue-34-aspect-control/d1-stretch"}},
+  "13": {"class_type": "SaveImage", "inputs": {"images": ["9", 0], "filename_prefix": "issue-34-aspect-control/d1-center"}},
+  "14": {"class_type": "SaveImage", "inputs": {"images": ["10", 0], "filename_prefix": "issue-34-aspect-control/d2-stretch"}},
+  "15": {"class_type": "SaveImage", "inputs": {"images": ["11", 0], "filename_prefix": "issue-34-aspect-control/d2-center"}}
+}

@@ -1,0 +1,66 @@
+{
+  "donor_normalization": {
+    "crop": "disabled",
+    "height": 718,
+    "upscale_method": "nearest-exact",
+    "width": 1572
+  },
+  "cleanplate": {
+    "source_region": [
+      185,
+      235,
+      1245,
+      65
+    ],
+    "target_region": [
+      185,
+      130,
+      1245,
+      350
+    ],
+    "upscale_method": "nearest-exact"
+  },
+  "components": [
+    {
+      "name": "bgm",
+      "kind": "bgm_slider",
+      "role": "source-owned BGM label, slider, and unchecked on state",
+      "source_region": [
+        185,
+        130,
+        1245,
+        115
+      ],
+      "target": [
+        185,
+        130
+      ]
+    },
+    {
+      "name": "skin",
+      "kind": "skin_dropdown",
+      "role": "source-owned Skin label and dropdown reflowed upward",
+      "source_region": [
+        185,
+        355,
+        1245,
+        130
+      ],
+      "target": [
+        185,
+        280
+      ]
+    }
+  ],
+  "final_edit_region": [
+    160,
+    130,
+    1350,
+    350
+  ],
+  "expected_structural_counts": {
+    "bgm_sliders": 1,
+    "effect_rows": 0,
+    "skin_dropdowns": 1
+  }
+}

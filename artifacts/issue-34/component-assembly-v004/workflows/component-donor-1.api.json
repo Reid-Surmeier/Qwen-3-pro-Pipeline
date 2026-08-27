@@ -1,0 +1,161 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "options-window-source.png"
+    }
+  },
+  "10": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "8",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "9",
+        0
+      ],
+      "x": 185,
+      "y": 280
+    }
+  },
+  "11": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {
+      "generated_images": [
+        "10",
+        0
+      ],
+      "reference_images": [
+        "1",
+        0
+      ],
+      "reference_masks": [
+        "1",
+        1
+      ],
+      "region": "160,130,1350,350"
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/component-v004-raw1",
+      "images": [
+        "11",
+        0
+      ]
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "raw_00001_.png"
+    }
+  },
+  "3": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "crop": "disabled",
+      "height": 718,
+      "image": [
+        "2",
+        0
+      ],
+      "upscale_method": "nearest-exact",
+      "width": 1572
+    }
+  },
+  "4": {
+    "class_type": "ImageCropV2",
+    "inputs": {
+      "crop_region": {
+        "height": 65,
+        "width": 1245,
+        "x": 185,
+        "y": 235
+      },
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "crop": "disabled",
+      "height": 350,
+      "image": [
+        "4",
+        0
+      ],
+      "upscale_method": "nearest-exact",
+      "width": 1245
+    }
+  },
+  "6": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "5",
+        0
+      ],
+      "x": 185,
+      "y": 130
+    }
+  },
+  "7": {
+    "class_type": "ImageCropV2",
+    "inputs": {
+      "crop_region": {
+        "height": 115,
+        "width": 1245,
+        "x": 185,
+        "y": 130
+      },
+      "image": [
+        "1",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "6",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "7",
+        0
+      ],
+      "x": 185,
+      "y": 130
+    }
+  },
+  "9": {
+    "class_type": "ImageCropV2",
+    "inputs": {
+      "crop_region": {
+        "height": 130,
+        "width": 1245,
+        "x": 185,
+        "y": 355
+      },
+      "image": [
+        "1",
+        0
+      ]
+    }
+  }
+}

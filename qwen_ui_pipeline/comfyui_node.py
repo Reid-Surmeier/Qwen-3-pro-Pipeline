@@ -127,10 +127,18 @@ class ReferenceRegionComposite:
                     "STRING",
                     {"default": "0,0,64,64", "multiline": False},
                 ),
-            }
+            },
+            "optional": {"reference_masks": ("MASK",)},
         }
 
-    def composite(self, reference_images, generated_images, region: str):
+    def composite(
+        self,
+        reference_images,
+        generated_images,
+        region: str,
+        reference_masks=None,
+    ):
+        import torch
         import torch.nn.functional as functional
 
         try:
@@ -159,6 +167,19 @@ class ReferenceRegionComposite:
         output[:, y : y + height, x : x + width, :] = generated[
             :, y : y + height, x : x + width, :
         ]
+        if reference_masks is not None:
+            alpha = 1.0 - reference_masks[:1]
+            if alpha.shape[1:] != (target_height, target_width):
+                alpha = functional.interpolate(
+                    alpha.unsqueeze(1),
+                    size=(target_height, target_width),
+                    mode="nearest",
+                ).squeeze(1)
+            # Center values inside their byte buckets so SaveImage's floor
+            # reproduces the source alpha exactly.
+            alpha = ((alpha * 255.0).round() + 0.25).clamp(0, 255) / 255.0
+            alpha = alpha.expand(output.shape[0], -1, -1).unsqueeze(-1)
+            output = torch.cat((output[..., :3], alpha), dim=-1)
         return (output,)
 
 

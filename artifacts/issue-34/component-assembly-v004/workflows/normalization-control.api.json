@@ -1,0 +1,60 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "raw_00001_.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "raw_00002_.png"
+    }
+  },
+  "3": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "crop": "disabled",
+      "height": 718,
+      "image": [
+        "1",
+        0
+      ],
+      "upscale_method": "nearest-exact",
+      "width": 1572
+    }
+  },
+  "4": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "crop": "disabled",
+      "height": 718,
+      "image": [
+        "2",
+        0
+      ],
+      "upscale_method": "nearest-exact",
+      "width": 1572
+    }
+  },
+  "5": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/component-v004-normalized-raw1",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "6": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/component-v004-normalized-raw2",
+      "images": [
+        "4",
+        0
+      ]
+    }
+  }
+}

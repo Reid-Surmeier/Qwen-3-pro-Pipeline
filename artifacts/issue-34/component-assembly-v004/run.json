@@ -1,0 +1,442 @@
+{
+  "classification": "qualifying component Assembly pending human visual approval",
+  "controls": [
+    {
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/controls/aspect-d1-stretch.png",
+      "role": "donor 1 stretch",
+      "sha256": "f083278231c25403998606881d16c52c55d8412a5c244cc8996024aa47de02e3",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/controls/aspect-d1-center.png",
+      "role": "donor 1 center crop",
+      "sha256": "c419fe233fdff1ac463112194bb60d807cb8ab862e51625eded52b22a100a675",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/controls/aspect-d2-stretch.png",
+      "role": "donor 2 stretch",
+      "sha256": "e88027b7d31b3ff67bacc0431d84cedc2affda44f0a856e3f2ce30fe517dce35",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/controls/aspect-d2-center.png",
+      "role": "donor 2 center crop",
+      "sha256": "9f5ffb9a41e8b39226ea26a1a260cabdfb8c2994e6c91c821d6deb449f4127a6",
+      "size": [
+        1572,
+        718
+      ]
+    }
+  ],
+  "human_visual_approval": "required before merge",
+  "issue": 34,
+  "layout": {
+    "cleanplate": {
+      "source_region": [
+        185,
+        235,
+        1245,
+        65
+      ],
+      "target_region": [
+        185,
+        130,
+        1245,
+        350
+      ],
+      "upscale_method": "nearest-exact"
+    },
+    "components": [
+      {
+        "kind": "bgm_slider",
+        "name": "bgm",
+        "role": "source-owned BGM label, slider, and unchecked on state",
+        "source_region": [
+          185,
+          130,
+          1245,
+          115
+        ],
+        "target": [
+          185,
+          130
+        ]
+      },
+      {
+        "kind": "skin_dropdown",
+        "name": "skin",
+        "role": "source-owned Skin label and dropdown reflowed upward",
+        "source_region": [
+          185,
+          355,
+          1245,
+          130
+        ],
+        "target": [
+          185,
+          280
+        ]
+      }
+    ],
+    "donor_normalization": {
+      "crop": "disabled",
+      "height": 718,
+      "upscale_method": "nearest-exact",
+      "width": 1572
+    },
+    "expected_structural_counts": {
+      "bgm_sliders": 1,
+      "effect_rows": 0,
+      "skin_dropdowns": 1
+    },
+    "final_edit_region": [
+      160,
+      130,
+      1350,
+      350
+    ]
+  },
+  "model": "qwen/qwen-image-3-pro",
+  "no_cost_live_runs": [
+    {
+      "arm": "component Assembly from raw render 1",
+      "duration_ms": 201,
+      "prompt_id": "b631b7a3-ecc0-4da1-b9b1-43956335f059",
+      "status": "success"
+    },
+    {
+      "arm": "component Assembly from raw render 2",
+      "duration_ms": 195,
+      "prompt_id": "a811e307-5912-4cbb-8f55-11ce55ae5e0b",
+      "status": "success"
+    },
+    {
+      "arm": "matched donor normalization control",
+      "duration_ms": 206,
+      "prompt_id": "571c7f2f-cf45-46ef-846c-e5788a00985f",
+      "status": "success"
+    },
+    {
+      "arm": "aspect-normalization control",
+      "duration_ms": 331,
+      "finding": "neutral; proportions changed but malformed copy/layout remained",
+      "prompt_id": "7e1a8b86-2bc6-4556-be83-490606b0b9ac",
+      "status": "success"
+    },
+    {
+      "arm": "superseded normalized-input component prototype pair",
+      "finding": "superseded after review required raw-render lineage",
+      "prompt_ids": [
+        "07624492-0558-4723-b281-3516719c2c99",
+        "4ee63f4a-cc4f-4dc1-88c1-0b2230caf154"
+      ],
+      "status": "success"
+    }
+  ],
+  "normalized_donors": [
+    {
+      "mode": "RGB",
+      "path": "artifacts/issue-34/component-assembly-v004/baseline/normalized-donor-1.png",
+      "role": "nearest-exact normalized donor 1",
+      "sha256": "13889ac026d87fa5c9f49a5a9da2294bbe99fdd9edb45d5d8ac0b97440086538",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "mode": "RGB",
+      "path": "artifacts/issue-34/component-assembly-v004/baseline/normalized-donor-2.png",
+      "role": "nearest-exact normalized donor 2",
+      "sha256": "a2593f1b6289eab9a637a616422afdd15a45cc1d1d95b374e32cce433e0ff8f2",
+      "size": [
+        1572,
+        718
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "checks": {
+        "alpha_changed_pixels": 0,
+        "components": {
+          "bgm": {
+            "byte_identical": true,
+            "different_rgba_pixels": 0,
+            "max_channel_error": 0
+          },
+          "skin": {
+            "byte_identical": true,
+            "different_rgba_pixels": 0,
+            "max_channel_error": 0
+          }
+        },
+        "footer_japanese_exact": true,
+        "inside_changed_rgba_pixels": 238344,
+        "node_induced_change_vs_normalized_donor": {
+          "exposed_donor_cleanplate_changed_rgba_pixels": 49828,
+          "inside_edit_region_changed_rgba_pixels": 305914,
+          "outside_edit_region_changed_alpha_pixels": 54952,
+          "outside_edit_region_changed_rgb_pixels": 593664,
+          "source_component_union_changed_rgba_pixels": 244049,
+          "source_owned_margin_changed_rgba_pixels": 12037,
+          "total_changed_rgba_pixels": 908025
+        },
+        "output_structural_check": {
+          "derived_counts": {
+            "bgm_sliders": 1,
+            "effect_rows": 0,
+            "skin_dropdowns": 1
+          },
+          "expected_counts": {
+            "bgm_sliders": 1,
+            "effect_rows": 0,
+            "skin_dropdowns": 1
+          },
+          "exposed_cleanplate_luminance_threshold": 240,
+          "exposed_cleanplate_pixels_below_threshold": 0,
+          "matches_expected": true,
+          "method": "byte-identical source-component inventory plus a pixel-derived foreground exclusion check over every exposed clean-plate pixel",
+          "minimum_exposed_cleanplate_luminance": 253
+        },
+        "outside_changed_rgba_pixels": 0,
+        "title_exact": true
+      },
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/outputs/donor-1-component-assembly.png",
+      "role": "component Assembly 1",
+      "sha256": "97a0261648ca3a3dbc24ba70ab322754699fbd179171ed2c3515079e0423569b",
+      "size": [
+        1572,
+        718
+      ]
+    },
+    {
+      "checks": {
+        "alpha_changed_pixels": 0,
+        "components": {
+          "bgm": {
+            "byte_identical": true,
+            "different_rgba_pixels": 0,
+            "max_channel_error": 0
+          },
+          "skin": {
+            "byte_identical": true,
+            "different_rgba_pixels": 0,
+            "max_channel_error": 0
+          }
+        },
+        "footer_japanese_exact": true,
+        "inside_changed_rgba_pixels": 267433,
+        "node_induced_change_vs_normalized_donor": {
+          "exposed_donor_cleanplate_changed_rgba_pixels": 92447,
+          "inside_edit_region_changed_rgba_pixels": 433332,
+          "outside_edit_region_changed_alpha_pixels": 54952,
+          "outside_edit_region_changed_rgb_pixels": 612562,
+          "source_component_union_changed_rgba_pixels": 304278,
+          "source_owned_margin_changed_rgba_pixels": 36607,
+          "total_changed_rgba_pixels": 1054001
+        },
+        "output_structural_check": {
+          "derived_counts": {
+            "bgm_sliders": 1,
+            "effect_rows": 0,
+            "skin_dropdowns": 1
+          },
+          "expected_counts": {
+            "bgm_sliders": 1,
+            "effect_rows": 0,
+            "skin_dropdowns": 1
+          },
+          "exposed_cleanplate_luminance_threshold": 240,
+          "exposed_cleanplate_pixels_below_threshold": 0,
+          "matches_expected": true,
+          "method": "byte-identical source-component inventory plus a pixel-derived foreground exclusion check over every exposed clean-plate pixel",
+          "minimum_exposed_cleanplate_luminance": 251
+        },
+        "outside_changed_rgba_pixels": 0,
+        "title_exact": true
+      },
+      "mode": "RGBA",
+      "path": "artifacts/issue-34/component-assembly-v004/outputs/donor-2-component-assembly.png",
+      "role": "component Assembly 2",
+      "sha256": "900e3d5da940311b5ef68c1b1e9834de90526ea557baf9092d57a672d400c995",
+      "size": [
+        1572,
+        718
+      ]
+    }
+  ],
+  "paid_accounting": {
+    "confirmed_actual_cost_usd": 0.249,
+    "cumulative_completed_outputs": 6,
+    "cumulative_requested_outputs": 8,
+    "new_paid_run_submitted": false,
+    "possibly_billed_outputs": 2,
+    "remaining_issue_allowance": 2,
+    "runs": [
+      {
+        "actual_cost_usd": 0.083,
+        "completed": 2,
+        "estimated_cost_usd": 0.0845,
+        "evidence": {
+          "manifest_path": "artifacts/issue-34/alpha-window-2x/run.json",
+          "pull_request": "https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/pull/35"
+        },
+        "model": "qwen/qwen-image-3-pro",
+        "name": "v001 enlargement",
+        "prompt_id": "ba31ea51-05f1-4992-8ab7-148a4668095f",
+        "provider": "openrouter",
+        "requested": 2,
+        "seed": 20260826
+      },
+      {
+        "actual_cost_usd": 0.083,
+        "completed": 2,
+        "estimated_cost_usd": 0.083,
+        "evidence": {
+          "manifest_path": "artifacts/issue-34/english-structural-edit-v002/run.json",
+          "pull_request": "https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/pull/37"
+        },
+        "model": "qwen/qwen-image-3-pro",
+        "name": "v002 structural edit",
+        "prompt_id": "179dd12b-bd20-430b-a5f3-3f072823c196",
+        "provider": "openrouter",
+        "requested": 2,
+        "seed": 2026082602
+      },
+      {
+        "actual_cost_usd": 0.083,
+        "completed": 2,
+        "estimated_cost_usd": 0.083,
+        "model": "qwen/qwen-image-3-pro",
+        "name": "v003 direct baseline",
+        "outputs": [
+          {
+            "mode": "RGB",
+            "path": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-1.png",
+            "role": "direct Qwen v003 raw render 1",
+            "sha256": "f02435d5d4e4342af47b6683c545676b6483899395cdb87c37e72b7afc2e3e4d",
+            "size": [
+              2048,
+              1024
+            ]
+          },
+          {
+            "mode": "RGB",
+            "path": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-2.png",
+            "role": "direct Qwen v003 raw render 2",
+            "sha256": "9514d88dbe9871424e71f520432b800d109d6b9f437d33ee0deba097fe6cae8b",
+            "size": [
+              2048,
+              1024
+            ]
+          }
+        ],
+        "prompt_id": "e920047d-3ada-47aa-a3bc-be17b5b683c2",
+        "provider": "openrouter",
+        "requested": 2,
+        "seed": 2026082603
+      },
+      {
+        "actual_cost_usd": null,
+        "billing": "unknown; counted as spent; never retried",
+        "completed": 0,
+        "estimated_cost_usd": 0.083,
+        "model": "qwen/qwen-image-3-pro",
+        "name": "v003 focused crop",
+        "prompt_id": "1e8f9909-66df-4555-8276-677c73d0dfa9",
+        "provider": "openrouter",
+        "requested": 2,
+        "seed": 2026082603
+      }
+    ]
+  },
+  "provider": "openrouter",
+  "raw_baselines": [
+    {
+      "mode": "RGB",
+      "path": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-1.png",
+      "role": "direct Qwen raw render 1",
+      "sha256": "f02435d5d4e4342af47b6683c545676b6483899395cdb87c37e72b7afc2e3e4d",
+      "size": [
+        2048,
+        1024
+      ]
+    },
+    {
+      "mode": "RGB",
+      "path": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-2.png",
+      "role": "direct Qwen raw render 2",
+      "sha256": "9514d88dbe9871424e71f520432b800d109d6b9f437d33ee0deba097fe6cae8b",
+      "size": [
+        2048,
+        1024
+      ]
+    }
+  ],
+  "render_lineage": [
+    {
+      "component_workflow": "artifacts/issue-34/component-assembly-v004/workflows/component-donor-1.api.json",
+      "normalization_workflow": "artifacts/issue-34/component-assembly-v004/workflows/normalization-control.api.json",
+      "normalized_donor": "artifacts/issue-34/component-assembly-v004/baseline/normalized-donor-1.png",
+      "output": "artifacts/issue-34/component-assembly-v004/outputs/donor-1-component-assembly.png",
+      "raw_render": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-1.png"
+    },
+    {
+      "component_workflow": "artifacts/issue-34/component-assembly-v004/workflows/component-donor-2.api.json",
+      "normalization_workflow": "artifacts/issue-34/component-assembly-v004/workflows/normalization-control.api.json",
+      "normalized_donor": "artifacts/issue-34/component-assembly-v004/baseline/normalized-donor-2.png",
+      "output": "artifacts/issue-34/component-assembly-v004/outputs/donor-2-component-assembly.png",
+      "raw_render": "artifacts/issue-34/component-assembly-v004/baseline/raw-render-2.png"
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "mode": "RGBA",
+    "path": "artifacts/issue-34/component-assembly-v004/source/options-window-source.png",
+    "role": "authoritative Reference Screen",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "stopping_reason": "The first ranked no-cost arm visibly repaired the internal copy and layout on both saved donors, so no remaining paid outputs were used.",
+  "workflows": [
+    {
+      "path": "artifacts/issue-34/component-assembly-v004/workflows/component-donor-1.api.json",
+      "role": "executed donor 1 native-node graph",
+      "sha256": "3c004ede1f1543f4333b7dc1ec25681f82900c6243e94823d64c0706effd9d88"
+    },
+    {
+      "path": "artifacts/issue-34/component-assembly-v004/workflows/component-donor-2.api.json",
+      "role": "executed donor 2 native-node graph",
+      "sha256": "4e52286d258faac3e7fc1170b8305363d82677fae8aaf3b02ccf372e4bcad1ac"
+    },
+    {
+      "path": "artifacts/issue-34/component-assembly-v004/workflows/normalization-control.api.json",
+      "role": "executed raw-render normalization control",
+      "sha256": "a52efec35e54706e2bc503ebc7a2d7f3194afde827066f808c7f3e8f38b25417"
+    },
+    {
+      "path": "artifacts/issue-34/component-assembly-v004/workflows/aspect-control.api.json",
+      "role": "executed rejected geometry-only graph",
+      "sha256": "a82ed9686094e9dce269ab411229c3e3a724e3bd22919d40d053a18652246bd9"
+    }
+  ]
+}
