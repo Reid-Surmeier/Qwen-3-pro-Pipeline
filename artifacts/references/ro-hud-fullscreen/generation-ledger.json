@@ -1,9 +1,9 @@
 {
   "cap": 200,
-  "requested": 4,
-  "completed": 1,
+  "requested": 6,
+  "completed": 3,
   "ambiguous": 3,
-  "actual_cost_usd": 0.043,
+  "actual_cost_usd": 0.129,
   "batches": [
     {
       "name": "backdrop-v1",
@@ -54,6 +54,68 @@
       "usage": null,
       "files": [],
       "seed": 2026086003
+    },
+    {
+      "name": "clean-pm",
+      "prompt_id": "33c04b2a-3b9f-411f-9b9a-475f3b03fad3",
+      "status": "success",
+      "seed": 2026086010,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 227,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4402
+      },
+      "files": [
+        {
+          "file": "artifacts/references/ro-hud-fullscreen/clean-raw-pm.png",
+          "sha256": "82cd12f14814da0d519646141883d2e654d912290b30f7ca2f2567ef427585f4"
+        }
+      ]
+    },
+    {
+      "name": "clean-chat-room",
+      "prompt_id": "5faecda6-4f4a-47be-a665-d615b0ec31d0",
+      "status": "success",
+      "seed": 2026086011,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 235,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4410
+      },
+      "files": [
+        {
+          "file": "artifacts/references/ro-hud-fullscreen/clean-raw-chat-room.png",
+          "sha256": "31010d2f078b59418ac9371a6cb5a6a190856ed0ae77d8d61fb2977053706e5b"
+        }
+      ]
     }
   ]
 }

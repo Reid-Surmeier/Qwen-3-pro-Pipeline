@@ -86,15 +86,34 @@ func _send_chat(window_id: String, text: String) -> void:
 	if window.dynamic_regions.has("log"):
 		var label: RichTextLabel = window.overlays.get("live-log")
 		if label == null:
+			# First send: swap the log region to the Qwen clean plate so live
+			# text owns a blank panel instead of stacking on source text.
+			var clean_path := "res://plates/%s-clean.png" % window_id
+			if ResourceLoader.exists(clean_path):
+				var clean_tex: Texture2D = load(clean_path)
+				var rect: Rect2 = window.dynamic_regions["log"]
+				var atlas := AtlasTexture.new()
+				atlas.atlas = clean_tex
+				atlas.region = rect
+				var patch := TextureRect.new()
+				patch.name = "clean-log-patch"
+				patch.texture = atlas
+				patch.position = rect.position
+				patch.size = rect.size
+				patch.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+				patch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				window.add_child(patch)
+				window.overlays["clean-log-patch"] = patch
+		if label == null:
 			label = RichTextLabel.new()
 			label.name = "live-log"
 			label.bbcode_enabled = true
 			label.scroll_active = false
 			label.add_theme_color_override("default_color", Color8(30, 34, 44))
 			label.add_theme_font_size_override("normal_font_size", 22)
-			var rect: Rect2 = window.dynamic_regions["log"]
-			label.position = Vector2(rect.position.x, rect.position.y + rect.size.y - 66)
-			label.size = Vector2(rect.size.x, 62)
+			var rect2: Rect2 = window.dynamic_regions["log"]
+			label.position = rect2.position + Vector2(6, 4)
+			label.size = rect2.size - Vector2(12, 8)
 			window.add_child(label)
 			window.overlays["live-log"] = label
 		label.append_text("[color=#4a6edc]SakumaRiri[/color] : %s\n" % text)

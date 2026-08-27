@@ -94,6 +94,7 @@ func _initialize() -> void:
 
 	main._send_chat("pm", "テスト")
 	check("live-send-appends", main.windows["pm"].overlays.has("live-log"))
+	check("clean-plate-patch", main.windows["pm"].overlays.has("clean-log-patch"))
 
 	_finish()
 

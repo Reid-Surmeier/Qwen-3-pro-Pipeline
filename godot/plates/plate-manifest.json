@@ -93,5 +93,24 @@
       ],
       "prompt_id": "b7268982-569d-467f-9550-9e627d56661b"
     }
+  },
+  "clean_plates": {
+    "pm": {
+      "file": "godot/plates/pm-clean.png",
+      "sha256": "e5ab7dca3e2c598f1872682ec020151428c7246a4b1a97356dcbda7021242e66",
+      "spliced_regions": [
+        "log",
+        "input"
+      ]
+    },
+    "chat-room": {
+      "file": "godot/plates/chat-room-clean.png",
+      "sha256": "d74f7611931c43b88533ad56863293cb30c01eb1b1b7fb4c88493790fe2764d4",
+      "spliced_regions": [
+        "log",
+        "input",
+        "roster"
+      ]
+    }
   }
 }
