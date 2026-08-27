@@ -9,6 +9,20 @@ from .capacity import (
     plan_capacity_scenarios,
     plan_worker_capacity,
 )
+from .fidelity import (
+    FidelityContract,
+    FidelityContractError,
+    FidelityEvidenceError,
+    FidelityResult,
+    MutableRegion,
+    RegionChange,
+    corrections_for,
+    describe_result,
+    load_correction_prompts,
+    load_fidelity_contract,
+    parse_fidelity_contract,
+    verify_against_baseline,
+)
 from .comfyui_workflow import (
     build_comfyui_api_workflow,
     build_comfyui_assembly_workflow,
@@ -29,6 +43,18 @@ from .providers.openrouter import (
 )
 
 __all__ = [
+    "FidelityContract",
+    "FidelityContractError",
+    "FidelityEvidenceError",
+    "FidelityResult",
+    "MutableRegion",
+    "RegionChange",
+    "corrections_for",
+    "describe_result",
+    "load_correction_prompts",
+    "load_fidelity_contract",
+    "parse_fidelity_contract",
+    "verify_against_baseline",
     "CapacityPlanningError",
     "CapacityPolicy",
     "CapacityRecommendation",
