@@ -52,12 +52,39 @@ Clean-state command: {clean_state_command}
    Every contract clause must end with a disposition: pass, fail, or
    unverified (an authoritative input you would need was not supplied).
 
-2. **Playtest the candidate.** Launch it with the launch command (an X display
-   is available; use `xvfb-run` if none is set). Run the clean-state command
-   between rounds. First perform every interaction the contract names, then
-   explore: drag, resize, click every control, edit and submit text, exercise
-   stateful widgets. Capture a screenshot of each state you judge into
-   `/out/` and inspect it with your vision capability.
+2. **Playtest the candidate — a full interaction loop, never idle
+   screenshots.** Run the app and drive it with real input events:
+
+   ```bash
+   Xvfb :99 -screen 0 1973x1319x24 &          # once, at the start
+   export DISPLAY=:99
+   {launch_command} > /out/app.log 2>&1 &      # keep the app running
+   sleep 8
+   import -window root /out/00-initial.png
+   ```
+
+   Interact with `xdotool` on the same DISPLAY: `xdotool mousemove X Y click 1`
+   to click; a drag is `mousedown 1`, `mousemove`, `mouseup 1`; type with
+   `xdotool type "text"` and submit with `xdotool key Return`. Window
+   rectangles for the reference canvas (1973x1319) are in
+   `/workspace/artifacts/references/ro-hud-fullscreen/window-rects.json` when
+   supplied. After every interaction, capture `import -window root` into
+   `/out/` and judge the frame with your vision capability.
+
+   For EVERY behavioral clause in the contract, perform at least one concrete
+   interaction and save a before/after screenshot pair named for the clause
+   (e.g. `/out/B1-drag-party-before.png`, `/out/B1-drag-party-after.png`).
+   The after frame must visibly show the state change the clause demands —
+   a pair with no visible change is evidence of a failure, not of a pass.
+   Minimum interaction ledger: drag two different windows; resize or
+   minimize/restore one; type into a text field and submit; toggle a checkbox
+   off and on; click at least six distinct buttons across different windows;
+   capture any animated region as a 3-frame sequence. Then keep exploring
+   beyond the ledger — exploration finds what the contract missed.
+
+   If the app crashes or the display wedges, run the clean-state command and
+   relaunch. If the candidate cannot be launched at all, the verdict is
+   blocked.
 
 3. **Capture evidence.** Every failure must carry: the state or window, exact
    steps to reproduce, expected behavior, actual behavior, a screenshot or log
@@ -80,7 +107,9 @@ Clean-state command: {clean_state_command}
    outside the contract goes in `followups`, never in blocking findings.
 
 Your review is complete when `/out/review.json` is written, every contract
-clause is dispositioned, and every finding's evidence file exists in `/out/`.
+clause is dispositioned, every behavioral clause has its named before/after
+screenshot pair in `/out/`, and every finding's evidence file exists in
+`/out/`.
 """
 
 VERDICT_EXAMPLE = {
