@@ -24,7 +24,7 @@ func _initialize() -> void:
 	var desktop = main.get_node_or_null("Desktop")
 	check("desktop-exists", desktop != null)
 	if desktop:
-		check("desktop-magenta", desktop.color.is_equal_approx(Color8(255, 0, 230)),
+		check("desktop-magenta", desktop.color.is_equal_approx(Color8(239, 7, 239)),
 			str(desktop.color))
 
 	var win = main.get_node_or_null("StatusWindow")
@@ -163,6 +163,32 @@ func _initialize() -> void:
 		check("party-tab-exclusive", party.tabs["ギルド"].button_pressed \
 			and not party.tabs["パーティー"].button_pressed)
 		party._on_tab("パーティー")
+
+	# Trade contracts.
+	var trade = main.get_node_or_null("TradeWindow")
+	check("trade-exists", trade != null)
+	if trade:
+		check("trade-initially-disabled", trade.trade_button.disabled)
+		trade._on_ok()
+		check("trade-still-disabled-after-one-ok", trade.trade_button.disabled)
+		trade.partner_ok()
+		check("trade-enabled-after-both-ok", not trade.trade_button.disabled)
+
+	# Guild contracts.
+	var guild = main.get_node_or_null("GuildWindow")
+	check("guild-exists", guild != null)
+	if guild:
+		check("guild-roster-13", guild.roster_size() == 13, str(guild.roster_size()))
+		check("guild-emblem-texture", guild.get_node("Body/Emblem").texture != null)
+
+	# Bottom bar contracts.
+	var bar = main.get_node_or_null("BottomBar")
+	check("bottombar-exists", bar != null)
+	if bar:
+		bar.set_location("プロンテラ", Vector2i(45, 200))
+		check("bottombar-location-live",
+			bar.location_label.text == "プロンテラ [座標 45, 200]", bar.location_label.text)
+		bar.set_location("ETダンジョン 02F", Vector2i(158, 94))
 
 	_finish()
 

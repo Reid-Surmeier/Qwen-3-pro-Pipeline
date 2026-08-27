@@ -2,14 +2,16 @@ extends Control
 ## Desktop root: magenta ground, game-scene backdrop placeholder, windows at
 ## their Reference Screen positions, and the project-wide pixel font.
 
-const DESKTOP_MAGENTA := Color8(255, 0, 230)
+const DESKTOP_MAGENTA := Color8(239, 7, 239)
 const WINDOW_LAYOUT := {
 	"StatusWindow": Vector2(10, 8),
+	"GuildWindow": Vector2(15, 295),
 	"MinimapWindow": Vector2(1403, 4),
-	"PmWindow": Vector2(88, 1018),
-	"ChatRoomWindow": Vector2(1262, 690),
 	"CreateRoomWindow": Vector2(1378, 232),
 	"PartyWindow": Vector2(720, 318),
+	"TradeWindow": Vector2(663, 850),
+	"ChatRoomWindow": Vector2(1262, 690),
+	"PmWindow": Vector2(88, 1018),
 }
 
 
@@ -29,11 +31,19 @@ func _ready() -> void:
 	desktop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(desktop)
 
-	for entry in [[StatusWindow, "StatusWindow"], [MinimapWindow, "MinimapWindow"], [PmWindow, "PmWindow"], [ChatRoomWindow, "ChatRoomWindow"], [CreateRoomWindow, "CreateRoomWindow"], [PartyWindow, "PartyWindow"]]:
+	for entry in [[StatusWindow, "StatusWindow"], [GuildWindow, "GuildWindow"],
+			[MinimapWindow, "MinimapWindow"], [CreateRoomWindow, "CreateRoomWindow"],
+			[PartyWindow, "PartyWindow"], [TradeWindow, "TradeWindow"],
+			[ChatRoomWindow, "ChatRoomWindow"], [PmWindow, "PmWindow"]]:
 		var win: ReplicaWindow = entry[0].new()
 		win.name = entry[1]
 		win.position = WINDOW_LAYOUT[entry[1]]
 		add_child(win)
+
+	var bar := BottomBar.new()
+	bar.name = "BottomBar"
+	bar.position = Vector2(0, 1258)
+	add_child(bar)
 
 func _process(_delta: float) -> void:
 	for arg in OS.get_cmdline_user_args():
