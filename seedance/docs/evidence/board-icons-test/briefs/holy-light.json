@@ -1,0 +1,20 @@
+{
+  "source_authority": "The supplied Ragnarok-style Holy Light skill icon (golden pixel-art cross with rays in a cream beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.",
+  "style_lock": [
+    "24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)",
+    "the tile frame, bevel, and background stay perfectly rigid and static for the entire clip",
+    "no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity",
+    "no added text, particles, objects, glow halos outside the tile, or style modernization",
+    "icon tile stays exactly centered; all motion is contained inside the tile"
+  ],
+  "motion": "The cross and its existing rays brighten softly in one gentle bloom and dim back to the start, keeping the same pixels lit. No new rays or halo appear.",
+  "timing": "Hold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.",
+  "camera": "Locked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.",
+  "background": "Uniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.",
+  "negative_constraints": [
+    "do not redraw or reinterpret the icon or its frame",
+    "do not change palette, stroke, bevel, or corner treatment",
+    "do not introduce edge shimmer, color pulsing, or background drift",
+    "do not leave a visible loop seam; final frame returns exactly to the first frame"
+  ]
+}

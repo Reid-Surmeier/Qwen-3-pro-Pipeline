@@ -1,0 +1,18 @@
+{
+  "holy-light": {
+    "source_crop_sha256": "6a01fec2d9f3695880569ec37a6314642fbb051194692fba641d8b6312f6ea6b",
+    "anchor_sha256": "5a12d2f5080f925959e1cfa08e6baeef5f4a8a233d22d4ea5669513a0ed1e9c7"
+  },
+  "heal": {
+    "source_crop_sha256": "1efa74253e97fda645e0f41b41a66299152b2b5792892e7848be87e5a73d8649",
+    "anchor_sha256": "f93ff9e4b060459a34d0fa607f37743370210c331a1b49fdd0bae93e3576207c"
+  },
+  "blessing": {
+    "source_crop_sha256": "2e20124aa2a22c253fdbf81f6e6e3552db1644f887293f6ef5c1f3b0dd881ed1",
+    "anchor_sha256": "68bd97bf9347674bb36f599c07b880f913fa3f025806ec7460c2618c84133a7b"
+  },
+  "protect": {
+    "source_crop_sha256": "4b9fe09ac9f858ce92cab29b59a2503141a86e925f255d3d6a60fa51d3cff360",
+    "anchor_sha256": "62cfada4741870d710adc8d349d6830ce6c3fde4c2a8099d5c231dcb90374da9"
+  }
+}
