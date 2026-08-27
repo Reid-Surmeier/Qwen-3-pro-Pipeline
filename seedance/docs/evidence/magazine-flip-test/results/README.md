@@ -1,5 +1,16 @@
 # Magazine-flip test — batch result: all four cells refused by the provider ($0 billed)
 
+> **Update (2026-08-27, `mag-flip-single-25`):** the owner confirmed they hold rights to
+> the images and directed continuing with the real source. A single-cell probe of the
+> identical `flip-single` brief on **Seedance 2.5** (`final` tier, 640x640, anchors only,
+> no API references — the one changed variable is the model) was refused with the same
+> "output video may be related to copyright restrictions" error, job `Vl0GTxqAGtChgPLYAj2W`,
+> $0 billed (generation ledger 404). The filter is **host-wide across model tiers**, and it
+> keys on the content itself, not on rights ownership — there is no rights-assertion channel
+> in the API. Remaining route for the real images: a different hosting surface, which is
+> outside the current OpenRouter-only policy (owner decision). Records in
+> `mag-flip-single-25/`.
+
 First live smooth-grammar batch (2026-08-27). All four jobs reached ByteDance and **failed
 at generation time**; no output was produced and no billing records exist for any of the
 four generation IDs (the OpenRouter generation ledger returns 404 for each — treated as
