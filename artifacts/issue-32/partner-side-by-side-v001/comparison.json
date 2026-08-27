@@ -1,0 +1,128 @@
+{
+  "actual_cost_usd": 0.086,
+  "arms": [
+    {
+      "arm": "legacy",
+      "attempt_id": "issue32-legacy-20260827T021817Z-e5572fa9",
+      "completed_outputs": 1,
+      "output": {
+        "bytes": 833586,
+        "mode": "RGB",
+        "path": "artifacts/issue-32/partner-side-by-side-v001/legacy/image-01.png",
+        "role": "legacy request-construction path output",
+        "sha256": "309a93fa9d9f74b186f73665d0d2fdbcb54b5f846b1ca2ac19fe160aa12d4b0c",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      "requested_outputs": 1,
+      "role": "legacy request-construction path",
+      "status": "success",
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4261
+      }
+    },
+    {
+      "arm": "partner",
+      "attempt_id": "issue32-partner-20260827T022035Z-e5572fa9",
+      "completed_outputs": 1,
+      "output": {
+        "bytes": 895937,
+        "mode": "RGB",
+        "path": "artifacts/issue-32/partner-side-by-side-v001/partner/image-01.png",
+        "role": "Partner request-construction path output",
+        "sha256": "8490e9e0a94a0df986057215b4b64d8ec48480d73d37d7f24ac5d21bdf542e8b",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      "requested_outputs": 1,
+      "role": "Partner request-construction path",
+      "status": "success",
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4261
+      }
+    }
+  ],
+  "aspect_ratio": "1:1",
+  "comparison": {
+    "different_rgb_pixels": 966389,
+    "same_dimensions": true,
+    "same_output_sha256": false
+  },
+  "completed_outputs": 2,
+  "estimated_cost_usd": 0.083,
+  "full_request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+  "human_visual_approval": "required",
+  "issue": 32,
+  "model": "qwen/qwen-image-3-pro",
+  "paid_ci": false,
+  "paid_submission_method": "direct OpenRouter client submission after proving the node request-construction paths identical",
+  "possibly_billed_outputs": 0,
+  "prompt": "Using Image 1, keep the complete PlantStudio interface and all existing pixel-art controls unchanged. Change only the blue title bar text from PlantStudio - Library of wildflowers (11 plants) to Partner Compatibility Test. Center the complete unchanged window on a plain light-gray square canvas without cropping or adding elements.",
+  "provider": "openrouter",
+  "reference_node_encoding_sha256": "ff7e892704714317cc365c0e96acf0355a14b29eb0ebf2f9beb254539a59f59f",
+  "reference_node_encodings_identical": true,
+  "requested_outputs": 2,
+  "resolution": "1K",
+  "sanitized_requests_identical": true,
+  "seed": 2026082632,
+  "side_by_side": {
+    "bytes": 1448042,
+    "mode": "RGB",
+    "path": "artifacts/issue-32/partner-side-by-side-v001/side-by-side.png",
+    "role": "labeled two-arm comparison",
+    "sha256": "95a5eae406546ff05c6286176865b01d9e95eddb0e0e5d404560b16ec1552eef",
+    "size": [
+      2048,
+      1088
+    ]
+  },
+  "source": {
+    "bytes": 12853,
+    "mode": "P",
+    "path": "artifacts/references/plantstudio-main-window.png",
+    "role": "immutable PlantStudio reference",
+    "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d",
+    "size": [
+      474,
+      403
+    ]
+  },
+  "stop_rule": "Stop after one output per arm; never retry an ambiguous call.",
+  "stopping_reason": "Completed the pre-approved one-output pair; no follow-up run."
+}
