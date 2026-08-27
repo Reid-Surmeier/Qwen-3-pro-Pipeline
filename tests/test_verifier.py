@@ -262,6 +262,38 @@ class EndToEndGateTests(unittest.TestCase):
         self.assertFalse(result.verified)
         self.assertEqual(client.calls, [])
 
+class IntentTests(unittest.TestCase):
+    def test_supplies_the_licensed_change_to_the_reviewer(self):
+        reviews = build_region_reviews(
+            CONTRACT,
+            canvas(),
+            canvas(),
+            intents={"title": "replace the numeral 11 with 24"},
+        )
+
+        self.assertEqual(reviews[0].intent, "replace the numeral 11 with 24")
+        self.assertEqual(reviews[1].intent, "")
+
+    def test_a_region_without_a_declared_intent_carries_none(self):
+        reviews = build_region_reviews(CONTRACT, canvas(), canvas())
+
+        self.assertTrue(all(review.intent == "" for review in reviews))
+
+    def test_run_verification_threads_intent_through_to_the_client(self):
+        client = StubVisionClient({"title": {"verdict": MATCH}, "footer": {"verdict": MATCH}})
+
+        run_verification(
+            CONTRACT,
+            passing_fidelity(),
+            canvas(),
+            canvas(),
+            client=client,
+            intents={"footer": "swap the tab labels"},
+        )
+
+        intents = {call.region: call.intent for call in client.calls}
+        self.assertEqual(intents["footer"], "swap the tab labels")
+
 
 if __name__ == "__main__":
     unittest.main()

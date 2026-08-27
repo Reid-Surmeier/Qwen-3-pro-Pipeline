@@ -82,6 +82,22 @@ class RegionChange:
 
 
 @dataclass(frozen=True)
+class PaletteComparison:
+    """How far one region's palette grew against the approved baseline.
+
+    A flat palettised control that multiplies its colour count many times over
+    was redrawn by a continuous-tone process, whatever the pixels outside it
+    say. The signal is blunt, free, and needs no model.
+    """
+
+    region: str
+    baseline_colours: int
+    candidate_colours: int
+    growth: float
+    within_tolerance: bool
+
+
+@dataclass(frozen=True)
 class FidelityResult:
     """A complete deterministic verdict, with the evidence behind it."""
 
@@ -303,6 +319,77 @@ def verify_against_baseline(
         region_changes=region_changes,
         invariant_violations=tuple(invariant_violations),
     )
+
+
+def _region_colours(
+    pixels: Sequence[Any], width: int, region: MutableRegion
+) -> set[Any]:
+    colours: set[Any] = set()
+    for y in range(region.y, region.bottom):
+        row = y * width
+        colours.update(pixels[row + region.x : row + region.right])
+    return colours
+
+
+def compare_palettes(
+    contract: FidelityContract,
+    candidate: Any,
+    baseline: Any,
+    *,
+    max_growth: float = 4.0,
+) -> tuple[PaletteComparison, ...]:
+    """Compare each licensed region's palette size with the baseline's.
+
+    Reported separately from `verify_against_baseline` rather than folded into
+    its verdict: `passed` means specifically that unlicensed pixels did not
+    change, and conflating a second question with it would make both harder to
+    act on.
+    """
+
+    if max_growth < 1.0:
+        raise FidelityContractError("max_growth below 1.0 would reject an identical palette")
+
+    candidate_width, candidate_height, candidate_pixels = _as_pixel_rows(candidate)
+    baseline_width, baseline_height, baseline_pixels = _as_pixel_rows(baseline)
+
+    if (candidate_width, candidate_height) != (baseline_width, baseline_height):
+        raise FidelityEvidenceError(
+            "candidate and baseline differ in size, so no palette comparison exists"
+        )
+    if (candidate_width, candidate_height) != (contract.width, contract.height):
+        raise FidelityEvidenceError(
+            "images do not match the contract canvas, so the regions do not apply"
+        )
+
+    comparisons: list[PaletteComparison] = []
+    for region in contract.mutable_regions:
+        baseline_colours = len(_region_colours(baseline_pixels, baseline_width, region))
+        candidate_colours = len(_region_colours(candidate_pixels, candidate_width, region))
+        growth = candidate_colours / baseline_colours if baseline_colours else float("inf")
+        comparisons.append(
+            PaletteComparison(
+                region=region.name,
+                baseline_colours=baseline_colours,
+                candidate_colours=candidate_colours,
+                growth=growth,
+                within_tolerance=growth <= max_growth,
+            )
+        )
+    return tuple(comparisons)
+
+
+def describe_palettes(comparisons: Iterable[PaletteComparison]) -> str:
+    """Render palette findings a reviewer can read without opening the images."""
+
+    lines: list[str] = []
+    for comparison in comparisons:
+        verdict = "ok" if comparison.within_tolerance else "lost bitmap character"
+        lines.append(
+            f"  region {comparison.region}: {comparison.baseline_colours} -> "
+            f"{comparison.candidate_colours} colour(s), "
+            f"{comparison.growth:.1f}x ({verdict})"
+        )
+    return "\n".join(lines)
 
 
 def describe_result(result: FidelityResult) -> str:

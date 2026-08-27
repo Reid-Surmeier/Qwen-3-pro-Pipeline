@@ -11,6 +11,9 @@ from .capacity import (
 )
 from .fidelity import (
     FidelityContract,
+    PaletteComparison,
+    compare_palettes,
+    describe_palettes,
     FidelityContractError,
     FidelityEvidenceError,
     FidelityResult,
@@ -56,6 +59,9 @@ from .providers.openrouter import (
 )
 
 __all__ = [
+    "PaletteComparison",
+    "compare_palettes",
+    "describe_palettes",
     "DEFECT_ROUTES",
     "RegionReview",
     "RegionVerdict",

@@ -102,6 +102,7 @@ class RegionReview:
     region: str
     baseline_crop: Any
     candidate_crop: Any
+    intent: str = ""
     questions: tuple[str, ...] = ()
     required_evidence: tuple[str, ...] = ()
 
@@ -129,8 +130,14 @@ def build_region_reviews(
     *,
     correction_prompts: Sequence[Mapping[str, Any]] = (),
     target: str = "*",
+    intents: Mapping[str, str] | None = None,
 ) -> tuple[RegionReview, ...]:
-    """Crop one review pair per licensed region, with its applicable questions."""
+    """Crop one review pair per licensed region, with its intent and questions.
+
+    A reviewer that is not told what change was licensed has no way to tell an
+    intended edit from a defect, and will report every deliberate change as a
+    failure. The intent is what makes the verdict meaningful.
+    """
 
     applicable = set(corrections_for(correction_prompts, target))
     questions = tuple(
@@ -151,6 +158,7 @@ def build_region_reviews(
                 region=region.name,
                 baseline_crop=_crop(baseline, box),
                 candidate_crop=_crop(candidate, box),
+                intent=(intents or {}).get(region.name, ""),
                 questions=questions,
                 required_evidence=tuple(dict.fromkeys(evidence)),
             )
@@ -246,6 +254,7 @@ def run_verification(
     client: VisionClient,
     correction_prompts: Sequence[Mapping[str, Any]] = (),
     target: str = "*",
+    intents: Mapping[str, str] | None = None,
 ) -> VerificationResult:
     """Review a run that already passed its deterministic gates.
 
@@ -270,6 +279,7 @@ def run_verification(
         baseline,
         correction_prompts=correction_prompts,
         target=target,
+        intents=intents,
     )
     if not reviews:
         raise VerificationError("contract licensed no region, so there is nothing to review")

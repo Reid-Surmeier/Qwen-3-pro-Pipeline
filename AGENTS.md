@@ -16,24 +16,25 @@ If these sources conflict, stop and surface the conflict. Do not silently choose
 
 ## Work-readiness gate
 
-While an Issue is labeled `needs-triage`, an agent may inspect relevant context and post a triage brief, but must not create a branch, edit repository files, or begin implementation. The brief must cover interpretation, material open decisions, proposed scope, proposed acceptance/verification, and a recommendation.
-
-After posting the brief, replace `needs-triage` with `needs-human-decision`. While that label is present, wait for the human to approve, revise, split, or reject the proposal. Silence is not approval. Only a human may authorize the transition from `needs-human-decision` to `ready-for-agent`.
-
-Before applying `ready-for-agent`, update the Issue body so the approved specification—not the comment thread—is the canonical work packet.
+Human approval lives at the pull request, not the Issue
+([ADR 0004](docs/adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+An agent may triage an Issue and proceed directly to implementation without
+waiting for an Issue-level human decision.
 
 Implementation may begin only when:
 
 - one authoritative GitHub Issue identifies the problem or desired outcome,
-- the Issue body contains the human-approved specification,
 - the Issue has testable acceptance criteria,
 - in-scope and out-of-scope boundaries are clear,
 - the expected verification method is named,
-- dependencies and human approvals are identified,
-- neither `needs-triage`, `needs-info`, nor `needs-human-decision` is present,
-- the Issue is labeled `ready-for-agent`.
+- neither `needs-info` nor `blocked` is present.
 
-If a material requirement is missing, return the Issue to `needs-info`. Do not fill product or architectural gaps by guessing.
+If the Issue body is missing one of those, sharpen the body first (a triage
+brief comment plus a body update), then proceed. Use `needs-info` only for a
+material question the agent genuinely cannot answer from the repository,
+primary sources, or bounded experimentation. Do not fill product or
+architectural gaps by silent guessing — state the interpretation taken in the
+Issue and the pull request so the human can veto it at the PR gate.
 
 ## Preflight
 
@@ -50,7 +51,8 @@ Then confirm:
 - unrelated working-tree changes will not be included,
 - no secret or credential is present in the requested inputs,
 - the proposed work does not conflict with `CONTEXT.md` or an accepted ADR,
-- paid generation or external side effects have the required human approval.
+- paid generation stays within the standing OpenRouter allowance (ADR 0003,
+  ADR 0004) and external side effects beyond it have human approval.
 
 A failed preflight is a stop condition.
 
@@ -83,7 +85,7 @@ A failed preflight is a stop condition.
 - Use exact baseline and candidate commit SHAs for reproducible comparisons.
 - Do not place provider keys, tokens, passwords, or credentials in source, logs, prompts, issues, pull requests, workflow YAML, or artifacts.
 - Paid or model-backed evaluation must not run automatically in ordinary pull-request CI.
-- Issue-scoped paid verification may use OpenRouter only. Use the smallest useful batch, never exceed 10 cumulative output images for the linked Issue/PR, and stop before submitting any request that could produce image 11. Do not use `provider: auto` or direct Alibaba under this allowance.
+- Paid image generation for Issue testing is generally authorized through explicit OpenRouter only (ADR 0004); it needs no per-Issue human pre-approval. Use the smallest useful batch, never exceed 10 cumulative output images for the linked Issue/PR, and stop before submitting any request that could produce image 11. Do not use `provider: auto` or direct Alibaba under this allowance. Write the pre-submission record (question, batch, estimate, stop rule) before spending.
 - Record requested and completed image counts, provider/model, prompt or task ID, estimate and actual cost when exposed, output paths, hashes, and provenance for every paid verification run.
 - Do not blindly retry an ambiguous provider failure that might create duplicate billing.
 - Count an ambiguous possibly billed request against the 10-image verification allowance until it is reconciled.
@@ -150,7 +152,7 @@ Stop and ask for human direction when:
 - requirements or acceptance criteria are ambiguous,
 - a requested change conflicts with an accepted ADR,
 - credentials or sensitive information appear in the worktree,
-- paid generation or an external side effect lacks approval,
+- paid generation would exceed the standing allowance, or an external side effect beyond it lacks approval,
 - exact preservation cannot be objectively verified,
 - the requested action would overwrite unrelated work,
 - Git author identity is missing at commit time,

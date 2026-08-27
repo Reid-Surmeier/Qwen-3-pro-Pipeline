@@ -5,6 +5,8 @@ from pathlib import Path
 
 from qwen_ui_pipeline.fidelity import (
     FidelityContractError,
+    compare_palettes,
+    describe_palettes,
     FidelityEvidenceError,
     FidelityResult,
     corrections_for,
@@ -256,6 +258,81 @@ class CorrectionCorpusTests(unittest.TestCase):
 
                     with self.assertRaisesRegex(FidelityContractError, "non-empty strings"):
                         load_correction_prompts(path)
+
+
+class PaletteComparisonTests(unittest.TestCase):
+    def setUp(self):
+        self.contract = parse_fidelity_contract(CONTRACT)
+
+    def test_an_unchanged_candidate_reports_no_growth(self):
+        baseline = canvas()
+
+        comparisons = compare_palettes(self.contract, baseline, baseline)
+
+        self.assertEqual(len(comparisons), 2)
+        self.assertTrue(all(c.growth == 1.0 for c in comparisons))
+        self.assertTrue(all(c.within_tolerance for c in comparisons))
+
+    def test_flags_a_flat_region_redrawn_in_continuous_tone(self):
+        baseline = canvas()
+        width, height, pixels = baseline
+        pixels = list(pixels)
+        # Repaint the licensed title region with a distinct colour per pixel,
+        # the signature of a continuous-tone redraw of a flat control.
+        region = self.contract.region("title")
+        shade = 0
+        for y in range(region.y, region.bottom):
+            for x in range(region.x, region.right):
+                pixels[y * width + x] = (shade, 10, 20, 255)
+                shade += 1
+        candidate = (width, height, pixels)
+
+        comparisons = compare_palettes(self.contract, candidate, baseline)
+        title = next(c for c in comparisons if c.region == "title")
+
+        self.assertFalse(title.within_tolerance)
+        self.assertEqual(title.baseline_colours, 1)
+        self.assertEqual(title.candidate_colours, 6)
+        self.assertIn("lost bitmap character", describe_palettes(comparisons))
+
+    def test_accepts_a_small_legitimate_palette_change(self):
+        baseline = canvas()
+        candidate = with_pixel(with_pixel(baseline, 2, 1, BLUE), 3, 2, (0, 128, 0, 255))
+
+        title = next(
+            c
+            for c in compare_palettes(self.contract, candidate, baseline)
+            if c.region == "title"
+        )
+
+        self.assertEqual(title.candidate_colours, 3)
+        self.assertTrue(title.within_tolerance)
+
+    def test_tolerance_is_configurable(self):
+        baseline = canvas()
+        candidate = with_pixel(with_pixel(baseline, 2, 1, BLUE), 3, 2, (0, 128, 0, 255))
+
+        strict = next(
+            c
+            for c in compare_palettes(self.contract, candidate, baseline, max_growth=2.0)
+            if c.region == "title"
+        )
+
+        self.assertFalse(strict.within_tolerance)
+
+    def test_rejects_a_tolerance_that_would_fail_an_identical_palette(self):
+        with self.assertRaises(FidelityContractError):
+            compare_palettes(self.contract, canvas(), canvas(), max_growth=0.5)
+
+    def test_fails_closed_on_a_size_mismatch(self):
+        with self.assertRaises(FidelityEvidenceError):
+            compare_palettes(self.contract, canvas(10, 10), canvas(10, 9))
+
+    def test_fails_closed_on_incomplete_pixel_evidence(self):
+        incomplete = (10, 10, [RED] * 99)
+
+        with self.assertRaisesRegex(FidelityEvidenceError, "declares 100 pixels"):
+            compare_palettes(self.contract, incomplete, canvas())
 
 
 if __name__ == "__main__":
