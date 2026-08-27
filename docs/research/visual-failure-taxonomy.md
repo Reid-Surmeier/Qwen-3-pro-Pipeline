@@ -69,7 +69,7 @@ rejection.
 | T30 | `style-smoothing` | Pixel-era aliased artwork returned as smooth anti-aliased or photoreal rendering. | strong | golf-club v001 club shaft gradient |
 | T31 | `micro-texture-worms` | Halftone or grain replaced by worm-like repeating micro-glyph noise, visible at 100%. | weak | maga v003 flag/field texture |
 | T32 | `template-remnant` | A structural element of the style-donor template survives into the new design where it has no role. | strong | maga v003 retained XP swoosh |
-| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit (cursive "palantir" returned as the real ENERGY STAR script and band text). | strong | Issue #18 object-removal pair, both arms (PR #64) |
+| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit. **Hypothesized only — no confirmed instance.** The Issue #18 evidence was retracted: its source was the genuine ENERGY STAR sticker mislabeled as the parody, and the model preserved it faithfully. Issue #70 tests the class against real parody sources. | unconfirmed | none (Issue #18 instance retracted 2026-08-26) |
 | T34 | `source-character-beautification` | A degraded source (blurry photo, compressed scan) is silently sharpened into a clean studio render while the requested edits are applied. | weak | Issue #18 dense-multi-region pair, both arms (PR #64) |
 
 ### Assembly and alpha (deterministically checkable today)
@@ -108,10 +108,11 @@ enough. Observed mappings from the seed corpus:
   resolution near source scale, and review at 100%.
 - T32 (template remnant) → enumerate donor-template elements to drop in the
   negative constraints.
-- T33 (memorized-brand reversion) → prompt explicitness does not protect
-  (measured in Issue #18: identical failure in a 300-token and a 3,300-token
-  brief). Keep parody-critical text and marks in source-owned pixels via
-  deterministic Assembly, or supply the parody wordmark as its own reference.
+- T33 (memorized-brand reversion) → unconfirmed; treat as a watch-for
+  class until Issue #70 reports. Independent of T33, the retracted #18
+  instance yielded a real datum: when a brief's words contradict the source
+  pixels, the model follows the pixels — so reviewer source-identity errors
+  masquerade as model failures. Verify the source before blaming the model.
 - T34 (beautification) → if photographic character matters, say so as a named
   invariant; expect sharpening of degraded sources by default.
 - T40–T43 → deterministic Assembly and Fidelity Check; these are pipeline
@@ -126,7 +127,11 @@ enough. Observed mappings from the seed corpus:
   and false rejects by class.
 - `v0.2.0` (2026-08-26): appended T33 `memorized-brand-reversion` and T34
   `source-character-beautification` from the Issue #18 controlled experiment
-  (PR #64), where both prompt-length arms reproduced them identically.
+  (PR #64).
+- `v0.2.1` (2026-08-26): retracted T33's evidence — the #18 source was the
+  genuine ENERGY STAR sticker mislabeled as the parody; the model was
+  source-faithful. T33 stays as an unconfirmed watch-for class pending
+  Issue #70. T34 is unaffected (observed in both arms of a different task).
 
 New classes append; renames supersede with a note. A class may only be
 promoted from advisory to hard-gate when a deterministic check exists for it
