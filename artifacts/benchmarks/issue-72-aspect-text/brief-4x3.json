@@ -1,0 +1,34 @@
+{
+  "model": "qwen/qwen-image-3-pro",
+  "negative_constraints": [
+    "No global redraw, modernization, smoothing, anti-aliasing upgrade, or invented UI.",
+    "No golf ball, golfer, tee, flag, or any second golf object."
+  ],
+  "objective": "Perform one surgical edit: replace the single selected tall thin flower inside the red selection rectangle with one upright seven-iron golf club. Change nothing else.",
+  "output": {
+    "aspect_ratio": "4:3",
+    "count": 1,
+    "resolution": "1K"
+  },
+  "preservation_invariants": [
+    "Keep the complete application window: title bar, menus, toolbar, plant canvas, species list, growth graph, age controls, tabs, and status bar in their original positions.",
+    "Keep every unselected plant, label, number, icon, and pixel-scale spacing unchanged.",
+    "Keep the Windows-era grey chrome, navy title bar, aliased pixel edges, limited palette, and low-resolution raster character.",
+    "Do not change any text anywhere in the window."
+  ],
+  "provider": "openrouter",
+  "quality_checks": [
+    "At 100 percent zoom, pixels outside the red rectangle look identical to the reference.",
+    "The club reads clearly as a seven-iron at original scale."
+  ],
+  "reference_role": "Reference image 1 is the authoritative PlantStudio main-window screenshot (474 by 403). Match it exactly outside the red selection rectangle.",
+  "regions": [
+    {
+      "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
+      "name": "red selection rectangle",
+      "preserve": [
+        "the red selection rectangle itself"
+      ]
+    }
+  ]
+}

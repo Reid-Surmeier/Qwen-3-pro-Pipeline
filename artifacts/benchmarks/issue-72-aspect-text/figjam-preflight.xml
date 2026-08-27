@@ -1,0 +1,29 @@
+<canvas id="0:1" name="Page 1" x="0" y="0" width="0" height="0">
+  <section id="6:2" x="0" y="540" width="4064" height="934">
+    <frame id="4:2" name="Uploaded Image" x="64" y="64" width="948" height="806" />
+    <frame id="4:3" name="Uploaded Image" x="1060" y="64" width="948" height="806" />
+    <frame id="4:4" name="Uploaded Image" x="2056" y="64" width="948" height="806" />
+    <frame id="4:5" name="Uploaded Image" x="3052" y="64" width="948" height="806" />
+  </section>
+  <section id="37:6" x="0" y="1714" width="5316" height="1768">
+    <frame id="37:2" name="Uploaded Image" x="64" y="64" width="948" height="806" />
+    <frame id="37:3" name="Uploaded Image" x="1060" y="64" width="1024" height="820" />
+    <frame id="37:4" name="Uploaded Image" x="2132" y="64" width="1024" height="576" />
+    <frame id="37:5" name="Uploaded Image" x="3204" y="64" width="2048" height="1640" />
+  </section>
+  <section id="40:9" x="0" y="3722" width="4368" height="1816">
+    <frame id="40:2" name="Uploaded Image" x="64" y="64" width="1024" height="820" />
+    <frame id="40:3" name="Uploaded Image" x="1136" y="64" width="1024" height="820" />
+    <frame id="40:4" name="Uploaded Image" x="2208" y="64" width="1024" height="820" />
+    <frame id="40:5" name="Uploaded Image" x="3280" y="64" width="1024" height="820" />
+    <frame id="40:6" name="Uploaded Image" x="64" y="932" width="1024" height="820" />
+    <frame id="40:7" name="Uploaded Image" x="1136" y="932" width="1024" height="820" />
+    <frame id="40:8" name="Uploaded Image" x="2208" y="932" width="1024" height="820" />
+  </section>
+  <section id="43:6" x="0" y="5778" width="3856" height="1152">
+    <frame id="43:2" name="Uploaded Image" x="64" y="64" width="1024" height="820" />
+    <frame id="43:3" name="Uploaded Image" x="1136" y="64" width="1024" height="820" />
+    <frame id="43:4" name="Uploaded Image" x="2208" y="64" width="768" height="1024" />
+    <frame id="43:5" name="Uploaded Image" x="3024" y="64" width="768" height="1024" />
+  </section>
+</canvas>

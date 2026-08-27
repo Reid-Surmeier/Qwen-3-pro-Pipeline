@@ -1,0 +1,117 @@
+{
+  "artifact_classification": {
+    "attempts_plan_and_manifests": "reproducibility_metadata",
+    "bounded_crops": "comparison_evidence",
+    "native_outputs": "comparison_evidence"
+  },
+  "base_commit": "2fd1e8d3d6473bc6ed932bdf13658fa4ff87772e",
+  "base_pr": 66,
+  "brief": {
+    "file": "artifacts/benchmarks/issue-72-aspect-text/brief-4x3.json",
+    "sha256": "a6773a069e0ce88a4d6ee48c790c376b1724c5dd49f3d84a709d18dfbd5d4264"
+  },
+  "frozen_non_geometry_fields": [
+    "Reference Screen",
+    "Edit Brief",
+    "model",
+    "resolution",
+    "seed",
+    "output count"
+  ],
+  "inherited_arm": {
+    "artifacts": {
+      "11": {
+        "cost_usd": 0.043,
+        "file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-11.png",
+        "prompt_id": "f814d934-1c40-4e90-9d9d-6525ba1417cb",
+        "sha256": "5111d717fc41e8f70daf2c27a7f19a1a9298af7b53d4598b3a27e29864d7b9bc"
+      },
+      "20260826": {
+        "cost_usd": 0.043,
+        "file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-20260826.png",
+        "prompt_id": "f447b1be-a8ba-47ea-b49d-fae490ac3d9c",
+        "sha256": "c53a53ba5be1415b18ece2008d725a9e3e2fdc54bd8dc773b413ae12d531daf4"
+      },
+      "4242": {
+        "cost_usd": 0.043,
+        "file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-4242.png",
+        "prompt_id": "84b29d7c-8892-4f55-a45d-b749c72181ef",
+        "sha256": "26c7f97723f3c5b7505d00458fd08bb7153d7fd22ecabe89c295ce70c17b3fe4"
+      },
+      "733": {
+        "cost_usd": 0.043,
+        "file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-733.png",
+        "prompt_id": "5713915f-2f84-4d96-9b8e-7e548b917dcb",
+        "sha256": "68f6b2f9f5b345abaef4bbe8ea7f355d98598d83b50c992fde60576e31b345c7"
+      }
+    },
+    "aspect_ratio": "5:4",
+    "completed_outputs": 4,
+    "incremental_cost_usd": 0,
+    "prior_cost_usd": 0.172,
+    "requested_outputs": 4,
+    "resolution": "1K"
+  },
+  "issue": 72,
+  "model": "qwen/qwen-image-3-pro",
+  "new_arm": {
+    "aspect_ratio": "4:3",
+    "estimated_cost_usd": 0.172,
+    "maximum_outputs": 4,
+    "maximum_requests": 4,
+    "requests": {
+      "11": {
+        "client_request_id": "issue-72-seed-11-4x3-4003ce72deb7cfa6",
+        "request_sha256": "4003ce72deb7cfa6269212fef7e519f16da99cef90b63ee7dbeaa9a002c9f208"
+      },
+      "20260826": {
+        "client_request_id": "issue-72-seed-20260826-4x3-78e9ad91447725bb",
+        "request_sha256": "78e9ad91447725bbaec8670499c09ada2599a10e16ba078bca4a5325a3d11ed1"
+      },
+      "4242": {
+        "client_request_id": "issue-72-seed-4242-4x3-09a63b90ecda2e91",
+        "request_sha256": "09a63b90ecda2e91ad85e0805935c636c89ec5b386da2d2bdf7493c686e048c6"
+      },
+      "733": {
+        "client_request_id": "issue-72-seed-733-4x3-fc610dffbfed1f10",
+        "request_sha256": "fc610dffbfed1f109ac37e0d8e571ff4fe0e41779b5840d71d33736e5cfd3802"
+      }
+    },
+    "resolution": "1K"
+  },
+  "prompt": {
+    "file": "artifacts/benchmarks/issue-72-aspect-text/prompt.txt",
+    "sha256": "4f65f2fc8742c0c04563735beb9077ae08f94f3100094bf6efa7d1f5cf5ec146"
+  },
+  "provider": "openrouter",
+  "schema_version": "issue-72-aspect-text-v1",
+  "seeds": [
+    11,
+    733,
+    4242,
+    20260826
+  ],
+  "source": {
+    "dimensions": [
+      474,
+      403
+    ],
+    "file": "artifacts/references/plantstudio-main-window.png",
+    "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d"
+  },
+  "stop_rule": "Never resubmit a seed. An exclusive global lock serializes paid submissions. Any HTTP, transport, response-count, or persistence ambiguity keeps the lock and blocks every later seed.",
+  "text_regions_xyxy_half_open": {
+    "species-list": [
+      0,
+      242,
+      172,
+      403
+    ],
+    "title-bar": [
+      0,
+      0,
+      474,
+      25
+    ]
+  }
+}
