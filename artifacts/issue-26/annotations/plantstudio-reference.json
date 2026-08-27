@@ -1,0 +1,12 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/references/plantstudio-main-window.png",
+  "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d",
+  "role": "source_reference",
+  "source_ref": null,
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [],
+  "disposition": "authoritative",
+  "note": "Authoritative 474x403 PlantStudio window; Win9x chrome, red selection rectangle around the tall thin selected flower."
+}

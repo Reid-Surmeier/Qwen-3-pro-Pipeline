@@ -1,0 +1,19 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/golf-club-object-v002/contact-sheet.png",
+  "sha256": "020096cdf1524d88725506ef89779af2357469a8fcff59a442c9f5e63db13a9f",
+  "role": "comparison_evidence",
+  "source_ref": "artifacts/references/plantstudio-main-window.png",
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [
+    {
+      "class": "T11",
+      "region": null,
+      "strength": "weak",
+      "note": "Residual variance confined to club-head shape/orientation across the four candidates."
+    }
+  ],
+  "disposition": "evidence",
+  "note": "Control for the guidance map: re-run at source-proportioned 948*806 kept layout, chrome, and copy intact in all four candidates. Canvas match is the single strongest corrective lever observed."
+}
