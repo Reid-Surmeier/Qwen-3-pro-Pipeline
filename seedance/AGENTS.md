@@ -18,6 +18,9 @@ allowance neither covers nor is extended by this addon — see "Addon boundary" 
 5. Do not claim native alpha, loop closure, source fidelity, or style compliance without evidence.
 6. Keep generated, verified, reviewed, and accepted as distinct states.
 7. Do not restart or modify a shared ComfyUI runtime without checking ownership and approval.
+8. For pixel-art sources, raw model output is not reviewable: briefs must pass the
+   sprite-grammar rules and outputs the certification in `docs/retro-conformance-gate.md`
+   (`seedance-icons retro-conform`) before human style review.
 
 ## Agent skills
 

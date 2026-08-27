@@ -140,6 +140,22 @@ def cmd_wait(args: argparse.Namespace) -> None:
     print(f"Downloaded output.mp4 (sha256 {digest})")
 
 
+def cmd_retro_conform(args: argparse.Namespace) -> None:
+    from .retro import conform
+
+    run = Path(args.run)
+    report = conform(
+        run / "outputs" / "output.mp4",
+        Path(args.reference),
+        run / "retro",
+        fps=args.fps,
+        max_frames=args.max_frames,
+        grid=args.grid,
+        colors=args.colors,
+    )
+    print(json.dumps(report, indent=2))
+
+
 def cmd_verify(args: argparse.Namespace) -> None:
     run = Path(args.run)
     request = json.loads((run / "request.json").read_text())
@@ -193,6 +209,17 @@ def parser() -> argparse.ArgumentParser:
     wait.add_argument("--interval", type=float, default=5)
     wait.add_argument("--timeout", type=float, default=1800)
     wait.set_defaults(func=cmd_wait)
+    retro = sub.add_parser(
+        "retro-conform",
+        help="Deterministically conform a run's output to retro sprite grammar and gate it",
+    )
+    retro.add_argument("run")
+    retro.add_argument("--reference", required=True, help="Exact first-frame anchor image")
+    retro.add_argument("--fps", type=int, default=6)
+    retro.add_argument("--max-frames", type=int, default=8)
+    retro.add_argument("--grid", type=int, default=160)
+    retro.add_argument("--colors", type=int, default=16)
+    retro.set_defaults(func=cmd_retro_conform)
     verify = sub.add_parser("verify", help="Run independent media and anchor checks")
     verify.add_argument("run")
     verify.add_argument("--capabilities")
