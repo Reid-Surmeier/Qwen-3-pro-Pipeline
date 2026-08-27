@@ -1,0 +1,50 @@
+{
+  "arm": "4:3",
+  "client_request_id": "issue-72-seed-20260826-4x3-78e9ad91447725bb",
+  "completed_at": "2026-08-27T04:06:56.432137+00:00",
+  "completed_outputs": 1,
+  "estimated_cost_usd": 0.043,
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "request": {
+    "aspect_ratio": "4:3",
+    "input_references": [
+      {
+        "image_url": "[recorded separately]",
+        "type": "image_url"
+      }
+    ],
+    "model": "qwen/qwen-image-3-pro",
+    "n": 1,
+    "prompt": "[TASK]\nPerform one surgical edit: replace the single selected tall thin flower inside the red selection rectangle with one upright seven-iron golf club. Change nothing else.\n\n[REFERENCE ROLE]\nReference image 1 is the authoritative PlantStudio main-window screenshot (474 by 403). Match it exactly outside the red selection rectangle.\n\n[PRESERVATION INVARIANTS]\n- Keep the complete application window: title bar, menus, toolbar, plant canvas, species list, growth graph, age controls, tabs, and status bar in their original positions.\n- Keep every unselected plant, label, number, icon, and pixel-scale spacing unchanged.\n- Keep the Windows-era grey chrome, navy title bar, aliased pixel edges, limited palette, and low-resolution raster character.\n- Do not change any text anywhere in the window.\n\n[REGION EDITS]\n- REGION: red selection rectangle\n  CHANGE: Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.\n  PRESERVE: the red selection rectangle itself\n\n[NEGATIVE CONSTRAINTS]\n- No global redraw, modernization, smoothing, anti-aliasing upgrade, or invented UI.\n- No golf ball, golfer, tee, flag, or any second golf object.\n\n[QUALITY GATE]\n- At 100 percent zoom, pixels outside the red rectangle look identical to the reference.\n- The club reads clearly as a seven-iron at original scale.",
+    "resolution": "1K",
+    "seed": 20260826
+  },
+  "request_sha256": "78e9ad91447725bbaec8670499c09ada2599a10e16ba078bca4a5325a3d11ed1",
+  "requested_outputs": 1,
+  "reserved_at": "2026-08-27T04:05:37.905615+00:00",
+  "response_id": null,
+  "seed": 20260826,
+  "source_sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d",
+  "status": "completed",
+  "submitted_at": "2026-08-27T04:05:37.915042+00:00",
+  "usage": {
+    "completion_tokens": 4175,
+    "completion_tokens_details": {
+      "image_tokens": 4175,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.043,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.04,
+      "upstream_inference_cost": 0.043,
+      "upstream_inference_prompt_cost": 0.003
+    },
+    "is_byok": false,
+    "prompt_tokens": 372,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 4547
+  }
+}

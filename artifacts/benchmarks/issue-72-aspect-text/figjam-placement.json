@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "sessionId": "issue-72-aspect-text",
+  "target": {
+    "fileKey": "lO1Eo2Xsjnk0HqDPLtOiXT",
+    "rootNodeId": "0:1",
+    "url": "https://www.figma.com/board/lO1Eo2Xsjnk0HqDPLtOiXT/Agent-FigJam?node-id=0-1"
+  },
+  "layout": {
+    "order": "row-major",
+    "sessionOrder": "top-to-bottom",
+    "columns": 2,
+    "rows": 4,
+    "resolution": "native",
+    "imageGap": 48,
+    "sessionGap": 240,
+    "padding": 64,
+    "scaleMode": "FIT",
+    "visibleTextCount": 0,
+    "uploadUrlChunkSize": 20
+  },
+  "sources": [
+    {
+      "path": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-11.png",
+      "file": "seed-11.png",
+      "bytes": 766308,
+      "contentType": "image/png",
+      "sha256": "5111d717fc41e8f70daf2c27a7f19a1a9298af7b53d4598b3a27e29864d7b9bc",
+      "width": 1024,
+      "height": 820
+    },
+    {
+      "path": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-11-4x3/image-01.png",
+      "file": "image-01.png",
+      "bytes": 784816,
+      "contentType": "image/png",
+      "sha256": "738b3e663f287a80f9f7672b6a4ffac54d7825ffef8c322a632dbba984817f55",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "path": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-733.png",
+      "file": "seed-733.png",
+      "bytes": 732018,
+      "contentType": "image/png",
+      "sha256": "68f6b2f9f5b345abaef4bbe8ea7f355d98598d83b50c992fde60576e31b345c7",
+      "width": 1024,
+      "height": 820
+    },
+    {
+      "path": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-733-4x3/image-01.png",
+      "file": "image-01.png",
+      "bytes": 834033,
+      "contentType": "image/png",
+      "sha256": "86bf5bc8d467f1ae0caa6deeb0822cb60a5f35a05dafeca786227593199001e7",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "path": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-4242.png",
+      "file": "seed-4242.png",
+      "bytes": 772347,
+      "contentType": "image/png",
+      "sha256": "26c7f97723f3c5b7505d00458fd08bb7153d7fd22ecabe89c295ce70c17b3fe4",
+      "width": 1024,
+      "height": 820
+    },
+    {
+      "path": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-4242-4x3/image-01.png",
+      "file": "image-01.png",
+      "bytes": 811468,
+      "contentType": "image/png",
+      "sha256": "32e654e7971a36773a9a2d3a95fca014fbcc9faf45951953b4f89198c8e8ddb8",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "path": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-20260826.png",
+      "file": "seed-20260826.png",
+      "bytes": 785924,
+      "contentType": "image/png",
+      "sha256": "c53a53ba5be1415b18ece2008d725a9e3e2fdc54bd8dc773b413ae12d531daf4",
+      "width": 1024,
+      "height": 820
+    },
+    {
+      "path": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-20260826-4x3/image-01.png",
+      "file": "image-01.png",
+      "bytes": 805150,
+      "contentType": "image/png",
+      "sha256": "041b1503b73058338cc9c70f64a817362624e999807b10e19617b9e8a07a1d45",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "startedAt": "2026-08-27T04:14:55.844Z",
+  "preflight": {
+    "rootReadbackSha256": "fb42240d6b7a0122bcefb1eca238c56d4e468d2896cb0f37a2ba0cfd41286bb9",
+    "frameNodeIds": [
+      "37:2",
+      "4:2",
+      "40:2",
+      "43:2",
+      "37:3",
+      "4:3",
+      "40:3",
+      "43:3",
+      "4:4",
+      "37:4",
+      "40:4",
+      "43:4",
+      "43:5",
+      "4:5",
+      "37:5",
+      "40:5",
+      "40:6",
+      "40:7",
+      "40:8"
+    ]
+  },
+  "uploads": [
+    {
+      "index": 0,
+      "sourceSha256": "5111d717fc41e8f70daf2c27a7f19a1a9298af7b53d4598b3a27e29864d7b9bc",
+      "responseSha256": "0009f455953d81a30b0c7d230687b0da14b4bc78d5105ade719eb413b730ae02",
+      "nodeId": "46:2"
+    },
+    {
+      "index": 1,
+      "sourceSha256": "738b3e663f287a80f9f7672b6a4ffac54d7825ffef8c322a632dbba984817f55",
+      "responseSha256": "f0d158726c260703bfa220e15d12732574f085efbaf29d4dc4d7113cbc033eb6",
+      "nodeId": "46:3"
+    },
+    {
+      "index": 2,
+      "sourceSha256": "68f6b2f9f5b345abaef4bbe8ea7f355d98598d83b50c992fde60576e31b345c7",
+      "responseSha256": "8de0bb12af0001ad02d00dd08997e286dc36c72e233dd20e67077848bffdbbc9",
+      "nodeId": "46:4"
+    },
+    {
+      "index": 3,
+      "sourceSha256": "86bf5bc8d467f1ae0caa6deeb0822cb60a5f35a05dafeca786227593199001e7",
+      "responseSha256": "71c6b99908dda50f2071720161bd96a537044c794bcac0459ce57e6f9bf145fc",
+      "nodeId": "46:5"
+    },
+    {
+      "index": 4,
+      "sourceSha256": "26c7f97723f3c5b7505d00458fd08bb7153d7fd22ecabe89c295ce70c17b3fe4",
+      "responseSha256": "acebc74841aa7b9a9a9df55895fa43086f1f22003bd0a55a46e2002121043f27",
+      "nodeId": "46:6"
+    },
+    {
+      "index": 5,
+      "sourceSha256": "32e654e7971a36773a9a2d3a95fca014fbcc9faf45951953b4f89198c8e8ddb8",
+      "responseSha256": "6d8856dee2939c43537d5f152b04554334275e325fb800f9e9c99075cb1fcb6e",
+      "nodeId": "46:7"
+    },
+    {
+      "index": 6,
+      "sourceSha256": "c53a53ba5be1415b18ece2008d725a9e3e2fdc54bd8dc773b413ae12d531daf4",
+      "responseSha256": "3f3cccb2b4115c4d701a4b44eb6cf4ae9ebfd8998cbb0572fd2726fb92ebbfd6",
+      "nodeId": "46:8"
+    },
+    {
+      "index": 7,
+      "sourceSha256": "041b1503b73058338cc9c70f64a817362624e999807b10e19617b9e8a07a1d45",
+      "responseSha256": "c446d2cb130578a5e56933e2e775bd9537c77f2e2c4e4b3b9329179ebf8435c1",
+      "nodeId": "46:9"
+    }
+  ],
+  "postUpload": {
+    "rootReadbackSha256": "c902f64edef17d3f8fea04dd377962b0f12445dafc9e7a43e8ed6f19295324d0",
+    "newFrameNodeIds": [
+      "46:2",
+      "46:3",
+      "46:4",
+      "46:5",
+      "46:6",
+      "46:7",
+      "46:8",
+      "46:9"
+    ]
+  },
+  "section": {
+    "mutatedNodeIds": [
+      "46:10"
+    ],
+    "sectionId": "46:10",
+    "x": 0,
+    "y": 7170,
+    "width": 2224,
+    "height": 3552
+  },
+  "placements": [
+    {
+      "nodeId": "46:2",
+      "x": 64,
+      "y": 64,
+      "width": 1024,
+      "height": 820,
+      "scaleMode": "FIT",
+      "index": 0
+    },
+    {
+      "nodeId": "46:3",
+      "x": 1136,
+      "y": 64,
+      "width": 1024,
+      "height": 768,
+      "scaleMode": "FIT",
+      "index": 1
+    },
+    {
+      "nodeId": "46:4",
+      "x": 64,
+      "y": 932,
+      "width": 1024,
+      "height": 820,
+      "scaleMode": "FIT",
+      "index": 2
+    },
+    {
+      "nodeId": "46:5",
+      "x": 1136,
+      "y": 932,
+      "width": 1024,
+      "height": 768,
+      "scaleMode": "FIT",
+      "index": 3
+    },
+    {
+      "nodeId": "46:6",
+      "x": 64,
+      "y": 1800,
+      "width": 1024,
+      "height": 820,
+      "scaleMode": "FIT",
+      "index": 4
+    },
+    {
+      "nodeId": "46:7",
+      "x": 1136,
+      "y": 1800,
+      "width": 1024,
+      "height": 768,
+      "scaleMode": "FIT",
+      "index": 5
+    },
+    {
+      "nodeId": "46:8",
+      "x": 64,
+      "y": 2668,
+      "width": 1024,
+      "height": 820,
+      "scaleMode": "FIT",
+      "index": 6
+    },
+    {
+      "nodeId": "46:9",
+      "x": 1136,
+      "y": 2668,
+      "width": 1024,
+      "height": 768,
+      "scaleMode": "FIT",
+      "index": 7
+    }
+  ],
+  "completedAt": "2026-08-27T04:15:20.775Z",
+  "readback": {
+    "xmlPath": "figjam-final-output.xml",
+    "xmlSha256": "49c316d8f550f983e41dfaa0d049593110ac4d999f36ba5f2a9fb23fd3d55dba",
+    "screenshotPath": "figjam-final-output.png",
+    "screenshotSha256": "2ad14f75d58cb472b7407bcb76220b01fac7d3d5d5c15650adde13bed6da8d65",
+    "nodeIdsPresent": true,
+    "prohibitedVisibleChromePresent": false
+  }
+}

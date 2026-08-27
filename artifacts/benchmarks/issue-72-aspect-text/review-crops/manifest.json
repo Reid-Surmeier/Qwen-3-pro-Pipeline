@@ -1,0 +1,175 @@
+{
+  "candidates": {
+    "seed-11-4x3": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-11-4x3/species-list.png",
+          "sha256": "69f2845dee21a586b43d94ebfbd366b683a8e38f5f7a0c6115dc8df95e256bbb"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-11-4x3/title-bar.png",
+          "sha256": "c7165f3204e27eebb66c1a5405424b1f9a6241fe45e10a50235d1bb24419b0f1"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        768
+      ],
+      "source_file": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-11-4x3/image-01.png",
+      "source_sha256": "738b3e663f287a80f9f7672b6a4ffac54d7825ffef8c322a632dbba984817f55"
+    },
+    "seed-11-5x4": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-11-5x4/species-list.png",
+          "sha256": "02305ff2b40b2704eed4d0e457028b081ba886e393f58337babb443cef1cd99b"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-11-5x4/title-bar.png",
+          "sha256": "3fba7b9a51f5c51ba752156920f854ae4e40e0a0b7f75531a89a4c30151f7279"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        820
+      ],
+      "source_file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-11.png",
+      "source_sha256": "5111d717fc41e8f70daf2c27a7f19a1a9298af7b53d4598b3a27e29864d7b9bc"
+    },
+    "seed-20260826-4x3": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-20260826-4x3/species-list.png",
+          "sha256": "1c206838b8deb946b2036c944697f2e31e6533f0505542132801608d7b2ef003"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-20260826-4x3/title-bar.png",
+          "sha256": "08c334da85f5ac00a01c40610ea21ea8143541d867589e75b8f46f0edd552c19"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        768
+      ],
+      "source_file": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-20260826-4x3/image-01.png",
+      "source_sha256": "041b1503b73058338cc9c70f64a817362624e999807b10e19617b9e8a07a1d45"
+    },
+    "seed-20260826-5x4": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-20260826-5x4/species-list.png",
+          "sha256": "1a4e799d5ca00b5ca9723d68f807c1cfe511d241aadbcb1e3d4976940961d010"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-20260826-5x4/title-bar.png",
+          "sha256": "ee3c1d978730bcebdf9fd4ed0957c37ae18fdfcb3153e67c26a7589a80c74503"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        820
+      ],
+      "source_file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-20260826.png",
+      "source_sha256": "c53a53ba5be1415b18ece2008d725a9e3e2fdc54bd8dc773b413ae12d531daf4"
+    },
+    "seed-4242-4x3": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-4242-4x3/species-list.png",
+          "sha256": "04537461034479e06f8cfdafaffb3f5f8fed6bda36aff99dce6800c1b849edd7"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-4242-4x3/title-bar.png",
+          "sha256": "ea5edc254469e5c0bc4e28167d5fd0fed7157e1bbf50a863c071edda6d22d291"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        768
+      ],
+      "source_file": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-4242-4x3/image-01.png",
+      "source_sha256": "32e654e7971a36773a9a2d3a95fca014fbcc9faf45951953b4f89198c8e8ddb8"
+    },
+    "seed-4242-5x4": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-4242-5x4/species-list.png",
+          "sha256": "891b1c2fd37f01287b9ebb6839b874997dc6d9612591333b81d2f39e473dc813"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-4242-5x4/title-bar.png",
+          "sha256": "b1df3b401457aa2f2100aa93aa3f625b90138340604b43a81ad48a8ac465f53d"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        820
+      ],
+      "source_file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-4242.png",
+      "source_sha256": "26c7f97723f3c5b7505d00458fd08bb7153d7fd22ecabe89c295ce70c17b3fe4"
+    },
+    "seed-733-4x3": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-733-4x3/species-list.png",
+          "sha256": "302f8b39de5567b61711cb9bfe3becf6897bee6c2feeafad7bd99f8a3c09370f"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-733-4x3/title-bar.png",
+          "sha256": "09d6a76e10400b643c5c0025e40085e341b59952160c0f7206d1b8d2689bcc7c"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        768
+      ],
+      "source_file": "artifacts/benchmarks/issue-72-aspect-text/runs/seed-733-4x3/image-01.png",
+      "source_sha256": "86bf5bc8d467f1ae0caa6deeb0822cb60a5f35a05dafeca786227593199001e7"
+    },
+    "seed-733-5x4": {
+      "crops": {
+        "species-list": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-733-5x4/species-list.png",
+          "sha256": "5bde33e2fb192f2dbe9c453bc56a145c794fcc5ca93fc8b41249c2a03679f53e"
+        },
+        "title-bar": {
+          "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/seed-733-5x4/title-bar.png",
+          "sha256": "9b0b14844d2377ef6a315dca29beacd656d65b7a2114a543542bd5fef0d85a6b"
+        }
+      },
+      "native_dimensions": [
+        1024,
+        820
+      ],
+      "source_file": "artifacts/benchmarks/issue-53-seed-variance/outputs/seed-733.png",
+      "source_sha256": "68f6b2f9f5b345abaef4bbe8ea7f355d98598d83b50c992fde60576e31b345c7"
+    }
+  },
+  "normalization": "nearest-neighbour to 474x403 before cropping",
+  "regions_xyxy_half_open": {
+    "species-list": [
+      0,
+      242,
+      172,
+      403
+    ],
+    "title-bar": [
+      0,
+      0,
+      474,
+      25
+    ]
+  },
+  "schema_version": "issue-72-review-crops-v1",
+  "source_crops": {
+    "species-list": {
+      "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/source/species-list.png",
+      "sha256": "100bfd7cb43193c6c4c9f6c0e74fa3094bcc87d83e8cb5c3e0bba0f2c6b02d13"
+    },
+    "title-bar": {
+      "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/source/title-bar.png",
+      "sha256": "b7f2d4fe9c800b98c23247aeae8f65e7fc11d1e97e0451f96b9930da690630b3"
+    }
+  },
+  "source_sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d"
+}
