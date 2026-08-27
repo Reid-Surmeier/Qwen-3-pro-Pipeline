@@ -1,0 +1,61 @@
+{
+  "ambiguous_request_policy": "count as spent; do not retry",
+  "conditional_paid_matrix": [
+    {
+      "arm": "full-source-plus-unmodified-detail-reference",
+      "condition": "focused crop does not qualify",
+      "requested_outputs": 2
+    }
+  ],
+  "estimated_initial_cost_usd": 0.166,
+  "geometry": {
+    "baseline_assembly_rectangle_v2": [
+      160,
+      130,
+      1350,
+      350
+    ],
+    "context_crop": [
+      160,
+      64,
+      1250,
+      625
+    ],
+    "donor_slice": [
+      0,
+      66,
+      1250,
+      395
+    ],
+    "edit_rectangle": [
+      160,
+      130,
+      1250,
+      395
+    ],
+    "feather_pixels": 16
+  },
+  "initial_paid_matrix": [
+    {
+      "arm": "direct-baseline",
+      "requested_outputs": 2
+    },
+    {
+      "arm": "focused-crop",
+      "requested_outputs": 2
+    }
+  ],
+  "issue": 34,
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "seed": 2026082603,
+  "source": {
+    "path": "artifacts/issue-34/alpha-window-2x/source/options-window-source.png",
+    "sha256": "7132ec99366fe2c33a1db5cadd92448257e35795764f4010b808e06723a40b16",
+    "size": [
+      1572,
+      718
+    ]
+  },
+  "stop_rule": "Stop when one method produces a repeatable pre-explained improvement or after the conditional arm fails."
+}

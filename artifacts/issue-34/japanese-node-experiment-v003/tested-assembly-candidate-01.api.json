@@ -1,0 +1,153 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-options-window-source.png"
+    }
+  },
+  "11": {
+    "class_type": "MaskToImage",
+    "inputs": {
+      "mask": [
+        "6",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/assembly/candidate-01/normalized-baseline",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/assembly/candidate-01/hard",
+      "images": [
+        "7",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/assembly/candidate-01/feathered",
+      "images": [
+        "8",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/assembly/candidate-01/mask",
+      "images": [
+        "11",
+        0
+      ]
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-japanese-v003-baseline-01.png"
+    }
+  },
+  "3": {
+    "class_type": "ResizeImageMaskNode",
+    "inputs": {
+      "input": [
+        "2",
+        0
+      ],
+      "resize_type": "scale dimensions",
+      "resize_type.crop": "disabled",
+      "resize_type.height": 718,
+      "resize_type.width": 1572,
+      "scale_method": "lanczos"
+    }
+  },
+  "4": {
+    "class_type": "ImageCropV2",
+    "inputs": {
+      "crop_region": {
+        "height": 395,
+        "width": 1250,
+        "x": 160,
+        "y": 130
+      },
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "SolidMask",
+    "inputs": {
+      "height": 395,
+      "value": 1.0,
+      "width": 1250
+    }
+  },
+  "6": {
+    "class_type": "FeatherMask",
+    "inputs": {
+      "bottom": 16,
+      "left": 16,
+      "mask": [
+        "5",
+        0
+      ],
+      "right": 16,
+      "top": 16
+    }
+  },
+  "7": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "mask": [
+        "5",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "4",
+        0
+      ],
+      "x": 160,
+      "y": 130
+    }
+  },
+  "8": {
+    "class_type": "ImageCompositeMasked",
+    "inputs": {
+      "destination": [
+        "1",
+        0
+      ],
+      "mask": [
+        "6",
+        0
+      ],
+      "resize_source": false,
+      "source": [
+        "4",
+        0
+      ],
+      "x": 160,
+      "y": 130
+    }
+  }
+}

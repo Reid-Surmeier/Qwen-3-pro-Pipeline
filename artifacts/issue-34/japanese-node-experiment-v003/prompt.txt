@@ -1,0 +1,42 @@
+[TASK]
+Edit this same Japanese options window on the same fixed canvas. Remove the complete Effect row and close its gap by reflowing the remaining controls. Keep exactly one BGM slider and one Skin dropdown.
+
+[REFERENCE ROLE]
+The supplied image is the immutable Reference Screen and the authority for the pixel-era raster style, geometry, colors, controls, and states.
+
+[PRESERVATION INVARIANTS]
+- Keep the complete window on the same canvas with no crop or surrounding scene.
+- Keep the original Japanese title and bottom label character-for-character.
+- Keep the magenta frame, blue-grey title bar, tabs, BGM state, Skin dropdown, bottom checkbox states, bevels, borders, shadows, and transparent exterior.
+- Keep the original aliased pixel scale and limited palette; do not modernize, vectorize, or redesign the interface.
+
+[REGION EDITS]
+- REGION: Effect row
+  CHANGE: Remove its label, left and right arrows, slider track, handle, checkbox, and adjacent on label.
+- REGION: remaining body controls
+  CHANGE: Reflow BGM and Skin vertically into the removed row's space with uniform spacing and no empty Effect-shaped band.
+
+[EXACT COPY]
+- title bar: "オプション"
+- left tab: "option"
+- left tab: "info"
+- remaining slider: "BGM"
+- dropdown: "Skin"
+- bottom option: "スナップ"
+
+[ASSET RULES]
+- Return exactly one complete options window per output.
+- Use no guide color, annotation, selection outline, invented icon, or extra reference content.
+- Keep the original Japanese copy; do not convert any text to another language.
+
+[NEGATIVE CONSTRAINTS]
+- No Effect label, second slider, second arrow pair, second handle, second checkbox, or second on label.
+- No empty horizontal band where the Effect row was removed.
+- No duplicate BGM control, duplicate Skin control, extra control row, or new text.
+- No green guide, mask color, highlight, selection rectangle, glow, or annotation.
+
+[QUALITY GATE]
+- The complete Effect row is absent.
+- Exactly one BGM slider and one Skin dropdown remain.
+- The retained controls use even vertical spacing and preserve their original states.
+- The window remains recognizably the same Japanese pixel-era interface.

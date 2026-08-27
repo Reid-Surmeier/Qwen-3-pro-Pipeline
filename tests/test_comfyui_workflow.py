@@ -38,6 +38,17 @@ class ComfyUiWorkflowTests(unittest.TestCase):
         self.assertEqual(workflow["3"]["inputs"]["region"], "182,78,37,165")
         self.assertEqual(workflow["4"]["inputs"]["images"], ["3", 0])
 
+    def test_region_assembly_can_opt_in_to_exact_source_alpha(self):
+        workflow = build_comfyui_assembly_workflow(
+            reference_filename="plantstudio-main-window.png",
+            generated_filename="golf-club-v002-2.png",
+            region="182,78,37,165",
+            filename_prefix="golf-ui/club-assembly/v004",
+            preserve_reference_alpha=True,
+        )
+
+        self.assertEqual(workflow["3"]["inputs"]["reference_masks"], ["1", 1])
+
 
 if __name__ == "__main__":
     unittest.main()

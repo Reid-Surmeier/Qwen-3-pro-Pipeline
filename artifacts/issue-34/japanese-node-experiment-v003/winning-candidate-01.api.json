@@ -1,0 +1,42 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-options-window-source.png"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "issue-34-japanese-v003-baseline-01.png"
+    }
+  },
+  "3": {
+    "class_type": "ReferenceRegionComposite",
+    "inputs": {
+      "generated_images": [
+        "2",
+        0
+      ],
+      "reference_images": [
+        "1",
+        0
+      ],
+      "reference_masks": [
+        "1",
+        1
+      ],
+      "region": "160,130,1350,350"
+    }
+  },
+  "4": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "issue-34/japanese-v003/winner/candidate-01",
+      "images": [
+        "3",
+        0
+      ]
+    }
+  }
+}
