@@ -1,0 +1,17 @@
+{
+  "arm": "e-close-5x4-2k",
+  "aspect_ratio": "5:4",
+  "resolution": "2K",
+  "seed": 2026052001,
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "requested_outputs": 1,
+  "source": {
+    "path": "artifacts/references/plantstudio-main-window.png",
+    "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d"
+  },
+  "status": "error",
+  "prompt_id": "e2220e90-c452-494d-b3f2-d85be500280b",
+  "completed": false,
+  "outputs": {}
+}
