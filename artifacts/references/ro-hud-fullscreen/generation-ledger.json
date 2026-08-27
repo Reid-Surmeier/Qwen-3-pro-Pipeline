@@ -1,8 +1,59 @@
 {
   "cap": 200,
-  "requested": 0,
-  "completed": 0,
-  "ambiguous": 0,
-  "actual_cost_usd": 0.0,
-  "batches": []
+  "requested": 4,
+  "completed": 1,
+  "ambiguous": 3,
+  "actual_cost_usd": 0.043,
+  "batches": [
+    {
+      "name": "backdrop-v1",
+      "prompt_id": "80486c7b-ce25-4fcc-93d2-c380684c8cb8",
+      "requested": 2,
+      "completed": 0,
+      "status": "error-read-timeout-ambiguous",
+      "seed": 2026086001,
+      "usage": null,
+      "files": [],
+      "note": "count:2 exceeded the node's 180s client timeout (pre-#73 package on the live service); counted as spent, not retried"
+    },
+    {
+      "name": "backdrop-s2",
+      "prompt_id": "3188b50e-8741-41c2-b7c6-89906835cf16",
+      "status": "success",
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 298,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4473
+      },
+      "files": [
+        {
+          "file": "artifacts/references/ro-hud-fullscreen/backdrop-s2.png",
+          "sha256": "645fd726c22d645f00c82aa50f8e9d4a1091559678ef2a43f3fbde32b6aee892"
+        }
+      ],
+      "seed": 2026086002
+    },
+    {
+      "name": "backdrop-s3",
+      "prompt_id": "db41e0bd-0d23-4431-bd2b-b569bd0525bf",
+      "status": "error",
+      "usage": null,
+      "files": [],
+      "seed": 2026086003
+    }
+  ]
 }
