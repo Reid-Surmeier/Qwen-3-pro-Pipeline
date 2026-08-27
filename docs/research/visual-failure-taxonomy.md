@@ -69,6 +69,8 @@ rejection.
 | T30 | `style-smoothing` | Pixel-era aliased artwork returned as smooth anti-aliased or photoreal rendering. | strong | golf-club v001 club shaft gradient |
 | T31 | `micro-texture-worms` | Halftone or grain replaced by worm-like repeating micro-glyph noise, visible at 100%. | weak | maga v003 flag/field texture |
 | T32 | `template-remnant` | A structural element of the style-donor template survives into the new design where it has no role. | strong | maga v003 retained XP swoosh |
+| T33 | `memorized-brand-reversion` | A parody or derivative of a famous mark snaps back to the genuine memorized trademark during an unrelated edit. **Hypothesized only — no confirmed instance.** The Issue #18 evidence was retracted: its source was the genuine ENERGY STAR sticker mislabeled as the parody, and the model preserved it faithfully. Issue #70 tests the class against real parody sources. | unconfirmed | none (Issue #18 instance retracted 2026-08-26) |
+| T34 | `source-character-beautification` | A degraded source (blurry photo, compressed scan) is silently sharpened into a clean studio render while the requested edits are applied. | weak | Issue #18 dense-multi-region pair, both arms (PR #64) |
 
 ### Assembly and alpha (deterministically checkable today)
 
@@ -84,11 +86,17 @@ rejection.
 The owner's framing in Issue #26: artifacts mean the model was not guided
 enough. Observed mappings from the seed corpus:
 
-- T20/T21/T22 (global redraw, aspect, crop) → **match the source canvas**.
-  The strongest single lever in the corpus: golf-club v002 re-ran v001 with
-  `size: 948*806` (source-proportioned) and all four candidates kept layout,
-  chrome, and copy intact; failures narrowed to club-head variance. v001 at
-  4:3/1152x864 lost all four to global drift.
+- T20/T21/T22 (global redraw, aspect, crop) → **prefer the nearest
+  supported aspect, but geometry is not the whole story**. The original
+  corpus inference (v001 at 4:3 lost all four candidates to global drift
+  while source-proportioned v002 kept layout) was tested under control in
+  Issue #52: on the current route with the canonical brief, aspect mismatch
+  did not reproduce the collapse — the model adapts by uniform anisotropic
+  scaling of the whole window (squash at 16:9, stretch at 1:1) with the UI
+  inventory intact. Mismatch costs proportion fidelity, predictably;
+  fine-grained text damage across aspects sat within Issue #53's measured
+  seed noise. The v001 collapse likely came from that run's brief/provider
+  settings, not geometry alone.
 - T01/T03 (copy/logotype corruption) → shrink the generation surface
   (focused crop), or move text into source-owned pixels via deterministic
   Assembly (ADR 0002); regenerate only non-text regions.
@@ -100,6 +108,13 @@ enough. Observed mappings from the seed corpus:
   resolution near source scale, and review at 100%.
 - T32 (template remnant) → enumerate donor-template elements to drop in the
   negative constraints.
+- T33 (memorized-brand reversion) → unconfirmed; treat as a watch-for
+  class until Issue #70 reports. Independent of T33, the retracted #18
+  instance yielded a real datum: when a brief's words contradict the source
+  pixels, the model follows the pixels — so reviewer source-identity errors
+  masquerade as model failures. Verify the source before blaming the model.
+- T34 (beautification) → if photographic character matters, say so as a named
+  invariant; expect sharpening of degraded sources by default.
 - T40–T43 → deterministic Assembly and Fidelity Check; these are pipeline
   contracts, not prompt problems.
 
@@ -110,6 +125,13 @@ enough. Observed mappings from the seed corpus:
   (Fable 5) model vision as the advisory layer; every record carries
   `annotator` and `evidence_strength` so later blind tests can score misses
   and false rejects by class.
+- `v0.2.0` (2026-08-26): appended T33 `memorized-brand-reversion` and T34
+  `source-character-beautification` from the Issue #18 controlled experiment
+  (PR #64).
+- `v0.2.1` (2026-08-26): retracted T33's evidence — the #18 source was the
+  genuine ENERGY STAR sticker mislabeled as the parody; the model was
+  source-faithful. T33 stays as an unconfirmed watch-for class pending
+  Issue #70. T34 is unaffected (observed in both arms of a different task).
 
 New classes append; renames supersede with a note. A class may only be
 promoted from advisory to hard-gate when a deterministic check exists for it
