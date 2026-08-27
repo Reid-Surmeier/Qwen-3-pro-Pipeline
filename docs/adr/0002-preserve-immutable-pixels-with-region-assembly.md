@@ -26,6 +26,12 @@ The `Reference Region Composite` ComfyUI node owns this deterministic Assembly.
 A Fidelity Check must prove zero changed pixels outside the declared region
 before an output can be called exact-preservation.
 
+For a transparent PNG Reference Screen, enable the node's optional reference
+mask input (or `assembly-workflow --preserve-reference-alpha`). This reconstructs
+the source alpha alongside source RGB. Rejoining alpha after a generic image
+composite is not sufficient evidence: the saved result must still pass the
+same zero-changed-RGBA-pixels check outside the declared region.
+
 ## Consequences
 
 - Long Qwen Image 3 instructions remain useful for describing the intended
@@ -35,3 +41,5 @@ before an output can be called exact-preservation.
   application text.
 - Multi-region edits require explicit masks or separate region assemblies.
 - GIF references must be losslessly normalized to PNG before strict Assembly.
+- Source-alpha preservation is opt-in so existing opaque workflows keep their
+  current graph shape and behavior.

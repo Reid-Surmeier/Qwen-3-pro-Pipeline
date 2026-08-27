@@ -42,8 +42,17 @@ def build_comfyui_assembly_workflow(
     generated_filename: str,
     region: str,
     filename_prefix: str,
+    preserve_reference_alpha: bool = False,
 ) -> dict[str, Any]:
     """Build a deterministic graph that preserves the reference outside a region."""
+
+    composite_inputs: dict[str, Any] = {
+        "reference_images": ["1", 0],
+        "generated_images": ["2", 0],
+        "region": region,
+    }
+    if preserve_reference_alpha:
+        composite_inputs["reference_masks"] = ["1", 1]
 
     return {
         "1": {
@@ -56,11 +65,7 @@ def build_comfyui_assembly_workflow(
         },
         "3": {
             "class_type": "ReferenceRegionComposite",
-            "inputs": {
-                "reference_images": ["1", 0],
-                "generated_images": ["2", 0],
-                "region": region,
-            },
+            "inputs": composite_inputs,
         },
         "4": {
             "class_type": "SaveImage",

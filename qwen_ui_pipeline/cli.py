@@ -68,6 +68,11 @@ def build_parser() -> argparse.ArgumentParser:
     assembly_parser.add_argument("--generated-filename", required=True)
     assembly_parser.add_argument("--region", required=True)
     assembly_parser.add_argument("--filename-prefix", required=True)
+    assembly_parser.add_argument(
+        "--preserve-reference-alpha",
+        action="store_true",
+        help="copy the reference alpha channel exactly outside the edit region",
+    )
     assembly_parser.add_argument("--output", required=True, type=Path)
 
     record_parser = subparsers.add_parser(
@@ -92,6 +97,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             generated_filename=args.generated_filename,
             region=args.region,
             filename_prefix=args.filename_prefix,
+            preserve_reference_alpha=args.preserve_reference_alpha,
         )
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(

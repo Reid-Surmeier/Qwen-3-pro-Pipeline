@@ -1,0 +1,71 @@
+{
+  "asset_rules": [
+    "Return exactly one complete options window per output.",
+    "Use no guide color, annotation, selection outline, invented icon, or extra reference content.",
+    "Keep the original Japanese copy; do not convert any text to another language."
+  ],
+  "exact_copy": [
+    {
+      "region": "title bar",
+      "text": "オプション"
+    },
+    {
+      "region": "left tab",
+      "text": "option"
+    },
+    {
+      "region": "left tab",
+      "text": "info"
+    },
+    {
+      "region": "remaining slider",
+      "text": "BGM"
+    },
+    {
+      "region": "dropdown",
+      "text": "Skin"
+    },
+    {
+      "region": "bottom option",
+      "text": "スナップ"
+    }
+  ],
+  "model": "qwen/qwen-image-3-pro",
+  "negative_constraints": [
+    "No Effect label, second slider, second arrow pair, second handle, second checkbox, or second on label.",
+    "No empty horizontal band where the Effect row was removed.",
+    "No duplicate BGM control, duplicate Skin control, extra control row, or new text.",
+    "No green guide, mask color, highlight, selection rectangle, glow, or annotation."
+  ],
+  "objective": "Edit this same Japanese options window on the same fixed canvas. Remove the complete Effect row and close its gap by reflowing the remaining controls. Keep exactly one BGM slider and one Skin dropdown.",
+  "output": {
+    "aspect_ratio": "2:1",
+    "count": 2,
+    "resolution": "2K",
+    "seed": 2026082603
+  },
+  "preservation_invariants": [
+    "Keep the complete window on the same canvas with no crop or surrounding scene.",
+    "Keep the original Japanese title and bottom label character-for-character.",
+    "Keep the magenta frame, blue-grey title bar, tabs, BGM state, Skin dropdown, bottom checkbox states, bevels, borders, shadows, and transparent exterior.",
+    "Keep the original aliased pixel scale and limited palette; do not modernize, vectorize, or redesign the interface."
+  ],
+  "provider": "openrouter",
+  "quality_checks": [
+    "The complete Effect row is absent.",
+    "Exactly one BGM slider and one Skin dropdown remain.",
+    "The retained controls use even vertical spacing and preserve their original states.",
+    "The window remains recognizably the same Japanese pixel-era interface."
+  ],
+  "reference_role": "The supplied image is the immutable Reference Screen and the authority for the pixel-era raster style, geometry, colors, controls, and states.",
+  "regions": [
+    {
+      "change": "Remove its label, left and right arrows, slider track, handle, checkbox, and adjacent on label.",
+      "name": "Effect row"
+    },
+    {
+      "change": "Reflow BGM and Skin vertically into the removed row's space with uniform spacing and no empty Effect-shaped band.",
+      "name": "remaining body controls"
+    }
+  ]
+}

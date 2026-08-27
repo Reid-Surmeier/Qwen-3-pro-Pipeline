@@ -7,6 +7,31 @@ from qwen_ui_pipeline.cli import main
 
 
 class RecordComfyRunTests(unittest.TestCase):
+    def test_assembly_workflow_can_preserve_reference_alpha(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "workflow.json"
+
+            status = main(
+                [
+                    "assembly-workflow",
+                    "--reference-filename",
+                    "source.png",
+                    "--generated-filename",
+                    "donor.png",
+                    "--region",
+                    "160,130,1350,350",
+                    "--filename-prefix",
+                    "issue-34/winner",
+                    "--preserve-reference-alpha",
+                    "--output",
+                    str(output),
+                ]
+            )
+
+            workflow = json.loads(output.read_text())
+        self.assertEqual(status, 0)
+        self.assertEqual(workflow["3"]["inputs"]["reference_masks"], ["1", 1])
+
     def test_records_existing_comfy_outputs_with_provider_provenance(self):
         brief = {
             "objective": "Replace the flower with a golf club.",
