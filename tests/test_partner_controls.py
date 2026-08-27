@@ -76,6 +76,26 @@ class PartnerControlsTests(unittest.TestCase):
                     **controls,
                 )
 
+    def test_rejects_count_and_seed_outside_the_partner_contract(self):
+        for field, value, expected in (
+            ("count", 7, "Output count must be between 1 and 6"),
+            ("seed", -1, "Seed must be between 0"),
+        ):
+            controls = {"count": 1, "seed": 42}
+            controls[field] = value
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, expected):
+                build_partner_text_brief(
+                    provider="openrouter",
+                    model="qwen-image-3.0-pro",
+                    prompt="A monochrome interface.",
+                    negative_prompt="",
+                    width=1024,
+                    height=1024,
+                    prompt_extend=False,
+                    watermark=False,
+                    **controls,
+                )
+
     def test_maps_supported_openrouter_dimensions_to_resolution_and_aspect(self):
         brief = build_partner_text_brief(
             provider="openrouter",

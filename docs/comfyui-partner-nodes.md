@@ -55,13 +55,31 @@ Brief/run metadata for automation and provenance.
 
 The evidence files are:
 
+- `workflows/partner-text-to-image.api.json` for text-to-image API validation;
+- `workflows/partner-text-to-image.workflow.json` for text-to-image canvas review;
 - `workflows/partner-three-reference.api.json` for API validation;
 - `workflows/partner-three-reference.workflow.json` for visual loading in the
   ComfyUI canvas.
 
 The canvas file groups each Load Image and Preview Image lane under its exact
 `image_1`, `image_2`, or `image_3` role, then previews and saves the IMAGE batch.
-Replace the placeholder image filenames after loading it.
+Its three stable filenames correspond to already-versioned repository source
+and evidence artifacts. Stage them in ComfyUI without recompression before
+opening the workflow:
+
+```bash
+COMFYUI_INPUT=/absolute/path/to/ComfyUI/input
+cp artifacts/references/plantstudio-main-window.png \
+  "${COMFYUI_INPUT}/partner-layout.png"
+cp artifacts/runs/golf-club-object-v001/image-01.png \
+  "${COMFYUI_INPUT}/partner-style.png"
+cp artifacts/runs/truth-social-inside-sticker-v001/truth-social-inside-sticker-v001.png \
+  "${COMFYUI_INPUT}/partner-asset.png"
+```
+
+These copies are review inputs, not new authoritative outputs. The source files
+remain immutable, retain their native resolutions, and are not composited into
+a contact sheet.
 
 ## No-cost verification
 
@@ -85,6 +103,14 @@ python3.12 scripts/audit_comfyui_review_path.py \
 
 This check reads sockets, loopback addresses, system stats, queue state, and
 the two node schemas. It neither submits a prompt nor changes network state.
+
+On 2026-08-26 both saved canvas files were loaded into the pinned local
+ComfyUI frontend and serialized/reopened without changing node IDs, links, or
+widget values. The three-reference graph retained all three named Load Image
+lanes, source previews, output preview, and save wiring. A no-credential queue
+probe also demonstrated that unsupported OpenRouter controls fail before a
+provider client is loaded. This is local graph evidence only; it does not
+replace the required authenticated Mac review.
 
 The installed custom-node wrapper imports this Python package. After the
 change reaches the host's canonical checkout, first verify the routed queue is

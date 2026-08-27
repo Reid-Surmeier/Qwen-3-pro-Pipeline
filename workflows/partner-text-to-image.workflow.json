@@ -1,0 +1,63 @@
+{
+  "id": "366cd8f5-b4ef-4d70-ae86-8440e85f7147",
+  "revision": 0,
+  "last_node_id": 3,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "QwenImage3TextToImage",
+      "title": "Qwen Image 3 Text to Image (Local)",
+      "pos": [0, 120],
+      "size": [470, 560],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {"name": "images", "type": "IMAGE", "links": [1, 2]},
+        {"name": "edit_brief_json", "type": "STRING", "links": null},
+        {"name": "run_metadata", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "QwenImage3TextToImage"},
+      "widgets_values": ["openrouter", "qwen-image-3.0-pro", "A clear monochrome interface with precise geometry.", "", 1024, 1024, 1, 42, "fixed", false, false],
+      "widgets_values_named": {"provider": "openrouter", "model": "qwen-image-3.0-pro", "prompt": "A clear monochrome interface with precise geometry.", "negative_prompt": "", "width": 1024, "height": 1024, "count": 1, "seed": 42, "control_after_generate": "fixed", "prompt_extend": false, "watermark": false}
+    },
+    {
+      "id": 2,
+      "type": "PreviewImage",
+      "title": "Preview IMAGE batch",
+      "pos": [600, 0],
+      "size": [360, 420],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 1}],
+      "outputs": [{"name": "images", "type": "IMAGE", "links": null}],
+      "properties": {}
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "title": "Save audited batch",
+      "pos": [600, 500],
+      "size": [360, 320],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 2}],
+      "outputs": [{"name": "images", "type": "IMAGE", "links": null}],
+      "properties": {},
+      "widgets_values": ["partner-compatible/text-to-image"],
+      "widgets_values_named": {"filename_prefix": "partner-compatible/text-to-image"}
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "IMAGE"],
+    [2, 1, 0, 3, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {"ds": {"scale": 1, "offset": [120, 80]}, "frontendVersion": "1.48.7"},
+  "version": 0.4
+}

@@ -1,7 +1,7 @@
 {
-  "1": {"class_type": "LoadImage", "inputs": {"image": "reference-image-1.png"}},
-  "2": {"class_type": "LoadImage", "inputs": {"image": "reference-image-2.png"}},
-  "3": {"class_type": "LoadImage", "inputs": {"image": "reference-image-3.png"}},
+  "1": {"class_type": "LoadImage", "inputs": {"image": "partner-layout.png"}},
+  "2": {"class_type": "LoadImage", "inputs": {"image": "partner-style.png"}},
+  "3": {"class_type": "LoadImage", "inputs": {"image": "partner-asset.png"}},
   "4": {
     "class_type": "QwenImage3Edit",
     "inputs": {

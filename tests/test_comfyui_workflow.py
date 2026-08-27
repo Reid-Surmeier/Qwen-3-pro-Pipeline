@@ -6,6 +6,7 @@ from qwen_ui_pipeline import (
     build_comfyui_api_workflow,
     build_comfyui_assembly_workflow,
     build_partner_edit_workflow,
+    build_partner_text_workflow,
 )
 
 
@@ -68,6 +69,19 @@ class ComfyUiWorkflowTests(unittest.TestCase):
         self.assertEqual(workflow["8"]["inputs"]["images"], ["4", 0])
         self.assertEqual(workflow["9"]["inputs"]["images"], ["4", 0])
 
+    def test_builds_text_partner_graph_with_visible_preview_and_save(self):
+        workflow = build_partner_text_workflow(
+            filename_prefix="partner/text-preview",
+            provider="openrouter",
+            prompt="A monochrome interface.",
+        )
+
+        self.assertEqual(workflow["1"]["class_type"], "QwenImage3TextToImage")
+        self.assertEqual(workflow["2"]["class_type"], "PreviewImage")
+        self.assertEqual(workflow["3"]["class_type"], "SaveImage")
+        self.assertEqual(workflow["2"]["inputs"]["images"], ["1", 0])
+        self.assertEqual(workflow["3"]["inputs"]["images"], ["1", 0])
+
     def test_partner_workflow_requires_exactly_three_portable_references(self):
         with self.assertRaisesRegex(ValueError, "exactly three"):
             build_partner_edit_workflow(
@@ -93,6 +107,19 @@ class ComfyUiWorkflowTests(unittest.TestCase):
         )
         for preview_id in (5, 6, 7, 8):
             self.assertEqual(nodes[preview_id]["type"], "PreviewImage")
+
+    def test_saved_canvases_survive_a_json_reopen_round_trip(self):
+        for path in (
+            Path("workflows/partner-text-to-image.workflow.json"),
+            Path("workflows/partner-three-reference.workflow.json"),
+        ):
+            with self.subTest(path=path):
+                original = json.loads(path.read_text(encoding="utf-8"))
+                reopened = json.loads(json.dumps(original))
+
+                self.assertEqual(reopened["nodes"], original["nodes"])
+                self.assertEqual(reopened["links"], original["links"])
+                self.assertGreater(len(reopened["nodes"]), 0)
 
 
 if __name__ == "__main__":

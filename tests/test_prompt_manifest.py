@@ -70,31 +70,6 @@ class CompileEditBriefTests(unittest.TestCase):
                 reference_urls=[f"data:image/png;base64,{index}" for index in range(5)],
             )
 
-    def test_openrouter_builder_never_silently_ignores_partner_controls(self):
-        cases = {
-            "negative_prompt": {"negative_prompt": "no gradients"},
-            "prompt_extend": {"output": {"prompt_extend": True}},
-            "watermark": {"output": {"watermark": True}},
-            "size": {"output": {"size": "1024*1024"}},
-        }
-
-        for control, values in cases.items():
-            brief = {"objective": "Render a monochrome interface.", **values}
-            with self.subTest(control=control), self.assertRaisesRegex(
-                ValueError, f"OpenRouter does not support {control}"
-            ):
-                build_openrouter_request(brief)
-
-    def test_openrouter_builder_validates_count_and_seed_bounds(self):
-        for output, message in (
-            ({"count": 7}, "count"),
-            ({"seed": -1}, "Seed"),
-        ):
-            with self.subTest(output=output), self.assertRaisesRegex(ValueError, message):
-                build_openrouter_request(
-                    {"objective": "Render a monochrome interface.", "output": output}
-                )
-
     def test_compiles_spatial_style_and_negative_constraints(self):
         brief = {
             "objective": "Transform the central plant into a golf club.",

@@ -72,6 +72,46 @@ def build_comfyui_assembly_workflow(
     }
 
 
+def build_partner_text_workflow(
+    *,
+    filename_prefix: str,
+    provider: str,
+    prompt: str,
+) -> dict[str, Any]:
+    """Build a portable text-to-image graph with visible preview and save nodes."""
+
+    if provider not in {"openrouter", "alibaba"}:
+        raise ValueError("Partner text workflow provider must be openrouter or alibaba")
+    return {
+        "1": {
+            "class_type": "QwenImage3TextToImage",
+            "inputs": {
+                "provider": provider,
+                "model": "qwen-image-3.0-pro",
+                "prompt": prompt,
+                "negative_prompt": "",
+                "width": 1024,
+                "height": 1024,
+                "count": 1,
+                "seed": 42,
+                "prompt_extend": False,
+                "watermark": False,
+            },
+        },
+        "2": {
+            "class_type": "PreviewImage",
+            "inputs": {"images": ["1", 0]},
+        },
+        "3": {
+            "class_type": "SaveImage",
+            "inputs": {
+                "filename_prefix": filename_prefix,
+                "images": ["1", 0],
+            },
+        },
+    }
+
+
 def build_partner_edit_workflow(
     *,
     reference_filenames: list[str],

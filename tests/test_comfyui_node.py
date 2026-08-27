@@ -1,5 +1,6 @@
 import unittest
 import json
+import numpy
 from unittest.mock import patch
 
 from qwen_ui_pipeline.comfyui_node import (
@@ -8,11 +9,30 @@ from qwen_ui_pipeline.comfyui_node import (
     QwenImage3TextToImage,
     ReferenceRegionComposite,
     _partner_render,
+    _reference_data_urls,
 )
 from qwen_ui_pipeline.providers.router import ProviderResult
 
 
 class QwenImage3RenderTests(unittest.TestCase):
+    def test_legacy_node_still_uses_only_the_first_four_batch_images(self):
+        class FakeTensor:
+            def __init__(self, value):
+                self.value = value
+
+            def detach(self):
+                return self
+
+            def cpu(self):
+                return self
+
+            def numpy(self):
+                return numpy.full((1, 1, 3), self.value, dtype=numpy.float32)
+
+        encoded = _reference_data_urls([FakeTensor(index / 10) for index in range(5)])
+
+        self.assertEqual(len(encoded), 4)
+
     def test_node_accepts_an_edit_brief_but_never_an_api_key_widget(self):
         inputs = QwenImage3Render.INPUT_TYPES()
         exposed_names = set(inputs["required"]) | set(inputs["optional"])

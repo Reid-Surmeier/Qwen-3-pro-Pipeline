@@ -10,8 +10,8 @@
       "inputs": [],
       "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [1, 4]}, {"name": "MASK", "type": "MASK", "links": null}],
       "properties": {"Node name for S&R": "Load image_1"},
-      "widgets_values": ["reference-image-1.png", "image"],
-      "widgets_values_named": {"image": "reference-image-1.png", "upload": "image"}
+      "widgets_values": ["partner-layout.png", "image"],
+      "widgets_values_named": {"image": "partner-layout.png", "upload": "image"}
     },
     {
       "id": 2, "type": "LoadImage", "title": "image_2 — style reference",
@@ -19,8 +19,8 @@
       "inputs": [],
       "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [2, 5]}, {"name": "MASK", "type": "MASK", "links": null}],
       "properties": {"Node name for S&R": "Load image_2"},
-      "widgets_values": ["reference-image-2.png", "image"],
-      "widgets_values_named": {"image": "reference-image-2.png", "upload": "image"}
+      "widgets_values": ["partner-style.png", "image"],
+      "widgets_values_named": {"image": "partner-style.png", "upload": "image"}
     },
     {
       "id": 3, "type": "LoadImage", "title": "image_3 — asset reference",
@@ -28,8 +28,8 @@
       "inputs": [],
       "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [3, 6]}, {"name": "MASK", "type": "MASK", "links": null}],
       "properties": {"Node name for S&R": "Load image_3"},
-      "widgets_values": ["reference-image-3.png", "image"],
-      "widgets_values_named": {"image": "reference-image-3.png", "upload": "image"}
+      "widgets_values": ["partner-asset.png", "image"],
+      "widgets_values_named": {"image": "partner-asset.png", "upload": "image"}
     },
     {
       "id": 4, "type": "QwenImage3Edit", "title": "Qwen Image 3 Edit (Local) — three portable roles",

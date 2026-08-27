@@ -27,7 +27,10 @@ def _reference_data_urls(reference_images: Any) -> list[str]:
     output = []
     if reference_images is None:
         return output
-    for tensor in reference_images:
+    # Preserve the legacy QwenImage3Render behavior: silently use at most the
+    # first four images from its batch input.  The new Partner-compatible node
+    # has stricter one-image-per-role validation in _partner_reference_records.
+    for tensor in reference_images[:4]:
         pixels = tensor.detach().cpu().numpy()
         pixels = (pixels.clip(0, 1) * 255).round().astype("uint8")
         image = Image.fromarray(pixels, mode="RGB")

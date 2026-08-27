@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 import re
-from typing import Any, Mapping, Sequence
+from typing import Any, Sequence
 
 from .providers.alibaba import MODEL_NAMES, SIZES
 
@@ -285,24 +285,3 @@ def build_partner_edit_brief(
         for index, dimensions in enumerate(reference_dimensions, start=1)
     ]
     return brief
-
-
-def partner_capabilities() -> Mapping[str, Mapping[str, Any]]:
-    """Return the fixed capability record used for preflight and audit."""
-
-    return {
-        "openrouter": {
-            "references": 3,
-            "negative_prompt": False,
-            "prompt_extend": False,
-            "watermark": False,
-            "size_modes": ["match input", "custom"],
-        },
-        "alibaba": {
-            "references": 3,
-            "negative_prompt": True,
-            "prompt_extend": True,
-            "watermark": True,
-            "size_modes": list(SIZE_MODES),
-        },
-    }

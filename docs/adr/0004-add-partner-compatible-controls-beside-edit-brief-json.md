@@ -22,10 +22,11 @@ visible role remains exact.
 Translate the visible controls into an Edit Brief, then use the existing
 explicit-provider router and clients. Validate the complete provider/control
 combination before client creation. Provider capabilities are not silently
-emulated: OpenRouter rejects unsupported negative prompt, prompt expansion,
-watermark, and size combinations; Alibaba receives its supported parameters
-natively. Both new nodes return the Edit Brief and run metadata beside the
-IMAGE batch.
+emulated by the new nodes: OpenRouter rejects unsupported negative prompt,
+prompt expansion, watermark, and size combinations before the shared adapter
+is called; Alibaba receives its supported parameters natively. The existing
+adapter retains its legacy permissive translation for old JSON workflows.
+Both new nodes return the Edit Brief and run metadata beside the IMAGE batch.
 
 Use a session-bound SSH loopback forward over the authenticated tailnet for
 Mac review. Do not expose ComfyUI publicly, add a Funnel, or forward worker
