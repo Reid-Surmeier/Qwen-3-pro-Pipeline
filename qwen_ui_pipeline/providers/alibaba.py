@@ -40,9 +40,14 @@ DEFAULT_ENDPOINT = (
     "https://dashscope-intl.aliyuncs.com"
     "/api/v1/services/aigc/multimodal-generation/generation"
 )
+MAX_SEED = 2_147_483_647
 
 
-def _resolve_size(output: Mapping[str, Any]) -> str:
+def _resolve_size(
+    output: Mapping[str, Any], *, allow_partner_auto: bool = False
+) -> str | None:
+    if allow_partner_auto and output.get("size_mode") == "auto":
+        return None
     explicit_size = output.get("size")
     if explicit_size is not None:
         match = re.fullmatch(r"([1-9][0-9]*)\*([1-9][0-9]*)", str(explicit_size))
@@ -150,7 +155,12 @@ def build_alibaba_request(
         raise ValueError("Alibaba Qwen Image 3 accepts at most 3 reference images")
     compiled = compile_edit_brief(brief)
     output = brief.get("output", {})
-    size = _resolve_size(output)
+    interface = brief.get("interface", {})
+    is_partner = (
+        isinstance(interface, Mapping)
+        and interface.get("name") == "partner-compatible"
+    )
+    size = _resolve_size(output, allow_partner_auto=is_partner)
     model = MODEL_NAMES.get(str(brief.get("model", "qwen/qwen-image-3-pro")))
     if model is None:
         raise ValueError("Unsupported Qwen Image 3 model")
@@ -160,11 +170,23 @@ def build_alibaba_request(
         "prompt_extend": True,
         "prompt_extend_mode": "direct",
         "n": int(output.get("count", 1)),
-        "size": size,
         "watermark": False,
     }
+    if size is not None:
+        parameters["size"] = size
     if "seed" in output:
         parameters["seed"] = int(output["seed"])
+    if is_partner:
+        count = parameters["n"]
+        if not 1 <= count <= 6:
+            raise ValueError("Alibaba output count must be between 1 and 6")
+        if "seed" in parameters and not 0 <= parameters["seed"] <= MAX_SEED:
+            raise ValueError(f"Seed must be between 0 and {MAX_SEED}")
+        parameters["prompt_extend"] = bool(output.get("prompt_extend", True))
+        parameters["watermark"] = bool(output.get("watermark", False))
+        negative_prompt = brief.get("negative_prompt")
+        if isinstance(negative_prompt, str) and negative_prompt:
+            parameters["negative_prompt"] = negative_prompt
     return {
         "model": model,
         "input": {"messages": [{"role": "user", "content": content}]},

@@ -1,0 +1,129 @@
+{
+  "captured_requests_identical": true,
+  "legacy": {
+    "captured_request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+    "matches_paid_request": true,
+    "metadata": {
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "model": "qwen/qwen-image-3-pro",
+      "provider": "openrouter",
+      "resolution": "1K",
+      "seed": 2026082632,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4261
+      }
+    },
+    "node_class": "QwenImage3Render",
+    "output_pixel_sha256": "fe53b044019e83f44468efb501565bd9d5f49997715d36934eab9bfe5fb272c1",
+    "saved_output_pixel_sha256": "fe53b044019e83f44468efb501565bd9d5f49997715d36934eab9bfe5fb272c1"
+  },
+  "limitation": "The paid submissions used the proven-equal direct client payloads; the actual node classes were verified by offline response replay.",
+  "method": "saved provider-response replay through the actual node classes",
+  "network_client": "mocked; no provider call",
+  "outputs_match_saved_pixels": true,
+  "paid_requests": 0,
+  "partner": {
+    "brief": {
+      "interface": {
+        "name": "partner-compatible",
+        "version": 1
+      },
+      "model": "qwen/qwen-image-3-pro",
+      "negative_prompt": "",
+      "objective": "Using Image 1, keep the complete PlantStudio interface and all existing pixel-art controls unchanged. Change only the blue title bar text from PlantStudio - Library of wildflowers (11 plants) to Partner Compatibility Test. Center the complete unchanged window on a plain light-gray square canvas without cropping or adding elements.",
+      "output": {
+        "aspect_ratio": "1:1",
+        "count": 1,
+        "prompt_extend": false,
+        "requested_dimensions": {
+          "height": 1024,
+          "width": 1024
+        },
+        "resolution": "1K",
+        "seed": 2026082632,
+        "size_mode": "custom",
+        "watermark": false
+      },
+      "provider": "openrouter",
+      "references": [
+        {
+          "effective_index": 1,
+          "height": 403,
+          "role": "image_1",
+          "width": 474
+        }
+      ]
+    },
+    "captured_request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+    "matches_paid_request": true,
+    "metadata": {
+      "completed_output_count": 1,
+      "controls": {
+        "aspect_ratio": "1:1",
+        "count": 1,
+        "prompt_extend": false,
+        "requested_dimensions": {
+          "height": 1024,
+          "width": 1024
+        },
+        "resolution": "1K",
+        "seed": 2026082632,
+        "size_mode": "custom",
+        "watermark": false
+      },
+      "model": "qwen/qwen-image-3-pro",
+      "output_sha256": [
+        "8490e9e0a94a0df986057215b4b64d8ec48480d73d37d7f24ac5d21bdf542e8b"
+      ],
+      "provider": "openrouter",
+      "references": [
+        {
+          "height": 403,
+          "role": "image_1",
+          "sha256": "ff7e892704714317cc365c0e96acf0355a14b29eb0ebf2f9beb254539a59f59f",
+          "width": 474
+        }
+      ],
+      "requested_output_count": 1,
+      "usage": {
+        "completion_tokens": 4175,
+        "completion_tokens_details": {
+          "image_tokens": 4175,
+          "reasoning_tokens": 0
+        },
+        "cost": 0.043,
+        "cost_details": {
+          "upstream_inference_completions_cost": 0.04,
+          "upstream_inference_cost": 0.043,
+          "upstream_inference_prompt_cost": 0.003
+        },
+        "is_byok": false,
+        "prompt_tokens": 86,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 4261
+      }
+    },
+    "node_class": "QwenImage3Edit",
+    "output_pixel_sha256": "1cb78751e1d41fd9c819777e85f5abe8adc20f1cd48abd32a1de7db69670e5c7",
+    "saved_output_pixel_sha256": "1cb78751e1d41fd9c819777e85f5abe8adc20f1cd48abd32a1de7db69670e5c7"
+  }
+}

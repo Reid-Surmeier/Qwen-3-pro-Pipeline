@@ -1,0 +1,13 @@
+{
+  "attempt_id": "issue32-legacy-20260827T021817Z-e5572fa9",
+  "assignment": "retrospective from retained response timestamp and request hash",
+  "completed_outputs": 1,
+  "output_sha256": [
+    "309a93fa9d9f74b186f73665d0d2fdbcb54b5f846b1ca2ac19fe160aa12d4b0c"
+  ],
+  "request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+  "requested_outputs": 1,
+  "retry_allowed": false,
+  "retry_performed": false,
+  "status": "completed"
+}

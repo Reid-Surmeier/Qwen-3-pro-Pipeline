@@ -6,7 +6,11 @@ from io import BytesIO
 from pathlib import Path
 from unittest import mock
 
-from qwen_ui_pipeline import OpenRouterImageClient, write_run_artifacts
+from qwen_ui_pipeline import (
+    OpenRouterImageClient,
+    build_openrouter_request,
+    write_run_artifacts,
+)
 
 
 class _Response:
@@ -24,6 +28,27 @@ class _Response:
 
 
 class OpenRouterImageClientTests(unittest.TestCase):
+    def test_legacy_builder_keeps_ignoring_partner_only_fields(self):
+        request = build_openrouter_request(
+            {
+                "model": "legacy-model-id",
+                "objective": "Keep the old adapter behavior.",
+                "negative_prompt": "legacy ignored value",
+                "output": {
+                    "count": 7,
+                    "seed": -1,
+                    "prompt_extend": True,
+                    "watermark": True,
+                    "size": "1024*1024",
+                    "size_mode": "auto",
+                },
+            }
+        )
+
+        self.assertEqual(request["model"], "legacy-model-id")
+        self.assertEqual(request["n"], 7)
+        self.assertEqual(request["seed"], -1)
+
     def test_posts_an_authenticated_image_request_and_returns_response(self):
         captured = {}
 

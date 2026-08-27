@@ -1,0 +1,31 @@
+{
+  "interface": {
+    "name": "partner-compatible",
+    "version": 1
+  },
+  "model": "qwen/qwen-image-3-pro",
+  "negative_prompt": "",
+  "objective": "Using Image 1, keep the complete PlantStudio interface and all existing pixel-art controls unchanged. Change only the blue title bar text from PlantStudio - Library of wildflowers (11 plants) to Partner Compatibility Test. Center the complete unchanged window on a plain light-gray square canvas without cropping or adding elements.",
+  "output": {
+    "aspect_ratio": "1:1",
+    "count": 1,
+    "prompt_extend": false,
+    "requested_dimensions": {
+      "height": 1024,
+      "width": 1024
+    },
+    "resolution": "1K",
+    "seed": 2026082632,
+    "size_mode": "custom",
+    "watermark": false
+  },
+  "provider": "openrouter",
+  "references": [
+    {
+      "effective_index": 1,
+      "height": 403,
+      "role": "image_1",
+      "width": 474
+    }
+  ]
+}
