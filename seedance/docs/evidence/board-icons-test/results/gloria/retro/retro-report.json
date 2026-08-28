@@ -1,0 +1,21 @@
+{
+  "unique_frames": 8,
+  "effective_fps": 2.0,
+  "out_of_palette_pixels": 0,
+  "min_silhouette_iou": 0.9982,
+  "frame0_identity": 0.7414,
+  "grid": 160,
+  "palette_colors": 16,
+  "reference": "docs/evidence/board-icons-test/anchors/gloria-anchor-640.png",
+  "checks": {
+    "unique_frames_in_range": true,
+    "effective_fps_ok": true,
+    "palette_locked": true,
+    "silhouette_stable": true
+  },
+  "diagnostics": {
+    "frame0_identity": 0.7414
+  },
+  "certified": true,
+  "hold_frames_at_24fps": 4
+}

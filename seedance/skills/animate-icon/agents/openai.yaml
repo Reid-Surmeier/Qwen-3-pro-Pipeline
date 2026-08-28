@@ -1,0 +1,4 @@
+interface:
+  display_name: "Animate Icon"
+  short_description: "Create cost-gated, style-locked icon motion"
+  default_prompt: "Use $animate-icon to plan a source-faithful icon animation and preserve every run as evidence."

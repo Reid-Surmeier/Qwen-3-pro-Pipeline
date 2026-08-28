@@ -1,0 +1,21 @@
+{
+  "unique_frames": 8,
+  "effective_fps": 2.0,
+  "out_of_palette_pixels": 0,
+  "min_silhouette_iou": 0.3947,
+  "frame0_identity": 0.8633,
+  "grid": 160,
+  "palette_colors": 16,
+  "reference": "docs/evidence/board-icons-test/anchors/blessing-anchor-crisp-640.png",
+  "checks": {
+    "unique_frames_in_range": true,
+    "effective_fps_ok": true,
+    "palette_locked": true,
+    "silhouette_stable": false
+  },
+  "diagnostics": {
+    "frame0_identity": 0.8633
+  },
+  "certified": false,
+  "hold_frames_at_24fps": 4
+}

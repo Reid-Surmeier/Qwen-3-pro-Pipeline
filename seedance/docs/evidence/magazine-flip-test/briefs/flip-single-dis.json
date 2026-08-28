@@ -1,0 +1,25 @@
+{
+  "grammar": "smooth",
+  "source_authority": "The supplied image is the exact identity authority: the DIS Magazine Data Issue cover in the design language of a September 1993 premiere issue — a massive black DIS masthead cropped by the top edge, a full-width magenta cover line reading THE DATA ISSUE, a small white three-line credit block reading 'Simon Denny / has his day / by Mike Pepi', a dramatic black-and-white portrait of a short-haired man in a black crew-neck filling the lower two thirds, a white barcode block at lower left, and a worn creased left edge — lying flat on a dark charcoal surface. Every element of the cover art, its typography, its photograph, and the framing of the magazine on the surface must look exactly as captured whenever the cover is visible, and the magazine must return to exactly this captured state at the end.",
+  "style_lock": [
+    "the cover photograph, masthead, and cover lines are never redrawn, retouched, recolored, sharpened, or modernized; the slightly worn 1993-style print character is the identity",
+    "the magazine keeps its exact printed proportions; it never changes size, position on the surface, or perspective while closed",
+    "the single revealed spread matches this issue's cover story: a left page dominated by a bold TOO BIG TO SCALE display headline above dense greeked serif article text, and a right page carrying a large black-and-white portrait photograph of the same short-haired man from the cover, in the same worn 1993 print style",
+    "paper behaves like real coated magazine stock: the turning cover is a thin flexible sheet that curls as it lifts and flattens as it lands",
+    "the dark charcoal surface under the magazine stays perfectly still and empty for the entire clip"
+  ],
+  "motion": "The magazine performs exactly one deliberate page turn and one return, like a reader opening straight to the cover story and closing the magazine again. Beat 1: the closed magazine holds exactly as captured. Beat 2: the front cover lifts slowly from its right edge, curling into a smooth arc that travels left with natural paper flex, and lands flat, opening the magazine to its cover-story spread — the left page led by the large TOO BIG TO SCALE display headline with dense greeked article text below, the right page filled by the black-and-white portrait photograph of the same man who appears on the cover. Beat 3: the open spread holds flat, still, and readable for a long clear pause — the longest hold of the clip — with no drift, shimmer, or text crawl on the pages. Beat 4: the same page lifts from its left edge and turns back right in one smooth arc, closing the magazine. Beat 5: the closed magazine holds exactly as captured through to the final frame. Both turns are single continuous motions with constant believable speed; the sheet never hesitates mid-arc, and the magazine body never slides or rotates on the surface.",
+  "timing": "Hold the exact captured cover for the opening moment, give the opening turn an unhurried arc of about a second, devote the longest middle stretch to the flat readable hold on the open spread, mirror the closing turn at the same speed, and hold the closed magazine exactly as captured for the final stretch so the last frame is identical to the first.",
+  "camera": "Static camera, directly above-front of the magazine at the captured angle. No zoom, no pan, no rotation, no dolly, no perspective change, no depth-of-field shift, no lighting change.",
+  "background": "The dark charcoal surface exactly as captured: uniform, still, no texture change, no shadows appearing or disappearing beyond the natural soft shadow of the turning sheet, nothing else ever enters the frame.",
+  "negative_constraints": [
+    "no hands, fingers, or any person visible; the page turns as if opened but no one is shown",
+    "no added objects, text overlays, logos, watermarks, or reflections",
+    "the cover must never be redrawn or reinterpreted when it returns; final frame identical to the first",
+    "no camera motion of any kind and no lighting shifts",
+    "the open spread must not warp, breathe, or rewrite its text while held",
+    "the magazine never levitates, slides, rotates, or changes size on the surface"
+  ],
+  "motion_basis": "A single page turn of a perfect-bound magazine: the sheet lifts from its free edge, flexes into an arc, and settles flat — with the cover identity grounded in the owner-licensed DIS rework of the 1993 premiere cover (rendered via the Qwen pipeline from source/vibe-sept-1993-cover.png with the supplied Simon Denny portrait; certified output source/dis-cover-v1.png) and the revealed spread described in the same issue's feature-opener grammar",
+  "real_reference": "source/dis-cover-v1.png and source/vibe-sept-1993-cover.png — the certified DIS cover rework and its layout donor, both on disk in this evidence tree"
+}

@@ -1,0 +1,52 @@
+{
+  "holy-light": {
+    "source_crop_sha256": "6a01fec2d9f3695880569ec37a6314642fbb051194692fba641d8b6312f6ea6b",
+    "anchor_sha256": "5a12d2f5080f925959e1cfa08e6baeef5f4a8a233d22d4ea5669513a0ed1e9c7",
+    "crisp_anchor_sha256": "258bcedfbac797db39197b392f4d2e06053f99987fcbcc901393b213983cbd6c"
+  },
+  "heal": {
+    "source_crop_sha256": "1efa74253e97fda645e0f41b41a66299152b2b5792892e7848be87e5a73d8649",
+    "anchor_sha256": "f93ff9e4b060459a34d0fa607f37743370210c331a1b49fdd0bae93e3576207c",
+    "crisp_anchor_sha256": "19e5a792e4d14f9bd930e954edd92c5607066180315804e47822a6eef3cdbb5d"
+  },
+  "blessing": {
+    "source_crop_sha256": "2e20124aa2a22c253fdbf81f6e6e3552db1644f887293f6ef5c1f3b0dd881ed1",
+    "anchor_sha256": "68bd97bf9347674bb36f599c07b880f913fa3f025806ec7460c2618c84133a7b",
+    "crisp_anchor_sha256": "7e083db70f4aa879b969d163aeaa044e472428f2de3b4c80cf5e83ec39f1f5d4"
+  },
+  "protect": {
+    "source_crop_sha256": "4b9fe09ac9f858ce92cab29b59a2503141a86e925f255d3d6a60fa51d3cff360",
+    "anchor_sha256": "62cfada4741870d710adc8d349d6830ce6c3fde4c2a8099d5c231dcb90374da9",
+    "crisp_anchor_sha256": "d937dc4602821a46a8b66973d96729689fd39e384e45f186ef2cd89981027caa"
+  },
+  "resurrection": {
+    "source_crop_sha256": "2ca0ac3eb17792b1f85b081d206543678a39098bbfbd1027cb2e2358de09880c",
+    "anchor_sha256": "49151ff05fdbf08ed39852372e71cff171b8aaa43fd31fad2bf0e0bda85d20ba",
+    "board_node": "0:4",
+    "crisp_anchor_sha256": "5c56d5ee7443cf6c18ea0699084bb4e638f696b2a2a25e66b489c3bf058b21c5"
+  },
+  "aqua-benedicta": {
+    "source_crop_sha256": "ae175d46f5c4bf99357b8e14e8ad3022f1abb704e381acb7a69fa67cec4bbc3d",
+    "anchor_sha256": "c29104e1b83974d40f08faf0144d16f900d0bda0fa14e4eaad2b44c702fd6a4c",
+    "board_node": "0:4",
+    "crisp_anchor_sha256": "353fdb546f1b67bb09ff595a8d84e86f42cd824b6a5206a78427aa45208765de"
+  },
+  "sanctuary": {
+    "source_crop_sha256": "51c6ee5090f5b8ff9aeb4b7ee6f1d4ce081104e2821f54f99d27fb6de6430dc2",
+    "anchor_sha256": "74f6f739344eee67f1fe3611ae49307bf3c0dde98d9b8ab2ab89619250600b01",
+    "board_node": "0:4",
+    "crisp_anchor_sha256": "b5f19f55dbb47ee2affe1949ac2d7279c519e76cbd05cff5b83b1135cc95852d"
+  },
+  "angelus": {
+    "source_crop_sha256": "75b4b2f43386f5afad5ce4d1a965303c394dff548021547f7a0c3a26626a844d",
+    "anchor_sha256": "17871d2eff0865f90c00e645ff4b451c80bb077682a5fc7d4f616ce742eb4e46",
+    "board_node": "0:4",
+    "crisp_anchor_sha256": "52b5f4ce1a675c7466a15ade21b32e41980d0e59bad96c8f4398c8996df2124e"
+  },
+  "gloria": {
+    "source_crop_sha256": "35eb1ee0ec532c19da0f590e0f72780f06c98d6e54e55acc7be2cb3b334e93ce",
+    "anchor_sha256": "9555ca258027e64bb83fcfd98ceccddfb4beabf1fdacf40eec7ea4bd2cf8f49a",
+    "board_node": "0:4",
+    "crisp_anchor_sha256": "557aa0806048bc9a19bb33dbd1ddb8322967d6c2d216401f40bb4e60c995d497"
+  }
+}

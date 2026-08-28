@@ -1,0 +1,19 @@
+{
+  "source_authority": "The supplied square favicon is the exact identity authority. Preserve its silhouette, proportions, negative space, and color boundaries.",
+  "style_lock": [
+    "flat vector appearance with crisp edges",
+    "centered inside an 80% safe area",
+    "no added text, texture, shadow, highlights, particles, or extra objects",
+    "remain readable when downsampled to 16, 32, 48, and 64 pixels"
+  ],
+  "motion": "One restrained, purposeful brand gesture that returns exactly to the starting pose. Prefer transform-like motion over freeform morphing.",
+  "timing": "Hold 8% at start, ease into one action, settle by 88%, and hold the identical pose through the end frame.",
+  "camera": "Locked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.",
+  "background": "Uniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency will be produced and inspected separately.",
+  "negative_constraints": [
+    "do not redraw or reinterpret the logo",
+    "do not change stroke weight or corner radii",
+    "do not introduce edge shimmer or color pulsing",
+    "do not leave a visible loop seam"
+  ]
+}

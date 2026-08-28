@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/seedance-icon-animation/motion-brief.schema.json",
+  "title": "Icon motion brief",
+  "type": "object",
+  "required": ["source_authority", "style_lock", "motion", "camera", "background", "negative_constraints"],
+  "properties": {
+    "source_authority": {"type": "string", "minLength": 1},
+    "style_lock": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]},
+    "motion": {"type": "string", "minLength": 1},
+    "timing": {"type": "string"},
+    "camera": {"type": "string", "minLength": 1},
+    "background": {"type": "string", "minLength": 1},
+    "negative_constraints": {"oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]}
+  },
+  "additionalProperties": true
+}
+

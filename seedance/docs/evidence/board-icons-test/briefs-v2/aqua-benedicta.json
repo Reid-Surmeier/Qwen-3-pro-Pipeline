@@ -1,0 +1,20 @@
+{
+  "source_authority": "The supplied image is the exact identity authority. Every pixel of the aqua benedicta icon and its square frame must remain as captured except the one described movement.",
+  "style_lock": [
+    "the object keeps its exact shape, colors, and soft blocky texture exactly as captured",
+    "the square frame and its border stay perfectly still for the entire clip",
+    "nothing is redrawn, repainted, sharpened, or reinterpreted",
+    "subtle, small movement only; stop-motion feel with held poses"
+  ],
+  "motion": "A tiny spark of light steps across the water surface from left to right in three separate held positions, one visible jump at a time. Everything else is frozen.",
+  "timing": "Hold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.",
+  "camera": "Static camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.",
+  "background": "Plain still uniform #00FF00 background with no gradient, texture, shadow, or spill.",
+  "negative_constraints": [
+    "nothing may cross the edge of the square onto the background",
+    "no glow, bloom, light rays, particles, or added objects",
+    "no smooth fades or continuous motion; every change happens in visible held steps",
+    "do not change any color or redraw any part of the image"
+  ],
+  "era_idiom_basis": "RO cursor-sparkle idiom: 3 frames @ 150 ms, 2x1 px glint walks the water line"
+}

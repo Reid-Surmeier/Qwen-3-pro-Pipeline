@@ -1,0 +1,25 @@
+{
+  "grammar": "smooth",
+  "source_authority": "The supplied image is the exact identity authority: the September 1993 premiere issue of VIBE magazine — the black-and-white Snoop Doggy Dogg cover with the large cropped VIBE masthead and the magenta BOW WOW WOW cover line — lying flat on a dark charcoal surface. Every element of the cover art, its typography, its photograph, and the framing of the magazine on the surface must look exactly as captured whenever the cover is visible, and the magazine must return to exactly this captured state at the end.",
+  "style_lock": [
+    "the cover photograph, masthead, and cover lines are never redrawn, retouched, recolored, sharpened, or modernized; the slightly worn 1993 print scan character is the identity",
+    "the magazine keeps its exact printed proportions; it never changes size, position on the surface, or perspective while closed",
+    "interior pages look like genuine early-1990s editorial print: dense serif body text in columns, large black-and-white photography, bold display headlines — consistent with this exact issue",
+    "paper behaves like real coated magazine stock: a turning page is a thin flexible sheet that curls as it lifts and flattens as it lands",
+    "the dark charcoal surface under the magazine stays perfectly still and empty for the entire clip"
+  ],
+  "motion": "The magazine performs one complete, unhurried flip-through, exactly like a person browsing a print magazine on a table. Beat 1: the closed magazine holds exactly as captured. Beat 2: the front cover lifts from its right edge, curls upward and arcs left like a real page turn, and lands open, revealing the opening feature spread of the issue — a left page dominated by a bold HOT DOGG display headline over dense article text, and a right page carrying a large black-and-white portrait photograph. Beat 3: after a readable pause, the right-hand page lifts from its right edge and turns left in the same physical way, revealing a second editorial spread with a large feature headline and black-and-white photography in the same design language. Beat 4: one more page turn in the same manner reveals a third spread of the same editorial style. Beat 5: the pages then turn back — right to left in reverse, each landing flat before the next lifts — closing the magazine again. Beat 6: the closed magazine holds exactly as captured through to the final frame. Every turn is a single continuous smooth arc with natural paper flex; pages land flat and fully settle before the next movement begins; the magazine body never slides or rotates on the surface while pages turn.",
+  "timing": "Hold the exact captured cover for the opening moment. Give each page turn a quick natural arc of well under a second, with a brief flat readable hold on every revealed spread. Reserve the final stretch for the closed magazine holding exactly as captured, so the last frame is identical to the first.",
+  "camera": "Static camera, directly above-front of the magazine at the captured angle. No zoom, no pan, no rotation, no dolly, no perspective change, no depth-of-field shift, no lighting change.",
+  "background": "The dark charcoal surface exactly as captured: uniform, still, no texture change, no shadows appearing or disappearing beyond the natural soft shadow of a turning page, nothing else ever enters the frame.",
+  "negative_constraints": [
+    "no hands, fingers, or any person visible; the pages turn as if browsed but no one is shown",
+    "no added objects, text overlays, logos, watermarks, or reflections",
+    "the cover must never be redrawn or reinterpreted when it returns; final frame identical to the first",
+    "no camera motion of any kind and no lighting shifts",
+    "pages never tear, crease sharply, flutter chaotically, or pass through each other",
+    "the magazine never levitates, slides, rotates, or changes size on the surface"
+  ],
+  "motion_basis": "Physical page-turn mechanics of a perfect-bound print magazine: a thin coated sheet lifts from its free right edge, flexes into an arc, and settles flat on the left — as documented by the referenced Internet Archive scan of this exact issue (leaves n52, n54, n68, n86 of bub_gb_IigEAAAAMBAJ), whose real spreads the revealed pages imitate",
+  "real_reference": "references/vibe-n52-hot-dogg-opener.jpg with references/vibe-n54-snoop-portrait.jpg, references/vibe-n68-cornel-u.jpg, references/vibe-n86-daughters-of-the-dance.jpg — genuine interior pages of this issue from archive.org/details/bub_gb_IigEAAAAMBAJ"
+}

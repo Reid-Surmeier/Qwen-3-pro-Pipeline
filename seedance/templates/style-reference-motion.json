@@ -1,0 +1,10 @@
+{
+  "source_authority": "The named icon is the identity authority; references guide motion or treatment only.",
+  "style_lock": ["match the documented style guide", "preserve source silhouette and palette hierarchy"],
+  "motion": "Apply only the motion grammar demonstrated by the reference video; do not copy unrelated content.",
+  "timing": "Match the reference cadence while preserving a readable start and settle.",
+  "camera": "Locked camera unless the reference and brief explicitly require otherwise.",
+  "background": "Use the approved solid matte.",
+  "negative_constraints": ["no reference-content leakage", "no source identity drift", "no extra objects"]
+}
+

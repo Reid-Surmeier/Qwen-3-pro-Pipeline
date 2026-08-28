@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the angelus icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe two wing tips shift up by one tiny step, return, then down by one tiny step, each pose held, like a slow sprite wing flap. The skull and frame are frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0822b7ed4b2d04b2ed4213e0f57e743ac189d19b72a5f82e5173d6f6ec9cfa90>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0822b7ed4b2d04b2ed4213e0f57e743ac189d19b72a5f82e5173d6f6ec9cfa90>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}
