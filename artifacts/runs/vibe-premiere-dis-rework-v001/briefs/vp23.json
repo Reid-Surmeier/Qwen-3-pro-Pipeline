@@ -1,0 +1,95 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the boot advertisement page as a DIS product page: keep the giant warm-toned product filling the right, the red staccato word list top-right, small product studies top-left, and the circular seal — the product is the reference 2 ornamental red tissue box at heroic scale.",
+ "reference_role": "Reference image 1 is the layout authority: heroic product scale, word-list block, small-studies corner, circular seal position. Its boots, words, and seal may not appear. Reference image 2 supplies the product: a red ornamented tissue box, to be rendered enormous with rich color.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: one enormous product dominating the page, staccato word list in red at top-right, two small monochrome product studies top-left, circular seal lower-right, thin bottom line.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, warm white field."
+ ],
+ "regions": [
+  {
+   "name": "header and list",
+   "change": "'Boxes and Tissues' small red header, then the staccato list 'Data.' 'Styles.' 'Scale.' 'Tude.' stacked in red.",
+   "preserve": [
+    "Staccato stack."
+   ]
+  },
+  {
+   "name": "giant product",
+   "change": "The reference 2 red tissue box at the donor boot's heroic scale and warmth.",
+   "preserve": [
+    "Monumental warmth."
+   ]
+  },
+  {
+   "name": "small studies",
+   "change": "Two small monochrome studies of the same box, top-left.",
+   "preserve": [
+    "Corner modesty."
+   ]
+  },
+  {
+   "name": "seal",
+   "change": "Circular seal reading 'VERIFIED IMAGES · DIS' in ring text.",
+   "preserve": [
+    "Seal position."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "header",
+   "text": "Boxes and Tissues"
+  },
+  {
+   "region": "list word 1",
+   "text": "Data."
+  },
+  {
+   "region": "list word 2",
+   "text": "Styles."
+  },
+  {
+   "region": "list word 3",
+   "text": "Scale."
+  },
+  {
+   "region": "list word 4",
+   "text": "Tude."
+  },
+  {
+   "region": "seal",
+   "text": "VERIFIED IMAGES · DIS"
+  }
+ ],
+ "style": [
+  "Rich warm product color against clean white; earnest catalog voice."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

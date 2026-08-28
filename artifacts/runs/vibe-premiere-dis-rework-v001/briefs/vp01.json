@@ -1,0 +1,65 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the left page of the opening denim advertisement spread: keep its vast open sky, monumental held-aloft object motif, and tiny brand chip at top left, but make it a DIS DENIM campaign built around the reference 2 photograph of figures scaling a white monolith.",
+ "reference_role": "Reference image 1 is the layout authority: horizon height, sky field, monumental object scale, chip placement. Its red banners, figures, and brand chip may not appear. Reference image 2 supplies the campaign photograph: figures climbing a towering white monolith against sky.",
+ "preservation_invariants": [
+  "Keep reference 1's composition: enormous sky, monument rising through the full page height, human figures tiny at its base, small brand chip top-left.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, full bleed; this is the left half of a spread, so the motif may run off the right edge."
+ ],
+ "regions": [
+  {
+   "name": "main field",
+   "change": "Integrate the reference 2 monolith-and-climbers as the monumental subject at the donor's banner scale, against the same wide sky.",
+   "preserve": [
+    "Horizon height and monumental proportion."
+   ]
+  },
+  {
+   "name": "brand chip",
+   "change": "Small top-left chip: 'DIS DENIM' with the line 'scale loosely' beneath it.",
+   "preserve": [
+    "Chip scale and position."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "brand chip",
+   "text": "DIS DENIM"
+  },
+  {
+   "region": "brand chip line",
+   "text": "scale loosely"
+  }
+ ],
+ "style": [
+  "Sun-washed early-90s color advertising film; big empty sky; heroic wide-angle."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

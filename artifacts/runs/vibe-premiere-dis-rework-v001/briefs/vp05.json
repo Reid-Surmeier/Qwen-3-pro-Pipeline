@@ -1,0 +1,83 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the left page of the electronics advertisement: keep its giant rotated red display letters, tilted subject, and repeated angled exclamation lines, but sell DIS data storage — the subject is the reference 2 photograph of a computer monitor displaying a cloud.",
+ "reference_role": "Reference image 1 is the layout authority: rotated display type running the page height, tilted central subject, angled exclamation lines, small vertical brand name. Its letters, figure, and brand may not appear. Reference image 2 supplies the subject: a desktop monitor showing a blue sky cloud.",
+ "preservation_invariants": [
+  "Keep reference 1's dynamic structure: monumental rotated red letters spanning the page, subject tilted across them, two angled exclamation lines, small vertical brand at the top edge.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, white field."
+ ],
+ "regions": [
+  {
+   "name": "giant rotated letters",
+   "change": "The word 'DATA' in the donor's giant condensed red caps, rotated the same way, cropped by the page edges.",
+   "preserve": [
+    "Scale, rotation, and red."
+   ]
+  },
+  {
+   "name": "subject",
+   "change": "The reference 2 cloud-monitor tilted diagonally across the letters like the donor figure.",
+   "preserve": [
+    "Diagonal energy."
+   ]
+  },
+  {
+   "name": "exclamation lines",
+   "change": "The line 'I CAN RECORD ON A CLOUD!' set twice at the donor's opposing angles in small bold caps.",
+   "preserve": [
+    "Angled placement."
+   ]
+  },
+  {
+   "name": "vertical brand",
+   "change": "'DIS' small, vertical, at the top-left edge.",
+   "preserve": [
+    "Edge position."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "giant rotated letters",
+   "text": "DATA"
+  },
+  {
+   "region": "exclamation lines",
+   "text": "I CAN RECORD ON A CLOUD!"
+  },
+  {
+   "region": "vertical brand",
+   "text": "DIS"
+  }
+ ],
+ "style": [
+  "Hard red-and-black on white; photocopied punk-meets-corporate 1993 energy."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

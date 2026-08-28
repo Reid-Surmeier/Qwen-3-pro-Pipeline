@@ -1,0 +1,97 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework this magazine's premiere-issue cover as the cover of DIS Magazine's print Data Issue: identical cover architecture — chunky black lowercase masthead partly behind the subject's head, hot-pink all-caps display line beneath it, small serif cover lines upper-left, black-and-white studio portrait subject — with all content replaced by DIS content.",
+ "reference_role": "Reference image 1 is the layout authority for masthead scale and overlap, the pink display line, cover-line placement, portrait crop, and period print finish; none of its words, faces, or images may appear. Reference image 2 supplies the sole cover subject: a solemn dog wearing a black jacket, to be rendered as the black-and-white newsstand portrait.",
+ "preservation_invariants": [
+  "Keep reference 1's cover architecture: lowercase masthead across the top with the subject's head overlapping it, one hot-pink condensed caps display line directly below, small white/serif cover lines at upper left, full-bleed monochrome portrait.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait magazine cover, 3:4, full bleed.",
+  "The reference 2 subject becomes a tight black-and-white studio portrait filling the frame like the donor portrait."
+ ],
+ "regions": [
+  {
+   "name": "masthead",
+   "change": "Replace the donor masthead with the word 'dis' in the same chunky black lowercase cut, same scale, the subject's head overlapping its middle letters.",
+   "preserve": [
+    "Masthead band position and overlap behavior."
+   ]
+  },
+  {
+   "name": "pink display line",
+   "change": "Set 'TOO BIG TO SCALE' in the same hot-pink condensed all-caps, same baseline position under the masthead.",
+   "preserve": [
+    "Color, weight, and single-line placement."
+   ]
+  },
+  {
+   "name": "cover lines upper-left",
+   "change": "Two small lines: 'Big data has its day' then 'by Marvin Jordan & Mike Pepi' in quiet serif.",
+   "preserve": [
+    "Small scale and upper-left placement."
+   ]
+  },
+  {
+   "name": "portrait",
+   "change": "The reference 2 dog in black jacket, photographed as a solemn monochrome newsstand portrait, eyes to camera.",
+   "preserve": [
+    "Portrait crop and tonal drama of the donor."
+   ]
+  },
+  {
+   "name": "barcode corner",
+   "change": "A small generic barcode box with no legible digits.",
+   "preserve": [
+    "Lower-left placement."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "masthead",
+   "text": "dis"
+  },
+  {
+   "region": "pink display line",
+   "text": "TOO BIG TO SCALE"
+  },
+  {
+   "region": "cover line 1",
+   "text": "Big data has its day"
+  },
+  {
+   "region": "cover line 2",
+   "text": "by Marvin Jordan & Mike Pepi"
+  }
+ ],
+ "style": [
+  "Black-and-white portrait with deep matte blacks; hot-pink and white type only; premiere-issue gravity."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients.",
+  "No human face on the cover.",
+  "No 'BOW', 'WOW', or any donor headline word."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

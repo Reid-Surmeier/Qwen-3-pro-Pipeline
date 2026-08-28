@@ -1,0 +1,47 @@
+{
+ "1": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "dis92-p1-cover-donor.png"
+  }
+ },
+ "2": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "dis92-p1-cover-art.png"
+  }
+ },
+ "3": {
+  "class_type": "ImageBatch",
+  "inputs": {
+   "image1": [
+    "1",
+    0
+   ],
+   "image2": [
+    "2",
+    0
+   ]
+  }
+ },
+ "4": {
+  "class_type": "QwenImage3Render",
+  "inputs": {
+   "edit_brief_json": "{\"asset_rules\": [\"Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.\", \"Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.\"], \"canvas\": [\"Portrait magazine cover, 3:4 aspect, full bleed.\", \"The reference 2 photograph becomes the full-bleed background subject behind the display type, moody and dark, with type knocked out in warm light colors for contrast.\"], \"exact_copy\": [{\"region\": \"masthead\", \"text\": \"DIS\"}, {\"region\": \"curved display headline upper line\", \"text\": \"Too Big\"}, {\"region\": \"curved display headline lower line\", \"text\": \"To Scale\"}, {\"region\": \"top cover-line left\", \"text\": \"TREVOR PAGLEN: LANDING SITES\"}, {\"region\": \"top cover-line right\", \"text\": \"KATE LOSSE: CULTS AT SCALE\"}, {\"region\": \"credit block\", \"text\": \"THE DATA ISSUE EDITED BY MARVIN JORDAN & MIKE PEPI\"}], \"model\": \"qwen/qwen-image-3-pro\", \"negative_constraints\": [\"No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.\", \"Do not reproduce the donor page's own photographs, advertisements, products, celebrities, phone numbers, or brand marks; the donor supplies layout bones and typographic idiom only.\", \"No New York Magazine masthead, no VIBE masthead, no Newport/Absolut/Levi's or any real advertisement, no barcode with real digits, no real cover price.\", \"No watermark, no border artifacts from the reference matte, no gray letterbox bars carried into the composition.\", \"No misspelled masthead, no duplicated headline, no extra unrelated cover lines, no modern flat-UI aesthetic, no smartphone-era design elements.\", \"No human faces on the cover.\", \"No 'New York' wordmark or any curl of the donor's original headline words.\"], \"objective\": \"Design the cover of DIS Magazine's print Data Issue by transplanting the layout bones of the reference 1990s city-weekly cover: same masthead scale and placement, same large curved two-part display headline structure, same top cover-line band, same lower-right credit block \\u2014 with all content replaced by DIS Data Issue content.\", \"output\": {\"aspect_ratio\": \"3:4\", \"count\": 1, \"resolution\": \"2K\", \"seed\": 260827}, \"preservation_invariants\": [\"Keep reference 1's compositional skeleton: masthead across the top, two-line curved display headline dominating the middle, cover lines in a band above the masthead, and a stacked credit block at lower right.\", \"Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting.\"], \"provider\": \"openrouter\", \"quality_checks\": [\"At thumbnail size the page reads as an authentic mid-1990s printed magazine page: coated-paper tone, slight halftone grain, period type rendering.\", \"Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.\", \"The transplanted DIS photograph is clearly recognizable and undistorted, integrated with period-correct print reproduction.\"], \"reference_role\": \"Reference image 1 is the layout authority for grid, masthead placement, curved headline geometry, cover-line hierarchy, and period print finish; none of its words, faces, or images may appear. Reference image 2 supplies the sole cover photograph: a dark data-center image that replaces the portrait subject.\", \"regions\": [{\"change\": \"Replace the donor masthead with the single word DIS in a white serif-script of equivalent weight and width, same position and scale.\", \"name\": \"masthead\", \"preserve\": [\"Masthead occupies the same band and overlaps the photograph the same way the donor masthead does.\"]}, {\"change\": \"Set the words 'Too Big' on the upper curved line and 'To Scale' on the lower curved line, in the donor's ornate gold-outlined display style.\", \"name\": \"curved display headline\", \"preserve\": [\"Same arc geometry and interlock with the photograph as the donor headline.\"]}, {\"change\": \"Replace donor cover lines with exactly two: 'TREVOR PAGLEN: LANDING SITES' on the left and 'KATE LOSSE: CULTS AT SCALE' on the right, small caps with thin rules.\", \"name\": \"top cover-line band\", \"preserve\": [\"Band height, alignment, and two-slot structure.\"]}, {\"change\": \"Stacked small caps reading 'THE DATA ISSUE' then 'EDITED BY' then 'MARVIN JORDAN' then '& MIKE PEPI'.\", \"name\": \"lower-right credit block\", \"preserve\": [\"Stacked alignment and modest scale of the donor block.\"]}], \"style\": [\"1990s American city-weekly cover finish: ornate outlined display serif for the headline, clean sans cover lines, saturated but print-limited color.\", \"The photograph is treated as a dramatic newsstand portrait subject: dark, glossy, lit like a celebrity shoot even though the subject is infrastructure.\"]}",
+   "reference_images": [
+    "3",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "filename_prefix": "dis92-p1-cover",
+   "images": [
+    "4",
+    0
+   ]
+  }
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the right page of the electronics spread: keep its floating product-collage-on-white with an angled serif copy column, but the floating products are the reference 2 photograph's pile of obsolete mobile phones, scattered as if weightless.",
+ "reference_role": "Reference image 1 is the layout authority: floating object arrangement, angled greeked copy column, small chip marks at bottom. Its products, copy, and logos may not appear. Reference image 2 supplies the objects: a heap of old phones to be exploded into individually floating devices.",
+ "preservation_invariants": [
+  "Keep reference 1's weightless collage structure: objects drifting at angles around an angled column of small serif copy.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, white field."
+ ],
+ "regions": [
+  {
+   "name": "floating objects",
+   "change": "Individual phones from reference 2 drifting at donor-like angles across the page.",
+   "preserve": [
+    "Weightless spacing."
+   ]
+  },
+  {
+   "name": "copy column",
+   "change": "An angled column of greeked serif copy, unreadable, ending in a small red arrow like period print ads.",
+   "preserve": [
+    "Column angle and width."
+   ]
+  },
+  {
+   "name": "bottom chips",
+   "change": "Small 'DIS' box mark and the words 'THE DATA ISSUE' in tiny caps; no phone numbers.",
+   "preserve": [
+    "Corner placement."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "bottom chip",
+   "text": "DIS"
+  },
+  {
+   "region": "bottom line",
+   "text": "THE DATA ISSUE"
+  }
+ ],
+ "style": [
+  "Clean catalog white with drop shadows; 1993 consumer-electronics print finish."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

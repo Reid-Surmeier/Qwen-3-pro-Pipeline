@@ -1,0 +1,79 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the streetwear page: keep the huge white outlined logotype across the top — now DIS — over a black-and-white group photograph, with the side statement now reading 'STOCK FOR BOTH SIDES OF THE FEED'.",
+ "reference_role": "Reference image 1 is the layout authority: outlined logotype scale, b/w group placement, side statement stack, bottom strip. Its logotype, models, and copy may not appear. Reference image 2 supplies the group: seven figures in patterned and black modest wear standing in formation, to be rendered monochrome.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: page-wide outlined display logotype at top, gritty monochrome group photograph beneath, stacked white statement at left, thin info strip at bottom.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, black-and-white."
+ ],
+ "regions": [
+  {
+   "name": "logotype",
+   "change": "'DIS' in the donor's huge white-outlined display style spanning the page top.",
+   "preserve": [
+    "Outline weight and span."
+   ]
+  },
+  {
+   "name": "group photograph",
+   "change": "The reference 2 seven-figure group, monochrome, gritty documentary grain, posed like a crew.",
+   "preserve": [
+    "Group formation scale."
+   ]
+  },
+  {
+   "name": "statement",
+   "change": "'STOCK FOR BOTH SIDES OF THE FEED' stacked in white caps at left.",
+   "preserve": [
+    "Stacked alignment."
+   ]
+  },
+  {
+   "name": "bottom strip",
+   "change": "Thin strip of greeked micro type.",
+   "preserve": [
+    "Strip height."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "logotype",
+   "text": "DIS"
+  },
+  {
+   "region": "statement",
+   "text": "STOCK FOR BOTH SIDES OF THE FEED"
+  }
+ ],
+ "style": [
+  "High-contrast street monochrome; outlined display type with halftone edges."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

@@ -1,0 +1,72 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the album-teaser page: keep the deep purple gradient field with one small floating object on a string and the tiny lowercase tagline — the object is the reference 2 sculpture of a hand releasing a rising green arrow.",
+ "reference_role": "Reference image 1 is the layout authority: gradient field, floating-object scale and position, tagline position, tiny corner mark. Its balloon and marks may not appear. Reference image 2 supplies the object: a hand holding a curving green growth arrow.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: vast gradient emptiness, one small centered floating object trailing a thin string, whisper-small tagline at lower left.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, deep purple-blue gradient."
+ ],
+ "regions": [
+  {
+   "name": "floating object",
+   "change": "The reference 2 hand-and-arrow floating at the donor balloon's exact scale, a thin string trailing down.",
+   "preserve": [
+    "Smallness in emptiness."
+   ]
+  },
+  {
+   "name": "tagline",
+   "change": "'it might scale up' in tiny lowercase at lower left.",
+   "preserve": [
+    "Whisper scale."
+   ]
+  },
+  {
+   "name": "corner mark",
+   "change": "Tiny 'DIS' mark at lower right.",
+   "preserve": [
+    "Tiny scale."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "tagline",
+   "text": "it might scale up"
+  },
+  {
+   "region": "corner mark",
+   "text": "DIS"
+  }
+ ],
+ "style": [
+  "Mysterious teaser minimalism; airbrushed 90s gradient."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

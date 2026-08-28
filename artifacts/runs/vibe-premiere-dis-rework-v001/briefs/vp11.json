@@ -1,0 +1,104 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the second contents page: black page, monochrome seated portrait at left, and the three colored column headers — now DATA, DEPARTMENTS, COLUMNS — listing the full scope of the Data Issue's pieces with folio numbers.",
+ "reference_role": "Reference image 1 is the layout authority: black field, portrait placement, three-column list structure with small colored headers and white folio entries. Its model and entries may not appear. Reference image 2 supplies the portrait: a dramatic dark studio portrait to be rendered monochrome.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: b/w figure left half, three narrow list columns right half with colored section headers, tiny credits at bottom.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, black field."
+ ],
+ "regions": [
+  {
+   "name": "portrait",
+   "change": "The reference 2 portrait, moody monochrome, seated scale as the donor.",
+   "preserve": [
+    "Left-half placement."
+   ]
+  },
+  {
+   "name": "column headers",
+   "change": "Three small headers in the donor's accent colors: 'DATA', 'DEPARTMENTS', 'COLUMNS'.",
+   "preserve": [
+    "Header color pops."
+   ]
+  },
+  {
+   "name": "entries",
+   "change": "Short white folio entries under the headers, descriptions greeked: 56 LANDING SITES · 100 CULTS AT SCALE · 18 CONTRIBUTORS · 23 MAIL · 27 START · 106 GEAR · 140 PROPS.",
+   "preserve": [
+    "Folio-first entry rhythm."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "header 1",
+   "text": "DATA"
+  },
+  {
+   "region": "header 2",
+   "text": "DEPARTMENTS"
+  },
+  {
+   "region": "header 3",
+   "text": "COLUMNS"
+  },
+  {
+   "region": "entry a",
+   "text": "56 LANDING SITES"
+  },
+  {
+   "region": "entry b",
+   "text": "100 CULTS AT SCALE"
+  },
+  {
+   "region": "entry c",
+   "text": "18 CONTRIBUTORS"
+  },
+  {
+   "region": "entry d",
+   "text": "23 MAIL"
+  },
+  {
+   "region": "entry e",
+   "text": "27 START"
+  },
+  {
+   "region": "entry f",
+   "text": "106 GEAR"
+  },
+  {
+   "region": "entry g",
+   "text": "140 PROPS"
+  }
+ ],
+ "style": [
+  "Ink-dense black page; small warm accent colors; premiere-issue confidence."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

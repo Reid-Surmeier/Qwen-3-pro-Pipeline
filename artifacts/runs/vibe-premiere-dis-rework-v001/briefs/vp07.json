@@ -1,0 +1,87 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the sneaker advertisement page as a DIS product page: keep the thin technical dek across the top and the giant heroic product photograph on white, but the product is the reference 2 purple lint roller, presented with full athletic-shoe seriousness.",
+ "reference_role": "Reference image 1 is the layout authority: top dek band in red and black smallcaps, giant product angle and scale, tiny caption bottom-left, small mark at right. Its shoe, brand, and copy may not appear. Reference image 2 supplies the product: a purple-handled lint roller on white.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: multi-line technical dek across the top, monumental product filling the lower two-thirds, small caption and mark.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, white field."
+ ],
+ "regions": [
+  {
+   "name": "technical dek",
+   "change": "Top band reading 'IT PICKS UP EVERYTHING.' with the phrase \"THAT'S KIND OF TECHNICAL.\" as its red highlight, remaining dek words greeked.",
+   "preserve": [
+    "Band position, red accent usage."
+   ]
+  },
+  {
+   "name": "product",
+   "change": "The reference 2 lint roller huge and heroic at the donor shoe's angle, crisp studio shadow.",
+   "preserve": [
+    "Monumental scale on white."
+   ]
+  },
+  {
+   "name": "caption",
+   "change": "'THE DATA COLLECTOR' in tiny tracked caps bottom-left.",
+   "preserve": [
+    "Tiny scale."
+   ]
+  },
+  {
+   "name": "mark",
+   "change": "Small 'dis' wordmark at the right edge where the donor logo sat.",
+   "preserve": [
+    "Modest scale."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "technical dek",
+   "text": "IT PICKS UP EVERYTHING."
+  },
+  {
+   "region": "technical dek highlight",
+   "text": "THAT'S KIND OF TECHNICAL."
+  },
+  {
+   "region": "caption",
+   "text": "THE DATA COLLECTOR"
+  },
+  {
+   "region": "mark",
+   "text": "dis"
+  }
+ ],
+ "style": [
+  "Athletic-catalog seriousness applied to an absurd object; hard studio light."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

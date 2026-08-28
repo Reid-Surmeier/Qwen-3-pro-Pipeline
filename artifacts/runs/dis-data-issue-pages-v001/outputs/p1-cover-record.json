@@ -1,0 +1,40 @@
+{
+ "page": "p1-cover",
+ "prompt_id": "50868ea3-8f55-4ff4-b6de-f046881ad39b",
+ "submitted_at": "2026-08-27T23:03:11Z",
+ "state": "done",
+ "uploaded_references": [
+  "dis92-p1-cover-donor.png",
+  "dis92-p1-cover-art.png"
+ ],
+ "outputs": [
+  {
+   "file": "p1-cover-dis92-p1-cover_00001_.png",
+   "sha256": "450979f563c534c74390b9732eab1b31c1bf60b7c265e3e242eb30659e90cc03"
+  }
+ ],
+ "status_messages": [
+  [
+   "execution_start",
+   {
+    "prompt_id": "50868ea3-8f55-4ff4-b6de-f046881ad39b",
+    "timestamp": 1787871791269
+   }
+  ],
+  [
+   "execution_cached",
+   {
+    "nodes": [],
+    "prompt_id": "50868ea3-8f55-4ff4-b6de-f046881ad39b",
+    "timestamp": 1787871791281
+   }
+  ],
+  [
+   "execution_success",
+   {
+    "prompt_id": "50868ea3-8f55-4ff4-b6de-f046881ad39b",
+    "timestamp": 1787871968791
+   }
+  ]
+ ]
+}

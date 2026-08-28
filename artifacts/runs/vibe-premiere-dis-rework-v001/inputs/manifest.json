@@ -1,0 +1,113 @@
+{
+ "donor_source": {
+  "archive_item": "bub_gb_IigEAAAAMBAJ",
+  "url_pattern": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n{N}.jpg",
+  "description": "Vibe premiere issue, Sept 1993 (Google Books scan mirrored on the Internet Archive); leaves n0-n24 = the magazine's first 25 pages"
+ },
+ "art_source": {
+  "site": "https://disimages.com",
+  "note": "DIS Images stock library; owner states rights from the creator (issue #92); per-photo provenance in dispool/manifest.json"
+ },
+ "files": {
+  "vp00-donor.png": {
+   "sha256": "92d0a908b2679bea37988c7fcc366adf9d6a7da1c0b4aa6e189fc85151cd69b3",
+   "bytes": 1487363
+  },
+  "vp01-donor.png": {
+   "sha256": "e5f95e8abe8385ea3c151b69d06e6ba6240cf0a7c54e35384de95c3ee9b92391",
+   "bytes": 2877521
+  },
+  "vp02-donor.png": {
+   "sha256": "06703294dd5d0e6546270756d89a9d0dbcde7c2a3d7487fd3a5cc50c64fb6953",
+   "bytes": 3431427
+  },
+  "vp03-donor.png": {
+   "sha256": "bc5e23d2e974231894b0f078a4a51ad804954a1bb59dbdc8f16094b1857e1fe2",
+   "bytes": 2309013
+  },
+  "vp04-donor.png": {
+   "sha256": "ef2165161db19c87f7a065969a854ac97ff45a8a7a678ffb57187df10add8bbf",
+   "bytes": 2211564
+  },
+  "vp05-donor.png": {
+   "sha256": "8e39eeb3f51eaf574353a1729a0b08b2b1e04d9a65996d5978c625ff4159d636",
+   "bytes": 2567245
+  },
+  "vp06-donor.png": {
+   "sha256": "611c38ae486052d44b0f1f449f8e1f74e28c3c668184c6eeed091897c15919bf",
+   "bytes": 2235467
+  },
+  "vp07-donor.png": {
+   "sha256": "f6066a29520438dabfa2911c5ca5f641d31afa28b394b4e09fab05f68effa112",
+   "bytes": 1157745
+  },
+  "vp08-donor.png": {
+   "sha256": "e7221a525573b5c4622c89a53b9d04a6b1aba464ae0af7d73cddfcee2c262d2e",
+   "bytes": 3278341
+  },
+  "vp09-donor.png": {
+   "sha256": "4c0883151678e6a45c00d00ce0e568f694ea7c96e07d683204e2a11d189386ac",
+   "bytes": 1882987
+  },
+  "vp10-donor.png": {
+   "sha256": "6118ccdc8374d80aa03fc89c0f2c2dff9b4d7cec4b66e929380c485a9cfd68ff",
+   "bytes": 2692530
+  },
+  "vp11-donor.png": {
+   "sha256": "226b9d1777c7fb5bdbd83730435f73f8fa78f9f2b246c4923fe1e58277694b1d",
+   "bytes": 2317348
+  },
+  "vp12-donor.png": {
+   "sha256": "bf4edc263d63079f458a68150bc2311117543faa51a49509ca48ded79717ac14",
+   "bytes": 1537506
+  },
+  "vp13-donor.png": {
+   "sha256": "d51ae6042e0011a0af054a0c66f9fafe522bc2712a6109b67311ad79d7f8e87f",
+   "bytes": 2122696
+  },
+  "vp14-donor.png": {
+   "sha256": "a4ef190d145633708c84a4dd316e468649b2877740ec1c7356f12376cffb0796",
+   "bytes": 2035423
+  },
+  "vp15-donor.png": {
+   "sha256": "d4863d5088e1d1c7152ef0ea922c0179970774cf581b2abb68b3fda96c7923b8",
+   "bytes": 2722655
+  },
+  "vp16-donor.png": {
+   "sha256": "25846ecee09dbd0a62262ed572b7e2dd067f02b5bc6a13b5c10bb7218f486f21",
+   "bytes": 2357847
+  },
+  "vp17-donor.png": {
+   "sha256": "8b3a885eaade33dc54ec5d468e7ab71a90def61d3a75e70520b04f2d35ba1720",
+   "bytes": 2516457
+  },
+  "vp18-donor.png": {
+   "sha256": "1658481a219a137bba1706c3eed03b9a7347b8cc93d3cce209e3d8a096c3899f",
+   "bytes": 1574788
+  },
+  "vp19-donor.png": {
+   "sha256": "228befd5b75d680a44247e0d93e0a46527afc24a548a39c64d7f64c3b2b04283",
+   "bytes": 3084115
+  },
+  "vp20-donor.png": {
+   "sha256": "ff3655dcee8d3f2a78b1120966677d4b6780616922ac6678ff2588005fe096a0",
+   "bytes": 2335291
+  },
+  "vp21-donor.png": {
+   "sha256": "dcbba47f3b44b367d4620debf0d038613a8f07ec88bf1623baff9a90398dbaae",
+   "bytes": 3057159
+  },
+  "vp22-donor.png": {
+   "sha256": "b8ad8d0a8c06543f93db0bbe81cb83e52a4724d6bf61b1c7699e59e04191fd5e",
+   "bytes": 2581014
+  },
+  "vp23-donor.png": {
+   "sha256": "b2fb3b2ea601f7cb381bb398978eedede1606ec4e667fa196dd616da8918ba3f",
+   "bytes": 1906214
+  },
+  "vp24-donor.png": {
+   "sha256": "4579ab9f41af1400a0204126458e3c11723d0dc22098d03b6378850bf0cf3794",
+   "bytes": 3128665
+  }
+ }
+}

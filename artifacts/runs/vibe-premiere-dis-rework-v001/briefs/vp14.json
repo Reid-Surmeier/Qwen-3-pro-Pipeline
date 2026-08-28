@@ -1,0 +1,87 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the identity-statement clothing page as a DIS IMAGES house advertisement: keep the white field, the small top-left inset photograph, the large two-part statement, the lower-left photograph, and the bottom logo chip.",
+ "reference_role": "Reference image 1 is the layout authority: inset scale, statement typography and split emphasis, second photo placement, chip block. Its models, statements, and brand may not appear. Reference image 2 is a two-photo sheet: the TOP photo (a formal server presenting a jar) goes to the small top-left inset; the BOTTOM photo (a woman dining alone at a table) goes to the lower-left photo slot.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: small formal inset top-left, statement type dominating the upper right, larger casual photograph lower-left, logo chip and small block bottom-right.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, white field."
+ ],
+ "regions": [
+  {
+   "name": "top inset",
+   "change": "Reference 2's top photo (formal server with jar) as the small rectangular inset.",
+   "preserve": [
+    "Inset scale."
+   ]
+  },
+  {
+   "name": "statement",
+   "change": "'SOME IMAGES SAY WHO YOU ARE.' large, then 'OTHERS SAY WHO YOU COULD BE.' with the donor's mixed-weight emphasis.",
+   "preserve": [
+    "Two-part statement hierarchy."
+   ]
+  },
+  {
+   "name": "lower photo",
+   "change": "Reference 2's bottom photo (woman dining alone) larger at lower-left.",
+   "preserve": [
+    "Photo proportion."
+   ]
+  },
+  {
+   "name": "chip block",
+   "change": "'DIS IMAGES' oval chip with 'New Stock Options' beneath, address lines greeked.",
+   "preserve": [
+    "Chip position bottom."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "statement 1",
+   "text": "SOME IMAGES SAY WHO YOU ARE."
+  },
+  {
+   "region": "statement 2",
+   "text": "OTHERS SAY WHO YOU COULD BE."
+  },
+  {
+   "region": "chip",
+   "text": "DIS IMAGES"
+  },
+  {
+   "region": "chip line",
+   "text": "New Stock Options"
+  }
+ ],
+ "style": [
+  "Plain-spoken 90s identity advertising; generous white space."
+ ],
+ "asset_rules": [
+  "Reference image 2 contains two photographs stacked on the gray matte: use the top one for the inset and the bottom one for the lower photo slot; use each exactly once.",
+  "Ignore the flat gray matte surrounding and separating the photographs; it is packing material, not content.",
+  "Render both photographs clean, without the translucent 'disimages' watermark that overlays the source files."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}

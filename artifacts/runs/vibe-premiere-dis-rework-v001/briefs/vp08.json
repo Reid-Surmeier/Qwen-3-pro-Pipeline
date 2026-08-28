@@ -1,0 +1,96 @@
+{
+ "provider": "openrouter",
+ "model": "qwen/qwen-image-3-pro",
+ "objective": "Rework the FEATURES contents page: keep the full-page monochrome-tinted standing figure at right, the spaced 'F E A T U R E S' header, and the left column of numbered feature entries — now listing the DIS Data Issue's six pieces.",
+ "reference_role": "Reference image 1 is the layout authority: header treatment, entry stack rhythm with large folio numerals, figure placement, single-color page cast. Its model and entries may not appear. Reference image 2 supplies the figure: a person in a bright blue full-body suit beside an orange cone, to be tinted into the page's monochrome cast.",
+ "preservation_invariants": [
+  "Keep reference 1's structure: letterspaced header top-left, stacked entries with big folios down the left, full-height figure on the right, one unified color cast over the whole page.",
+  "Keep the 1990s newsstand finish: coated paper, halftone grain, slightly imperfect period type setting."
+ ],
+ "canvas": [
+  "Portrait page, 3:4, full bleed, unified blue cast."
+ ],
+ "regions": [
+  {
+   "name": "header",
+   "change": "'F E A T U R E S' letterspaced, with the small line 'PREMIERE DATA ISSUE SEPTEMBER 1993 VOLUME 1 NUMBER 1' beneath.",
+   "preserve": [
+    "Header position."
+   ]
+  },
+  {
+   "name": "feature entries",
+   "change": "Six entries, each a large folio numeral, a bold title, and a byline, in the donor's stacked style, dek lines greeked: 50 LANDING SITES By Trevor Paglen · 64 CULTS AT SCALE By Kate Losse · 72 WHAT CAN AN ALGORITHM DO? By Josh Scannell · 80 METAPHORS OF BIG DATA By Sara M. Watson · 88 BITS AND ATOMS By Holly Herndon & Hannes Grassegger · 98 MACHINE VISION By Benjamin Bratton.",
+   "preserve": [
+    "Folio scale and stack rhythm."
+   ]
+  },
+  {
+   "name": "figure",
+   "change": "The reference 2 blue-suited figure standing full height at right, tinted to the page cast.",
+   "preserve": [
+    "Figure height and placement."
+   ]
+  }
+ ],
+ "exact_copy": [
+  {
+   "region": "header",
+   "text": "F E A T U R E S"
+  },
+  {
+   "region": "issue line",
+   "text": "PREMIERE DATA ISSUE SEPTEMBER 1993 VOLUME 1 NUMBER 1"
+  },
+  {
+   "region": "entry 1",
+   "text": "50 LANDING SITES By Trevor Paglen"
+  },
+  {
+   "region": "entry 2",
+   "text": "64 CULTS AT SCALE By Kate Losse"
+  },
+  {
+   "region": "entry 3",
+   "text": "72 WHAT CAN AN ALGORITHM DO? By Josh Scannell"
+  },
+  {
+   "region": "entry 4",
+   "text": "80 METAPHORS OF BIG DATA By Sara M. Watson"
+  },
+  {
+   "region": "entry 5",
+   "text": "88 BITS AND ATOMS By Holly Herndon & Hannes Grassegger"
+  },
+  {
+   "region": "entry 6",
+   "text": "98 MACHINE VISION By Benjamin Bratton"
+  }
+ ],
+ "style": [
+  "Single-ink duotone page; editorial confidence of a premiere issue."
+ ],
+ "asset_rules": [
+  "Use the photograph from reference image 2 exactly once as the page's primary art; crop is allowed, distortion and mirroring are not.",
+  "Ignore the flat gray matte surrounding the photograph in reference image 2; it is packing material, not content.",
+  "Render the reference photograph clean, without the translucent 'disimages' watermark that overlays the source file."
+ ],
+ "negative_constraints": [
+  "No legible paragraph-length body text anywhere: running text must be greeked, soft-blurred print texture that is clearly type but unreadable at full size.",
+  "Do not reproduce the donor page's own photographs, faces, celebrities, advertiser brand marks, wordmarks, logos, phone numbers, addresses, or barcode digits; the donor supplies grid, type idiom, and period finish only.",
+  "No VIBE wordmark and no real 1990s advertiser brand name or logo anywhere on the page.",
+  "No watermark text, no gray letterbox bars carried in from the reference matte, no border artifacts.",
+  "No modern flat-UI aesthetic, no smartphone-era design elements, no vector-clean gradients."
+ ],
+ "quality_checks": [
+  "At thumbnail size the page reads as an authentic printed page from a September 1993 American music magazine.",
+  "Every exact-copy string is legible, spelled exactly as specified, and appears exactly once.",
+  "The DIS photograph is clearly recognizable, undistorted, and integrated with period-correct print reproduction."
+ ],
+ "output": {
+  "resolution": "2K",
+  "aspect_ratio": "3:4",
+  "count": 1,
+  "seed": 260827
+ }
+}
