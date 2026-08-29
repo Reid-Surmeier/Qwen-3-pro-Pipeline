@@ -263,6 +263,10 @@ Ask:
 
 A fluent agent explanation is not evidence. Read the diff and the verification output.
 
+### Blind artifact review
+
+When the change produces visual or interactive output, a third pass runs beside the two above: an independent blind reviewer judges the running artifact from a review packet alone, with the implementer's narrative withheld. See [`blind-review.md`](blind-review.md).
+
 ## 10. Merge and clean up
 
 Merge only after required checks and approvals pass. Prefer squash merging for a small single-purpose branch unless preserving its internal commit history is important.

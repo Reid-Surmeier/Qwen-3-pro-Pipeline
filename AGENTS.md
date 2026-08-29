@@ -182,6 +182,17 @@ Review the pull request twice:
 
 Do not merge until required deterministic checks pass and the human has approved any subjective visual decision, paid execution, credential use, or production effect.
 
+## Blind artifact-review gate
+
+A pull request that creates or changes visual or interactive output additionally requires an independent blind artifact review before human approval. The blind reviewer runs in a fresh context and receives only the review packet — acceptance contract, hash-locked references, candidate artifact, exact candidate SHA, and launch/reset instructions — and judges the artifact, not the implementer's account of it.
+
+- The implementation agent applies `ready-for-blind-review` only when the packet at `artifacts/reviews/issue-<n>/packet.json` passes `scripts/validate_blind_review_packet.py` against the candidate SHA.
+- Only the blind reviewer applies `blind-review-passed`, `blind-review-failed`, or `blind-review-blocked`; every verdict names its SHA, and a new commit invalidates it.
+- The reviewer posts reproducible findings with expected behavior, actual behavior, evidence, and the violated contract clause; it never modifies the candidate.
+- Blind review is advisory evidence for the owner's final visual approval, not a substitute for it.
+
+Full procedure, packet schema, label rules, and the review template: [`docs/agents/blind-review.md`](docs/agents/blind-review.md).
+
 ## Artifact policy
 
 Classify generated material before adding it:
