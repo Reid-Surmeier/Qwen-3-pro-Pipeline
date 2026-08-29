@@ -1,0 +1,16 @@
+{
+  "$comment": "Rules the hourly issue sweep reads for this repo. See .sandcastle/README.md.",
+  "verify": [
+    "python3.12 -m unittest discover -s tests -v",
+    "node --test tests/figma-mcp-client.test.mjs tests/figma-oauth-bootstrap.test.mjs",
+    "python3.12 -m compileall -q qwen_ui_pipeline tests scripts",
+    "git diff --check"
+  ],
+  "maxIterations": 6,
+  "maxAttempts": 3,
+  "rotation": [],
+  "setup": [
+    "uv pip install --python python3.12 -e ."
+  ],
+  "paused": false
+}
