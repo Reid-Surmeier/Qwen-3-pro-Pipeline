@@ -504,3 +504,216 @@ cursor frame count; FE/AW idle-loop lengths. **Gaps:** TSR pages could not be fe
 (bot-blocked) — links verified via search results only; walkthrough video owRVh3-eZxM not
 inspected frame-by-frame; FireRed source asserted identical from shared-engine knowledge, its
 files not re-read this session.
+
+---
+
+## Tier B: the 2004 MMO client grammar (owner reference: World of Warcraft)
+
+Appended 2026-08-27. This tier sits between the static-icon PC corpus (§1–2) and the
+handheld sprite-loop grammar (GBA addendum): the 2004 MMO client animates icons **through
+state machinery** — masks, overlay textures, vertex-color multiplies, and alpha ramps driven
+by game timers — while the icon *bitmap* itself stays untouched. Primary source for every WoW
+claim: Blizzard's own Classic-era FrameXML, read verbatim from the public mirror
+**[tekkub/wow-ui-source, tag 1.12.1](https://github.com/tekkub/wow-ui-source/tree/1.12.1/FrameXML)**
+(raw files fetched 2026-08-27: `ActionButton.lua`, `ActionButtonTemplate.xml`, `Cooldown.lua`,
+`Cooldown.xml`, `BuffFrame.lua`, `CastingBarFrame.lua`, `Minimap.lua`, `Minimap.xml`), plus
+[warcraft.wiki.gg](https://warcraft.wiki.gg/) widget documentation. **[OBSERVED]** /
+**[INFERENCE]** conventions as in §1.
+
+### B.1 WoW 1.x action-button / icon animation inventory (from FrameXML 1.12.1)
+
+1. **Cooldown radial sweep** — **[OBSERVED — `Cooldown.xml`, `Cooldown.lua`]** In 1.12 the
+   cooldown indicator is literally a **3D Model frame**:
+   `<Model name="CooldownFrameTemplate" file="Interface\Cooldown\UI-Cooldown-Indicator.mdx"
+   scale="0.75" ...>` layered over the 36×36 button. `CooldownFrame_SetTimer(this, start,
+   duration, enable)` shows it; every frame, `CooldownFrame_OnUpdateModel` computes
+   `finished = (GetTime() - this.start) / this.duration` and **scrubs the model's animation
+   to that fraction**: `this:SetSequenceTime(0, finished * 1000)`. So the sweep is a canned
+   1000 ms clock-wipe animation whose playhead is slaved to real cooldown progress — a
+   2-second CD scrubs it in 2 s, a 5-minute CD in 5 min. When `finished >= 1.0` it switches
+   to **sequence 1 — the end-of-cooldown flash** — played at real speed via `AdvanceTime()`,
+   then hides in `CooldownFrame_OnAnimFinished`. Visually: a dark pie mask whose edge sweeps
+   clockwise like a clock hand, uncovering the full-color icon, capped by a one-shot shine.
+   The modern retail widget keeps the same grammar as a 2D system — "clock-like sweep and
+   leading-edge effects", `SetCooldown(start, duration)`, `SetEdgeTexture()` ("the texture
+   which 'follows' the moving edge"), `SetBlingTexture()` for the end flash, `SetReverse()`
+   for direction ([warcraft.wiki.gg UIOBJECT_Cooldown](https://warcraft.wiki.gg/wiki/UIOBJECT_Cooldown)).
+   Mechanism: **radial mask over an unchanged icon** — never a fade, never icon-art frames.
+2. **Attack/auto-repeat flash** — **[OBSERVED — `ActionButton.lua`, `ActionButtonTemplate.xml`]**
+   `ATTACK_BUTTON_FLASH_TIME = 0.4;`. The flash is a dedicated overlay texture
+   `Interface\Buttons\UI-QuickslotRed` (a red button frame) that the OnUpdate **toggles
+   Show/Hide every 0.4 s** — square wave, 0.8 s full period (1.25 Hz), with drift correction
+   (`this.flashtime = ATTACK_BUTTON_FLASH_TIME - overtime`). Started when the slot
+   `IsAttackAction(...)` and combat begins, or for `IsAutoRepeatAction` (Shoot/wand):
+   `ActionButton_StartFlash()` sets `flashing = 1`; `ActionButton_StopFlash()` hides the
+   texture. Mechanism: **binary visibility toggle of one overlay texture** — no alpha ramp.
+3. **Button depress** — **[OBSERVED — `ActionButtonTemplate.xml`]** Pure state-texture swap:
+   `NormalTexture = Interface\Buttons\UI-Quickslot2` ↔
+   `PushedTexture = Interface\Buttons\UI-Quickslot-Depress`, instant on mouse-down/up; the
+   icon bitmap itself does not move or scale. Hover = `HighlightTexture
+   Interface\Buttons\ButtonHilight-Square` with `alphaMode="ADD"`; toggled-on state
+   (auto-attack active) = `CheckedTexture Interface\Buttons\CheckButtonHilight`, also ADD.
+4. **"Glow" in 1.x — static overlay only; the proc glow is 2010** — **[OBSERVED]** The only
+   1.12 button glow is the **Border** texture `Interface\Buttons\UI-ActionButton-Border`
+   (`alphaMode="ADD"`), shown at a *fixed* tint for equipped-item actions:
+   `border:SetVertexColor(0, 1.0, 0, 0.35); border:Show();` (`ActionButton.lua`). It never
+   pulses. The famous gold proc glow (SpellActivationOverlay + the button overlay glow) was
+   added in **patch 4.0.1 (Cataclysm systems patch, Oct 2010)** — the driving event
+   `SPELL_ACTIVATION_OVERLAY_GLOW_SHOW` is documented "Added in 4.0.1"
+   ([warcraft.wiki.gg](https://warcraft.wiki.gg/wiki/SPELL_ACTIVATION_OVERLAY_GLOW_SHOW)).
+   A 2004-authentic "glow" is therefore an **additive overlay texture at constant alpha**.
+5. **Out-of-mana / unusable / out-of-range tinting** — **[OBSERVED — `ActionButton.lua`]**
+   Vertex-color multiply on the icon, three discrete states, instant switch:
+   usable `icon:SetVertexColor(1.0, 1.0, 1.0)`; not enough mana
+   `icon:SetVertexColor(0.5, 0.5, 1.0)` (the blue-grey OOM wash, applied to the normal
+   texture too); otherwise unusable `icon:SetVertexColor(0.4, 0.4, 0.4)` (dark grey).
+   **Out-of-range in 1.12 tints the hotkey/range-dot text red, not the whole icon**:
+   `RANGE_INDICATOR = "●"`, polled via `IsActionInRange(...)`, red
+   `SetVertexColor(1.0, 0.1, 0.1)` — the full-icon red range tint players remember is a
+   later-era/addon behavior **[OBSERVED for 1.12 scope; whole-icon red = later, INFERENCE]**.
+6. **Expiring-buff blink** — **[OBSERVED — `BuffFrame.lua`]** Constants:
+   `BUFF_WARNING_TIME = 31;` (start blinking under 31 s left), `BUFF_DURATION_WARNING_TIME
+   = 60;`, `BUFF_FLASH_TIME_ON = 0.75; BUFF_FLASH_TIME_OFF = 0.75; BUFF_MIN_ALPHA = 0.3;`.
+   Unlike the toggles above this is a **smooth linear alpha triangle wave**: alpha ramps
+   1.0 → 0.3 over 0.75 s and back over 0.75 s (1.5 s period), normalized as
+   `(BUFF_ALPHA_VALUE * (1 - BUFF_MIN_ALPHA)) + BUFF_MIN_ALPHA`, applied to the whole buff
+   button until the aura expires. The icon art never changes.
+7. **Cast bar** — **[OBSERVED — `CastingBarFrame.lua`]** A StatusBar filled left→right by
+   wall-clock: `SetMinMaxValues(startTime, startTime + castTime)` then per-frame
+   `SetValue(GetTime())`. A **Spark texture rides the fill edge**:
+   `sparkPosition = (progress) * 195; CastingBarSpark:SetPoint("CENTER", CastingBarFrame,
+   "LEFT", sparkPosition, 2)`. On success the bar snaps green `SetStatusBarColor(0.0, 1.0,
+   0.0)`, a full-bar Flash overlay ramps up `+= CASTING_BAR_FLASH_STEP (0.2)` per frame to
+   alpha 1, then the whole frame fades out `-= CASTING_BAR_ALPHA_STEP (0.05)` per frame
+   (~0.7 s at 60 fps). On interrupt/fail: snap red `SetStatusBarColor(1.0, 0.0, 0.0)`, text
+   FAILED/INTERRUPTED, hold `CASTING_BAR_HOLD_TIME = 1` s, then the same fade.
+8. **Minimap ping** — **[OBSERVED — `Minimap.lua/.xml`]** Another Model frame:
+   `Interface\MiniMap\Ping\MinimapPing.mdx` (50×50, scale 0.4) shown at the clicked spot,
+   plays its radar-blip animation for `MINIMAPPING_TIMER = 5` s, then linear alpha fade over
+   `MINIMAPPING_FADE_TIMER = 0.5` s and Hide.
+9. **Quest "!" / "?" over NPCs** — **[OBSERVED colors / INFERENCE motion]** Gold "!" for
+   available, "?" for turn-in (silver = too low level; blue = repeatable) rendered as a world
+   marker above the NPC ([warcraft.wiki.gg Quest giver](https://warcraft.wiki.gg/wiki/Quest_giver);
+   the page describes no animation). **[INFERENCE from footage]** In the 1.x client the
+   marker is a static floating model — no bounce, no spin; it billboards with the camera.
+10. **Loot sparkle** — **[OBSERVED]** A lootable corpse emits "a glittering effect" in the
+    world, and the cursor swaps to the loot icon on hover
+    ([warcraft.wiki.gg Loot](https://warcraft.wiki.gg/wiki/Loot)). The feedback is
+    world-particle + cursor swap; nothing animates in the loot window's item buttons.
+11. **Bag item pickup** — **[OBSERVED API / INFERENCE visual]** Picking up an item places it
+    "on the cursor" (`PickupContainerItem`; with an item held, the next click places/swaps —
+    [warcraft.wiki.gg](https://warcraft.wiki.gg/wiki/API_PickupContainerItem)). Visually the
+    item's icon rides the cursor as a **static bitmap at full size** — no tilt, no scale, no
+    trail — and drop/placement is instant. **[INFERENCE from footage]** for the no-tilt part.
+
+### B.2 Contemporaries (1999–2005)
+
+- **Ragnarok Online (2002)** — already cataloged in §1.1: cast time = green gauge above the
+  character filling left→right; **cooldown has no sweep at all** — the hotbar skill icon just
+  grays out ([iRO Wiki Skills](https://irowiki.org/wiki/Skills)); skill failure feedback is
+  text/emote (ACT-driven world sprites), not an icon effect. RO is the "pre-sweep" pole that
+  WoW's Cooldown model replaced.
+- **Diablo II (2000)** — belt: 1–4 potion **columns**; potions auto-slot into matching
+  columns on pickup, and using the bottom potion pulls the one above **down into its slot
+  instantly** — a snap re-layout, no tween
+  ([diablo-archive.fandom.com Belts (Diablo II)](https://diablo-archive.fandom.com/wiki/Belts_(Diablo_II));
+  auto-fill behavior per search-verified wiki text; instant-snap **[INFERENCE from footage]**,
+  cf. §1.2 longplay). Skill buttons: the left/right skill selector swaps static DC6 icon art
+  instantly; buttons have a two-state pressed bevel; the animation budget lives in the
+  health/mana globes (§1.2).
+- **Guild Wars (2005)** — **it had the radial wipe, independently of WoW**: "The visual
+  indicator of a recharging skill is a darkened skill icon that gradually lightens as if a
+  clock-hand was sweeping through from noon to midnight."
+  ([wiki.guildwars.com Recharge](https://wiki.guildwars.com/wiki/Recharge)) — same grammar
+  as WoW's Cooldown (dark mask, clockwise from 12), confirming the radial sweep as *the*
+  mid-2000s cooldown convention rather than one studio's invention.
+- **EverQuest (1999)** — spell gems: casting grays **all** gems for a flat ~2 s global
+  refresh regardless of the spell's own recast ("spell gems stay grayed-out for 2 seconds
+  after casting any spell" — [Project 1999 forum archive](https://www.project1999.com/forums/archive/index.php/t-170288.html);
+  [everquest.fandom.com Spell gem](https://everquest.fandom.com/wiki/Spell_gem)). Gray-out is
+  a palette/brightness state, no sweep. **[INFERENCE from footage]** During memorization the
+  gem flickers through icon frames — the era's only "animated icon", and it is a canned
+  flicker, not a progress display.
+- **Final Fantasy XI (2002)** — casting shown as the **Casting Time Gauge**, a linear bar in
+  the top-left; the spell actually resolves at **75%** of the gauge ("At 75% on the gauge,
+  the spell is effectively complete… reaches 100% at 4 seconds" for a 3 s cast —
+  [BG Wiki Casting Time Gauge](https://www.bg-wiki.com/ffxi/Casting_Time_Gauge)). Abilities
+  are menu-driven; recast shown as **numeric timers in the menu list**, no icon sweep.
+
+### B.3 The Tier-B grammar table
+
+The defining shift vs. §2 (static-icon PC era): the icon bitmap is *still* never redrawn,
+but the client now runs **continuous state machinery around it** — masks, overlays, tints,
+and alpha ramps with real durations tied to game timers.
+
+| Element class | 2004-client idiom | Mechanism | Cadence / duration | What STILL never happens |
+|---|---|---|---|---|
+| Cooldown on icon | Clockwise dark wipe from 12 o'clock + end flash (WoW `UI-Cooldown-Indicator.mdx` seq 0/1; GW recharge) | Radial mask scrubbed to `elapsed/duration`; one-shot shine sequence at end | Sweep duration = the actual cooldown; end flash ≲ 0.5 s one-shot | Never a fade-in of the icon, never icon-art frames; RO/EQ tier does plain gray-out instead |
+| Ability-queued / attack flash | Red overlay frame blinking (WoW `UI-QuickslotRed`) | Show/Hide toggle of one overlay texture | 0.4 s on / 0.4 s off (`ATTACK_BUTTON_FLASH_TIME`), 0.8 s period | No alpha ramp on the flash, no color cycling |
+| Button press | Background plate swap (Quickslot2 ↔ Quickslot-Depress; D2/SC bevel lineage) | Two-state texture swap | Instant | Icon never moves, scales, or squashes |
+| "Glow" / highlight | Additive overlay texture at fixed alpha (WoW Border ADD @ 0.35; hover ButtonHilight ADD) | ADD-blend texture, constant | Static while condition holds | No pulsing proc glow (that is 4.0.1 / 2010), no bloom — glow is a hard-edged TEXTURE |
+| Unusable / OOM / range | Vertex-color multiply states: white / (0.5,0.5,1.0) / (0.4,0.4,0.4); red (1,0.1,0.1) range dot | Per-state color multiply, binary switch | Instant on state change; range polled sub-second | No fade between tints; no desaturation shader (later era) |
+| Expiring buff | Whole-icon alpha triangle wave under 31 s | Linear alpha ramp 1.0↔0.3 | 0.75 s down + 0.75 s up (1.5 s period) | Icon art unchanged; never blinks fully off |
+| Cast bar | Wall-clock fill + spark at edge; green+flash+fade on success, red+1 s hold+fade on fail | StatusBar SetValue(GetTime()) + positioned spark texture; per-frame alpha steps (0.2 up / 0.05 down) | Fill = real cast time; fade ~0.7 s | No easing curve on the fill; color changes snap |
+| Ping / attention | One-shot world/UI model with linear fade-out (minimap ping 5 s + 0.5 s fade) | Canned model anim + SetAlpha ramp | Seconds-scale, then gone | No repeat, no elastic |
+| Item drag | Icon rides cursor as static full-size bitmap | Cursor attachment | Instant pickup/drop | No tilt, no scale, no inertia |
+| Icon bitmap itself | **Still static, always** (WoW, GW, D2, EQ, FFXI alike) | — | — | Never morphs, never scale-pulses, never plays sprite frames (that's the GBA tier) |
+
+### B.4 Prescriptions — complex icon-animation experiments on 24 px RO-style skill icons, 2004-MMO grammar
+
+Governing rule: the 24 px icon bitmap is a constant; every effect is a **layer above or a
+multiply upon it** (mask wedge, overlay frame, tint, alpha), with timings taken verbatim
+from the 1.12 constants above. Layers may use hard-edged shapes and additive blend; nothing
+eases, everything snaps or ramps linearly.
+
+- **(a) Radial cooldown wipe + end-of-cooldown flash** (WoW Cooldown model, B.1.1): overlay
+  a dark mask (black at ~55–65% opacity) covering the whole icon at cast; its edge is a
+  radius line that sweeps **clockwise starting at 12 o'clock**, shrinking the dark pie so
+  the full-color icon is progressively uncovered; sweep duration = the actual cooldown
+  (scrub position = `elapsed/duration`, updated every frame — at 24 px the wedge edge is
+  hard, aliased, 1-px stepped). At 100%: mask off, then a **one-shot end flash** — a white/
+  gold additive burst overlay (star or full-square) that appears at full alpha and plays out
+  in ~0.3–0.5 s (2–4 discrete alpha steps down is period-correct), then hides. Icon pixels
+  never tinted by the sweep — only covered.
+- **(b) Proc-style border glow pulse** (B.1.4): a separate **hard-edged gold frame texture**
+  one ring outside the icon (1–2 px ring at 24 px), ADD blend. Strictly-2004 mode: constant
+  alpha ≈ 0.35, no pulse, appears/disappears instantly with the condition (the equipped-item
+  border idiom). "Experiment" mode (borrowing the buff-blink ramp, still era-legal
+  machinery): alpha triangle wave 0.3 ↔ 1.0 at 0.75 s up / 0.75 s down. Never blur the ring,
+  never let it bloom past its texture bounds, never scale it.
+- **(c) Activation press-flash** (B.1.2–3): on press, **instantly** swap the button's
+  background plate to the depress art (bevel inverted / rim darkened — the icon itself does
+  not move; at most the plate reads 1 px "sunk"); on release, instant restore, plus a white
+  additive overlay square at ~60% alpha shown for exactly 1–2 frames (~50 ms) as the "fire"
+  acknowledgment. If the ability stays queued/toggled: blink a **red overlay frame**
+  Show/Hide at 0.4 s on / 0.4 s off until it fires, and keep an ADD highlight on while
+  toggled (checked state).
+- **(d) Out-of-range red tint toggle** (B.1.5): binary, no transition. Strict 1.12 flavor:
+  the icon dims to a fixed multiply (0.4, 0.4, 0.4) when unusable and only the **hotkey/dot
+  marker** turns red (1.0, 0.1, 0.1); OOM flavor: whole-icon multiply (0.5, 0.5, 1.0). If
+  the experiment wants the (slightly later-era) whole-icon red: multiply ≈ (0.8, 0.1, 0.1),
+  toggled on a ~0.2 s poll — state flips instantly whenever the range check flips, and the
+  two states are the *only* frames that exist.
+- **(e) Expiring-buff blink** (B.1.6): when remaining duration < 31 s, run the icon's
+  **whole-layer alpha** on a linear triangle wave: 1.0 → 0.3 over 0.75 s, 0.3 → 1.0 over
+  0.75 s, looping (1.5 s period) until expiry, then the icon vanishes instantly. Art, tint,
+  and position unchanged; alpha floor never below 0.3 (the icon must stay readable). This is
+  the one place the 2004 grammar uses a *smooth* ramp on an icon — everything else snaps.
+
+### Tier-B confidence & gaps
+
+**High (read verbatim from 1.12.1 FrameXML or quoted wiki text):** cooldown-as-Model with
+`SetSequenceTime` scrub + sequence-1 end flash; `ATTACK_BUTTON_FLASH_TIME 0.4` and the
+Show/Hide flash loop; all template texture paths and blend modes; usable/OOM/unusable vertex
+colors and the red range indicator; all BuffFrame blink constants and the alpha formula;
+cast-bar fill/spark/flash/fade code and colors; minimap-ping model + 5 s / 0.5 s timers;
+green equipped-item border; SpellActivationOverlay glow = patch 4.0.1; Guild Wars recharge
+clock-hand quote; FFXI 75%-gauge; EQ 2 s gem gray-out; D2 belt auto-fill text.
+**Medium [INFERENCE]:** quest-marker and loot-window stillness, drag-icon no-tilt, D2 belt
+snap being tween-free — footage-level claims not pinned to a quoted sentence; the exact
+visual content of `UI-Cooldown-Indicator.mdx` sequence 1 (described from code flow + period
+footage, the .mdx was not decompiled); whole-icon red range tint dated "later era" from
+FrameXML absence in 1.12, not from a changelog line. **Gaps:** wago.tools texture pages not
+fetched (JS-only viewer); Wowpedia (fandom) largely paywalled/403 to the fetcher — its
+warcraft.wiki.gg successor used instead; EQ classic casting-bar specifics and RO fail-emote
+specifics left to §1.1's existing citations.

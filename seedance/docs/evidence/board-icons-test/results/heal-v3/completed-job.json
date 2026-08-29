@@ -1,0 +1,13 @@
+{
+  "id": "IfohqnQRDgshqXP1ORUd",
+  "generation_id": "gen-vid-1787868031-EsBWbegDdxWWcZy4IYXc",
+  "polling_url": "https://openrouter.ai/api/v1/videos/IfohqnQRDgshqXP1ORUd",
+  "status": "completed",
+  "unsigned_urls": [
+    "https://openrouter.ai/api/v1/videos/IfohqnQRDgshqXP1ORUd/content?index=0"
+  ],
+  "usage": {
+    "cost": 0.05432,
+    "is_byok": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority: the September 1993 premiere issue of VIBE magazine \u2014 the black-and-white Snoop Doggy Dogg cover with the large cropped VIBE masthead and the magenta BOW WOW WOW cover line \u2014 lying flat on a dark charcoal surface. Every element of the cover art, its typography, its photograph, and the framing of the magazine on the surface must look exactly as captured whenever the cover is visible, and the magazine must return to exactly this captured state at the end.\n\nLOCKED STYLE:\n- the cover photograph, masthead, and cover lines are never redrawn, retouched, recolored, sharpened, or modernized; the slightly worn 1993 print scan character is the identity\n- the magazine keeps its exact printed proportions; it never changes size, position on the surface, or perspective while closed\n- the single revealed spread matches this exact issue's opening feature: a left page dominated by a bold HOT DOGG display headline above dense serif article text, and a right page carrying a large black-and-white portrait photograph of the artist in a knit cap\n- paper behaves like real coated magazine stock: the turning cover is a thin flexible sheet that curls as it lifts and flattens as it lands\n- the dark charcoal surface under the magazine stays perfectly still and empty for the entire clip\n\nMOTION:\nThe magazine performs exactly one deliberate page turn and one return, like a reader opening straight to the cover story and closing the magazine again. Beat 1: the closed magazine holds exactly as captured. Beat 2: the front cover lifts slowly from its right edge, curling into a smooth arc that travels left with natural paper flex, and lands flat, opening the magazine to its cover-story spread \u2014 the left page led by the large HOT DOGG display headline with its article text below, the right page filled by the black-and-white portrait photograph. Beat 3: the open spread holds flat, still, and readable for a long clear pause \u2014 the longest hold of the clip \u2014 with no drift, shimmer, or text crawl on the pages. Beat 4: the same page lifts from its left edge and turns back right in one smooth arc, closing the magazine. Beat 5: the closed magazine holds exactly as captured through to the final frame. Both turns are single continuous motions with constant believable speed; the sheet never hesitates mid-arc, and the magazine body never slides or rotates on the surface.\n\nTIMING:\nHold the exact captured cover for the opening moment, give the opening turn an unhurried arc of about a second, devote the longest middle stretch to the flat readable hold on the open spread, mirror the closing turn at the same speed, and hold the closed magazine exactly as captured for the final stretch so the last frame is identical to the first.\n\nCAMERA:\nStatic camera, directly above-front of the magazine at the captured angle. No zoom, no pan, no rotation, no dolly, no perspective change, no depth-of-field shift, no lighting change.\n\nBACKGROUND / MATTE:\nThe dark charcoal surface exactly as captured: uniform, still, no texture change, no shadows appearing or disappearing beyond the natural soft shadow of the turning sheet, nothing else ever enters the frame.\n\nMUST NOT:\n- no hands, fingers, or any person visible; the page turns as if opened but no one is shown\n- no added objects, text overlays, logos, watermarks, or reflections\n- the cover must never be redrawn or reinterpreted when it returns; final frame identical to the first\n- no camera motion of any kind and no lighting shifts\n- the open spread must not warp, breathe, or rewrite its text while held\n- the magazine never levitates, slides, rotates, or changes size on the surface",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0e192e0cc42d67e45a65024c83b4ec7bd018d6e7931e99caa902c3a02fc84132>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=0e192e0cc42d67e45a65024c83b4ec7bd018d6e7931e99caa902c3a02fc84132>"
+      },
+      "frame_type": "last_frame"
+    }
+  ],
+  "input_references": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n52_w640.jpg"
+      }
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "https://archive.org/download/bub_gb_IigEAAAAMBAJ/page/n54_w640.jpg"
+      }
+    }
+  ]
+}

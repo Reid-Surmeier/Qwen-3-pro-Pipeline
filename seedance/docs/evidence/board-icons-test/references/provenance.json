@@ -1,0 +1,106 @@
+{
+  "built": "2026-08-27",
+  "rule": "Every visible pixel comes from fetched real game graphics (pret decompilation repos). Only cropping, tile placement per the games' own OAM/frame data, documented flips, position offsets, palette application, backdrop color, and 8x NEAREST upscaling were performed. No pixels were drawn or synthesized.",
+  "assets": {
+    "ref-party-icon-pulse.gif": {
+      "game": "Pokémon Emerald",
+      "platform": "GBA",
+      "year": 2004,
+      "element": "Party-menu Pokémon icon, the continuous 2-frame healthy-state loop (Pikachu)",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/pokemon/pikachu/icon.png",
+          "sha256": "5cc872b218a4e529a4f1a250a722b69418825e706e2609c71201ee0d6f225d33",
+          "note": "32x64 indexed PNG: two 32x32 frames stacked vertically"
+        }
+      ],
+      "frames": 2,
+      "hold_ms": [100, 100],
+      "cadence_basis": "pokeemerald src/pokemon_icon.c sAnim_0: ANIMCMD_FRAME(0, 6), ANIMCMD_FRAME(1, 6) — 6 ticks at the GBA's ~59.7275 Hz ≈ 100.4 ms per frame (the full-HP cadence)"
+    },
+    "ref-textbox-arrow-bob.gif": {
+      "game": "Pokémon Emerald",
+      "platform": "GBA",
+      "year": 2004,
+      "element": "Message-box down-arrow (▼) vertical bob — motion, not blink",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/fonts/down_arrow.png",
+          "sha256": "7f1e557e4dce2cadbab8740eb0bc60e43630472f7ad73ba06bc64e7397f49f1b"
+        }
+      ],
+      "frames": 4,
+      "hold_ms": [134, 134, 134, 134],
+      "offsets_px": [0, 1, 2, 1],
+      "cadence_basis": "pokeemerald src/text.c: sDownArrowYCoords[] = {0, 1, 2, 1}, delay 8 ticks ≈ 133.9 ms per step (533 ms period)"
+    },
+    "ref-coin-spin.gif": {
+      "game": "Pokémon Trading Card Game",
+      "platform": "GBC",
+      "year": 1998,
+      "element": "Duel coin toss — the full 8-step spin cycle (face → edge → face), metasprite-assembled tile by tile from the game's own frame table",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/poketcg/master/src/gfx/duel/anims/coin.png",
+          "sha256": "907879eafad58d3a4ad4af76935c281156465f81c1ce69b6c8d640260649e4f5",
+          "note": "8x184 strip of 8x8 tiles"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/poketcg/master/src/data/duel/animations/anims3.asm",
+          "note": "AnimData167 sequence (frames 0,1,2,3,4,5,2,6 held 4 ticks each) and AnimFrameTable79 OAM placements (y, x, tile, xflip/yflip) used verbatim"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/poketcg/master/src/data/palettes1.asm",
+          "note": "CoinPal CGB 5-bit colors, scaled x255/31"
+        }
+      ],
+      "frames": 8,
+      "hold_ms": [67, 67, 67, 67, 67, 67, 67, 67],
+      "cadence_basis": "poketcg anims3.asm AnimData167: each frame held 4 ticks ≈ 67 ms at ~59.7 Hz"
+    },
+    "ref-item-get-bounce.gif": {
+      "game": "Pokémon Emerald",
+      "platform": "GBA",
+      "year": 2004,
+      "element": "Poké Ball open + sparkle presentation (item-get / release idiom): closed → opening → open, then the field sparkle plays its real 4-frame cycle above the ball",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/balls/poke.png",
+          "sha256": "7e8e78babd958f24d282a647f0ea9dfe41b20b6cd49800c7a7b2cffa8bd01450",
+          "note": "frames 0 (closed) and 1 (opening)"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/balls/open.png",
+          "sha256": "b987127a398492a7a19bcda5b11dcd26c7cb89086cfce4fdadefd1f7cd511cd0"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/field_effects/pics/sparkle.png",
+          "sha256": "f59dd2d325647fc1cd3ad80fdc91eab73e884302c236ffcae3e99ee52afd0970",
+          "note": "96x16 sheet of six 16x16 cells; sparkle pixels are palette index 14 = pure white, so the backdrop is a dark neutral (96,112,96) to keep them visible — in-game they draw over the overworld scene"
+        }
+      ],
+      "frames": 8,
+      "hold_ms": [500, 84, 84, 100, 100, 100, 100, 700],
+      "cadence_basis": "pokeemerald src/pokeball.c ball-open AnimCmd steps at 5 ticks ≈ 84 ms; sparkle cells held ~100 ms (6-cell one-shot cycle, middle 4 cells used)"
+    },
+    "ref-status-flash.gif": {
+      "game": "Pokémon Emerald",
+      "platform": "GBA",
+      "year": 2004,
+      "element": "Battle status-condition badge (PSN) in a binary on/off alert blink",
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/interface/status_icons.png",
+          "sha256": "56d244ae5155b5d08c16135551a45abffa36995a40cdd5b0c37880e20b7e13d2",
+          "note": "32x8 PSN strip from the stacked status-icon sheet"
+        }
+      ],
+      "frames": 4,
+      "hold_ms": [134, 134, 134, 300],
+      "cadence_basis": "Badge art is real Emerald data; in-game the badge itself is static — the on/off blink is the era's binary alert idiom (era corpus §2: 100–250 ms on/off cycling, nothing eases), applied at the textbox 8-tick quantum (134 ms)"
+    }
+  },
+  "skipped": {
+    "ref-card-flip.gif": "No real flip frames obtainable: poketcg's card animations (anims3.asm AnimData158–163) are shuffle translations, not flips, and The Spriters Resource sheet downloads were not fetchable. Nothing was fabricated."
+  }
+}

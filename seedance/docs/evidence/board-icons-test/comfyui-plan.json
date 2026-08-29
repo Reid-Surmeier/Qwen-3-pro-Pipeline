@@ -1,119 +1,197 @@
 {
-  "heal": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Heal skill icon (pink pixel-art heart marked 'AB' in a red beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe heart glyph alone performs one soft heartbeat pulse: a slight scale-up of about 5 percent and back, like a single gentle beat. The tile frame does not move.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "protect": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Protect skill icon (silver-blue pixel-art shield on a dark beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nA single narrow diagonal gleam of light sweeps once across the shield face from upper-left to lower-right, respecting the pixel style. Nothing else moves.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "blessing": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Blessing skill icon (small blue potion bottle with golden sparkles in an amber beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe bottle gives one gentle tilt of a few degrees to the left and returns upright while the existing golden sparkles twinkle once. The tile frame does not move.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "holy-light": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Holy Light skill icon (golden pixel-art cross with rays in a cream beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe cross and its existing rays brighten softly in one gentle bloom and dim back to the start, keeping the same pixels lit. No new rays or halo appear.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "resurrection-v2": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "era_idiom_basis": "FF6 save-point shimmer: 2 frames @ 200 ms, palette band one step brighter",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the resurrection icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe bright core of the circular orb alternates between two brightness states in visible held steps, like a slow blink. Nothing moves and nothing else changes.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "aqua-benedicta-v2": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "era_idiom_basis": "RO cursor-sparkle idiom: 3 frames @ 150 ms, 2x1 px glint walks the water line",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the aqua benedicta icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nA tiny spark of light steps across the water surface from left to right in three separate held positions, one visible jump at a time. Everything else is frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "sanctuary-v2": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "era_idiom_basis": "ALttP blink: 2 frames 350/150 ms asymmetric, mid-tones remap brighter",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the sanctuary icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe golden tones of the figure flash one step brighter and settle back, a slow two-state blink. Zero movement anywhere; only the gold shades change.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "angelus-v2": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "era_idiom_basis": "RO sprite flap quantum: 3 frames (1-2-3-2) @ 125 ms, wing tips 1 px",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the angelus icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe two wing tips shift up by one tiny step, return, then down by one tiny step, each pose held, like a slow sprite wing flap. The skull and frame are frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
-  },
-  "gloria-v2": {
-    "canonical_model": "bytedance/seedance-2.0-mini-20260811",
-    "estimated_cost_usd": "0.0756",
-    "era_idiom_basis": "1UP/pokered \u25bc binary toggle: 2 frames @ 250 ms",
-    "request": {
-      "model": "bytedance/seedance-2.0-mini",
-      "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the gloria icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe four outer ray tips of the emblem blink on and off together while the small center switches to its brightest shade, a simple two-state twinkle in held steps.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
-      "duration": 4,
-      "size": "480x480",
-      "generate_audio": false,
-      "seed": 1
-    }
+ "heal": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Heal skill icon (pink pixel-art heart marked 'AB' in a red beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe heart glyph alone performs one soft heartbeat pulse: a slight scale-up of about 5 percent and back, like a single gentle beat. The tile frame does not move.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
   }
+ },
+ "protect": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Protect skill icon (silver-blue pixel-art shield on a dark beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nA single narrow diagonal gleam of light sweeps once across the shield face from upper-left to lower-right, respecting the pixel style. Nothing else moves.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "blessing": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Blessing skill icon (small blue potion bottle with golden sparkles in an amber beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe bottle gives one gentle tilt of a few degrees to the left and returns upright while the existing golden sparkles twinkle once. The tile frame does not move.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "holy-light": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied Ragnarok-style Holy Light skill icon (golden pixel-art cross with rays in a cream beveled tile) is the exact identity authority. Preserve its silhouette, pixel structure, palette, and tile frame.\n\nLOCKED STYLE:\n- 24px-origin pixel-art skill icon inside a beveled rounded-square tile, as captured (already upscaled with soft pixel edges)\n- the tile frame, bevel, and background stay perfectly rigid and static for the entire clip\n- no smoothing, no vector redraw, no repainting; the pixel structure and limited palette are the identity\n- no added text, particles, objects, glow halos outside the tile, or style modernization\n- icon tile stays exactly centered; all motion is contained inside the tile\n\nMOTION:\nThe cross and its existing rays brighten softly in one gentle bloom and dim back to the start, keeping the same pixels lit. No new rays or halo appear.\n\nTIMING:\nHold the exact start pose for the first 8%, perform one gesture, settle by 88%, and hold the identical pose through the end frame.\n\nCAMERA:\nLocked orthographic front view. No pan, zoom, roll, perspective, reframing, or depth-of-field.\n\nBACKGROUND / MATTE:\nUniform #00FF00 key matte with no gradient, spill, texture, or shadow. Transparency is produced and inspected separately.\n\nMUST NOT:\n- do not redraw or reinterpret the icon or its frame\n- do not change palette, stroke, bevel, or corner treatment\n- do not introduce edge shimmer, color pulsing, or background drift\n- do not leave a visible loop seam; final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "resurrection-v2": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "era_idiom_basis": "FF6 save-point shimmer: 2 frames @ 200 ms, palette band one step brighter",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the resurrection icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe bright core of the circular orb alternates between two brightness states in visible held steps, like a slow blink. Nothing moves and nothing else changes.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "aqua-benedicta-v2": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "era_idiom_basis": "RO cursor-sparkle idiom: 3 frames @ 150 ms, 2x1 px glint walks the water line",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the aqua benedicta icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nA tiny spark of light steps across the water surface from left to right in three separate held positions, one visible jump at a time. Everything else is frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "sanctuary-v2": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "era_idiom_basis": "ALttP blink: 2 frames 350/150 ms asymmetric, mid-tones remap brighter",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the sanctuary icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe golden tones of the figure flash one step brighter and settle back, a slow two-state blink. Zero movement anywhere; only the gold shades change.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "angelus-v2": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "era_idiom_basis": "RO sprite flap quantum: 3 frames (1-2-3-2) @ 125 ms, wing tips 1 px",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the angelus icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe two wing tips shift up by one tiny step, return, then down by one tiny step, each pose held, like a slow sprite wing flap. The skull and frame are frozen.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "gloria-v2": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "era_idiom_basis": "1UP/pokered \u25bc binary toggle: 2 frames @ 250 ms",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the gloria icon and its square frame must remain as captured except the one described movement.\n\nLOCKED STYLE:\n- the object keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame and its border stay perfectly still for the entire clip\n- nothing is redrawn, repainted, sharpened, or reinterpreted\n- subtle, small movement only; stop-motion feel with held poses\n\nMOTION:\nThe four outer ray tips of the emblem blink on and off together while the small center switches to its brightest shade, a simple two-state twinkle in held steps.\n\nTIMING:\nHold the exact start image for the first quarter, make the small stepped change, and return to exactly the start image for the final quarter.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects\n- no smooth fades or continuous motion; every change happens in visible held steps\n- do not change any color or redraw any part of the image",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "heal-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the heal icon \u2014 the white heart glyph and its red beveled square frame \u2014 must remain exactly as captured except the one described repeating movement.\n\nLOCKED STYLE:\n- the heart keeps its exact shape, colors, and soft blocky texture exactly as captured\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted\n- all movement is a whole-glyph position change between fixed poses; the glyph never deforms, stretches, or morphs\n- stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending\n\nMOTION:\nThe white heart runs a continuous two-pose idle loop for the whole clip, exactly like a handheld-game party icon. Pose A is the image exactly as captured. Pose B is the identical heart shifted up by one small step of its own blocky grid, with its bottom edge sitting one step higher. The clip alternates A, B, A, B without ever stopping: each pose is held for about a tenth of a second, then the picture snaps to the other pose. There are roughly twenty A-B rounds across the clip. Nothing accelerates, decelerates, eases, or drifts \u2014 the two poses are the only two pictures that ever exist, traded at a metronome-steady rate. The frame and background hold perfectly still through every swap.\n\nTIMING:\nBegin on pose A, the exact start image. Alternate A and B at a steady beat of about one tenth of a second per pose for the entire duration, with crisp instant swaps. Time the final swaps so the clip ends holding pose A, pixel-identical to the first frame.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, shadows, or added objects\n- no smooth motion, no fades, no motion blur; only instant swaps between the two held poses\n- no third pose: the heart is only ever in pose A or pose B\n- do not change any color or redraw any part of the image\n- the loop must not slow down, pause mid-clip, or change rhythm",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "angelus-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the angelus icon \u2014 the small winged skull and its beveled square frame \u2014 must remain exactly as captured except the one described repeating movement.\n\nLOCKED STYLE:\n- the skull and both wings keep their exact shapes, colors, and soft blocky texture exactly as captured\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted\n- wing movement is a tiny position shift of the outer wing tips only, in whole steps of the image's own blocky grid; the wing shapes never bend, stretch, or morph\n- stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending\n\nMOTION:\nThe two outer wing tips run a continuous four-beat flap cycle for the whole clip while the skull and everything else stay frozen. The cycle has exactly three poses used in the order 1-2-3-2: pose 1 is the image exactly as captured; pose 2 has each outer wing tip shifted up by one small step of the blocky grid; pose 3 has each tip up by two steps. The clip walks 1, 2, 3, 2, 1, 2, 3, 2 continuously, each pose held for about an eighth of a second, snapping between poses with no blending. Both wings move together in perfect mirror symmetry. The inner wing roots next to the skull never move \u2014 only the outermost tip region rises and falls. Roughly eight full flap cycles fit across the clip at a steady, unhurried rhythm.\n\nTIMING:\nBegin on pose 1, the exact start image. Step through the 1-2-3-2 cycle at a steady beat of about one eighth of a second per pose for the entire duration. Time the final beats so the clip ends holding pose 1, pixel-identical to the first frame.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, shadows, or added objects\n- no smooth motion, no fades, no motion blur; only instant swaps between the three held poses\n- the skull, the frame, and the wing roots never move; only the outer wing tips shift\n- do not change any color or redraw any part of the image\n- the flap must not slow down, pause mid-clip, or change rhythm",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "protect-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the protect icon \u2014 the silver-blue shield and its beveled square frame \u2014 must remain exactly as captured underneath the described overlay effect. The shield art itself is never altered, only covered and uncovered.\n\nLOCKED STYLE:\n- the shield keeps its exact shape, colors, and soft blocky texture exactly as captured; it never moves, scales, or redraws\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- the cooldown effect is a flat dark cover layer ON TOP of the icon, like a piece of dark glass \u2014 the icon pixels underneath are unchanged and reappear exactly as captured when uncovered\n- the cover's edge is a hard straight radius line from the center, aliased and crisp, never soft or feathered\n- stop-motion feel: the sweep advances in small visible increments, each briefly held, never as one continuous smear\n\nMOTION:\nA skill-cooldown sweep plays once, exactly like a 2004 MMO action bar. Beat 1: the icon holds exactly as captured for a moment. Beat 2: a flat dark semi-transparent cover snaps on instantly over the whole square tile, darkening the shield to about forty percent brightness \u2014 the shield is still recognizable underneath, merely dimmed. Beat 3: the cover is eaten away clockwise, starting from the twelve o'clock position: a hard straight edge line from the tile center sweeps clockwise like a clock hand, and everything the line passes is uncovered back to full captured brightness, while everything not yet reached stays dimmed. The sweep advances in about twelve visible held increments, taking most of the clip, so the bright wedge grows from a sliver at twelve o'clock through three o'clock, six o'clock, nine o'clock, until the last dark sliver just before twelve vanishes. Beat 4: the instant the cover is fully gone, a small bright white-gold flat flash overlay appears across the shield at full strength and fades out in three visible held steps, each dimmer than the last, within half a second. Beat 5: the tile holds exactly as captured to the end.\n\nTIMING:\nHold the exact start image briefly, snap the dark cover on, spend most of the clip on the stepped clockwise sweep, play the three-step end flash right as the sweep completes, and hold the exact start image again for the final portion so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the dark cover and the flash exist only inside the square tile.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, soft light rays, particles, or added objects; the flash is a flat overlay, not a bloom\n- the shield art is never redrawn, recolored, or moved \u2014 dimming comes only from the flat cover above it\n- the sweep edge is never blurred, curved, or feathered\n- no smooth continuous rotation; the sweep advances in distinct held increments\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "resurrection-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the resurrection icon \u2014 the circular orb and its beveled square frame \u2014 must remain exactly as captured underneath the described overlay effects. The orb art itself is never altered, only overlaid.\n\nLOCKED STYLE:\n- the orb keeps its exact shape, colors, and soft blocky texture exactly as captured; it never moves, scales, or redraws\n- the tile background stays in place; the only frame change is the described instant bevel press state\n- overlay effects are flat layers ON TOP of the icon; the pixels underneath are unchanged and reappear exactly as captured when an overlay hides\n- every state change is an instant snap between held states; nothing eases or glides\n- stop-motion feel: the clip is a sequence of a few distinct held pictures\n\nMOTION:\nA button press-and-fire plays once, exactly like clicking a skill on a 2004 MMO action bar. Beat 1: the tile holds exactly as captured. Beat 2, the press: the beveled frame snaps instantly to a pressed state \u2014 the bevel highlight and shadow edges swap places so the tile reads as pushed one step inward; the orb itself does not move or change. Beat 3, the fire: a flat white overlay square covers the icon area at about sixty percent strength for just one brief held instant \u2014 a single blink \u2014 then vanishes, and the bevel snaps back to the captured state in the same instant. Beat 4, the queued blink: a flat red overlay border frame, sitting just inside the tile edge and about two grid steps thick, snaps fully on and holds for about four tenths of a second, snaps fully off for four tenths, on again for four tenths, off again \u2014 exactly two on-off rounds, with the orb and frame unchanged underneath and clearly visible through the open center of the red frame. Beat 5: the tile holds exactly as captured to the end.\n\nTIMING:\nHold the exact start image for the first stretch, play the instant press and the single white blink near the one-third mark, run the two red on-off rounds at a steady four-tenths-of-a-second beat, and hold the exact start image again for the final stretch so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the press state, white blink, and red frame exist only inside the square tile.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects; the white blink and red frame are flat overlays, not glows\n- the orb art is never redrawn, recolored, or moved\n- no fading: the white blink and the red frame turn fully on and fully off instantly\n- the red frame's edges are hard and straight, never soft, and it never fills the tile center\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "gloria-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the gloria icon's beveled square frame and background must remain exactly as captured; the rayed emblem in the center performs the described turn and returns to exactly its captured appearance.\n\nLOCKED STYLE:\n- the emblem keeps its exact colors and soft blocky texture in every pose; poses are drawn with the same limited palette and chunky structure as the captured art\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is repainted, sharpened, smoothed, or style-modernized\n- the turn is shown as a handful of distinct held poses, exactly like a flipped game coin \u2014 never a smooth 3D rotation\n- stop-motion feel: each pose is held briefly, and the picture snaps from pose to pose with no in-between blending\n\nMOTION:\nThe central emblem performs exactly one full spin about its vertical axis, shown the way a Game Boy duel coin shows a toss \u2014 as a short cycle of flat held poses, not a smooth rotation. Beat 1: the emblem holds exactly as captured. Beat 2, the spin, about eight held poses in sequence: the full face as captured; the face narrowed to about two thirds of its width; narrowed to a slim upright oval; collapsed to a thin vertical edge line a couple of grid steps wide; the slim oval again, now showing the back of the turn; two thirds width again; and finally the full face exactly as captured. Each pose is a flat picture held for roughly a tenth of a second, snapping to the next with no blending, no perspective, and no shading change \u2014 the narrowing poses simply compress the emblem's blocky forms horizontally around its vertical centerline while keeping its palette. The emblem stays centered the whole time; its height never changes; only its width steps through the cycle. Beat 3: after the single spin completes, the emblem holds exactly as captured for the rest of the clip.\n\nTIMING:\nHold the exact start image for roughly the first third, play the one eight-pose spin cycle at a steady beat of about a tenth of a second per pose, and hold the exact start image again through the final third so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation of the camera, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, shadows, or added objects\n- no smooth continuous rotation, no 3D shading, no perspective foreshortening, no motion blur \u2014 only flat held poses\n- the emblem never leaves the tile center, never changes height, and never changes palette\n- exactly one spin: the cycle must not repeat\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ },
+ "blessing-v3": {
+  "canonical_model": "bytedance/seedance-2.0-mini-20260811",
+  "estimated_cost_usd": "0.0756",
+  "request_sha_note": "prompt compiled by SeedanceIconPrompt; request validated by SeedancePlanRequest",
+  "request": {
+   "model": "bytedance/seedance-2.0-mini",
+   "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the blessing icon \u2014 the small bottle and its beveled square frame \u2014 must remain exactly as captured except the one described presentation, which adds only the small sparkle shapes explicitly licensed below.\n\nLOCKED STYLE:\n- the bottle keeps its exact shape, colors, and soft blocky texture exactly as captured; it never deforms, stretches, or morphs\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted\n- the licensed sparkles are tiny flat blocky shapes in the same chunky structure as the captured art \u2014 plus-shaped four-block twinkles, pure white, at most a few grid steps across\n- stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending\n\nMOTION:\nAn item-get presentation plays once, exactly like a Game Boy Advance treasure reveal. Beat 1: the tile holds exactly as captured. Beat 2, the pop: the whole bottle jumps up by two small steps of its own blocky grid in one instant snap, holds that raised pose briefly, then snaps down to one step below its captured position for one brief held pose, then snaps back to exactly its captured position \u2014 a two-position quantized bounce, three snaps in all, with no easing and no stretching. Beat 3, the twinkle: right as the bottle lands, two tiny white plus-shaped sparkles appear in the empty tile area above the bottle, one upper-left and one upper-right of the bottle neck; each sparkle steps through a small grow-shrink cycle of three held poses \u2014 a single dot, the full plus shape, back to a dot \u2014 and vanishes completely, the pair offset so one twinkles a beat after the other. The sparkle cycle takes under a second in total. Beat 4: the tile holds exactly as captured, with no trace of the sparkles, through to the end.\n\nTIMING:\nHold the exact start image for roughly the first third, play the three-snap bounce, run the short two-sparkle twinkle immediately after the landing, and hold the exact start image again through the final third so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the sparkles exist only inside the square tile, never on the background.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, halos, or soft particles; the two plus-shaped sparkles are the only added elements, and they are flat, hard-edged, and temporary\n- the bottle is never redrawn, recolored, tilted, squashed, or stretched \u2014 it only changes position in whole steps\n- no smooth motion, no fades, no motion blur; only instant snaps between held poses\n- the sparkles must be gone well before the clip ends, leaving the image exactly as captured\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+   "duration": 4,
+   "size": "480x480",
+   "generate_audio": false,
+   "seed": 1
+  }
+ }
 }

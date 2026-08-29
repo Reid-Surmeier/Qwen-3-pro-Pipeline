@@ -1,0 +1,24 @@
+{
+  "source_authority": "The supplied image is the exact identity authority. Every pixel of the heal icon — the white heart glyph and its red beveled square frame — must remain exactly as captured except the one described repeating movement.",
+  "style_lock": [
+    "the heart keeps its exact shape, colors, and soft blocky texture exactly as captured",
+    "the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip",
+    "nothing is redrawn, repainted, sharpened, smoothed, or reinterpreted",
+    "all movement is a whole-glyph position change between fixed poses; the glyph never deforms, stretches, or morphs",
+    "stop-motion feel: every visible state is a held pose, and the picture jumps between poses with no in-between blending"
+  ],
+  "motion": "The white heart runs a continuous two-pose idle loop for the whole clip, exactly like a handheld-game party icon. Pose A is the image exactly as captured. Pose B is the identical heart shifted up by one small step of its own blocky grid, with its bottom edge sitting one step higher. The clip alternates A, B, A, B without ever stopping: each pose is held for about a tenth of a second, then the picture snaps to the other pose. There are roughly twenty A-B rounds across the clip. Nothing accelerates, decelerates, eases, or drifts — the two poses are the only two pictures that ever exist, traded at a metronome-steady rate. The frame and background hold perfectly still through every swap.",
+  "timing": "Begin on pose A, the exact start image. Alternate A and B at a steady beat of about one tenth of a second per pose for the entire duration, with crisp instant swaps. Time the final swaps so the clip ends holding pose A, pixel-identical to the first frame.",
+  "camera": "Static camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.",
+  "background": "Plain still uniform #00FF00 background with no gradient, texture, shadow, or spill.",
+  "negative_constraints": [
+    "nothing may cross the edge of the square onto the background",
+    "no glow, bloom, light rays, particles, shadows, or added objects",
+    "no smooth motion, no fades, no motion blur; only instant swaps between the two held poses",
+    "no third pose: the heart is only ever in pose A or pose B",
+    "do not change any color or redraw any part of the image",
+    "the loop must not slow down, pause mid-clip, or change rhythm"
+  ],
+  "era_idiom_basis": "Pokemon Emerald party icon healthy-state loop: exactly 2 frames traded forever at 6 ticks (~100 ms) per frame, whole-sprite position change only (pret/pokeemerald src/pokemon_icon.c sAnim_0)",
+  "real_reference": "references/ref-party-icon-pulse.gif"
+}

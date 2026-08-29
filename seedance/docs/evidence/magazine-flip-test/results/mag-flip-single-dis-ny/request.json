@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority: the DIS Magazine Data Issue cover in the design language of a 1990s American city-weekly \u2014 a deep purple masthead band across the top carrying the word DIS in a large white serif-script with swash flourishes, above it a thin white cover-line band with two small-caps feature lines (TREVOR PAGLEN: LANDING SITES and KATE LOSSE: CULTS AT SCALE), a huge ornate gold-outlined blackletter display headline reading 'Too Big' over 'To Scale' dominating the middle over a full-bleed dark storm-cloud and sea photograph, and a stacked white small-caps credit block at lower right reading THE DATA ISSUE / EDITED BY / MARVIN JORDAN / & MIKE PEPI \u2014 lying flat on a dark charcoal surface. Every element of the cover art, its typography, its photograph, and the framing of the magazine on the surface must look exactly as captured whenever the cover is visible, and the magazine must return to exactly this captured state at the end.\n\nLOCKED STYLE:\n- the cover photograph, masthead, headline, and cover lines are never redrawn, retouched, recolored, sharpened, or modernized; the mid-1990s coated-paper print character is the identity\n- the magazine keeps its exact printed proportions; it never changes size, position on the surface, or perspective while closed\n- the single revealed spread matches this issue's cover story: a left page dominated by a bold TOO BIG TO SCALE display headline above dense greeked serif article text, and a right page carrying a large moody photograph of undersea-cable landing-site infrastructure \u2014 a dark coastal landscape, no people \u2014 in the same period print style\n- paper behaves like real coated magazine stock: the turning cover is a thin flexible sheet that curls as it lifts and flattens as it lands\n- the dark charcoal surface under the magazine stays perfectly still and empty for the entire clip\n\nMOTION:\nThe magazine performs exactly one deliberate page turn and one return, like a reader opening straight to the cover story and closing the magazine again. Beat 1: the closed magazine holds exactly as captured. Beat 2: the front cover lifts slowly from its right edge, curling into a smooth arc that travels left with natural paper flex, and lands flat, opening the magazine to its cover-story spread \u2014 the left page led by the large TOO BIG TO SCALE display headline with dense greeked article text below, the right page filled by the dark coastal infrastructure photograph. Beat 3: the open spread holds flat, still, and readable for a long clear pause \u2014 the longest hold of the clip \u2014 with no drift, shimmer, or text crawl on the pages. Beat 4: the same page lifts from its left edge and turns back right in one smooth arc, closing the magazine. Beat 5: the closed magazine holds exactly as captured through to the final frame. Both turns are single continuous motions with constant believable speed; the sheet never hesitates mid-arc, and the magazine body never slides or rotates on the surface.\n\nTIMING:\nHold the exact captured cover for the opening moment, give the opening turn an unhurried arc of about a second, devote the longest middle stretch to the flat readable hold on the open spread, mirror the closing turn at the same speed, and hold the closed magazine exactly as captured for the final stretch so the last frame is identical to the first.\n\nCAMERA:\nStatic camera, directly above-front of the magazine at the captured angle. No zoom, no pan, no rotation, no dolly, no perspective change, no depth-of-field shift, no lighting change.\n\nBACKGROUND / MATTE:\nThe dark charcoal surface exactly as captured: uniform, still, no texture change, no shadows appearing or disappearing beyond the natural soft shadow of the turning sheet, nothing else ever enters the frame.\n\nMUST NOT:\n- no hands, fingers, or any person visible anywhere in the clip; the page turns as if opened but no one is shown\n- no added objects, text overlays, logos, watermarks, or reflections\n- the cover must never be redrawn or reinterpreted when it returns; final frame identical to the first\n- no camera motion of any kind and no lighting shifts\n- the open spread must not warp, breathe, or rewrite its text while held\n- the magazine never levitates, slides, rotates, or changes size on the surface",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=1f00926a6618824191fd225752572c5629d68e5e060ae399a6774af637217d38>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=1f00926a6618824191fd225752572c5629d68e5e060ae399a6774af637217d38>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}

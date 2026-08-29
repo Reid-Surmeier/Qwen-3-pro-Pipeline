@@ -55,3 +55,47 @@ Billed $0.05432 each — $0.27160 for the batch against a $0.378 estimate.
 3. Endpoint drift persists (seam RMSE 23–29) — unchanged from batch 1 and unfixed
    by prompt work; loop closure remains a post-step (trim/cross-fade) or a
    first-frame-only conditioning question for a future cell.
+
+## Batch 3 — beat-by-beat, reference-paired, complex-motion cells (2026-08-27)
+
+Redesign per owner feedback: every run paired with a real-game reference animation
+(`../references/`, provenance with sha256s), prompts at 406–543 compiled words
+(`briefs-v3/`), crisp 26 px-grid anchors as both frame inputs, and four cells beyond
+the subtle-idle layer. Seven runs billed $0.05432 each — $0.38024 against a $0.4990
+estimate. One extra free finding: `input_references` reject data URLs
+(`400 Only HTTPS URLs are allowed`) — the video-reference cell fetches its clip from
+the repo raw URL.
+
+| Cell | Idiom | First RMSE | Last RMSE | Silhouette IoU | Certified |
+| --- | --- | --- | --- | --- | --- |
+| heal | Emerald party-icon 2-pose loop | 4.2 | 39.6 | 0.942 | yes |
+| angelus | quantized 1-2-3-2 wing flap | 4.1 | 43.8 | 0.965 | yes |
+| protect | WoW cooldown clock-wipe + end flash | 4.0 | 14.6 | 0.422 | **no** |
+| resurrection | press-fire + queued red blink | 4.1 | 24.2 | 0.863 | **no** |
+| gloria | TCG 8-pose coin spin | 4.1 | 25.0 | 1.000 | yes |
+| blessing | item-get pop + sparkle cycle | 4.3 | 22.5 | 0.395 | **no** |
+| gloria-vidref | coin spin + real clip as video reference | 4.1 | 22.8 | 1.000 | yes |
+
+### Findings (visually confirmed frame-by-frame; gate agreed with the eye on all seven)
+
+1. **The transition layer works: both gloria spins certified at IoU 1.0.** The stepped
+   coin-flip idiom transfers cleanly — full face → narrowed → thin edge → back → face,
+   tile rigid, matte clean. First complex-motion successes of the experiment. The
+   video-reference cell rendered rounder, more coin-like turn poses than the
+   prompt-only cell — reference conditioning visibly steers pose drawing.
+2. **Overlay grammar fails as a class.** All three failures treat overlay effects as
+   scene events: protect applied the "dark cover" to the entire canvas (matte included)
+   and its end flash bloomed across the matte; resurrection rendered the press as a
+   whole-tile morph and never showed the red blink; blessing deleted the tile frame
+   while the bottle bounced (figure/ground confusion — the licensed sparkles themselves
+   were rendered correctly). Prompt language cannot yet buy WoW-style layers-above-the-
+   icon; candidate next cell: composite overlays deterministically in post and reserve
+   the model for glyph motion.
+3. **Crisp anchors set a new first-frame record** (RMSE 4.0–4.3 vs 4.6–5.1 soft) and
+   survived quantization — but sub-glyph detail below the 26 px grid (heal's tiny 'AB'
+   mark) drops out after frame 0.
+4. **Long continuous loops risk terminal drift**: angelus held near-static for seven
+   conformed frames then broke identity on the last (last RMSE 43.8) — the endpoint
+   anchor bounds the start tightly, not the end, exactly as in batches 1–2.
+
+Per-run evidence in `<icon>-v3/` (gloria-vidref-v3 for the reference-conditioned cell).

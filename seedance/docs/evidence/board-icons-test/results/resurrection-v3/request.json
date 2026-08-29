@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the resurrection icon \u2014 the circular orb and its beveled square frame \u2014 must remain exactly as captured underneath the described overlay effects. The orb art itself is never altered, only overlaid.\n\nLOCKED STYLE:\n- the orb keeps its exact shape, colors, and soft blocky texture exactly as captured; it never moves, scales, or redraws\n- the tile background stays in place; the only frame change is the described instant bevel press state\n- overlay effects are flat layers ON TOP of the icon; the pixels underneath are unchanged and reappear exactly as captured when an overlay hides\n- every state change is an instant snap between held states; nothing eases or glides\n- stop-motion feel: the clip is a sequence of a few distinct held pictures\n\nMOTION:\nA button press-and-fire plays once, exactly like clicking a skill on a 2004 MMO action bar. Beat 1: the tile holds exactly as captured. Beat 2, the press: the beveled frame snaps instantly to a pressed state \u2014 the bevel highlight and shadow edges swap places so the tile reads as pushed one step inward; the orb itself does not move or change. Beat 3, the fire: a flat white overlay square covers the icon area at about sixty percent strength for just one brief held instant \u2014 a single blink \u2014 then vanishes, and the bevel snaps back to the captured state in the same instant. Beat 4, the queued blink: a flat red overlay border frame, sitting just inside the tile edge and about two grid steps thick, snaps fully on and holds for about four tenths of a second, snaps fully off for four tenths, on again for four tenths, off again \u2014 exactly two on-off rounds, with the orb and frame unchanged underneath and clearly visible through the open center of the red frame. Beat 5: the tile holds exactly as captured to the end.\n\nTIMING:\nHold the exact start image for the first stretch, play the instant press and the single white blink near the one-third mark, run the two red on-off rounds at a steady four-tenths-of-a-second beat, and hold the exact start image again for the final stretch so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the press state, white blink, and red frame exist only inside the square tile.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, light rays, particles, or added objects; the white blink and red frame are flat overlays, not glows\n- the orb art is never redrawn, recolored, or moved\n- no fading: the white blink and the red frame turn fully on and fully off instantly\n- the red frame's edges are hard and straight, never soft, and it never fills the tile center\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=043fab04e793b47f918d4482fc1b9694c6b14487447b21df94969c0b93f3988e>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=043fab04e793b47f918d4482fc1b9694c6b14487447b21df94969c0b93f3988e>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}

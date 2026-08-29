@@ -1,0 +1,24 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "prompt": "SOURCE AUTHORITY:\nThe supplied image is the exact identity authority. Every pixel of the protect icon \u2014 the silver-blue shield and its beveled square frame \u2014 must remain exactly as captured underneath the described overlay effect. The shield art itself is never altered, only covered and uncovered.\n\nLOCKED STYLE:\n- the shield keeps its exact shape, colors, and soft blocky texture exactly as captured; it never moves, scales, or redraws\n- the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip\n- the cooldown effect is a flat dark cover layer ON TOP of the icon, like a piece of dark glass \u2014 the icon pixels underneath are unchanged and reappear exactly as captured when uncovered\n- the cover's edge is a hard straight radius line from the center, aliased and crisp, never soft or feathered\n- stop-motion feel: the sweep advances in small visible increments, each briefly held, never as one continuous smear\n\nMOTION:\nA skill-cooldown sweep plays once, exactly like a 2004 MMO action bar. Beat 1: the icon holds exactly as captured for a moment. Beat 2: a flat dark semi-transparent cover snaps on instantly over the whole square tile, darkening the shield to about forty percent brightness \u2014 the shield is still recognizable underneath, merely dimmed. Beat 3: the cover is eaten away clockwise, starting from the twelve o'clock position: a hard straight edge line from the tile center sweeps clockwise like a clock hand, and everything the line passes is uncovered back to full captured brightness, while everything not yet reached stays dimmed. The sweep advances in about twelve visible held increments, taking most of the clip, so the bright wedge grows from a sliver at twelve o'clock through three o'clock, six o'clock, nine o'clock, until the last dark sliver just before twelve vanishes. Beat 4: the instant the cover is fully gone, a small bright white-gold flat flash overlay appears across the shield at full strength and fades out in three visible held steps, each dimmer than the last, within half a second. Beat 5: the tile holds exactly as captured to the end.\n\nTIMING:\nHold the exact start image briefly, snap the dark cover on, spend most of the clip on the stepped clockwise sweep, play the three-step end flash right as the sweep completes, and hold the exact start image again for the final portion so the last frame is pixel-identical to the first.\n\nCAMERA:\nStatic camera. No zoom, no pan, no rotation, no perspective, no depth-of-field.\n\nBACKGROUND / MATTE:\nPlain still uniform #00FF00 background with no gradient, texture, shadow, or spill; the dark cover and the flash exist only inside the square tile.\n\nMUST NOT:\n- nothing may cross the edge of the square onto the background\n- no glow, bloom, soft light rays, particles, or added objects; the flash is a flat overlay, not a bloom\n- the shield art is never redrawn, recolored, or moved \u2014 dimming comes only from the flat cover above it\n- the sweep edge is never blurred, curved, or feathered\n- no smooth continuous rotation; the sweep advances in distinct held increments\n- do not leave a visible loop seam; the final frame returns exactly to the first frame",
+  "duration": 4,
+  "size": "480x480",
+  "generate_audio": false,
+  "seed": 1,
+  "frame_images": [
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=87df68d5516e6994f4c66154d24bfbb1d55959e207d7d5025bb779aade1a45ef>"
+      },
+      "frame_type": "first_frame"
+    },
+    {
+      "type": "image_url",
+      "image_url": {
+        "url": "<data-url sha256=87df68d5516e6994f4c66154d24bfbb1d55959e207d7d5025bb779aade1a45ef>"
+      },
+      "frame_type": "last_frame"
+    }
+  ]
+}

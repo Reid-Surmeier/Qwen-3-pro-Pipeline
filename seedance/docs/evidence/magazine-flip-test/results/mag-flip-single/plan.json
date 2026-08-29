@@ -1,0 +1,13 @@
+{
+  "model": "bytedance/seedance-2.0-mini",
+  "canonical_slug": "bytedance/seedance-2.0-mini-20260811",
+  "request_sha256": "93a65322297564cf9701da3ac0453160f239c99cccf33faecc50a4ec1fbc3369",
+  "estimated_cost_usd": "0.0756",
+  "estimate_only_not_invoice": true,
+  "paid_submission_performed": true,
+  "strategy_gate": {
+    "grammar": "smooth",
+    "passed": true,
+    "violations": []
+  }
+}

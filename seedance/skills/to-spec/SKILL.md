@@ -64,6 +64,13 @@ Each cell is `seedance-icons plan …` (free) → show model, canonical slug, re
 estimate → explicit approval → `submit --acknowledge-cost` with the exact estimate →
 `wait` → `verify`. One approval covers one submission.
 
+`plan` enforces the batch-3 strategy gate (see `docs/run-contract.md` § Strategy gate):
+era-idiom citation, a resolving real-game `real_reference`, a ≥ 350-word beat-by-beat
+compiled prompt, and crisp quantized anchors for both frames. Non-pixel-art sources
+declare `"grammar": "smooth"` in the brief — same principles, no crisp-pixel check. A refusal is a brief/anchor
+problem, not a CLI bug — fix the inputs; `--waive-strategy-gate "reason"` exists only for
+owner-approved experiments and records the deviation in plan.json.
+
 ### 5. Transfer to 2.5 and close
 
 1. Re-run the winning brief on `final` (Seedance 2.5). Seeds and motion behavior do not

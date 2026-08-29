@@ -1,0 +1,24 @@
+{
+  "source_authority": "The supplied image is the exact identity authority. Every pixel of the gloria icon's beveled square frame and background must remain exactly as captured; the rayed emblem in the center performs the described turn and returns to exactly its captured appearance.",
+  "style_lock": [
+    "the emblem keeps its exact colors and soft blocky texture in every pose; poses are drawn with the same limited palette and chunky structure as the captured art",
+    "the square frame, its bevel, and the tile background stay perfectly rigid and still for the entire clip",
+    "nothing is repainted, sharpened, smoothed, or style-modernized",
+    "the turn is shown as a handful of distinct held poses, exactly like a flipped game coin — never a smooth 3D rotation",
+    "stop-motion feel: each pose is held briefly, and the picture snaps from pose to pose with no in-between blending"
+  ],
+  "motion": "The central emblem performs exactly one full spin about its vertical axis, shown the way a Game Boy duel coin shows a toss — as a short cycle of flat held poses, not a smooth rotation. Beat 1: the emblem holds exactly as captured. Beat 2, the spin, about eight held poses in sequence: the full face as captured; the face narrowed to about two thirds of its width; narrowed to a slim upright oval; collapsed to a thin vertical edge line a couple of grid steps wide; the slim oval again, now showing the back of the turn; two thirds width again; and finally the full face exactly as captured. Each pose is a flat picture held for roughly a tenth of a second, snapping to the next with no blending, no perspective, and no shading change — the narrowing poses simply compress the emblem's blocky forms horizontally around its vertical centerline while keeping its palette. The emblem stays centered the whole time; its height never changes; only its width steps through the cycle. Beat 3: after the single spin completes, the emblem holds exactly as captured for the rest of the clip.",
+  "timing": "Hold the exact start image for roughly the first third, play the one eight-pose spin cycle at a steady beat of about a tenth of a second per pose, and hold the exact start image again through the final third so the last frame is pixel-identical to the first.",
+  "camera": "Static camera. No zoom, no pan, no rotation of the camera, no perspective, no depth-of-field.",
+  "background": "Plain still uniform #00FF00 background with no gradient, texture, shadow, or spill.",
+  "negative_constraints": [
+    "nothing may cross the edge of the square onto the background",
+    "no glow, bloom, light rays, particles, shadows, or added objects",
+    "no smooth continuous rotation, no 3D shading, no perspective foreshortening, no motion blur — only flat held poses",
+    "the emblem never leaves the tile center, never changes height, and never changes palette",
+    "exactly one spin: the cycle must not repeat",
+    "do not leave a visible loop seam; the final frame returns exactly to the first frame"
+  ],
+  "era_idiom_basis": "Pokemon TCG (GBC) duel coin toss: a full spin rendered as 8 flat metasprite poses (face, narrowed, edge, narrowed, face) each held 4 ticks (~67 ms), assembled per the game's own AnimData167 frame table (pret/poketcg src/data/duel/animations/anims3.asm)",
+  "real_reference": "references/ref-coin-spin.gif"
+}
