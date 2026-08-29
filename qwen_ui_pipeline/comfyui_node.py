@@ -17,8 +17,24 @@ from .partner_controls import (
     build_partner_text_brief,
 )
 from .providers.alibaba import AlibabaImageClient
-from .providers.openrouter import OpenRouterImageClient
+from .providers.openrouter import DEFAULT_TIMEOUT_SECONDS, OpenRouterImageClient
 from .providers.router import generate_with_provider
+
+
+def _openrouter_timeout_seconds() -> float:
+    """``QWEN_OPENROUTER_TIMEOUT_SECONDS`` overrides the client's 180 s default.
+
+    Unset, unparseable, or non-positive values keep the default so the
+    override can never disable the timeout.
+    """
+    raw = os.environ.get("QWEN_OPENROUTER_TIMEOUT_SECONDS", "").strip()
+    if not raw:
+        return DEFAULT_TIMEOUT_SECONDS
+    try:
+        value = float(raw)
+    except ValueError:
+        return DEFAULT_TIMEOUT_SECONDS
+    return value if value > 0 and value != float("inf") else DEFAULT_TIMEOUT_SECONDS
 
 
 def _reference_data_urls(reference_images: Any) -> list[str]:
@@ -104,7 +120,7 @@ def _provider_clients(provider: str) -> tuple[Any, Any]:
         api_key = os.environ.get("OPENROUTER_API_KEY", "")
         if not api_key:
             raise ValueError("OpenRouter client is unavailable")
-        return OpenRouterImageClient(api_key), None
+        return OpenRouterImageClient(api_key, timeout=_openrouter_timeout_seconds()), None
     api_key = os.environ.get("DASHSCOPE_API_KEY", "")
     if not api_key:
         raise ValueError("Alibaba client is unavailable")
@@ -302,7 +318,11 @@ class QwenImage3Render:
             brief,
             reference_urls=_reference_data_urls(reference_images),
             openrouter_client=(
-                OpenRouterImageClient(openrouter_key) if openrouter_key else None
+                OpenRouterImageClient(
+                    openrouter_key, timeout=_openrouter_timeout_seconds()
+                )
+                if openrouter_key
+                else None
             ),
             alibaba_client=(AlibabaImageClient(alibaba_key) if alibaba_key else None),
         )
