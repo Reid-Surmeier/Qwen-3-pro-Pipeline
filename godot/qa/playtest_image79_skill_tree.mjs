@@ -185,6 +185,7 @@ await click(commitBefore.geometry.x + commitBefore.geometry.width - 4,
 const preCommit = await control(commitId);
 const commitPendingFrame = await shot("04-commit-before");
 await click(957, 569);
+await page.waitForTimeout(2000);
 const committed = await skillTree();
 const committedFrame = await shot("04-committed");
 record("skill_tree.use", "Activate", "CommitSkillChanges",
@@ -202,6 +203,7 @@ await click(cancelBefore.geometry.x + cancelBefore.geometry.width - 4,
   cancelBefore.geometry.y + cancelBefore.geometry.height / 2);
 const cancelPendingFrame = await shot("05-cancel-before");
 await click(1046, 569);
+await page.waitForTimeout(2000);
 const cancelled = await skillTree();
 const cancelledFrame = await shot("05-cancelled");
 record("skill_tree.cancel", "Activate", "CancelSkillChanges",
@@ -213,6 +215,7 @@ record("skill_tree.cancel", "Activate", "CancelSkillChanges",
   }, { before: cancelPendingFrame, after: cancelledFrame });
 
 await click(1048, 15);
+await page.waitForTimeout(1000);
 const list = await skillTree();
 record("skill_tree.view", "Activate", "ToggleSkillView",
   "View changes the reversible tree/list presentation", JSON.stringify(list.window), {
@@ -255,7 +258,7 @@ const minimizeAfter = await shot("09-minimized");
 await click(503, 12);
 const restored = (await skillTree()).window;
 await page.mouse.move(0, 0);
-await page.waitForTimeout(20);
+await page.waitForTimeout(1000);
 const minimizeRestoredFrame = await shot("10-minimize-restored");
 record("skill_tree.minimize", "Activate", "ToggleMinimized",
   "swap to a purpose-built title strip and restore the full Window",
