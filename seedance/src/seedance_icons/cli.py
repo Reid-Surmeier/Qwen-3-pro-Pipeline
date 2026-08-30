@@ -75,7 +75,12 @@ def cmd_plan(args: argparse.Namespace) -> None:
     brief = load_brief(brief_path)
     grammar = str(brief.get("grammar") or DEFAULT_GRAMMAR)
     violations = check_strategy(
-        brief, brief_path, request["prompt"], args.first_frame, args.last_frame
+        brief,
+        brief_path,
+        request["prompt"],
+        args.first_frame,
+        args.last_frame,
+        video_references=args.video_reference,
     )
     waiver = args.waive_strategy_gate
     if violations and waiver is None:
@@ -122,6 +127,13 @@ def cmd_submit(args: argparse.Namespace) -> None:
         )
     request = json.loads(payload_path.read_text())
     plan = json.loads((run / "plan.json").read_text())
+    planned_digest = plan.get("request_sha256")
+    actual_digest = request_digest(request)
+    if not isinstance(planned_digest, str) or actual_digest != planned_digest:
+        raise SystemExit(
+            "Request payload changed since planning; recreate the plan and obtain a "
+            "new exact cost acknowledgement"
+        )
     allowed, reason = submit_allowed(plan)
     if not allowed:
         raise SystemExit(f"Strategy gate refuses submission: {reason}")
@@ -177,6 +189,44 @@ def cmd_retro_conform(args: argparse.Namespace) -> None:
         colors=args.colors,
     )
     print(json.dumps(report, indent=2))
+
+
+def cmd_retro_conform_states(args: argparse.Namespace) -> None:
+    """Cut one multi-state take into a State Set and certify each state separately."""
+    from .retro import conform_states
+
+    run = Path(args.run)
+    candidates = sorted((run / "outputs").glob("*.mp4"))
+    if not candidates:
+        raise SystemExit(f"No mp4 in {run / 'outputs'}")
+    video = candidates[0]
+    state_map = None
+    brief_path = run / "brief.json"
+    if args.state_map:
+        state_map = json.loads(Path(args.state_map).read_text())
+        state_map = state_map.get("state_map", state_map)
+    elif brief_path.exists():
+        state_map = json.loads(brief_path.read_text()).get("state_map")
+    summary = conform_states(
+        video,
+        Path(args.reference),
+        run / "states",
+        state_map=state_map,
+        fps=args.fps,
+        max_frames=args.max_frames,
+        grid=args.grid,
+        colors=args.colors,
+        settle_trim=args.settle_trim,
+        frame_mode=args.frame_mode,
+        state_hold_ms=args.state_hold_ms,
+        cycle_poses=args.cycle_poses,
+        pose_hold_ms=args.pose_hold_ms,
+    )
+    print(json.dumps(summary, indent=2))
+    if not summary["certified"]:
+        raise SystemExit(
+            "uncertified states: " + ", ".join(summary["uncertified_states"])
+        )
 
 
 def cmd_verify(args: argparse.Namespace) -> None:
@@ -251,6 +301,44 @@ def parser() -> argparse.ArgumentParser:
     retro.add_argument("--grid", type=int, default=160)
     retro.add_argument("--colors", type=int, default=16)
     retro.set_defaults(func=cmd_retro_conform)
+    retro_states = sub.add_parser(
+        "retro-conform-states",
+        help="Cut a multi-state take into a State Set and certify each state",
+    )
+    retro_states.add_argument("run")
+    retro_states.add_argument("--reference", required=True, help="Exact Anchor image")
+    retro_states.add_argument("--state-map", help="JSON file carrying a state_map; defaults to the run's brief")
+    retro_states.add_argument("--fps", type=int, default=6)
+    retro_states.add_argument("--max-frames", type=int, default=8)
+    retro_states.add_argument("--grid", type=int, default=160)
+    retro_states.add_argument("--colors", type=int, default=16)
+    retro_states.add_argument("--settle-trim", type=float, default=0.25)
+    retro_states.add_argument(
+        "--state-hold-ms",
+        type=int,
+        default=134,
+        help="Hold per state in the state-set GIF; 134 ms is the era binary-swap cadence",
+    )
+    retro_states.add_argument(
+        "--cycle-poses", type=int, default=12,
+        help="Poses in the whole-gesture cycle; set it to the number the brief enumerates",
+    )
+    retro_states.add_argument(
+        "--pose-hold-ms", type=int, default=100,
+        help="Even hold per pose in the full-cycle GIF; the era beat is 67-134 ms",
+    )
+    retro_states.add_argument(
+        "--frame-mode",
+        choices=("matte", "filled"),
+        default="matte",
+        help=(
+            "matte: the icon floats in the key colour, fidelity is silhouette IoU. "
+            "filled: the icon fills its tile and the key colour is only a border, "
+            "containment is checked automatically and fidelity requires human review "
+            "because every frame's silhouette is the same square."
+        ),
+    )
+    retro_states.set_defaults(func=cmd_retro_conform_states)
     verify = sub.add_parser("verify", help="Run independent media and anchor checks")
     verify.add_argument("run")
     verify.add_argument("--capabilities")
