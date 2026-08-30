@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "issue": 118,
+  "pull_request": 82,
+  "candidate_commit": "90af97002816d0f68af9a48bacedf2650a73d629",
+  "acceptance_contract": "docs/reviews/issue-118-v003-contract.md",
+  "references": [
+    {
+      "path": "artifacts/runs/museum-filter-assembly-v001/assembly-v001.png",
+      "sha256": "5b6a2e54a75147047d52f992a9b1a6b6a211e3a0330a139669be4b43a2d8a53a"
+    },
+    {
+      "path": "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png",
+      "sha256": "f7f2f47ebd96ed2f14cc5b06a58e215bac69a48f561c5af4dd5f01281ef49e07"
+    },
+    {
+      "path": "artifacts/runs/museum-filter-assembly-v002/assembly-v002.png",
+      "sha256": "3d4f727f83c1bae55de5805b60433f1c3df3c49377e91c8f58d6e368a235c4b8"
+    },
+    {
+      "path": "artifacts/runs/museum-filter-retro-skin-v005/image-02.png",
+      "sha256": "86d9838fed6cf6c0e7dc528a8c13a5139feb79d0f50706f556585f8d4d36a764"
+    }
+  ],
+  "candidate": {
+    "evidence": [
+      "artifacts/runs/museum-filter-assembly-v003/contact-sheet.png",
+      "artifacts/runs/museum-filter-assembly-v003/assembly-v003.png",
+      "artifacts/runs/museum-filter-assembly-v003/assembly-v003-native.png",
+      "artifacts/runs/museum-filter-assembly-v003/edit-mask.png",
+      "artifacts/runs/museum-filter-assembly-v003/verification.json",
+      "artifacts/runs/museum-filter-assembly-v003/run.json"
+    ]
+  },
+  "launch": {
+    "command": "file /workspace/artifacts/runs/museum-filter-assembly-v003/assembly-v003.png",
+    "clean_state_command": "true"
+  }
+}
