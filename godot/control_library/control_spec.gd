@@ -17,11 +17,14 @@ const GESTURES := [
 	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
-	"Button": ["ToggleMinimized", "CloseWindow"],
+	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
+		"CommitSkillChanges", "CancelSkillChanges"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
 	"ChoiceGroup": ["SelectChoice"],
+	"SelectionView": ["SelectSkill", "OpenSkillDetail"],
+	"Stepper": ["StepSkill"],
 }
 
 
@@ -164,6 +167,10 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 		_validate_range_contract(control, path, errors)
 	elif control_type == "Dropdown" or control_type == "ChoiceGroup":
 		_validate_choice_contract(control, control_type, path, errors)
+	elif control_type == "SelectionView":
+		_validate_selection_view_contract(control, path, errors)
+	elif control_type == "Stepper":
+		_validate_stepper_contract(control, path, errors)
 
 
 static func _validate_range_contract(control: Dictionary, path: String,
@@ -221,6 +228,58 @@ static func _validate_choice_contract(control: Dictionary, control_type: String,
 				and surfaces[str(choice)].state_set.has("unselected")):
 			errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
 				"ChoiceGroup requires selected/unselected State Sets for every choice"))
+
+
+static func _validate_selection_view_contract(control: Dictionary, path: String,
+		errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var items: Array = value.get("items", []) if value is Dictionary else []
+	var initial: Variant = value.get("initial") if value is Dictionary else null
+	var unique := {}
+	var valid := not items.is_empty()
+	for item in items:
+		valid = valid and item is String and not str(item).is_empty() and not unique.has(item)
+		unique[item] = true
+	valid = valid and initial in items
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"SelectionView requires unique non-empty items and a declared initial item"))
+	var surfaces: Variant = control.get("surfaces")
+	if not surfaces is Dictionary or not items.all(func(item):
+		return surfaces.has(str(item)) and surfaces[str(item)] is Dictionary \
+			and surfaces[str(item)].has("geometry") \
+			and surfaces[str(item)].has("state_set") \
+			and surfaces[str(item)].state_set.has("selected") \
+			and surfaces[str(item)].state_set.has("unselected")):
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
+			"SelectionView requires selected/unselected State Sets for every item"))
+
+
+static func _validate_stepper_contract(control: Dictionary, path: String,
+		errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var valid := value is Dictionary
+	if valid:
+		for field in ["minimum", "maximum", "current", "target", "step"]:
+			valid = valid and _number(value.get(field))
+	if valid:
+		valid = float(value.minimum) <= float(value.current) \
+			and float(value.current) <= float(value.maximum) \
+			and float(value.minimum) <= float(value.target) \
+			and float(value.target) <= float(value.maximum) \
+			and float(value.step) > 0.0
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"Stepper requires in-range current/target values and a positive step"))
+	var surfaces: Variant = control.get("surfaces")
+	if not surfaces is Dictionary or not ["decrement", "increment"].all(func(surface):
+		return surfaces.has(surface) and surfaces[surface] is Dictionary \
+			and surfaces[surface].has("geometry") \
+			and surfaces[surface].has("state_set") \
+			and surfaces[surface].state_set.has("visible") \
+			and surfaces[surface].state_set.has("hidden")):
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
+			"Stepper requires visible/hidden State Sets for both arrows"))
 
 
 static func _validate_surfaces(surfaces: Variant, path: String,
@@ -307,6 +366,11 @@ static func _validate_actions(actions: Variant, gestures: Variant, control_type:
 		elif not allowed.is_empty() and str(action.action) not in allowed:
 			errors.append(_error(Errors.ACTION_ROUTING, "%s[%d].action" % [path, action_index],
 				"Window Action is not supported by %s: %s" % [control_type, str(action.action)]))
+	for gesture in declared:
+		if not actions.any(func(action): return action is Dictionary \
+			and action.get("gesture") == gesture):
+			errors.append(_error(Errors.CONTROL_BINDING, path,
+				"declared gesture has no Window Action: %s" % str(gesture)))
 
 
 static func _validate_geometry(geometry: Variant, path: String,

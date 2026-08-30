@@ -6,6 +6,8 @@ extends RefCounted
 
 const Errors = preload("res://control_library/control_errors.gd")
 const ChoiceGroup = preload("res://control_library/choice_group.gd")
+const SelectionViewModule = preload("res://control_library/selection_view.gd")
+const StepperModule = preload("res://control_library/stepper.gd")
 
 var window_spec: Dictionary = {}
 var controls: Dictionary = {}
@@ -25,6 +27,7 @@ func configure(spec: Dictionary) -> Dictionary:
 			"active_surface": "",
 			"semantic_state": str(control_spec.initial_semantic_state),
 			"last_action": "",
+			"last_gesture": "",
 			"last_error": null,
 			"geometry": control_spec.get("geometry", {}).duplicate(true),
 			"visible": true,
@@ -33,7 +36,16 @@ func configure(spec: Dictionary) -> Dictionary:
 			"text": "",
 			"last_result": {"accepted": false, "action": "", "error": null},
 		}
-		if control_spec.has("value"):
+		if str(control_spec.type) == "Stepper":
+			state.current = control_spec.value.current
+			state.target = control_spec.value.target
+			state.minimum = control_spec.value.minimum
+			state.maximum = control_spec.value.maximum
+			state.step = control_spec.value.step
+			state.pending = false
+			state.arrows_visible = true
+			state.text = StepperModule.format_value(state.current, state.target)
+		elif control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
 			if state.value is String:
 				state.text = state.value
@@ -74,6 +86,10 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 			result = _dispatch_dropdown(entry, gesture, payload)
 		"ChoiceGroup":
 			result = _dispatch_choice_group(entry, gesture, payload)
+		"SelectionView":
+			result = _dispatch_selection_view(entry, gesture, payload)
+		"Stepper":
+			result = _dispatch_stepper(entry, gesture, payload)
 		"Button":
 			result = _dispatch_button(entry, gesture)
 		_:
@@ -81,6 +97,7 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 				"control type has no runtime action adapter")
 	if result.get("ok", false):
 		entry.state.last_error = null
+		entry.state.last_gesture = gesture
 		entry.state.last_result = {"accepted": true,
 			"action": str(entry.state.last_action), "error": null}
 		if entry.state.get("value") is String:
@@ -99,6 +116,7 @@ func qa_state() -> Dictionary:
 		"window_id": str(window_spec.get("id", "")),
 		"controls": factual_controls,
 		"interaction_log": interaction_log.duplicate(true),
+		"window_pending": _has_pending_stepper(),
 	}
 
 
@@ -114,6 +132,24 @@ func visual_asset(control_id: String) -> String:
 	var state: Dictionary = entry.state
 	return str(entry.spec.state_set.get(state.semantic_state, {}).get(
 		state.interaction_phase, ""))
+
+
+func visual_surface_asset(control_id: String, surface_id: String) -> String:
+	if not controls.has(control_id):
+		return ""
+	var entry: Dictionary = controls[control_id]
+	if not entry.spec.get("surfaces", {}).has(surface_id):
+		return ""
+	var state: Dictionary = entry.state
+	var surface: Dictionary = entry.spec.surfaces[surface_id]
+	var semantic := str(state.semantic_state)
+	if str(entry.spec.type) == "SelectionView":
+		semantic = "selected" if str(state.get("value", "")) == surface_id else "unselected"
+	elif str(entry.spec.type) == "Stepper":
+		semantic = "visible" if bool(state.get("arrows_visible", true)) else "hidden"
+	var phase := str(state.interaction_phase) \
+		if str(state.get("active_surface", "")) == surface_id else "idle"
+	return str(surface.state_set.get(semantic, {}).get(phase, ""))
 
 
 func _dispatch_toggle(entry: Dictionary, gesture: String) -> Dictionary:
@@ -197,6 +233,24 @@ func _dispatch_choice_group(entry: Dictionary, gesture: String,
 		"semantic_state": entry.state.semantic_state}
 
 
+func _dispatch_selection_view(entry: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	var result: Dictionary = SelectionViewModule.activate(entry.spec, entry.state,
+		gesture, payload)
+	if not result.ok:
+		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
+	return result
+
+
+func _dispatch_stepper(entry: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	var result: Dictionary = StepperModule.step(entry.spec, entry.state, gesture, payload)
+	if not result.ok:
+		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
+	_set_all_stepper_arrows(not _has_pending_stepper())
+	return result
+
+
 func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	if gesture != "Activate":
 		return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
@@ -209,13 +263,58 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	if action.is_empty():
 		return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
 			"Button has no Activate Window Action")
-	if action not in ["ToggleMinimized", "CloseWindow"]:
+	if action not in ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
+			"CommitSkillChanges", "CancelSkillChanges"]:
 		return _reject(entry.state.id, gesture, Errors.ACTION_ROUTING,
 			"Button action is not routed: %s" % action)
+	if action == "CommitSkillChanges":
+		_commit_steppers()
+	elif action == "CancelSkillChanges":
+		_cancel_steppers()
 	entry.state.interaction_phase = "idle"
 	entry.state.last_action = action
 	return {"ok": true, "action": action,
 		"semantic_state": entry.state.semantic_state}
+
+
+func _has_pending_stepper() -> bool:
+	for control_id in controls:
+		var entry: Dictionary = controls[control_id]
+		if str(entry.spec.type) == "Stepper" and bool(
+				entry.state.get("pending", false)):
+			return true
+	return false
+
+
+func _set_all_stepper_arrows(visible: bool) -> void:
+	for control_id in controls:
+		var entry: Dictionary = controls[control_id]
+		if str(entry.spec.type) == "Stepper":
+			entry.state.arrows_visible = visible
+
+
+func _commit_steppers() -> void:
+	for control_id in controls:
+		var entry: Dictionary = controls[control_id]
+		if str(entry.spec.type) == "Stepper":
+			entry.state.current = entry.state.target
+			entry.state.pending = false
+			entry.state.semantic_state = "ready"
+			entry.state.text = StepperModule.format_value(
+				entry.state.current, entry.state.target)
+	_set_all_stepper_arrows(true)
+
+
+func _cancel_steppers() -> void:
+	for control_id in controls:
+		var entry: Dictionary = controls[control_id]
+		if str(entry.spec.type) == "Stepper":
+			entry.state.target = entry.state.current
+			entry.state.pending = false
+			entry.state.semantic_state = "ready"
+			entry.state.text = StepperModule.format_value(
+				entry.state.current, entry.state.target)
+	_set_all_stepper_arrows(true)
 
 
 func _reject(control_id: String, gesture: String, code: String, detail: String) -> Dictionary:

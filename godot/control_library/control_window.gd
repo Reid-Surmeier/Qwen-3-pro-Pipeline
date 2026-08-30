@@ -9,12 +9,16 @@ const BitmapControlScript = preload("res://control_library/bitmap_control.gd")
 const RangeControlScript = preload("res://control_library/range_control.gd")
 const DropdownControlScript = preload("res://control_library/dropdown_control.gd")
 const ChoiceGroupControlScript = preload("res://control_library/choice_group.gd")
+const SelectionViewControlScript = preload("res://control_library/selection_view_control.gd")
+const StepperControlScript = preload("res://control_library/stepper_control.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
 var plate: TextureRect
 var control_nodes := {}
 var minimized := false
+var view_mode := "tree"
+var detail_item := ""
 var _expanded_size := Vector2.ZERO
 var _dragging := false
 var _drag_offset := Vector2.ZERO
@@ -53,6 +57,10 @@ func _ready() -> void:
 				node = DropdownControlScript.new()
 			"ChoiceGroup":
 				node = ChoiceGroupControlScript.new()
+			"SelectionView":
+				node = SelectionViewControlScript.new()
+			"Stepper":
+				node = StepperControlScript.new()
 			_:
 				continue
 		node.configure(control_spec, runtime)
@@ -84,6 +92,9 @@ func qa_state() -> Dictionary:
 		"size": [size.x, size.y],
 		"visible": visible,
 		"minimized": minimized,
+		"view_mode": view_mode,
+		"detail_item": detail_item,
+		"pending": state.get("window_pending", false),
 		"z_index": z_index,
 	}
 	return state
@@ -109,8 +120,10 @@ func dismiss_dropdowns() -> void:
 func _add_title_drag() -> void:
 	var hit := Control.new()
 	hit.name = "TitleDrag"
-	hit.position = Vector2.ZERO
-	hit.size = Vector2(373, 28)
+	var geometry: Dictionary = spec.get("drag_geometry",
+		{"x": 0, "y": 0, "width": 373, "height": 28})
+	hit.position = Vector2(float(geometry.x), float(geometry.y))
+	hit.size = Vector2(float(geometry.width), float(geometry.height))
 	hit.mouse_filter = Control.MOUSE_FILTER_STOP
 	hit.mouse_default_cursor_shape = Control.CURSOR_MOVE
 	hit.gui_input.connect(_title_input)
@@ -163,8 +176,15 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 			"CloseWindow":
 				dismiss_dropdowns()
 				visible = false
+			"ToggleSkillView":
+				_toggle_skill_view()
+			"OpenSkillDetail":
+				_show_skill_detail(str(result.get("value", "")))
+			"SelectSkill", "StepSkill", "CommitSkillChanges", "CancelSkillChanges":
+				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
+	_refresh_all_controls()
 	state_changed.emit(str(spec.id))
 
 
@@ -179,6 +199,49 @@ func _toggle_minimized() -> void:
 		plate.texture = load(str(spec.plates.expanded))
 		size = _expanded_size
 		plate.size = size
+	var keep_visible: Array = spec.get("minimized_controls", [])
+	if keep_visible.is_empty():
+		keep_visible = control_nodes.keys().filter(func(control_id):
+			return str(control_id).ends_with(".minimize") \
+				or str(control_id).ends_with(".close"))
 	for control_id in control_nodes:
 		var node: Control = control_nodes[control_id]
-		node.visible = not minimized or control_id in ["options.minimize", "options.close"]
+		node.visible = not minimized or control_id in keep_visible
+	if not minimized:
+		_apply_view_mode()
+
+
+func _toggle_skill_view() -> void:
+	view_mode = "list" if view_mode == "tree" else "tree"
+	detail_item = ""
+	_apply_view_mode()
+
+
+func _apply_view_mode() -> void:
+	if minimized:
+		return
+	if view_mode == "list" and spec.plates.has("list"):
+		plate.texture = load(str(spec.plates.list))
+	else:
+		plate.texture = load(str(spec.plates.expanded))
+	for control_id in control_nodes:
+		var node: Control = control_nodes[control_id]
+		if node.has_method("set_list_mode"):
+			node.set_list_mode(view_mode == "list")
+		elif str(runtime.controls[control_id].spec.type) == "Stepper":
+			node.visible = view_mode == "tree"
+
+
+func _show_skill_detail(item: String) -> void:
+	detail_item = item
+	for control_id in control_nodes:
+		var node: Control = control_nodes[control_id]
+		if node.has_method("show_detail"):
+			node.show_detail(item)
+
+
+func _refresh_all_controls() -> void:
+	for control_id in control_nodes:
+		var node: Control = control_nodes[control_id]
+		if node.has_method("refresh"):
+			node.refresh()
