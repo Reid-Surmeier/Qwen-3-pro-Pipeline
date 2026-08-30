@@ -132,6 +132,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 			path + ".state_set", errors, asset_exists)
 	if control.has("surfaces"):
 		_validate_surfaces(control.surfaces, path + ".surfaces", errors, asset_exists)
+	_validate_type_contract(control, control_type, path, errors)
 	var gestures: Variant = control.get("gestures")
 	if not gestures is Array or gestures.is_empty():
 		errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
@@ -142,6 +143,71 @@ static func _validate_control(control: Variant, window_id: String, control_index
 				errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
 					"unsupported gesture: %s" % str(gesture)))
 	_validate_actions(control.get("actions"), gestures, path + ".actions", errors)
+
+
+static func _validate_type_contract(control: Dictionary, control_type: String,
+		path: String, errors: Array[Dictionary]) -> void:
+	if control_type == "Range":
+		_validate_range_contract(control, path, errors)
+	elif control_type == "Dropdown" or control_type == "ChoiceGroup":
+		_validate_choice_contract(control, control_type, path, errors)
+
+
+static func _validate_range_contract(control: Dictionary, path: String,
+		errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var valid := value is Dictionary
+	if valid:
+		for field in ["minimum", "maximum", "initial", "arrow_step", "wheel_step"]:
+			valid = valid and _number(value.get(field))
+	if valid:
+		valid = float(value.minimum) < float(value.maximum) \
+			and float(value.initial) >= float(value.minimum) \
+			and float(value.initial) <= float(value.maximum) \
+			and float(value.arrow_step) > 0.0 and float(value.wheel_step) > 0.0
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"Range requires ordered bounds, an in-range initial value, and positive steps"))
+	var surfaces: Variant = control.get("surfaces")
+	if not surfaces is Dictionary or not ["track", "thumb", "decrement", "increment"].all(
+			func(surface): return surfaces.has(surface)):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".surfaces",
+			"Range requires track, thumb, decrement, and increment surfaces"))
+
+
+static func _validate_choice_contract(control: Dictionary, control_type: String,
+		path: String, errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var choices: Array = value.get("choices", []) if value is Dictionary else []
+	var initial: Variant = value.get("initial") if value is Dictionary else null
+	var unique := {}
+	var valid := not choices.is_empty()
+	for choice in choices:
+		valid = valid and choice is String and not str(choice).is_empty() and not unique.has(choice)
+		unique[choice] = true
+	valid = valid and initial in choices
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"%s requires unique non-empty choices and a declared initial choice" % control_type))
+	var surfaces: Variant = control.get("surfaces")
+	if control_type == "Dropdown":
+		if not surfaces is Dictionary or not surfaces.has("field") or not surfaces.has("arrow"):
+			errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".surfaces",
+				"Dropdown requires field and arrow surfaces"))
+		var tokens: Variant = control.get("tokens")
+		if not tokens is Dictionary or not ["fill", "border", "highlight", "text"].all(
+				func(token): return tokens.has(token) and not str(tokens[token]).is_empty()):
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".tokens",
+				"Dropdown requires fill, border, highlight, and text tokens"))
+	else:
+		if not surfaces is Dictionary or not choices.all(func(choice):
+				return surfaces.has(str(choice)) and surfaces[str(choice)] is Dictionary \
+				and surfaces[str(choice)].has("geometry") \
+				and surfaces[str(choice)].has("state_set") \
+				and surfaces[str(choice)].state_set.has("selected") \
+				and surfaces[str(choice)].state_set.has("unselected")):
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
+				"ChoiceGroup requires selected/unselected State Sets for every choice"))
 
 
 static func _validate_surfaces(surfaces: Variant, path: String,

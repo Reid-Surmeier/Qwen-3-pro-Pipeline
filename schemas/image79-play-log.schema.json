@@ -4,7 +4,7 @@
   "title": "Image 79 Play Log",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "candidate", "required_controls", "console_errors", "actions"],
+  "required": ["schema_version", "candidate", "required_controls", "required_actions", "console_errors", "actions"],
   "properties": {
     "schema_version": {"const": "image79-play-log-v1"},
     "candidate": {
@@ -23,6 +23,12 @@
       "uniqueItems": true,
       "items": {"type": "string", "minLength": 1}
     },
+    "required_actions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/requiredAction"}
+    },
     "console_errors": {"type": "array", "items": {"type": "string"}},
     "actions": {
       "type": "array",
@@ -31,6 +37,16 @@
     }
   },
   "$defs": {
+    "requiredAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control_id", "gesture", "window_action"],
+      "properties": {
+        "control_id": {"type": "string", "minLength": 1},
+        "gesture": {"type": "string", "minLength": 1},
+        "window_action": {"type": "string", "minLength": 1}
+      }
+    },
     "frame": {
       "type": "object",
       "additionalProperties": false,
@@ -43,10 +59,11 @@
     "action": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["control_id", "gesture", "expected", "observed", "responsive", "matches_expected", "assertions", "frames"],
+      "required": ["control_id", "gesture", "window_action", "expected", "observed", "responsive", "matches_expected", "assertions", "frames"],
       "properties": {
         "control_id": {"type": "string", "minLength": 1},
         "gesture": {"type": "string", "minLength": 1},
+        "window_action": {"type": "string", "minLength": 1},
         "expected": {"type": "string", "minLength": 1},
         "observed": {"type": "string", "minLength": 1},
         "responsive": {"type": "boolean"},

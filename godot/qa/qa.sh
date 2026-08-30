@@ -6,6 +6,7 @@ GODOT="${GODOT_BIN:-$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stabl
 cd "$(dirname "$0")/.."
 mkdir -p qa/out
 : > qa/out/import.log
+rm -f qa/out/capture.png qa/out/fidelity.json qa/out/interact.json
 
 echo "==> import"
 "$GODOT" --headless --path . --import >> qa/out/import.log 2>&1
@@ -37,9 +38,10 @@ if [ "${QA_CAPTURE:-1}" = "1" ]; then
   interact_rc=$?
 fi
 
-python3.12 - "$import_rc" "$contracts_rc" "$image79_rc" "$capture_rc" "$fidelity_rc" "$interact_rc" <<'PY'
+python3.12 - "$import_rc" "$contracts_rc" "$image79_rc" "$capture_rc" "$fidelity_rc" "$interact_rc" "${QA_CAPTURE:-1}" <<'PY'
 import json, sys, pathlib
 import_rc, contracts_rc, image79_rc, capture_rc, fidelity_rc, interact_rc = map(int, sys.argv[1:7])
+capture_required = sys.argv[7] == "1"
 out = pathlib.Path("qa/out")
 report = {
     "import": {"exit": import_rc,
@@ -56,10 +58,19 @@ report = {
     "interact": json.loads(out.joinpath("interact.json").read_text())
                 if out.joinpath("interact.json").exists() else {"exit": interact_rc},
 }
-hard_fail = bool(report["import"]["errors"]) \
+hard_fail = import_rc != 0 \
+    or bool(report["import"]["errors"]) \
+    or contracts_rc != 0 \
+    or image79_rc != 0 \
     or report["contracts"].get("failed", 1) != 0 \
-    or report["image79"].get("failed", 1) != 0 \
-    or report["interact"].get("failed", 1) != 0
+    or report["image79"].get("failed", 1) != 0
+if capture_required:
+    hard_fail = hard_fail \
+        or capture_rc != 0 \
+        or fidelity_rc != 0 \
+        or report["fidelity"].get("pass") is not True \
+        or interact_rc != 0 \
+        or report["interact"].get("failed", 1) != 0
 report["pass"] = not hard_fail
 out.joinpath("report.json").write_text(json.dumps(report, indent=2))
 print(json.dumps({"pass": report["pass"],

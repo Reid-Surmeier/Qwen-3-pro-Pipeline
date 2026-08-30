@@ -44,6 +44,28 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
     elif len(set(required)) != len(required):
         problems.append("required_controls must not contain duplicates")
 
+    required_actions = log.get("required_actions")
+    required_action_keys: list[tuple[str, str, str]] = []
+    if not isinstance(required_actions, list) or not required_actions:
+        problems.append("required_actions must be a non-empty array")
+    else:
+        for index, required_action in enumerate(required_actions):
+            label = f"required_actions[{index}]"
+            if not isinstance(required_action, dict):
+                problems.append(f"{label} must be an object")
+                continue
+            fields = tuple(required_action.get(field) for field in (
+                "control_id", "gesture", "window_action"
+            ))
+            if not all(_nonempty_string(value) for value in fields):
+                problems.append(
+                    f"{label} must name a control_id, gesture, and window_action"
+                )
+                continue
+            required_action_keys.append(fields)  # type: ignore[arg-type]
+        if len(set(required_action_keys)) != len(required_action_keys):
+            problems.append("required_actions must not contain duplicates")
+
     console_errors = log.get("console_errors")
     if not isinstance(console_errors, list) or not all(
         isinstance(entry, str) for entry in console_errors
@@ -59,6 +81,7 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
         actions = []
 
     seen: set[str] = set()
+    seen_actions: set[tuple[str, str, str]] = set()
     verified_frames: set[Path] = set()
     for index, action in enumerate(actions):
         label = f"actions[{index}]"
@@ -67,12 +90,17 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
             continue
         control_id = action.get("control_id")
         gesture = action.get("gesture")
+        window_action = action.get("window_action")
         if not _nonempty_string(control_id):
             problems.append(f"{label}.control_id must be non-empty")
         else:
             seen.add(control_id)
         if not _nonempty_string(gesture):
             problems.append(f"{label}.gesture must be non-empty")
+        if not _nonempty_string(window_action):
+            problems.append(f"{label}.window_action must be non-empty")
+        if all(_nonempty_string(value) for value in (control_id, gesture, window_action)):
+            seen_actions.add((control_id, gesture, window_action))
         for field in ("expected", "observed"):
             if not _nonempty_string(action.get(field)):
                 problems.append(f"{label}.{field} must be non-empty")
@@ -118,11 +146,14 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
                 verified_frames.add(verified)
 
     unexercised = [control_id for control_id in required if control_id not in seen]
+    unexercised_actions = [
+        ":".join(action) for action in required_action_keys if action not in seen_actions
+    ]
     if problems:
         verdict = "INVALID"
     elif failures:
         verdict = "FAIL"
-    elif unexercised:
+    elif unexercised or unexercised_actions:
         verdict = "INCOMPLETE"
     else:
         verdict = "PASS"
@@ -131,6 +162,7 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
         "actions": len(actions),
         "frames_verified": len(verified_frames),
         "unexercised": unexercised,
+        "unexercised_actions": unexercised_actions,
         "failures": failures,
         "problems": problems,
     }
@@ -174,6 +206,7 @@ def _invalid(problem: str) -> dict[str, Any]:
         "actions": 0,
         "frames_verified": 0,
         "unexercised": [],
+        "unexercised_actions": [],
         "failures": [],
         "problems": [problem],
     }

@@ -85,6 +85,16 @@
     1024
    ],
    "sha256_file": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+  },
+  {
+   "file": "native-crispness-4x.png",
+   "classification": "comparison evidence",
+   "derivation": "4x nearest-neighbor enlargement of a 160x24 native title-strip crop used to judge crispness; not an authoritative source",
+   "size": [
+    640,
+    96
+   ],
+   "sha256_file": "687109f32979e9f185eef8b87648f81058bbecf16bee37cc3ca676e5fbdd2192"
   }
  ],
  "limitation": "The byte-exact original upload could not be exported. The only endpoint that returns the original S3 object, GET /v1/files/:key/images, needs the files:read OAuth scope; the local Figma credential is scoped mcp:connect only and returns 403 on every REST v1 call including /v1/me. download_assets (which returns rawImages) refuses FigJam files. The originals were read in-process through the Figma Plugin API (getImageByHash().getBytesAsync()) and hashed there, but use_figma truncates its response at 20KB so 2.06MB of bytes cannot be ferried out. The stored copies are the highest-fidelity obtainable form: correct native dimensions, 91.4% of pixels byte-identical to the original, max channel error 6/255."

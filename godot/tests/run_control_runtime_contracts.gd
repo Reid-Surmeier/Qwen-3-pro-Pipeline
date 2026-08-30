@@ -3,12 +3,17 @@ extends SceneTree
 
 const ControlSpec = preload("res://control_library/control_spec.gd")
 const ControlRuntime = preload("res://control_library/control_runtime.gd")
+const ControlWindowScript = preload("res://control_library/control_window.gd")
 
 var results: Array[Dictionary] = []
 var runtime
 
 
 func _init() -> void:
+	call_deferred("_run")
+
+
+func _run() -> void:
 	var loaded: Dictionary = ControlSpec.load_and_validate(
 		"res://data/image-79-control-spec.json")
 	_check("fixture-valid", loaded.errors.is_empty(), str(loaded.errors))
@@ -19,6 +24,7 @@ func _init() -> void:
 	_contract_range_drag_is_monotonic_and_clamped()
 	_contract_dropdown_opens_selects_and_dismisses()
 	_contract_choice_group_selects_one_declared_choice()
+	await _contract_choice_group_has_a_window_adapter()
 	_contract_unsupported_gesture_fails_closed()
 	_contract_qa_state_is_factual()
 	_write_report()
@@ -88,6 +94,38 @@ func _contract_choice_group_selects_one_declared_choice() -> void:
 		and not rejected.ok and state.value == "three", str([selected, rejected, state]))
 
 
+func _contract_choice_group_has_a_window_adapter() -> void:
+	var image := "res://assets/image-79/options/checkbox-unchecked-idle.png"
+	var variants := {"idle": image, "hover": image, "pressed": image}
+	var fixture := {
+		"id": "fixture", "geometry": {"x": 0, "y": 0, "width": 80, "height": 32},
+		"plates": {"expanded": image, "minimized": image},
+		"controls": [{
+			"id": "fixture.mode", "type": "ChoiceGroup",
+			"geometry": {"x": 0, "y": 0, "width": 40, "height": 16},
+			"interaction_phases": ["idle", "hover", "pressed"],
+			"semantic_states": ["ready"], "initial_semantic_state": "ready",
+			"state_set": {"ready": variants}, "gestures": ["Activate"],
+			"actions": [{"gesture": "Activate", "action": "SelectChoice"}],
+			"value": {"choices": ["one", "two"], "initial": "one"},
+			"surfaces": {
+				"one": {"geometry": {"x": 0, "y": 0, "width": 16, "height": 16},
+					"state_set": {"selected": variants, "unselected": variants}},
+				"two": {"geometry": {"x": 20, "y": 0, "width": 16, "height": 16},
+					"state_set": {"selected": variants, "unselected": variants}},
+			},
+		}],
+	}
+	var choice_window = ControlWindowScript.new()
+	choice_window.configure(fixture)
+	get_root().add_child(choice_window)
+	await process_frame
+	var state: Dictionary = choice_window.qa_state().controls["fixture.mode"]
+	_check("choice-group-window-adapter", state.rendered and state.visible
+		and state.geometry.width == 40.0, str(state))
+	choice_window.queue_free()
+
+
 func _contract_unsupported_gesture_fails_closed() -> void:
 	var before: Dictionary = runtime.qa_state().controls["options.attack"].duplicate(true)
 	var result: Dictionary = runtime.dispatch("options.attack", "Drag", {"normalized": 1.0})
@@ -101,7 +139,13 @@ func _contract_qa_state_is_factual() -> void:
 	var state: Dictionary = runtime.qa_state()
 	_check("qa-state", state.window_id == "options" and state.controls.size() == 11
 		and state.controls["options.bgm"].value == 100.0
+		and state.controls["options.bgm"].geometry.width == 264
+		and state.controls["options.bgm"].visible
+		and state.controls["options.bgm"].z_index == 0
+		and state.controls["options.bgm"].last_result.accepted
+		and state.controls["options.skin"].text == "tanublue"
 		and state.controls["options.attack"].interaction_phase == "idle"
+		and not state.controls["options.attack"].last_result.accepted
 		and state.interaction_log.size() >= 38, str(state))
 
 

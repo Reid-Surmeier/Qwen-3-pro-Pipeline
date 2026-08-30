@@ -120,6 +120,19 @@ func _contract_failures_are_named_and_fail_closed() -> void:
 		"expected": "AssetIntegrityError",
 		"assets": func(path: String) -> bool: return not path.ends_with("missing-surface.png")})
 
+	var malformed_range := _valid_manifest()
+	malformed_range.windows[0].controls[0].type = "Range"
+	malformed_range.windows[0].controls[0].value = {"minimum": 100, "maximum": 0}
+	cases.append({"name": "malformed-range", "manifest": malformed_range,
+		"expected": "InvalidStateSet", "assets": _all_assets_exist})
+
+	var malformed_dropdown := _valid_manifest()
+	malformed_dropdown.windows[0].controls[0].type = "Dropdown"
+	malformed_dropdown.windows[0].controls[0].value = {
+		"choices": ["one", "one"], "initial": "missing"}
+	cases.append({"name": "malformed-dropdown", "manifest": malformed_dropdown,
+		"expected": "InvalidStateSet", "assets": _all_assets_exist})
+
 	var duplicate := _valid_manifest()
 	duplicate.windows[0].controls.append(duplicate.windows[0].controls[0].duplicate(true))
 	cases.append({"name": "duplicate-control", "manifest": duplicate,

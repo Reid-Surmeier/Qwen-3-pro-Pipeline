@@ -32,11 +32,16 @@ class PlayLogVerdictTests(unittest.TestCase):
                 "window_id": "options",
             },
             "required_controls": ["options.bgm", "options.skin"],
+            "required_actions": [
+                {"control_id": "options.bgm", "gesture": "Drag", "window_action": "SetRange"},
+                {"control_id": "options.skin", "gesture": "Activate", "window_action": "ToggleDropdown"},
+            ],
             "console_errors": [],
             "actions": [
                 {
                     "control_id": "options.bgm",
                     "gesture": "Drag",
+                    "window_action": "SetRange",
                     "expected": "continuous and clamped",
                     "observed": "31 monotonic samples reached both endpoints",
                     "responsive": True,
@@ -57,6 +62,7 @@ class PlayLogVerdictTests(unittest.TestCase):
                 {
                     "control_id": "options.skin",
                     "gesture": "Activate",
+                    "window_action": "ToggleDropdown",
                     "expected": "open themed list",
                     "observed": "list opened",
                     "responsive": True,
@@ -78,6 +84,17 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root)
         self.assertEqual("INCOMPLETE", verdict["verdict"])
         self.assertEqual(["options.skin"], verdict["unexercised"])
+
+    def test_unexercised_manifest_action_is_incomplete(self) -> None:
+        log = self._valid_log()
+        log["required_actions"].append(
+            {"control_id": "options.bgm", "gesture": "Wheel", "window_action": "StepRange"}
+        )
+        verdict = evaluate_play_log(log, self.root)
+        self.assertEqual("INCOMPLETE", verdict["verdict"])
+        self.assertEqual(
+            ["options.bgm:Wheel:StepRange"], verdict["unexercised_actions"]
+        )
 
     def test_false_action_claim_fails(self) -> None:
         log = self._valid_log()

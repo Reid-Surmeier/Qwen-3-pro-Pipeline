@@ -27,6 +27,7 @@ func _run() -> void:
 	await _toggle_reversal()
 	await _range_drag()
 	await _dropdown_lifecycle()
+	await _escape_without_open_dropdown_is_inert()
 	await _minimize_restore()
 	await _window_drag()
 	_write_report()
@@ -56,7 +57,8 @@ func _pressed_phase_publication() -> void:
 		await _release(fixture.point)
 		if fixture.id == "options.attack":
 			await _click(fixture.point)
-	window.dismiss_dropdowns()
+	if window.qa_state().controls["options.skin"].semantic_state == "open":
+		await _key(KEY_ESCAPE)
 	_check("pressed-phase-publication", published,
 		"state changes=%d" % state_change_count)
 
@@ -103,12 +105,22 @@ func _dropdown_lifecycle() -> void:
 		and selected.semantic_state == "closed" and dismissed == "closed", str(selected))
 
 
+func _escape_without_open_dropdown_is_inert() -> void:
+	await _key(KEY_ESCAPE)
+	_check("closed-dropdown-escape-is-inert", window.visible,
+		str(window.qa_state().window))
+
+
 func _minimize_restore() -> void:
 	var point := window.global_position + Vector2(382, 17)
 	await _click(point)
-	var minimized := window.minimized and window.size.y == 28.0
+	var minimized_state: Dictionary = window.qa_state().window
 	await _click(point)
-	var restored := not window.minimized and window.size == Vector2(424, 202)
+	var restored_state: Dictionary = window.qa_state().window
+	var minimized: bool = bool(minimized_state.minimized) \
+		and minimized_state.size == [424.0, 28.0]
+	var restored: bool = not bool(restored_state.minimized) \
+		and restored_state.size == [424.0, 202.0]
 	_check("real-distinct-minimize-restore", minimized and restored,
 		str(window.qa_state().window))
 
@@ -116,12 +128,13 @@ func _minimize_restore() -> void:
 func _window_drag() -> void:
 	var start := window.global_position + Vector2(100, 14)
 	var target := start + Vector2(-80, 90)
-	var before := window.position
+	var before: Array = window.qa_state().window.position
 	await _press(start)
 	await _move(target, true)
 	await _release(target)
-	_check("real-window-drag", window.position.is_equal_approx(before + Vector2(-80, 90)),
-		str([before, window.position]))
+	var after: Array = window.qa_state().window.position
+	_check("real-window-drag", is_equal_approx(after[0], before[0] - 80.0)
+		and is_equal_approx(after[1], before[1] + 90.0), str([before, after]))
 
 
 func _click(point: Vector2) -> void:

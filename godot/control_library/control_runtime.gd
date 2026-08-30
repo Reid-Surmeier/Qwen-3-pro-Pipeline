@@ -26,9 +26,17 @@ func configure(spec: Dictionary) -> Dictionary:
 			"semantic_state": str(control_spec.initial_semantic_state),
 			"last_action": "",
 			"last_error": null,
+			"geometry": control_spec.get("geometry", {}).duplicate(true),
+			"visible": true,
+			"z_index": 0,
+			"rendered": false,
+			"text": "",
+			"last_result": {"accepted": false, "action": "", "error": null},
 		}
 		if control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
+			if state.value is String:
+				state.text = state.value
 		controls[control_id] = {"spec": control_spec.duplicate(true), "state": state}
 	return {"ok": true, "window_id": str(window_spec.get("id", "")),
 		"control_count": controls.size()}
@@ -73,6 +81,10 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 				"control type has no runtime action adapter")
 	if result.get("ok", false):
 		entry.state.last_error = null
+		entry.state.last_result = {"accepted": true,
+			"action": str(entry.state.last_action), "error": null}
+		if entry.state.get("value") is String:
+			entry.state.text = str(entry.state.value)
 		interaction_log.append({"control_id": control_id, "gesture": gesture,
 			"accepted": true, "semantic_state": entry.state.semantic_state,
 			"value": entry.state.get("value")})
@@ -202,6 +214,8 @@ func _reject(control_id: String, gesture: String, code: String, detail: String) 
 	var error := {"code": code, "detail": detail}
 	if controls.has(control_id):
 		controls[control_id].state.last_error = error
+		controls[control_id].state.last_result = {
+			"accepted": false, "action": "", "error": error}
 	interaction_log.append({"control_id": control_id, "gesture": gesture,
 		"accepted": false, "error": error})
 	return {"ok": false, "error": error}

@@ -8,6 +8,7 @@ signal state_changed(window_id: String)
 const BitmapControlScript = preload("res://control_library/bitmap_control.gd")
 const RangeControlScript = preload("res://control_library/range_control.gd")
 const DropdownControlScript = preload("res://control_library/dropdown_control.gd")
+const ChoiceGroupControlScript = preload("res://control_library/choice_group.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
@@ -50,6 +51,8 @@ func _ready() -> void:
 				node = RangeControlScript.new()
 			"Dropdown":
 				node = DropdownControlScript.new()
+			"ChoiceGroup":
+				node = ChoiceGroupControlScript.new()
 			_:
 				continue
 		node.configure(control_spec, runtime)
@@ -63,6 +66,16 @@ func _ready() -> void:
 
 func qa_state() -> Dictionary:
 	var state := runtime.qa_state()
+	for control_id in control_nodes:
+		var node: Control = control_nodes[control_id]
+		var rect := node.get_global_rect()
+		state.controls[control_id].geometry = {
+			"x": rect.position.x, "y": rect.position.y,
+			"width": rect.size.x, "height": rect.size.y,
+		}
+		state.controls[control_id].visible = node.is_visible_in_tree()
+		state.controls[control_id].z_index = node.z_index
+		state.controls[control_id].rendered = true
 	state.window = {
 		"id": str(spec.id),
 		"position": [position.x, position.y],
@@ -132,14 +145,12 @@ func _window_input(event: InputEvent) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		var skin: Dictionary = runtime.qa_state().controls.get("options.skin", {})
-		if skin.get("semantic_state") == "open":
-			dismiss_dropdowns()
-		else:
-			dismiss_dropdowns()
-			visible = false
-			state_changed.emit(str(spec.id))
-		get_viewport().set_input_as_handled()
+		for control_id in control_nodes:
+			var node: Control = control_nodes[control_id]
+			if node is DropdownControl and runtime.qa_state().controls[control_id].semantic_state == "open":
+				node.dismiss()
+				get_viewport().set_input_as_handled()
+				return
 
 
 func _control_changed(control_id: String, result: Dictionary) -> void:

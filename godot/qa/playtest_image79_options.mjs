@@ -58,10 +58,10 @@ const shot = async (name) => {
 const checks = [];
 const actions = [];
 const check = (name, passed, detail) => checks.push({ name, passed, detail });
-const record = (controlId, gesture, expected, observed, assertions, actionFrames,
+const record = (controlId, gesture, windowAction, expected, observed, assertions, actionFrames,
   motionSamples = undefined) => {
   const matches = Object.values(assertions).every(Boolean);
-  const action = { control_id: controlId, gesture, expected, observed,
+  const action = { control_id: controlId, gesture, window_action: windowAction, expected, observed,
     responsive: matches, matches_expected: matches, assertions, frames: actionFrames };
   if (motionSamples !== undefined) action.motion_samples = motionSamples;
   actions.push(action);
@@ -90,7 +90,7 @@ async function exerciseToggle(id, x, y, index) {
     toggled: afterState.semantic_state !== beforeState.semantic_state,
     reversible: reversed.semantic_state === beforeState.semantic_state,
   };
-  record(id, "Activate", "toggle in one frame and reverse on a second click",
+  record(id, "Activate", "ToggleValue", "toggle in one frame and reverse on a second click",
     `${beforeState.semantic_state} -> ${afterState.semantic_state} -> ${reversed.semantic_state}`,
     assertions, { before, after, reversed: reversedFrame });
   check(`${id}-activate`, Object.values(assertions).every(Boolean), assertions);
@@ -111,7 +111,7 @@ async function exerciseRangeButton(id, x, y, direction, index) {
     pressed_exposed: pressed.interaction_phase === "pressed",
     stepped: direction < 0 ? afterState.value < beforeState.value : afterState.value > beforeState.value,
   };
-  record(id, "Activate", "arrow steps the Range and exposes pressed state",
+  record(id, "Activate", "StepRange", "arrow steps the Range and exposes pressed state",
     `${beforeState.value} -> ${afterState.value}`, assertions, { before, after });
   check(`${id}-activate`, Object.values(assertions).every(Boolean), assertions);
 }
@@ -126,7 +126,7 @@ async function exerciseWheel(id, x, y, index) {
   const afterState = await control(id);
   const after = await shot(`${index}-${id.replaceAll(".", "-")}-wheel-after`);
   const assertions = { wheel_stepped: afterState.value > beforeState.value };
-  record(id, "Wheel", "wheel input steps and clamps the Range",
+  record(id, "Wheel", "StepRange", "wheel input steps and clamps the Range",
     `${beforeState.value} -> ${afterState.value}`, assertions, { before, after });
   check(`${id}-wheel`, assertions.wheel_stepped, assertions);
 }
@@ -157,7 +157,7 @@ async function exerciseRangeDrag(id, y, index, reverse) {
     || (reverse ? value <= values[sample - 1] : value >= values[sample - 1]));
   const endpoint = reverse ? afterState.value <= 1 : afterState.value >= 99;
   const assertions = { continuous: values.length === 31, monotonic, endpoint_clamped: endpoint };
-  record(id, "Drag", "31-frame continuous drag reaches a clamped endpoint",
+  record(id, "Drag", "SetRange", "31-frame continuous drag reaches a clamped endpoint",
     `${beforeState.value} -> ${afterState.value} across ${values.length} samples`,
     assertions, { before, mid, after }, values);
   check(`${id}-drag`, Object.values(assertions).every(Boolean), assertions);
@@ -191,17 +191,33 @@ const dropdownAssertions = {
   pressed_exposed: dropdownPressed.interaction_phase === "pressed",
   opened: dropdownOpened.semantic_state === "open",
 };
-record("options.skin", "Activate", "open the themed list in one frame",
+record("options.skin", "Activate", "ToggleDropdown", "open the themed list in one frame",
   dropdownOpened.semantic_state, dropdownAssertions,
   { before: dropdownBefore, after: dropdownAfter });
 check("options.skin-activate", Object.values(dropdownAssertions).every(Boolean), dropdownAssertions);
+
+const skinChoiceBefore = await shot("15-options-skin-select-before");
+const skinChoicePoint = point(1300, 514);
+await page.mouse.click(skinChoicePoint.x, skinChoicePoint.y);
+const skinSelected = await control("options.skin");
+const skinChoiceAfter = await shot("15-options-skin-select-after");
+const skinChoiceAssertions = {
+  selected: skinSelected.value === "tanublue",
+  closed: skinSelected.semantic_state === "closed",
+};
+record("options.skin", "Activate", "SelectChoice", "select a themed row and close the list",
+  JSON.stringify(skinSelected), skinChoiceAssertions,
+  { before: skinChoiceBefore, after: skinChoiceAfter });
+check("options.skin-select", Object.values(skinChoiceAssertions).every(Boolean), skinChoiceAssertions);
+
+await page.mouse.click(dropdownPoint.x, dropdownPoint.y);
 
 const skinEscapeBefore = await shot("15-options-skin-key-before");
 await page.keyboard.press("Escape");
 const skinDismissed = await control("options.skin");
 const skinEscapeAfter = await shot("15-options-skin-key-after");
 const skinKeyAssertions = { dismissed: skinDismissed.semantic_state === "closed" };
-record("options.skin", "KeyCommand", "Escape dismisses without changing the value",
+record("options.skin", "KeyCommand", "DismissDropdown", "Escape dismisses without changing the value",
   skinDismissed.semantic_state, skinKeyAssertions,
   { before: skinEscapeBefore, after: skinEscapeAfter });
 check("options.skin-key", skinKeyAssertions.dismissed, skinKeyAssertions);
@@ -220,7 +236,7 @@ const minimizeAssertions = {
   position_preserved: minimized.position[0] === restored.position[0]
     && minimized.position[1] === restored.position[1],
 };
-record("options.minimize", "Activate", "swap to a purpose-built minimized Window and restore",
+record("options.minimize", "Activate", "ToggleMinimized", "swap to a purpose-built minimized Window and restore",
   JSON.stringify({ minimized, restored }), minimizeAssertions,
   { before: minimizeBefore, after: minimizeAfter, restored: restoredFrame });
 check("options.minimize-activate", Object.values(minimizeAssertions).every(Boolean), minimizeAssertions);
@@ -246,7 +262,7 @@ const windowDragAssertions = {
   continuous: windowPositions.length === 31,
   pointer_delta_applied: Math.abs(moved[0] - 1028) < 1 && Math.abs(moved[1] - 387) < 1,
 };
-record("options", "Drag", "Window follows the pointer without tweening",
+record("options", "Drag", "MoveWindow", "Window follows the pointer without tweening",
   JSON.stringify(moved), windowDragAssertions,
   { before: dragBefore, mid: dragMid, after: dragAfter }, windowPositions);
 check("window-drag", Object.values(windowDragAssertions).every(Boolean), windowDragAssertions);
@@ -257,14 +273,15 @@ await page.mouse.click(closePoint.x, closePoint.y);
 const closed = (await options()).window;
 const closeAfter = await shot("18-options-close-after");
 const closeAssertions = { hidden: closed.visible === false };
-record("options.close", "Activate", "close hides the Window in one frame",
+record("options.close", "Activate", "CloseWindow", "close hides the Window in one frame",
   JSON.stringify(closed), closeAssertions, { before: closeBefore, after: closeAfter });
 check("options.close-activate", closeAssertions.hidden, closeAssertions);
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT, "godot/data/image-79-control-spec.json"), "utf8"));
 const manifestActions = manifest.windows[0].controls.flatMap((entry) =>
-  entry.actions.map((binding) => `${entry.id}:${binding.gesture}`));
-const covered = new Set(actions.map((entry) => `${entry.control_id}:${entry.gesture}`));
+  entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`));
+const covered = new Set(actions.map((entry) =>
+  `${entry.control_id}:${entry.gesture}:${entry.window_action}`));
 const missingActions = manifestActions.filter((binding) => !covered.has(binding));
 check("manifest-action-coverage", missingActions.length === 0, missingActions);
 
@@ -272,6 +289,9 @@ const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
   || entry.startsWith("[pageerror]"));
 check("zero-console-errors", errors.length === 0, errors);
 const requiredControls = manifest.windows[0].controls.map((entry) => entry.id);
+const requiredActions = manifest.windows[0].controls.flatMap((entry) =>
+  entry.actions.map((binding) => ({ control_id: entry.id, gesture: binding.gesture,
+    window_action: binding.action })));
 const playLog = {
   schema_version: "image79-play-log-v1",
   candidate: {
@@ -281,6 +301,7 @@ const playLog = {
     window_id: "options",
   },
   required_controls: requiredControls,
+  required_actions: requiredActions,
   console_errors: errors,
   actions,
 };

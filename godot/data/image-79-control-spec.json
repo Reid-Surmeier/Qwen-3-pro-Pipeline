@@ -208,6 +208,7 @@
           "gestures": ["Activate", "KeyCommand"],
           "actions": [
             {"gesture": "Activate", "action": "ToggleDropdown"},
+            {"gesture": "Activate", "action": "SelectChoice"},
             {"gesture": "KeyCommand", "action": "DismissDropdown"}
           ]
         }
