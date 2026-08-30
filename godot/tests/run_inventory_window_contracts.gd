@@ -151,10 +151,12 @@ func _minimize_restore_resized() -> void:
 	await _click(Vector2(minimize_geometry.x + minimize_geometry.width / 2.0,
 		minimize_geometry.y + minimize_geometry.height / 2.0))
 	var restored: Dictionary = window.qa_state().window
+	var restored_items: Dictionary = window.qa_state().controls["inventory.items"]
 	_check("real-resized-minimize-restore", minimized.minimized
 		and minimized.size == [484.0, 28.0] and not restored.minimized
-		and restored.size == before.size and restored.position == before.position,
-		str([before, minimized, restored]))
+		and restored.size == before.size and restored.position == before.position
+		and restored.detail_item == before.detail_item and restored_items.detail_visible,
+		str([before, minimized, restored, restored_items]))
 
 
 func _window_drag() -> void:

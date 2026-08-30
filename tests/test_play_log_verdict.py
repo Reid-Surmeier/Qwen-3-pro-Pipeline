@@ -185,6 +185,14 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.assertEqual("INVALID", verdict["verdict"])
         self.assertTrue(any("30 motion samples" in problem for problem in verdict["problems"]))
 
+    def test_window_drag_accepts_two_dimensional_motion_samples(self) -> None:
+        log = self._valid_log()
+        drag = next(action for action in log["actions"]
+                    if action["control_id"] == "options")
+        drag["motion_samples"] = [[index, index * 2] for index in range(31)]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
     def test_malformed_root_is_invalid_without_throwing(self) -> None:
         verdict = evaluate_play_log({"schema_version": "wrong"}, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])

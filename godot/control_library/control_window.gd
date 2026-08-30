@@ -468,6 +468,8 @@ func _toggle_minimized() -> void:
 		node.visible = not minimized or control_id in keep_visible
 	if not minimized:
 		_apply_view_mode()
+		if not detail_item.is_empty():
+			_show_selection_detail(detail_item)
 
 
 func _toggle_skill_view() -> void:

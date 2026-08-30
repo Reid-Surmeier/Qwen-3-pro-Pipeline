@@ -145,10 +145,17 @@ def evaluate_play_log(
         if gesture == "Drag":
             required_roles.add("mid")
             samples = action.get("motion_samples")
-            if not isinstance(samples, list) or len(samples) < 30 or not all(
-                isinstance(sample, (int, float)) and not isinstance(sample, bool)
-                for sample in samples
-            ):
+            def valid_motion_sample(sample: object) -> bool:
+                if isinstance(sample, (int, float)) and not isinstance(sample, bool):
+                    return True
+                return window_action != "SetRange" and isinstance(sample, list) \
+                    and len(sample) == 2 and all(
+                        isinstance(axis, (int, float)) and not isinstance(axis, bool)
+                        for axis in sample
+                    )
+
+            if not isinstance(samples, list) or len(samples) < 30 \
+                    or not all(valid_motion_sample(sample) for sample in samples):
                 problems.append(f"{label} Drag requires at least 30 motion samples")
         if not isinstance(frames, dict):
             problems.append(f"{label}.frames must be an object")

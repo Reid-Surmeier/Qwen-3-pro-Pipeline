@@ -264,6 +264,8 @@ record("inventory", "Resize", "ResizeWindow",
 const minimizeGeometry = resized.controls["inventory.minimize"].geometry;
 const minimizeX = minimizeGeometry.x + minimizeGeometry.width / 2;
 const minimizeY = minimizeGeometry.y + minimizeGeometry.height / 2;
+await page.mouse.move(point(1400, 900).x, point(1400, 900).y);
+await page.waitForTimeout(30);
 const minimizeBefore = await shot("08-minimize-before");
 await click(minimizeX, minimizeY);
 const minimized = (await inventory()).window;
@@ -272,6 +274,9 @@ const minimizedControl = await control("inventory.minimize");
 await click(minimizedControl.geometry.x + minimizedControl.geometry.width / 2,
   minimizedControl.geometry.y + minimizedControl.geometry.height / 2);
 const restored = (await inventory()).window;
+const restoredItems = await control("inventory.items");
+await page.mouse.move(point(1400, 900).x, point(1400, 900).y);
+await page.waitForTimeout(30);
 const minimizeRestored = await shot("08-minimize-restored");
 record("inventory.minimize", "Activate", "ToggleMinimized",
   "purpose-built title Window preserves the resized geometry on restore",
@@ -279,6 +284,7 @@ record("inventory.minimize", "Activate", "ToggleMinimized",
     minimized: minimized.minimized && minimized.size[0] === 484 && minimized.size[1] === 28,
     restored: !restored.minimized && restored.size[0] === 734 && restored.size[1] === 512,
     position_preserved: JSON.stringify(minimized.position) === JSON.stringify(restored.position),
+    detail_restored: restored.detail_item === "r0c1" && restoredItems.detail_visible,
   }, { before: minimizeBefore, after: minimizeAfter, restored: minimizeRestored });
 
 const closeBefore = await shot("09-close-before");
