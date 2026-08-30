@@ -7,8 +7,10 @@ Reference Screen: `artifacts/references/museum-filter-retro-skin-v001/style-ro-o
 ## Outcome
 
 **Four full-redraw Render Passes failed to reach the required fidelity, so the
-work moved to Assembly.  After owner review, one final two-output Qwen edit pass
-supplied bounded header, lettering and tab donors for Assembly v002.**
+work moved to Assembly.  A final two-output Qwen edit pass supplied foreground
+donors, but Assembly v002 was rejected because rectangular masks imported their
+backgrounds. Assembly v003 keeps Assembly v001's backgrounds and composites
+only native-scale glyph pixels.**
 
 ## What each pass got wrong
 
@@ -19,6 +21,29 @@ supplied bounded header, lettering and tab donors for Assembly v002.**
 | v003 | Any/All became two checkboxes, 4:5, palette pinned to sampled hexes | Size right. Font still too thick. Tabs wrong. Checkboxes not exact. Title misaligned. ✕ button wrong. |
 | v004 | Second reference: a 2–4× magnified parts sheet cut from the original | Closer on every axis, still not the original's chrome. |
 | v005 | Assembly v001 became the composition authority; the original and parts sheet became style authorities; 3:2 final edit | Candidate 1 supplied the continuous header/title; candidate 2 supplied the more consistent English raster lettering and stepped tabs. Both remained donor images, not the final Assembly. |
+
+## Assembly v003 correction
+
+The owner identified v002's remaining defect as Assembly, not generation:
+rectangles around the title, labels, material rows, and tabs carried Qwen's
+slightly different blue, white, and lavender backgrounds into the final image.
+The objective outside-mask score was true but insufficient because the declared
+mask itself owned far more background than the actual foreground change.
+
+Assembly v003 therefore returns to the 313×211 Assembly v001 native image. It
+restores the old glyph silhouettes from Assembly v001-owned backgrounds,
+registers the existing v005 candidate 2 at native scale, and admits only its
+foreground-valued glyph pixels. The title-bar gradient, right bead, close
+button, tab silhouettes, controls, frame, crop, and every other background
+pixel remain Assembly v001 pixels. The result is enlarged 4× with nearest-
+neighbour resampling; no new Render Pass ran.
+
+The v003 mask is the actual RGB difference rather than a declaration of
+enclosing rectangles: 6,197 native pixels (99,152 review-scale pixels), with
+zero changes and zero maximum channel error outside it. Every individual edit
+box is 36.3% filled or less, rather than being a solid donor patch. The right
+header controls are byte-identical to Assembly v001, and full/native visual
+readback found all 19 Exact Copy entries present.
 
 ## Why the first four passes did not fix it
 
@@ -46,9 +71,10 @@ and accepts their pixels only through explicit header, lettering and tab masks.
 The search-field edge, dropdown, body checkboxes, checkbox states, layout,
 border and crop remain Assembly v001 pixels outside those masks.
 
-The resulting Fidelity Check reports zero changed pixels and zero maximum
-channel error outside the declared mask.  That establishes strict preservation;
-human visual approval still decides whether the repaired regions are accepted.
+The v002 Fidelity Check reported zero changed pixels outside its rectangles,
+but that did not prove the rectangles were correctly owned. v003 closes that
+gap by deriving the edit mask from the actual foreground-shaped RGB change.
+Human visual approval still decides whether the repaired regions are accepted.
 
 ## Rule taken from this
 
@@ -56,6 +82,11 @@ Before spending on a Render Pass, ask whether the pixels being requested already
 exist in the Reference Screen. If they do, cut them and composite; generate only
 what is genuinely absent. A brief that has to *describe* existing artwork in
 prose is a signal the work belongs in Assembly.
+
+An edit mask must express source ownership, not merely contain a change. A
+rectangle around text can pass outside-mask identity while still importing an
+incorrect background. For flat interface bands and labels, restore the
+authoritative background first and composite only the foreground silhouette.
 
 ## Cost
 
