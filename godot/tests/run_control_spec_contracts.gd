@@ -151,6 +151,10 @@ func _contract_window_adapter_fields_fail_closed() -> void:
 	minimize.id = "options.minimize"
 	minimize.actions[0].action = "ToggleMinimized"
 	fixture.windows[0].controls.append(minimize)
+	var list_toggle: Dictionary = fixture.windows[0].controls[0].duplicate(true)
+	list_toggle.id = "options.list-toggle"
+	list_toggle.actions[0].action = "ToggleSkillView"
+	fixture.windows[0].controls.append(list_toggle)
 	fixture.windows[0].drag_geometry = {"x": 0, "y": 0, "width": 200, "height": 24}
 	fixture.windows[0].minimized_controls = ["options.minimize", "options.close"]
 	fixture.windows[0].plates.list = "res://options/list.png"
@@ -176,6 +180,13 @@ func _contract_window_adapter_fields_fail_closed() -> void:
 	_check("missing-list-plate-fails-closed",
 		"AssetIntegrityError" in list_errors.map(func(error): return error.code),
 		str(list_errors))
+
+	var omitted_list := fixture.duplicate(true)
+	omitted_list.windows[0].plates.erase("list")
+	var omitted_list_errors: Array = ControlSpec.validate(omitted_list, _all_assets_exist)
+	_check("omitted-required-list-plate-fails-closed",
+		"AssetIntegrityError" in omitted_list_errors.map(func(error): return error.code),
+		str(omitted_list_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:

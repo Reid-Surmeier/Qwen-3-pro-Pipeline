@@ -110,6 +110,15 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".controls",
 			"Window must contain at least one Control"))
 		return
+	var requires_list_plate: bool = controls.any(func(control):
+		if not control is Dictionary:
+			return false
+		var actions: Variant = control.get("actions", [])
+		return actions is Array and actions.any(func(binding):
+			return binding is Dictionary and binding.get("action") == "ToggleSkillView"))
+	if requires_list_plate and (not plates is Dictionary or not plates.has("list")):
+		errors.append(_error(Errors.ASSET_INTEGRITY, path + ".plates.list",
+			"a list plate is required when ToggleSkillView is bound"))
 	for control_index in controls.size():
 		_validate_control(controls[control_index], window_id, control_index,
 			control_ids, errors, asset_exists)

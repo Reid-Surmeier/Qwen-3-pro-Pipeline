@@ -32,12 +32,34 @@ func _ready() -> void:
 
 func rendered_facts() -> Dictionary:
 	var state: Dictionary = runtime.qa_state().controls[spec.id]
+	var rendered_visibility := {}
+	var rendered_arrow_pixels := {}
+	for surface_name in visuals:
+		rendered_visibility[surface_name] = visuals[surface_name].is_visible_in_tree()
+		rendered_arrow_pixels[surface_name] = _blue_pixel_count(visuals[surface_name].texture)
 	return {
 		"current": state.current,
 		"target": state.target,
 		"arrows_visible": state.arrows_visible,
+		"rendered_arrow_visibility": rendered_visibility,
+		"rendered_arrow_pixels": rendered_arrow_pixels,
 		"text_visible": value_label.visible,
 	}
+
+
+func _blue_pixel_count(texture: Texture2D) -> int:
+	if texture == null:
+		return 0
+	var image := texture.get_image()
+	if image == null:
+		return 0
+	var count := 0
+	for y in image.get_height():
+		for x in image.get_width():
+			var color := image.get_pixel(x, y)
+			if color.b > 0.45 and color.b > color.r + 0.12 and color.b > color.g + 0.03:
+				count += 1
+	return count
 
 
 func refresh() -> void:

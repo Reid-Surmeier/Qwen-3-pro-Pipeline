@@ -65,6 +65,7 @@ func rendered_facts() -> Dictionary:
 		"detail_visible": detail_panel != null and detail_panel.visible,
 		"detail_text": "" if detail_label == null else detail_label.text,
 		"list_values": _list_values(),
+		"list_labels": _rendered_list_labels(),
 	}
 
 
@@ -143,9 +144,19 @@ func _stepper_text(item: String) -> String:
 
 func _list_values() -> Dictionary:
 	var values := {}
-	for item in spec.value.items:
-		values[str(item)] = _stepper_text(str(item))
+	var labels: Dictionary = spec.value.get("labels", {})
+	for item in list_labels:
+		var prefix := str(labels.get(item, item)) + "   "
+		var rendered := str(list_labels[item].text)
+		values[str(item)] = rendered.trim_prefix(prefix)
 	return values
+
+
+func _rendered_list_labels() -> Dictionary:
+	var rendered := {}
+	for item in list_labels:
+		rendered[str(item)] = str(list_labels[item].text)
+	return rendered
 
 
 func _entered(item: String) -> void:

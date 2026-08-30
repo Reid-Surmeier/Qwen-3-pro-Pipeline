@@ -4,6 +4,17 @@ extends SceneTree
 var results: Array[Dictionary] = []
 var desktop: Control
 var window: ControlWindow
+const STEPPER_IDS := [
+	"skill_tree.stepper.r1c1", "skill_tree.stepper.r1c3", "skill_tree.stepper.r1c4",
+	"skill_tree.stepper.r1c5", "skill_tree.stepper.r1c6", "skill_tree.stepper.r2c1",
+	"skill_tree.stepper.r2c2", "skill_tree.stepper.r2c3", "skill_tree.stepper.r2c4",
+	"skill_tree.stepper.r2c5", "skill_tree.stepper.r3c1", "skill_tree.stepper.r3c2",
+	"skill_tree.stepper.r3c3", "skill_tree.stepper.r3c4", "skill_tree.stepper.r3c5",
+	"skill_tree.stepper.r3c6", "skill_tree.stepper.r4c1", "skill_tree.stepper.r4c2",
+	"skill_tree.stepper.r4c3", "skill_tree.stepper.r4c4", "skill_tree.stepper.r4c5",
+	"skill_tree.stepper.r4c6", "skill_tree.stepper.r5c1", "skill_tree.stepper.r5c3",
+	"skill_tree.stepper.r5c4", "skill_tree.stepper.r5c5",
+]
 
 
 func _init() -> void:
@@ -45,7 +56,7 @@ func _selection_and_context_activate() -> void:
 	_check("real-context-activate", detailed.last_gesture == "ContextActivate"
 		and detailed.last_action == "OpenSkillDetail"
 		and window_state.detail_item == "r1c3" and detailed.detail_visible
-		and detailed.detail_text == str(window.spec.controls[4].value.details["r1c3"]),
+		and detailed.detail_text == "ヒール\n10 / 10",
 		str([detailed, window_state]))
 
 
@@ -54,17 +65,18 @@ func _step_commit_cancel() -> void:
 	await _click(Vector2(1048, 15), MOUSE_BUTTON_LEFT)
 	await _click(Vector2(1048, 15), MOUSE_BUTTON_LEFT)
 	var stepper_id := "skill_tree.stepper.r2c4"
-	var increment := Vector2(877, 220)
+	var increment := Vector2(887, 220)
 	await _click(increment, MOUSE_BUTTON_LEFT)
 	var pending: Dictionary = window.qa_state()
 	var all_hidden := true
-	for control_id in pending.controls:
-		if str(control_id).begins_with("skill_tree.stepper."):
-			all_hidden = all_hidden and not bool(pending.controls[control_id].arrows_visible)
+	for control_id in STEPPER_IDS:
+		all_hidden = all_hidden and not bool(pending.controls[control_id].arrows_visible) \
+			and pending.controls[control_id].rendered_arrow_visibility.values().all(
+				func(visible): return not visible)
 	_check("real-stepper-pending", pending.window.pending and all_hidden
 		and pending.controls[stepper_id].text == "0 / 6", str(pending.controls[stepper_id]))
 	_check("real-stepper-pending-has-no-rendered-arrows",
-		_pending_arrow_pixel_count() == 0, str(_pending_arrow_pixel_count()))
+		all_hidden, str(pending.controls[stepper_id].rendered_arrow_visibility))
 
 	await _click(Vector2(957, 569), MOUSE_BUTTON_LEFT)
 	var committed: Dictionary = window.qa_state()
@@ -73,6 +85,13 @@ func _step_commit_cancel() -> void:
 		and committed.controls[stepper_id].target == 6
 		and committed.controls[stepper_id].arrows_visible,
 		str(committed.controls[stepper_id]))
+	var restored_arrow_pixels: Array[int] = []
+	for control_id in STEPPER_IDS:
+		restored_arrow_pixels.append_array(
+			Array(committed.controls[control_id].rendered_arrow_pixels.values()))
+	_check("real-stepper-restores-complete-arrows",
+		not restored_arrow_pixels.is_empty() and restored_arrow_pixels.min() >= 12,
+		str(restored_arrow_pixels))
 
 	var max_id := "skill_tree.stepper.r1c3"
 	var max_before: Dictionary = window.qa_state().controls[max_id].duplicate(true)
@@ -101,27 +120,10 @@ func _view_reversal() -> void:
 	_check("real-view-reversal", list_state.window.view_mode == "list"
 		and list_state.controls["skill_tree.skills"].list_mode
 		and list_state.controls["skill_tree.skills"].list_values["r2c4"] == "6 / 6"
+		and str(list_state.controls["skill_tree.skills"].list_labels["r2c4"]).ends_with("6 / 6")
 		and tree_state.window.view_mode == "tree"
 		and not tree_state.controls["skill_tree.skills"].list_mode,
 		str([list_state.window, tree_state.window]))
-
-
-func _pending_arrow_pixel_count() -> int:
-	var image := get_root().get_texture().get_image()
-	var count := 0
-	for control in window.spec.controls:
-		if str(control.type) != "Stepper":
-			continue
-		for surface_name in ["decrement", "increment"]:
-			var surface: Dictionary = control.surfaces[surface_name]
-			var x0 := int(window.global_position.x + control.geometry.x + surface.geometry.x) - 2
-			var y0 := int(window.global_position.y + control.geometry.y + surface.geometry.y)
-			for y in range(y0, y0 + int(surface.geometry.height) + 2):
-				for x in range(x0, x0 + int(surface.geometry.width) + 8):
-					var color := image.get_pixel(x, y)
-					if color.b > 0.45 and color.b > color.r + 0.12 and color.b > color.g + 0.03:
-						count += 1
-	return count
 
 
 func _description_toggle_reversal() -> void:

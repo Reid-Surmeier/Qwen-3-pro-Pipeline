@@ -137,15 +137,19 @@ check("context-detail-dismissed-before-stepper-visuals",
 
 const boundSpec = stepperSpecs.find((entry) => entry.id === "skill_tree.stepper.r1c3");
 const boundBefore = await control(boundSpec.id);
+const boundBeforeFrame = await shot("02b-bound-before");
 await click(boundBefore.geometry.x + boundBefore.geometry.width - 4,
   boundBefore.geometry.y + boundBefore.geometry.height / 2);
 const boundAfter = await control(boundSpec.id);
-check("stepper-bound-rejected-without-transaction",
-  boundAfter.last_result.accepted === false
-    && boundAfter.last_result.error?.code === "TransactionRejectedError"
-    && boundAfter.target === boundBefore.target
-    && (await skillTree()).window.pending === false,
-  boundAfter);
+const boundAfterFrame = await shot("02b-bound-rejected");
+record(boundSpec.id, "Activate", "StepSkill",
+  "a beyond-bound click rejects without opening a Window transaction",
+  JSON.stringify(boundAfter), {
+    rejected: boundAfter.last_result.accepted === false,
+    typed_error: boundAfter.last_result.error?.code === "TransactionRejectedError",
+    target_unchanged: boundAfter.target === boundBefore.target,
+    transaction_not_opened: (await skillTree()).window.pending === false,
+  }, { before: boundBeforeFrame, after: boundAfterFrame });
 
 for (const [index, spec] of stepperSpecs.entries()) {
   const before = await control(spec.id);

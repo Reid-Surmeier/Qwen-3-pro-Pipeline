@@ -104,15 +104,16 @@ func _contract_declared_actions_drive_runtime() -> void:
 
 func _contract_stepper_bounds_reject_without_mutation() -> void:
 	var bounded := ControlRuntime.new()
-	bounded.configure(_fixture())
+	var bounded_fixture := _fixture()
+	bounded_fixture.controls[2].value.current = 10
+	bounded_fixture.controls[2].value.target = 10
+	bounded_fixture.controls[1].value.current = 0
+	bounded_fixture.controls[1].value.target = 0
+	bounded.configure(bounded_fixture)
 	var before_max: Dictionary = bounded.qa_state().controls["skill_tree.stepper.holy-light"]
-	bounded.controls["skill_tree.stepper.holy-light"].state.target = 10
-	bounded.controls["skill_tree.stepper.holy-light"].state.current = 10
 	var rejected_max: Dictionary = bounded.dispatch("skill_tree.stepper.holy-light", "Activate",
 		{"direction": 1})
 	var after_max: Dictionary = bounded.qa_state().controls["skill_tree.stepper.holy-light"]
-	bounded.controls["skill_tree.stepper.heal"].state.target = 0
-	bounded.controls["skill_tree.stepper.heal"].state.current = 0
 	var rejected_min: Dictionary = bounded.dispatch("skill_tree.stepper.heal", "Activate",
 		{"direction": -1})
 	var after_min: Dictionary = bounded.qa_state().controls["skill_tree.stepper.heal"]

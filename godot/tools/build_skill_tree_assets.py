@@ -163,12 +163,18 @@ def main() -> None:
     )
 
     stepper_specs: list[dict[str, object]] = []
+    # Every source Stepper uses the same complete arrow glyphs, but the
+    # inventory rectangles start and end at different horizontal points based
+    # on label width. Reuse one source-locked complete pair so no label can
+    # yield clipped arrow fragments.
+    canonical_left_arrow = window.crop((127, 414, 145, 431))
+    canonical_right_arrow = window.crop((191, 414, 209, 431))
     for entry in steppers:
         item = stable_cell_id(entry["rect"])
         geometry = rel(entry["rect"])
         # The inventory rectangle ended before the right-arrow pixels. Own the
         # complete source group so a pending transaction can hide every arrow.
-        geometry["width"] += 10
+        geometry["width"] += 12
         geometry["height"] += 1
         crop = window.crop(box(geometry))
         clean_draw.rectangle(box(geometry), fill=BODY)
@@ -180,9 +186,8 @@ def main() -> None:
         # Eighteen pixels owns each complete source arrow while leaving a
         # 46-pixel live value region for the widest `10 / 10` label.
         arrow_width = min(18, geometry["width"] // 3)
-        left = crop.crop((0, 0, arrow_width, geometry["height"]))
-        right = crop.crop((geometry["width"] - arrow_width, 0,
-                           geometry["width"], geometry["height"]))
+        left = canonical_left_arrow.copy()
+        right = canonical_right_arrow.copy()
         hidden = {phase: transparent_path for phase in ["idle", "hover", "pressed"]}
         surfaces = {
             "decrement": {
