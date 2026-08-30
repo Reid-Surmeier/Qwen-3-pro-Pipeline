@@ -1,0 +1,132 @@
+{
+  "failed": 0,
+  "results": [
+    {
+      "detail": "[]",
+      "passed": true,
+      "test": "valid-manifest"
+    },
+    {
+      "detail": "[]",
+      "passed": true,
+      "test": "options-production-manifest"
+    },
+    {
+      "detail": "[]",
+      "passed": true,
+      "test": "skill-tree-control-contracts"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[skill_tree].controls[1].value\", \"detail\": \"Stepper requires in-range current/target values and a positive step\" }]",
+      "passed": true,
+      "test": "stepper-bounds-fail-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"ControlBindingError\", \"path\": \"$.windows[skill_tree].controls[0].actions\", \"detail\": \"declared gesture has no Window Action: ContextActivate\" }]",
+      "passed": true,
+      "test": "selection-context-binding-fails-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[skill_tree].controls[0].value\", \"detail\": \"SelectionView requires unique items, an initial item, and detail text for every item\" }]",
+      "passed": true,
+      "test": "selection-details-fail-closed"
+    },
+    {
+      "detail": "",
+      "passed": true,
+      "test": "valid-window-adapter-fields"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidGeometry\", \"path\": \"$.windows[0].drag_geometry\", \"detail\": \"geometry requires numeric x/y and positive width/height\" }]",
+      "passed": true,
+      "test": "invalid-drag-geometry-fails-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidControlSpec\", \"path\": \"$.windows[0].minimized_controls[0]\", \"detail\": \"minimized Control must be unique and belong to this Window\" }, { \"code\": \"ControlBindingError\", \"path\": \"$.windows[0].minimized_controls\", \"detail\": \"minimized Controls must retain a ToggleMinimized restore action\" }]",
+      "passed": true,
+      "test": "unknown-minimized-control-fails-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"AssetIntegrityError\", \"path\": \"$.windows[0].plates.list\", \"detail\": \"asset does not exist: res://options/list.png\" }]",
+      "passed": true,
+      "test": "missing-list-plate-fails-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"AssetIntegrityError\", \"path\": \"$.windows[0].plates.list\", \"detail\": \"a list plate is required when ToggleSkillView is bound\" }]",
+      "passed": true,
+      "test": "omitted-required-list-plate-fails-closed"
+    },
+    {
+      "detail": "[{ \"code\": \"VisualAuthorityError\", \"path\": \"$.reference.sha256\", \"detail\": \"expected 64 lowercase hexadecimal characters\" }]",
+      "passed": true,
+      "test": "visual-authority"
+    },
+    {
+      "detail": "[{ \"code\": \"UnknownControlType\", \"path\": \"$.windows[options].controls[0].type\", \"detail\": \"unknown Control Library type: Mystery\" }]",
+      "passed": true,
+      "test": "unknown-control"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidGeometry\", \"path\": \"$.windows[options].controls[0].geometry\", \"detail\": \"geometry requires numeric x/y and positive width/height\" }]",
+      "passed": true,
+      "test": "invalid-geometry"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[options].controls[0].state_set.ready.hover\", \"detail\": \"required visual state is missing\" }]",
+      "passed": true,
+      "test": "invalid-state-set"
+    },
+    {
+      "detail": "[{ \"code\": \"UnsupportedGesture\", \"path\": \"$.windows[options].controls[0].gestures\", \"detail\": \"unsupported gesture: Teleport\" }, { \"code\": \"ControlBindingError\", \"path\": \"$.windows[options].controls[0].actions[0]\", \"detail\": \"binding must name a declared gesture and non-empty Window Action\" }, { \"code\": \"ControlBindingError\", \"path\": \"$.windows[options].controls[0].actions\", \"detail\": \"declared gesture has no Window Action: Teleport\" }]",
+      "passed": true,
+      "test": "unsupported-gesture"
+    },
+    {
+      "detail": "[{ \"code\": \"ControlBindingError\", \"path\": \"$.windows[options].controls[0].actions\", \"detail\": \"at least one gesture-to-action binding is required\" }]",
+      "passed": true,
+      "test": "missing-binding"
+    },
+    {
+      "detail": "[{ \"code\": \"ActionRoutingError\", \"path\": \"$.windows[options].controls[0].actions[0].action\", \"detail\": \"Window Action is not supported by Button: InventedAction\" }]",
+      "passed": true,
+      "test": "unknown-action"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[options].controls[0].semantic_states\", \"detail\": \"Toggle requires exactly two distinct semantic states\" }]",
+      "passed": true,
+      "test": "malformed-toggle"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidGeometry\", \"path\": \"$.windows[options].controls[0].surfaces.icon.geometry\", \"detail\": \"geometry requires numeric x/y and positive width/height\" }]",
+      "passed": true,
+      "test": "invalid-surface-geometry"
+    },
+    {
+      "detail": "[{ \"code\": \"AssetIntegrityError\", \"path\": \"$.windows[options].controls[0].surfaces.icon.asset\", \"detail\": \"asset does not exist: res://options/missing-surface.png\" }]",
+      "passed": true,
+      "test": "missing-surface-asset"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[options].controls[0].value\", \"detail\": \"Range requires ordered bounds, an in-range initial value, and positive steps\" }, { \"code\": \"InvalidControlSpec\", \"path\": \"$.windows[options].controls[0].surfaces\", \"detail\": \"Range requires track, thumb, decrement, and increment surfaces\" }, { \"code\": \"ActionRoutingError\", \"path\": \"$.windows[options].controls[0].actions[0].action\", \"detail\": \"Window Action is not supported by Range: CloseWindow\" }]",
+      "passed": true,
+      "test": "malformed-range"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidStateSet\", \"path\": \"$.windows[options].controls[0].value\", \"detail\": \"Dropdown requires unique non-empty choices and a declared initial choice\" }, { \"code\": \"InvalidControlSpec\", \"path\": \"$.windows[options].controls[0].surfaces\", \"detail\": \"Dropdown requires field and arrow surfaces\" }, { \"code\": \"InvalidStateSet\", \"path\": \"$.windows[options].controls[0].tokens\", \"detail\": \"Dropdown requires fill, border, highlight, and text tokens\" }, { \"code\": \"ActionRoutingError\", \"path\": \"$.windows[options].controls[0].actions[0].action\", \"detail\": \"Window Action is not supported by Dropdown: CloseWindow\" }]",
+      "passed": true,
+      "test": "malformed-dropdown"
+    },
+    {
+      "detail": "[{ \"code\": \"InvalidControlSpec\", \"path\": \"$.windows[options].controls[1].id\", \"detail\": \"Control id must be globally unique and prefixed by its Window id\" }]",
+      "passed": true,
+      "test": "duplicate-control"
+    },
+    {
+      "detail": "[{ \"code\": \"AssetIntegrityError\", \"path\": \"$.windows[options].controls[0].state_set.ready.hover\", \"detail\": \"asset does not exist: res://options/close-hover.png\" }]",
+      "passed": true,
+      "test": "missing-asset"
+    }
+  ],
+  "suite": "control-spec",
+  "total": 25
+}

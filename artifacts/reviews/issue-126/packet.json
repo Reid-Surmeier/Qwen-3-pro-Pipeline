@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 126,
   "pull_request": 82,
-  "candidate_commit": "13fca40e2e28491aa259d82b00692475760443aa",
+  "candidate_commit": "972765efefbed20366f0a259d28867a3422ca9f9",
   "acceptance_contract": "docs/reviews/issue-126-contract.md",
   "references": [
     {
@@ -24,6 +24,8 @@
       "artifacts/reviews/issue-126/builder/11-drag-mid.png",
       "artifacts/reviews/issue-126/builder/play-log.json",
       "artifacts/reviews/issue-126/builder/verdict.json",
+      "artifacts/reviews/issue-126/builder/control-spec-contracts.json",
+      "artifacts/reviews/issue-126/builder/skill-tree-window-contracts.json",
       "artifacts/reviews/issue-126/options-regression/play-log.json",
       "artifacts/reviews/issue-126/options-regression/verdict.json"
     ]

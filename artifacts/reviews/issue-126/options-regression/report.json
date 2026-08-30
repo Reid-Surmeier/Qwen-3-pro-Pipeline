@@ -197,10 +197,10 @@
     }
   ],
   "consoleEntries": [
-    "[warning] [.WebGL-0x272404a29c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x272404a29c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x272404a29c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x272404a29c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    "[warning] [.WebGL-0x18dc06d05c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x18dc06d05c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x18dc06d05c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x18dc06d05c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
   ],
   "final": {
     "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
@@ -1723,6 +1723,35 @@
               "action": "",
               "error": null
             },
+            "list_labels": {
+              "r1c1": "ホーリー..   5 / 5",
+              "r1c2": "リザレク..   ",
+              "r1c3": "ヒール   10 / 10",
+              "r1c4": "アクア..   10 / 10",
+              "r1c5": "ディバイ..   5 / 5",
+              "r1c6": "ブレッシ..   10 / 10",
+              "r2c1": "プロテク..   5 / 5",
+              "r2c2": "キリエエ..   1 / 1",
+              "r2c3": "サンクチ..   5 / 5",
+              "r2c4": "デーモン..   0 / 5",
+              "r2c5": "魔法反射   0 / 3",
+              "r3c1": "速度増加   5 / 5",
+              "r3c2": "天使の恵み   3 / 3",
+              "r3c3": "エンジェ..   1 / 1",
+              "r3c4": "ニューマ   5 / 5",
+              "r3c5": "ストリッ..   0 / 5",
+              "r3c6": "シールド..   3 / 3",
+              "r4c1": "リカバリー   1 / 1",
+              "r4c2": "レックス..   10 / 10",
+              "r4c3": "カントキ..   1 / 1",
+              "r4c4": "クァグマ..   1 / 1",
+              "r4c5": "ペイニッ..   0 / 5",
+              "r4c6": "セイフティ..   0 / 5",
+              "r5c1": "グロリア   5 / 5",
+              "r5c3": "エクスピア..   0 / 1",
+              "r5c4": "エクスピア..   0 / 1",
+              "r5c5": "ターンア..   0 / 10"
+            },
             "list_mode": false,
             "list_values": {
               "r1c1": "5 / 5",
@@ -1768,7 +1797,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 522,
               "y": 111
             },
@@ -1786,6 +1815,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -1801,7 +1838,7 @@
             "current": 10,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 716,
               "y": 111
             },
@@ -1819,6 +1856,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 10,
@@ -1834,7 +1879,7 @@
             "current": 10,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 813,
               "y": 111
             },
@@ -1852,6 +1897,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 10,
@@ -1867,7 +1920,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 910,
               "y": 111
             },
@@ -1885,6 +1938,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -1900,7 +1961,7 @@
             "current": 10,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 1007,
               "y": 111
             },
@@ -1918,6 +1979,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 10,
@@ -1933,7 +2002,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 522,
               "y": 212
             },
@@ -1951,6 +2020,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -1966,7 +2043,7 @@
             "current": 1,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 619,
               "y": 212
             },
@@ -1984,6 +2061,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -1999,7 +2084,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 716,
               "y": 212
             },
@@ -2017,6 +2102,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2032,7 +2125,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 813,
               "y": 212
             },
@@ -2050,6 +2143,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2065,7 +2166,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 910,
               "y": 212
             },
@@ -2083,6 +2184,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 3,
@@ -2098,7 +2207,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 522,
               "y": 313
             },
@@ -2116,6 +2225,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2131,7 +2248,7 @@
             "current": 3,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 619,
               "y": 313
             },
@@ -2149,6 +2266,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 3,
@@ -2164,7 +2289,7 @@
             "current": 1,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 716,
               "y": 313
             },
@@ -2182,6 +2307,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2197,7 +2330,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 813,
               "y": 313
             },
@@ -2215,6 +2348,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2230,7 +2371,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 910,
               "y": 313
             },
@@ -2248,6 +2389,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2263,7 +2412,7 @@
             "current": 3,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 1007,
               "y": 313
             },
@@ -2281,6 +2430,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 3,
@@ -2296,7 +2453,7 @@
             "current": 1,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 522,
               "y": 414
             },
@@ -2314,6 +2471,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2329,7 +2494,7 @@
             "current": 10,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 619,
               "y": 414
             },
@@ -2347,6 +2512,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 10,
@@ -2362,7 +2535,7 @@
             "current": 1,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 716,
               "y": 414
             },
@@ -2380,6 +2553,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2395,7 +2576,7 @@
             "current": 1,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 813,
               "y": 414
             },
@@ -2413,6 +2594,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2428,7 +2617,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 910,
               "y": 414
             },
@@ -2446,6 +2635,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2461,7 +2658,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 1007,
               "y": 414
             },
@@ -2479,6 +2676,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2494,7 +2699,7 @@
             "current": 5,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 522,
               "y": 515
             },
@@ -2512,6 +2717,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 5,
@@ -2527,7 +2740,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 716,
               "y": 515
             },
@@ -2545,6 +2758,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2560,7 +2781,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 813,
               "y": 515
             },
@@ -2578,6 +2799,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 1,
@@ -2593,7 +2822,7 @@
             "current": 0,
             "geometry": {
               "height": 17,
-              "width": 82,
+              "width": 84,
               "x": 910,
               "y": 515
             },
@@ -2611,6 +2840,14 @@
             "minimum": 0,
             "pending": false,
             "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
             "semantic_state": "ready",
             "step": 1,
             "target": 10,
@@ -2697,6 +2934,6 @@
   "pass": true,
   "idle": {
     "path": "00-idle.png",
-    "sha256": "684b96bf7996c6644a3e8e1369e46c69b513d773b748d0e0ef1eb413c13702af"
+    "sha256": "e1c7759c14fbb22643acdb98424ddfeb5617f3bce8036b0f93eb27551c3892e8"
   }
 }
