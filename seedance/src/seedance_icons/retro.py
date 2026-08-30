@@ -99,6 +99,34 @@ FRAME_MODES = ("matte", "filled")
 MIN_ANCHOR_PIXEL_IDENTITY = 0.80
 
 
+def ground_color(image: Image.Image) -> tuple[int, int, int]:
+    """The most common colour in an image: in a filled tile, the icon's own ground."""
+    data = list(image.convert("RGB").getdata())
+    return max(set(data), key=data.count)
+
+
+def ink_silhouette_iou(
+    frame: Image.Image, anchor: Image.Image, ground: tuple[int, int, int]
+) -> float:
+    """Silhouette agreement measured against the icon's own ground, not the key colour.
+
+    Two dead ends got us here, both of them metrics that measured everything except the
+    drawing:
+
+    - Keying on the key colour in a filled tile gives every frame the same square
+      outline, so the IoU is 1.0 whatever is drawn inside it.
+    - Per-pixel identity fails in the other direction. The video model re-renders rather
+      than copying: a run whose magnifier never left the bust scored 0.457 overall and
+      0.186 over the Anchor's ink, because the whole tile is redrawn a shade warmer and
+      a fraction larger. No identity metric survives that, and demanding one would
+      reject every run this model can produce.
+
+    Keying on the ground instead makes the mask the drawing again, which is what the
+    Issue #87 calibration was measuring all along.
+    """
+    return silhouette_iou(frame, anchor, ground)
+
+
 def silhouette_iou(frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]) -> float:
     a, b = _mask(frame, matte), _mask(reference, matte)
     inter = sum(1 for x, y in zip(a, b) if x and y)
@@ -137,7 +165,7 @@ class RetroThresholds:
     # the same tile. Per-pixel identity against the Anchor is what remains. The 0.80
     # starting point is NOT calibrated against human verdicts yet — it is a placeholder
     # chosen so a one-pixel shift of one element passes and a redraw does not.
-    min_anchor_pixel_identity: float = 0.80
+    min_anchor_pixel_identity: float = 0.80  # kept for reporting; no longer a check
 
 
 def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
@@ -149,10 +177,21 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "silhouette_stable": report["min_silhouette_iou"] >= t.min_silhouette_iou,
     }
     mode = report.get("frame_mode")
-    if mode == "filled":
-        checks["matches_anchor"] = (
-            report["anchor_pixel_identity"] >= t.min_anchor_pixel_identity
-        )
+    if mode == "filled":  # noqa: SIM102 - the comment below is the decision
+        # Deliberately no automatic fidelity check. Four metrics were tried against the
+        # 2026-08-30 filled-tile run and not one of them separates a good state from a
+        # bad one:
+        #
+        #   silhouette vs the key colour   every frame is the same square -> all 1.0
+        #   per-pixel identity             the model re-renders, it never copies -> 0.457
+        #   identity over the Anchor's ink  same reason, worse -> 0.186
+        #   silhouette vs the icon's ground the generated ground shifts hue -> all 1.0
+        #
+        # Shipping a fifth guess would be shipping a number that certifies whatever it
+        # is handed, which is exactly the failure this gate exists to prevent. Until a
+        # metric is calibrated against human verdicts on filled tiles, filled runs are
+        # certified by a person looking at the state-set GIF.
+        checks["human_gate_required"] = False
     elif "anchor_silhouette_iou" in report:
         checks["matches_anchor"] = (
             report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
@@ -365,6 +404,9 @@ def conform_states(
             "frame0_identity": round(identity_fraction(snapped[0], source_snapped), 4),
             "anchor_silhouette_iou": round(silhouette_iou(snapped[0], source_snapped, matte), 4),
             "anchor_pixel_identity": round(identity_fraction(snapped[0], source_snapped), 4),
+            "anchor_ink_silhouette_iou": round(
+                ink_silhouette_iou(snapped[0], source_snapped, ground_color(source_snapped)), 4
+            ),
             "frame_mode": frame_mode,
             "grid": grid,
             "palette_colors": colors,
@@ -413,6 +455,15 @@ def conform_states(
         "frame_mode": frame_mode,
         "certified": all(r["certified"] for r in states.values()),
         "uncertified_states": [n for n, r in states.items() if not r["certified"]],
+        "human_gate_required": frame_mode == "filled",
+        "human_gate_note": (
+            "filled framing has no calibrated fidelity metric: silhouette measures the "
+            "tile, identity measures a model that re-renders rather than copies. A "
+            "person judges states/state-set.gif against the Anchor. `certified` here "
+            "means the cadence and palette checks passed, not that the picture is right."
+        )
+        if frame_mode == "filled"
+        else None,
         "anchor_silhouette_iou_note": (
             "anchor_silhouette_iou compares each state's first frame to the Anchor, and is a "
             "certification check for State Set runs. Calibrated on the two 2026-08-30 "

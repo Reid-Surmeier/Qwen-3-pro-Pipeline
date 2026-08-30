@@ -113,9 +113,10 @@ def test_anchor_iou_gates_only_state_set_runs() -> None:
     assert not verdict["certified"]
 
 
-def test_filled_mode_switches_the_fidelity_metric() -> None:
-    """A filled tile has the same silhouette in every frame, so a silhouette metric
-    cannot see a redraw there. The framing decides which metric can see anything."""
+def test_filled_mode_asserts_no_automatic_fidelity_check() -> None:
+    """Filled framing has no calibrated fidelity metric, and the gate must not pretend
+    otherwise. Four were tried on the 2026-08-30 run and none separated a good state
+    from a bad one, so a person judges these runs and the report says so."""
     from seedance_icons.retro import certify
 
     base = {
@@ -126,19 +127,14 @@ def test_filled_mode_switches_the_fidelity_metric() -> None:
         "frame0_identity": 0.72,
     }
 
-    # filled: a perfect silhouette score must not rescue a redrawn tile
-    redrawn_tile = dict(
-        base, frame_mode="filled", anchor_silhouette_iou=1.0, anchor_pixel_identity=0.41
-    )
-    verdict = certify(redrawn_tile)
-    assert verdict["checks"]["matches_anchor"] is False
-    assert not verdict["certified"]
+    filled = certify(dict(base, frame_mode="filled", anchor_pixel_identity=0.41))
+    assert "matches_anchor" not in filled["checks"]
+    assert filled["checks"]["human_gate_required"] is False
 
-    faithful_tile = dict(
-        base, frame_mode="filled", anchor_silhouette_iou=1.0, anchor_pixel_identity=0.93
-    )
-    assert certify(faithful_tile)["certified"]
+    # matte keeps the calibrated silhouette decision
+    drifted = certify(dict(base, frame_mode="matte", anchor_silhouette_iou=0.466))
+    assert drifted["checks"]["matches_anchor"] is False
+    assert not drifted["certified"]
 
-    # matte mode keeps using the silhouette, as calibrated
-    drifted = dict(base, frame_mode="matte", anchor_silhouette_iou=0.466)
-    assert not certify(drifted)["certified"]
+    faithful = certify(dict(base, frame_mode="matte", anchor_silhouette_iou=0.979))
+    assert faithful["certified"]
