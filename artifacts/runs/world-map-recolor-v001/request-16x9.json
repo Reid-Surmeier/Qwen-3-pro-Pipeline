@@ -1,0 +1,11 @@
+{
+  "model": "openai/gpt-image-2",
+  "prompt": "Edit this pixel-art world time-zone map. Remove every time-zone annotation: all rectangular clock badges showing times, all small yellow DST tags, all city, region and country name labels, the two date boxes in the top corners, the orange '+1 day' and '-1 day' labels, the orange International Date Line and its vertical caption, the vertical Greenwich bar with its rotated clock labels and caption, and the rounded white scroll-up button at the bottom center. Fill each cleared area with exactly what lies underneath it: white ocean with the pale lavender grid, or the land color and black border that was covered. Then give every country exactly one solid flat color chosen only from the map's own palette (red #ff0024, green #00d200, blue #009dff, gold #f8c800, light blue #40c8f8, mint #70f8c0, pink #ff777c, lavender #c8a0e8, pale green #c8f8a0, orange #ff9000) so that no two neighboring countries share a color; countries that are currently striped in several time-zone colors become one single color each and their thin internal grey zone lines disappear. Lighten the dark grey time-zone boundary lines in the ocean to a pale light grey (#d0d0d0). The plain white bands above and below the map stay plain white. Keep everything else exactly as in the source at the same position and size: coastlines, black one-pixel borders, every island and dot, the lavender latitude-longitude grid, the rounded black frame with the blue bar on its left edge, and the small mint 'Map outline WorldTimeZone.com' credit box at the bottom left. Preserve the flat, aliased, low-resolution pixel look: no anti-aliasing, no gradients, no shading, no new text, no legend.",
+  "n": 1,
+  "resolution": "2K",
+  "aspect_ratio": "16:9",
+  "quality": "high",
+  "output_format": "png",
+  "seed": 20260830,
+  "input_references": "[reference recorded separately]"
+}

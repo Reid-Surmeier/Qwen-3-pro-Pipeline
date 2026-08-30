@@ -1,0 +1,11 @@
+{
+  "model": "openai/gpt-image-2",
+  "prompt": "Edit this flat pixel-art political world map. Several countries are wrongly split into two or more colored pieces along old time-zone lines. Merge each of the following countries into ONE single solid color over its entire territory and erase every internal dividing line inside it: Canada (all of it \u2014 Yukon, British Columbia, the prairies, Ontario, Quebec, the Maritimes and every Arctic island), the United States mainland, Russia (from its western border all the way to the Pacific coast and Kamchatka), Brazil, Mexico, Kazakhstan, Mongolia, Indonesia, Argentina, Chile and Australia. For each merged country choose one color from the map's existing palette so that it differs clearly from every neighboring country. Change absolutely nothing else: keep every other country's color and shape, every coastline, every black one-pixel border between different countries, every island and dot, the pale lavender grid, the white ocean, the plain white bands above and below the map, the rounded black frame with the blue bar on its left edge, and the small mint credit box at the bottom left, all at exactly the same positions and sizes. No text, no labels, no legend, no anti-aliasing, no gradients, no shading.",
+  "n": 1,
+  "resolution": "2K",
+  "aspect_ratio": "16:9",
+  "quality": "high",
+  "output_format": "png",
+  "seed": 20260831,
+  "input_references": "[reference recorded separately]"
+}

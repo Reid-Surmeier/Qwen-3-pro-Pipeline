@@ -1,0 +1,39 @@
+{
+  "final": {
+    "file": "final.png",
+    "sha256": "270e9eb548bf32e72367a47fe4ec2a0a4b09df06ab184c32bf32ff0f2ff1b291",
+    "size": "1536x793"
+  },
+  "passes": [
+    {
+      "n": 1,
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.143379,
+      "output": "pass1-openai-gpt-image-2.png"
+    },
+    {
+      "n": 2,
+      "model": "openai/gpt-image-2 via OpenRouter",
+      "cost_usd": 0.140983,
+      "output": "pass2-openai-gpt-image-2.png"
+    },
+    {
+      "n": 3,
+      "step": "deterministic finish_map.py: restore source zone lines at #b8b8b8 on ocean only, crop padding bands"
+    }
+  ],
+  "source_sha256": "ac6ad3ec94b6c5865d12c8ffa671df212aff10ae7daf9f87cc8cf27f7e5e585d",
+  "figjam": {
+    "fileKey": "z3aX2nqkUO7WZmuF4yOcA4",
+    "node": "4:67",
+    "imageHash": "17b32209d3a0789fb8d818cacca14f8b6a5ca927",
+    "placed": {
+      "x": -3426,
+      "y": 2456,
+      "w": 1651.1,
+      "h": 852
+    },
+    "source_map_node": "0:28",
+    "note": "nearest free full-width slot; left/right of the map were occupied by new stickies at placement time"
+  }
+}
