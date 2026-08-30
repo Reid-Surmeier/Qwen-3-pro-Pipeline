@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "9c36e3712964a9a59b1fbfb08805de7037f9db8e",
+  "baseline_commit": "b2e4f594f6fb23e0dcc4e2a3395d492585a35c9b",
+  "verdict": "pass",
+  "specified_defect_found": false,
+  "findings": [],
+  "unverified": [],
+  "clauses": [
+    {
+      "clause": "C1",
+      "verdict": "pass",
+      "observation": "Assembly v001 dimensions, crop, frame, panel geometry, controls, checkbox states, ordering, spacing, and bottom stripe band are preserved."
+    },
+    {
+      "clause": "C2",
+      "verdict": "pass",
+      "observation": "Assembly v001 header gradient and rules remain intact. The right blue bead and close button are byte-identical and unshifted; no rectangle patch, cyan seam, stepped gradient, or halo is visible."
+    },
+    {
+      "clause": "C3",
+      "verdict": "pass",
+      "observation": "The predeclared binary edit mask is glyph-shaped: 4,831 native mask pixels contain all 4,207 actual changes. Maximum per-box fill is 0.364804965, below 0.37."
+    },
+    {
+      "clause": "C4",
+      "verdict": "pass",
+      "observation": "All 19 strings read back character-for-character at 1252x844 and 313x211. No broken, merged, doubled, clipped, or haloed glyphs or mismatched background patches were found."
+    },
+    {
+      "clause": "C5",
+      "verdict": "pass",
+      "observation": "object remains the active upper tab and material the inactive lower tab; Assembly v001 silhouettes, fills, stepped notch, placement, and orientation remain intact."
+    },
+    {
+      "clause": "C6",
+      "verdict": "pass",
+      "observation": "Independent reproduction found 4,207 native changes and 67,312 review-scale changes, zero outside-mask changes, zero outside-mask maximum channel error, and zero right-control differences. The full output is an exact nearest-neighbor 4x enlargement of the native candidate; pinned font hashes match and no new provider request was made."
+    }
+  ],
+  "evidence": [
+    "artifacts/runs/museum-filter-assembly-v003/contact-sheet.png",
+    "artifacts/runs/museum-filter-assembly-v003/assembly-v003.png",
+    "artifacts/runs/museum-filter-assembly-v003/assembly-v003-native.png",
+    "artifacts/runs/museum-filter-assembly-v003/edit-mask.png",
+    "artifacts/runs/museum-filter-assembly-v003/verification.json",
+    "artifacts/runs/museum-filter-assembly-v003/run.json"
+  ],
+  "review_boundary": "Advisory blind artifact evidence only; this is not owner approval."
+}

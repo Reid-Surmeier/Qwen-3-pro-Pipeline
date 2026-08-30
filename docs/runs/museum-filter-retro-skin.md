@@ -7,8 +7,11 @@ Reference Screen: `artifacts/references/museum-filter-retro-skin-v001/style-ro-o
 ## Outcome
 
 **Four full-redraw Render Passes failed to reach the required fidelity, so the
-work moved to Assembly.  After owner review, one final two-output Qwen edit pass
-supplied bounded header, lettering and tab donors for Assembly v002.**
+work moved to Assembly. A final two-output Qwen edit pass helped diagnose the
+remaining defects, but Assembly v002 was rejected because rectangular masks
+imported its backgrounds. Assembly v003 uses no generated raster: it keeps
+Assembly v001's backgrounds and renders exact copy through native-scale,
+shape-aware masks with repository-pinned pixel fonts.**
 
 ## What each pass got wrong
 
@@ -19,6 +22,31 @@ supplied bounded header, lettering and tab donors for Assembly v002.**
 | v003 | Any/All became two checkboxes, 4:5, palette pinned to sampled hexes | Size right. Font still too thick. Tabs wrong. Checkboxes not exact. Title misaligned. ✕ button wrong. |
 | v004 | Second reference: a 2–4× magnified parts sheet cut from the original | Closer on every axis, still not the original's chrome. |
 | v005 | Assembly v001 became the composition authority; the original and parts sheet became style authorities; 3:2 final edit | Candidate 1 supplied the continuous header/title; candidate 2 supplied the more consistent English raster lettering and stepped tabs. Both remained donor images, not the final Assembly. |
+
+## Assembly v003 correction
+
+The owner identified v002's remaining defect as Assembly, not generation:
+rectangles around the title, labels, material rows, and tabs carried Qwen's
+slightly different blue, white, and lavender backgrounds into the final image.
+The objective outside-mask score was true but insufficient because the declared
+mask itself owned far more background than the actual foreground change.
+
+Assembly v003 therefore returns to the 313×211 Assembly v001 native image. It
+predeclares a permitted mask from the old exact-ink glyph pixels and new
+PixelMplus glyph silhouettes, restores only the old text pixels from
+Assembly-v001-owned backgrounds, and renders the exact strings through that
+mask. The title-bar gradient, right bead, close button, tab silhouettes,
+controls, frame, crop, and every other background pixel remain Assembly v001
+pixels. The result is enlarged 4× with nearest-neighbour resampling; no new
+Render Pass ran and no v005 raster enters the final Assembly.
+
+The v003 mask is declared before composition and contains 4,831 native pixels
+(77,296 review-scale pixels). The actual difference is a strict 4,207-pixel
+native subset (67,312 review-scale pixels), with zero changes and zero maximum
+channel error outside the declaration. Every individual edit box is 36.5%
+filled or less, rather than being a solid background patch. The right header
+controls are byte-identical to Assembly v001, and full/native visual readback
+found all 19 Exact Copy entries present.
 
 ## Why the first four passes did not fix it
 
@@ -46,9 +74,12 @@ and accepts their pixels only through explicit header, lettering and tab masks.
 The search-field edge, dropdown, body checkboxes, checkbox states, layout,
 border and crop remain Assembly v001 pixels outside those masks.
 
-The resulting Fidelity Check reports zero changed pixels and zero maximum
-channel error outside the declared mask.  That establishes strict preservation;
-human visual approval still decides whether the repaired regions are accepted.
+The v002 Fidelity Check reported zero changed pixels outside its rectangles,
+but that did not prove the rectangles were correctly owned. The first v003
+attempt still derived its mask from the completed output, which made that proof
+circular. The corrected v003 declares old and new glyph silhouettes first, then
+proves the completed output is a subset. Human visual approval still decides
+whether the repaired regions are accepted.
 
 ## Rule taken from this
 
@@ -56,6 +87,11 @@ Before spending on a Render Pass, ask whether the pixels being requested already
 exist in the Reference Screen. If they do, cut them and composite; generate only
 what is genuinely absent. A brief that has to *describe* existing artwork in
 prose is a signal the work belongs in Assembly.
+
+An edit mask must express source ownership, not merely contain a change. A
+rectangle around text can pass outside-mask identity while still importing an
+incorrect background. For flat interface bands and labels, restore the
+authoritative background first and composite only the foreground silhouette.
 
 ## Cost
 
