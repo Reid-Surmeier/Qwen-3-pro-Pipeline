@@ -1,6 +1,6 @@
 # Issue 126 blind artifact contract
 
-Review candidate `972765efefbed20366f0a259d28867a3422ca9f9` without relying on the builder narrative.
+Review candidate `82ae10483fd41d365f1ca54fe691e894c9727303` without relying on the builder narrative.
 
 ## Visual authority
 
@@ -16,8 +16,8 @@ Review candidate `972765efefbed20366f0a259d28867a3422ca9f9` without relying on t
 4. A Stepper click beyond either bound is rejected with `TransactionRejectedError`, does not change the target, and does not start a transaction.
 5. Use commits pending targets; Cancel discards pending targets. Both clear the transaction and restore every arrow.
 6. View reverses between tree and list presentation; list values reflect committed runtime values rather than their construction-time snapshot. The description Toggle reverses on a second activation.
-7. Minimize swaps to a purpose-built 611x28 title strip and restores in place. Title Drag follows the pointer continuously; Close hides the Window.
-8. `plates.list`, `drag_geometry`, and `minimized_controls` fail closed when malformed; SelectionView and Stepper semantics route the manifest-declared actions rather than hardcoded action names.
-9. All stable Control IDs and manifest actions are covered, the Play Log has no console error, and the previously accepted Options Window regression remains PASS.
+7. Minimize swaps to a purpose-built 611x28 title strip and restores in place. Title Drag follows the pointer continuously; both the Close Control and the Window-level Escape `KeyCommand` hide the Window through their manifest bindings.
+8. `plates.list`, `drag_geometry`, `minimized_controls`, Window actions, and SelectionView `value_control_ids` fail closed when malformed. SelectionView, Stepper, and Window semantics route manifest-declared actions rather than Window-specific names embedded in shared adapters.
+9. All stable Control IDs plus all Control- and Window-level manifest actions are covered, the Play Log has no console error, and the previously accepted Options Window regression remains PASS. The Skill Tree and Options bundles each have their own candidate-bound evidence manifest and every packet evidence path is hash-locked by one of them.
 
 Every finding must name the candidate SHA, expected behavior, actual behavior, evidence path, and violated clause. This review is advisory evidence only and does not approve the final eleven-Window assembled desktop.
