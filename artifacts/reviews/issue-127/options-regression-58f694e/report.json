@@ -1,0 +1,2498 @@
+{
+  "url": "http://127.0.0.1:8879/?screen=image79",
+  "facts": {
+    "canvas": {
+      "width": 1536,
+      "height": 1024,
+      "cssWidth": 1536,
+      "cssHeight": 1024,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "scale": 1,
+  "checks": [
+    {
+      "name": "options.bgm-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "stepped": true
+      }
+    },
+    {
+      "name": "options.bgm-wheel",
+      "passed": true,
+      "detail": {
+        "wheel_stepped": true
+      }
+    },
+    {
+      "name": "options.bgm-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.bgm-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.effect-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "stepped": true
+      }
+    },
+    {
+      "name": "options.effect-wheel",
+      "passed": true,
+      "detail": {
+        "wheel_stepped": true
+      }
+    },
+    {
+      "name": "options.effect-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.effect-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.bgm_on-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.effect_on-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.attack-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.skill-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.item-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.option-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.skin-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "opened": true
+      }
+    },
+    {
+      "name": "options.skin-select",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "closed": true
+      }
+    },
+    {
+      "name": "options.skin-key",
+      "passed": true,
+      "detail": {
+        "dismissed": true
+      }
+    },
+    {
+      "name": "options.minimize-activate",
+      "passed": true,
+      "detail": {
+        "distinct_minimized_plate": true,
+        "restored_state": true,
+        "position_preserved": true
+      }
+    },
+    {
+      "name": "window-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "pointer_delta_applied": true
+      }
+    },
+    {
+      "name": "options.close-activate",
+      "passed": true,
+      "detail": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "manifest-action-coverage",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "zero-console-errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "consoleEntries": [
+    "[warning] [.WebGL-0x295c0b031c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x295c0b031c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x295c0b031c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x295c0b031c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "final": {
+    "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "schema_version": 3,
+    "validation_errors": [],
+    "viewport": [
+      1536,
+      1024
+    ],
+    "windows": {
+      "inventory": {
+        "controls": {
+          "inventory.close": {
+            "active_surface": "",
+            "geometry": {
+              "height": 17,
+              "width": 18,
+              "x": 460,
+              "y": 709
+            },
+            "id": "inventory.close",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "inventory.items": {
+            "active_surface": "",
+            "detail_text": "",
+            "detail_visible": false,
+            "drag_state": {
+              "active": false,
+              "motion_samples": 0,
+              "source": "",
+              "target": ""
+            },
+            "geometry": {
+              "height": 244,
+              "width": 378,
+              "x": 42,
+              "y": 731
+            },
+            "gesture_drag": {
+              "active": false,
+              "motion_samples": 0,
+              "source": "",
+              "target": ""
+            },
+            "id": "inventory.items",
+            "interaction_phase": "idle",
+            "item_values": {
+              "r0c0": "r0c0",
+              "r0c1": "r0c1",
+              "r0c2": "r0c2",
+              "r0c3": "r0c3",
+              "r0c4": "r0c4",
+              "r0c5": "r0c5",
+              "r0c6": "r0c6",
+              "r1c0": "r1c0",
+              "r1c1": "r1c1",
+              "r1c2": "r1c2",
+              "r1c3": "r1c3",
+              "r1c4": "r1c4",
+              "r1c5": "r1c5",
+              "r1c6": "r1c6",
+              "r2c0": "r2c0",
+              "r2c1": "r2c1",
+              "r2c2": "r2c2",
+              "r2c3": "r2c3",
+              "r2c4": "r2c4",
+              "r2c5": "r2c5",
+              "r2c6": "r2c6",
+              "r3c0": "r3c0",
+              "r3c1": "r3c1",
+              "r3c2": "r3c2",
+              "r3c3": "r3c3",
+              "r3c4": "r3c4",
+              "r3c5": "r3c5",
+              "r3c6": "r3c6"
+            },
+            "item_version": 0,
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "list_labels": {
+              "r0c0": "r0c0   ",
+              "r0c1": "r0c1   ",
+              "r0c2": "r0c2   ",
+              "r0c3": "r0c3   ",
+              "r0c4": "r0c4   ",
+              "r0c5": "r0c5   ",
+              "r0c6": "r0c6   ",
+              "r1c0": "r1c0   ",
+              "r1c1": "r1c1   ",
+              "r1c2": "r1c2   ",
+              "r1c3": "r1c3   ",
+              "r1c4": "r1c4   ",
+              "r1c5": "r1c5   ",
+              "r1c6": "r1c6   ",
+              "r2c0": "r2c0   ",
+              "r2c1": "r2c1   ",
+              "r2c2": "r2c2   ",
+              "r2c3": "r2c3   ",
+              "r2c4": "r2c4   ",
+              "r2c5": "r2c5   ",
+              "r2c6": "r2c6   ",
+              "r3c0": "r3c0   ",
+              "r3c1": "r3c1   ",
+              "r3c2": "r3c2   ",
+              "r3c3": "r3c3   ",
+              "r3c4": "r3c4   ",
+              "r3c5": "r3c5   ",
+              "r3c6": "r3c6   "
+            },
+            "list_mode": false,
+            "list_values": {
+              "r0c0": "",
+              "r0c1": "",
+              "r0c2": "",
+              "r0c3": "",
+              "r0c4": "",
+              "r0c5": "",
+              "r0c6": "",
+              "r1c0": "",
+              "r1c1": "",
+              "r1c2": "",
+              "r1c3": "",
+              "r1c4": "",
+              "r1c5": "",
+              "r1c6": "",
+              "r2c0": "",
+              "r2c1": "",
+              "r2c2": "",
+              "r2c3": "",
+              "r2c4": "",
+              "r2c5": "",
+              "r2c6": "",
+              "r3c0": "",
+              "r3c1": "",
+              "r3c2": "",
+              "r3c3": "",
+              "r3c4": "",
+              "r3c5": "",
+              "r3c6": ""
+            },
+            "opened_item": "",
+            "opened_item_value": "",
+            "rendered": true,
+            "selected_item": "r0c0",
+            "selected_items": [],
+            "semantic_state": "unselected",
+            "surface_geometry": {
+              "r0c0": {
+                "height": 61,
+                "width": 54,
+                "x": 42,
+                "y": 731
+              },
+              "r0c1": {
+                "height": 61,
+                "width": 54,
+                "x": 96,
+                "y": 731
+              },
+              "r0c2": {
+                "height": 61,
+                "width": 54,
+                "x": 150,
+                "y": 731
+              },
+              "r0c3": {
+                "height": 61,
+                "width": 54,
+                "x": 204,
+                "y": 731
+              },
+              "r0c4": {
+                "height": 61,
+                "width": 54,
+                "x": 258,
+                "y": 731
+              },
+              "r0c5": {
+                "height": 61,
+                "width": 54,
+                "x": 312,
+                "y": 731
+              },
+              "r0c6": {
+                "height": 61,
+                "width": 54,
+                "x": 366,
+                "y": 731
+              },
+              "r1c0": {
+                "height": 61,
+                "width": 54,
+                "x": 42,
+                "y": 792
+              },
+              "r1c1": {
+                "height": 61,
+                "width": 54,
+                "x": 96,
+                "y": 792
+              },
+              "r1c2": {
+                "height": 61,
+                "width": 54,
+                "x": 150,
+                "y": 792
+              },
+              "r1c3": {
+                "height": 61,
+                "width": 54,
+                "x": 204,
+                "y": 792
+              },
+              "r1c4": {
+                "height": 61,
+                "width": 54,
+                "x": 258,
+                "y": 792
+              },
+              "r1c5": {
+                "height": 61,
+                "width": 54,
+                "x": 312,
+                "y": 792
+              },
+              "r1c6": {
+                "height": 61,
+                "width": 54,
+                "x": 366,
+                "y": 792
+              },
+              "r2c0": {
+                "height": 61,
+                "width": 54,
+                "x": 42,
+                "y": 853
+              },
+              "r2c1": {
+                "height": 61,
+                "width": 54,
+                "x": 96,
+                "y": 853
+              },
+              "r2c2": {
+                "height": 61,
+                "width": 54,
+                "x": 150,
+                "y": 853
+              },
+              "r2c3": {
+                "height": 61,
+                "width": 54,
+                "x": 204,
+                "y": 853
+              },
+              "r2c4": {
+                "height": 61,
+                "width": 54,
+                "x": 258,
+                "y": 853
+              },
+              "r2c5": {
+                "height": 61,
+                "width": 54,
+                "x": 312,
+                "y": 853
+              },
+              "r2c6": {
+                "height": 61,
+                "width": 54,
+                "x": 366,
+                "y": 853
+              },
+              "r3c0": {
+                "height": 61,
+                "width": 54,
+                "x": 42,
+                "y": 914
+              },
+              "r3c1": {
+                "height": 61,
+                "width": 54,
+                "x": 96,
+                "y": 914
+              },
+              "r3c2": {
+                "height": 61,
+                "width": 54,
+                "x": 150,
+                "y": 914
+              },
+              "r3c3": {
+                "height": 61,
+                "width": 54,
+                "x": 204,
+                "y": 914
+              },
+              "r3c4": {
+                "height": 61,
+                "width": 54,
+                "x": 258,
+                "y": 914
+              },
+              "r3c5": {
+                "height": 61,
+                "width": 54,
+                "x": 312,
+                "y": 914
+              },
+              "r3c6": {
+                "height": 61,
+                "width": 54,
+                "x": 366,
+                "y": 914
+              }
+            },
+            "text": "r0c0",
+            "type": "SelectionView",
+            "value": "r0c0",
+            "visible": true,
+            "z_index": 0
+          },
+          "inventory.minimize": {
+            "active_surface": "",
+            "geometry": {
+              "height": 16,
+              "width": 17,
+              "x": 435,
+              "y": 709
+            },
+            "id": "inventory.minimize",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "inventory.tabs": {
+            "active_surface": "",
+            "geometry": {
+              "height": 192,
+              "width": 26,
+              "x": 10,
+              "y": 731
+            },
+            "id": "inventory.tabs",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "selected_tab": "item",
+            "semantic_state": "ready",
+            "text": "item",
+            "type": "Tabs",
+            "value": "item",
+            "visible": true,
+            "z_index": 0
+          }
+        },
+        "interaction_log": [],
+        "window": {
+          "detail_item": "",
+          "geometry_version": 0,
+          "id": "inventory",
+          "last_action": "",
+          "last_error": null,
+          "last_gesture": "",
+          "minimized": false,
+          "pending": false,
+          "position": [
+            0,
+            701
+          ],
+          "resize": {
+            "active": false,
+            "clamped": [
+              484,
+              303
+            ],
+            "motion_samples": 0,
+            "requested": [
+              484,
+              303
+            ],
+            "stale_footer_grip_covered": false,
+            "stale_right_edge_covered": false,
+            "stale_title_controls_covered": false
+          },
+          "size": [
+            484,
+            303
+          ],
+          "view_mode": "tree",
+          "visible": true,
+          "z_index": 0
+        },
+        "window_id": "inventory",
+        "window_pending": false
+      },
+      "options": {
+        "controls": {
+          "options.attack": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1134,
+              "y": 466
+            },
+            "id": "options.attack",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "off",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.bgm": {
+            "active_surface": "",
+            "geometry": {
+              "height": 24,
+              "width": 264,
+              "x": 1223,
+              "y": 345
+            },
+            "id": "options.bgm",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "enabled",
+            "text": "",
+            "type": "Range",
+            "value": 86.7299,
+            "visible": false,
+            "z_index": 0
+          },
+          "options.bgm_on": {
+            "active_surface": "",
+            "geometry": {
+              "height": 18,
+              "width": 18,
+              "x": 1485,
+              "y": 350
+            },
+            "id": "options.bgm_on",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.close": {
+            "active_surface": "",
+            "geometry": {
+              "height": 25,
+              "width": 22,
+              "x": 1505,
+              "y": 301
+            },
+            "id": "options.close",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.effect": {
+            "active_surface": "",
+            "geometry": {
+              "height": 24,
+              "width": 264,
+              "x": 1223,
+              "y": 377
+            },
+            "id": "options.effect",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "enabled",
+            "text": "",
+            "type": "Range",
+            "value": 52.1327,
+            "visible": false,
+            "z_index": 0
+          },
+          "options.effect_on": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 18,
+              "x": 1485,
+              "y": 381
+            },
+            "id": "options.effect_on",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.item": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 19,
+              "x": 1296,
+              "y": 466
+            },
+            "id": "options.item",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "off",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.minimize": {
+            "active_surface": "",
+            "geometry": {
+              "height": 18,
+              "width": 19,
+              "x": 1481,
+              "y": 305
+            },
+            "id": "options.minimize",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.option": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1391,
+              "y": 467
+            },
+            "id": "options.option",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.skill": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1224,
+              "y": 466
+            },
+            "id": "options.skill",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.skin": {
+            "active_surface": "",
+            "geometry": {
+              "height": 32,
+              "width": 300,
+              "x": 1222,
+              "y": 415
+            },
+            "id": "options.skin",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "rendered_asset": "res://assets/image-79/options/dropdown-field-idle.png",
+            "semantic_state": "closed",
+            "text": "Classic Blue",
+            "text_visible": false,
+            "type": "Dropdown",
+            "value": "Classic Blue",
+            "visible": false,
+            "z_index": 50
+          }
+        },
+        "interaction_log": [],
+        "window": {
+          "detail_item": "",
+          "geometry_version": 0,
+          "id": "options",
+          "last_action": "CloseWindow",
+          "last_error": null,
+          "last_gesture": "KeyCommand",
+          "minimized": false,
+          "pending": false,
+          "position": [
+            1108,
+            297
+          ],
+          "resize": {
+            "active": false,
+            "clamped": [
+              424,
+              202
+            ],
+            "motion_samples": 0,
+            "requested": [
+              424,
+              202
+            ],
+            "stale_footer_grip_covered": false,
+            "stale_right_edge_covered": false,
+            "stale_title_controls_covered": false
+          },
+          "size": [
+            424,
+            202
+          ],
+          "view_mode": "tree",
+          "visible": false,
+          "z_index": 0
+        },
+        "window_id": "options",
+        "window_pending": false
+      },
+      "skill_tree": {
+        "controls": {
+          "skill_tree.cancel": {
+            "active_surface": "",
+            "geometry": {
+              "height": 26,
+              "width": 75,
+              "x": 1009,
+              "y": 556
+            },
+            "id": "skill_tree.cancel",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.close": {
+            "active_surface": "",
+            "geometry": {
+              "height": 17,
+              "width": 17,
+              "x": 1082,
+              "y": 7
+            },
+            "id": "skill_tree.close",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.descriptions": {
+            "active_surface": "",
+            "geometry": {
+              "height": 14,
+              "width": 16,
+              "x": 750,
+              "y": 12
+            },
+            "id": "skill_tree.descriptions",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "off",
+            "text": "",
+            "type": "Toggle",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.minimize": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 19,
+              "x": 494,
+              "y": 3
+            },
+            "id": "skill_tree.minimize",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.skills": {
+            "active_surface": "",
+            "detail_text": "",
+            "detail_visible": false,
+            "drag_state": {
+              "active": false,
+              "motion_samples": 0,
+              "source": "",
+              "target": ""
+            },
+            "geometry": {
+              "height": 470,
+              "width": 550,
+              "x": 522,
+              "y": 60
+            },
+            "gesture_drag": {
+              "active": false,
+              "motion_samples": 0,
+              "source": "",
+              "target": ""
+            },
+            "id": "skill_tree.skills",
+            "interaction_phase": "idle",
+            "item_values": {},
+            "item_version": 0,
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "list_labels": {
+              "r1c1": "ホーリー..   5 / 5",
+              "r1c2": "リザレク..   ",
+              "r1c3": "ヒール   10 / 10",
+              "r1c4": "アクア..   10 / 10",
+              "r1c5": "ディバイ..   5 / 5",
+              "r1c6": "ブレッシ..   10 / 10",
+              "r2c1": "プロテク..   5 / 5",
+              "r2c2": "キリエエ..   1 / 1",
+              "r2c3": "サンクチ..   5 / 5",
+              "r2c4": "デーモン..   0 / 5",
+              "r2c5": "魔法反射   0 / 3",
+              "r3c1": "速度増加   5 / 5",
+              "r3c2": "天使の恵み   3 / 3",
+              "r3c3": "エンジェ..   1 / 1",
+              "r3c4": "ニューマ   5 / 5",
+              "r3c5": "ストリッ..   0 / 5",
+              "r3c6": "シールド..   3 / 3",
+              "r4c1": "リカバリー   1 / 1",
+              "r4c2": "レックス..   10 / 10",
+              "r4c3": "カントキ..   1 / 1",
+              "r4c4": "クァグマ..   1 / 1",
+              "r4c5": "ペイニッ..   0 / 5",
+              "r4c6": "セイフティ..   0 / 5",
+              "r5c1": "グロリア   5 / 5",
+              "r5c3": "エクスピア..   0 / 1",
+              "r5c4": "エクスピア..   0 / 1",
+              "r5c5": "ターンア..   0 / 10"
+            },
+            "list_mode": false,
+            "list_values": {
+              "r1c1": "5 / 5",
+              "r1c2": "",
+              "r1c3": "10 / 10",
+              "r1c4": "10 / 10",
+              "r1c5": "5 / 5",
+              "r1c6": "10 / 10",
+              "r2c1": "5 / 5",
+              "r2c2": "1 / 1",
+              "r2c3": "5 / 5",
+              "r2c4": "0 / 5",
+              "r2c5": "0 / 3",
+              "r3c1": "5 / 5",
+              "r3c2": "3 / 3",
+              "r3c3": "1 / 1",
+              "r3c4": "5 / 5",
+              "r3c5": "0 / 5",
+              "r3c6": "3 / 3",
+              "r4c1": "1 / 1",
+              "r4c2": "10 / 10",
+              "r4c3": "1 / 1",
+              "r4c4": "1 / 1",
+              "r4c5": "0 / 5",
+              "r4c6": "0 / 5",
+              "r5c1": "5 / 5",
+              "r5c3": "0 / 1",
+              "r5c4": "0 / 1",
+              "r5c5": "0 / 10"
+            },
+            "opened_item": "",
+            "opened_item_value": "",
+            "rendered": true,
+            "selected_item": "r1c3",
+            "selected_items": [],
+            "semantic_state": "unselected",
+            "surface_geometry": {
+              "r1c1": {
+                "height": 41,
+                "width": 41,
+                "x": 538,
+                "y": 67
+              },
+              "r1c2": {
+                "height": 42,
+                "width": 42,
+                "x": 637,
+                "y": 67
+              },
+              "r1c3": {
+                "height": 40,
+                "width": 38,
+                "x": 738,
+                "y": 67
+              },
+              "r1c4": {
+                "height": 40,
+                "width": 36,
+                "x": 837,
+                "y": 67
+              },
+              "r1c5": {
+                "height": 40,
+                "width": 41,
+                "x": 929,
+                "y": 67
+              },
+              "r1c6": {
+                "height": 40,
+                "width": 41,
+                "x": 1022,
+                "y": 67
+              },
+              "r2c1": {
+                "height": 40,
+                "width": 41,
+                "x": 538,
+                "y": 170
+              },
+              "r2c2": {
+                "height": 40,
+                "width": 41,
+                "x": 638,
+                "y": 170
+              },
+              "r2c3": {
+                "height": 40,
+                "width": 38,
+                "x": 738,
+                "y": 170
+              },
+              "r2c4": {
+                "height": 40,
+                "width": 36,
+                "x": 837,
+                "y": 170
+              },
+              "r2c5": {
+                "height": 40,
+                "width": 39,
+                "x": 931,
+                "y": 170
+              },
+              "r3c1": {
+                "height": 40,
+                "width": 41,
+                "x": 538,
+                "y": 271
+              },
+              "r3c2": {
+                "height": 40,
+                "width": 41,
+                "x": 638,
+                "y": 271
+              },
+              "r3c3": {
+                "height": 40,
+                "width": 38,
+                "x": 738,
+                "y": 271
+              },
+              "r3c4": {
+                "height": 40,
+                "width": 36,
+                "x": 837,
+                "y": 271
+              },
+              "r3c5": {
+                "height": 40,
+                "width": 39,
+                "x": 931,
+                "y": 271
+              },
+              "r3c6": {
+                "height": 40,
+                "width": 41,
+                "x": 1022,
+                "y": 271
+              },
+              "r4c1": {
+                "height": 40,
+                "width": 41,
+                "x": 537,
+                "y": 372
+              },
+              "r4c2": {
+                "height": 40,
+                "width": 42,
+                "x": 637,
+                "y": 372
+              },
+              "r4c3": {
+                "height": 40,
+                "width": 38,
+                "x": 738,
+                "y": 372
+              },
+              "r4c4": {
+                "height": 40,
+                "width": 36,
+                "x": 837,
+                "y": 372
+              },
+              "r4c5": {
+                "height": 40,
+                "width": 39,
+                "x": 931,
+                "y": 372
+              },
+              "r4c6": {
+                "height": 40,
+                "width": 41,
+                "x": 1022,
+                "y": 372
+              },
+              "r5c1": {
+                "height": 40,
+                "width": 41,
+                "x": 538,
+                "y": 473
+              },
+              "r5c3": {
+                "height": 40,
+                "width": 38,
+                "x": 738,
+                "y": 473
+              },
+              "r5c4": {
+                "height": 39,
+                "width": 36,
+                "x": 837,
+                "y": 474
+              },
+              "r5c5": {
+                "height": 40,
+                "width": 40,
+                "x": 926,
+                "y": 473
+              }
+            },
+            "text": "r1c3",
+            "type": "SelectionView",
+            "value": "r1c3",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r1c1": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 522,
+              "y": 111
+            },
+            "id": "skill_tree.stepper.r1c1",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r1c3": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 10,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 716,
+              "y": 111
+            },
+            "id": "skill_tree.stepper.r1c3",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 10,
+            "text": "10 / 10",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r1c4": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 10,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 813,
+              "y": 111
+            },
+            "id": "skill_tree.stepper.r1c4",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 10,
+            "text": "10 / 10",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r1c5": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 910,
+              "y": 111
+            },
+            "id": "skill_tree.stepper.r1c5",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r1c6": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 10,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 1007,
+              "y": 111
+            },
+            "id": "skill_tree.stepper.r1c6",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 10,
+            "text": "10 / 10",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r2c1": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 522,
+              "y": 212
+            },
+            "id": "skill_tree.stepper.r2c1",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r2c2": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 1,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 619,
+              "y": 212
+            },
+            "id": "skill_tree.stepper.r2c2",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "1 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r2c3": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 716,
+              "y": 212
+            },
+            "id": "skill_tree.stepper.r2c3",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r2c4": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 813,
+              "y": 212
+            },
+            "id": "skill_tree.stepper.r2c4",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "0 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r2c5": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 910,
+              "y": 212
+            },
+            "id": "skill_tree.stepper.r2c5",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 3,
+            "text": "0 / 3",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c1": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 522,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c1",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c2": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 3,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 619,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c2",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 3,
+            "text": "3 / 3",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c3": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 1,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 716,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c3",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "1 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c4": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 813,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c4",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c5": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 910,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c5",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "0 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r3c6": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 3,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 1007,
+              "y": 313
+            },
+            "id": "skill_tree.stepper.r3c6",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 3,
+            "text": "3 / 3",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c1": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 1,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 522,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c1",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "1 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c2": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 10,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 619,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c2",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 10,
+            "text": "10 / 10",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c3": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 1,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 716,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c3",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "1 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c4": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 1,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 813,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c4",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "1 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c5": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 910,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c5",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "0 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r4c6": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 1007,
+              "y": 414
+            },
+            "id": "skill_tree.stepper.r4c6",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "0 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r5c1": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 5,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 522,
+              "y": 515
+            },
+            "id": "skill_tree.stepper.r5c1",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 5,
+            "text": "5 / 5",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r5c3": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 716,
+              "y": 515
+            },
+            "id": "skill_tree.stepper.r5c3",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "0 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r5c4": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 813,
+              "y": 515
+            },
+            "id": "skill_tree.stepper.r5c4",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 1,
+            "text": "0 / 1",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.stepper.r5c5": {
+            "active_surface": "",
+            "arrows_visible": true,
+            "current": 0,
+            "geometry": {
+              "height": 17,
+              "width": 84,
+              "x": 910,
+              "y": 515
+            },
+            "id": "skill_tree.stepper.r5c5",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "maximum": 10,
+            "minimum": 0,
+            "pending": false,
+            "rendered": true,
+            "rendered_arrow_pixels": {
+              "decrement": 81,
+              "increment": 56
+            },
+            "rendered_arrow_visibility": {
+              "decrement": true,
+              "increment": true
+            },
+            "semantic_state": "ready",
+            "step": 1,
+            "target": 10,
+            "text": "0 / 10",
+            "text_visible": true,
+            "type": "Stepper",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.use": {
+            "active_surface": "",
+            "geometry": {
+              "height": 26,
+              "width": 70,
+              "x": 922,
+              "y": 556
+            },
+            "id": "skill_tree.use",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          },
+          "skill_tree.view": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 53,
+              "x": 1022,
+              "y": 6
+            },
+            "id": "skill_tree.view",
+            "interaction_phase": "idle",
+            "last_action": "",
+            "last_error": null,
+            "last_gesture": "",
+            "last_result": {
+              "accepted": false,
+              "action": "",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": true,
+            "z_index": 0
+          }
+        },
+        "interaction_log": [],
+        "window": {
+          "detail_item": "",
+          "geometry_version": 0,
+          "id": "skill_tree",
+          "last_action": "",
+          "last_error": null,
+          "last_gesture": "",
+          "minimized": false,
+          "pending": false,
+          "position": [
+            492,
+            0
+          ],
+          "resize": {
+            "active": false,
+            "clamped": [
+              611,
+              595
+            ],
+            "motion_samples": 0,
+            "requested": [
+              611,
+              595
+            ],
+            "stale_footer_grip_covered": false,
+            "stale_right_edge_covered": false,
+            "stale_title_controls_covered": false
+          },
+          "size": [
+            611,
+            595
+          ],
+          "view_mode": "tree",
+          "visible": true,
+          "z_index": 0
+        },
+        "window_id": "skill_tree",
+        "window_pending": false
+      }
+    }
+  },
+  "pass": true,
+  "idle": {
+    "path": "00-idle.png",
+    "sha256": "0ff6dbf9b02c459c2b909a040e6d6a838c6fae8b9f0d238aa8f97fbb30c78f91"
+  }
+}
