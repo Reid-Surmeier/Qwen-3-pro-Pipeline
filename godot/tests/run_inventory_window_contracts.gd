@@ -19,6 +19,9 @@ func _run() -> void:
 	window = desktop.inventory
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
 		and desktop.windows.size() == 3, str(desktop.validation_errors))
+	var idle_resize: Dictionary = window.qa_state().window.resize
+	_check("idle-resize-facts", idle_resize.requested == [484.0, 303.0]
+		and idle_resize.clamped == [484.0, 303.0], str(idle_resize))
 	await _tabs_reverse()
 	await _single_and_double_activate()
 	await _modifier_reverse_and_reject()
@@ -35,13 +38,16 @@ func _run() -> void:
 
 
 func _tabs_reverse() -> void:
-	await _click(Vector2(23, 788))
-	var selected: Dictionary = window.qa_state().controls["inventory.tabs"]
+	var choices := ["item", "equip", "etc-1", "etc-2", "cash"]
+	var centers := [749.0, 788.0, 827.0, 866.0, 905.0]
+	var routed := []
+	for index in choices.size():
+		await _click(Vector2(23, centers[index]))
+		routed.append(window.qa_state().controls["inventory.tabs"].value == choices[index])
 	await _click(Vector2(23, 749))
 	var restored: Dictionary = window.qa_state().controls["inventory.tabs"]
-	_check("real-tabs-reverse", selected.value == "equip"
-		and selected.last_action == "SelectInventoryTab"
-		and restored.value == "item", str([selected, restored]))
+	_check("real-all-tabs-reverse", routed.all(func(value): return value)
+		and restored.value == "item", str([routed, restored]))
 
 
 func _single_and_double_activate() -> void:
@@ -74,14 +80,23 @@ func _modifier_reverse_and_reject() -> void:
 	var during: Array = window.qa_state().controls["inventory.items"].selected_items
 	await _click(point, true)
 	var after: Array = window.qa_state().controls["inventory.items"].selected_items
-	var before_values: Dictionary = window.qa_state().controls["inventory.items"].item_values.duplicate(true)
-	await _click(point, false, true)
-	var rejected: Dictionary = window.qa_state().controls["inventory.items"]
+	var preserved := _selection_semantics()
+	var invalid_results := []
+	for modifiers in [
+		{"alt": true}, {"shift": true}, {"meta": true},
+		{"ctrl": true, "shift": true},
+	]:
+		await _click(point, bool(modifiers.get("ctrl", false)),
+			bool(modifiers.get("alt", false)), bool(modifiers.get("shift", false)),
+			bool(modifiers.get("meta", false)))
+		var rejected: Dictionary = window.qa_state().controls["inventory.items"]
+		invalid_results.append(not rejected.last_result.accepted
+			and rejected.last_result.error.code == "InvalidModifierError"
+			and _selection_semantics() == preserved)
 	_check("real-modifier-reverse", "r0c2" in during and "r0c2" not in after,
 		str([during, after]))
-	_check("real-invalid-modifier", not rejected.last_result.accepted
-		and rejected.last_result.error.code == "InvalidModifierError"
-		and rejected.item_values == before_values, str(rejected))
+	_check("real-invalid-modifiers", invalid_results.all(func(value): return value),
+		str(invalid_results))
 
 
 func _drag_drop_and_rejections() -> void:
@@ -97,6 +112,8 @@ func _drag_drop_and_rejections() -> void:
 		and moved.item_values.r0c0 == "r0c1" and moved.item_values.r0c1 == "r0c0"
 		and moved.last_gesture == "DragDrop" and _gesture_count("Activate") == activate_before,
 		str(moved))
+	_check("drag-detail-follows-item-identity", moved.opened_item_value == "r0c0"
+		and moved.detail_text == "所持品 1-1\n個数 2" and moved.detail_visible, str(moved))
 	var values_before: Dictionary = moved.item_values.duplicate(true)
 	await _press(source)
 	for index in 31:
@@ -127,6 +144,11 @@ func _resize_and_alignment() -> void:
 	_check("real-resize-max-clamp", maximum.window.size == [734.0, 512.0]
 		and maximum.window.resize.motion_samples >= 30 and maximum.window.geometry_version == 1,
 		str(maximum.window))
+	_check("resized-stale-chrome-covered",
+		maximum.window.resize.stale_title_controls_covered
+		and maximum.window.resize.stale_footer_grip_covered
+		and maximum.window.resize.stale_right_edge_covered,
+		str(maximum.window.resize))
 	_check("resized-grid-alignment", aligned, str(maximum.controls["inventory.items"].surface_geometry))
 	var grip := window.get_node("ResizeGrip")
 	var grip_rect: Rect2 = grip.get_global_rect()
@@ -203,7 +225,16 @@ func _surfaces_aligned(state: Dictionary) -> bool:
 func _gesture_count(gesture: String) -> int:
 	return window.runtime.interaction_log.filter(func(entry):
 		return entry.get("control_id") == "inventory.items" \
-			and entry.get("gesture") == gesture).size()
+		and entry.get("gesture") == gesture).size()
+
+
+func _selection_semantics() -> Dictionary:
+	var state: Dictionary = window.qa_state()
+	var items: Dictionary = state.controls["inventory.items"]
+	return {"value": items.value, "selected_items": items.selected_items.duplicate(),
+		"opened_item": items.opened_item, "item_values": items.item_values.duplicate(true),
+		"item_version": items.item_version, "detail_item": state.window.detail_item,
+		"detail_text": items.detail_text, "detail_visible": items.detail_visible}
 
 
 func _double_click(point: Vector2) -> void:
@@ -219,12 +250,14 @@ func _double_click(point: Vector2) -> void:
 	await _release(point)
 
 
-func _click(point: Vector2, ctrl := false, alt := false) -> void:
-	await _press(point, ctrl, alt)
-	await _release(point, ctrl, alt)
+func _click(point: Vector2, ctrl := false, alt := false,
+		shift := false, meta := false) -> void:
+	await _press(point, ctrl, alt, shift, meta)
+	await _release(point, ctrl, alt, shift, meta)
 
 
-func _press(point: Vector2, ctrl := false, alt := false) -> void:
+func _press(point: Vector2, ctrl := false, alt := false,
+		shift := false, meta := false) -> void:
 	await _move(point, false)
 	var event := InputEventMouseButton.new()
 	event.position = point
@@ -233,11 +266,14 @@ func _press(point: Vector2, ctrl := false, alt := false) -> void:
 	event.pressed = true
 	event.ctrl_pressed = ctrl
 	event.alt_pressed = alt
+	event.shift_pressed = shift
+	event.meta_pressed = meta
 	Input.parse_input_event(event)
 	await process_frame
 
 
-func _release(point: Vector2, ctrl := false, alt := false) -> void:
+func _release(point: Vector2, ctrl := false, alt := false,
+		shift := false, meta := false) -> void:
 	var event := InputEventMouseButton.new()
 	event.position = point
 	event.global_position = point
@@ -245,6 +281,8 @@ func _release(point: Vector2, ctrl := false, alt := false) -> void:
 	event.pressed = false
 	event.ctrl_pressed = ctrl
 	event.alt_pressed = alt
+	event.shift_pressed = shift
+	event.meta_pressed = meta
 	Input.parse_input_event(event)
 	await process_frame
 

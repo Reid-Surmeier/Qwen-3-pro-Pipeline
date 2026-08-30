@@ -32,8 +32,11 @@ var _resize_hit: Control
 var _resize_visual: TextureRect
 var _resize_frame_nodes: Array[CanvasItem] = []
 var _resize_old_footer_cover: ColorRect
+var _resize_old_right_edge_cover: ColorRect
 var _resize_title_fill: TextureRect
+var _resize_old_title_controls_cover: TextureRect
 var _resize_footer: TextureRect
+var _resize_old_footer_grip_cover: TextureRect
 var _resize_footer_fill: TextureRect
 var _resize_right_edge: TextureRect
 var _resizing := false
@@ -55,6 +58,8 @@ func configure(window_spec: Dictionary) -> void:
 	size = Vector2(float(spec.geometry.width), float(spec.geometry.height))
 	_expanded_size = size
 	_home_size = size
+	_resize_requested = size
+	_resize_clamped = size
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	clip_contents = true
 
@@ -135,7 +140,13 @@ func qa_state() -> Dictionary:
 		"resize": {"active": _resizing,
 			"requested": [_resize_requested.x, _resize_requested.y],
 			"clamped": [_resize_clamped.x, _resize_clamped.y],
-			"motion_samples": _resize_motion_samples},
+			"motion_samples": _resize_motion_samples,
+			"stale_title_controls_covered": _resize_old_title_controls_cover != null \
+				and _resize_old_title_controls_cover.visible,
+			"stale_footer_grip_covered": _resize_old_footer_grip_cover != null \
+				and _resize_old_footer_grip_cover.visible,
+			"stale_right_edge_covered": _resize_old_right_edge_cover != null \
+				and _resize_old_right_edge_cover.visible},
 	}
 	return state
 
@@ -220,8 +231,18 @@ func _add_resize_frame() -> void:
 	_resize_old_footer_cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_resize_old_footer_cover)
 	_resize_frame_nodes.append(_resize_old_footer_cover)
+	_resize_old_right_edge_cover = ColorRect.new()
+	_resize_old_right_edge_cover.name = "OldRightEdgeCover"
+	_resize_old_right_edge_cover.color = Color8(247, 247, 247)
+	_resize_old_right_edge_cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_resize_old_right_edge_cover)
+	_resize_frame_nodes.append(_resize_old_right_edge_cover)
 	_resize_title_fill = _frame_texture("TitleFill", str(frame.title_fill))
+	_resize_old_title_controls_cover = _frame_texture(
+		"OldTitleControlsCover", str(frame.title_fill))
 	_resize_footer = _frame_texture("Footer", str(frame.footer))
+	_resize_old_footer_grip_cover = _frame_texture(
+		"OldFooterGripCover", str(frame.footer_fill))
 	_resize_footer_fill = _frame_texture("FooterFill", str(frame.footer_fill))
 	_resize_right_edge = _frame_texture("RightEdge", str(frame.right_edge))
 	_layout_resize_frame()
@@ -255,11 +276,29 @@ func _layout_resize_frame() -> void:
 	_resize_old_footer_cover.position = Vector2(0, home.y - footer_height)
 	_resize_old_footer_cover.size = Vector2(minf(size.x, home.x), footer_height)
 	_resize_old_footer_cover.visible = size.y > home.y
+	var right_cover: Dictionary = frame.stale_right_edge_geometry
+	_resize_old_right_edge_cover.position = Vector2(
+		float(right_cover.x), float(right_cover.y))
+	_resize_old_right_edge_cover.size = Vector2(
+		float(right_cover.width), float(right_cover.height))
+	_resize_old_right_edge_cover.visible = size.x > home.x
 	_resize_title_fill.position = Vector2(home.x, 0)
 	_resize_title_fill.size = Vector2(maxf(0.0, size.x - home.x), title_height)
 	_resize_title_fill.visible = size.x > home.x
+	var title_cover: Dictionary = frame.stale_title_controls_geometry
+	_resize_old_title_controls_cover.position = Vector2(
+		float(title_cover.x), float(title_cover.y))
+	_resize_old_title_controls_cover.size = Vector2(
+		float(title_cover.width), float(title_cover.height))
+	_resize_old_title_controls_cover.visible = size.x > home.x
 	_resize_footer.position = Vector2(0, size.y - footer_height)
 	_resize_footer.size = Vector2(minf(size.x, home.x), footer_height)
+	var grip_cover: Dictionary = frame.stale_footer_grip_geometry
+	_resize_old_footer_grip_cover.position = Vector2(float(grip_cover.x),
+		size.y - (home.y - float(grip_cover.y)))
+	_resize_old_footer_grip_cover.size = Vector2(
+		float(grip_cover.width), float(grip_cover.height))
+	_resize_old_footer_grip_cover.visible = size.x > home.x
 	_resize_footer_fill.position = Vector2(home.x, size.y - footer_height)
 	_resize_footer_fill.size = Vector2(maxf(0.0, size.x - home.x - edge_width), footer_height)
 	_resize_footer_fill.visible = size.x > home.x

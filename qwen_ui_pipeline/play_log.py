@@ -142,7 +142,7 @@ def evaluate_play_log(
 
         frames = action.get("frames")
         required_roles = {"before", "after"}
-        if gesture == "Drag":
+        if gesture in {"Drag", "Resize", "DragDrop"}:
             required_roles.add("mid")
             samples = action.get("motion_samples")
             def valid_motion_sample(sample: object) -> bool:
@@ -156,7 +156,9 @@ def evaluate_play_log(
 
             if not isinstance(samples, list) or len(samples) < 30 \
                     or not all(valid_motion_sample(sample) for sample in samples):
-                problems.append(f"{label} Drag requires at least 30 motion samples")
+                problems.append(
+                    f"{label} {gesture} requires at least 30 motion samples"
+                )
         if not isinstance(frames, dict):
             problems.append(f"{label}.frames must be an object")
             continue

@@ -4112,6 +4112,24 @@
             "inventory.minimize",
             "inventory.close"
           ],
+          "stale_title_controls_geometry": {
+            "x": 436,
+            "y": 0,
+            "width": 48,
+            "height": 24
+          },
+          "stale_footer_grip_geometry": {
+            "x": 460,
+            "y": 279,
+            "width": 24,
+            "height": 24
+          },
+          "stale_right_edge_geometry": {
+            "x": 480,
+            "y": 24,
+            "width": 4,
+            "height": 255
+          },
           "title_fill": "res://assets/image-79/inventory/resize-title-fill.png",
           "footer": "res://assets/image-79/inventory/resize-footer.png",
           "footer_fill": "res://assets/image-79/inventory/resize-footer-fill.png",

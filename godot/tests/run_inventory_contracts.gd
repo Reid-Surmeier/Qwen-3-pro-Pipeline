@@ -79,8 +79,8 @@ func _contract_drag_drop_swaps_once() -> void:
 	var state: Dictionary = runtime.qa_state().controls["inventory.items"]
 	_check("drag-drop-swaps-once", result.get("ok", false)
 		and result.get("action") == "MoveInventoryItem"
-		and state.get("item_values", {}).get("r0c0") == "item-02"
-		and state.get("item_values", {}).get("r0c1") == "item-01"
+		and state.get("item_values", {}).get("r0c0") == "r0c1"
+		and state.get("item_values", {}).get("r0c1") == "r0c0"
 		and state.get("item_version") == 1, str([result, state]))
 
 
@@ -165,7 +165,7 @@ func _fixture() -> Dictionary:
 			"value": {"items": ["r0c0", "r0c1", "r0c2"], "initial": "r0c0",
 				"details": {"r0c0": "item 1", "r0c1": "item 2", "r0c2": "item 3"},
 				"value_control_ids": {},
-				"item_values": {"r0c0": "item-01", "r0c1": "item-02", "r0c2": "item-03"},
+				"item_values": {"r0c0": "r0c0", "r0c1": "r0c1", "r0c2": "r0c2"},
 				"allowed_modifiers": ["ctrl"],
 				"drop_targets": ["r0c0", "r0c1", "r0c2"], "initial_version": 0},
 			"surfaces": surfaces,

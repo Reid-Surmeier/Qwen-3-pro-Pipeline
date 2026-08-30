@@ -90,15 +90,24 @@ const invariantBefore = await invariantShot("00-invariant-before");
 const initial = await inventory();
 check("idle-factual-state", initial.window.size[0] === 484
   && initial.window.size[1] === 303
+  && JSON.stringify(initial.window.resize.requested) === JSON.stringify([484, 303])
+  && JSON.stringify(initial.window.resize.clamped) === JSON.stringify([484, 303])
   && initial.controls["inventory.tabs"].value === "item"
   && Object.keys(initial.controls["inventory.items"].surface_geometry).length === 28,
   initial.window);
 
-await click(23, 788);
+const tabRouteChecks = [];
+for (const [choice, y] of [["item", 749], ["etc-1", 827], ["etc-2", 866],
+  ["cash", 905], ["equip", 788]]) {
+  await click(23, y);
+  const state = await control("inventory.tabs");
+  tabRouteChecks.push(state.value === choice && state.last_action === "SelectInventoryTab");
+}
 const tabSelected = await control("inventory.tabs");
 const tabFrame = await shot("01-tab-equip");
 record("inventory.tabs", "Activate", "SelectInventoryTab",
-  "clicking Equip selects exactly that tab", JSON.stringify(tabSelected), {
+  "each source tab routes once and Item reverses the selection", JSON.stringify(tabSelected), {
+    all_five_routed: tabRouteChecks.every(Boolean),
     selected: tabSelected.value === "equip",
     action_routed: tabSelected.last_action === "SelectInventoryTab",
   }, { before: idle, after: tabFrame });
@@ -147,15 +156,35 @@ await page.keyboard.up("Control");
 check("modifier-reversible", !(await control("inventory.items")).selected_items.includes("r0c2"),
   await control("inventory.items"));
 
-const valuesBeforeAlt = (await control("inventory.items")).item_values;
-await page.keyboard.down("Alt");
-await click(177, 761);
-await page.keyboard.up("Alt");
-const invalidModifier = await control("inventory.items");
-check("invalid-modifier-fails-closed", invalidModifier.last_result.accepted === false
-  && invalidModifier.last_result.error?.code === "InvalidModifierError"
-  && JSON.stringify(invalidModifier.item_values) === JSON.stringify(valuesBeforeAlt),
-  invalidModifier.last_result);
+const beforeInvalidModifiers = await inventory();
+const preservedModifierState = JSON.stringify({
+  value: beforeInvalidModifiers.controls["inventory.items"].value,
+  selected_items: beforeInvalidModifiers.controls["inventory.items"].selected_items,
+  opened_item: beforeInvalidModifiers.controls["inventory.items"].opened_item,
+  item_values: beforeInvalidModifiers.controls["inventory.items"].item_values,
+  item_version: beforeInvalidModifiers.controls["inventory.items"].item_version,
+  detail_item: beforeInvalidModifiers.window.detail_item,
+  detail_text: beforeInvalidModifiers.controls["inventory.items"].detail_text,
+  detail_visible: beforeInvalidModifiers.controls["inventory.items"].detail_visible,
+});
+const invalidModifierChecks = [];
+for (const keys of [["Alt"], ["Shift"], ["Meta"], ["Control", "Shift"]]) {
+  for (const key of keys) await page.keyboard.down(key);
+  await click(177, 761);
+  for (const key of keys.toReversed()) await page.keyboard.up(key);
+  const rejectedWindow = await inventory();
+  const rejected = rejectedWindow.controls["inventory.items"];
+  const afterState = JSON.stringify({ value: rejected.value,
+    selected_items: rejected.selected_items, opened_item: rejected.opened_item,
+    item_values: rejected.item_values, item_version: rejected.item_version,
+    detail_item: rejectedWindow.window.detail_item, detail_text: rejected.detail_text,
+    detail_visible: rejected.detail_visible });
+  invalidModifierChecks.push(rejected.last_result.accepted === false
+    && rejected.last_result.error?.code === "InvalidModifierError"
+    && afterState === preservedModifierState);
+}
+check("invalid-modifiers-fail-closed", invalidModifierChecks.every(Boolean),
+  invalidModifierChecks);
 
 const dragStart = point(69, 761);
 const dragEnd = point(123, 761);
@@ -184,6 +213,8 @@ record("inventory.items", "DragDrop", "MoveInventoryItem",
     motion_factual: Math.max(...dragSamples) >= 30,
     no_trailing_click: (await inventory()).interaction_log
       .filter((entry) => entry.gesture === "Activate").length === activateBeforeDrag,
+    detail_follows_item: movedItem.opened_item_value === "r0c0"
+      && movedItem.detail_text === "所持品 1-1\n個数 2" && movedItem.detail_visible,
   }, { before: dragBefore, mid: dragMid, after: dragAfter }, dragSamples);
 
 const invalidStart = point(177, 761);
@@ -259,6 +290,9 @@ record("inventory", "Resize", "ResizeWindow",
     maximum: resized.window.size[0] === 734 && resized.window.size[1] === 512,
     continuous: resized.window.resize.motion_samples >= 30,
     aligned,
+    stale_chrome_covered: resized.window.resize.stale_title_controls_covered
+      && resized.window.resize.stale_footer_grip_covered
+      && resized.window.resize.stale_right_edge_covered,
   }, { before: resizeBefore, mid: resizeMid, after: resizeAfter }, sizeSamples);
 
 const minimizeGeometry = resized.controls["inventory.minimize"].geometry;

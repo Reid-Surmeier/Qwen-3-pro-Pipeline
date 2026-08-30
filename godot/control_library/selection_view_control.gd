@@ -63,7 +63,7 @@ func show_detail(item: String) -> void:
 		return
 	var surface: Dictionary = spec.surfaces[item]
 	var geometry: Dictionary = surface.geometry
-	detail_label.text = str(spec.value.details[item])
+	detail_label.text = str(spec.value.details[_item_identity(item)])
 	var detail_view: Variant = spec.value.get("detail_view", {})
 	var offset: Array = detail_view.get("offset", [8, 0]) \
 		if detail_view is Dictionary else [8, 0]
@@ -75,11 +75,13 @@ func show_detail(item: String) -> void:
 
 
 func rendered_facts() -> Dictionary:
+	var opened_item := str(runtime.qa_state().controls[spec.id].get("opened_item", ""))
 	return {
 		"selected_item": str(runtime.qa_state().controls[spec.id].get("value", "")),
 		"list_mode": _list_mode,
 		"detail_visible": detail_panel != null and detail_panel.visible,
 		"detail_text": "" if detail_label == null else detail_label.text,
+		"opened_item_value": "" if opened_item.is_empty() else _item_identity(opened_item),
 		"list_values": _list_values(),
 		"list_labels": _rendered_list_labels(),
 		"gesture_drag": runtime.qa_state().controls[spec.id].get("drag_state", {}),
@@ -374,6 +376,14 @@ func _refresh() -> void:
 	for item in list_labels:
 		list_labels[item].text = "%s   %s" % [
 			str(labels.get(item, item)), _related_value_text(item)]
+	var opened_item := str(runtime.qa_state().controls[spec.id].get("opened_item", ""))
+	if detail_panel != null and detail_panel.visible and not opened_item.is_empty():
+		show_detail(opened_item)
+
+
+func _item_identity(item: String) -> String:
+	var state: Dictionary = runtime.qa_state().controls[spec.id]
+	return str(state.get("item_values", {}).get(item, item))
 
 
 func _point(geometry: Dictionary) -> Vector2:

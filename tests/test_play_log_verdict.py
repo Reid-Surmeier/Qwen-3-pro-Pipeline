@@ -193,6 +193,24 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
+    def test_resize_and_drag_drop_require_motion_evidence(self) -> None:
+        for gesture in ("Resize", "DragDrop"):
+            with self.subTest(gesture=gesture):
+                log = self._valid_log()
+                action = log["actions"][0]
+                action["gesture"] = gesture
+                del action["frames"]["mid"]
+                del action["motion_samples"]
+                log["required_actions"][0]["gesture"] = gesture
+                manifest = self._manifest()
+                manifest["windows"][0]["actions"][0]["gesture"] = gesture
+                verdict = evaluate_play_log(log, self.root, manifest)
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+                self.assertTrue(any(
+                    f"{gesture} requires at least 30 motion samples" in problem
+                    for problem in verdict["problems"]
+                ), verdict)
+
     def test_malformed_root_is_invalid_without_throwing(self) -> None:
         verdict = evaluate_play_log({"schema_version": "wrong"}, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])

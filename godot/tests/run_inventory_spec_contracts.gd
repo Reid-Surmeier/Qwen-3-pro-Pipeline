@@ -14,7 +14,9 @@ func _init() -> void:
 	_contract_valid_inventory_fixture()
 	_contract_modifier_policy_fails_closed()
 	_contract_drop_targets_fail_closed()
+	_contract_item_identity_fails_closed()
 	_contract_resize_bounds_fail_closed()
+	_contract_resize_frame_fails_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
 
@@ -61,12 +63,35 @@ func _contract_drop_targets_fail_closed() -> void:
 		str(errors))
 
 
+func _contract_item_identity_fails_closed() -> void:
+	var fixture := _fixture()
+	fixture.windows[0].controls[1].value.item_values.r0c1 = "missing"
+	var errors: Array[Dictionary] = ControlSpec.validate(fixture, func(_path): return true)
+	_check("invalid-item-identity-fails-closed", _has_code(errors, Errors.INVALID_STATE_SET),
+		str(errors))
+
+
 func _contract_resize_bounds_fail_closed() -> void:
 	var fixture := _fixture()
 	fixture.windows[0].resize.minimum = [735, 513]
 	var errors: Array[Dictionary] = ControlSpec.validate(fixture, func(_path): return true)
 	_check("invalid-resize-bounds-fail-closed", _has_code(errors, Errors.INVALID_GEOMETRY),
 		str(errors))
+
+
+func _contract_resize_frame_fails_closed() -> void:
+	var missing_geometry := _fixture()
+	missing_geometry.windows[0].resize.frame.erase("home_size")
+	var geometry_errors: Array[Dictionary] = ControlSpec.validate(
+		missing_geometry, func(_path): return true)
+	var foreign_control := _fixture()
+	foreign_control.windows[0].resize.frame.anchored_right_controls = ["inventory.missing"]
+	var control_errors: Array[Dictionary] = ControlSpec.validate(
+		foreign_control, func(_path): return true)
+	_check("invalid-resize-frame-fails-closed",
+		_has_code(geometry_errors, Errors.INVALID_GEOMETRY)
+		and _has_code(control_errors, Errors.CONTROL_BINDING),
+		str({"geometry": geometry_errors, "control": control_errors}))
 
 
 func _fixture() -> Dictionary:
@@ -98,7 +123,18 @@ func _fixture() -> Dictionary:
 			"id": "inventory", "geometry": {"x": 0, "y": 701, "width": 484, "height": 303},
 			"drag_geometry": {"x": 24, "y": 0, "width": 390, "height": 24},
 			"resize": {"grip_geometry": {"x": 460, "y": 279, "width": 24, "height": 24},
-				"minimum": [332, 220], "maximum": [734, 512]},
+				"minimum": [332, 220], "maximum": [734, 512],
+				"frame": {"home_size": [484, 303], "title_height": 24,
+					"footer_height": 24, "right_edge_width": 4,
+					"anchored_right_controls": ["inventory.tabs"],
+					"stale_title_controls_geometry": {"x": 436, "y": 0,
+						"width": 48, "height": 24},
+					"stale_footer_grip_geometry": {"x": 460, "y": 279,
+						"width": 24, "height": 24},
+					"stale_right_edge_geometry": {"x": 480, "y": 24,
+						"width": 4, "height": 255},
+					"title_fill": "fixture", "footer": "fixture",
+					"footer_fill": "fixture", "right_edge": "fixture"}},
 			"plates": {"expanded": "fixture", "minimized": "fixture"},
 			"gestures": ["Drag", "Resize", "KeyCommand"],
 			"actions": [
@@ -134,7 +170,7 @@ func _fixture() -> Dictionary:
 					"value": {"items": ["r0c0", "r0c1", "r0c2"], "initial": "r0c0",
 						"details": {"r0c0": "item 1", "r0c1": "item 2", "r0c2": "item 3"},
 						"value_control_ids": {},
-						"item_values": {"r0c0": "item-01", "r0c1": "item-02", "r0c2": "item-03"},
+						"item_values": {"r0c0": "r0c0", "r0c1": "r0c1", "r0c2": "r0c2"},
 						"allowed_modifiers": ["ctrl"],
 						"drop_targets": ["r0c0", "r0c1", "r0c2"], "initial_version": 0,
 						"detail_view": {"size": [156, 50], "offset": [8, 0],
