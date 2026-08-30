@@ -160,7 +160,10 @@ def main() -> None:
             raise ValueError(f"Stepper value missing from {entry['label']}")
         current, target = (int(match.group(1)), int(match.group(2)))
         maximum = max(current, target, 10)
-        arrow_width = min(18, geometry["width"] // 3)
+        # Keep the arrow crop source-exact without carrying the adjacent baked
+        # digits into the live value region. Fifteen pixels contains each
+        # source arrow and leaves 42 pixels for the widest `10 / 10` label.
+        arrow_width = min(15, geometry["width"] // 3)
         left = crop.crop((0, 0, arrow_width, geometry["height"]))
         right = crop.crop((geometry["width"] - arrow_width, 0,
                            geometry["width"], geometry["height"]))
