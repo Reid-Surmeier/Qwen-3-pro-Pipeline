@@ -1,0 +1,115 @@
+{
+  "issue": 138,
+  "assembly": "custom-filters-ro-v003",
+  "status": "candidate_pending_owner_visual_approval",
+  "style_source": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+  "style_source_sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+  "data_source": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+  "data_source_sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
+  "data_source_usage": "strings and order only",
+  "rejected_parents": [
+    "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png",
+    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png"
+  ],
+  "font": "godot/fonts/PixelMplus10-Regular.ttf",
+  "font_sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7",
+  "body_font_size_native": 10,
+  "popup_font_size_native": 10,
+  "title_font_size_native": 12,
+  "row_baselines_native": [
+    30,
+    51,
+    72
+  ],
+  "row_gaps_native": [
+    21,
+    21
+  ],
+  "assembly_resolution": [
+    336,
+    126
+  ],
+  "review_resolution": [
+    1344,
+    504
+  ],
+  "open_native_resolution": [
+    336,
+    196
+  ],
+  "open_review_resolution": [
+    1344,
+    784
+  ],
+  "review_resampling": "nearest for text and shell; byte-exact full-resolution source overlays for named controls",
+  "full_source_window_resampled": false,
+  "native_shell_extension": {
+    "insert_at": 136,
+    "insert_width": 64,
+    "method": "exact halves plus nearest-neighbor center donor strip"
+  },
+  "exterior_edge_cleanup": "clean native rounded silhouette outside exact inner frame caps",
+  "exact_native_source_pixels": {
+    "left_exterior_cap": true,
+    "right_exterior_cap": true,
+    "close": true,
+    "page_arrow": true,
+    "sort_arrow": true,
+    "on_radio": true,
+    "off_radio": true,
+    "button_pair": true
+  },
+  "full_resolution_source_control_overlays": true,
+  "strict_exact_preservation_claim": false,
+  "mask_comparison_baseline": "deterministic native widened shell",
+  "native_edit_mask_pixels": 26208,
+  "changed_pixels": 15735,
+  "changed_pixels_outside_native_edit_mask": 0,
+  "actual_is_subset_of_native_edit_mask": true,
+  "qwen_popup_surface_source": "artifacts/runs/custom-filters-ro-render-v001/image-01.png",
+  "qwen_popup_surface_source_sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c",
+  "generated_glyph_pixels_in_final": false,
+  "exact_copy": {
+    "title": "Custom filters",
+    "custom_filters": "Custom filters:",
+    "images_per_page": "Images per page:",
+    "page_value": "20",
+    "sort_by": "Sort by:",
+    "selected_sort": "Relevance",
+    "choices": [
+      "On",
+      "Off"
+    ],
+    "source_buttons": [
+      "OK",
+      "cancel"
+    ],
+    "sort_options": [
+      "Relevance",
+      "Title (a-z)",
+      "Title (z-a)",
+      "Date (newest-oldest)",
+      "Date (oldest-newest)",
+      "Artist/Maker (a-z)",
+      "Artist/Maker (z-a)",
+      "Accession Number (0-9)",
+      "Accession Number (9-0)"
+    ]
+  },
+  "closed_native_sha256": "2266dfce6f2fc1f511b7db9e3e270bdd933eff72162e8341b29ba0af12b69505",
+  "closed_sha256": "ff649d6624aca020217657552d8a6fded8628f6f70b70fc68ae2ca39b7ace1a1",
+  "open_native_sha256": "f20f911d3f5f22e3acd46e926c2fb36e0b0f9bd798d2ccb3144990d353e3b32c",
+  "open_sha256": "29eece27c00bcd9afe9285664d6577df3cc1d37b8970f1bdbbcb0dd9e8a986f1",
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "usage": "retained masked popup surface only; no generated glyph or closed-state control pixels",
+    "new_requests_for_v003": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}

@@ -4,12 +4,12 @@ Issue: [#138](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/138)
 
 ## Current candidate
 
-The v002 candidate is a 336 x 126 native-pixel closed Assembly plus a 336 x 196
-open-dropdown export. It supersedes the rejected v001 attempt without deleting
-that history. The RO chat-room window supplies the frame, shadow, pink border,
-glass title bar, field bevels, radio controls, dropdown arrows, footer, and the
-entire `OK` / lowercase `cancel` button pair. The museum screenshot supplies
-only the nine sort-option strings and their order.
+The v003 candidate is a 336 x 126 native-pixel closed Assembly plus a 336 x 196
+open-dropdown export. It supersedes rejected v001 and v002 without deleting
+their history. All replacement text is rendered once on the native pixel grid;
+the RO source supplies the inner frame, title glass, field bevels, control
+sprites, footer, and the entire `OK` / lowercase `cancel` pair. The museum
+screenshot supplies only the nine sort-option strings and their order.
 
 The mapping is:
 
@@ -49,43 +49,49 @@ surface from candidate 1.
 
 The two raw candidates are preserved under
 `artifacts/runs/custom-filters-ro-render-v001/`. Candidate 1 was the more
-coherent compact layout. V002 imports only its popup frame and row surface
+coherent compact layout. V003 imports only its popup frame and row surface
 through a glyph-free mask. It imports no generated lettering or generated
-closed-state control pixels. No new paid request was made for v002.
+closed-state control pixels. No new paid request was made for v003.
 
 ## Assembly and fidelity check
 
-`scripts/assemble_custom_filters_ro_v002.py` works at the source's full 4x
-review resolution, widens the shell horizontally, and then exports a 336 x 126
-native view. Existing arrows, radio sprites, close control, and the complete
-button pair are copied at their original full-resolution dimensions. Field
-middles use horizontal source-pixel nine-slicing; they are not flat replacement
-rectangles.
+`scripts/assemble_custom_filters_ro_v003.py` first reduces the style source to
+its 272 x 126 pixel grid, widens the shell there with exact source halves and a
+bounded center donor strip, and composes the replacement UI at 336 x 126.
+It never horizontally resamples the complete 4x screenshot. The noisy outer
+screenshot shadow is replaced by a clean native rounded silhouette while the
+inner frame caps remain exact source pixels.
 
-The page and sort controls reuse the source dropdown-arrow sprite exactly. The
-On and Off controls reuse the source selected and unselected radio sprites
-exactly. All body labels, values, radio labels, and all nine popup options use
-one 40 px PixelMplus size at review resolution, equivalent to its native
-10-pixel grid. The three closed-state baselines have equal 84 px gaps. The
-title remains the source-matched larger title size. The pinned file is
+All body labels, values, radio labels, and all nine popup options use one 10 px
+PixelMplus size at native resolution. The three closed-state baselines have
+equal 21 px gaps. Their 4x review pixels come only from nearest-neighbor
+enlargement, so no independently hinted 40 px glyphs enter the output. The
+title remains the source-matched larger native size. The pinned file is
 `godot/fonts/PixelMplus10-Regular.ttf`, SHA-256
 `01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7`.
+
+After native enlargement, the review exports restore byte-exact
+full-resolution source crops for the close control, both arrows, both radios,
+and the complete `OK` / `cancel` pair. This retains the source detail that would
+otherwise be lost by native downsampling while leaving all replacement text on
+the single native grid.
 
 The open popup is aligned to the widened sort field. A hash-locked crop from
 Qwen candidate 1 supplies its frame, selected-row treatment, and subtle row
 surface. Assembly samples only a donor strip to the right of all generated
 glyphs, extends that surface under the mask, and draws the exact nine strings
-deterministically at the same 40 px size.
+deterministically at the same native 10 px size.
 
 Machine verification records:
 
-- the permitted-region mask is created from the five fixed edit boxes before
-  content composition on the deterministic widened shell, and the separately
+- the native edit mask is created before content composition on the
+  deterministic widened shell, and the separately
   computed actual-difference mask is its subset;
 - zero content-assembly changes outside that predeclared mask relative to the
   widened shell;
 - both native dimensions and all exact strings are frozen by tests;
-- source arrows, radio sprites, and the `OK` / `cancel` pair are byte-identical;
+- inner frame caps plus native controls are exact source pixels, and the review
+  controls are byte-identical full-resolution source crops;
 - the password field is removed from the source layout;
 - the 336 x 196 open canvas contains the entire dropdown, including all nine
   options below the closed window's edge.
@@ -97,14 +103,14 @@ Byte-exact claims are limited to the named arrows, radios, and button pair.
 
 ## Outputs
 
-- `artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/contact-sheet.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/permitted-edit-mask-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/actual-difference-mask-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v002/verification.json`
+- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/contact-sheet.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/native-edit-mask.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/actual-difference-mask-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v003/verification.json`
 
 ## Verification boundary
 
