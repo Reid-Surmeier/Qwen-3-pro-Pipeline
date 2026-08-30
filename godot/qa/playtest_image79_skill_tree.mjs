@@ -96,17 +96,17 @@ check("idle-factual-state", initial.window.pending === false
   pending: initial.window.pending, steppers: initialSteppers.length,
 });
 
-await click(757, 87);
+await click(558, 87);
 const selected = await control("skill_tree.skills");
 const selectedFrame = await shot("01-selected");
 record("skill_tree.skills", "Activate", "SelectSkill",
-  "left click selects r1c3", JSON.stringify(selected), {
-    selected: selected.value === "r1c3",
+  "left click changes selection from r1c3 to r1c1", JSON.stringify(selected), {
+    selected: selected.value === "r1c1",
     gesture_distinct: selected.last_gesture === "Activate",
     action_routed: selected.last_action === "SelectSkill",
   }, { before: idle, after: selectedFrame });
 
-await click(757, 87, "right");
+await click(558, 87, "right");
 const detailed = await control("skill_tree.skills");
 const detailedWindow = (await skillTree()).window;
 const detailedFrame = await shot("02-context-detail");
@@ -114,7 +114,7 @@ record("skill_tree.skills", "ContextActivate", "OpenSkillDetail",
   "right click opens the selected skill detail", JSON.stringify(detailed), {
     context_gesture: detailed.last_gesture === "ContextActivate",
     action_routed: detailed.last_action === "OpenSkillDetail",
-    detail_visible: detailed.detail_visible && detailedWindow.detail_item === "r1c3",
+    detail_visible: detailed.detail_visible && detailedWindow.detail_item === "r1c1",
   }, { before: selectedFrame, after: detailedFrame });
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT,
