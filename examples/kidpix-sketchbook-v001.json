@@ -1,0 +1,72 @@
+{
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "objective": "Edit reference image 1 into one clean blank Sketchbook icon. Keep the same open spiral-bound book, cobalt pencil, viewpoint, scale and centered composition. Remove the bust drawing and every other mark from both pages. Restyle only the rendering material so the object reads as a flat 1990s Kid Pix-era pixel graphic on pure white.",
+  "reference_role": "Reference image 1 is the sole OBJECT AND GEOMETRY AUTHORITY: preserve its open book silhouette, spiral binding, red cover edge, cream page shapes, cobalt pencil in the gutter, three-quarter viewpoint, centered square composition and generous surrounding margin. Reference image 2 is STYLE ONLY: use its Kid Pix interface's bold limited palette, hard square pixel steps, simple outlined shapes and flat fills, but copy none of its window chrome, toolbar, logo, circles, text or drawings. Reference image 3 is STYLE ONLY: use its flat white field, crisp low-resolution map edges, black pixel outlines and discrete solid colors, but copy none of its map, grid, labels, borders or time boxes.",
+  "preservation_invariants": [
+    "Keep exactly one open spiral-bound sketchbook with one cobalt-blue pencil lying in the center gutter.",
+    "Keep reference image 1's recognizable overall geometry: landscape-open book, spiral binding at left, red cover visible beneath cream pages, three-quarter slightly-above viewpoint and centered placement.",
+    "Both paper faces must be completely blank. Remove the bust, portrait, shoulder, pedestal, sketch strokes, guide marks, letters, numbers and every other drawn line from both pages.",
+    "Keep the background a single flat pure white field from edge to edge. No vignette, grey floor, contact shadow, paper grain, canvas texture or tonal backdrop.",
+    "Use a deliberately limited indexed-color look: hard stair-stepped silhouette pixels, one-pixel dark outlines, a few solid color steps per material and no antialiasing or continuous gradients.",
+    "The output is an isolated reusable icon, not a screenshot or a scene."
+  ],
+  "canvas": [
+    "Square 1:1 icon canvas at 1024 by 1024.",
+    "One centered open sketchbook filling roughly seventy-five percent of the width, with an even pure-white margin on every side.",
+    "No border, tile, frame, window, toolbar, map, desk, hand, caption, badge, logo or watermark."
+  ],
+  "regions": [
+    {
+      "name": "blank pages",
+      "change": "Erase the complete bust drawing and all visible drawing marks. Render both page surfaces as clean unmarked cream-white pixel shapes with only the page edges and center fold retained.",
+      "preserve": [
+        "the left and right page silhouettes",
+        "the center gutter and page thickness",
+        "the pencil resting in the gutter"
+      ]
+    },
+    {
+      "name": "pixel material treatment",
+      "change": "Translate the existing book into flat low-resolution Kid Pix-like raster art: square pixel steps, hard dark outlines and three to five solid shades per material. Keep the spiral metal grey, pencil cobalt blue, pages warm cream and cover brick red.",
+      "preserve": [
+        "source object identity",
+        "source viewpoint",
+        "source material colors",
+        "source centered scale"
+      ]
+    }
+  ],
+  "exact_copy": [],
+  "style": [
+    "Authentic early-1990s educational paint-program pixel art rather than modern vector pixel-art imitation.",
+    "Bold black and charcoal stair-stepped outlines like the tools and map borders in the style references.",
+    "Flat solid fills with a tiny number of discrete highlight and shadow colors; no airbrush, no soft digital paint and no photoreal texture.",
+    "Clean pure-white negative space, with the icon readable immediately at thumbnail size."
+  ],
+  "asset_rules": [
+    "Exactly one sketchbook, one pencil and one spiral binding.",
+    "Exactly two blank page faces with no content drawn on them.",
+    "No second object, no variation grid and no reference-sheet layout."
+  ],
+  "negative_constraints": [
+    "Do not retain, redraw or replace the bust. No face, head, person, sculpture, shoulder, pedestal, doodle, scribble or page annotation.",
+    "No text, letters, numerals, symbols, logo, Kid Pix wordmark, toolbar icons, menu bar, map, countries, grid lines, clock labels or colored background circles.",
+    "No anti-aliased curves, soft feathering, smooth vector edges, watercolor, paper grain, canvas texture, glossy 3D rendering, photographic lighting or continuous-tone gradients.",
+    "No grey or off-white background, no horizon, no desk, no room, no cast shadow and no border around the canvas.",
+    "Do not close the book, remove the pencil, move the spiral binding to the center or change the object into a UI window."
+  ],
+  "quality_checks": [
+    "At thumbnail scale the result is immediately recognizable as the same open sketchbook and pencil from reference image 1.",
+    "At native scale both pages contain no drawing, writing or residual sketch pixels.",
+    "Every outer corner is pure white and the background is visually uniform.",
+    "Diagonal edges show deliberate square pixel steps and materials use flat discrete shades consistent with both style references.",
+    "No visible content from either style reference appears in the output."
+  ],
+  "output": {
+    "resolution": "1K",
+    "aspect_ratio": "1:1",
+    "count": 2,
+    "seed": 20260904
+  }
+}

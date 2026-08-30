@@ -1,0 +1,70 @@
+{
+  "issue": 139,
+  "outputs": [
+    {
+      "role": "raw-render-pass",
+      "file": "image-01.png",
+      "bytes": 327807,
+      "media_type": "image/png",
+      "sha256": "942b539aafdda5315b3ac13dd00af9990a82625d3285f8ecfff826e5bba0bd0c"
+    },
+    {
+      "role": "raw-render-pass",
+      "file": "image-02.png",
+      "bytes": 363583,
+      "media_type": "image/png",
+      "sha256": "db457ff09884f8682c30f17e5794728c1fb8f13898f3729fb1f1a7a93ac6e19c"
+    },
+    {
+      "role": "assembled-candidate",
+      "file": "final-01.png",
+      "bytes": 323250,
+      "media_type": "image/png",
+      "sha256": "e4dd344ef1efd3790ccf5242062d3bbbfc7cdb6f43bdbf2c1fda742fd8dd9c66"
+    },
+    {
+      "role": "assembled-candidate",
+      "file": "final-02.png",
+      "bytes": 352281,
+      "media_type": "image/png",
+      "sha256": "8ddde4d2ec6231fa54ef0bfeae12ca7b9472e4afa4aef6e8ed30221273d26e6b"
+    },
+    {
+      "role": "comparison-evidence",
+      "file": "contact-sheet.png",
+      "bytes": 425015,
+      "media_type": "image/png",
+      "sha256": "f89c2cd862c7542e150f640cd2a7bb8faaeb9e652eaffac1a7785eb59630bb7c"
+    }
+  ],
+  "provenance": {
+    "issue": 139,
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "11559d60-d2d4-4d45-a408-47423eb9f124",
+    "client_id": "ce2f2964-e602-42f2-816c-a07465e860fe",
+    "prompt_request_sha256": "cd05095f8cd2249bbb9ab1aee547c358accec68fc2f71fda25bc3e51a4f3f7e6",
+    "workflow_sha256": "7e664b4270933b095eaf43a4332c3261937c70d112c96393012b49aa62bbc07e",
+    "brief_sha256": "8452c835e05c29068d1dd86b78f1d338283f6056068d60100f78c5f47dbdf9e0",
+    "reference_sha256": [
+      "10547816de7f18b875eea14622238b29d1be496d84fe6d7695ad4ca7975949dd",
+      "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b",
+      "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e"
+    ],
+    "submitted_at": "2026-08-30T16:17:20-04:00",
+    "completed_at": "2026-08-30T16:19:15-04:00",
+    "duration_seconds": 115.209,
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.10,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+  },
+  "usage": {
+    "input_image_count": 3,
+    "output_image_count": 2,
+    "output_width": 1024,
+    "output_height": 1024
+  }
+}

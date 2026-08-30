@@ -1,0 +1,24 @@
+{
+  "issue": 139,
+  "maximum_outputs": 10,
+  "requested": 2,
+  "completed": 2,
+  "ambiguous": 0,
+  "remaining": 8,
+  "estimated_cost_usd": 0.10,
+  "actual_cost_usd": null,
+  "entries": [
+    {
+      "name": "kidpix-sketchbook-v001",
+      "prompt_id": "11559d60-d2d4-4d45-a408-47423eb9f124",
+      "provider": "openrouter",
+      "model": "qwen/qwen-image-3-pro",
+      "requested": 2,
+      "completed": 2,
+      "ambiguous": 0,
+      "status": "success",
+      "estimated_cost_usd": 0.10,
+      "actual_cost_usd": null
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "issue": 139,
+  "status": "machine-checks-passed-pending-owner-visual-approval",
+  "checks": [
+    {
+      "candidate": "final-01.png",
+      "dimensions": "1024x1024",
+      "sha256": "e4dd344ef1efd3790ccf5242062d3bbbfc7cdb6f43bdbf2c1fda742fd8dd9c66",
+      "corner_rgbs": [
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]
+      ],
+      "outer_16px_pure_white_fraction": 1.0,
+      "whole_canvas_pure_white_fraction": 0.523746,
+      "nonwhite_bbox": [92, 185, 949, 848],
+      "background_assembly_changed_pixels": 13580,
+      "visual_findings": [
+        "Both pages are blank with no bust, portrait, lettering or sketch marks.",
+        "Open-book silhouette, left spiral, red cover and cobalt pencil remain recognizable from the object authority.",
+        "Candidate 1 preserves the source geometry and surrounding margin most closely."
+      ]
+    },
+    {
+      "candidate": "final-02.png",
+      "dimensions": "1024x1024",
+      "sha256": "8ddde4d2ec6231fa54ef0bfeae12ca7b9472e4afa4aef6e8ed30221273d26e6b",
+      "corner_rgbs": [
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]
+      ],
+      "outer_16px_pure_white_fraction": 1.0,
+      "whole_canvas_pure_white_fraction": 0.499856,
+      "nonwhite_bbox": [80, 172, 950, 861],
+      "background_assembly_changed_pixels": 18720,
+      "visual_findings": [
+        "Both pages are blank with no bust, portrait, lettering or sketch marks.",
+        "Open-book silhouette, left spiral, red cover and cobalt pencil remain recognizable from the object authority.",
+        "Candidate 2 has the harder stair-stepped pixel treatment and fills more of the canvas."
+      ]
+    }
+  ],
+  "assembly": {
+    "operation": "Normalize only the connected near-white exterior background to exact RGB 255,255,255.",
+    "command": "convert image-N.png -alpha off -fuzz 5% -fill white -draw 'color 0,0 floodfill' final-N.png",
+    "raw_outputs_preserved": true
+  },
+  "verification_boundary": "These are deterministic pixel checks plus builder visual inspection. They do not replace the owner's subjective visual approval or the repository's independent blind artifact-review gate if the work is proposed for integration."
+}

@@ -1,0 +1,20 @@
+{
+  "request_id": "11559d60-d2d4-4d45-a408-47423eb9f124",
+  "status": "success",
+  "data": [
+    {
+      "file": "image-01.png",
+      "media_type": "image/png",
+      "bytes": 327807,
+      "sha256": "942b539aafdda5315b3ac13dd00af9990a82625d3285f8ecfff826e5bba0bd0c"
+    },
+    {
+      "file": "image-02.png",
+      "media_type": "image/png",
+      "bytes": 363583,
+      "sha256": "db457ff09884f8682c30f17e5794728c1fb8f13898f3729fb1f1a7a93ac6e19c"
+    }
+  ],
+  "usage": {},
+  "usage_note": "OpenRouter usage and actual charge were not exposed by the ComfyUI history record."
+}

@@ -1,0 +1,23 @@
+{
+  "issue": 139,
+  "sources": [
+    {
+      "role": "object-and-geometry-authority",
+      "path": "artifacts/references/kidpix-sketchbook-v001/sketchbook-object-source.png",
+      "sha256": "10547816de7f18b875eea14622238b29d1be496d84fe6d7695ad4ca7975949dd",
+      "dimensions": "1024x1024"
+    },
+    {
+      "role": "kidpix-flat-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-kidpix-ui.png",
+      "sha256": "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b",
+      "dimensions": "786x602"
+    },
+    {
+      "role": "flat-map-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-world-map.png",
+      "sha256": "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e",
+      "dimensions": "1240x652"
+    }
+  ]
+}
