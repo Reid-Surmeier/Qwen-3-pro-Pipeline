@@ -53,5 +53,19 @@
       "small text fragments near the right-edge badge sites",
       "region caps partially rebuilt"
     ]
+  },
+  "v005": {
+    "file": "v005-polished.png",
+    "sha256": "a9a55c13f03961388bea0b38d2a29f7f36a63fedbad240cbd7caa391a0645f32",
+    "method": "owner rejected v002's hard 1x pixels ('pixelated'); pass 4 = gpt-image-2 re-render of v002 2x ('clean smooth flat, keep everything'), pass 5 = targeted label fixes (Samara, Yekaterinburg typo, +Vladivostok +Jakarta +Mexico). Verified: fixes applied, surroundings unchanged.",
+    "costs_usd": {
+      "pass4": 0.142329,
+      "pass5": 0.140633
+    },
+    "known_nits": [
+      "'Yekatterinburg' doubled t",
+      "model added country names (Canada, United States, Brazil, AUSTRALIA, Apia, Papeete, Brasilia) - reads well, not in source",
+      "Kiribati label not restored"
+    ]
   }
 }
