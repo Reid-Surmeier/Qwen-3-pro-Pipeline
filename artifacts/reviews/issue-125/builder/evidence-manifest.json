@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 125,
-  "candidate_commit": "7dcc651993319b5cfbb1aee1049bc7b9c82d0caf",
+  "candidate_commit": "36d746224ac15040d16cda4f30507fd644bbe133",
   "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
   "files": [
     {"path": "00-idle.png", "sha256": "8ae817197ef6e4faa4dc3313d4c52893ee6a165df1be77b0f570ef3817be93e4"},
@@ -10,9 +10,9 @@
     {"path": "03-bgm-right-endpoint.png", "sha256": "ab37dc5bd13e2cb322bf458adc952655150de228aee4d34998de152bd6618f02"},
     {"path": "04-skin-open.png", "sha256": "f71176e24e9cc3ac208f2e4e53aadad9b141a623b80751b6df17ed69dbbde622"},
     {"path": "05-minimized.png", "sha256": "443dfc1bc1c839fac96a4de6a62f094db912e776ab7ac15f89642111532cb103"},
-    {"path": "06-restored.png", "sha256": "e60b18b8a8f1ad800abe50274c5e408b88f6ee27c4c706a439154d986e4cb869"},
-    {"path": "browser-report.json", "sha256": "f1233fa9f9ac4db2df582cab7be58dced7a720835f9138c6c47bf727da946721"},
-    {"path": "play-log.json", "sha256": "e6b0088a21530aebe93eb81e62f2491cf39fbb55d72a6468102d99ab201089b7"},
+    {"path": "06-restored.png", "sha256": "fbf3a756ecb8ced50df6a4261f2ac2a9741ade50cc6a494853122c46efc423f2"},
+    {"path": "browser-report.json", "sha256": "7713e82c2dcfe2e1bb8c7a1c1173a21873188e56bfcfeac04b49e58bb2ca53ce"},
+    {"path": "play-log.json", "sha256": "59a62ec0b38e8f6ce5fb94c9ba397dc6c707158f9e38b374cdced27fc974a2ad"},
     {"path": "verdict.json", "sha256": "94c255f3e85f6d0c51a7f8845344ddf1bbd2986bb19df4c066eb2bc0872aa91c"}
   ],
   "play_log_frame_corpus": {

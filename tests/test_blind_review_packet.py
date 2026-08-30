@@ -17,7 +17,7 @@ SPEC.loader.exec_module(MODULE)
 
 class BlindReviewPacketTests(unittest.TestCase):
     def test_current_issue_125_packet_is_hash_locked(self) -> None:
-        candidate = "7dcc651993319b5cfbb1aee1049bc7b9c82d0caf"
+        candidate = "36d746224ac15040d16cda4f30507fd644bbe133"
         packet = ROOT / "artifacts" / "reviews" / "issue-125" / "packet.json"
         self.assertEqual([], MODULE.validate_packet(packet, ROOT, candidate))
 
