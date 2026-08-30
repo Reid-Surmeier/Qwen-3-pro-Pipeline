@@ -20,6 +20,7 @@ from .comfyui_workflow import (
 from .prompt_manifest import compile_edit_brief
 from .providers.openrouter import (
     OpenRouterImageClient,
+    resolve_timeout_seconds,
     build_openrouter_request,
     write_run_artifacts,
 )
@@ -200,7 +201,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = generate_with_provider(
         brief,
         reference_urls=reference_urls,
-        openrouter_client=(OpenRouterImageClient(openrouter_key) if openrouter_key else None),
+        openrouter_client=(
+            OpenRouterImageClient(openrouter_key, timeout=resolve_timeout_seconds())
+            if openrouter_key
+            else None
+        ),
         alibaba_client=(AlibabaImageClient(alibaba_key) if alibaba_key else None),
     )
     output_directory = args.output_dir or _default_run_directory()

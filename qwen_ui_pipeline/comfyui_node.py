@@ -17,24 +17,17 @@ from .partner_controls import (
     build_partner_text_brief,
 )
 from .providers.alibaba import AlibabaImageClient
-from .providers.openrouter import DEFAULT_TIMEOUT_SECONDS, OpenRouterImageClient
+from .providers.openrouter import DEFAULT_TIMEOUT_SECONDS, OpenRouterImageClient, resolve_timeout_seconds
 from .providers.router import generate_with_provider
 
 
 def _openrouter_timeout_seconds() -> float:
     """``QWEN_OPENROUTER_TIMEOUT_SECONDS`` overrides the client's 180 s default.
 
-    Unset, unparseable, or non-positive values keep the default so the
-    override can never disable the timeout.
+    Kept as a name for this module's callers; the single definition lives beside the
+    default it overrides, in ``providers.openrouter``.
     """
-    raw = os.environ.get("QWEN_OPENROUTER_TIMEOUT_SECONDS", "").strip()
-    if not raw:
-        return DEFAULT_TIMEOUT_SECONDS
-    try:
-        value = float(raw)
-    except ValueError:
-        return DEFAULT_TIMEOUT_SECONDS
-    return value if value > 0 and value != float("inf") else DEFAULT_TIMEOUT_SECONDS
+    return resolve_timeout_seconds()
 
 
 def _reference_data_urls(reference_images: Any) -> list[str]:

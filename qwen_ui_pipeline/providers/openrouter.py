@@ -7,6 +7,7 @@ import base64
 import hashlib
 import http.client
 import math
+import os
 import socket
 import urllib.error
 import urllib.request
@@ -50,6 +51,30 @@ class _KeepAliveHTTPSHandler(urllib.request.HTTPSHandler):
 def keepalive_urlopen(request, *, timeout):
     """urlopen equivalent whose HTTPS sockets send TCP keepalive probes."""
     return urllib.request.build_opener(_KeepAliveHTTPSHandler()).open(request, timeout=timeout)
+
+
+def resolve_timeout_seconds() -> float:
+    """``QWEN_OPENROUTER_TIMEOUT_SECONDS`` overrides the client's default.
+
+    Unset, unparseable, non-positive or infinite values keep the default, so the
+    override can never disable the timeout.
+
+    This lives here, beside the default it overrides, because both entry points need
+    it. The ComfyUI node had it and the CLI did not, and the CLI is the path the icon
+    batches use: every call took the hard 180 s default, every generation slower than
+    that timed out client-side, and OpenRouter billed the finished image anyway.
+    Measured 2026-08-30 — $3.36 billed for images that were never delivered.
+    """
+    raw = os.environ.get("QWEN_OPENROUTER_TIMEOUT_SECONDS", "").strip()
+    if not raw:
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    try:
+        value = float(raw)
+    except ValueError:
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    if value <= 0 or not math.isfinite(value):
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    return value
 
 
 class OpenRouterImageClient:

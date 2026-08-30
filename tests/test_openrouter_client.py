@@ -1,5 +1,6 @@
 import json
 import tempfile
+import os
 import unittest
 import urllib.error
 from io import BytesIO
@@ -10,6 +11,10 @@ from qwen_ui_pipeline import (
     OpenRouterImageClient,
     build_openrouter_request,
     write_run_artifacts,
+)
+from qwen_ui_pipeline.providers.openrouter import (
+    DEFAULT_TIMEOUT_SECONDS,
+    resolve_timeout_seconds,
 )
 
 
@@ -200,3 +205,39 @@ class OpenRouterImageClientTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ResolveTimeoutSeconds(unittest.TestCase):
+    """The CLI took the hard 180 s default because nothing passed it a timeout.
+
+    Every generation slower than 180 s then timed out client-side while OpenRouter
+    billed the finished image anyway — $3.36 of images paid for and never delivered on
+    2026-08-30. The override existed, but only the ComfyUI node used it.
+    """
+
+    def setUp(self) -> None:
+        self._saved = os.environ.pop("QWEN_OPENROUTER_TIMEOUT_SECONDS", None)
+
+    def tearDown(self) -> None:
+        os.environ.pop("QWEN_OPENROUTER_TIMEOUT_SECONDS", None)
+        if self._saved is not None:
+            os.environ["QWEN_OPENROUTER_TIMEOUT_SECONDS"] = self._saved
+
+    def test_unset_keeps_the_default(self) -> None:
+        self.assertEqual(resolve_timeout_seconds(), float(DEFAULT_TIMEOUT_SECONDS))
+
+    def test_a_longer_timeout_is_honoured(self) -> None:
+        os.environ["QWEN_OPENROUTER_TIMEOUT_SECONDS"] = "1200"
+        self.assertEqual(resolve_timeout_seconds(), 1200.0)
+
+    def test_nothing_can_disable_the_timeout(self) -> None:
+        for bad in ("0", "-5", "abc", "inf", "nan", "  "):
+            with self.subTest(bad=bad):
+                os.environ["QWEN_OPENROUTER_TIMEOUT_SECONDS"] = bad
+                self.assertEqual(resolve_timeout_seconds(), float(DEFAULT_TIMEOUT_SECONDS))
+
+    def test_the_node_and_the_cli_share_one_definition(self) -> None:
+        from qwen_ui_pipeline.comfyui_node import _openrouter_timeout_seconds
+
+        os.environ["QWEN_OPENROUTER_TIMEOUT_SECONDS"] = "600"
+        self.assertEqual(_openrouter_timeout_seconds(), resolve_timeout_seconds())
