@@ -1,0 +1,54 @@
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+web_search = "disabled"
+
+[features]
+apps = false
+multi_agent = false
+plugins = false
+remote_plugin = false
+memories = false
+goals = false
+shell_tool = false
+
+[tools]
+view_image = true
+
+[sandbox_workspace_write]
+network_access = true
+
+[mcp_servers.browser]
+command = "node"
+args = [
+  "/tmp/playtest/out/mcp/node_modules/@playwright/mcp/cli.js",
+  "--isolated",
+  "--headless",
+  "--no-sandbox",
+  "--viewport-size", "1536x1024",
+  "--caps", "vision",
+  "--output-dir", "/tmp/playtest/codex",
+]
+cwd = "/tmp/playtest/codex"
+startup_timeout_sec = 180
+tool_timeout_sec = 180
+default_tools_approval_mode = "approve"
+enabled_tools = [
+  "browser_navigate",
+  "browser_take_screenshot",
+  "browser_mouse_move_xy",
+  "browser_mouse_click_xy",
+  "browser_mouse_drag_xy",
+  "browser_mouse_down",
+  "browser_mouse_up",
+  "browser_mouse_wheel",
+  "browser_press_key",
+  "browser_type",
+  "browser_wait_for",
+  "browser_resize",
+  "browser_close",
+]
+
+[mcp_servers.browser.env]
+PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+HOME = "/tmp/playtest/out/fakehome"
+PLAYWRIGHT_BROWSERS_PATH = "/home/reidsurmeier/.cache/ms-playwright"
