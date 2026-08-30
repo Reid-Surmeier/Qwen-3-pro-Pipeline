@@ -24,6 +24,7 @@ jobs:
       - name: Check out the candidate commit
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Set up Python
