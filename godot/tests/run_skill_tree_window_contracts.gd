@@ -38,6 +38,7 @@ func _run() -> void:
 	await _description_toggle_reversal()
 	await _minimize_restore()
 	await _window_drag()
+	await _escape_close()
 	await _close()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
@@ -160,6 +161,20 @@ func _window_drag() -> void:
 	var after: Array = window.qa_state().window.position
 	_check("real-window-drag", is_equal_approx(after[0], before[0] - 60.0)
 		and is_equal_approx(after[1], before[1] + 70.0), str([before, after]))
+
+
+func _escape_close() -> void:
+	var event := InputEventKey.new()
+	event.keycode = KEY_ESCAPE
+	event.pressed = true
+	Input.parse_input_event(event)
+	await process_frame
+	var closed: Dictionary = window.qa_state().window
+	_check("real-window-key-command", not closed.visible
+		and closed.last_gesture == "KeyCommand"
+		and closed.last_action == "CloseWindow", str(closed))
+	window.reset()
+	await process_frame
 
 
 func _close() -> void:

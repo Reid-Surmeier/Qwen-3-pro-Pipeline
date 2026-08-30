@@ -17,6 +17,7 @@ const GESTURES := [
 	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
+	"Window": ["MoveWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges"],
 	"Toggle": ["ToggleValue"],
@@ -91,6 +92,10 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	else:
 		window_ids[window_id] = true
 	_validate_geometry(window.get("geometry"), path + ".geometry", errors)
+	var gestures: Variant = window.get("gestures")
+	_validate_gestures(gestures, path + ".gestures", errors)
+	_validate_actions(window.get("actions"), gestures, "Window",
+		path + ".actions", errors)
 	var plates: Variant = window.get("plates")
 	if not plates is Dictionary:
 		errors.append(_error(Errors.ASSET_INTEGRITY, path + ".plates",
@@ -122,6 +127,7 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	for control_index in controls.size():
 		_validate_control(controls[control_index], window_id, control_index,
 			control_ids, errors, asset_exists)
+	_validate_selection_value_controls(controls, window_id, path, errors)
 	if window.has("minimized_controls"):
 		_validate_minimized_controls(window.minimized_controls, controls,
 			path + ".minimized_controls", errors)
@@ -189,14 +195,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 		_validate_surfaces(control.surfaces, path + ".surfaces", errors, asset_exists)
 	_validate_type_contract(control, control_type, path, errors)
 	var gestures: Variant = control.get("gestures")
-	if not gestures is Array or gestures.is_empty():
-		errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
-			"at least one shared Gesture Capability is required"))
-	else:
-		for gesture in gestures:
-			if gesture not in GESTURES:
-				errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
-					"unsupported gesture: %s" % str(gesture)))
+	_validate_gestures(gestures, path + ".gestures", errors)
 	_validate_actions(control.get("actions"), gestures, control_type,
 		path + ".actions", errors)
 
@@ -302,6 +301,48 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 			and surfaces[str(item)].state_set.has("unselected")):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
 			"SelectionView requires selected/unselected State Sets for every item"))
+	var value_control_ids: Variant = value.get("value_control_ids", {}) \
+		if value is Dictionary else null
+	if not value_control_ids is Dictionary or not value_control_ids.keys().all(func(item):
+		return item in items and value_control_ids[item] is String \
+			and not str(value_control_ids[item]).is_empty()):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".value.value_control_ids",
+			"SelectionView value Control ids must map declared items to non-empty ids"))
+
+
+static func _validate_selection_value_controls(controls: Array, window_id: String,
+		path: String, errors: Array[Dictionary]) -> void:
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	for index in controls.size():
+		var control: Variant = controls[index]
+		if not control is Dictionary or control.get("type") != "SelectionView":
+			continue
+		var value: Variant = control.get("value")
+		var mappings: Variant = value.get("value_control_ids", {}) \
+			if value is Dictionary else {}
+		if not mappings is Dictionary:
+			continue
+		for item in mappings:
+			var related_id := str(mappings[item])
+			if not related_id.begins_with(window_id + ".") or not declared.has(related_id):
+				errors.append(_error(Errors.CONTROL_BINDING,
+					"%s.controls[%d].value.value_control_ids.%s" % [path, index, str(item)],
+					"related value Control must belong to this Window and be declared"))
+
+
+static func _validate_gestures(gestures: Variant, path: String,
+		errors: Array[Dictionary]) -> void:
+	if not gestures is Array or gestures.is_empty():
+		errors.append(_error(Errors.UNSUPPORTED_GESTURE, path,
+			"at least one shared Gesture Capability is required"))
+		return
+	for gesture in gestures:
+		if gesture not in GESTURES:
+			errors.append(_error(Errors.UNSUPPORTED_GESTURE, path,
+				"unsupported gesture: %s" % str(gesture)))
 
 
 static func _validate_stepper_contract(control: Dictionary, path: String,
@@ -415,6 +456,10 @@ static func _validate_actions(actions: Variant, gestures: Variant, control_type:
 		elif not allowed.is_empty() and str(action.action) not in allowed:
 			errors.append(_error(Errors.ACTION_ROUTING, "%s[%d].action" % [path, action_index],
 				"Window Action is not supported by %s: %s" % [control_type, str(action.action)]))
+		elif control_type == "Window" and action.get("gesture") == "KeyCommand" \
+				and str(action.get("key", "")).is_empty():
+			errors.append(_error(Errors.CONTROL_BINDING, "%s[%d].key" % [path, action_index],
+				"KeyCommand binding must name a key"))
 	for gesture in declared:
 		if not actions.any(func(action): return action is Dictionary \
 			and action.get("gesture") == gesture):

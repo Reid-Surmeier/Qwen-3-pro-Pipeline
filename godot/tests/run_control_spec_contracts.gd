@@ -28,6 +28,11 @@ func _valid_manifest() -> Dictionary:
 		"windows": [{
 			"id": "options",
 			"geometry": {"x": 1108, "y": 297, "width": 424, "height": 202},
+			"gestures": ["Drag", "KeyCommand"],
+			"actions": [
+				{"gesture": "Drag", "action": "MoveWindow"},
+				{"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+			],
 			"plates": {
 				"expanded": "res://options/window.png",
 				"minimized": "res://options/minimized.png",
@@ -86,7 +91,8 @@ func _contract_skill_tree_control_types_are_frozen() -> void:
 			"initial_semantic_state": "unselected",
 			"state_set": {"unselected": variants, "selected": variants},
 			"value": {"items": ["heal", "holy-light"], "initial": "heal",
-				"details": {"heal": "heal\n7 / 7", "holy-light": "holy-light\n5 / 5"}},
+				"details": {"heal": "heal\n7 / 7", "holy-light": "holy-light\n5 / 5"},
+				"value_control_ids": {"heal": "skill_tree.stepper.heal"}},
 			"surfaces": {
 				"heal": {"geometry": {"x": 0, "y": 0, "width": 42, "height": 42},
 					"state_set": {"unselected": variants, "selected": variants}},
@@ -144,6 +150,15 @@ func _contract_skill_tree_control_types_are_frozen() -> void:
 		"InvalidStateSet" in detail_errors.map(func(error): return error.code),
 		str(detail_errors))
 
+	var foreign_value_control := fixture.duplicate(true)
+	foreign_value_control.windows[0].controls[0].value.value_control_ids.heal = \
+		"other.stepper.heal"
+	var foreign_value_errors: Array = ControlSpec.validate(foreign_value_control,
+		_all_assets_exist)
+	_check("selection-value-control-fails-closed",
+		"ControlBindingError" in foreign_value_errors.map(func(error): return error.code),
+		str(foreign_value_errors))
+
 
 func _contract_window_adapter_fields_fail_closed() -> void:
 	var fixture := _valid_manifest()
@@ -187,6 +202,30 @@ func _contract_window_adapter_fields_fail_closed() -> void:
 	_check("omitted-required-list-plate-fails-closed",
 		"AssetIntegrityError" in omitted_list_errors.map(func(error): return error.code),
 		str(omitted_list_errors))
+
+	var missing_window_action := fixture.duplicate(true)
+	missing_window_action.windows[0].actions = [
+		{"gesture": "Drag", "action": "MoveWindow"}]
+	var missing_window_action_errors: Array = ControlSpec.validate(
+		missing_window_action, _all_assets_exist)
+	_check("window-gesture-binding-fails-closed",
+		"ControlBindingError" in missing_window_action_errors.map(func(error): return error.code),
+		str(missing_window_action_errors))
+
+	var unknown_window_action := fixture.duplicate(true)
+	unknown_window_action.windows[0].actions[0].action = "TeleportWindow"
+	var unknown_window_action_errors: Array = ControlSpec.validate(
+		unknown_window_action, _all_assets_exist)
+	_check("window-action-routing-fails-closed",
+		"ActionRoutingError" in unknown_window_action_errors.map(func(error): return error.code),
+		str(unknown_window_action_errors))
+
+	var missing_key := fixture.duplicate(true)
+	missing_key.windows[0].actions[1].erase("key")
+	var missing_key_errors: Array = ControlSpec.validate(missing_key, _all_assets_exist)
+	_check("window-key-command-fails-closed",
+		"ControlBindingError" in missing_key_errors.map(func(error): return error.code),
+		str(missing_key_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:

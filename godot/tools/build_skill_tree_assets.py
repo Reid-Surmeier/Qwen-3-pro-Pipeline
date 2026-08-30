@@ -158,7 +158,11 @@ def main() -> None:
         ],
         ["unselected", "selected"], "unselected",
         value={"items": item_ids, "initial": "r1c3", "labels": item_labels,
-               "details": item_details},
+               "details": item_details,
+               "value_control_ids": {
+                   item: f"skill_tree.stepper.{item}"
+                   for item in item_ids if item in stepper_values
+               }},
         surfaces=item_surfaces,
     )
 

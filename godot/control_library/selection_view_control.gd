@@ -106,7 +106,7 @@ func _add_list_overlay() -> void:
 	for index in spec.value.items.size():
 		var item := str(spec.value.items[index])
 		var label := Label.new()
-		label.text = "%s   %s" % [str(labels.get(item, item)), _stepper_text(item)]
+		label.text = "%s   %s" % [str(labels.get(item, item)), _related_value_text(item)]
 		label.position = Vector2(12 + 270 * int(index / 14), 8 + 30 * (index % 14))
 		label.size = Vector2(255, 26)
 		label.add_theme_font_override("font", load("res://fonts/PixelMplus10-Regular.ttf"))
@@ -136,8 +136,10 @@ func _add_detail_panel() -> void:
 	detail_panel.visible = false
 
 
-func _stepper_text(item: String) -> String:
-	var control_id := "skill_tree.stepper.%s" % item
+func _related_value_text(item: String) -> String:
+	var control_id := str(spec.value.get("value_control_ids", {}).get(item, ""))
+	if control_id.is_empty():
+		return ""
 	var state: Dictionary = runtime.qa_state().controls.get(control_id, {})
 	return str(state.get("text", ""))
 
@@ -204,7 +206,8 @@ func _refresh() -> void:
 			visuals[item].texture = load(path)
 	var labels: Dictionary = spec.value.get("labels", {})
 	for item in list_labels:
-		list_labels[item].text = "%s   %s" % [str(labels.get(item, item)), _stepper_text(item)]
+		list_labels[item].text = "%s   %s" % [
+			str(labels.get(item, item)), _related_value_text(item)]
 
 
 func _point(geometry: Dictionary) -> Vector2:

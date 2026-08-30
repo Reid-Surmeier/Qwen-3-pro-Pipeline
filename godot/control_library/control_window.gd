@@ -23,6 +23,9 @@ var _expanded_size := Vector2.ZERO
 var _dragging := false
 var _drag_offset := Vector2.ZERO
 var _home := Vector2.ZERO
+var _last_window_gesture := ""
+var _last_window_action := ""
+var _last_window_error: Variant = null
 
 
 func configure(window_spec: Dictionary) -> void:
@@ -96,6 +99,9 @@ func qa_state() -> Dictionary:
 		"detail_item": detail_item,
 		"pending": state.get("window_pending", false),
 		"z_index": z_index,
+		"last_gesture": _last_window_gesture,
+		"last_action": _last_window_action,
+		"last_error": _last_window_error,
 	}
 	return state
 
@@ -103,6 +109,9 @@ func qa_state() -> Dictionary:
 func reset() -> void:
 	position = _home
 	visible = true
+	_last_window_gesture = ""
+	_last_window_action = ""
+	_last_window_error = null
 	if minimized:
 		_toggle_minimized()
 	state_changed.emit(str(spec.id))
@@ -143,6 +152,9 @@ func _title_input(event: InputEvent) -> void:
 			state_changed.emit(str(spec.id))
 			accept_event()
 	if event is InputEventMouseMotion and _dragging:
+		var routed := _route_window_gesture("Drag")
+		if not routed.get("ok", false) or routed.get("action") != "MoveWindow":
+			return
 		var viewport_size := get_viewport_rect().size
 		var max_position := Vector2(maxf(0.0, viewport_size.x - size.x),
 			maxf(0.0, viewport_size.y - size.y))
@@ -159,16 +171,59 @@ func _window_input(event: InputEvent) -> void:
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_ESCAPE and _is_frontmost_window():
 		for control_id in control_nodes:
 			var node: Control = control_nodes[control_id]
 			if node is DropdownControl and runtime.qa_state().controls[control_id].semantic_state == "open":
 				node.dismiss()
 				get_viewport().set_input_as_handled()
 				return
+		var result := _route_window_gesture("KeyCommand", "Escape")
+		if result.get("ok", false):
+			get_viewport().set_input_as_handled()
+			state_changed.emit(str(spec.id))
+
+
+func _is_frontmost_window() -> bool:
+	if not visible or get_parent() == null:
+		return false
+	var siblings := get_parent().get_children().filter(func(node):
+		return node is ControlWindow and node.visible)
+	return not siblings.is_empty() and siblings.back() == self
+
+
+func _route_window_gesture(gesture: String, key: String = "") -> Dictionary:
+	if gesture not in spec.get("gestures", []):
+		_last_window_error = {"code": "UnsupportedGesture",
+			"message": "Window gesture is not declared: %s" % gesture}
+		return {"ok": false, "error": _last_window_error}
+	for binding in spec.get("actions", []):
+		if not binding is Dictionary or binding.get("gesture") != gesture:
+			continue
+		if gesture == "KeyCommand" and str(binding.get("key", "")) != key:
+			continue
+		_last_window_gesture = gesture
+		_last_window_action = str(binding.get("action", ""))
+		_last_window_error = null
+		match _last_window_action:
+			"MoveWindow":
+				pass
+			"CloseWindow":
+				dismiss_dropdowns()
+				visible = false
+			_:
+				_last_window_error = {"code": "ActionRoutingError",
+					"message": "Window cannot route action: %s" % _last_window_action}
+				return {"ok": false, "error": _last_window_error}
+		return {"ok": true, "gesture": gesture, "action": _last_window_action}
+	_last_window_error = {"code": "ControlBindingError",
+		"message": "Window gesture has no matching action: %s" % gesture}
+	return {"ok": false, "error": _last_window_error}
 
 
 func _control_changed(control_id: String, result: Dictionary) -> void:
+	move_to_front()
 	if result.get("ok", false) and result.has("action"):
 		match str(result.action):
 			"ToggleMinimized":

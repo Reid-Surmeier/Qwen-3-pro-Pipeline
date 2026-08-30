@@ -8,7 +8,8 @@ from pathlib import Path
 from typing import Any
 
 
-SCHEMA_VERSION = "image79-play-log-v1"
+SCHEMA_VERSION = "image79-play-log-v2"
+LEGACY_SCHEMA_VERSION = "image79-play-log-v1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 
@@ -23,8 +24,9 @@ def evaluate_play_log(
 
     if not isinstance(log, dict):
         return _invalid("play log root must be an object")
-    if log.get("schema_version") != SCHEMA_VERSION:
-        problems.append(f"schema_version must be {SCHEMA_VERSION}")
+    schema_version = log.get("schema_version")
+    if schema_version not in (LEGACY_SCHEMA_VERSION, SCHEMA_VERSION):
+        problems.append(f"schema_version must be {LEGACY_SCHEMA_VERSION} or {SCHEMA_VERSION}")
 
     candidate = log.get("candidate")
     if not isinstance(candidate, dict):
@@ -38,7 +40,7 @@ def evaluate_play_log(
             problems.append("candidate.window_id must be a non-empty string")
 
     expected_controls, expected_actions, range_specs = _manifest_requirements(
-        manifest, candidate, problems
+        manifest, candidate, problems, include_window_actions=schema_version == SCHEMA_VERSION
     )
     source_sha = log.get("source_reference_sha256")
     manifest_sha = manifest.get("reference", {}).get("sha256") if isinstance(manifest, dict) else None
@@ -263,7 +265,7 @@ def _nonempty_string(value: Any) -> bool:
 
 
 def _manifest_requirements(
-    manifest: Any, candidate: Any, problems: list[str]
+    manifest: Any, candidate: Any, problems: list[str], *, include_window_actions: bool
 ) -> tuple[set[str], set[tuple[str, str, str]], dict[str, tuple[float, float]]]:
     if not isinstance(manifest, dict):
         problems.append("a frozen ControlSpec manifest is required")
@@ -283,6 +285,18 @@ def _manifest_requirements(
     controls: set[str] = set()
     actions: set[tuple[str, str, str]] = set()
     range_specs: dict[str, tuple[float, float]] = {}
+    # Window gestures are public bindings too. They use the Window id as the
+    # Play Log action owner but are not added to required_controls.
+    if include_window_actions:
+        for binding in window.get("actions", []):
+            if not isinstance(binding, dict):
+                problems.append(f"manifest action for {window_id} is malformed")
+                continue
+            key = (window_id, binding.get("gesture"), binding.get("action"))
+            if not all(_nonempty_string(value) for value in key):
+                problems.append(f"manifest action for {window_id} is malformed")
+                continue
+            actions.add(key)  # type: ignore[arg-type]
     for control in window["controls"]:
         if not isinstance(control, dict) or not _nonempty_string(control.get("id")):
             problems.append("manifest contains a malformed control")

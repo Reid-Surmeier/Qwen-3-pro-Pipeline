@@ -295,13 +295,32 @@ record("skill_tree", "Drag", "MoveWindow", "Window follows continuous pointer mo
 
 await click(moved.position[0] + 598, moved.position[1] + 15);
 const closed = (await skillTree()).window;
-const closedFrame = await shot("12-closed");
+const closedFrame = await shot("12-button-closed");
 record("skill_tree.close", "Activate", "CloseWindow", "close hides in one frame",
   JSON.stringify(closed), { hidden: closed.visible === false },
   { before: dragAfter, after: closedFrame });
 
-const manifestActions = windowSpec.controls.flatMap((entry) =>
-  entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`));
+await page.reload({ waitUntil: "networkidle", timeout: 90000 });
+await page.waitForFunction(() => window.godotQaState?.windows?.skill_tree,
+  undefined, { timeout: 90000 });
+await page.waitForTimeout(2500);
+const keyBefore = await shot("13-key-before");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(50);
+const keyClosed = (await skillTree()).window;
+const keyAfter = await shot("13-key-closed");
+record("skill_tree", "KeyCommand", "CloseWindow",
+  "Escape routes through the Window binding and hides the frontmost Window",
+  JSON.stringify(keyClosed), {
+    hidden: keyClosed.visible === false,
+    gesture_routed: keyClosed.last_gesture === "KeyCommand",
+    action_routed: keyClosed.last_action === "CloseWindow",
+  }, { before: keyBefore, after: keyAfter });
+
+const windowActions = windowSpec.actions.map((binding) =>
+  `${windowSpec.id}:${binding.gesture}:${binding.action}`);
+const manifestActions = windowActions.concat(windowSpec.controls.flatMap((entry) =>
+  entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`)));
 const covered = new Set(actions.map((entry) =>
   `${entry.control_id}:${entry.gesture}:${entry.window_action}`));
 const missingActions = manifestActions.filter((binding) => !covered.has(binding));
@@ -311,11 +330,13 @@ const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
 check("zero-console-errors", errors.length === 0, errors);
 
 const requiredControls = windowSpec.controls.map((entry) => entry.id);
-const requiredActions = windowSpec.controls.flatMap((entry) =>
-  entry.actions.map((binding) => ({ control_id: entry.id, gesture: binding.gesture,
-    window_action: binding.action })));
+const requiredActions = windowSpec.actions.map((binding) => ({
+  control_id: windowSpec.id, gesture: binding.gesture, window_action: binding.action,
+})).concat(windowSpec.controls.flatMap((entry) => entry.actions.map((binding) => ({
+  control_id: entry.id, gesture: binding.gesture, window_action: binding.action,
+}))));
 const playLog = {
-  schema_version: "image79-play-log-v1",
+  schema_version: "image79-play-log-v2",
   candidate: { issue: 126,
     commit_sha: execFileSync("git", ["rev-parse", "HEAD"],
       { cwd: ROOT, encoding: "utf8" }).trim(), window_id: "skill_tree" },
@@ -323,7 +344,7 @@ const playLog = {
   required_controls: requiredControls,
   required_actions: requiredActions,
   invariant_frames: { before: invariantBefore,
-    after: await invariantShot("13-invariant-after") },
+    after: await invariantShot("14-invariant-after") },
   console_errors: errors,
   actions,
 };
