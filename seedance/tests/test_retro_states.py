@@ -86,3 +86,28 @@ def test_mask_fill_ratio_separates_a_panel_from_a_silhouette() -> None:
 
     empty = Image.new("RGB", (10, 10), matte)
     assert mask_fill_ratio(empty, matte) == 0.0
+
+
+def test_anchor_iou_gates_only_state_set_runs() -> None:
+    """The Anchor check must not touch the single-loop path: its thresholds are
+    calibrated against Issue #87 and that calibration has to stay valid."""
+    from seedance_icons.retro import certify
+
+    single_loop = {
+        "unique_frames": 4,
+        "effective_fps": 6.0,
+        "out_of_palette_pixels": 0,
+        "min_silhouette_iou": 0.998,
+        "frame0_identity": 0.72,
+    }
+    result = certify(single_loop)
+    assert "matches_anchor" not in result["checks"]
+    assert result["certified"]
+
+    faithful_state = dict(single_loop, anchor_silhouette_iou=0.979)
+    assert certify(faithful_state)["certified"]
+
+    redrawn_state = dict(single_loop, anchor_silhouette_iou=0.466)
+    verdict = certify(redrawn_state)
+    assert verdict["checks"]["matches_anchor"] is False
+    assert not verdict["certified"]

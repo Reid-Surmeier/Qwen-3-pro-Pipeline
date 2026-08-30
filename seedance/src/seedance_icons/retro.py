@@ -105,10 +105,19 @@ class RetroThresholds:
     # redraw/escape 0.57-0.76) and is the certification decision. frame0_identity
     # does NOT separate reliably — it tracks tile paleness (faithful 0.71-0.84
     # overlapping the redraw's 0.72), so it is recorded as a diagnostic only.
+    #
+    # min_anchor_silhouette_iou applies only to State Set runs, where each state is
+    # compared back to the Anchor rather than to its own first frame. Calibrated on the
+    # two 2026-08-30 four-state takes of UI-01 Search: the states a human accepted
+    # scored 0.955-0.979, the two a human rejected scored 0.466 and 0.529 — the same
+    # clean separation the single-loop metric showed in Issue #87, with nothing in
+    # between. Single-loop reports do not carry the key and are certified exactly as
+    # before.
     min_frames: int = 2
     max_frames: int = 8
     max_effective_fps: float = 10.0
     min_silhouette_iou: float = 0.90
+    min_anchor_silhouette_iou: float = 0.90
 
 
 def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
@@ -119,6 +128,10 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "palette_locked": report["out_of_palette_pixels"] == 0,
         "silhouette_stable": report["min_silhouette_iou"] >= t.min_silhouette_iou,
     }
+    if "anchor_silhouette_iou" in report:
+        checks["matches_anchor"] = (
+            report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
+        )
     return {
         "checks": checks,
         "diagnostics": {"frame0_identity": report["frame0_identity"]},
@@ -352,10 +365,11 @@ def conform_states(
         "certified": all(r["certified"] for r in states.values()),
         "uncertified_states": [n for n, r in states.items() if not r["certified"]],
         "anchor_silhouette_iou_note": (
-            "anchor_silhouette_iou compares each state's first frame to the Anchor. It is "
-            "recorded as a diagnostic only: the certification thresholds were calibrated on "
-            "single-loop runs in Issue #87 and no threshold for this metric has been "
-            "calibrated against human verdicts yet."
+            "anchor_silhouette_iou compares each state's first frame to the Anchor, and is a "
+            "certification check for State Set runs. Calibrated on the two 2026-08-30 "
+            "four-state takes of UI-01 Search: accepted states 0.955-0.979, rejected states "
+            "0.466 and 0.529. Recalibrate as batches accumulate; the threshold lives in "
+            "RetroThresholds.min_anchor_silhouette_iou."
         ),
     }
     (out_dir / "states-report.json").write_text(json.dumps(summary, indent=2) + "\n")
