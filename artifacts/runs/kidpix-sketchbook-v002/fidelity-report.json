@@ -1,0 +1,36 @@
+{
+  "issue": 139,
+  "version": "v002",
+  "status": "machine-checks-passed-pending-owner-visual-approval",
+  "candidate": {
+    "path": "artifacts/runs/kidpix-sketchbook-v002/final-01.png",
+    "dimensions": "1024x1024",
+    "sha256": "f8a336493d1c61f9b00fcdcc8be1c60d579360495556244027e5121806f5e10d",
+    "corner_rgbs": [
+      [255, 255, 255],
+      [255, 255, 255],
+      [255, 255, 255],
+      [255, 255, 255]
+    ],
+    "outer_16px_pure_white_fraction": 1.0,
+    "whole_canvas_pure_white_fraction": 0.5215,
+    "nonwhite_bbox": [91, 185, 888, 853],
+    "right_side_red_pixels_x_greater_than_or_equal_to_888": 0,
+    "raw_right_side_red_pixels_x_greater_than_or_equal_to_888": 9418,
+    "assembly_changed_pixels": 376443
+  },
+  "visual_findings": [
+    "The final page plane is rectified into a flatter top-down orthographic presentation with reduced perspective taper.",
+    "The vertical red cover or binding strip and visible side thickness are absent from the right edge.",
+    "The grey left spiral and single cobalt pencil remain present.",
+    "Both pages remain blank with no drawing, lettering or annotation.",
+    "The exterior background is exact white and the object remains fully inside the square canvas."
+  ],
+  "raw_render_pass_finding": "The paid v002 Render Pass improved projection but retained the forbidden vertical red strip on the right. It is preserved as rejected candidate image-01.png and review-right-edge-2x.png.",
+  "assembly": {
+    "operation": "Nearest-neighbour perspective rectification of the complete icon, followed by removal of the right-side thickness region and normalization of the connected near-white exterior background.",
+    "command": "convert image-01.png -filter point -virtual-pixel white -distort Perspective '135,170 125,190 898,189 898,190 908,833 898,832 125,832 125,832' -fill white -draw 'rectangle 888,0 1023,1023' -alpha off -fuzz 5% -fill white -draw 'color 0,0 floodfill' final-01.png",
+    "raw_output_preserved": true
+  },
+  "verification_boundary": "These are deterministic pixel checks plus builder visual inspection. They do not replace owner visual approval or the repository independent blind artifact-review gate if proposed for integration."
+}

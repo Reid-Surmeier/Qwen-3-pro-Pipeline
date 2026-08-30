@@ -1,0 +1,64 @@
+{
+  "issue": 139,
+  "version": "v002",
+  "outputs": [
+    {
+      "role": "rejected-raw-render-pass",
+      "file": "image-01.png",
+      "bytes": 324342,
+      "media_type": "image/png",
+      "sha256": "c10c9274a0bbd09689aa4fe4c0b6b6e46dfe9fd00e41cd799317ff47adf09b82",
+      "reason": "Projection improved, but the forbidden right-side vertical red strip remained."
+    },
+    {
+      "role": "approved-for-owner-review-assembly",
+      "file": "final-01.png",
+      "bytes": 266338,
+      "media_type": "image/png",
+      "sha256": "f8a336493d1c61f9b00fcdcc8be1c60d579360495556244027e5121806f5e10d"
+    },
+    {
+      "role": "comparison-evidence",
+      "file": "contact-sheet.png",
+      "bytes": 370985,
+      "media_type": "image/png",
+      "sha256": "03d90788f2853dfc4b21c4b0a061c543ff1dd8ad0e93355838753abd79c29971"
+    },
+    {
+      "role": "rejected-region-evidence",
+      "file": "review-right-edge-2x.png",
+      "bytes": 92852,
+      "media_type": "image/png",
+      "sha256": "659ee3ad416f69d38185b26f171b1dee9bff0f8630ab90c7e354ccbcc759116b"
+    }
+  ],
+  "provenance": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "5bdf8a1f-3a7e-4e52-a5ab-56920febc0d3",
+    "client_id": "d96135bb-a880-49c9-86b7-1be7600bb831",
+    "prompt_request_sha256": "745b0b8c20a32c7da9c980958672bca77cc28c181be5e8eacd8e0e1739a43a10",
+    "workflow_sha256": "b95d7ae1b5d80eeca7a15de6631d0ab76bbddddffad87daa4a2974c8f5b4432f",
+    "brief_sha256": "7f6a6adb2dcaca3745ee98af311b39b0d3ee280a28978bc1d33469070d3797de",
+    "reference_sha256": [
+      "e4dd344ef1efd3790ccf5242062d3bbbfc7cdb6f43bdbf2c1fda742fd8dd9c66",
+      "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b",
+      "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e"
+    ],
+    "submitted_at": "2026-08-30T16:35:18-04:00",
+    "completed_at": "2026-08-30T16:37:00-04:00",
+    "duration_seconds": 101.914,
+    "requested_outputs": 1,
+    "completed_outputs": 1,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.05,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+  },
+  "usage": {
+    "input_image_count": 3,
+    "output_image_count": 1,
+    "output_width": 1024,
+    "output_height": 1024
+  }
+}

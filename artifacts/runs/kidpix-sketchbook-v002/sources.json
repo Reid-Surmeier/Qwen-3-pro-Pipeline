@@ -1,0 +1,24 @@
+{
+  "issue": 139,
+  "version": "v002",
+  "sources": [
+    {
+      "role": "approved-v001-composition-and-material-authority",
+      "path": "artifacts/runs/kidpix-sketchbook-v001/final-01.png",
+      "sha256": "e4dd344ef1efd3790ccf5242062d3bbbfc7cdb6f43bdbf2c1fda742fd8dd9c66",
+      "dimensions": "1024x1024"
+    },
+    {
+      "role": "kidpix-flat-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-kidpix-ui.png",
+      "sha256": "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b",
+      "dimensions": "786x602"
+    },
+    {
+      "role": "flat-map-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-world-map.png",
+      "sha256": "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e",
+      "dimensions": "1240x652"
+    }
+  ]
+}

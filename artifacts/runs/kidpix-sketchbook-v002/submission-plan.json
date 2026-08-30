@@ -1,0 +1,58 @@
+{
+  "issue": 139,
+  "version": "v002",
+  "status": "planned-not-submitted",
+  "planned_at": "2026-08-30T16:34:56-04:00",
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "endpoint": "http://10.255.255.254:8188/prompt",
+  "client_id": "d96135bb-a880-49c9-86b7-1be7600bb831",
+  "requested_outputs": 1,
+  "resolution": "1K",
+  "aspect_ratio": "1:1",
+  "seed": 20260905,
+  "estimated_cost_usd": 0.05,
+  "actual_cost_usd": null,
+  "issue_allowance": {
+    "maximum_outputs": 10,
+    "prior_requested_outputs": 2,
+    "prior_completed_outputs": 2,
+    "prior_ambiguous_outputs": 0,
+    "remaining_before_this_request": 8,
+    "remaining_after_this_request_if_ambiguous": 7
+  },
+  "references": [
+    {
+      "role": "approved-v001-composition-and-material-authority",
+      "path": "artifacts/runs/kidpix-sketchbook-v001/final-01.png",
+      "sha256": "e4dd344ef1efd3790ccf5242062d3bbbfc7cdb6f43bdbf2c1fda742fd8dd9c66"
+    },
+    {
+      "role": "kidpix-flat-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-kidpix-ui.png",
+      "sha256": "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b"
+    },
+    {
+      "role": "flat-map-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-world-map.png",
+      "sha256": "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e"
+    }
+  ],
+  "brief": {
+    "path": "examples/kidpix-sketchbook-v002.json",
+    "sha256": "7f6a6adb2dcaca3745ee98af311b39b0d3ee280a28978bc1d33469070d3797de",
+    "approximate_tokens": 1686,
+    "budget_tokens": 4500
+  },
+  "workflow": {
+    "path": "workflows/kidpix-sketchbook-v002.api.json",
+    "sha256": "b95d7ae1b5d80eeca7a15de6631d0ab76bbddddffad87daa4a2974c8f5b4432f"
+  },
+  "prompt_request_sha256": "745b0b8c20a32c7da9c980958672bca77cc28c181be5e8eacd8e0e1739a43a10",
+  "submission_rule": "Submit this exact one-output workflow and client ID once. If enqueue or provider result is ambiguous, count the requested output against the Issue allowance and reconcile router, worker, output and provider state before any retry. No blind retry is authorized.",
+  "queue_preflight": {
+    "checked_at": "2026-08-30T16:34:56-04:00",
+    "running": 0,
+    "pending": 0
+  }
+}
