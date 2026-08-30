@@ -1,0 +1,225 @@
+{
+  "schema_version": 3,
+  "reference": {
+    "path": "res://assets/image-79/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024]
+  },
+  "windows": [
+    {
+      "id": "options",
+      "geometry": {"x": 1108, "y": 297, "width": 424, "height": 202},
+      "plates": {
+        "expanded": "res://assets/image-79/options/clean-plate.png",
+        "minimized": "res://assets/image-79/options/minimized-plate.png"
+      },
+      "gestures": ["Drag", "KeyCommand"],
+      "actions": [
+        {"gesture": "Drag", "action": "MoveWindow"},
+        {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"}
+      ],
+      "controls": [
+        {
+          "id": "options.minimize",
+          "type": "Button",
+          "geometry": {"x": 373, "y": 8, "width": 19, "height": 18},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["ready"],
+          "initial_semantic_state": "ready",
+          "state_set": {"ready": {
+            "idle": "res://assets/image-79/options/minimize-idle.png",
+            "hover": "res://assets/image-79/options/minimize-hover.png",
+            "pressed": "res://assets/image-79/options/minimize-pressed.png"
+          }},
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleMinimized"}]
+        },
+        {
+          "id": "options.close",
+          "type": "Button",
+          "geometry": {"x": 397, "y": 4, "width": 22, "height": 25},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["ready"],
+          "initial_semantic_state": "ready",
+          "state_set": {"ready": {
+            "idle": "res://assets/image-79/options/close-idle.png",
+            "hover": "res://assets/image-79/options/close-hover.png",
+            "pressed": "res://assets/image-79/options/close-pressed.png"
+          }},
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "CloseWindow"}]
+        },
+        {
+          "id": "options.bgm",
+          "type": "Range",
+          "geometry": {"x": 115, "y": 48, "width": 264, "height": 24},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["enabled"],
+          "initial_semantic_state": "enabled",
+          "state_set": {"enabled": {
+            "idle": "res://assets/image-79/options/bgm-thumb-idle.png",
+            "hover": "res://assets/image-79/options/bgm-thumb-hover.png",
+            "pressed": "res://assets/image-79/options/bgm-thumb-pressed.png"
+          }},
+          "value": {"minimum": 0, "maximum": 100, "initial": 86.7299, "arrow_step": 2, "wheel_step": 1},
+          "surfaces": {
+            "track": {"geometry": {"x": 16, "y": 5, "width": 225, "height": 15}, "asset": "res://assets/image-79/options/bgm-track.png"},
+            "thumb": {"geometry": {"x": 16, "y": 4, "width": 16, "height": 16}},
+            "decrement": {"geometry": {"x": 0, "y": 0, "width": 17, "height": 24}, "state_set": {"enabled": {"idle": "res://assets/image-79/options/bgm-arrow-left-idle.png", "hover": "res://assets/image-79/options/bgm-arrow-left-hover.png", "pressed": "res://assets/image-79/options/bgm-arrow-left-pressed.png"}}},
+            "increment": {"geometry": {"x": 240, "y": 0, "width": 17, "height": 23}, "state_set": {"enabled": {"idle": "res://assets/image-79/options/bgm-arrow-right-idle.png", "hover": "res://assets/image-79/options/bgm-arrow-right-hover.png", "pressed": "res://assets/image-79/options/bgm-arrow-right-pressed.png"}}}
+          },
+          "gestures": ["Activate", "Drag", "Wheel"],
+          "actions": [
+            {"gesture": "Activate", "action": "StepRange"},
+            {"gesture": "Drag", "action": "SetRange"},
+            {"gesture": "Wheel", "action": "StepRange"}
+          ]
+        },
+        {
+          "id": "options.effect",
+          "type": "Range",
+          "geometry": {"x": 115, "y": 80, "width": 264, "height": 24},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["enabled"],
+          "initial_semantic_state": "enabled",
+          "state_set": {"enabled": {
+            "idle": "res://assets/image-79/options/effect-thumb-idle.png",
+            "hover": "res://assets/image-79/options/effect-thumb-hover.png",
+            "pressed": "res://assets/image-79/options/effect-thumb-pressed.png"
+          }},
+          "value": {"minimum": 0, "maximum": 100, "initial": 52.1327, "arrow_step": 2, "wheel_step": 1},
+          "surfaces": {
+            "track": {"geometry": {"x": 16, "y": 5, "width": 225, "height": 15}, "asset": "res://assets/image-79/options/effect-track.png"},
+            "thumb": {"geometry": {"x": 16, "y": 4, "width": 16, "height": 16}},
+            "decrement": {"geometry": {"x": 0, "y": 0, "width": 17, "height": 24}, "state_set": {"enabled": {"idle": "res://assets/image-79/options/effect-arrow-left-idle.png", "hover": "res://assets/image-79/options/effect-arrow-left-hover.png", "pressed": "res://assets/image-79/options/effect-arrow-left-pressed.png"}}},
+            "increment": {"geometry": {"x": 240, "y": 0, "width": 17, "height": 24}, "state_set": {"enabled": {"idle": "res://assets/image-79/options/effect-arrow-right-idle.png", "hover": "res://assets/image-79/options/effect-arrow-right-hover.png", "pressed": "res://assets/image-79/options/effect-arrow-right-pressed.png"}}}
+          },
+          "gestures": ["Activate", "Drag", "Wheel"],
+          "actions": [
+            {"gesture": "Activate", "action": "StepRange"},
+            {"gesture": "Drag", "action": "SetRange"},
+            {"gesture": "Wheel", "action": "StepRange"}
+          ]
+        },
+        {
+          "id": "options.bgm_on",
+          "type": "Toggle",
+          "geometry": {"x": 377, "y": 53, "width": 18, "height": 18},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "on",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/bgm_on-off-idle.png", "hover": "res://assets/image-79/options/bgm_on-off-hover.png", "pressed": "res://assets/image-79/options/bgm_on-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/bgm_on-on-idle.png", "hover": "res://assets/image-79/options/bgm_on-on-hover.png", "pressed": "res://assets/image-79/options/bgm_on-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.effect_on",
+          "type": "Toggle",
+          "geometry": {"x": 377, "y": 84, "width": 18, "height": 19},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "on",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/effect_on-off-idle.png", "hover": "res://assets/image-79/options/effect_on-off-hover.png", "pressed": "res://assets/image-79/options/effect_on-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/effect_on-on-idle.png", "hover": "res://assets/image-79/options/effect_on-on-hover.png", "pressed": "res://assets/image-79/options/effect_on-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.attack",
+          "type": "Toggle",
+          "geometry": {"x": 26, "y": 169, "width": 20, "height": 19},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "off",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/cb_attack-off-idle.png", "hover": "res://assets/image-79/options/cb_attack-off-hover.png", "pressed": "res://assets/image-79/options/cb_attack-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/cb_attack-on-idle.png", "hover": "res://assets/image-79/options/cb_attack-on-hover.png", "pressed": "res://assets/image-79/options/cb_attack-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.skill",
+          "type": "Toggle",
+          "geometry": {"x": 116, "y": 169, "width": 20, "height": 19},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "on",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/cb_skill-off-idle.png", "hover": "res://assets/image-79/options/cb_skill-off-hover.png", "pressed": "res://assets/image-79/options/cb_skill-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/cb_skill-on-idle.png", "hover": "res://assets/image-79/options/cb_skill-on-hover.png", "pressed": "res://assets/image-79/options/cb_skill-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.item",
+          "type": "Toggle",
+          "geometry": {"x": 188, "y": 169, "width": 19, "height": 19},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "off",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/cb_item-off-idle.png", "hover": "res://assets/image-79/options/cb_item-off-hover.png", "pressed": "res://assets/image-79/options/cb_item-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/cb_item-on-idle.png", "hover": "res://assets/image-79/options/cb_item-on-hover.png", "pressed": "res://assets/image-79/options/cb_item-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.option",
+          "type": "Toggle",
+          "geometry": {"x": 283, "y": 170, "width": 20, "height": 19},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["off", "on"],
+          "initial_semantic_state": "on",
+          "state_set": {
+            "off": {"idle": "res://assets/image-79/options/cb_option-off-idle.png", "hover": "res://assets/image-79/options/cb_option-off-hover.png", "pressed": "res://assets/image-79/options/cb_option-off-pressed.png"},
+            "on": {"idle": "res://assets/image-79/options/cb_option-on-idle.png", "hover": "res://assets/image-79/options/cb_option-on-hover.png", "pressed": "res://assets/image-79/options/cb_option-on-pressed.png"}
+          },
+          "gestures": ["Activate"],
+          "actions": [{"gesture": "Activate", "action": "ToggleValue"}]
+        },
+        {
+          "id": "options.skin",
+          "type": "Dropdown",
+          "geometry": {"x": 114, "y": 118, "width": 300, "height": 32},
+          "interaction_phases": ["idle", "hover", "pressed"],
+          "semantic_states": ["closed", "open"],
+          "initial_semantic_state": "closed",
+          "state_set": {
+            "closed": {"idle": "res://assets/image-79/options/dropdown-field-idle.png", "hover": "res://assets/image-79/options/dropdown-field-hover.png", "pressed": "res://assets/image-79/options/dropdown-field-pressed.png"},
+            "open": {"idle": "res://assets/image-79/options/dropdown-field-idle.png", "hover": "res://assets/image-79/options/dropdown-field-hover.png", "pressed": "res://assets/image-79/options/dropdown-field-pressed.png"}
+          },
+          "value": {"initial": "Classic Blue", "choices": ["Classic Blue", "<Basic Skin>", "scribbling kid", "tanublue"]},
+          "surfaces": {
+            "field": {
+              "geometry": {"x": 0, "y": 0, "width": 270, "height": 32},
+              "value_state_set": {
+                "idle": "res://assets/image-79/options/dropdown-field-blank-idle.png",
+                "hover": "res://assets/image-79/options/dropdown-field-blank-hover.png",
+                "pressed": "res://assets/image-79/options/dropdown-field-blank-pressed.png"
+              }
+            },
+            "arrow": {"geometry": {"x": 268, "y": 0, "width": 32, "height": 32}, "state_set": {
+              "closed": {"idle": "res://assets/image-79/options/dropdown-arrow-idle.png", "hover": "res://assets/image-79/options/dropdown-arrow-hover.png", "pressed": "res://assets/image-79/options/dropdown-arrow-pressed.png"},
+              "open": {"idle": "res://assets/image-79/options/dropdown-arrow-open.png", "hover": "res://assets/image-79/options/dropdown-arrow-open.png", "pressed": "res://assets/image-79/options/dropdown-arrow-open.png"}
+            }}
+          },
+          "tokens": {"fill": "#F6F2F5", "border": "#D3D2D6", "text": "#2A252A", "highlight": "#46599F"},
+          "gestures": ["Activate", "KeyCommand"],
+          "actions": [
+            {"gesture": "Activate", "action": "ToggleDropdown"},
+            {"gesture": "Activate", "action": "SelectChoice"},
+            {"gesture": "KeyCommand", "action": "DismissDropdown"}
+          ]
+        }
+      ]
+    }
+  ]
+}

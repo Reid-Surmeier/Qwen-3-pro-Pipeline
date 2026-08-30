@@ -50,6 +50,9 @@ var interaction_log: Array = []
 
 
 func _ready() -> void:
+	if _route_to_image79():
+		get_tree().call_deferred("change_scene_to_file", "res://image79_options.tscn")
+		return
 	var font: FontFile = load("res://fonts/PixelMplus12-Regular.ttf")
 	font.antialiasing = TextServer.FONT_ANTIALIASING_NONE
 	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_DISABLED
@@ -87,6 +90,16 @@ func _ready() -> void:
 		windows[window.window_id] = window
 
 	_mount_live_inputs()
+
+
+func _route_to_image79() -> bool:
+	for argument in OS.get_cmdline_user_args():
+		if argument == "--screen=image79":
+			return true
+	if OS.has_feature("web"):
+		var search: Variant = JavaScriptBridge.eval("window.location.search", true)
+		return str(search).contains("screen=image79")
+	return false
 
 
 func _mount_live_inputs() -> void:

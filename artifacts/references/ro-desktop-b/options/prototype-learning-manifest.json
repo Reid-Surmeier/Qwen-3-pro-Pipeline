@@ -1,0 +1,2002 @@
+{
+  "reference": {
+    "file": "artifacts/references/ro-desktop-b/reference-native.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+  },
+  "window_rect": {
+    "x": 1108,
+    "y": 297,
+    "w": 424,
+    "h": 202
+  },
+  "coordinate_space": "reference-native.png, 1536x1024, native scale (1:1)",
+  "texture_margin_px": 1,
+  "tokens": {
+    "title_bar_blue": {
+      "hex": "#C7DBF0",
+      "rgb": [
+        199,
+        219,
+        240
+      ],
+      "derivation": "source-cut: median of reference-native.png x1300..1459 y303..320 (an empty span of this window's title bar)"
+    },
+    "title_ink_blue": {
+      "hex": "#46599F",
+      "rgb": [
+        70,
+        89,
+        159
+      ],
+      "derivation": "source-cut: median of the saturated dark-blue title-strip pixels (b-r > 45, luminance < 140) -- the ⊖/⊗ glyph ink. Used for the hover outline and as the dropdown's highlight-bar token: Behaviour Card cross-cutting finding 4 says the highlight colour belongs to the skin, not the control."
+    },
+    "window_body": {
+      "hex": "#FCFCFC",
+      "rgb": [
+        252,
+        252,
+        252
+      ],
+      "derivation": "source-cut: median of an empty span of the window body"
+    },
+    "field_text": {
+      "hex": "#2A252A",
+      "rgb": [
+        42,
+        37,
+        42
+      ],
+      "derivation": "source-cut: median of the dark pixels of the `Classic Blue` value text"
+    },
+    "field_border": {
+      "hex": "#D3D2D6",
+      "rgb": [
+        211,
+        210,
+        214
+      ],
+      "derivation": "source-cut: median of the dropdown field's own top and bottom border rows"
+    },
+    "field_fill": {
+      "hex": "#F6F2F5",
+      "rgb": [
+        246,
+        242,
+        245
+      ],
+      "derivation": "source-cut: median of an empty span inside the dropdown field"
+    }
+  },
+  "controls": {
+    "minimize": {
+      "kind": "button",
+      "ink_rect": [
+        1482,
+        306,
+        17,
+        16
+      ],
+      "place_rect": [
+        1481,
+        305,
+        19,
+        18
+      ],
+      "place_in_window": [
+        373,
+        8
+      ],
+      "states": {
+        "idle": "minimize-idle.png",
+        "hover": "minimize-hover.png",
+        "pressed": "minimize-pressed.png"
+      },
+      "behaviour": "toggles minimized/restored, instantly. Manual-attested (M1): 「ウィンドウ右上のボタンで、最大化／最小化の切り替えも可能だ。」 -- a two-state toggle on the same button. The collapsed FORM (a bare title strip) is intent-specified."
+    },
+    "close": {
+      "kind": "button",
+      "ink_rect": [
+        1506,
+        302,
+        20,
+        23
+      ],
+      "place_rect": [
+        1505,
+        301,
+        22,
+        25
+      ],
+      "place_in_window": [
+        397,
+        4
+      ],
+      "states": {
+        "idle": "close-idle.png",
+        "hover": "close-hover.png",
+        "pressed": "close-pressed.png"
+      },
+      "behaviour": "hides the window whole, in one frame (Behaviour Card `close`). Esc also closes the focused window (manual-attested via the shortcut list)."
+    },
+    "bgm_arrow_left": {
+      "kind": "button",
+      "ink_rect": [
+        1224,
+        346,
+        15,
+        22
+      ],
+      "place_rect": [
+        1223,
+        345,
+        17,
+        24
+      ],
+      "place_in_window": [
+        115,
+        48
+      ],
+      "states": {
+        "idle": "bgm-arrow-left-idle.png",
+        "hover": "bgm-arrow-left-hover.png",
+        "pressed": "bgm-arrow-left-pressed.png"
+      },
+      "behaviour": "steps the slider by 2. INTENT-SPECIFIED: Behaviour Card `slider` records the arrow gesture as Unverified; roBrowser's step=1 is secondary evidence only."
+    },
+    "bgm_arrow_right": {
+      "kind": "button",
+      "ink_rect": [
+        1464,
+        346,
+        15,
+        21
+      ],
+      "place_rect": [
+        1463,
+        345,
+        17,
+        23
+      ],
+      "place_in_window": [
+        355,
+        48
+      ],
+      "states": {
+        "idle": "bgm-arrow-right-idle.png",
+        "hover": "bgm-arrow-right-hover.png",
+        "pressed": "bgm-arrow-right-pressed.png"
+      },
+      "behaviour": "steps the slider by 2. INTENT-SPECIFIED: Behaviour Card `slider` records the arrow gesture as Unverified; roBrowser's step=1 is secondary evidence only."
+    },
+    "effect_arrow_left": {
+      "kind": "button",
+      "ink_rect": [
+        1224,
+        378,
+        15,
+        22
+      ],
+      "place_rect": [
+        1223,
+        377,
+        17,
+        24
+      ],
+      "place_in_window": [
+        115,
+        80
+      ],
+      "states": {
+        "idle": "effect-arrow-left-idle.png",
+        "hover": "effect-arrow-left-hover.png",
+        "pressed": "effect-arrow-left-pressed.png"
+      },
+      "behaviour": "steps the slider by 2. INTENT-SPECIFIED: Behaviour Card `slider` records the arrow gesture as Unverified; roBrowser's step=1 is secondary evidence only."
+    },
+    "effect_arrow_right": {
+      "kind": "button",
+      "ink_rect": [
+        1464,
+        378,
+        15,
+        22
+      ],
+      "place_rect": [
+        1463,
+        377,
+        17,
+        24
+      ],
+      "place_in_window": [
+        355,
+        80
+      ],
+      "states": {
+        "idle": "effect-arrow-right-idle.png",
+        "hover": "effect-arrow-right-hover.png",
+        "pressed": "effect-arrow-right-pressed.png"
+      },
+      "behaviour": "steps the slider by 2. INTENT-SPECIFIED: Behaviour Card `slider` records the arrow gesture as Unverified; roBrowser's step=1 is secondary evidence only."
+    },
+    "bgm_thumb": {
+      "kind": "thumb",
+      "ink_rect": [
+        1422,
+        350,
+        14,
+        14
+      ],
+      "place_rect": [
+        1421,
+        349,
+        16,
+        16
+      ],
+      "place_in_window": [
+        313,
+        52
+      ],
+      "states": {
+        "idle": "bgm-thumb-idle.png",
+        "hover": "bgm-thumb-hover.png",
+        "pressed": "bgm-thumb-pressed.png"
+      },
+      "behaviour": "follows the pointer continuously while held and clamps flush at both track ends (Behaviour Card `slider`: End clamping Confirmed; the drag itself is Unverified)."
+    },
+    "effect_thumb": {
+      "kind": "thumb",
+      "ink_rect": [
+        1349,
+        383,
+        14,
+        14
+      ],
+      "place_rect": [
+        1348,
+        382,
+        16,
+        16
+      ],
+      "place_in_window": [
+        240,
+        85
+      ],
+      "states": {
+        "idle": "effect-thumb-idle.png",
+        "hover": "effect-thumb-hover.png",
+        "pressed": "effect-thumb-pressed.png"
+      },
+      "behaviour": "follows the pointer continuously while held and clamps flush at both track ends (Behaviour Card `slider`: End clamping Confirmed; the drag itself is Unverified)."
+    },
+    "cb_attack": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1135,
+        467,
+        18,
+        17
+      ],
+      "place_rect": [
+        1134,
+        466,
+        20,
+        19
+      ],
+      "place_in_window": [
+        26,
+        169
+      ],
+      "states": {
+        "off": {
+          "idle": "cb_attack-off-idle.png",
+          "hover": "cb_attack-off-hover.png",
+          "pressed": "cb_attack-off-pressed.png"
+        },
+        "on": {
+          "idle": "cb_attack-on-idle.png",
+          "hover": "cb_attack-on-hover.png",
+          "pressed": "cb_attack-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "cb_skill": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1225,
+        467,
+        18,
+        17
+      ],
+      "place_rect": [
+        1224,
+        466,
+        20,
+        19
+      ],
+      "place_in_window": [
+        116,
+        169
+      ],
+      "states": {
+        "off": {
+          "idle": "cb_skill-off-idle.png",
+          "hover": "cb_skill-off-hover.png",
+          "pressed": "cb_skill-off-pressed.png"
+        },
+        "on": {
+          "idle": "cb_skill-on-idle.png",
+          "hover": "cb_skill-on-hover.png",
+          "pressed": "cb_skill-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "cb_item": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1297,
+        467,
+        17,
+        17
+      ],
+      "place_rect": [
+        1296,
+        466,
+        19,
+        19
+      ],
+      "place_in_window": [
+        188,
+        169
+      ],
+      "states": {
+        "off": {
+          "idle": "cb_item-off-idle.png",
+          "hover": "cb_item-off-hover.png",
+          "pressed": "cb_item-off-pressed.png"
+        },
+        "on": {
+          "idle": "cb_item-on-idle.png",
+          "hover": "cb_item-on-hover.png",
+          "pressed": "cb_item-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "cb_option": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1392,
+        468,
+        18,
+        17
+      ],
+      "place_rect": [
+        1391,
+        467,
+        20,
+        19
+      ],
+      "place_in_window": [
+        283,
+        170
+      ],
+      "states": {
+        "off": {
+          "idle": "cb_option-off-idle.png",
+          "hover": "cb_option-off-hover.png",
+          "pressed": "cb_option-off-pressed.png"
+        },
+        "on": {
+          "idle": "cb_option-on-idle.png",
+          "hover": "cb_option-on-hover.png",
+          "pressed": "cb_option-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "bgm_on": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1486,
+        351,
+        16,
+        16
+      ],
+      "place_rect": [
+        1485,
+        350,
+        18,
+        18
+      ],
+      "place_in_window": [
+        377,
+        53
+      ],
+      "states": {
+        "off": {
+          "idle": "bgm_on-off-idle.png",
+          "hover": "bgm_on-off-hover.png",
+          "pressed": "bgm_on-off-pressed.png"
+        },
+        "on": {
+          "idle": "bgm_on-on-idle.png",
+          "hover": "bgm_on-on-hover.png",
+          "pressed": "bgm_on-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "effect_on": {
+      "kind": "checkbox",
+      "ink_rect": [
+        1486,
+        382,
+        16,
+        17
+      ],
+      "place_rect": [
+        1485,
+        381,
+        18,
+        19
+      ],
+      "place_in_window": [
+        377,
+        84
+      ],
+      "states": {
+        "off": {
+          "idle": "effect_on-off-idle.png",
+          "hover": "effect_on-off-hover.png",
+          "pressed": "effect_on-off-pressed.png"
+        },
+        "on": {
+          "idle": "effect_on-on-idle.png",
+          "hover": "effect_on-on-hover.png",
+          "pressed": "effect_on-on-pressed.png"
+        }
+      },
+      "behaviour": "toggles on release, reversibly; the square never changes, only the tick appears or goes (Behaviour Card `checkbox`). Both states of this control are its OWN square, so the idle frame is exact and a toggle round-trip restores byte-identical pixels."
+    },
+    "dropdown_field": {
+      "kind": "button",
+      "ink_rect": [
+        1223,
+        416,
+        268,
+        30
+      ],
+      "place_rect": [
+        1222,
+        415,
+        270,
+        32
+      ],
+      "place_in_window": [
+        114,
+        118
+      ],
+      "states": {
+        "idle": "dropdown-field-idle.png",
+        "hover": "dropdown-field-hover.png",
+        "pressed": "dropdown-field-pressed.png",
+        "blank_idle": "dropdown-field-blank-idle.png",
+        "blank_hover": "dropdown-field-blank-hover.png",
+        "blank_pressed": "dropdown-field-blank-pressed.png"
+      },
+      "behaviour": "click opens the list downward over whatever is beneath it (Behaviour Card `dropdown`, cut-verified at 1 frame)."
+    },
+    "dropdown_arrow": {
+      "kind": "button",
+      "ink_rect": [
+        1491,
+        416,
+        30,
+        30
+      ],
+      "place_rect": [
+        1490,
+        415,
+        32,
+        32
+      ],
+      "place_in_window": [
+        382,
+        118
+      ],
+      "states": {
+        "idle": "dropdown-arrow-idle.png",
+        "hover": "dropdown-arrow-hover.png",
+        "pressed": "dropdown-arrow-pressed.png",
+        "open": "dropdown-arrow-open.png"
+      },
+      "behaviour": "click opens the list; while the list is open the button is repainted darker/inset (Behaviour Card `dropdown`)."
+    },
+    "bgm_track": {
+      "kind": "track",
+      "ink_rect": [
+        1239,
+        350,
+        225,
+        15
+      ],
+      "place_rect": [
+        1239,
+        350,
+        225,
+        15
+      ],
+      "place_in_window": [
+        131,
+        53
+      ],
+      "states": {
+        "idle": "bgm-track.png"
+      },
+      "behaviour": "clicking anywhere on the track jumps the thumb to the pointer and begins a drag. INTENT-SPECIFIED."
+    },
+    "effect_track": {
+      "kind": "track",
+      "ink_rect": [
+        1239,
+        382,
+        225,
+        15
+      ],
+      "place_rect": [
+        1239,
+        382,
+        225,
+        15
+      ],
+      "place_in_window": [
+        131,
+        85
+      ],
+      "states": {
+        "idle": "effect-track.png"
+      },
+      "behaviour": "clicking anywhere on the track jumps the thumb to the pointer and begins a drag. INTENT-SPECIFIED."
+    }
+  },
+  "assets": {
+    "window.png": {
+      "file": "window.png",
+      "size": [
+        424,
+        202
+      ],
+      "derivation": "source-cut (+ derived: pixels of the magenta #FF00FF desktop showing through the window's rounded corners keyed to alpha 0)",
+      "sha256": "27069713a605d0865b41000b65b90f6b2417e61bbd3f7cdfd6e2fc9ba895c521",
+      "source_rect": [
+        1108,
+        297,
+        424,
+        202
+      ],
+      "note": "61 corner pixels keyed"
+    },
+    "minimized-plate.png": {
+      "file": "minimized-plate.png",
+      "size": [
+        424,
+        28
+      ],
+      "derivation": "source-cut",
+      "sha256": "4562d125b80521d37d3e066f3677d81e9737299d80bfd2e59a18845f89235fed",
+      "source_rect": [
+        1108,
+        297,
+        424,
+        28
+      ],
+      "note": "title strip; 28 rows rather than the ticket's 24 because the ⊗ glyph's bottom border is measured on y=321 and the title gradient's own edge is y=324"
+    },
+    "title-strip-24.png": {
+      "file": "title-strip-24.png",
+      "size": [
+        424,
+        24
+      ],
+      "derivation": "source-cut",
+      "sha256": "3c644380a0a2e2b71142d7777dfd5ceda3edfa9af7f1d6b196d91b04d80987a1",
+      "source_rect": [
+        1108,
+        297,
+        424,
+        24
+      ],
+      "note": "the ticket's literal 424x24 strip; it clips the ⊗ glyph, so it is not used"
+    },
+    "clean-plate.png": {
+      "file": "clean-plate.png",
+      "size": [
+        424,
+        202
+      ],
+      "derivation": "derived: window.png with (a) both slider thumbs healed by copying the nearest empty track segment of the same rows (footprint = thumb bbox + 3 px, donor 6 px clear, DC-matched per row by a linear ramp to the flanking columns) and (b) the six checkbox footprints filled with the median colour of the 2 px ring around each box, so their state textures can be drawn on top without the source glyph showing through",
+      "sha256": "21e2d3a0647b8d2b0075fc1f124ba67e2c43601b16ae82b0b56610ec2ec40c46",
+      "source_rect": [
+        1108,
+        297,
+        424,
+        202
+      ],
+      "note": "labels, the Skin row's `Classic Blue` pixels, the arrows, the tracks, the dropdown and both title-bar glyphs are untouched"
+    },
+    "minimize-idle.png": {
+      "file": "minimize-idle.png",
+      "size": [
+        19,
+        18
+      ],
+      "derivation": "source-cut (alpha un-mixed from a 2-D model of the title-bar gradient)",
+      "sha256": "a7515e45c4219e5addbc3a88c4cc5f33d07ce36ceed3ec060b84d3bbe5e81947",
+      "source_rect": [
+        1482,
+        306,
+        17,
+        16
+      ]
+    },
+    "minimize-hover.png": {
+      "file": "minimize-hover.png",
+      "size": [
+        19,
+        18
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "eef7ce7787c4e77507020e4489dedcb7439d26e38eaba81ca21e38b0dd601714",
+      "source_rect": [
+        1482,
+        306,
+        17,
+        16
+      ]
+    },
+    "minimize-pressed.png": {
+      "file": "minimize-pressed.png",
+      "size": [
+        19,
+        18
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "da33354d744213279327d3cc89d7a7a6090f6dceb9ae23c8def70fe8a228760f",
+      "source_rect": [
+        1482,
+        306,
+        17,
+        16
+      ]
+    },
+    "close-idle.png": {
+      "file": "close-idle.png",
+      "size": [
+        22,
+        25
+      ],
+      "derivation": "source-cut (alpha un-mixed from a 2-D model of the title-bar gradient)",
+      "sha256": "a37a80c2767d26ede8f7ebb2fba7d7cf7e2644841542f485c41b51bf3b2ce0d1",
+      "source_rect": [
+        1506,
+        302,
+        20,
+        23
+      ]
+    },
+    "close-hover.png": {
+      "file": "close-hover.png",
+      "size": [
+        22,
+        25
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "51bf589aced166c908be0864efd60da8570ec1cc099c530203359987e8b2426a",
+      "source_rect": [
+        1506,
+        302,
+        20,
+        23
+      ]
+    },
+    "close-pressed.png": {
+      "file": "close-pressed.png",
+      "size": [
+        22,
+        25
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "88d8d7ce0e5bd5f4ed3771e781f762bc2aed8c51a96b3761997b85f969f24a99",
+      "source_rect": [
+        1506,
+        302,
+        20,
+        23
+      ]
+    },
+    "bgm-arrow-left-idle.png": {
+      "file": "bgm-arrow-left-idle.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "source-cut (alpha un-mixed from the window body)",
+      "sha256": "00dea2cf40dbd6b13fe9b6fe8d7963907f5e9db335a424f4d87fe36da9e2ce33",
+      "source_rect": [
+        1224,
+        346,
+        15,
+        22
+      ]
+    },
+    "bgm-arrow-left-hover.png": {
+      "file": "bgm-arrow-left-hover.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "9acc81992495f51558835842a2ba1326448964718860949c95615a92eb49337d",
+      "source_rect": [
+        1224,
+        346,
+        15,
+        22
+      ]
+    },
+    "bgm-arrow-left-pressed.png": {
+      "file": "bgm-arrow-left-pressed.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "90761a6eb21d10e34b36056135da534f7258b5bcb299a92a50521e4498fed5cb",
+      "source_rect": [
+        1224,
+        346,
+        15,
+        22
+      ]
+    },
+    "bgm-arrow-right-idle.png": {
+      "file": "bgm-arrow-right-idle.png",
+      "size": [
+        17,
+        23
+      ],
+      "derivation": "source-cut (alpha un-mixed from the window body)",
+      "sha256": "df31f327f8cd50034d4d80242a3d4616aac6b2363f5913830dfcb01ca031aaf2",
+      "source_rect": [
+        1464,
+        346,
+        15,
+        21
+      ]
+    },
+    "bgm-arrow-right-hover.png": {
+      "file": "bgm-arrow-right-hover.png",
+      "size": [
+        17,
+        23
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "f5f84731f6a607a9ccb59fceaadc424aefe14a2fb7780fee15680579807c79ec",
+      "source_rect": [
+        1464,
+        346,
+        15,
+        21
+      ]
+    },
+    "bgm-arrow-right-pressed.png": {
+      "file": "bgm-arrow-right-pressed.png",
+      "size": [
+        17,
+        23
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "beab9cd35fd61346e70beaec33020bad85657b8094f9b9b2b4d084789d13009e",
+      "source_rect": [
+        1464,
+        346,
+        15,
+        21
+      ]
+    },
+    "effect-arrow-left-idle.png": {
+      "file": "effect-arrow-left-idle.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "source-cut (alpha un-mixed from the window body)",
+      "sha256": "3848549bf8cc06cb528d0a6ab6e376e4435abf9469376b5b6a4e23540f8d77d5",
+      "source_rect": [
+        1224,
+        378,
+        15,
+        22
+      ]
+    },
+    "effect-arrow-left-hover.png": {
+      "file": "effect-arrow-left-hover.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "d156897ed3ddb581b666ef9043bfa7ad7e937e38937bdc1b55db0f820f9e5108",
+      "source_rect": [
+        1224,
+        378,
+        15,
+        22
+      ]
+    },
+    "effect-arrow-left-pressed.png": {
+      "file": "effect-arrow-left-pressed.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "23fbbe08a9f028cb8a00e08d412f36a9fbc8130dd5d05083a2ec0e7622d87cc1",
+      "source_rect": [
+        1224,
+        378,
+        15,
+        22
+      ]
+    },
+    "effect-arrow-right-idle.png": {
+      "file": "effect-arrow-right-idle.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "source-cut (alpha un-mixed from the window body)",
+      "sha256": "26aea56310ed0f5b333555298cbaa1c1f05e21e3cb057fa0af6fdf1b41b0ecf4",
+      "source_rect": [
+        1464,
+        378,
+        15,
+        22
+      ]
+    },
+    "effect-arrow-right-hover.png": {
+      "file": "effect-arrow-right-hover.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "0eb4320447f99a99a69fff59493f77bdc97098088239dcb67dd11a7e23f79134",
+      "source_rect": [
+        1464,
+        378,
+        15,
+        22
+      ]
+    },
+    "effect-arrow-right-pressed.png": {
+      "file": "effect-arrow-right-pressed.png",
+      "size": [
+        17,
+        24
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "9466d3eecfbcf03e9b1ee471d9b5dec5d9737c5565de45a85634feb12b5ca7c7",
+      "source_rect": [
+        1464,
+        378,
+        15,
+        22
+      ]
+    },
+    "bgm-thumb-idle.png": {
+      "file": "bgm-thumb-idle.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "source-cut from the BGM row (alpha un-mixed row by row from the track it sits on; enclosed holes filled so the whole disc is opaque)",
+      "sha256": "e6da724b0688815be8b949c1d8f63877470b9bbf28113f93e6e9d395d184b1c0",
+      "source_rect": [
+        1422,
+        350,
+        14,
+        14
+      ]
+    },
+    "bgm-thumb-hover.png": {
+      "file": "bgm-thumb-hover.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "07ed793a09750db2fa6d4884e9289671bbd0088ccd234c4ea04b8bdca36ed191",
+      "source_rect": [
+        1422,
+        350,
+        14,
+        14
+      ]
+    },
+    "bgm-thumb-pressed.png": {
+      "file": "bgm-thumb-pressed.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "derived: the idle thumb multiplied by 0.78 grey -- the pressed treatment proven in the predecessor repo's Options-window prototype, the canonical quality floor named by ADR 0006. The Source Game does not show a slider thumb held.",
+      "sha256": "64799bc0bc328421d43401e6a550e28ad305f4cfbfd30d096758d7aac2956539",
+      "source_rect": [
+        1422,
+        350,
+        14,
+        14
+      ]
+    },
+    "effect-thumb-idle.png": {
+      "file": "effect-thumb-idle.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "source-cut from the EFFECT row (alpha un-mixed row by row from the track it sits on; enclosed holes filled so the whole disc is opaque)",
+      "sha256": "f088a17c7d3666b79284cbf69cfca8b9616a784683da9454e5e546cac6612e96",
+      "source_rect": [
+        1349,
+        383,
+        14,
+        14
+      ]
+    },
+    "effect-thumb-hover.png": {
+      "file": "effect-thumb-hover.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "c622337c22d04a39aa2fa86bae85129320e55e869c32770b5336c390bc586e7b",
+      "source_rect": [
+        1349,
+        383,
+        14,
+        14
+      ]
+    },
+    "effect-thumb-pressed.png": {
+      "file": "effect-thumb-pressed.png",
+      "size": [
+        16,
+        16
+      ],
+      "derivation": "derived: the idle thumb multiplied by 0.78 grey -- the pressed treatment proven in the predecessor repo's Options-window prototype, the canonical quality floor named by ADR 0006. The Source Game does not show a slider thumb held.",
+      "sha256": "45376286e97f7c95be034c6469a7f8a490241e311407282b0c0f2ea0ee721152",
+      "source_rect": [
+        1349,
+        383,
+        14,
+        14
+      ]
+    },
+    "cb_attack-off-idle.png": {
+      "file": "cb_attack-off-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "source-cut: the footer `attack` box in the state the Reference Screen shows it (unchecked); alpha un-mixed from the window body",
+      "sha256": "5b2965d964c7b2dd7dd15d44e58246e463dfe74756294161afc40733ca003365",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_attack-off-hover.png": {
+      "file": "cb_attack-off-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "36fb7d8cf0ef677906e07811e80fd3c5e7c94db93851ae0dca6a6339a40fe6d6",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_attack-off-pressed.png": {
+      "file": "cb_attack-off-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "18424f1b6c3d2e4530a1a2834e8db9fdda9c29fce795f26eda770ff523bd1765",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_attack-on-idle.png": {
+      "file": "cb_attack-on-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: this box's own square with the tick glyph composited into it at the offset the tick occupies inside the footer `skill` box (centred, for the smaller `on` boxes). The Reference Screen never shows this box checked.",
+      "sha256": "13de2b674d290053a7e00a51315917eba803d63bcb59f6ac60c635fda7258dfc",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_attack-on-hover.png": {
+      "file": "cb_attack-on-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "f75eabf848a6576c43c7c231cc1fc9295aeacd12ad104814f77a7dd0a796575a",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_attack-on-pressed.png": {
+      "file": "cb_attack-on-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "6211ece61e2b6067b97eaa5d6562537bace2b275005a1f73a961a2f24be8f4bb",
+      "source_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-off-idle.png": {
+      "file": "cb_skill-off-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: this box's own square with the tick's footprint replaced by the same patch of the footer `attack` box, which the Reference Screen does show unchecked. The Reference Screen never shows this box unchecked.",
+      "sha256": "1d86f877048163847a726df909d00e263768409cc4d677f5c021685bdaf0f0e5",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-off-hover.png": {
+      "file": "cb_skill-off-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "553147c4da901d4a2dde25f21a8e483aa41f267d5cd249dab0761d1eeb8c01d8",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-off-pressed.png": {
+      "file": "cb_skill-off-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "21fdd3627c111ec4260d6744eee882b754cf0b236c17cf6c75ba9119c170966c",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-on-idle.png": {
+      "file": "cb_skill-on-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "source-cut: the footer `skill` box in the state the Reference Screen shows it (checked); alpha un-mixed from the window body",
+      "sha256": "ea7efbdf42891da6b3c19b9993098cad14696d649955e4d7c0d0b32cd05b8371",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-on-hover.png": {
+      "file": "cb_skill-on-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "5d47f935bb9c9f5d148881878d84d5648efb529cc443468f1b8ab5f2a6029798",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill-on-pressed.png": {
+      "file": "cb_skill-on-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "af595668d2d5ad2ff7906a8669a9485e683b79239fb0264b20435a6ebf17445c",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_item-off-idle.png": {
+      "file": "cb_item-off-idle.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "derived: this box's own square with the tick's footprint replaced by the same patch of the footer `attack` box, which the Reference Screen does show unchecked. The Reference Screen never shows this box unchecked.",
+      "sha256": "cecf6dd6ad664433ef5dfa8854e6e9ddbde8a435137030d72e82066e6db4ca60",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_item-off-hover.png": {
+      "file": "cb_item-off-hover.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "37fdf04ca71def99eb46221c8a70ad7426bfd2f17378aa2b0068b1837ac38c4d",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_item-off-pressed.png": {
+      "file": "cb_item-off-pressed.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "9eafd0aab23a92577485003699a5e7fcee2ba0aa7f3a6a06a623c7bdf9c52c39",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_item-on-idle.png": {
+      "file": "cb_item-on-idle.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "source-cut: the footer `item` box in the state the Reference Screen shows it (checked); alpha un-mixed from the window body",
+      "sha256": "f4a0bd9b3f9f7dbc00a33b196baed5cf76efc2107f5262cf0e859b66fa11bc65",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_item-on-hover.png": {
+      "file": "cb_item-on-hover.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "02f19304641e1c4a7e5bf574eb3a2c27aebede541ba12849ca3d5238ebace4d8",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_item-on-pressed.png": {
+      "file": "cb_item-on-pressed.png",
+      "size": [
+        19,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "0f38e153c4f3ee18a490f99faabe3b985bc19821985076f8a043f5b79b5d7ba5",
+      "source_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_option-off-idle.png": {
+      "file": "cb_option-off-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "source-cut: the footer `option` box in the state the Reference Screen shows it (unchecked); alpha un-mixed from the window body",
+      "sha256": "af69dd7f28ba2c3b56c116a1453f77dc4181bb89b528992788fdfc2d84c655c1",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "cb_option-off-hover.png": {
+      "file": "cb_option-off-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "a9b157ee25f31b5602ca11ffd49091bcea05f4a6bae5fd4ef34133ae278d101b",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "cb_option-off-pressed.png": {
+      "file": "cb_option-off-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "935e9944364362e6010d65bcb0ee4521ee268baaec5d44bb37695a144a608047",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "cb_option-on-idle.png": {
+      "file": "cb_option-on-idle.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: this box's own square with the tick glyph composited into it at the offset the tick occupies inside the footer `skill` box (centred, for the smaller `on` boxes). The Reference Screen never shows this box checked.",
+      "sha256": "76a3992dc94e29d8666f81230401b9fe08292c855b30e40674d985f5f26f3cee",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "cb_option-on-hover.png": {
+      "file": "cb_option-on-hover.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "69b924def5a33fd64d1f00456ad3177ce6b2ede6534f3a5684f90f87be9597cb",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "cb_option-on-pressed.png": {
+      "file": "cb_option-on-pressed.png",
+      "size": [
+        20,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "84a4e63632ee6c507acee4309d680f38205a9394a5606a37954fdd641042ceec",
+      "source_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "bgm_on-off-idle.png": {
+      "file": "bgm_on-off-idle.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "source-cut: the BGM `on` mute box in the state the Reference Screen shows it (unchecked); alpha un-mixed from the window body",
+      "sha256": "0cb4335529af392613f94586b14062f4964252fa137660caf097107bdef382be",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "bgm_on-off-hover.png": {
+      "file": "bgm_on-off-hover.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "ab94143a44a7d9fd88f2cc8dce75badf5d6a07c1241ada3e4024cabf447c5bf2",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "bgm_on-off-pressed.png": {
+      "file": "bgm_on-off-pressed.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "619bb73326c5b035ba94c20a003a49b18081e5eabc7fbafa64524ff03036be24",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "bgm_on-on-idle.png": {
+      "file": "bgm_on-on-idle.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "derived: this box's own square with the tick glyph composited into it at the offset the tick occupies inside the footer `skill` box (centred, for the smaller `on` boxes). The Reference Screen never shows this box checked.",
+      "sha256": "d4a1f6aa99147f3f1e2a822640ece3181325df305ce15439c6b990706b4b15d4",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "bgm_on-on-hover.png": {
+      "file": "bgm_on-on-hover.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "216882f975ae7a63bbeb4fcc9a064f68c2c24acdc0606a5864a3be456292f81b",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "bgm_on-on-pressed.png": {
+      "file": "bgm_on-on-pressed.png",
+      "size": [
+        18,
+        18
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "e688eb646e4e4bed59b7ece8b1c1f32fca0af8f0c414b716ad6cd706b37d23f3",
+      "source_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "effect_on-off-idle.png": {
+      "file": "effect_on-off-idle.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "source-cut: the Effect `on` mute box in the state the Reference Screen shows it (unchecked); alpha un-mixed from the window body",
+      "sha256": "bf36ab7c78b7738615fb60ab522f375714bf69cb9343453fcd177eeb57b6e65e",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "effect_on-off-hover.png": {
+      "file": "effect_on-off-hover.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "626a1ad07437fbe0293e9ce344ba1b826049c080e4ebcd38fc81ff2f607fe41d",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "effect_on-off-pressed.png": {
+      "file": "effect_on-off-pressed.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "3d65f96d6092250a4c3e213064229b94bebd8f657ccead6d385f6f646b417e62",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "effect_on-on-idle.png": {
+      "file": "effect_on-on-idle.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "derived: this box's own square with the tick glyph composited into it at the offset the tick occupies inside the footer `skill` box (centred, for the smaller `on` boxes). The Reference Screen never shows this box checked.",
+      "sha256": "096a65702220e784e380c06e2925023a080454db37fc8c0a4854883d4e8a4379",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "effect_on-on-hover.png": {
+      "file": "effect_on-on-hover.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "19a658ecca598c99d89634641c3713e82ab8b8d88348255a0b74cc79ddef31e5",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "effect_on-on-pressed.png": {
+      "file": "effect_on-on-pressed.png",
+      "size": [
+        18,
+        19
+      ],
+      "derivation": "derived: the idle glyph multiplied by 0.85 while held. INTENT-SPECIFIED: the Source Game shows no checkbox press state (Behaviour Card `checkbox`: hover and press both Not observed).",
+      "sha256": "8c2368e7ed0f59413226117e65fe0c6fd01cec71f28f48304172d3acbe4b0856",
+      "source_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "tick.png": {
+      "file": "tick.png",
+      "size": [
+        15,
+        15
+      ],
+      "derivation": "derived: the tick glyph isolated as |skill - attack| > 40, closed and hole-filled; the intermediate used to build on-checked.png",
+      "sha256": "6a4c93f800eeadfd6a8ee62dc11568135b42cb45177f6bfa37865cd0d5eff0ce",
+      "source_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "dropdown-field-idle.png": {
+      "file": "dropdown-field-idle.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "source-cut; keeps the source's own `Classic Blue` pixels as the idle value texture, so the committed value is only ever rendered as a Label after the player picks a different skin",
+      "sha256": "0fc5fef7946606c97ab270b0cc57e966614dc88c33bfdf91416d01c6336adeed",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-field-hover.png": {
+      "file": "dropdown-field-hover.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "13382b6775d7e807bba22199f9b1277cdc59f029f53889f3c180c2c286ef665d",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-field-pressed.png": {
+      "file": "dropdown-field-pressed.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "2e8c0537042c808edcb347a499aa27f17fbc9513e0710868e17116ed714b6ab7",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-arrow-idle.png": {
+      "file": "dropdown-arrow-idle.png",
+      "size": [
+        32,
+        32
+      ],
+      "derivation": "source-cut",
+      "sha256": "62c103e93b2fca43d718ca365aa563ab50092a5ccaec67018625d1ad872214c7",
+      "source_rect": [
+        1491,
+        416,
+        30,
+        30
+      ]
+    },
+    "dropdown-arrow-hover.png": {
+      "file": "dropdown-arrow-hover.png",
+      "size": [
+        32,
+        32
+      ],
+      "derivation": "derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "108b615ed9663e4a480554177b140d1f910b0e0f9fe8b85798a1144b09283120",
+      "source_rect": [
+        1491,
+        416,
+        30,
+        30
+      ]
+    },
+    "dropdown-arrow-pressed.png": {
+      "file": "dropdown-arrow-pressed.png",
+      "size": [
+        32,
+        32
+      ],
+      "derivation": "derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "97fc2fd061aec46ffc1dac5130cd5aa4a645bf0bd7c9fb9e4e0f7b8b7b748c4f",
+      "source_rect": [
+        1491,
+        416,
+        30,
+        30
+      ]
+    },
+    "dropdown-field-blank-idle.png": {
+      "file": "dropdown-field-blank-idle.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "derived: the dropdown field with its `Classic Blue` value text erased -- the text's bounding box [1324, 421, 111, 19] filled per row with the median of the field's own empty interior columns. Only used once the player commits a skin other than Classic Blue; the value is then drawn as a DotGothic16 Label on top.",
+      "sha256": "c57686ecdd8da21641708e4ae9d1f3be4d191c4cfec44eecec41a9179d2ec2c2",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-field-blank-hover.png": {
+      "file": "dropdown-field-blank-hover.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "derived: the dropdown field with its `Classic Blue` value text erased -- the text's bounding box [1324, 421, 111, 19] filled per row with the median of the field's own empty interior columns. Only used once the player commits a skin other than Classic Blue; the value is then drawn as a DotGothic16 Label on top. derived (INVENTED-IN-STYLE): a 1 px outline in the skin's title-bar ink blue #46599F plus a 20% tint toward the pale title-bar blue #C7DBF0. The Behaviour Cards record hover on buttons and dropdown rows and note the highlight colour is a skin token; hover on THIS control is NOT observed in the Source Game. It exists under the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+      "sha256": "384750451345458604cc0a0e56834662e1f688060090be5586906dddb10238c1",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-field-blank-pressed.png": {
+      "file": "dropdown-field-blank-pressed.png",
+      "size": [
+        270,
+        32
+      ],
+      "derivation": "derived: the dropdown field with its `Classic Blue` value text erased -- the text's bounding box [1324, 421, 111, 19] filled per row with the median of the field's own empty interior columns. Only used once the player commits a skin other than Classic Blue; the value is then drawn as a DotGothic16 Label on top. derived: the idle glyph nudged 1 px down and right. Behaviour Card `button` (#115): between hover and pressed only the LABEL moves -- a 2-D shift search puts the best match at (dx +2, dy +1) at that capture's up-scale, i.e. the client's 1 px press offset -- while the fill's row-brightness profile is unchanged within 1-2 grey levels.",
+      "sha256": "3b97a624b48633523e3866e0d6f0856fbb72bfc7b61d7c87ff63a2d05773bbab",
+      "source_rect": [
+        1223,
+        416,
+        268,
+        30
+      ]
+    },
+    "dropdown-arrow-open.png": {
+      "file": "dropdown-arrow-open.png",
+      "size": [
+        32,
+        32
+      ],
+      "derivation": "derived: the idle arrow button multiplied by 0.82. Behaviour Card `dropdown`: the arrow button IS repainted darker/inset while the list is open -- the form is observed, the exact pixels are not readable at that capture's resolution.",
+      "sha256": "79296634a4fcdfa01506970b8b781bed8ad84c2eb3db6be70ccf5e125daa3333",
+      "source_rect": [
+        1491,
+        416,
+        30,
+        30
+      ]
+    },
+    "bgm-track.png": {
+      "file": "bgm-track.png",
+      "size": [
+        225,
+        15
+      ],
+      "derivation": "derived: cut out of clean-plate.png -- the source track with the thumb healed away",
+      "sha256": "7d698d0b5850da5436fb52e6b42a6d94e6a60c22ffce12bd9ddcd2b08681f919",
+      "source_rect": [
+        1239,
+        350,
+        225,
+        15
+      ]
+    },
+    "effect-track.png": {
+      "file": "effect-track.png",
+      "size": [
+        225,
+        15
+      ],
+      "derivation": "derived: cut out of clean-plate.png -- the source track with the thumb healed away",
+      "sha256": "ee918d6c29fa40a4a25fdfbaef7f1afc67d66bfb935034cf26ee2470b3ba234f",
+      "source_rect": [
+        1239,
+        382,
+        225,
+        15
+      ]
+    }
+  },
+  "measurements": {
+    "bgm_slider": {
+      "left": [
+        1224,
+        346,
+        15,
+        22
+      ],
+      "right": [
+        1464,
+        346,
+        15,
+        21
+      ],
+      "thumb": [
+        1422,
+        350,
+        14,
+        14
+      ],
+      "track": [
+        1239,
+        350,
+        225,
+        15
+      ]
+    },
+    "effect_slider": {
+      "left": [
+        1224,
+        378,
+        15,
+        22
+      ],
+      "right": [
+        1464,
+        378,
+        15,
+        22
+      ],
+      "thumb": [
+        1349,
+        383,
+        14,
+        14
+      ],
+      "track": [
+        1239,
+        382,
+        225,
+        15
+      ]
+    },
+    "cb_attack": {
+      "ink_rect": [
+        1135,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_skill": {
+      "ink_rect": [
+        1225,
+        467,
+        18,
+        17
+      ]
+    },
+    "cb_item": {
+      "ink_rect": [
+        1297,
+        467,
+        17,
+        17
+      ]
+    },
+    "cb_option": {
+      "ink_rect": [
+        1392,
+        468,
+        18,
+        17
+      ]
+    },
+    "bgm_on": {
+      "ink_rect": [
+        1486,
+        351,
+        16,
+        16
+      ]
+    },
+    "effect_on": {
+      "ink_rect": [
+        1486,
+        382,
+        16,
+        17
+      ]
+    },
+    "dropdown": {
+      "ink_rect": [
+        1223,
+        416,
+        298,
+        30
+      ],
+      "field_ink_rect": [
+        1223,
+        416,
+        268,
+        30
+      ],
+      "arrow_ink_rect": [
+        1491,
+        416,
+        30,
+        30
+      ],
+      "value_text_bbox": [
+        1324,
+        421,
+        111,
+        19
+      ]
+    },
+    "clean_plate_thumb_heal": [
+      {
+        "row": "bgm",
+        "thumb_footprint": [
+          1419,
+          347,
+          20,
+          20
+        ],
+        "donor_rect": [
+          1393,
+          347,
+          20,
+          20
+        ],
+        "donor_side": "left",
+        "dc_match": "per row, a linear ramp between the flanking source columns x=1418 and x=1439 corrects the donor's DC offset; measured residual seam <= 2 levels"
+      },
+      {
+        "row": "effect",
+        "thumb_footprint": [
+          1346,
+          380,
+          20,
+          20
+        ],
+        "donor_rect": [
+          1320,
+          380,
+          20,
+          20
+        ],
+        "donor_side": "left",
+        "dc_match": "per row, a linear ramp between the flanking source columns x=1345 and x=1366 corrects the donor's DC offset; measured residual seam <= 2 levels"
+      }
+    ],
+    "clean_plate_checkbox_erase": [
+      {
+        "control": "cb_attack",
+        "footprint": [
+          1134,
+          466,
+          20,
+          19
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "control": "cb_skill",
+        "footprint": [
+          1224,
+          466,
+          20,
+          19
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "control": "cb_item",
+        "footprint": [
+          1296,
+          466,
+          19,
+          19
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "control": "cb_option",
+        "footprint": [
+          1391,
+          467,
+          20,
+          19
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "control": "bgm_on",
+        "footprint": [
+          1485,
+          350,
+          18,
+          18
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      },
+      {
+        "control": "effect_on",
+        "footprint": [
+          1485,
+          381,
+          18,
+          19
+        ],
+        "fill_rgb": [
+          252,
+          252,
+          252
+        ]
+      }
+    ],
+    "slider_value_mapping": {
+      "rule": "thumb.x = track.x + round(value / 100 * (track.w - thumb.w)); the thumb clamps flush at both ends (Behaviour Card `slider`: End clamping Confirmed)",
+      "bgm_default": 86.7299,
+      "effect_default": 52.1327,
+      "inventory_states": [
+        "thumb at ~80%",
+        "thumb at ~48%"
+      ],
+      "default_note": "the defaults are the exact measured values, not integers: the track's travel is 211 px over 0..100, so no integer BGM value lands the thumb on the source pixel (86 -> x1420, 87 -> x1423, source x1422). The value is continuous while dragging; the arrows step it by 2 and the wheel by 1.",
+      "arrow_step": 2,
+      "wheel_step": 1,
+      "step_provenance": "INTENT-SPECIFIED. Behaviour Card `slider` records gesture -> response as Unverified for both the drag and the arrows; roBrowser's min=0 max=100 step=1 is secondary evidence only."
+    }
+  },
+  "notes": [
+    "The Reference Screen is the sole visual authority. No artwork from the official play manual was used and nothing was redrawn by hand.",
+    "Hover on the thumb, the arrows, the checkboxes, the dropdown and ⊖/⊗ is INVENTED-IN-STYLE: the Source Game shows hover on buttons and dropdown rows but never on any of these. It is the owner's hover-everywhere rule and is struck by deleting the *-hover.png assets.",
+    "The pressed nudge is source-derived in KIND (Behaviour Card `button`, #115: the label moves, the fill does not) but has never been observed on these particular controls.",
+    "The window drag is INTENT-SPECIFIED. ADR 0006 and #115: players never move windows, so the corpus contains no drag at all.",
+    "The minimized FORM -- a bare title strip -- is INTENT-SPECIFIED. The manual attests the ⊖ toggle's semantics (M1) but no frame in either corpus shows a collapsed window.",
+    "All transitions are instant. Behaviour Card cross-cutting finding 0: about forty measured transitions each complete within one frame at 60 fps, and there is no animation anywhere in this UI. The prototype contains no tweens.",
+    "The `reopen` text button in the desktop's top-left is a PROTOTYPE AFFORDANCE, not a Source Game control. It exists only so the owner can reopen the window after ⊗ during a play session, and it is visible only while the window is hidden.",
+    "The four skin names in the open list -- Classic Blue, <Basic Skin>, scribbling kid, tanublue -- come from the Behaviour Card `dropdown` evidence; only `Classic Blue` is legible in this Reference Screen."
+  ]
+}

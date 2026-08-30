@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
+  "evidence_bundle_commit": "9d6978ac0ddbfe2934b0e532b39bfdc0d9cb6274",
+  "reviewer": "fresh-context Codex gpt-5.6-sol xhigh packet-only artifact review",
+  "verdict": "pass",
+  "findings": [],
+  "clauses": [
+    {"clause": "1", "verdict": "pass", "observation": "Idle, interaction, and settled artwork remains source-coherent in the hash-locked frame corpus."},
+    {"clause": "2", "verdict": "pass", "observation": "Both ranges have arrow, wheel, continuous drag, reversal, and endpoint evidence."},
+    {"clause": "3", "verdict": "pass", "observation": "All six toggles return to their initial state on second activation."},
+    {"clause": "4", "verdict": "pass", "observation": "The themed four-row Skin list opens, selects tanublue without overlapping text, and dismisses with Escape."},
+    {"clause": "5", "verdict": "pass", "observation": "Minimize uses distinct 424 by 28 artwork and restore preserves position and selected state."},
+    {"clause": "6", "verdict": "pass", "observation": "Title drag follows the recorded pointer sequence and Close hides the Window."},
+    {"clause": "7", "verdict": "pass", "observation": "The 54-frame Play Log has no failed actions or console errors and public QA facts match the rendered Skin state."}
+  ],
+  "evidence": [
+    "artifacts/reviews/issue-125/builder/00-idle.png",
+    "artifacts/reviews/issue-125/builder/01-bgm-drag-mid.png",
+    "artifacts/reviews/issue-125/builder/02-bgm-left-endpoint.png",
+    "artifacts/reviews/issue-125/builder/03-bgm-right-endpoint.png",
+    "artifacts/reviews/issue-125/builder/04-skin-open.png",
+    "artifacts/reviews/issue-125/builder/15-options-skin-select-after.png",
+    "artifacts/reviews/issue-125/builder/05-minimized.png",
+    "artifacts/reviews/issue-125/builder/06-restored.png",
+    "artifacts/reviews/issue-125/builder/play-log.json",
+    "artifacts/reviews/issue-125/builder/verdict.json"
+  ],
+  "review_boundary": "Advisory blind artifact evidence only; this is not owner approval or approval of the complete assembled desktop."
+}
