@@ -1,0 +1,279 @@
+{
+  "export_url": "https://windows-wsl.taile06c45.ts.net/godot-v2-options/",
+  "viewport": {"width": 1536, "height": 1024},
+  "actions": [
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag (1440,355) -> (1236,355)",
+      "expected": "thumb follows the pointer continuously and stops at the left end",
+      "observed": "Before, the BGM thumb was near the right side; in the held mid shot it was farther left and visibly darker. After release it was normal blue and stopped at the left track end, just to the right of the left arrow.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-21-53-316Z.png", "mid": "page-2026-08-30T16-22-10-861Z.png", "after": "page-2026-08-30T16-22-27-010Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "attempted drag (1236,355) -> (1470,355)",
+      "expected": "press begins on the thumb and the thumb follows six rightward moves",
+      "observed": "Before, the thumb was at the left end, and the supplied start point (1236,355) landed left of the visible round thumb. The mid and after shots show the thumb still at the left end, so this attempt produced no visible slider movement.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T16-22-27-010Z.png", "mid": "page-2026-08-30T16-22-39-410Z.png", "after": "page-2026-08-30T16-22-51-725Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag corrected visible thumb center (1246,355) -> (1470,355)",
+      "expected": "thumb follows the pointer continuously and stops at the right end",
+      "observed": "Before, the thumb was at the left end; in the held mid shot it was centered under the rightward path and darker. After release it was normal blue and stopped at the right track end without passing the right arrow.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-22-51-725Z.png", "mid": "page-2026-08-30T16-23-26-957Z.png", "after": "page-2026-08-30T16-23-40-373Z.png"}
+    },
+    {
+      "control": "bgm-arrow-right",
+      "gesture": "click (1472,355)",
+      "expected": "at the maximum, the thumb remains clamped at the right end",
+      "observed": "Before, the thumb was already at the right track end. After the right-arrow click it remained at the same endpoint with no visible displacement.",
+      "responsive": false,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-23-40-373Z.png", "after": "page-2026-08-30T16-23-54-090Z.png"}
+    },
+    {
+      "control": "bgm-arrow-left",
+      "gesture": "click (1230,355)",
+      "expected": "the arrow steps the thumb a little to the left",
+      "observed": "Before, the BGM thumb was at the right endpoint. After the left-arrow click it sat a small but clearly visible distance left of that endpoint.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-23-54-090Z.png", "after": "page-2026-08-30T16-24-07-391Z.png"}
+    },
+    {
+      "control": "effect-slider-track",
+      "gesture": "click (1300,389)",
+      "expected": "the Effect thumb moves immediately to the clicked track position",
+      "observed": "Before, the Effect thumb was near the middle of its track. After the click it was visibly left of its former position and centered at the clicked part of the track.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-24-07-391Z.png", "after": "page-2026-08-30T16-24-21-472Z.png"}
+    },
+    {
+      "control": "bgm-on",
+      "gesture": "click (1493,358)",
+      "expected": "the empty square gains a tick instantly",
+      "observed": "Before, the BGM on square was empty. After the click a blue tick was visible inside it.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-24-21-472Z.png", "after": "page-2026-08-30T16-24-29-974Z.png"}
+    },
+    {
+      "control": "bgm-on",
+      "gesture": "click again (1493,358)",
+      "expected": "the second click restores the original empty square",
+      "observed": "Before, the BGM on square contained a blue tick. After the second click it was empty again and matched its original state.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-24-29-974Z.png", "after": "page-2026-08-30T16-24-39-104Z.png"}
+    },
+    {
+      "control": "checkbox-attack",
+      "gesture": "click (1144,473)",
+      "expected": "the empty attack square gains a tick instantly",
+      "observed": "Before, attack was empty. After the click attack contained a blue tick.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-24-39-104Z.png", "after": "page-2026-08-30T16-24-53-138Z.png"}
+    },
+    {
+      "control": "checkbox-skill",
+      "gesture": "click (1234,473)",
+      "expected": "the checked skill square becomes empty instantly",
+      "observed": "Before, skill contained a blue tick. After the click skill was empty while the other footer states were unchanged.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-24-53-138Z.png", "after": "page-2026-08-30T16-25-01-470Z.png"}
+    },
+    {
+      "control": "checkbox-attack",
+      "gesture": "click again (1144,473)",
+      "expected": "the second attack click restores the original empty square",
+      "observed": "Before, attack contained a blue tick. After the second click attack was empty again and matched its initial state.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-01-470Z.png", "after": "page-2026-08-30T16-25-08-787Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click (1505,429)",
+      "expected": "a list opens below in one frame with the current value highlighted",
+      "observed": "Before, only the Classic Blue field was visible. After the click a four-row list was open directly below it, and the Classic Blue row had a blue highlight bar.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-08-787Z.png", "after": "page-2026-08-30T16-25-18-155Z.png"}
+    },
+    {
+      "control": "dropdown-row",
+      "gesture": "hover second row at (1300,477)",
+      "expected": "the highlight moves to the hovered row while the field value stays unchanged",
+      "observed": "Before, the blue bar was on Classic Blue. After the pointer moved, the bar was on the second row, <Basic Skin>, while the field above still read Classic Blue.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-18-155Z.png", "after": "page-2026-08-30T16-25-32-205Z.png"}
+    },
+    {
+      "control": "dropdown-row",
+      "gesture": "click second row at (1300,477)",
+      "expected": "the list closes and the clicked row name appears in the field",
+      "observed": "Before, the list was open with <Basic Skin> highlighted and Classic Blue still in the field. After the click the list was gone and the field read <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-32-205Z.png", "after": "page-2026-08-30T16-25-41-037Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click again (1505,429)",
+      "expected": "the list opens again with the new current value highlighted",
+      "observed": "Before, the closed field read <Basic Skin>. After the click the list reopened and the second row, <Basic Skin>, carried the blue highlight.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-41-037Z.png", "after": "page-2026-08-30T16-25-51-454Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "press Escape with list open",
+      "expected": "Escape closes the list without changing the field",
+      "observed": "Before, the list was open with <Basic Skin> highlighted. After Escape the list was closed and the field still read <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-25-51-454Z.png", "after": "page-2026-08-30T16-26-00-719Z.png"}
+    },
+    {
+      "control": "hover-minimize",
+      "gesture": "hover (1491,311) for 1 second",
+      "expected": "the minimize button shows a light hover highlight",
+      "observed": "Before, the minimize icon had its normal small blue circle. After the one-second rest it had a larger light-blue halo around the icon.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-26-00-719Z.png", "after": "page-2026-08-30T16-26-15-883Z.png"}
+    },
+    {
+      "control": "hover-thumb",
+      "gesture": "hover visible BGM thumb near (1450,355) for 1 second",
+      "expected": "the thumb shows a light hover highlight",
+      "observed": "Before, the BGM thumb was a plain blue circle. After the one-second rest a light outlined halo was visible around the thumb.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-26-15-883Z.png", "after": "page-2026-08-30T16-26-27-667Z.png"}
+    },
+    {
+      "control": "title-drag",
+      "gesture": "drag (1300,309) -> (900,600) in 8 moves",
+      "expected": "the window follows the pointer 1:1 with no animation",
+      "observed": "Before, the window top-left was about (1108,297); in the held mid shot it was about (908,443), matching the pointer delta. After release its top-left was about (708,588), matching the full (-400,+291) delta with no visible easing.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-26-27-667Z.png", "mid": "page-2026-08-30T16-26-42-550Z.png", "after": "page-2026-08-30T16-26-55-282Z.png"}
+    },
+    {
+      "control": "title-drag",
+      "gesture": "drag back (900,600) -> (1300,309) in 8 moves",
+      "expected": "the window follows the inverse pointer path and returns near its start",
+      "observed": "Before, the window was at the lower-left destination; in the held mid shot it was halfway back. After release it was again at about (1108,297), with the same size and no trailing animation.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-26-55-282Z.png", "mid": "page-2026-08-30T16-27-08-082Z.png", "after": "page-2026-08-30T16-27-17-848Z.png"}
+    },
+    {
+      "control": "minimize",
+      "gesture": "click (1491,311)",
+      "expected": "the window collapses instantly to its title strip",
+      "observed": "Before, the full window body was visible. After the click only the title strip remained at the same position.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-27-17-848Z.png", "after": "page-2026-08-30T16-27-27-264Z.png"}
+    },
+    {
+      "control": "minimize",
+      "gesture": "click again (1491,311)",
+      "expected": "the full window restores instantly",
+      "observed": "Before, only the title strip was visible. After the click the full controls and footer reappeared at the same position with their prior states preserved.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-27-27-264Z.png", "after": "page-2026-08-30T16-27-39-715Z.png"}
+    },
+    {
+      "control": "close",
+      "gesture": "click (1517,312)",
+      "expected": "the window disappears and a small reopen control appears near the top-left",
+      "observed": "Before, the full options window was visible. After the click it was gone and only the white word reopen appeared near (10,20) on magenta.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-27-39-715Z.png", "after": "page-2026-08-30T16-27-49-913Z.png"}
+    },
+    {
+      "control": "reopen",
+      "gesture": "click visible control near (35,20)",
+      "expected": "the options window reappears",
+      "observed": "Before, the window was absent and the reopen text was visible at the top-left. After the click the window returned to its original position with <Basic Skin> and the prior checkbox states intact.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-27-49-913Z.png", "after": "page-2026-08-30T16-28-01-280Z.png"}
+    }
+  ],
+  "free_play": [
+    {
+      "control": "effect-on",
+      "gesture": "click (1493,392)",
+      "expected": "the empty Effect on square gains a tick instantly",
+      "observed": "Before, the Effect on square was empty. After the click a blue tick was visible inside it.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-28-01-280Z.png", "after": "page-2026-08-30T16-28-24-446Z.png"}
+    },
+    {
+      "control": "effect-on",
+      "gesture": "click again (1493,392)",
+      "expected": "the second click restores the original empty square",
+      "observed": "Before, the Effect on square contained a tick. After the second click it was empty again.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-28-24-446Z.png", "after": "page-2026-08-30T16-28-33-662Z.png"}
+    },
+    {
+      "control": "checkbox-item",
+      "gesture": "rapid double click (1306,473)",
+      "expected": "two toggles finish with the item tick restored",
+      "observed": "Before, item was checked without a hover outline. After the double click it was still checked and its square had a light hover outline; the screenshots do not expose the state between clicks.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-28-33-662Z.png", "after": "page-2026-08-30T16-28-42-078Z.png"}
+    },
+    {
+      "control": "checkbox-option",
+      "gesture": "click (1403,473)",
+      "expected": "the empty option square gains a tick instantly",
+      "observed": "Before, option was empty. After the click option contained a blue tick.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-28-42-078Z.png", "after": "page-2026-08-30T16-28-55-530Z.png"}
+    },
+    {
+      "control": "checkbox-option",
+      "gesture": "click again (1403,473)",
+      "expected": "the second click restores the original empty option square",
+      "observed": "Before, option contained a blue tick. After the second click it was empty again with a light hover outline.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-28-55-530Z.png", "after": "page-2026-08-30T16-29-05-195Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag (1450,355) -> outside (1000,700) -> (1350,355)",
+      "expected": "pointer capture continues outside, the thumb clamps at the left end, and it follows back before release",
+      "observed": "Before, the BGM thumb was near the right; while held with the pointer outside the window it was dark and clamped at the left track end. After the pointer returned and released at (1350,355), the normal thumb was back inside the track near that horizontal position.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T16-29-05-195Z.png", "mid": "page-2026-08-30T16-29-20-196Z.png", "after": "page-2026-08-30T16-29-34-494Z.png"}
+    }
+  ],
+  "notes": "The loaded shot was page-2026-08-30T16-21-53-316Z.png, captured about four seconds after navigation; it was fully drawn at 1536 x 1024, and magenta reached all four edges with no black bars, so scale=1, offsetX=0, and offsetY=0 were used. The supplied controls otherwise aligned with design coordinates. The BGM thumb initially appeared centered near x=1428 rather than the approximate x=1440, and after the left clamp its visible center was x=1246; the supplied restart point x=1236 missed it, so the failed attempt was retained in the actions and the rightward drag was repeated from x=1246. The dropdown second-row center used was (1300,477), the visible reopened control was clicked near (35,20), and later thumb probes used its visible center near x=1450. Static screenshots did not render the mouse cursor itself, so the expected pointing-hand cursor could not be visually confirmed even though the hover highlights were visible. The selected second dropdown value rendered literally as <Basic Skin>."
+}

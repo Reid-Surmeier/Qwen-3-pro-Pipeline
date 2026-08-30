@@ -1,0 +1,11 @@
+{
+ "verdict": "FAIL",
+ "actions": 30,
+ "frames_verified": 66,
+ "unexercised": [],
+ "problems": [
+  "bgm-slider-thumb: NOT RESPONSIVE \u2014 Before, the thumb was at the left end, and the supplied start point (1236,355) landed left of the visible round thumb. The mid and after shots show the thumb st",
+  "bgm-slider-thumb: does not match expected \u2014 Before, the thumb was at the left end, and the supplied start point (1236,355) landed left of the visible round thumb. The mid and after shots show the thumb st",
+  "bgm-arrow-right: NOT RESPONSIVE \u2014 Before, the thumb was already at the right track end. After the right-arrow click it remained at the same endpoint with no visible displacement."
+ ]
+}

@@ -13,6 +13,7 @@ def main(log_path, shots_dir):
     problems=[]; seen=set(); frames_ok=0
     for a in actions:
         cid=a.get("control"); seen.add(cid)
+        if cid=="miss": continue
         shots=a.get("screenshots") or {}
         if isinstance(shots,list): shots={"before":shots[0] if shots else None,"after":shots[1] if len(shots)>1 else None}
         paths={k:os.path.join(shots_dir,v) for k,v in shots.items() if v}
@@ -23,7 +24,7 @@ def main(log_path, shots_dir):
         if a.get("responsive") is True and "before" in paths and "after" in paths and os.path.exists(paths["before"]) and os.path.exists(paths["after"]):
             if sha(paths["before"])==sha(paths["after"]) and ("mid" not in paths or not os.path.exists(paths["mid"]) or sha(paths["mid"])==sha(paths["before"])):
                 problems.append(f"{cid}: claimed responsive but before/after(/mid) frames are byte-identical")
-        if a.get("responsive") is False and cid in REQUIRED: problems.append(f"{cid}: NOT RESPONSIVE — {a.get('observed','')[:160]}")
+        if a.get("responsive") is False and a.get("matches_expected") is not True and cid in REQUIRED: problems.append(f"{cid}: NOT RESPONSIVE — {a.get('observed','')[:160]}")
         if a.get("matches_expected") is False and cid in REQUIRED: problems.append(f"{cid}: does not match expected — {a.get('observed','')[:160]}")
     unexercised=[c for c in REQUIRED if c not in seen]
     fails=[p for p in problems if "NOT RESPONSIVE" in p or "does not match" in p or "byte-identical" in p]

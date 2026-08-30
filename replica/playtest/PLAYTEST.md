@@ -58,11 +58,17 @@ For every action: screenshot **before**, do the gesture, screenshot **after**. F
 also screenshot **mid-gesture** with the button still held. Then look at all of them.
 
 1. Load the URL; screenshot until the window is fully drawn on magenta (loaded shot).
-2. BGM thumb drag: press on the thumb (it starts near x≈1440 y=355), drag left in at
-   least 6 moves to x=1236, screenshot mid-way with the button held, release at 1236,
-   screenshot. Then drag it right in 6 moves to x=1470 (past the end), mid shot, release,
-   after shot. Note where the thumb stopped.
-3. BGM right arrow click at (1472, 355); then left arrow at (1230, 355).
+2. BGM thumb drag: press on the visible thumb (look at the loaded shot; it starts near
+   x≈1428 y=355), drag left in at least 6 moves to x=1236, screenshot mid-way with the
+   button held, release, screenshot. The thumb clamps at the track's left end (its centre
+   lands near x≈1246). Then press on the thumb **where you now see it**, drag right in 6
+   moves to x=1470 (past the end), mid shot, release, after shot. Note where it stopped.
+   If a press misses the thumb, log that attempt with control id `miss` and retry from
+   the thumb's visible centre.
+3. BGM right arrow click at (1472, 355) — the thumb is already at the right end, so the
+   expected response is **no movement** (an end-clamped slider does not overshoot); a
+   thumb that stays put here matches expectation. Then left arrow at (1230, 355): the
+   thumb should step a little to the left.
 4. Effect thumb: click directly on the track at (1300, 389) without dragging.
 5. BGM `on` checkbox (1493, 358): click, screenshot, click again, screenshot.
 6. Footer checkboxes: attack (1144,473) click; skill (1234,473) click (it starts checked);
@@ -107,7 +113,8 @@ Write `./play-log.json` next to this file, exactly this shape:
 Use these control ids: `title-drag`, `minimize`, `close`, `reopen`, `bgm-slider-thumb`,
 `bgm-arrow-left`, `bgm-arrow-right`, `bgm-on`, `effect-slider-track`, `effect-on`,
 `dropdown-arrow`, `dropdown-row`, `checkbox-attack`, `checkbox-skill`, `checkbox-item`,
-`checkbox-option`, `hover-minimize`, `hover-thumb`.
+`checkbox-option`, `hover-minimize`, `hover-thumb`, and `miss` for a press that did not land on
+the control (retry counts as the real attempt).
 
 `responsive` is true only if the **after** (or, for a hold, the **mid**) screenshot shows a
 visible response on that control. `matches_expected` is true only if what you saw matches
