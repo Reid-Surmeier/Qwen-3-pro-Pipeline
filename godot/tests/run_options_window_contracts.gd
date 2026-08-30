@@ -98,11 +98,17 @@ func _dropdown_lifecycle() -> void:
 	var row_point := window.global_position + Vector2(220, 217)
 	await _click(row_point)
 	var selected: Dictionary = window.qa_state().controls["options.skin"]
+	var dropdown: DropdownControl = window.control_nodes["options.skin"]
+	var selected_field_path := dropdown.field.texture.resource_path
 	await _click(field_point)
 	await _key(KEY_ESCAPE)
 	var dismissed: String = str(window.qa_state().controls["options.skin"].semantic_state)
 	_check("real-dropdown-lifecycle", opened == "open" and selected.value == "tanublue"
 		and selected.semantic_state == "closed" and dismissed == "closed", str(selected))
+	_check("selected-dropdown-uses-unlabelled-field",
+		selected_field_path.contains("dropdown-field-blank-")
+		and dropdown.label.visible and dropdown.label.text == "tanublue",
+		str({"field": selected_field_path, "label": dropdown.label.text}))
 
 
 func _escape_without_open_dropdown_is_inert() -> void:

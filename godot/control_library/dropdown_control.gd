@@ -184,10 +184,13 @@ func _refresh() -> void:
 		return
 	var state: Dictionary = runtime.qa_state().controls[spec.id]
 	menu.position = get_parent().position + position + Vector2(0, 32)
-	field.texture = load(runtime.visual_asset(spec.id))
-	var arrow_set: Dictionary = spec.surfaces.arrow.state_set
 	var phase: String = str(state.interaction_phase) \
 		if state.active_surface == "field" else "idle"
+	var field_asset: String = runtime.visual_asset(spec.id)
+	if state.value != spec.value.initial:
+		field_asset = str(spec.surfaces.field.value_state_set[phase])
+	field.texture = load(field_asset)
+	var arrow_set: Dictionary = spec.surfaces.arrow.state_set
 	arrow.texture = load(str(arrow_set[state.semantic_state][phase]))
 	menu.visible = state.semantic_state == "open"
 	label.text = str(state.value)

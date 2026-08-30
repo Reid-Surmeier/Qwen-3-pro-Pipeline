@@ -198,7 +198,14 @@
           },
           "value": {"initial": "Classic Blue", "choices": ["Classic Blue", "<Basic Skin>", "scribbling kid", "tanublue"]},
           "surfaces": {
-            "field": {"geometry": {"x": 0, "y": 0, "width": 270, "height": 32}},
+            "field": {
+              "geometry": {"x": 0, "y": 0, "width": 270, "height": 32},
+              "value_state_set": {
+                "idle": "res://assets/image-79/options/dropdown-field-blank-idle.png",
+                "hover": "res://assets/image-79/options/dropdown-field-blank-hover.png",
+                "pressed": "res://assets/image-79/options/dropdown-field-blank-pressed.png"
+              }
+            },
             "arrow": {"geometry": {"x": 268, "y": 0, "width": 32, "height": 32}, "state_set": {
               "closed": {"idle": "res://assets/image-79/options/dropdown-arrow-idle.png", "hover": "res://assets/image-79/options/dropdown-arrow-hover.png", "pressed": "res://assets/image-79/options/dropdown-arrow-pressed.png"},
               "open": {"idle": "res://assets/image-79/options/dropdown-arrow-open.png", "hover": "res://assets/image-79/options/dropdown-arrow-open.png", "pressed": "res://assets/image-79/options/dropdown-arrow-open.png"}
