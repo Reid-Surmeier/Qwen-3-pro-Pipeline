@@ -1,5 +1,5 @@
 {
-  "url": "http://127.0.0.1:8878/?screen=image79",
+  "url": "http://127.0.0.1:8127/?screen=image79",
   "facts": {
     "canvas": {
       "width": 1536,
@@ -35,7 +35,114 @@
       "detail": {
         "context_gesture": true,
         "action_routed": true,
-        "detail_visible": true
+        "detail_visible": true,
+        "detail_manifest_backed": true
+      }
+    },
+    {
+      "name": "context-detail-dismissed-before-stepper-visuals",
+      "passed": true,
+      "detail": {
+        "active_surface": "",
+        "detail_text": "ホーリー..\n5 / 5",
+        "detail_visible": false,
+        "geometry": {
+          "height": 470,
+          "width": 550,
+          "x": 522,
+          "y": 60
+        },
+        "id": "skill_tree.skills",
+        "interaction_phase": "idle",
+        "last_action": "OpenSkillDetail",
+        "last_error": null,
+        "last_gesture": "ContextActivate",
+        "last_result": {
+          "accepted": true,
+          "action": "OpenSkillDetail",
+          "error": null
+        },
+        "list_mode": false,
+        "list_values": {
+          "r1c1": "5 / 5",
+          "r1c2": "",
+          "r1c3": "10 / 10",
+          "r1c4": "10 / 10",
+          "r1c5": "5 / 5",
+          "r1c6": "10 / 10",
+          "r2c1": "5 / 5",
+          "r2c2": "1 / 1",
+          "r2c3": "5 / 5",
+          "r2c4": "0 / 5",
+          "r2c5": "0 / 3",
+          "r3c1": "5 / 5",
+          "r3c2": "3 / 3",
+          "r3c3": "1 / 1",
+          "r3c4": "5 / 5",
+          "r3c5": "0 / 5",
+          "r3c6": "3 / 3",
+          "r4c1": "1 / 1",
+          "r4c2": "10 / 10",
+          "r4c3": "1 / 1",
+          "r4c4": "1 / 1",
+          "r4c5": "0 / 5",
+          "r4c6": "0 / 5",
+          "r5c1": "5 / 5",
+          "r5c3": "0 / 1",
+          "r5c4": "0 / 1",
+          "r5c5": "0 / 10"
+        },
+        "rendered": true,
+        "selected_item": "r1c1",
+        "semantic_state": "selected",
+        "text": "r1c1",
+        "type": "SelectionView",
+        "value": "r1c1",
+        "visible": true,
+        "z_index": 0
+      }
+    },
+    {
+      "name": "stepper-bound-rejected-without-transaction",
+      "passed": true,
+      "detail": {
+        "active_surface": "",
+        "arrows_visible": true,
+        "current": 10,
+        "geometry": {
+          "height": 17,
+          "width": 82,
+          "x": 716,
+          "y": 111
+        },
+        "id": "skill_tree.stepper.r1c3",
+        "interaction_phase": "idle",
+        "last_action": "",
+        "last_error": {
+          "code": "TransactionRejectedError",
+          "detail": "Stepper is already at the requested bound"
+        },
+        "last_gesture": "",
+        "last_result": {
+          "accepted": false,
+          "action": "",
+          "error": {
+            "code": "TransactionRejectedError",
+            "detail": "Stepper is already at the requested bound"
+          }
+        },
+        "maximum": 10,
+        "minimum": 0,
+        "pending": false,
+        "rendered": true,
+        "semantic_state": "ready",
+        "step": 1,
+        "target": 10,
+        "text": "10 / 10",
+        "text_visible": true,
+        "type": "Stepper",
+        "visible": true,
+        "z_index": 0
       }
     },
     {
@@ -56,8 +163,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 522,
           "y": 111
         },
@@ -103,8 +210,8 @@
         "arrows_visible": true,
         "current": 10,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 716,
           "y": 111
         },
@@ -150,8 +257,8 @@
         "arrows_visible": true,
         "current": 10,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 813,
           "y": 111
         },
@@ -197,8 +304,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 910,
           "y": 111
         },
@@ -244,8 +351,8 @@
         "arrows_visible": true,
         "current": 10,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 1007,
           "y": 111
         },
@@ -291,8 +398,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 522,
           "y": 212
         },
@@ -338,8 +445,8 @@
         "arrows_visible": true,
         "current": 1,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 619,
           "y": 212
         },
@@ -385,8 +492,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 716,
           "y": 212
         },
@@ -432,8 +539,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 813,
           "y": 212
         },
@@ -479,8 +586,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 910,
           "y": 212
         },
@@ -526,8 +633,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 522,
           "y": 313
         },
@@ -573,8 +680,8 @@
         "arrows_visible": true,
         "current": 3,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 619,
           "y": 313
         },
@@ -620,8 +727,8 @@
         "arrows_visible": true,
         "current": 1,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 716,
           "y": 313
         },
@@ -667,8 +774,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 813,
           "y": 313
         },
@@ -714,8 +821,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 910,
           "y": 313
         },
@@ -761,8 +868,8 @@
         "arrows_visible": true,
         "current": 3,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 1007,
           "y": 313
         },
@@ -808,8 +915,8 @@
         "arrows_visible": true,
         "current": 1,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 522,
           "y": 414
         },
@@ -855,8 +962,8 @@
         "arrows_visible": true,
         "current": 10,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 619,
           "y": 414
         },
@@ -902,8 +1009,8 @@
         "arrows_visible": true,
         "current": 1,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 716,
           "y": 414
         },
@@ -949,8 +1056,8 @@
         "arrows_visible": true,
         "current": 1,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 813,
           "y": 414
         },
@@ -996,8 +1103,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 910,
           "y": 414
         },
@@ -1043,8 +1150,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 1007,
           "y": 414
         },
@@ -1090,8 +1197,8 @@
         "arrows_visible": true,
         "current": 5,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 522,
           "y": 515
         },
@@ -1137,8 +1244,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 716,
           "y": 515
         },
@@ -1184,8 +1291,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 813,
           "y": 515
         },
@@ -1231,8 +1338,8 @@
         "arrows_visible": true,
         "current": 0,
         "geometry": {
-          "height": 16,
-          "width": 72,
+          "height": 17,
+          "width": 82,
           "x": 910,
           "y": 515
         },
@@ -1282,7 +1389,8 @@
       "name": "skill_tree.view:Activate:ToggleSkillView",
       "passed": true,
       "detail": {
-        "list_mode": true
+        "list_mode": true,
+        "committed_values_live": true
       }
     },
     {
@@ -1378,10 +1486,10 @@
     }
   ],
   "consoleEntries": [
-    "[warning] [.WebGL-0xb4408015c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0xb4408015c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0xb4408015c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0xb4408015c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    "[warning] [.WebGL-0x246c05309c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x246c05309c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x246c05309c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x246c05309c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
   ],
   "final": {
     "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
@@ -1800,7 +1908,7 @@
           },
           "skill_tree.skills": {
             "active_surface": "",
-            "detail_text": "ホーリー..\nContext detail",
+            "detail_text": "ホーリー..\n5 / 5",
             "detail_visible": false,
             "geometry": {
               "height": 470,
@@ -1819,6 +1927,35 @@
               "error": null
             },
             "list_mode": false,
+            "list_values": {
+              "r1c1": "5 / 5",
+              "r1c2": "",
+              "r1c3": "10 / 10",
+              "r1c4": "10 / 10",
+              "r1c5": "5 / 5",
+              "r1c6": "10 / 10",
+              "r2c1": "5 / 5",
+              "r2c2": "1 / 1",
+              "r2c3": "5 / 5",
+              "r2c4": "1 / 1",
+              "r2c5": "0 / 0",
+              "r3c1": "5 / 5",
+              "r3c2": "3 / 3",
+              "r3c3": "1 / 1",
+              "r3c4": "5 / 5",
+              "r3c5": "0 / 0",
+              "r3c6": "3 / 3",
+              "r4c1": "1 / 1",
+              "r4c2": "10 / 10",
+              "r4c3": "1 / 1",
+              "r4c4": "1 / 1",
+              "r4c5": "0 / 0",
+              "r4c6": "0 / 0",
+              "r5c1": "5 / 5",
+              "r5c3": "0 / 0",
+              "r5c4": "0 / 0",
+              "r5c5": "0 / 0"
+            },
             "rendered": true,
             "selected_item": "r1c1",
             "semantic_state": "selected",
@@ -1833,8 +1970,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 572,
               "y": 176
             },
@@ -1866,8 +2003,8 @@
             "arrows_visible": true,
             "current": 10,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 766,
               "y": 176
             },
@@ -1899,8 +2036,8 @@
             "arrows_visible": true,
             "current": 10,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 863,
               "y": 176
             },
@@ -1932,8 +2069,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 960,
               "y": 176
             },
@@ -1965,8 +2102,8 @@
             "arrows_visible": true,
             "current": 10,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 1057,
               "y": 176
             },
@@ -1998,8 +2135,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 572,
               "y": 277
             },
@@ -2031,8 +2168,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 669,
               "y": 277
             },
@@ -2064,8 +2201,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 766,
               "y": 277
             },
@@ -2097,8 +2234,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 863,
               "y": 277
             },
@@ -2130,8 +2267,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 960,
               "y": 277
             },
@@ -2163,8 +2300,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 572,
               "y": 378
             },
@@ -2196,8 +2333,8 @@
             "arrows_visible": true,
             "current": 3,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 669,
               "y": 378
             },
@@ -2229,8 +2366,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 766,
               "y": 378
             },
@@ -2262,8 +2399,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 863,
               "y": 378
             },
@@ -2295,8 +2432,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 960,
               "y": 378
             },
@@ -2328,8 +2465,8 @@
             "arrows_visible": true,
             "current": 3,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 1057,
               "y": 378
             },
@@ -2361,8 +2498,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 572,
               "y": 479
             },
@@ -2394,8 +2531,8 @@
             "arrows_visible": true,
             "current": 10,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 669,
               "y": 479
             },
@@ -2427,8 +2564,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 766,
               "y": 479
             },
@@ -2460,8 +2597,8 @@
             "arrows_visible": true,
             "current": 1,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 863,
               "y": 479
             },
@@ -2493,8 +2630,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 960,
               "y": 479
             },
@@ -2526,8 +2663,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 1057,
               "y": 479
             },
@@ -2559,8 +2696,8 @@
             "arrows_visible": true,
             "current": 5,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 572,
               "y": 580
             },
@@ -2592,8 +2729,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 766,
               "y": 580
             },
@@ -2625,8 +2762,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 863,
               "y": 580
             },
@@ -2658,8 +2795,8 @@
             "arrows_visible": true,
             "current": 0,
             "geometry": {
-              "height": 16,
-              "width": 72,
+              "height": 17,
+              "width": 82,
               "x": 960,
               "y": 580
             },
@@ -2751,6 +2888,29 @@
             "gesture": "ContextActivate",
             "semantic_state": "selected",
             "value": "r1c1"
+          },
+          {
+            "accepted": true,
+            "control_id": "skill_tree.view",
+            "gesture": "Activate",
+            "semantic_state": "ready",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "skill_tree.view",
+            "gesture": "Activate",
+            "semantic_state": "ready",
+            "value": null
+          },
+          {
+            "accepted": false,
+            "control_id": "skill_tree.stepper.r1c3",
+            "error": {
+              "code": "TransactionRejectedError",
+              "detail": "Stepper is already at the requested bound"
+            },
+            "gesture": "Activate"
           },
           {
             "accepted": true,
@@ -3219,6 +3379,6 @@
   "pass": true,
   "idle": {
     "path": "00-idle.png",
-    "sha256": "3442c9a3d2b9fbb5f1632784ee4a101f45cfddefd29b593f30217d4a920a8e16"
+    "sha256": "684b96bf7996c6644a3e8e1369e46c69b513d773b748d0e0ef1eb413c13702af"
   }
 }

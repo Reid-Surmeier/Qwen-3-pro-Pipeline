@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "issue": 126,
+  "candidate_commit": "9d63fc8cc10e2b0a3de442be379a8d5f435a7eae",
+  "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "files": [
+    {"path": "00-idle.png", "sha256": "3442c9a3d2b9fbb5f1632784ee4a101f45cfddefd29b593f30217d4a920a8e16"},
+    {"path": "01-selected.png", "sha256": "2cdae0b578997e7ef78d4a3bb90435bc9392b154925f680e4ef2b008cec2c13b"},
+    {"path": "02-context-detail.png", "sha256": "b93a0d8232b61a4bfc31322f3cf7c4ae0b5d69696a1d705372c737b262eb1813"},
+    {"path": "03-00-skill_tree.stepper.r1c1-after.png", "sha256": "ece2b05ef58ca97fb429bd795436c9f5c174ab0abdc4c6ca6f62380933fe4d24"},
+    {"path": "04-committed.png", "sha256": "c0d78c93c79f69242eedd2f60ce61440dcd356966d4228a538384e8b43e8cf2b"},
+    {"path": "05-cancelled.png", "sha256": "d4ecc6eaa9ac309c1e164e91139ed0cf46843e32060cb8f47271383f12dbab2d"},
+    {"path": "06-list-view.png", "sha256": "fdc08dedd4568930b013088ed178f3f0de28e1e45d4b6f70b7a90ba50e282b8b"},
+    {"path": "09-minimized.png", "sha256": "d162ac11d0835f77b4ed0721e23f2393af2ad8b9df063f55c8fa670f9b61b58a"},
+    {"path": "10-minimize-restored.png", "sha256": "b79c5cecbd06f7ebbc2dbec516a371574d941db1cd5cbb6449827e839b9f871c"},
+    {"path": "11-drag-mid.png", "sha256": "08391709e94295345914c25f00fbc8fb0e3541dd0fb194a4e1dc5602bcb32427"},
+    {"path": "play-log.json", "sha256": "4c977a4be41c79e45e98fc507561983674aedff0177c5f5f83a83989a4481cdf"},
+    {"path": "verdict.json", "sha256": "9f2f826d3945ecd07c132dfd3e6a26c1e98f9dbbaf0842e55830a5dd5afc026c"},
+    {"path": "report.json", "sha256": "abbf0661a1f4e3624cbf1cc322706979e850488b6cb7ee5710b9128430df19f1"}
+  ],
+  "play_log_frame_corpus": {
+    "count": 72,
+    "classification": "comparison evidence",
+    "hash_authority": "play-log.json frames and invariant_frames"
+  },
+  "shared_options_regression": {
+    "actions": 20,
+    "frames_verified": 54,
+    "verdict": "PASS",
+    "play_log_sha256": "88ec5bfa1f32f9f91433348075b17067fc346629bbffc7d7fc564dc0fc54b4c5",
+    "verdict_sha256": "94c255f3e85f6d0c51a7f8845344ddf1bbd2986bb19df4c066eb2bc0872aa91c"
+  }
+}

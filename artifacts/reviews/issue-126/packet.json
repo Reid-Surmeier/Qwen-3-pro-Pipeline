@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 126,
   "pull_request": 82,
-  "candidate_commit": "9d63fc8cc10e2b0a3de442be379a8d5f435a7eae",
+  "candidate_commit": "13fca40e2e28491aa259d82b00692475760443aa",
   "acceptance_contract": "docs/reviews/issue-126-contract.md",
   "references": [
     {
@@ -23,7 +23,9 @@
       "artifacts/reviews/issue-126/builder/10-minimize-restored.png",
       "artifacts/reviews/issue-126/builder/11-drag-mid.png",
       "artifacts/reviews/issue-126/builder/play-log.json",
-      "artifacts/reviews/issue-126/builder/verdict.json"
+      "artifacts/reviews/issue-126/builder/verdict.json",
+      "artifacts/reviews/issue-126/options-regression/play-log.json",
+      "artifacts/reviews/issue-126/options-regression/verdict.json"
     ]
   },
   "launch": {

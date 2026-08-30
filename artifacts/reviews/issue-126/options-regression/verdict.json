@@ -1,9 +1,9 @@
 {
+  "verdict": "PASS",
   "actions": 20,
-  "failures": [],
   "frames_verified": 54,
-  "problems": [],
   "unexercised": [],
   "unexercised_actions": [],
-  "verdict": "PASS"
+  "failures": [],
+  "problems": []
 }
