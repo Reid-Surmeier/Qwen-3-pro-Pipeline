@@ -11,7 +11,10 @@ rm -f qa/out/capture.png qa/out/fidelity.json qa/out/interact.json
 echo "==> import"
 "$GODOT" --headless --path . --import >> qa/out/import.log 2>&1
 import_rc=$?
-grep -iE 'error|script error|parse error|failed' qa/out/import.log > qa/out/import-errors.log || true
+# Match diagnostic words, not class names such as `ControlErrors` printed by
+# Godot's class-registration progress output during a clean import.
+grep -iE '(^|[^[:alnum:]_])(script error|parse error|error|failed)([^[:alnum:]_]|$)' \
+  qa/out/import.log > qa/out/import-errors.log || true
 
 echo "==> engine contracts"
 "$GODOT" --headless --path . --script res://tests/run_contracts.gd > qa/out/contracts.log 2>&1
