@@ -3,7 +3,7 @@
   "issue": 138,
   "pull_request": 82,
   "baseline_commit": "80c1beaa60d898ba5eef5304897e0ff87916ec13",
-  "candidate_commit": "72098af25fb536674a045fe0839126c60e8d6ce7",
+  "candidate_commit": "deced8572497a9c6ce113c2908a319c2186de5b9",
   "acceptance_contract": "docs/reviews/issue-138-contract.md",
   "references": [
     {
@@ -13,6 +13,10 @@
     {
       "path": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
       "sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085"
+    },
+    {
+      "path": "godot/fonts/PixelMplus10-Regular.ttf",
+      "sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
     }
   ],
   "candidate": {
@@ -38,8 +42,8 @@
     "artifacts/runs/custom-filters-ro-assembly-v001/edit-mask.png": "2515145a113b8a14c16fd206355af15107d7a8ff38a661ac07ae7d555a81de27",
     "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask.png": "bb5264be0166745f5ce9c026e7051a7827ad6bcb55b6f06f9de3a4436b1d2399",
     "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask-native.png": "8f7ece5805f47a0426ac7126a0805bc22ccb755d948f83b9b4b5ba61f49f2694",
-    "artifacts/runs/custom-filters-ro-assembly-v001/verification.json": "5e0614328a96ce8447e8284a503d0a5e320c7a82adb5878b3672a3eddb6da7aa",
-    "artifacts/runs/custom-filters-ro-assembly-v001/run.json": "b1c72b2bb7077fce913947911f351e59a4055e886130ba307760b97b1301adaf"
+    "artifacts/runs/custom-filters-ro-assembly-v001/verification.json": "ccf58342d2725a543c36e6366adeef52343b9b0aeb83dcd80c2bbf0a6ad79942",
+    "artifacts/runs/custom-filters-ro-assembly-v001/run.json": "daa334be7300373788ac751904a48cad96ddbf06ccced0432780f40650ebca53"
   },
   "launch": {
     "command": "file /workspace/artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png /workspace/artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-open.png",
