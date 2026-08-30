@@ -1,0 +1,149 @@
+{
+  "control_type": "tab",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-inventory-vertical-tabs.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:13:50.000",
+      "timestamp_s": 830.0,
+      "frame_index_at_30fps": 24900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        303,
+        186,
+        34,
+        158
+      ],
+      "shows": "所持アイテム left-hand vertical tab strip: 消耗 / 装備 / 収集 / 個人. One tab carries a pale blue fill, the rest are white.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-chat-three-tabs.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:01:40.000",
+      "timestamp_s": 100.0,
+      "frame_index_at_30fps": 3000,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        2,
+        398,
+        292,
+        22
+      ],
+      "shows": "会話ウィンドウ tab row: 一般メッセージ / バトルメッセージ / NewTab_3. The active tab (NewTab_3) is taller, lighter and merges into the panel below; inactive tabs are shorter and separated.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-skill-vertical-tabs.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        12,
+        144,
+        36,
+        256
+      ],
+      "shows": "スキルリスト left-hand vertical tabs (ノービス・1次職 / 2次・上位2次職 / …). Active tab is white and flush with the panel.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-shortcut-window-tabs.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:17.000",
+      "timestamp_s": 1217.0,
+      "frame_index_at_30fps": 36510,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        376,
+        110,
+        434,
+        36
+      ],
+      "shows": "ショートカット設定 horizontal tabs: ショートカットウィンドウ / インターフェース / ショートカットリスト.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-manual-gamesettings-tab-display.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config051.png",
+      "shows": "ゲーム設定 tab strip with 表示設定 active.",
+      "crop_xywh_in_source": [
+        2,
+        14,
+        396,
+        30
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    },
+    {
+      "file": "06-manual-gamesettings-tab-control.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config06.png",
+      "shows": "Same strip with 操作設定 active — the active tab loses its bottom border and merges with the panel.",
+      "crop_xywh_in_source": [
+        2,
+        14,
+        396,
+        30
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    },
+    {
+      "file": "07-manual-gamesettings-tab-other.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config07.png",
+      "shows": "Same strip with その他 active. Three shots of one strip give the complete active/inactive state set.",
+      "crop_xywh_in_source": [
+        2,
+        14,
+        393,
+        30
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    },
+    {
+      "file": "08-manual-equipment-tabs.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window04.png",
+      "shows": "装備アイテム tabs: 一般装備 / 補助装備 / 称号 / ダメージ.",
+      "crop_xywh_in_source": [
+        2,
+        14,
+        250,
+        26
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    }
+  ]
+}

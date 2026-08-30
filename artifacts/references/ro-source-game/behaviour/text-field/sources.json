@@ -1,0 +1,97 @@
+{
+  "control_type": "text-field",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-replay-filename-typed.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:08:40.000",
+      "timestamp_s": 520.0,
+      "frame_index_at_30fps": 15600,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        256,
+        214,
+        205,
+        46
+      ],
+      "shows": "Replay filename field with typed content replay010101 and a visible vertical caret after the last character; a tooltip Input FileName -> Start above it and a highlighted commit button to its right.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-chatroom-title-caret.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:07:10.000",
+      "timestamp_s": 430.0,
+      "frame_index_at_30fps": 12900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        498,
+        386,
+        285,
+        46
+      ],
+      "shows": "チャットルーム作成 Title field mid-typing: ちゃっとるーむ with the caret trailing the text.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-chat-input-bar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:03:05.000",
+      "timestamp_s": 185.0,
+      "frame_index_at_30fps": 5550,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        2,
+        506,
+        612,
+        34
+      ],
+      "shows": "会話ウィンドウ input bar, empty: a chat-target swatch at the left, the caret at the start of the field, two round buttons at the right.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-login-password-masked.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "92A2MpKGBXI",
+      "url": "https://www.youtube.com/watch?v=92A2MpKGBXI",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ゲームスタート編)",
+      "channel": "FRIES17",
+      "uploaded": "2020-04-26",
+      "timestamp": "00:10:20.000",
+      "timestamp_s": 620.0,
+      "frame_index_at_30fps": 18600,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        676,
+        362,
+        232,
+        178
+      ],
+      "shows": "パスワード入力: an active masked field (****), and below it two greyed, non-editable fields — the client's disabled field state.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ]
+}

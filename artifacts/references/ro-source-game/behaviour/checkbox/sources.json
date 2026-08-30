@@ -1,0 +1,119 @@
+{
+  "control_type": "checkbox",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-sound-on-unchecked-checked.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:12.000",
+      "timestamp_s": 1212.0,
+      "frame_index_at_30fps": 36360,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        184,
+        296,
+        252,
+        64
+      ],
+      "shows": "サウンド設定: BGM row shows ☐on (unchecked), SOUND row ☑on (checked) — the same control in both states in one frame.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-graphics-snap-row.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:10.000",
+      "timestamp_s": 1210.0,
+      "frame_index_at_30fps": 36300,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        185,
+        320,
+        275,
+        50
+      ],
+      "shows": "グラフィック設定: スナップ ☑attack ☐skill ☑item, and ☐Trilinear ☑NoCtrl — five checkboxes, mixed states.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-skill-description-off.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        430,
+        148,
+        120,
+        20
+      ],
+      "shows": "スキルリスト title bar: ☐説明表示 unchecked (empty square, dark border).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-skill-description-on.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:56.500",
+      "timestamp_s": 596.5,
+      "frame_index_at_30fps": 17895,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        760,
+        112,
+        130,
+        22
+      ],
+      "shows": "Same control 16.5 s later: ☑説明表示 checked — a black tick drawn inside the same square. Box size and border are unchanged.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-shortcut-chat-input-type.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:17.000",
+      "timestamp_s": 1217.0,
+      "frame_index_at_30fps": 36510,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        400,
+        500,
+        200,
+        28
+      ],
+      "shows": "ショートカット設定 footer: ☑チャット入力タイプ変更, checked.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ]
+}

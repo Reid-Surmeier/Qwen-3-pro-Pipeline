@@ -1,0 +1,88 @@
+{
+  "control_type": "scrollbar",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-chatlog-scrollbar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:03:05.000",
+      "timestamp_s": 185.0,
+      "frame_index_at_30fps": 5550,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        578,
+        410,
+        28,
+        104
+      ],
+      "shows": "会話ウィンドウ log scrollbar: ▲ arrow button, black track, light thumb filling most of the track, ▼ arrow button. One arrow at each end.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-popup-list-scrollbar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:01:40.000",
+      "timestamp_s": 100.0,
+      "frame_index_at_30fps": 3000,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        290,
+        200,
+        285,
+        170
+      ],
+      "shows": "NewTab_3ウィンドウ表示情報 popup: a scrollable list with a blue ▲/▼ arrow pair and a blue thumb sitting part-way down a light track; thumb is shorter than the track because the list overflows.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-chatroom-limit-list.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:07:10.000",
+      "timestamp_s": 430.0,
+      "frame_index_at_30fps": 12900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        538,
+        446,
+        90,
+        58
+      ],
+      "shows": "The chat-room Limit dropdown while open: its list carries its own ▲ thumb ▼ scrollbar.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-manual-gamesettings-scrollbar.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config06.png",
+      "shows": "ゲーム設定 list scrollbar at native manual resolution — arrow buttons at both ends, thumb in between.",
+      "crop_xywh_in_source": [
+        352,
+        44,
+        32,
+        280
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    }
+  ]
+}

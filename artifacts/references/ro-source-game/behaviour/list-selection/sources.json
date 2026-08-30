@@ -1,0 +1,163 @@
+{
+  "control_type": "list-selection",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-shortcut-row-selected.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:16.200",
+      "timestamp_s": 1216.2,
+      "frame_index_at_30fps": 36486,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        376,
+        400,
+        434,
+        120
+      ],
+      "shows": "ショートカット設定 list: the third-column cell of the ショートカット 2-7 row is drawn as a dark grey block with white text — the selected/being-edited cell. Rows are otherwise white with pale-yellow key and index columns.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-shortcut-row-committed.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:16.567",
+      "timestamp_s": 1216.567,
+      "frame_index_at_30fps": 36497,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        376,
+        400,
+        434,
+        120
+      ],
+      "shows": "The same rows ~0.37 s later: the dark block is gone and the cell now reads ショートカット 4-7 — selection cleared, value committed. NOTE: an editing cut lies at 00:20:16.500, between this and 01, so this pair shows the two states but does NOT time the change.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-popup-row-hover.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:01:40.000",
+      "timestamp_s": 100.0,
+      "frame_index_at_30fps": 3000,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        296,
+        300,
+        275,
+        60
+      ],
+      "shows": "NewTab_3 display-info list: the row under the pointer (バトルメッセージ) carries a thin blue outline box; the rows above and below have none.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-skill-grid-cell-hover.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        150,
+        163,
+        132,
+        70
+      ],
+      "shows": "スキルリスト grid: the cell under the pointer is painted with a pink/red fill behind the icon; the neighbouring cell is not.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-inventory-grid.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:13:50.000",
+      "timestamp_s": 830.0,
+      "frame_index_at_30fps": 24900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        303,
+        186,
+        288,
+        236
+      ],
+      "shows": "所持アイテム grid in its normal state — empty cells are pale blue lozenges, occupied cells carry the icon and a stack count.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "06-inventory-select-mode.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:13:57.000",
+      "timestamp_s": 837.0,
+      "frame_index_at_30fps": 25110,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        303,
+        186,
+        288,
+        236
+      ],
+      "shows": "The same grid after NPC売却ロック適用: every cell is repainted blue to show the grid is now in a select-items mode, with a banner across the window.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "07-party-rows.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:09:20.000",
+      "timestamp_s": 560.0,
+      "frame_index_at_30fps": 16800,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        712,
+        222,
+        246,
+        180
+      ],
+      "shows": "パーティー list rows, plus a hover tooltip (パーティー設定) over one of the footer icon buttons.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ]
+}

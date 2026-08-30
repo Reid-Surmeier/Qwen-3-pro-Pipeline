@@ -1,0 +1,141 @@
+{
+  "control_type": "button",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-menu-hover-sound.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:13.933",
+      "timestamp_s": 1213.933,
+      "frame_index_at_30fps": 36418,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        500,
+        355,
+        292,
+        172
+      ],
+      "shows": "ゲームオプション menu; pointer on サウンド設定 — that button carries the hover fill (blue gradient), the other five are idle white. Read with 02: an editing cut lies between the two.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-menu-hover-shortcut.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:13.967",
+      "timestamp_s": 1213.967,
+      "frame_index_at_30fps": 36419,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        500,
+        355,
+        292,
+        172
+      ],
+      "shows": "The next SHOT (an editing cut lies between this and frame 01 — verified by a UI-free game-world region jumping 8.5 mean abs): the pointer is on ショートカット設定 and that button now carries the hover fill while サウンド設定 is idle. Proves the highlight tracks the pointer and is not a click-selection — the ショートカット設定 window does not open until 00:20:16 — but does NOT time the transition.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-basicinfo-text-buttons.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:02:56.000",
+      "timestamp_s": 176.0,
+      "frame_index_at_30fps": 5280,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        204,
+        16,
+        90,
+        116
+      ],
+      "shows": "基本情報 window's eight text buttons (status / rec / items / equip / skill / map / chat / friend) in the idle state — raised bevel, grey face.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-login-ok-hover.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "92A2MpKGBXI",
+      "url": "https://www.youtube.com/watch?v=92A2MpKGBXI",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ゲームスタート編)",
+      "channel": "FRIES17",
+      "uploaded": "2020-04-26",
+      "timestamp": "00:10:20.000",
+      "timestamp_s": 620.0,
+      "frame_index_at_30fps": 18600,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        676,
+        505,
+        230,
+        36
+      ],
+      "shows": "パスワード入力 dialogue: pointer on OK, which shows the blue hover fill; cancel and 変更 beside it are idle.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-skill-apply-reset.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        462,
+        498,
+        124,
+        36
+      ],
+      "shows": "スキルリスト footer buttons 確定 / リセット, idle.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "06-shortcut-footer-buttons.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:17.000",
+      "timestamp_s": 1217.0,
+      "frame_index_at_30fps": 36510,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        376,
+        500,
+        430,
+        30
+      ],
+      "shows": "ショートカット設定 footer: リセット, OK, cancel, close — four idle buttons at once.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ]
+}

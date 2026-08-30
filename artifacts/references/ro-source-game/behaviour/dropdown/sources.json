@@ -1,0 +1,207 @@
+{
+  "control_type": "dropdown",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-closed.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:39.567",
+      "timestamp_s": 1179.567,
+      "frame_index_at_30fps": 35387,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        28
+      ],
+      "shows": "Cut-verified consecutive pair with 02, frame A: closed — a sunken field reading <Basic Skin> plus a raised ▽ arrow button at its right, pointer on the arrow.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-open-current-marked.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:39.600",
+      "timestamp_s": 1179.6,
+      "frame_index_at_30fps": 35388,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        112
+      ],
+      "shows": "Frame B, one frame (33 ms) later: the list is open, drawn downward over the window below. The current value <Basic Skin> is the highlighted row and the arrow button is repainted darker/inset. Open takes one frame; no cut between (UI-free region 0.00), no animation, no partial draw.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-open-row-hover.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:46.767",
+      "timestamp_s": 1186.767,
+      "frame_index_at_30fps": 35603,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        112
+      ],
+      "shows": "Cut-verified consecutive pair with 04, frame A: the pointer is on scribbling kid, the blue bar is on that row and <Basic Skin> is no longer highlighted — one bar serves both current-value and hover. The field still reads <Basic Skin>.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-committed.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:46.800",
+      "timestamp_s": 1186.8,
+      "frame_index_at_30fps": 35604,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        28
+      ],
+      "shows": "Frame B, one frame (33 ms) after 03: the list is gone, the field reads scribbling kid, and every window on screen has been repainted in the new skin — all in the same frame, with no editing cut between them (UI-free game-world region 0.00).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-chatroom-closed-pair.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:07:10.000",
+      "timestamp_s": 430.0,
+      "frame_index_at_30fps": 12900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        498,
+        430,
+        285,
+        28
+      ],
+      "shows": "チャットルーム作成: two more dropdowns of the same construction (Limit: 20 名, Type: チャットルーム).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "06-row-hover-frame-a.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:43.900",
+      "timestamp_s": 1183.9,
+      "frame_index_at_30fps": 35517,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        112
+      ],
+      "shows": "Cut-verified consecutive pair, frame A: the highlight bar is on Rec_Replay with the pointer just below it. Same shot as frame B — no editing cut between them.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "07-row-hover-frame-b.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:19:43.933",
+      "timestamp_s": 1183.933,
+      "frame_index_at_30fps": 35518,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        248,
+        292,
+        205,
+        112
+      ],
+      "shows": "Frame B, one frame (33 ms) later: the pointer has moved down one row and the bar has moved with it to scribbling kid. The field still reads <Basic Skin> — hover does not preview into the field. This is the corpus's one measured hover transition.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "08-revert-before.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:08.097",
+      "timestamp_s": 1208.097,
+      "frame_index_at_30fps": 36243,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        185,
+        195,
+        290,
+        205
+      ],
+      "shows": "Cut-verified consecutive pair, frame A: the whole UI is in the scribbling kid skin, the Skin list is open and the pointer is on <Basic Skin> — note the hover bar is pale GREEN in this skin, i.e. the highlight colour is part of the skin.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "09-revert-after.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "JaA_UUL4a5w",
+      "url": "https://www.youtube.com/watch?v=JaA_UUL4a5w",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その３)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-19",
+      "timestamp": "00:20:08.130",
+      "timestamp_s": 1208.13,
+      "frame_index_at_30fps": 36244,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        185,
+        195,
+        290,
+        205
+      ],
+      "shows": "Frame B, one frame later: list closed, field reads <Basic Skin>, and this window plus the ステータス window behind it are fully repainted in the blue skin. Second independent single-frame commit, and the reversal of the one at 00:19:46.8.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ]
+}
