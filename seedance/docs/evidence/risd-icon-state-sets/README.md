@@ -119,3 +119,45 @@ pipeline one.
 | 3 | filled, no margin | ~static | yes (nothing moved) |
 | 4 | filled, no margin | 40.1% | **no** |
 | 5 | tile with 7.8% margin | 23.0% | **yes** |
+
+## Take six: the right kind of reference, and pacing by travel
+
+Reid on take five: *"the movement is still quite jerky, and the reference video you gave
+has nothing to do with the animation shown ... the coin animation's movement is affecting
+the way the magnifying glass moves in a strange way. That should be hard wired."*
+
+Both true, and the first explains a failure previously blamed on the brief.
+
+**The reference kind.** `ref-coin-spin` is a **rotation** — a coin turning about its axis
+in place. It was handed to a brief asking a magnifying glass to **travel**. The glass
+tumbled and changed size instead of travelling, and no brief wording corrected it,
+because the reference was pulling the other way throughout. The five references are now
+classified by `motion_kind` in `provenance.json`, and `check_reference_matches_motion`
+refuses a run whose kinds disagree.
+
+Only `ref-textbox-arrow-bob` is a translation. Take six uses it. **The model's own
+pacing improved before any post-processing: raw step spread 2.138 with the coin, 1.018
+with the arrow.** The reference teaches the kind of movement, not only its beat.
+
+**The pacing.** Per-step travel of the moving element in take five ran
+
+    0 0 0 0 0 1 26 66 10 13 9 11 6 14 24 98 13 73 32 17 26 40 9 41 0 0 0 ...
+
+Long stretches of nothing, then leaps of a hundred pixels; spread 2.1x its own mean.
+Equal hold times cannot fix that, because the unevenness is in the content.
+`resample_by_travel` picks frames spaced evenly along the path the element travels,
+which is what a hand-authored frame table does.
+
+| Take | Reference | Raw step spread | After resampling | Border leak |
+| --- | --- | --- | --- | --- |
+| 5 | coin spin (rotate) | 2.138 | 0.424 | 0.0 |
+| 6 | arrow bob (translate) | **1.018** | **0.199** | 0.0095 |
+
+**Still wrong, and the next thing to fix:** the bust does not hold still. It is specified
+as frozen and it visibly changes across poses. Filled framing has no fidelity metric, so
+nothing catches this but a person looking. A targeted one is possible — mask out the
+cobalt glass and compare only the marble across frames — and would catch exactly this.
+
+**Still missing:** a large-travel translation reference. The arrow bob moves 2 px. Both
+pret and The Spriters Resource were searched for a magnifier or sweep with a documented
+frame table and neither has one. Amplitude currently comes entirely from the brief.
