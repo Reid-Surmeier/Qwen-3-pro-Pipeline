@@ -1,0 +1,2898 @@
+{
+ "image": "reference-native.png",
+ "size": [
+  1536,
+  1024
+ ],
+ "coordinate_space": "native pixels in the full frame, origin top-left, rect = [x, y, w, h]",
+ "pass": "first",
+ "accuracy_note": "Rects were measured by eye from 2x nearest-neighbour crops overlaid with a 20px native grid. Explicit controls are accurate to about +/-3 px; grid cells are generated from measured pitch and origin and are accurate to about +/-4 px. Types are drawn from the map #103 list.",
+ "counts_by_type": {
+  "button": 31,
+  "checkbox": 7,
+  "close": 9,
+  "dropdown": 1,
+  "grid cell": 101,
+  "list row": 10,
+  "meter": 4,
+  "minimize": 6,
+  "radio": 2,
+  "scrollbar": 3,
+  "slider": 2,
+  "stepper": 31,
+  "tab": 14,
+  "text field": 7,
+  "title drag": 11
+ },
+ "controls": [
+  {
+   "type": "title drag",
+   "rect": [
+    0,
+    0,
+    484,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "basic-info"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    460,
+    6,
+    16,
+    16
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "basic-info"
+  },
+  {
+   "type": "meter",
+   "rect": [
+    189,
+    37,
+    151,
+    15
+   ],
+   "state": "full (1109/1109)",
+   "label": "HP",
+   "window": "basic-info"
+  },
+  {
+   "type": "meter",
+   "rect": [
+    189,
+    74,
+    151,
+    14
+   ],
+   "state": "partial (601/613)",
+   "label": "SP",
+   "window": "basic-info"
+  },
+  {
+   "type": "meter",
+   "rect": [
+    146,
+    131,
+    184,
+    11
+   ],
+   "state": "partial",
+   "label": "Base Lv. 60",
+   "window": "basic-info"
+  },
+  {
+   "type": "meter",
+   "rect": [
+    146,
+    148,
+    184,
+    11
+   ],
+   "state": "partial",
+   "label": "Job Lv. 47",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    356,
+    42,
+    48,
+    26
+   ],
+   "state": "selected",
+   "label": "status",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    418,
+    42,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "option",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    356,
+    83,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "items",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    418,
+    83,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "equip",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    356,
+    124,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "skill",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    418,
+    124,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "map",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    356,
+    165,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "chat",
+   "window": "basic-info"
+  },
+  {
+   "type": "button",
+   "rect": [
+    418,
+    165,
+    48,
+    26
+   ],
+   "state": "normal",
+   "label": "friend",
+   "window": "basic-info"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    492,
+    0,
+    611,
+    26
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "skill-tree"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1082,
+    7,
+    17,
+    17
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "skill-tree"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    750,
+    12,
+    16,
+    14
+   ],
+   "state": "unchecked",
+   "label": "スキル説明表示",
+   "window": "skill-tree"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1022,
+    6,
+    53,
+    19
+   ],
+   "state": "normal",
+   "label": "View",
+   "window": "skill-tree"
+  },
+  {
+   "type": "button",
+   "rect": [
+    922,
+    556,
+    70,
+    26
+   ],
+   "state": "normal",
+   "label": "use",
+   "window": "skill-tree"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1009,
+    556,
+    75,
+    26
+   ],
+   "state": "normal",
+   "label": "close",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    538,
+    67,
+    41,
+    41
+   ],
+   "state": "learned",
+   "label": "ホーリー..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    522,
+    111,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "ホーリー.. 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    637,
+    67,
+    42,
+    42
+   ],
+   "state": "unlearned",
+   "label": "リザレク..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    738,
+    67,
+    38,
+    40
+   ],
+   "state": "learned",
+   "label": "ヒール",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    716,
+    111,
+    72,
+    16
+   ],
+   "state": "value 10/10",
+   "label": "ヒール 10/10",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    837,
+    67,
+    36,
+    40
+   ],
+   "state": "learned",
+   "label": "アクア..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    813,
+    111,
+    72,
+    16
+   ],
+   "state": "value 10/10",
+   "label": "アクア.. 10/10",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    929,
+    67,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "ディバイ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    910,
+    111,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "ディバイ.. 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    1022,
+    67,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "ブレッシ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    1007,
+    111,
+    72,
+    16
+   ],
+   "state": "value 10/10",
+   "label": "ブレッシ.. 10/10",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    538,
+    170,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "プロテク..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    522,
+    212,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "プロテク.. 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    638,
+    170,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "キリエエ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    619,
+    212,
+    72,
+    16
+   ],
+   "state": "value 1/1",
+   "label": "キリエエ.. 1/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    738,
+    170,
+    38,
+    40
+   ],
+   "state": "learned",
+   "label": "サンクチ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    716,
+    212,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "サンクチ.. 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    837,
+    170,
+    36,
+    40
+   ],
+   "state": "unlearned",
+   "label": "デーモン..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    813,
+    212,
+    72,
+    16
+   ],
+   "state": "value 0/5",
+   "label": "デーモン.. 0/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    931,
+    170,
+    39,
+    40
+   ],
+   "state": "unlearned",
+   "label": "魔法反射",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    910,
+    212,
+    72,
+    16
+   ],
+   "state": "value 0/3",
+   "label": "魔法反射 0/3",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    538,
+    271,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "速度増加",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    522,
+    313,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "速度増加 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    638,
+    271,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "天使の恵み",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    619,
+    313,
+    72,
+    16
+   ],
+   "state": "value 3/3",
+   "label": "天使の恵み 3/3",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    738,
+    271,
+    38,
+    40
+   ],
+   "state": "learned",
+   "label": "エンジェ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    716,
+    313,
+    72,
+    16
+   ],
+   "state": "value 1/1",
+   "label": "エンジェ.. 1/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    837,
+    271,
+    36,
+    40
+   ],
+   "state": "learned",
+   "label": "ニューマ",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    813,
+    313,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "ニューマ 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    931,
+    271,
+    39,
+    40
+   ],
+   "state": "unlearned",
+   "label": "ストリッ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    910,
+    313,
+    72,
+    16
+   ],
+   "state": "value 0/5",
+   "label": "ストリッ.. 0/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    1022,
+    271,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "シールド..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    1007,
+    313,
+    72,
+    16
+   ],
+   "state": "value 3/3",
+   "label": "シールド.. 3/3",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    537,
+    372,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "リカバリー",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    522,
+    414,
+    72,
+    16
+   ],
+   "state": "value 1/1",
+   "label": "リカバリー 1/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    637,
+    372,
+    42,
+    40
+   ],
+   "state": "learned",
+   "label": "レックス..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    619,
+    414,
+    72,
+    16
+   ],
+   "state": "value 10/10",
+   "label": "レックス.. 10/10",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    738,
+    372,
+    38,
+    40
+   ],
+   "state": "learned",
+   "label": "カントキ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    716,
+    414,
+    72,
+    16
+   ],
+   "state": "value 1/1",
+   "label": "カントキ.. 1/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    837,
+    372,
+    36,
+    40
+   ],
+   "state": "learned",
+   "label": "クァグマ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    813,
+    414,
+    72,
+    16
+   ],
+   "state": "value 1/1",
+   "label": "クァグマ.. 1/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    931,
+    372,
+    39,
+    40
+   ],
+   "state": "unlearned",
+   "label": "ペイニッ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    910,
+    414,
+    72,
+    16
+   ],
+   "state": "value 0/5",
+   "label": "ペイニッ.. 0/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    1022,
+    372,
+    41,
+    40
+   ],
+   "state": "unlearned",
+   "label": "セイフティ..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    1007,
+    414,
+    72,
+    16
+   ],
+   "state": "value 0/5",
+   "label": "セイフティ.. 0/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    538,
+    473,
+    41,
+    40
+   ],
+   "state": "learned",
+   "label": "グロリア",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    522,
+    515,
+    72,
+    16
+   ],
+   "state": "value 5/5",
+   "label": "グロリア 5/5",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    738,
+    473,
+    38,
+    40
+   ],
+   "state": "unlearned",
+   "label": "エクスピア..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    716,
+    515,
+    72,
+    16
+   ],
+   "state": "value 0/1",
+   "label": "エクスピア.. 0/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    837,
+    474,
+    36,
+    39
+   ],
+   "state": "unlearned",
+   "label": "エクスピア..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    813,
+    515,
+    72,
+    16
+   ],
+   "state": "value 0/1",
+   "label": "エクスピア.. 0/1",
+   "window": "skill-tree"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    926,
+    473,
+    40,
+    40
+   ],
+   "state": "unlearned",
+   "label": "ターンア..",
+   "window": "skill-tree"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    910,
+    515,
+    72,
+    16
+   ],
+   "state": "value 0/10",
+   "label": "ターンア.. 0/10",
+   "window": "skill-tree"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    1108,
+    0,
+    424,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "equipment-card"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1508,
+    7,
+    18,
+    18
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "equipment-card"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    1123,
+    39,
+    180,
+    231
+   ],
+   "state": "occupied",
+   "label": "ミストレスカード (card art)",
+   "window": "equipment-card"
+  },
+  {
+   "type": "scrollbar",
+   "rect": [
+    1498,
+    80,
+    28,
+    190
+   ],
+   "state": "vertical, thumb near top",
+   "label": null,
+   "window": "equipment-card"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    0,
+    211,
+    484,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "status"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    434,
+    219,
+    16,
+    16
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "status"
+  },
+  {
+   "type": "close",
+   "rect": [
+    459,
+    219,
+    17,
+    17
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "status"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    8,
+    241,
+    13,
+    165
+   ],
+   "state": "selected (vertical)",
+   "label": "職業/status",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    250,
+    112,
+    17
+   ],
+   "state": "read-only, 1 +2 -> 2",
+   "label": "Str",
+   "window": "status"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    153,
+    252,
+    19,
+    13
+   ],
+   "state": "enabled",
+   "label": "raise Str",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    277,
+    112,
+    17
+   ],
+   "state": "read-only, 1 +2 -> 2",
+   "label": "Agi",
+   "window": "status"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    153,
+    279,
+    19,
+    13
+   ],
+   "state": "enabled",
+   "label": "raise Agi",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    304,
+    112,
+    17
+   ],
+   "state": "read-only, 1 +3 -> 2",
+   "label": "Vit",
+   "window": "status"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    153,
+    306,
+    19,
+    13
+   ],
+   "state": "enabled",
+   "label": "raise Vit",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    331,
+    112,
+    17
+   ],
+   "state": "read-only, 92+10 -> 11",
+   "label": "Int",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    358,
+    112,
+    17
+   ],
+   "state": "read-only, 1 +3 -> 2",
+   "label": "Dex",
+   "window": "status"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    153,
+    360,
+    19,
+    13
+   ],
+   "state": "enabled",
+   "label": "raise Dex",
+   "window": "status"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    88,
+    385,
+    112,
+    17
+   ],
+   "state": "read-only, 1 +5 -> 2",
+   "label": "Luk",
+   "window": "status"
+  },
+  {
+   "type": "stepper",
+   "rect": [
+    153,
+    387,
+    19,
+    13
+   ],
+   "state": "enabled",
+   "label": "raise Luk",
+   "window": "status"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    1108,
+    297,
+    424,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "options"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    1484,
+    303,
+    15,
+    16
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "options"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1508,
+    303,
+    19,
+    18
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "options"
+  },
+  {
+   "type": "slider",
+   "rect": [
+    1224,
+    347,
+    254,
+    17
+   ],
+   "state": "thumb at ~80%",
+   "label": "BGM",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1487,
+    353,
+    12,
+    11
+   ],
+   "state": "unchecked",
+   "label": "on (BGM)",
+   "window": "options"
+  },
+  {
+   "type": "slider",
+   "rect": [
+    1224,
+    381,
+    254,
+    17
+   ],
+   "state": "thumb at ~48%",
+   "label": "Effect",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1487,
+    387,
+    12,
+    11
+   ],
+   "state": "unchecked",
+   "label": "on (Effect)",
+   "window": "options"
+  },
+  {
+   "type": "dropdown",
+   "rect": [
+    1224,
+    416,
+    294,
+    26
+   ],
+   "state": "closed, value 'Classic Blue'",
+   "label": "Skin",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1138,
+    467,
+    12,
+    12
+   ],
+   "state": "unchecked",
+   "label": "attack",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1228,
+    467,
+    12,
+    12
+   ],
+   "state": "checked",
+   "label": "skill",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1300,
+    467,
+    12,
+    12
+   ],
+   "state": "checked",
+   "label": "item",
+   "window": "options"
+  },
+  {
+   "type": "checkbox",
+   "rect": [
+    1397,
+    467,
+    12,
+    12
+   ],
+   "state": "unchecked",
+   "label": "option",
+   "window": "options"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    0,
+    423,
+    484,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "equipment-items"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    434,
+    431,
+    17,
+    16
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "equipment-items"
+  },
+  {
+   "type": "close",
+   "rect": [
+    459,
+    431,
+    17,
+    17
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "equipment-items"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    8,
+    454,
+    99,
+    26
+   ],
+   "state": "selected",
+   "label": "一般装備",
+   "window": "equipment-items"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    111,
+    454,
+    119,
+    26
+   ],
+   "state": "normal",
+   "label": "衣装装備",
+   "window": "equipment-items"
+  },
+  {
+   "type": "button",
+   "rect": [
+    212,
+    635,
+    52,
+    24
+   ],
+   "state": "normal",
+   "label": "items",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    8,
+    483,
+    182,
+    35
+   ],
+   "state": "occupied",
+   "label": "+7 聖者の冠",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    295,
+    483,
+    181,
+    35
+   ],
+   "state": "occupied",
+   "label": "聖者のローブ +4",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    8,
+    521,
+    182,
+    30
+   ],
+   "state": "occupied",
+   "label": "くわえた魚",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    295,
+    521,
+    181,
+    30
+   ],
+   "state": "occupied",
+   "label": "+4 ディアボロス",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    8,
+    554,
+    182,
+    37
+   ],
+   "state": "occupied",
+   "label": "+5 イービルグロリアス",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    295,
+    554,
+    181,
+    37
+   ],
+   "state": "occupied",
+   "label": "ロザリオ",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    8,
+    593,
+    182,
+    30
+   ],
+   "state": "occupied",
+   "label": "+7 治癒の杖",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    295,
+    593,
+    181,
+    30
+   ],
+   "state": "occupied",
+   "label": "+5 ソウルエンチャン...",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    8,
+    628,
+    182,
+    45
+   ],
+   "state": "occupied",
+   "label": "サバイバルイヤリング",
+   "window": "equipment-items"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    295,
+    628,
+    181,
+    45
+   ],
+   "state": "occupied",
+   "label": "サバイバルイヤリング",
+   "window": "equipment-items"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    1107,
+    505,
+    215,
+    22
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "party"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1301,
+    510,
+    13,
+    13
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "party"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1113,
+    538,
+    200,
+    32
+   ],
+   "state": "HP bar full, 1109/1109",
+   "label": "SakumaRiri（フェイヨン..",
+   "window": "party"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1113,
+    572,
+    200,
+    32
+   ],
+   "state": "HP bar full, 1340/1340",
+   "label": "Sebas*（フェイヨン...",
+   "window": "party"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1113,
+    606,
+    200,
+    32
+   ],
+   "state": "HP bar full, 1762/1762",
+   "label": "ANRI（フェイヨン森）",
+   "window": "party"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1113,
+    640,
+    200,
+    32
+   ],
+   "state": "HP bar full, 1235/1235",
+   "label": "Show_A（フェイヨン森..",
+   "window": "party"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1113,
+    674,
+    200,
+    32
+   ],
+   "state": "HP bar full, 1028/1028",
+   "label": "AyanaIshizuka（フェイヨン...",
+   "window": "party"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1122,
+    719,
+    21,
+    21
+   ],
+   "state": "normal (icon only)",
+   "label": "memo",
+   "window": "party"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1157,
+    719,
+    21,
+    21
+   ],
+   "state": "normal (icon only)",
+   "label": "info",
+   "window": "party"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1192,
+    719,
+    21,
+    21
+   ],
+   "state": "normal (icon only)",
+   "label": "target",
+   "window": "party"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1227,
+    719,
+    21,
+    21
+   ],
+   "state": "normal (icon only)",
+   "label": "search",
+   "window": "party"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1262,
+    719,
+    21,
+    21
+   ],
+   "state": "normal (icon only)",
+   "label": "leave",
+   "window": "party"
+  },
+  {
+   "type": "radio",
+   "rect": [
+    1114,
+    750,
+    16,
+    16
+   ],
+   "state": "unselected",
+   "label": "友達",
+   "window": "party"
+  },
+  {
+   "type": "radio",
+   "rect": [
+    1195,
+    750,
+    16,
+    16
+   ],
+   "state": "selected",
+   "label": "パーティー",
+   "window": "party"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    1328,
+    505,
+    204,
+    22
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "system-menu"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    1509,
+    510,
+    14,
+    14
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    536,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "セーブポイントへ",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    570,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "キャラクター選択",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    604,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "サウンド設定",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    638,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "環境設定",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    672,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "ショートカット",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    706,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "ゲーム終了",
+   "window": "system-menu"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1336,
+    740,
+    188,
+    27
+   ],
+   "state": "normal",
+   "label": "return to game",
+   "window": "system-menu"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    492,
+    609,
+    539,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "storage"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1007,
+    617,
+    18,
+    18
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    649,
+    66,
+    33
+   ],
+   "state": "selected",
+   "label": "消耗品",
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    688,
+    66,
+    33
+   ],
+   "state": "normal",
+   "label": "装備品",
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    727,
+    66,
+    33
+   ],
+   "state": "normal",
+   "label": "カード",
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    766,
+    66,
+    33
+   ],
+   "state": "normal",
+   "label": "材料",
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    805,
+    66,
+    33
+   ],
+   "state": "normal",
+   "label": "収集品",
+   "window": "storage"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    504,
+    844,
+    66,
+    33
+   ],
+   "state": "normal",
+   "label": "その他",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    580,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x42",
+   "label": "storage slot r0c0",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    640,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x18",
+   "label": "storage slot r0c1",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    700,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x60",
+   "label": "storage slot r0c2",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    760,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x7",
+   "label": "storage slot r0c3",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    820,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x3",
+   "label": "storage slot r0c4",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    880,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x2",
+   "label": "storage slot r0c5",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    940,
+    639,
+    60,
+    63
+   ],
+   "state": "occupied x2",
+   "label": "storage slot r0c6",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    580,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x10",
+   "label": "storage slot r1c0",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    640,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x1",
+   "label": "storage slot r1c1",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    700,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x5",
+   "label": "storage slot r1c2",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    760,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x24",
+   "label": "storage slot r1c3",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    820,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x17",
+   "label": "storage slot r1c4",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    880,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x6",
+   "label": "storage slot r1c5",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    940,
+    702,
+    60,
+    63
+   ],
+   "state": "occupied x2",
+   "label": "storage slot r1c6",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    580,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x31",
+   "label": "storage slot r2c0",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    640,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x9",
+   "label": "storage slot r2c1",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    700,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x4",
+   "label": "storage slot r2c2",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    760,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x2",
+   "label": "storage slot r2c3",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    820,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x3",
+   "label": "storage slot r2c4",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    880,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x12",
+   "label": "storage slot r2c5",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    940,
+    765,
+    60,
+    63
+   ],
+   "state": "occupied x22",
+   "label": "storage slot r2c6",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    580,
+    828,
+    60,
+    63
+   ],
+   "state": "occupied x1",
+   "label": "storage slot r3c0",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    640,
+    828,
+    60,
+    63
+   ],
+   "state": "occupied x1",
+   "label": "storage slot r3c1",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    700,
+    828,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r3c2",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    760,
+    828,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r3c3",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    820,
+    828,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r3c4",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    880,
+    828,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r3c5",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    940,
+    828,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r3c6",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    580,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c0",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    640,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c1",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    700,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c2",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    760,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c3",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    820,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c4",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    880,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c5",
+   "window": "storage"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    940,
+    891,
+    60,
+    63
+   ],
+   "state": "empty",
+   "label": "storage slot r4c6",
+   "window": "storage"
+  },
+  {
+   "type": "button",
+   "rect": [
+    621,
+    964,
+    23,
+    27
+   ],
+   "state": "normal",
+   "label": "list mode (icon)",
+   "window": "storage"
+  },
+  {
+   "type": "button",
+   "rect": [
+    652,
+    964,
+    47,
+    27
+   ],
+   "state": "normal",
+   "label": "search (icon)",
+   "window": "storage"
+  },
+  {
+   "type": "button",
+   "rect": [
+    736,
+    964,
+    86,
+    27
+   ],
+   "state": "normal",
+   "label": "search",
+   "window": "storage"
+  },
+  {
+   "type": "button",
+   "rect": [
+    836,
+    964,
+    84,
+    27
+   ],
+   "state": "normal",
+   "label": "sort",
+   "window": "storage"
+  },
+  {
+   "type": "button",
+   "rect": [
+    932,
+    964,
+    66,
+    27
+   ],
+   "state": "normal",
+   "label": "close",
+   "window": "storage"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    0,
+    701,
+    484,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "inventory"
+  },
+  {
+   "type": "minimize",
+   "rect": [
+    435,
+    709,
+    17,
+    16
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "inventory"
+  },
+  {
+   "type": "close",
+   "rect": [
+    460,
+    709,
+    18,
+    17
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "inventory"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    10,
+    731,
+    26,
+    36
+   ],
+   "state": "selected",
+   "label": "item",
+   "window": "inventory"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    10,
+    770,
+    26,
+    36
+   ],
+   "state": "normal",
+   "label": "equip",
+   "window": "inventory"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    10,
+    809,
+    26,
+    36
+   ],
+   "state": "normal",
+   "label": "etc",
+   "window": "inventory"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    10,
+    848,
+    26,
+    36
+   ],
+   "state": "normal",
+   "label": "etc",
+   "window": "inventory"
+  },
+  {
+   "type": "tab",
+   "rect": [
+    10,
+    887,
+    26,
+    36
+   ],
+   "state": "normal",
+   "label": "cash",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    42,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r0c0",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    96,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x15",
+   "label": "inventory slot r0c1",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    150,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x147",
+   "label": "inventory slot r0c2",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    204,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x88",
+   "label": "inventory slot r0c3",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    258,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x10",
+   "label": "inventory slot r0c4",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    312,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x5",
+   "label": "inventory slot r0c5",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    366,
+    731,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r0c6",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    42,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x8",
+   "label": "inventory slot r1c0",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    96,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x23",
+   "label": "inventory slot r1c1",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    150,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r1c2",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    204,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r1c3",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    258,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r1c4",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    312,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r1c5",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    366,
+    792,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r1c6",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    42,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x13",
+   "label": "inventory slot r2c0",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    96,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r2c1",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    150,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x5",
+   "label": "inventory slot r2c2",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    204,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r2c3",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    258,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r2c4",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    312,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x15",
+   "label": "inventory slot r2c5",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    366,
+    853,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r2c6",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    42,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x2",
+   "label": "inventory slot r3c0",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    96,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x1",
+   "label": "inventory slot r3c1",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    150,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x22",
+   "label": "inventory slot r3c2",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    204,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x7",
+   "label": "inventory slot r3c3",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    258,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x25",
+   "label": "inventory slot r3c4",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    312,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x23",
+   "label": "inventory slot r3c5",
+   "window": "inventory"
+  },
+  {
+   "type": "grid cell",
+   "rect": [
+    366,
+    914,
+    54,
+    61
+   ],
+   "state": "occupied x18",
+   "label": "inventory slot r3c6",
+   "window": "inventory"
+  },
+  {
+   "type": "scrollbar",
+   "rect": [
+    457,
+    731,
+    21,
+    230
+   ],
+   "state": "vertical, thumb near top",
+   "label": null,
+   "window": "inventory"
+  },
+  {
+   "type": "button",
+   "rect": [
+    109,
+    976,
+    19,
+    20
+   ],
+   "state": "normal",
+   "label": "search (icon)",
+   "window": "inventory"
+  },
+  {
+   "type": "title drag",
+   "rect": [
+    1037,
+    782,
+    495,
+    24
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "chat-room"
+  },
+  {
+   "type": "close",
+   "rect": [
+    1507,
+    789,
+    18,
+    18
+   ],
+   "state": "normal",
+   "label": null,
+   "window": "chat-room"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1044,
+    815,
+    460,
+    25
+   ],
+   "state": "read-only log line",
+   "label": "Sebas*：レイドリック終わったー",
+   "window": "chat-room"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1044,
+    840,
+    460,
+    25
+   ],
+   "state": "read-only log line",
+   "label": "SakumaRiri：おつかれさま〜",
+   "window": "chat-room"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1044,
+    865,
+    460,
+    25
+   ],
+   "state": "read-only log line",
+   "label": "ANRI：もう1周いきますか？",
+   "window": "chat-room"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1044,
+    890,
+    460,
+    25
+   ],
+   "state": "read-only log line",
+   "label": "Show_A：いきましょう！",
+   "window": "chat-room"
+  },
+  {
+   "type": "list row",
+   "rect": [
+    1044,
+    915,
+    460,
+    25
+   ],
+   "state": "read-only log line",
+   "label": "経験値が 10800 上がりました。",
+   "window": "chat-room"
+  },
+  {
+   "type": "scrollbar",
+   "rect": [
+    1507,
+    810,
+    20,
+    152
+   ],
+   "state": "vertical, thumb upper third",
+   "label": null,
+   "window": "chat-room"
+  },
+  {
+   "type": "text field",
+   "rect": [
+    1044,
+    978,
+    458,
+    21
+   ],
+   "state": "empty, caret at left",
+   "label": "chat input",
+   "window": "chat-room"
+  },
+  {
+   "type": "button",
+   "rect": [
+    1505,
+    978,
+    21,
+    21
+   ],
+   "state": "normal",
+   "label": "chat settings (icon)",
+   "window": "chat-room"
+  }
+ ],
+ "total_controls": 239
+}

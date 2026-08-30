@@ -1,0 +1,9 @@
+{
+  "name": "image79-browser-qa",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pinned local browser driver for the image-79 Godot QA loop.",
+  "dependencies": {
+    "playwright": "1.62.1"
+  }
+}
