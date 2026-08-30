@@ -85,5 +85,23 @@
       "one green pixel patch on KAMCHATKA's T",
       "London label tail clipped by its plate in the source"
     ]
+  },
+  "v007": {
+    "file": "final-v007-assembly.png",
+    "sha256": "57856e5f1404549076c8a8dc83cf0550d44dd374514d1f50d124675fcf40ae3d",
+    "method": "FULLY DETERMINISTIC, no generative model: native WorldTimeZone GIF reference (source-locked) + Natural Earth admin-0 country layer through a fitted Mercator projection (projection.json) + plates localized by diffing two live fetches of the same map URL (digits change between loads) + colon-pattern and border-run detectors + declared-region composite with fidelity gate.",
+    "fidelity": {
+      "declared_pixels": 186840,
+      "changed_pixels": 145820,
+      "outside_changed": 0,
+      "passed": true
+    },
+    "spot_checks": "16/16 major countries painted their assigned palette colour (mechanical check in compose_v3.py)",
+    "cost_usd": 0,
+    "known_nits": [
+      "a few source-layout label quirks (Manaus label sits over Bolivia as in the source)",
+      "Ireland/UK strait-adjacent colours acceptable",
+      "one dead second-fetch attempt rate-limited"
+    ]
   }
 }
