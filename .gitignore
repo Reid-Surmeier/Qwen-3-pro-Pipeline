@@ -7,3 +7,7 @@ __pycache__/
 artifacts/figma/candidates/
 artifacts/figma/uploaded-node-4-146.png
 artifacts/figma/uploaded-node-4-147.png
+
+# prototype #111: the Web build is served from the worktree, never committed
+replica/web/
+replica/.godot/

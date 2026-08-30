@@ -1,0 +1,107 @@
+{
+  "note": "BUILDER EVIDENCE, not the verdict.",
+  "window_rect": [
+    1108,
+    297,
+    424,
+    202
+  ],
+  "max_delta": 46,
+  "mean_delta": 0.0465,
+  "pixels_over_16": 23,
+  "pixels_over_32": 10,
+  "total_pixels": 85648,
+  "clusters": [
+    {
+      "size": 9,
+      "rect": [
+        1108,
+        493,
+        6,
+        6
+      ],
+      "max_delta": 44
+    },
+    {
+      "size": 5,
+      "rect": [
+        1108,
+        298,
+        4,
+        5
+      ],
+      "max_delta": 41
+    },
+    {
+      "size": 2,
+      "rect": [
+        1526,
+        297,
+        2,
+        1
+      ],
+      "max_delta": 40
+    },
+    {
+      "size": 2,
+      "rect": [
+        1529,
+        299,
+        2,
+        2
+      ],
+      "max_delta": 46
+    },
+    {
+      "size": 1,
+      "rect": [
+        1113,
+        297,
+        1,
+        1
+      ],
+      "max_delta": 25
+    },
+    {
+      "size": 1,
+      "rect": [
+        1531,
+        302,
+        1,
+        1
+      ],
+      "max_delta": 42
+    },
+    {
+      "size": 1,
+      "rect": [
+        1531,
+        495,
+        1,
+        1
+      ],
+      "max_delta": 21
+    },
+    {
+      "size": 1,
+      "rect": [
+        1529,
+        497,
+        1,
+        1
+      ],
+      "max_delta": 31
+    },
+    {
+      "size": 1,
+      "rect": [
+        1527,
+        498,
+        1,
+        1
+      ],
+      "max_delta": 43
+    }
+  ],
+  "reading": "Every remaining cluster sits on the window's four rounded corners, where the Reference Screen's own magenta reads (251,4,250) after compression while the prototype's desktop is exactly #FF00FF. No cluster lands on a control."
+}
