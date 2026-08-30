@@ -98,3 +98,24 @@ same time, which is what the era's frame tables do.
 `border_leak` also went in: in filled framing the key colour is the tile edge, so it is
 also the containment test — a question the framing can actually answer, unlike every
 fidelity metric tried for filled tiles.
+
+### Take five result, and the trade-off it exposes
+
+Containment holds: `inner_margin` 7.8%, `max_border_leak` **0.0** across all thirty-two
+frames, the green border the same thickness on all four sides in every pose. The cycle is
+eleven poses at an even 100 ms.
+
+But the movement is smaller: **23.0% of pixels differ at the peak, against 40.1% in take
+four.** That is the trade-off, and it is structural rather than a brief failure. The tile
+is the arena. Take four moved further precisely because it was escaping; keeping the
+glass inside a tile whose margin is 7.8% of its width caps how far it can travel.
+
+Getting both means drawing the icon smaller inside its tile — more margin, so more room
+to sweep — which costs detail at 64 pixels. That is an icon-design decision, not a
+pipeline one.
+
+| Take | Framing | Movement at peak | Stayed in the tile |
+| --- | --- | --- | --- |
+| 3 | filled, no margin | ~static | yes (nothing moved) |
+| 4 | filled, no margin | 40.1% | **no** |
+| 5 | tile with 7.8% margin | 23.0% | **yes** |
