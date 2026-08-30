@@ -6,6 +6,7 @@ extends RefCounted
 
 const Errors = preload("res://control_library/control_errors.gd")
 const ChoiceGroup = preload("res://control_library/choice_group.gd")
+const TabsModule = preload("res://control_library/tabs.gd")
 const SelectionViewModule = preload("res://control_library/selection_view.gd")
 const StepperModule = preload("res://control_library/stepper.gd")
 
@@ -45,6 +46,15 @@ func configure(spec: Dictionary) -> Dictionary:
 			state.pending = false
 			state.arrows_visible = true
 			state.text = StepperModule.format_value(state.current, state.target)
+		elif str(control_spec.type) == "SelectionView":
+			state.value = control_spec.value.get("initial")
+			state.text = str(state.value)
+			state.selected_items = []
+			state.opened_item = ""
+			state.item_values = control_spec.value.get("item_values", {}).duplicate(true)
+			state.item_version = int(control_spec.value.get("initial_version", 0))
+			state.drag_state = {"active": false, "source": "", "target": "",
+				"motion_samples": 0}
 		elif control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
 			if state.value is String:
@@ -86,6 +96,8 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 			result = _dispatch_dropdown(entry, gesture, payload)
 		"ChoiceGroup":
 			result = _dispatch_choice_group(entry, gesture, payload)
+		"Tabs":
+			result = _dispatch_tabs(entry, gesture, payload)
 		"SelectionView":
 			result = _dispatch_selection_view(entry, gesture, payload)
 		"Stepper":
@@ -141,10 +153,23 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 	if not entry.spec.get("surfaces", {}).has(surface_id):
 		return ""
 	var state: Dictionary = entry.state
-	var surface: Dictionary = entry.spec.surfaces[surface_id]
+	var asset_surface_id := surface_id
+	if str(entry.spec.type) == "SelectionView":
+		var mapped := str(state.get("item_values", {}).get(surface_id, surface_id))
+		if entry.spec.surfaces.has(mapped):
+			asset_surface_id = mapped
+	var surface: Dictionary = entry.spec.surfaces[asset_surface_id]
 	var semantic := str(state.semantic_state)
 	if str(entry.spec.type) == "SelectionView":
-		semantic = "selected" if str(state.get("value", "")) == surface_id else "unselected"
+		var drag: Dictionary = state.get("drag_state", {})
+		if bool(drag.get("active", false)) and str(drag.get("source", "")) == surface_id:
+			semantic = "dragging"
+		elif bool(drag.get("active", false)) and str(drag.get("target", "")) == surface_id:
+			semantic = "drop_target"
+		elif surface_id in state.get("selected_items", []):
+			semantic = "modifier_selected"
+		else:
+			semantic = "selected" if str(state.get("value", "")) == surface_id else "unselected"
 	elif str(entry.spec.type) == "Stepper":
 		semantic = "visible" if bool(state.get("arrows_visible", true)) else "hidden"
 	var phase := str(state.interaction_phase) \
@@ -233,6 +258,14 @@ func _dispatch_choice_group(entry: Dictionary, gesture: String,
 		"semantic_state": entry.state.semantic_state}
 
 
+func _dispatch_tabs(entry: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	var result: Dictionary = TabsModule.select(entry.spec, entry.state, gesture, payload)
+	if not result.ok:
+		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
+	return result
+
+
 func _dispatch_selection_view(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
 	var result: Dictionary = SelectionViewModule.activate(entry.spec, entry.state,
@@ -240,6 +273,17 @@ func _dispatch_selection_view(entry: Dictionary, gesture: String,
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
 	return result
+
+
+func set_selection_drag_state(control_id: String, active: bool, source: String = "",
+		target: String = "", motion_samples: int = 0) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "DragDrop", Errors.INVALID_CONTROL_SPEC,
+			"drag state requires a SelectionView")
+	var state: Dictionary = controls[control_id].state
+	state.drag_state = {"active": active, "source": source, "target": target,
+		"motion_samples": motion_samples}
+	return {"ok": true, "drag_state": state.drag_state.duplicate(true)}
 
 
 func _dispatch_stepper(entry: Dictionary, gesture: String,

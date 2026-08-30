@@ -17,14 +17,16 @@ const GESTURES := [
 	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
-	"Window": ["MoveWindow", "CloseWindow"],
+	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
 	"ChoiceGroup": ["SelectChoice"],
-	"SelectionView": ["SelectSkill", "OpenSkillDetail"],
+	"Tabs": ["SelectInventoryTab"],
+	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
+		"OpenInventoryItem", "ToggleInventorySelection", "MoveInventoryItem"],
 	"Stepper": ["StepSkill"],
 }
 
@@ -110,6 +112,11 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 				errors, asset_exists)
 	if window.has("drag_geometry"):
 		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
+	if "Resize" in (gestures if gestures is Array else []):
+		_validate_resize_contract(window.get("resize"), path + ".resize", errors, asset_exists)
+	elif window.has("resize"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".resize",
+			"resize geometry requires the shared Resize Gesture Capability"))
 	var controls: Variant = window.get("controls")
 	if not controls is Array or controls.is_empty():
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".controls",
@@ -193,7 +200,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 			path + ".state_set", errors, asset_exists)
 	if control.has("surfaces"):
 		_validate_surfaces(control.surfaces, path + ".surfaces", errors, asset_exists)
-	_validate_type_contract(control, control_type, path, errors)
+	_validate_type_contract(control, control_type, path, errors, asset_exists)
 	var gestures: Variant = control.get("gestures")
 	_validate_gestures(gestures, path + ".gestures", errors)
 	_validate_actions(control.get("actions"), gestures, control_type,
@@ -201,7 +208,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 
 
 static func _validate_type_contract(control: Dictionary, control_type: String,
-		path: String, errors: Array[Dictionary]) -> void:
+		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
 	if control_type == "Toggle":
 		var states: Variant = control.get("semantic_states")
 		if not states is Array or states.size() != 2 or states[0] == states[1]:
@@ -211,8 +218,10 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 		_validate_range_contract(control, path, errors)
 	elif control_type == "Dropdown" or control_type == "ChoiceGroup":
 		_validate_choice_contract(control, control_type, path, errors)
+	elif control_type == "Tabs":
+		_validate_choice_contract(control, control_type, path, errors)
 	elif control_type == "SelectionView":
-		_validate_selection_view_contract(control, path, errors)
+		_validate_selection_view_contract(control, path, errors, asset_exists)
 	elif control_type == "Stepper":
 		_validate_stepper_contract(control, path, errors)
 
@@ -271,11 +280,11 @@ static func _validate_choice_contract(control: Dictionary, control_type: String,
 				and surfaces[str(choice)].state_set.has("selected") \
 				and surfaces[str(choice)].state_set.has("unselected")):
 			errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
-				"ChoiceGroup requires selected/unselected State Sets for every choice"))
+				"%s requires selected/unselected State Sets for every choice" % control_type))
 
 
 static func _validate_selection_view_contract(control: Dictionary, path: String,
-		errors: Array[Dictionary]) -> void:
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
 	var value: Variant = control.get("value")
 	var items: Array = value.get("items", []) if value is Dictionary else []
 	var initial: Variant = value.get("initial") if value is Dictionary else null
@@ -292,15 +301,58 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
 			"SelectionView requires unique items, an initial item, and detail text for every item"))
+	var gestures: Array = control.get("gestures", []) \
+		if control.get("gestures", []) is Array else []
+	if "DoubleActivate" in gestures:
+		var detail_view: Variant = value.get("detail_view") if value is Dictionary else null
+		var detail_size: Variant = detail_view.get("size") \
+			if detail_view is Dictionary else null
+		if not detail_view is Dictionary or not detail_size is Array \
+				or detail_size.size() != 2 or not _positive_number(detail_size[0]) \
+				or not _positive_number(detail_size[1]):
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value.detail_view",
+				"DoubleActivate requires a manifest-owned detail view"))
+		else:
+			_validate_state_set(detail_view.get("state_set"), ["ready"],
+				INTERACTION_PHASES, path + ".value.detail_view.state_set",
+				errors, asset_exists)
+			_validate_asset(str(detail_view.get("font", "")),
+				path + ".value.detail_view.font", errors, asset_exists)
+	if "ModifierActivate" in gestures:
+		var allowed: Variant = value.get("allowed_modifiers") if value is Dictionary else null
+		if not allowed is Array or allowed != ["ctrl"]:
+			errors.append(_error(Errors.INVALID_MODIFIER,
+				path + ".value.allowed_modifiers",
+				"ModifierActivate requires exactly the Control modifier"))
+	if "DragDrop" in gestures:
+		var item_values: Variant = value.get("item_values") if value is Dictionary else null
+		if not item_values is Dictionary or item_values.keys().size() != items.size() \
+				or not items.all(func(item): return item_values.has(str(item))):
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value.item_values",
+				"DragDrop requires one declared value for every SelectionView item"))
+		var targets: Variant = value.get("drop_targets") if value is Dictionary else null
+		if not targets is Array or targets.is_empty() or not targets.all(func(target):
+			return target in items):
+			errors.append(_error(Errors.INVALID_DROP_TARGET, path + ".value.drop_targets",
+				"every DragDrop target must be a declared SelectionView item"))
+		var version: Variant = value.get("initial_version") if value is Dictionary else null
+		if not _number(version) or float(version) < 0.0 or float(version) != floorf(float(version)):
+			errors.append(_error(Errors.GESTURE_CONFLICT, path + ".value.initial_version",
+				"DragDrop requires a non-negative transaction version"))
 	var surfaces: Variant = control.get("surfaces")
+	var required_surface_states := ["selected", "unselected"]
+	if "ModifierActivate" in gestures:
+		required_surface_states.append("modifier_selected")
+	if "DragDrop" in gestures:
+		required_surface_states.append_array(["dragging", "drop_target"])
 	if not surfaces is Dictionary or not items.all(func(item):
 		return surfaces.has(str(item)) and surfaces[str(item)] is Dictionary \
 			and surfaces[str(item)].has("geometry") \
 			and surfaces[str(item)].has("state_set") \
-			and surfaces[str(item)].state_set.has("selected") \
-			and surfaces[str(item)].state_set.has("unselected")):
+			and required_surface_states.all(func(state):
+				return surfaces[str(item)].state_set.has(state))):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
-			"SelectionView requires selected/unselected State Sets for every item"))
+			"SelectionView requires every declared item visual State Set"))
 	var value_control_ids: Variant = value.get("value_control_ids", {}) \
 		if value is Dictionary else null
 	if not value_control_ids is Dictionary or not value_control_ids.keys().all(func(item):
@@ -343,6 +395,35 @@ static func _validate_gestures(gestures: Variant, path: String,
 		if gesture not in GESTURES:
 			errors.append(_error(Errors.UNSUPPORTED_GESTURE, path,
 				"unsupported gesture: %s" % str(gesture)))
+
+
+static func _validate_resize_contract(resize: Variant, path: String,
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
+	if not resize is Dictionary:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path,
+			"Resize requires grip geometry and minimum/maximum sizes"))
+		return
+	_validate_geometry(resize.get("grip_geometry"), path + ".grip_geometry", errors)
+	var minimum: Variant = resize.get("minimum")
+	var maximum: Variant = resize.get("maximum")
+	var valid: bool = minimum is Array and maximum is Array \
+		and minimum.size() == 2 and maximum.size() == 2 \
+		and _positive_number(minimum[0]) and _positive_number(minimum[1]) \
+		and _positive_number(maximum[0]) and _positive_number(maximum[1])
+	if valid:
+		valid = float(minimum[0]) <= float(maximum[0]) \
+			and float(minimum[1]) <= float(maximum[1])
+	if not valid:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path,
+			"Resize minimum must be positive and no larger than maximum"))
+	if resize is Dictionary and resize.has("state_set"):
+		_validate_state_set(resize.state_set, ["ready"], INTERACTION_PHASES,
+			path + ".state_set", errors, asset_exists)
+	var frame: Variant = resize.get("frame") if resize is Dictionary else null
+	if frame is Dictionary:
+		for field in ["title_fill", "footer", "footer_fill", "right_edge"]:
+			_validate_asset(str(frame.get(field, "")), path + ".frame." + field,
+				errors, asset_exists)
 
 
 static func _validate_stepper_contract(control: Dictionary, path: String,

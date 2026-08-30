@@ -12,11 +12,23 @@ var visuals := {}
 var hits := {}
 var list_labels := {}
 var list_overlay: Control
-var detail_panel: PanelContainer
+var detail_panel: Control
 var detail_label: Label
 var _held_item := ""
 var _held_button := 0
 var _list_mode := false
+var _press_global := Vector2.ZERO
+var _press_local := Vector2.ZERO
+var _press_modifiers: Array[String] = []
+var _dragging := false
+var _drag_target := ""
+var _drag_version := 0
+var _motion_samples := 0
+var _double_pending := false
+var _single_generation := 0
+
+const DRAG_THRESHOLD := 4.0
+const DOUBLE_INTERVAL_SECONDS := 0.22
 
 
 func configure(control_spec: Dictionary, control_runtime: ControlRuntime) -> void:
@@ -47,14 +59,18 @@ func set_list_mode(enabled: bool) -> void:
 
 
 func show_detail(item: String) -> void:
-	if item not in spec.value.items:
+	if item not in spec.value.items or detail_panel == null:
 		return
 	var surface: Dictionary = spec.surfaces[item]
 	var geometry: Dictionary = surface.geometry
 	detail_label.text = str(spec.value.details[item])
+	var detail_view: Variant = spec.value.get("detail_view", {})
+	var offset: Array = detail_view.get("offset", [8, 0]) \
+		if detail_view is Dictionary else [8, 0]
 	detail_panel.position = Vector2(
-		minf(float(geometry.x) + float(geometry.width) + 8.0, size.x - 156.0),
-		minf(float(geometry.y), size.y - 50.0))
+		minf(float(geometry.x) + float(geometry.width) + float(offset[0]),
+			size.x - detail_panel.size.x),
+		minf(float(geometry.y) + float(offset[1]), size.y - detail_panel.size.y))
 	detail_panel.visible = true
 
 
@@ -66,7 +82,18 @@ func rendered_facts() -> Dictionary:
 		"detail_text": "" if detail_label == null else detail_label.text,
 		"list_values": _list_values(),
 		"list_labels": _rendered_list_labels(),
+		"gesture_drag": runtime.qa_state().controls[spec.id].get("drag_state", {}),
+		"surface_geometry": _surface_geometry(),
 	}
+
+
+func _surface_geometry() -> Dictionary:
+	var geometry := {}
+	for item in hits:
+		var rect: Rect2 = hits[item].get_global_rect()
+		geometry[str(item)] = {"x": rect.position.x, "y": rect.position.y,
+			"width": rect.size.x, "height": rect.size.y}
+	return geometry
 
 
 func refresh() -> void:
@@ -119,18 +146,49 @@ func _add_list_overlay() -> void:
 
 
 func _add_detail_panel() -> void:
-	detail_panel = PanelContainer.new()
+	var detail_view: Variant = spec.value.get("detail_view")
+	if not detail_view is Dictionary:
+		var legacy := PanelContainer.new()
+		detail_panel = legacy
+		detail_panel.name = "ContextDetail"
+		detail_panel.size = Vector2(156, 50)
+		detail_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color8(246, 242, 245)
+		style.border_color = Color8(70, 89, 159)
+		style.set_border_width_all(1)
+		legacy.add_theme_stylebox_override("panel", style)
+		detail_label = Label.new()
+		detail_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		detail_label.add_theme_font_override("font",
+			load("res://fonts/PixelMplus10-Regular.ttf"))
+		detail_label.add_theme_font_size_override("font_size", 12)
+		detail_label.add_theme_color_override("font_color", Color8(42, 37, 42))
+		detail_panel.add_child(detail_label)
+		add_child(detail_panel)
+		detail_panel.visible = false
+		return
+	detail_panel = Control.new()
 	detail_panel.name = "ContextDetail"
-	detail_panel.size = Vector2(156, 50)
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color8(246, 242, 245)
-	style.border_color = Color8(70, 89, 159)
-	style.set_border_width_all(1)
-	detail_panel.add_theme_stylebox_override("panel", style)
+	detail_panel.size = Vector2(float(detail_view.size[0]), float(detail_view.size[1]))
+	detail_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var background := TextureRect.new()
+	background.name = "Background"
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	background.texture = load(str(detail_view.state_set.ready.idle))
+	background.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	background.stretch_mode = TextureRect.STRETCH_KEEP
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	detail_panel.add_child(background)
 	detail_label = Label.new()
-	detail_label.add_theme_font_override("font", load("res://fonts/PixelMplus10-Regular.ttf"))
-	detail_label.add_theme_font_size_override("font_size", 12)
-	detail_label.add_theme_color_override("font_color", Color8(42, 37, 42))
+	detail_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	detail_label.position = Vector2(float(detail_view.padding[0]),
+		float(detail_view.padding[1]))
+	detail_label.size = detail_panel.size - detail_label.position * 2.0
+	detail_label.add_theme_font_override("font", load(str(detail_view.font)))
+	detail_label.add_theme_font_size_override("font_size", int(detail_view.font_size))
+	detail_label.add_theme_color_override("font_color", Color.from_string(
+		str(detail_view.font_color), Color8(42, 37, 42)))
 	detail_panel.add_child(detail_label)
 	add_child(detail_panel)
 	detail_panel.visible = false
@@ -180,23 +238,131 @@ func _item_input(event: InputEvent, item: String) -> void:
 		if event.pressed:
 			_held_item = item
 			_held_button = event.button_index
+			_press_global = event.global_position
+			_press_local = event.position
+			_press_modifiers = _modifiers(event)
+			_dragging = false
+			_drag_target = ""
+			_motion_samples = 0
+			_drag_version = int(runtime.qa_state().controls[spec.id].get("item_version", 0))
+			_double_pending = event.button_index == MOUSE_BUTTON_LEFT \
+				and event.double_click and "DoubleActivate" in spec.gestures
+			if _double_pending:
+				_single_generation += 1
 			runtime.set_interaction_phase(spec.id, "pressed", item)
 			_refresh()
 			changed.emit(spec.id, {"ok": true, "phase": "pressed", "surface": item})
 			accept_event()
 		elif _held_item == item and _held_button == event.button_index:
-			var gesture := "ContextActivate" \
-				if event.button_index == MOUSE_BUTTON_RIGHT else "Activate"
-			_held_item = ""
-			_held_button = 0
-			var result: Dictionary = runtime.dispatch(spec.id, gesture,
-				{"item": item, "button": "right" if gesture == "ContextActivate" else "left",
-				 "position": [event.position.x, event.position.y],
-				 "global_position": [event.global_position.x, event.global_position.y]})
-			runtime.set_interaction_phase(spec.id, "hover", item)
+			_finish_pointer(event)
+
+
+func _input(event: InputEvent) -> void:
+	if _held_item.is_empty():
+		return
+	if event is InputEventMouseMotion and _held_button == MOUSE_BUTTON_LEFT \
+			and "DragDrop" in spec.gestures:
+		var distance: float = event.global_position.distance_to(_press_global)
+		if distance > DRAG_THRESHOLD:
+			_dragging = true
+			_single_generation += 1
+			_drag_target = _item_at_global(event.global_position)
+			_motion_samples += 1
+			runtime.set_selection_drag_state(spec.id, true, _held_item,
+				_drag_target, _motion_samples)
 			_refresh()
-			changed.emit(spec.id, result)
-			accept_event()
+			changed.emit(spec.id, {"ok": true, "phase": "dragging",
+				"source": _held_item, "target": _drag_target,
+				"motion_samples": _motion_samples})
+	if event is InputEventMouseButton and not event.pressed \
+			and event.button_index == _held_button:
+		_finish_pointer(event)
+
+
+func _finish_pointer(event: InputEventMouseButton) -> void:
+	if _held_item.is_empty():
+		return
+	var item := _held_item
+	var button := _held_button
+	var was_dragging := _dragging
+	var was_double := _double_pending
+	var modifiers := _press_modifiers.duplicate()
+	var payload := {
+		"item": item,
+		"button": "right" if button == MOUSE_BUTTON_RIGHT else "left",
+		"position": [event.position.x, event.position.y],
+		"global_position": [event.global_position.x, event.global_position.y],
+		"modifiers": modifiers,
+	}
+	_held_item = ""
+	_held_button = 0
+	_double_pending = false
+	var result: Dictionary
+	if was_dragging:
+		var target := _item_at_global(event.global_position)
+		result = runtime.dispatch(spec.id, "DragDrop", {
+			"source": item, "target": target, "version": _drag_version,
+			"start_position": [_press_global.x, _press_global.y],
+			"end_position": [event.global_position.x, event.global_position.y],
+			"motion_samples": _motion_samples, "modifiers": modifiers,
+		})
+		runtime.set_selection_drag_state(spec.id, false)
+		_dragging = false
+		_drag_target = ""
+	elif button == MOUSE_BUTTON_RIGHT:
+		result = runtime.dispatch(spec.id, "ContextActivate", payload)
+	elif not modifiers.is_empty() and "ModifierActivate" in spec.gestures:
+		result = runtime.dispatch(spec.id, "ModifierActivate", payload)
+	elif was_double:
+		result = runtime.dispatch(spec.id, "DoubleActivate", payload)
+	elif "DoubleActivate" in spec.gestures:
+		_schedule_single(payload)
+		runtime.set_interaction_phase(spec.id, "hover", item)
+		_refresh()
+		accept_event()
+		return
+	else:
+		result = runtime.dispatch(spec.id, "Activate", payload)
+	runtime.set_interaction_phase(spec.id, "hover", item)
+	_refresh()
+	changed.emit(spec.id, result)
+	accept_event()
+
+
+func _schedule_single(payload: Dictionary) -> void:
+	_single_generation += 1
+	var generation := _single_generation
+	get_tree().create_timer(DOUBLE_INTERVAL_SECONDS).timeout.connect(
+		_commit_single.bind(generation, payload.duplicate(true)))
+
+
+func _commit_single(generation: int, payload: Dictionary) -> void:
+	if generation != _single_generation:
+		return
+	var result: Dictionary = runtime.dispatch(spec.id, "Activate", payload)
+	runtime.set_interaction_phase(spec.id, "hover", str(payload.item))
+	_refresh()
+	changed.emit(spec.id, result)
+
+
+func _item_at_global(point: Vector2) -> String:
+	for item in hits:
+		if hits[item].get_global_rect().has_point(point):
+			return str(item)
+	return ""
+
+
+func _modifiers(event: InputEventWithModifiers) -> Array[String]:
+	var modifiers: Array[String] = []
+	if event.ctrl_pressed:
+		modifiers.append("ctrl")
+	if event.alt_pressed:
+		modifiers.append("alt")
+	if event.shift_pressed:
+		modifiers.append("shift")
+	if event.meta_pressed:
+		modifiers.append("meta")
+	return modifiers
 
 
 func _refresh() -> void:

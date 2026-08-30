@@ -1,0 +1,3770 @@
+{
+  "schema_version": 1,
+  "issue": 127,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "window_rect": [
+      0,
+      701,
+      484,
+      303
+    ]
+  },
+  "assembly": "deterministic source-pixel crops and source-palette state transforms",
+  "provider_requests": 0,
+  "files": [
+    {
+      "path": "godot/assets/image-79/inventory/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-unselected-idle.png",
+      "sha256": "4e9ca3922649e326955461990271da07330cd9fc80fac3db9750d8a0e4039a03",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-unselected-hover.png",
+      "sha256": "39014a871ddfb4a1cb2110d32ce307b0ff620dab08bdb4cff112067e0fad11de",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-unselected-pressed.png",
+      "sha256": "aaf4f3c8e0afa7a48c0aade2a34d95bdccd74aba8b8bed79ba7866ff34cb23b5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-selected-idle.png",
+      "sha256": "edeb329d4cddebe0676aa66811bb8cc55477423a995fec55621b0b31d7bc4f76",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-selected-hover.png",
+      "sha256": "85ec93147fefbdfe59a273b0fd1c91a92c575dbcae7a5a14e7b404a8122e21c9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-selected-pressed.png",
+      "sha256": "5630f3bd0a36b80ebe151dd0581445939aa70854bd9cbf63d56741a50363c8ea",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-modifier-idle.png",
+      "sha256": "0a97c52b2249c7aad694ca3b2ad1d317f9cdb2de60b74dc25cf2b8d14099006c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-modifier-hover.png",
+      "sha256": "0c2225c5c2df7a85e50db50eb995fe2d5ee41f0981b850a7614705bc8034d56b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-modifier-pressed.png",
+      "sha256": "632aba63337ce4beba480037c3dcb5cea0b72bca9f7dbef3790add14b4727c0b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-dragging-idle.png",
+      "sha256": "70ed93468f114fad17832653c50e33eef63b47880530bd26df3c83a3b1a0e28f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-dragging-hover.png",
+      "sha256": "5071569519d2374bcc9e795e732b89699a451a3a81faa0d104a81ade4833ebed",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-dragging-pressed.png",
+      "sha256": "b28d3284381df2ee7a04599703ea304cf78bcff46442c2de1d7c798f23b605c6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-drop-idle.png",
+      "sha256": "c30ade9caea85295af6efe81ec24d2441e98586d718f5789262508f22cb21161",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-drop-hover.png",
+      "sha256": "d6058f1998d851f6b545797bf956b8ad318fe6430e6583682f4ccec04fd3809c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c0-drop-pressed.png",
+      "sha256": "90e60f29d23b4408456a7fcdbe392dcc1052a3a93c8f746d0c14231012eafe6d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-unselected-idle.png",
+      "sha256": "d3b09de0cf89f2c7ab0f78a4d8d1040e22359b8dde28d5923c6728c1207a020d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-unselected-hover.png",
+      "sha256": "dd99a3a28024beac03351c6b8146fc4f432debd0930cf37f819c321d65fd67e9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-unselected-pressed.png",
+      "sha256": "951519d5f497a416353dacee92993f3dc6be3af5f160f166a773a4a7e7a3f746",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-selected-idle.png",
+      "sha256": "9259b271c3e0da2fbec774e29c71bd30392f38ee9f8360d0c34f782b651070b8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-selected-hover.png",
+      "sha256": "2a2cf63837119a175447309fd76b75d1f0c87067d40e867f335f19e613c10029",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-selected-pressed.png",
+      "sha256": "088c47f6947b17b3f03c2d4a4484a025b815cba64fd3bab92b81ab0a502de8e3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-modifier-idle.png",
+      "sha256": "620ffc9219a200a6d4c529368e63885c79b0a572c477c0159cd5b331330e2778",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-modifier-hover.png",
+      "sha256": "7d3c55490c831298dfc974097559e1cf9cbb1a9ebb8221700c3c34c1faeeff26",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-modifier-pressed.png",
+      "sha256": "3e33d9a3fe2754c27df86096c72f3edc29217593323f9af2d3ad688eed245284",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-dragging-idle.png",
+      "sha256": "6d4d23e6bd58edf8d29c9e8c1320960552727c41c1178d4018b32df340bd3f7b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-dragging-hover.png",
+      "sha256": "3498d2b3ff9486b8ca8a6c70a16226dde26b504062f85b493c96bebcf3d4585a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-dragging-pressed.png",
+      "sha256": "8912d630909e836f2a574ecf1ff8b4cf4b3c15ee4ac7365f95bb20d654f3ed5f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-drop-idle.png",
+      "sha256": "631d682d6c84a3cd532ee51cd3d9afd453f2f421280ade0b1045942b0d203394",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-drop-hover.png",
+      "sha256": "6d8168279da2d09d757952292d0d60ad1afcfb00d0f0a31b9780af120e8173dd",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c1-drop-pressed.png",
+      "sha256": "e2fd3e0b8a3fc1e87243cab6378504ea1a48dbfa753afedf535119e3ed918fe2",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-unselected-idle.png",
+      "sha256": "ed2efa60679b415c8fb0199024d211c4875b309a205434e784331ff340b6ae69",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-unselected-hover.png",
+      "sha256": "33b397ddf7c7f52155cb1bb281e3f2d2f3c67574c40e7353b402b8fd50b89369",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-unselected-pressed.png",
+      "sha256": "15a87a74dbcfc9f30b32bfb23a168bab44e641ef29859f101c1832f28b8a2093",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-selected-idle.png",
+      "sha256": "3a81540f99389fb1f1268ea7866402104031ee8ecf0aa78cb10298bc9d070c71",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-selected-hover.png",
+      "sha256": "f4fcc517317763cbd9e8ec9fd6f8d4f709897e75b1fe1c3a72d48d9096d93dc3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-selected-pressed.png",
+      "sha256": "9b928a6ef94e781b12bcf187fc2db2f8dcb8907f37e7c661bc1bcbce2d8264bc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-modifier-idle.png",
+      "sha256": "2d287603d9de2302a3f66ab6acd9933405458eb59e2d4100b6a57a35a04b28b5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-modifier-hover.png",
+      "sha256": "f4f5ae1e7ff0b647832db154a71355dfe43aa23b6d0a0f5964a29f8e71d6e3a3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-modifier-pressed.png",
+      "sha256": "ecaf3d462aff715fc809b91f463fa8912323d4d3f46a2ec033611b00c91f9018",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-dragging-idle.png",
+      "sha256": "aaadb44f48e3b43b5a1b792bf0738bcada52945208b2253c3d16803011214625",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-dragging-hover.png",
+      "sha256": "2943c1d1d1ee70914a8c87c82cd1a496f201627450272eda9d9efc9920e74040",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-dragging-pressed.png",
+      "sha256": "0c02258a759a1815645c5c44efe7c25e7c0b4919d136c34e4ba95614f5f95fba",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-drop-idle.png",
+      "sha256": "cd4d760770130c836c5611e6a66f0e7edfb8ec76924863f018378ee97558b7a0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-drop-hover.png",
+      "sha256": "5aaeced322e8871ab2fdbdb788976feccb5f157991ae52ece5d4a08f9c487b88",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c2-drop-pressed.png",
+      "sha256": "4ff9a06eb562ddf67bc3dba5c068b753259ac114f2f913c55051a333fba2088f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-unselected-idle.png",
+      "sha256": "e792cea0bf93ff5d8226dd16f099a09a068118fd291548efc4d21f56be5156f8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-unselected-hover.png",
+      "sha256": "a91e1bf34dc88559295a479bf22318bf984d47b28120d24481f38548f9da74f3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-unselected-pressed.png",
+      "sha256": "bd29ffe6c5f832fc0e8eb7cc71077e00ff9be293908678bd821e773e7e885297",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-selected-idle.png",
+      "sha256": "793d6fb45f29e0561ca82a84e352d4f4b19a2a5fea24b84a8db2365b6d8bd517",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-selected-hover.png",
+      "sha256": "d14df49df397ea2825ac006f30d5a78dc4d79affe6bb7c5413da08613f359a8c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-selected-pressed.png",
+      "sha256": "c0c598459ec7f6e555d664b54e079bb7e05f1048419f67355df38e6837b8502d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-modifier-idle.png",
+      "sha256": "fe080f8830577fc7702d11ec60b3e9bfd1a6bfad2aa69b23a86b724365cce4d9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-modifier-hover.png",
+      "sha256": "2a223ed168fa2df33d876f38379c90fe89b6cac455385853916fb37240f2f030",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-modifier-pressed.png",
+      "sha256": "28c83c7ff07bda3ad26504e86df0ac339d32ad01d41c4c7cf2914c0cd5f424c2",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-dragging-idle.png",
+      "sha256": "3072849ab7af28d1a8b3668765ee0963d32240ffe93c29d104e419587adeb526",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-dragging-hover.png",
+      "sha256": "f3b47fe793dfca6fe795f036e567a92bf6f53a84bd3398661cf01236ae3e625a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-dragging-pressed.png",
+      "sha256": "d3aa3ad5f45cd14297d377d4f7c2a0f85b777e68e86ad9f50d7a8d0445cbfd70",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-drop-idle.png",
+      "sha256": "298f11c7ac6ffd03305c19667b6e785e180a122c96472f840e1731b7bf47cb4f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-drop-hover.png",
+      "sha256": "bf6efca103e13526bcf9f2e8cf83be25893d99359da2b4a04babc955e73e05c8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c3-drop-pressed.png",
+      "sha256": "67438d945e3fa9fe9861a5a7dbb1b30b61d0af6bfb048166fd1a7c9b7d963ea3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-unselected-idle.png",
+      "sha256": "ef907a91302b68c2c7c2f5a5255c27f62f1a811096412e1c0004a69419516532",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-unselected-hover.png",
+      "sha256": "c304820211140270be382b65efac4741e861dcf208fb6f0e0659b3eb631a1297",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-unselected-pressed.png",
+      "sha256": "3545a387773eed3266fa7f9422803e7172abb7b32a94a9fa0121ecf875376250",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-selected-idle.png",
+      "sha256": "58f747b6d0505fc7e9655896b181e42f3dff485da4647c26f70f379f6a734f95",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-selected-hover.png",
+      "sha256": "034c18790158768f733b1bd1f20b7402ad2d51202dd0f3763f6af6fb2083cc28",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-selected-pressed.png",
+      "sha256": "cedf73bf04b098cb485d30e5a944d99d92cb21c02e3502a893631b6fc155c993",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-modifier-idle.png",
+      "sha256": "dc64c3d7ddf1aec02dde34f4d060912dd5c047bde72dae6c23c6ba175dcb5d84",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-modifier-hover.png",
+      "sha256": "d47632ecc472f63336a306ec96cf56baf3f0c87e0206900d17d25b779e9aa4cb",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-modifier-pressed.png",
+      "sha256": "ed6c104b4937d14cf3eaad6707942d9980671868f1f6dc564abddae52a324c19",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-dragging-idle.png",
+      "sha256": "d00a39f0429758247f80f8cc200b778c5835f674d061f193737099ac28a52a26",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-dragging-hover.png",
+      "sha256": "8237e85db4a49e4e4ac4479b1629f9d66c419ee8e300a80f35d3a13b117b404b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-dragging-pressed.png",
+      "sha256": "20b7e00232fa37fcd164e77b8e348c4d34216e57de585bb3b7e019c4dabf9775",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-drop-idle.png",
+      "sha256": "99600d9afcc25fdaca51be8d1f66d3e192bcfc9a96b9593af8cdd8186384b9d5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-drop-hover.png",
+      "sha256": "d2b78609b91ec88dbad2d5d75fa37e86549b8e2f10df9d235b38e57bd68c690f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c4-drop-pressed.png",
+      "sha256": "ce47d9796d2c44163f604c33f948b5d7cedd5f2f0abd2735a86780a9897b00da",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-unselected-idle.png",
+      "sha256": "d9327be3e7c9bd7b12815a777eeb0f64561180d7718a8a9ead34d10b0dc01422",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-unselected-hover.png",
+      "sha256": "a22f81d505f457840b4f879d08c2fa717f57f4f884692abb03fd4a971e2b9ef4",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-unselected-pressed.png",
+      "sha256": "7df0153a3e9679a54610786136e01e45914e7f9fb20e289557f0948e459f6533",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-selected-idle.png",
+      "sha256": "271b8d2bb4905c5d020ad5bb1311f25bf0061746f67f9370932b8addd2488b34",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-selected-hover.png",
+      "sha256": "5088e7e6055c7860ba4314cca536229f7ef506101b04b8cfd84480c100d3a7a8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-selected-pressed.png",
+      "sha256": "8b4a776abba856b0717364bce6678cb39bc5aef1ba73ab62b7891d6a574cc735",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-modifier-idle.png",
+      "sha256": "b8feec834ed26382c23d3182265b2b030d94bbacfe291f125402017bd95e9ea9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-modifier-hover.png",
+      "sha256": "d23ceb0cbdb50b1ae0f6acc807d9916d8be7d8592788f018b815aaa40873a045",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-modifier-pressed.png",
+      "sha256": "a6e2ceca92240eb38c2c2dcce0b0497d3264c943215180ad80df64b1b9b0cb55",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-dragging-idle.png",
+      "sha256": "1c145be73fb3a826efdc08977f8f754eb66530845a1adc92d1ad9d2469fa023d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-dragging-hover.png",
+      "sha256": "e82f52e0d404eb54a1e1edceb7c19e99710e076792bb6c568c549fc76a66fe27",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-dragging-pressed.png",
+      "sha256": "414995758154c05d3dadc373d947c75e9b3733fea2d81f543c5889d418d1d9ad",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-drop-idle.png",
+      "sha256": "0f74196416edf7dd8f0ab554a6277a465257d77eec6a7861a09e9fb1b9dbe16e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-drop-hover.png",
+      "sha256": "380288641ce17ca0fc24821d5f859c4e6b513cac1b2451ef2ad04114fb9d227e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c5-drop-pressed.png",
+      "sha256": "d07622c201cbe9d68824284ad3f8168850da041f422da65cd337f6ce878953d7",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-unselected-idle.png",
+      "sha256": "7c58bcab42e00265888d8ba409629147a8975010d9ae26f54e0c60a896e8cba4",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-unselected-hover.png",
+      "sha256": "0cf660ae53a082116b068a2189f97765bf8d7ff509e67f0794520913b70c5409",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-unselected-pressed.png",
+      "sha256": "a23f1b43931cb227906569619ac730b896116b33df871cc3c5271be5cbad3416",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-selected-idle.png",
+      "sha256": "d93b508ced5d0afe8c1bbdd7ce94ba753a81601520ef50f63be77ecd39508a6b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-selected-hover.png",
+      "sha256": "488160fedbce605ba73c17023efc82be2dafaf87d41de24f042468c11549fbdf",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-selected-pressed.png",
+      "sha256": "77df19af47f7188a643e38ad00f0054deb1fd3a41b9056f6781b441e3df8ef8e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-modifier-idle.png",
+      "sha256": "a53cff195acfb424ce41f331cb2646de91a8fa97411e04c92805e0a088c35086",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-modifier-hover.png",
+      "sha256": "e89d0fb9f97f58b9eb2d2d57d082ad750d9f418741bfba71d184fd3b030e9dd6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-modifier-pressed.png",
+      "sha256": "4c8cf8b6d540c32dae7e397fee584eae9237d30130a1331c3275197cb0da972b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-dragging-idle.png",
+      "sha256": "4cad07dc447cc0a252c0e06b56de57d0977e37d7d33fe137c40b3be1fa66e3e1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-dragging-hover.png",
+      "sha256": "39c77554ddb34bb583361d939854a5844c222df33d23602b819a92966e4d003d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-dragging-pressed.png",
+      "sha256": "3d185a0dfe6f22274d4f43e77569607bb15382dfaf707be8c3043d3c94dbe9a3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-drop-idle.png",
+      "sha256": "69c476fcb285d373b99ffa0e06b81edb17c2573facca466cac2031ca7e4eae42",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-drop-hover.png",
+      "sha256": "90ff1ca22452bdfad8dcb0255292c77e86d31ad5d1d312b526e70de5d2a03a02",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r0c6-drop-pressed.png",
+      "sha256": "1be20b60d46dbb359eb2baf3273c3b8c4fbe671a40f28825927235c0102f17a5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-unselected-idle.png",
+      "sha256": "04a0756423e375bd02ef6e2caefc2ba003f53696ccd5c5d27866c76298f0c433",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-unselected-hover.png",
+      "sha256": "95ea1e2bd1b703a8979c844a80c7ffddec0d78c4e8b4a1db8846af41503e2c55",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-unselected-pressed.png",
+      "sha256": "f9e09da5078c58a3a177ab4c80b91702bcf75dceb1ea5f60ece8063b55133f0b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-selected-idle.png",
+      "sha256": "4a706e40ff41d25966599008806105a819fc2585d568cd5b71c667e7fd4da38a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-selected-hover.png",
+      "sha256": "8e547cf36ab0077ab2a48cfdead5ecb8d94b733b2ae3ad4c097d87afe43ab5f5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-selected-pressed.png",
+      "sha256": "4245b8a756d8d2dc16b0e7bc1f51ec85396533a9a130dc8e7198109532641846",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-modifier-idle.png",
+      "sha256": "aa524292614a1fa8598a4c91734f1e35173fb1dc03e9c39d69d3b546911b963d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-modifier-hover.png",
+      "sha256": "5a397708eebbf9f7d9005addf7207b889af465cfe18026373719997bcb85618a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-modifier-pressed.png",
+      "sha256": "9225b95c0a7c66feef00e4682cc0d0ecec9f3d9f711e28dc7ce06090605702fe",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-dragging-idle.png",
+      "sha256": "eafe499e52631dbba52eeb2c386a445eeccf297ce440f01c762218d36805b7b5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-dragging-hover.png",
+      "sha256": "6765867afbde8be81ffb5f59a345df300a26c969598de9b43d651b567e2e5197",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-dragging-pressed.png",
+      "sha256": "59a68fb77d23e43117ffd6ebb4d46a5cd0d0c01fa37bb990addf6128931233ae",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-drop-idle.png",
+      "sha256": "a0e2853d8d5d6db154de2ebbda36b2f09a8e3f73f1c497f90652b1a5166d1af6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-drop-hover.png",
+      "sha256": "b63ee2420824cfc573575e41ec4181892f17c61773d97704080e0a7da18ac29f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c0-drop-pressed.png",
+      "sha256": "e0fec10417c9a17670f5a44a0d36edc2be09b7feb7667d2f44bd2be9691cbfe3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-unselected-idle.png",
+      "sha256": "c75e8e2e739a32d24ba21a87344d7bff2d61b30293ae0574a600043f583c2b78",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-unselected-hover.png",
+      "sha256": "f47c0651653d123ae12a49d2daa9a4ddeb083ee80a9c0b578d8c244ef436359d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-unselected-pressed.png",
+      "sha256": "f3f4e98553973e8da0a0d5ceab3aa7300e668dbcd6e1e214612a51d0b430513a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-selected-idle.png",
+      "sha256": "a73f0f7cb36a09119078cb50cd5604524ab09e741731e3fa143662adb7fddca6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-selected-hover.png",
+      "sha256": "808fc14e1ffd04f781c3ab562359a6936de3e1ffe9e92534b0220fb80f0063ad",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-selected-pressed.png",
+      "sha256": "80f30d00b5c22a2659c593d45c7140c42ca63b93351edd48aa0c177920deb437",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-modifier-idle.png",
+      "sha256": "af9f3315243b9f20929c60aeefe54ce17092d3ab86c80d71418bc0f601a64e48",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-modifier-hover.png",
+      "sha256": "8c6f23c3bce1af5d3d6135bf0a79fc43222af2f9c72c038a0bbe42b38da69492",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-modifier-pressed.png",
+      "sha256": "2185bf1a8ef827ef066137d0cc8d750a128c0877385a60d76521fa1a774031c0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-dragging-idle.png",
+      "sha256": "6d3988160fa81f46ccd94e61547fdf08327aa7e29312507a355a7e62a566b479",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-dragging-hover.png",
+      "sha256": "759ad4394c6bd7e861fa1e34a6133ae5e9e78f820dbeef72a3606bf3a910de54",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-dragging-pressed.png",
+      "sha256": "3949e588aeadaefccf2c3bacbcf86996cb3e40e172ba5abc377ca81015007ab5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-drop-idle.png",
+      "sha256": "748acecba0e5c2689b159e2096f1325728383685752363d672a16cae8073118e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-drop-hover.png",
+      "sha256": "2bb557caa4d48abebb87407deb5a35fba7e4fd118ab023acbf3da02509f29466",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c1-drop-pressed.png",
+      "sha256": "276fd4e7dbf8105fc29de1d5af376d0727eceb8bca26de5f2e6c5c775e2d5b56",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-unselected-idle.png",
+      "sha256": "c759462e2a33f07622c2065f9d86db6b9454115e67529db78a947dbf74ab8a9c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-unselected-hover.png",
+      "sha256": "f017111007d94e878f099d40783ebdef4635788df949d797af7b962dcc3ead64",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-unselected-pressed.png",
+      "sha256": "2c195e02cf69aca4d7ea107150b1dd1296f3c9121800faf30c39d53340419065",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-selected-idle.png",
+      "sha256": "07f9f3d069d2c43402e747627f70ed6d38192f5eeb495e155bedbe23f475ea9a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-selected-hover.png",
+      "sha256": "4661eb41e2dd8858047cc8c8b685e07682fadbecf4682f173058e175fc697487",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-selected-pressed.png",
+      "sha256": "a462b8bc5faa28e5ac3cbebbb0e1fba23ebc5a88dd6bc1933c5b2a22984baefc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-modifier-idle.png",
+      "sha256": "b10431a97617708153666ced395f21e665c37e2b06b459cb394890902bb7b5c3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-modifier-hover.png",
+      "sha256": "a8cf397ae4849cb0e5e0a7c7082074002da3061e676205d47a3626845b25f3af",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-modifier-pressed.png",
+      "sha256": "6d6446a6998f67cd071072705c4aec1775af8b019f86d75fbad3cd6aa648cef5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-dragging-idle.png",
+      "sha256": "d03c81bbfe2a053eb94c4be35b6b5d6e99c8d27b97baae2a0937574cddaa1c1f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-dragging-hover.png",
+      "sha256": "0367905bf1b5468761bd398a0ce4aa5f5ab516ef816e6b7e1612124e7aedbf6f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-dragging-pressed.png",
+      "sha256": "01592a25b89e1ae8aab9c93daad5ca14371673dcc4254659bcb6e70c7209c7c3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-drop-idle.png",
+      "sha256": "a43331b23a06b843b146a00ebbab0bde32e8466fe51ee80aace33e2ffcbfe1fd",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-drop-hover.png",
+      "sha256": "c4864f672c7eee9a3b573ae30606b5396cd6bc3c29e672fc4468b6076eb08d1e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c2-drop-pressed.png",
+      "sha256": "e199abc2ac2da1561682a9a2ef79a29bc32859bfccd8989f6f5064a55f04f75d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-unselected-idle.png",
+      "sha256": "625dc09080455d2bea73edd1417b2e5243ec46934153216b07ae623333d370a6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-unselected-hover.png",
+      "sha256": "57e48a58850d2c6152e6b092e37ef14d2a9ece0083c15cb504327d892178180b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-unselected-pressed.png",
+      "sha256": "0e2b0f585d0a08f54e816d1cad895d5a7bfcc6f222000dd56f0157e3fe2d320e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-selected-idle.png",
+      "sha256": "df496e0d6acc675767a244261fdb838351a9361ae2d5022a3ff1a5e5c8ccefac",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-selected-hover.png",
+      "sha256": "afa15ced280e1800fc82a7baeba1ba5f64b60400b1b76f4a9b5b58728cf6a30b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-selected-pressed.png",
+      "sha256": "7059bb9b878f41137531275d6da276d7d85196f6a39e8538c0a48b966d6381b6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-modifier-idle.png",
+      "sha256": "9a200bbda98179b17a4d01485f9fed3ce3bdfc8d494b2800725e4925bc28c7bf",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-modifier-hover.png",
+      "sha256": "676da2d854b1da0dad83b771678d90e592da08010899c508e3b2b2a4f58b1c7b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-modifier-pressed.png",
+      "sha256": "9bce40ce839f68a69d4b8aca508992126b77cb8f184affa13c207e3664da5652",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-dragging-idle.png",
+      "sha256": "d50f9362e64e26a3f4f9f5a37e81e4474d9938849cc9b46e9fcf5f7e6f33b005",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-dragging-hover.png",
+      "sha256": "ff93133c633b9913d327dd1af1bb6c964ad66075f7aba2273e73ba3ba5ad6c5b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-dragging-pressed.png",
+      "sha256": "81b563db43b554291bd9aeeeec6c66d9f4a593e5e27a27ee6ee0fb032e535387",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-drop-idle.png",
+      "sha256": "99c65495d65ce27dc4bfa562ceb69cb50bea321126b695e16cd2beef36d4a3be",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-drop-hover.png",
+      "sha256": "7603b05570a9364f531dda82ee16dd4c5344183935c38cdf9cb9b3812e137d46",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c3-drop-pressed.png",
+      "sha256": "f8c5eadf59b434ff127d39cdf3441bd18df95102766f2297d94d870fb42718bc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-unselected-idle.png",
+      "sha256": "d8ec60ac4618f193b011a9f735cfa6109d9225eed9fc72735511c299a1710e49",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-unselected-hover.png",
+      "sha256": "622bfa8c83b87b75f49ec074fa864fdaa3865aecf8a88670673fded2cf419f4a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-unselected-pressed.png",
+      "sha256": "007fa430b85410844a02b7ca1dd35e8a6d9568b4769f52489e24f58361001776",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-selected-idle.png",
+      "sha256": "f1d29d7efe26522469fbb4a1203acdb637b6bb3502c69d13e40ebace250209c8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-selected-hover.png",
+      "sha256": "dd99521a3e6881293890ccd94cd38b8724c57f01eb118803055fd6928b3ddc23",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-selected-pressed.png",
+      "sha256": "6e193a7485931e09bbd74110bd1aaffddd4947fde14769af08b8ad1517903297",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-modifier-idle.png",
+      "sha256": "992d6a78b1bf1d1efc3d8a71c8d64162fc75fb43f073e63a2d001e87f034bb98",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-modifier-hover.png",
+      "sha256": "f42e773cc293bfd272f005e10b64d1e86552e4dc02a85cd55f7583a86a64a032",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-modifier-pressed.png",
+      "sha256": "3b3589632b8ef876c68187e5a5bf14c42044e14411a28acd93a5cfd386c5ed80",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-dragging-idle.png",
+      "sha256": "31ce8462dfef83ae6fba8ae5cc6dc1227066f11abccfcb093d1a7cd417ac0852",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-dragging-hover.png",
+      "sha256": "3e3313eceecaa101f0d065d36d661436402f268b1734b0e2e7beb153d70256c0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-dragging-pressed.png",
+      "sha256": "50ad51b77c5bb5a29f106da380607b118af6c6716bcc1976fc19ff3e613ec4ad",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-drop-idle.png",
+      "sha256": "277efbf71abe79290d45e742bdd18140c26a07199ff71a105e366c2f3281921d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-drop-hover.png",
+      "sha256": "dfcb16035368545778be0f8cd08867f8092fb03d1d2dd1acb445ac62c0ebf108",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c4-drop-pressed.png",
+      "sha256": "170ad32bbc01521bd02a5f61655faa6cca062e20995d9283c2422e51fa94aa7c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-unselected-idle.png",
+      "sha256": "efd83d7b91e388f26ea1e8d26f1b68b87ca350967c80e476cdc067523a295492",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-unselected-hover.png",
+      "sha256": "f6b34e5807bdf8ba7bf198cb9b967e6b6137a9161e4085d0523e76a74fe5bc35",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-unselected-pressed.png",
+      "sha256": "da5824d2ef2ea86d36c6e8c5b129e0f3d7a504529dfe0bf6df05608bbd8db69d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-selected-idle.png",
+      "sha256": "93fa90e205d3254cde83279efad013cf00977469e7f3eaf687e76c8a28d1c740",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-selected-hover.png",
+      "sha256": "03fc591927b7579aba801c6a9e117c240698357a3963a17b7916c70576a6a676",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-selected-pressed.png",
+      "sha256": "03621500ab139a8bdf2188e522e88898c0dec096f4b25a33327e38fa9880be11",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-modifier-idle.png",
+      "sha256": "2af5a279c71dca244cacd62a7a8451ba0e9e74cf012f9545a1c74e4e500eb130",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-modifier-hover.png",
+      "sha256": "b70d8a30e6f037fa08aab065ec9a926f4987eb6c3d1d322150affffb50cdd81d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-modifier-pressed.png",
+      "sha256": "994cafd6ad491016056db27a27cd018f85be0c9ad7b4a74c343ee266e34157e1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-dragging-idle.png",
+      "sha256": "8c4d57267a8e5ea3e1de26a5fd31d04d477ff42d7a36ba6b9b641f9d1b930bd9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-dragging-hover.png",
+      "sha256": "b6a866eece02ebd4c8fc1a033eee32b40582b9e44cb1b207190cf82eb3ccea6c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-dragging-pressed.png",
+      "sha256": "d46e131930196221036abd94d437516ea83783495d26893ca43ec9ff34cb4573",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-drop-idle.png",
+      "sha256": "7dc5b32717354055d210e31f3983b481a1611c90fc75b67753f245051d4c8b8c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-drop-hover.png",
+      "sha256": "4d57ca2ed9b187babe2c544b9d3f203ace470141008694f63c0791cec83f3eec",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c5-drop-pressed.png",
+      "sha256": "afbfcd87e97a4cf1c082d7c55f95bcd62c9ba51bd9b0276ddf89d5f8594de210",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-unselected-idle.png",
+      "sha256": "f1b164d2e0ded10849a45a8197e1843a8b731503b474be3a35be494f2fbbddf2",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-unselected-hover.png",
+      "sha256": "1a607bb8dcb67a9286a4ff5a9a53b32d4247b6fc63a8420a3506555867ae908d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-unselected-pressed.png",
+      "sha256": "ade7b52ad09bfa111018cde167ef8e7bd28c503e9e07c29f8ad96824a1fe9dbd",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-selected-idle.png",
+      "sha256": "cfc13141307badff305892b6b1692e0662cf1540b660d350c90836b9948263fa",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-selected-hover.png",
+      "sha256": "cc8288457c5acbeaef555752541507964cd982b8a478899a3c2ff92570bd38d6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-selected-pressed.png",
+      "sha256": "3e4bee14f9c6cf31bc390901c81eee6644671acf1c3b6e6a92f3cd111e381b02",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-modifier-idle.png",
+      "sha256": "1e4e8aa49cbbadbbcc1883486b33a8cd006b2543bc6377e1e95acf4ebea2de8d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-modifier-hover.png",
+      "sha256": "8c5006ab367460a0015d92b1e9468010753eac24d89d9360dbf25bd4b4a5c2bf",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-modifier-pressed.png",
+      "sha256": "504ba98f4ad728fe75482dd08cae08d1cf31682549582ec648e2aa3da0a7eb9a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-dragging-idle.png",
+      "sha256": "8e99927a6503b220bafc8fc09e5f830d69a603c29b06da3fb9f061f79b7dae64",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-dragging-hover.png",
+      "sha256": "93c44bf52daa5ba662874552437a1e5cf6d8515f3873b615c2939f50fbb9f4a8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-dragging-pressed.png",
+      "sha256": "90e0ba46323ffd3c366b6c33c93bc75384a8e006a83bc8d4dbf44e1d536b5b42",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-drop-idle.png",
+      "sha256": "1685c9a0a3b688eee277e1b636afa8a57979d29767f57c84883df798ec8305db",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-drop-hover.png",
+      "sha256": "a19972a8e6f3fb6170514af3c120ec4f4278ba6137265d8c25dca231129b8cc6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r1c6-drop-pressed.png",
+      "sha256": "3c3d9469535434d2e938ebb994a5849ec109abea5639b702efbdaa57b5da1a98",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-unselected-idle.png",
+      "sha256": "e41bfce958cb6d2b3d898c27e4444f26b7a45424fd658bd3036624d5b1f792ed",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-unselected-hover.png",
+      "sha256": "494aa985803cfa00aea4c2df7ef321acdd7eb1951c9efb3a307f6d6397bf9a1d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-unselected-pressed.png",
+      "sha256": "507e367af54096ddce77aa680f5bffba23cfc11b1bdef90f22c4325e87a35a9e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-selected-idle.png",
+      "sha256": "31b532c1d053efb47d2abc0b92418d5ddbe34e39b4aeb9be96bde4c0aed24984",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-selected-hover.png",
+      "sha256": "b4edcd724edcdf664d5871e51b06ad561f315eba6c7e2dbfc6a2c441acd55d43",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-selected-pressed.png",
+      "sha256": "7ddc3a5437ca4047020cff7d62ee8fb3d55522c0c427db71e81ee44cec64105e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-modifier-idle.png",
+      "sha256": "faa1afad3fa19fee57f8e248f63fb416f5f9143fcba3c1f1f282f77a45b97a53",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-modifier-hover.png",
+      "sha256": "7ec2a000326c2d05d1e84dca6c3b1fd8975fcd14ed16aed9f6fb8bbedad91a23",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-modifier-pressed.png",
+      "sha256": "5a64f72af5fb6ce2513369243c90b1d0583eb4bd9b22d00868354b1d257a07a6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-dragging-idle.png",
+      "sha256": "d45d6bc523f5292a09b6a43bd45d533cd646274821c77e62492289d4db3e348e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-dragging-hover.png",
+      "sha256": "9b03db1098a91623d96bf2a9b1f1daa14e3db5730b8d7bb9494e84fe23620669",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-dragging-pressed.png",
+      "sha256": "556c9089b101443c85fbf979204db38df44d3683aa165e213a2f7a94d5fcc4d6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-drop-idle.png",
+      "sha256": "9367538e51d2f2023c7bdfe9a9f0879afcdffc723bc698fe851f11179bf04bb0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-drop-hover.png",
+      "sha256": "466400edbc239c00eb6ec8e4a2b00e5902cd93b05a94431b8a87d26f5a1f8b50",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c0-drop-pressed.png",
+      "sha256": "2699da4976bbb2537aee2147728498e9ab6e7c4700c394f6cd3930188b04ca4b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-unselected-idle.png",
+      "sha256": "e7ebb71dfb463aa1b637d46814efd29bbdc1006f9587a9e8c750879b92d3076e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-unselected-hover.png",
+      "sha256": "f7f49e941dc626e751709bf81853b8375db3a70453d0ae6ed85cb43a4ef2ae67",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-unselected-pressed.png",
+      "sha256": "9fdbd582aa46fc0e081d630858d23e401af79905f1354868a99c5bdfba8a992b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-selected-idle.png",
+      "sha256": "0716a87473540ccaeca8c19d5d31d0cfe302cb7a77583879238dcec3b95d3719",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-selected-hover.png",
+      "sha256": "85e6565d286e018d9fac593ba253ff570240a4a0e215402c454e0b12a8019c99",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-selected-pressed.png",
+      "sha256": "b3b836938a76a1319488a72a581feab21b944e2216a473fb745107cdde0f7919",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-modifier-idle.png",
+      "sha256": "d6f1b71aa8a602e37d4619809e60e7b6530608fdd798d7d495f5e8f7b8e4d0f1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-modifier-hover.png",
+      "sha256": "e2a8a5233a976ef6e9c08b13c24b4201ce5d16cc8b23b8fe07fb79cc20741fc2",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-modifier-pressed.png",
+      "sha256": "7fd780e164d36ee1235a55202dfeea16f32203e27caea75ef00bc635ac1ad928",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-dragging-idle.png",
+      "sha256": "c04024dc254348f49d5285bba4f1919ae627339bbfe0ff68e07f660a249fb1be",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-dragging-hover.png",
+      "sha256": "1cc1cf1fd3dcb5f8ae021fea5bf4e7572a5fecd6c378a9f194dab4825dfa8994",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-dragging-pressed.png",
+      "sha256": "87cc2de041d1afee03eb43021edb9724e992f89ae0033042400ccd63d10be65f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-drop-idle.png",
+      "sha256": "edb9a65b9f9e31b964f576d235a5f165dffdff272ab20e5b19cb3890cce4bdc2",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-drop-hover.png",
+      "sha256": "c9fa25fc476a89ee41552bf081450c6e08d2d50c4587fe46d5e61d19298f7c36",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c1-drop-pressed.png",
+      "sha256": "d64edee745bee25399e3cf356c0f72bd968bd6a02069271a8086d2d40bbcaedc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-unselected-idle.png",
+      "sha256": "1019aa1f33f03f0a1b56bde8073c187668f901a4a1b37b8324f2e0670d52fb80",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-unselected-hover.png",
+      "sha256": "8a54c421753207c41a748e4f683c27a78b66cdd7f456e0510857dbfc1ecd5596",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-unselected-pressed.png",
+      "sha256": "de4030ad11bb63038fe1e2d7dda6c18526d7f6f7aad79f3368e9d36efc065004",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-selected-idle.png",
+      "sha256": "3aeb5aca9177cb1fa87be209c648da8df409dd1c6072f772b85de7082f93c3f1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-selected-hover.png",
+      "sha256": "f879f17dd27f07f32a1313a685bf45702fbb4c7f9a5db12d73d49beae90d36ad",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-selected-pressed.png",
+      "sha256": "e2974b0e457b97478fea522b319eac64fc00c202b72217851ca5041bbe3bf1a1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-modifier-idle.png",
+      "sha256": "60bed2a93bcdf150406e7625f871e75284b21646bb7da2c04b2702f0ec09c2c1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-modifier-hover.png",
+      "sha256": "825671f965ac09409b0eb1f64cb874c55a1ab883c50810e0bba1aa4e07cd7b38",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-modifier-pressed.png",
+      "sha256": "3c4b46afc782f29290c4e7b052832d185f3156ae93f4493596f3e5fda0351453",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-dragging-idle.png",
+      "sha256": "45b36b5868e3d56e0c9cf861ffb98b64e205d0e5f805864c5788cf65f6c19090",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-dragging-hover.png",
+      "sha256": "73efb2f0c8a6c8c27b982846f694b437c27829a35ebea04e51089cc0cce03629",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-dragging-pressed.png",
+      "sha256": "e191de879ba1e6c2ac5bfd80d8ebedd5641bf8552a9ed1fcfd754734328b2258",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-drop-idle.png",
+      "sha256": "359dde919d6543043bfe4b49c75a3f775ad141e37d1cb50dbfc6a2cd36635a0c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-drop-hover.png",
+      "sha256": "46da9963a39531d234cd3f4e9d8d06a04a19a4eea218f86e01778b10fd49d5c4",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c2-drop-pressed.png",
+      "sha256": "b9690876f85343d39060e6895acba8e926aa7c443e32b06ab1daca7b4bea5f47",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-unselected-idle.png",
+      "sha256": "7569b9d5466555ad86b0b3b8c477c5625b9a48a834eefdd8b3764c9fa0050f84",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-unselected-hover.png",
+      "sha256": "6a2cd33ef3699d20091fddc3211aa2ff55b7cf2e73219a6056f0a69a2e26135c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-unselected-pressed.png",
+      "sha256": "d697417506cb414beb8598cd1d150e84ed55a59c65f06192c11d618238d573ed",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-selected-idle.png",
+      "sha256": "77f4d2aa642131ee35ffd1220b98c1a1dafce4072d28d51e25ac36f639d811ff",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-selected-hover.png",
+      "sha256": "127fc0b5b9f896738d3f3b57d96bcd2c63191923a2f29071303c715caaacb5d0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-selected-pressed.png",
+      "sha256": "5686197ad614468d386b981ed341fcc95d4b358ce78a679c0a0d1c739a595f5b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-modifier-idle.png",
+      "sha256": "3e21911e7f0198cc66b62b640055f56adcd3337b200d59f65293f526cc53ffea",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-modifier-hover.png",
+      "sha256": "5827e1bb7d498c71a1f4500cb22dd81cb951305d7b3160a6cde55f1f0378d657",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-modifier-pressed.png",
+      "sha256": "8e1c8761a3e754e4624d43c751298c6c9590ebc795e5184a952f8ffbbcfd7d5e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-dragging-idle.png",
+      "sha256": "2d7cdfeaa3ea01d62f0c58e668f1ecda67f8b486906b2a8ea5c90d0ef37c7b02",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-dragging-hover.png",
+      "sha256": "8290da28708f9386771264ac8f1ee982b1050536afbe58962f098e07d56e2334",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-dragging-pressed.png",
+      "sha256": "d2612804709571b12f8bbfb9e5f581d3d67a17a23aa85cf741ec026197c38238",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-drop-idle.png",
+      "sha256": "7b43009abec3d7838fc0eafc78deb9bac26073e9b968171779359fbe9ab5903c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-drop-hover.png",
+      "sha256": "c33dbdf3c5e0c357eab50d9a53cf84e8ddc0ca755f085a5451c3b03ff8778071",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c3-drop-pressed.png",
+      "sha256": "f121c56c1efcdfe554c7661efce501e3367c1af9a37fab7a2965eb622e0869bb",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-unselected-idle.png",
+      "sha256": "0ebf181dbc11728c3f2aee632a0c73d4c5e99ee897f06e51d125616ad6a4749c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-unselected-hover.png",
+      "sha256": "424cfef56001fe7c75de4d60e3d1fe0bdb6416734dabb3401ca8a5400ea46343",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-unselected-pressed.png",
+      "sha256": "fe413af44647e5af81352acf30be496edd9e4f6745294bb0f66997c728a60675",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-selected-idle.png",
+      "sha256": "8351ae4a78c56d20112786d7d3893e0e9818bc78840726cb33a8327f9f162b9d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-selected-hover.png",
+      "sha256": "79e67bfffad177784a1fd0f03409ce66c74b8eebc149d7b3d01815222596065c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-selected-pressed.png",
+      "sha256": "7a421f4c7e596869b417f2c7bee1f929dd0ec82b3209ff0e8c33a04ce00a8ed8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-modifier-idle.png",
+      "sha256": "07297cdcd1d4cf1c2a72c82e728e342cc9876e6505f9f23f24cc9d2d2a8a6436",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-modifier-hover.png",
+      "sha256": "ee9efd2d7c611c00cb8e39bcfafe147674786edcc2c0aac2433a71af07fd8fc7",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-modifier-pressed.png",
+      "sha256": "c49bedb66b7645e093a6f8e503791a00038509647107878707f652671fc66453",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-dragging-idle.png",
+      "sha256": "8e27e055ab423f6f2d304a88bf130b18dd3778ad59ab04ef93ea7dc75f2e9518",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-dragging-hover.png",
+      "sha256": "8bd137017959af7197a94783ea334c827c63036d1250b6b634bf5b244b1a5497",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-dragging-pressed.png",
+      "sha256": "f4a038aa325b84ae47ff045d19b663d32f9d3fad4def36b7a26ebcf178c4c72f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-drop-idle.png",
+      "sha256": "1f9e3b10bae35586ea6d18701b5011869a27c7bbd8affeba9dc88449532bb004",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-drop-hover.png",
+      "sha256": "48c50348ee194088ba076dd823d14588c588c0795ef64f451c8df23c49a48888",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c4-drop-pressed.png",
+      "sha256": "1006a4a6303a9765174cebbe2686cf0ae498bde8b602e48ea6aad10cb5591bc0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-unselected-idle.png",
+      "sha256": "434c3540c13d09d4a61cde4d822b1f0b0add45db87476dc09f861e70e3bc4cc9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-unselected-hover.png",
+      "sha256": "f5a508ae8cb10b1aa98813d14aa7a40bb9449969a94faf46d523fbf4223d8ea9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-unselected-pressed.png",
+      "sha256": "4f1aee56b512b07753ecc5308c365a81184fd2f8b0918ed9572e2f83af58a7cc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-selected-idle.png",
+      "sha256": "c6d650cc28ddff0f604212d338f43ed2feab64b948d973056e944d74a56c1876",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-selected-hover.png",
+      "sha256": "2faf973d9201bfdbc2ad96241a503f6111a9f287318011159c25eb3d2bb9b845",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-selected-pressed.png",
+      "sha256": "86ec847dc11e23f3d816e0ea8932a9cbf6e595c83a117b030ae0b22aaa8bd2e3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-modifier-idle.png",
+      "sha256": "34b13cf39a508c717a945aea39e0f0b45ca28e3e4c14c155301caaa1abac6a42",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-modifier-hover.png",
+      "sha256": "22c6182fa03ecf8c7bf8b029b97f49efd7b8ce514223aacad4cb0fcbfc11d96c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-modifier-pressed.png",
+      "sha256": "c5aab48d295732e8055071a631823d93a2283ccecfce10684002db06e12575f8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-dragging-idle.png",
+      "sha256": "dd1746554ac0b3a8a82479568c4c4cd5c14668cad4c43a7f1e9b7f1dcc66b640",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-dragging-hover.png",
+      "sha256": "7d17af38e9b786e114db8790791985ec8d1d6fbbc1bf4b173c1649373940bf40",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-dragging-pressed.png",
+      "sha256": "11d7f699c7d04203ba9417fc02ff756ab91a452297032aab41f7bfff4f713427",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-drop-idle.png",
+      "sha256": "561ffa55c71d58082971f1f69ac6b0fe3d451af8ab36041e9d529f2a803b875a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-drop-hover.png",
+      "sha256": "a91dd6fc05c7f6fd5700c571c813d8dd22fae95e80da96449a300bc80554a56e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c5-drop-pressed.png",
+      "sha256": "73aae9e14eb17122f805f5ed4c9dd335925980c43eae3e341252ff4db5dc60ad",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-unselected-idle.png",
+      "sha256": "a76d5341ff28d528aedc227627965d647ff640b4720faabf8bbc753b2cf94c67",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-unselected-hover.png",
+      "sha256": "3e6a94203282dda07336ea6d7bc3eba1f2eac923bc927661da8bc322b05bc24c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-unselected-pressed.png",
+      "sha256": "fa5fada9e33429d285142ddce1b12a6e962a771df94c44ecb4398b0c8eb673ac",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-selected-idle.png",
+      "sha256": "309a8d8bcdc83595bc63b59cab5470e626c6f6ef7efb1857b15d6b19f5852c3e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-selected-hover.png",
+      "sha256": "c3a7b441ce5f7444315bbb6b672feb4cecb3c7d9ab2848d5e92749a20ab5d559",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-selected-pressed.png",
+      "sha256": "d1f93526193a3c8f182ee41f46fe66cf7032722220e1d868e62186f65691294d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-modifier-idle.png",
+      "sha256": "a83d1a75d4b24d351375f8c9fe97e2027f565dc6b1456594059f8137b9227a52",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-modifier-hover.png",
+      "sha256": "542b403407e699ccbb6b8c860bc2874333b561fea70d6d4ddd0504163b95819b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-modifier-pressed.png",
+      "sha256": "eb9b48a5eb41497c7bc8112ebc26eb3491868707e24a50a766f4710783aebf4f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-dragging-idle.png",
+      "sha256": "ba995b19bdf0dff57cd0197cdf5fbe558dac0bbe369a849fa37440e5fed5a557",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-dragging-hover.png",
+      "sha256": "0434a118fd48d0afa2b342d73402b1db74c8632609d5448c3d8f2754d03ccf54",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-dragging-pressed.png",
+      "sha256": "7a1045cbaa3605224b878bc2595d4bda74dfd5c43937320a4ddb913fb2921b3c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-drop-idle.png",
+      "sha256": "0551a5d74cf8046ff347af033be7aff199e4d547e984d9545dda35819e64dd26",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-drop-hover.png",
+      "sha256": "1809f0321d3c1fbf647068b85f215119749457b77fb2943d027f0251afa56954",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r2c6-drop-pressed.png",
+      "sha256": "b396c9c41579ebd03644eec2f3be6ad4d36d42fd48365f35b16ce454ced3dc8f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-unselected-idle.png",
+      "sha256": "90f0825cbdf782a2bfe1248395f07923fb7748596af6fcdaa185c2d7d91f8e85",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-unselected-hover.png",
+      "sha256": "22c9ddf1883a6ca3d8ec199c4f1375993f3c29896868f703aa4242caecde0566",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-unselected-pressed.png",
+      "sha256": "25ffd06406caa9b39f421cdcb04f10d8ed06a55a2fd3ec5b8c1c14cf4b011f91",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-selected-idle.png",
+      "sha256": "4b3e2d38a3fc680013f647ae2cd2bc119e621ab287a01725ae948e86098de99f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-selected-hover.png",
+      "sha256": "f1995f116da0e15dcc4211e8058984fd23e355f8b485fd9adc102e3f132c19d4",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-selected-pressed.png",
+      "sha256": "cb7384592fff070d07be7f94c3ecf6cbe90c70c1aa8998b35cde844c07edbfb5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-modifier-idle.png",
+      "sha256": "3486d4de0f836c4d57aa5ae54184f26eb962a6eb770ee0eeb0a754c2178ac502",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-modifier-hover.png",
+      "sha256": "a5a9cf1c43cba229632d22b658fff2a1807f2fbcc37f1c6c72853b0d8ef4d43d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-modifier-pressed.png",
+      "sha256": "fd82a26d84d3b2d6a5811e4e2079b534dcb76b4a231fa8c3baf4513d4a1c2fb3",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-dragging-idle.png",
+      "sha256": "60554ddbe9a093c23ee4340b63d07acb340ff11ad7bdfb137b1ca562ca173373",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-dragging-hover.png",
+      "sha256": "28042de63d3d1551f6dfb07b090869fb6d3193c82829d55c2e481f0790842ef8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-dragging-pressed.png",
+      "sha256": "7c6eed14cc4d67666217b8e736f1377838663e3940599006c7400fcad49e554b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-drop-idle.png",
+      "sha256": "2ad8ab219c13e1f50b6a2ee5a084a3cd436d258c4952db48ff4d12de5b61a155",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-drop-hover.png",
+      "sha256": "7434a4e171e6f050ea6cfb0eb65db2d50d8f5744e7496fabd8b7fe405cf179c1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c0-drop-pressed.png",
+      "sha256": "c78823eaed66435f74dee51c39adbd4515160c3e5a815063d5a806cf614a652d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-unselected-idle.png",
+      "sha256": "a0e939b550e00c9e6749fc5d41b10c58452ef3188d8aa5d7509a24fe72480e51",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-unselected-hover.png",
+      "sha256": "e040e4f8215d1488ff476e1117d8c513207af5962eb5412ac5f2608854fa0ed8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-unselected-pressed.png",
+      "sha256": "3feb79f782b8965eec078fdc4ab5ff31ce9693449fb01305764ec3379daef006",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-selected-idle.png",
+      "sha256": "79f92481a373c9058179c412766f8c6a4e441ca27e8cb73582d1a64ef9465b89",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-selected-hover.png",
+      "sha256": "8c5c1b4fe8a5b80dd0494e5205fab470e4cf6e4c4b190097ffe3c08f5717e2ec",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-selected-pressed.png",
+      "sha256": "a6255fdbbd42ec53e5fd5f32acd90f355d0bc25e72da11518425dba25d4921d7",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-modifier-idle.png",
+      "sha256": "0299800a826a632e5644ec9c6237ae4afcac31e5f7b40fb266a18fb5b48c0a5a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-modifier-hover.png",
+      "sha256": "656d9f8a8c5206b4546fb1e2ff1f07d16d01003dfe01515783858fe3a86992dd",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-modifier-pressed.png",
+      "sha256": "2a440df9a68382703d0228e1ab3dc9415db4986346e6257fa93f075a8ab72477",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-dragging-idle.png",
+      "sha256": "63ccdaa7c061a32afbad1c995c9cf4aa5051eac216c7738c7ce380b1080e0552",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-dragging-hover.png",
+      "sha256": "36b00a763f663c49ffd248514bed7444812c7d2f26624b1387f0f3583d693a2f",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-dragging-pressed.png",
+      "sha256": "e00227cb6c32a92e03a57d109446d9ae9b206a000fe9b03ea1647518ca1c1166",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-drop-idle.png",
+      "sha256": "aa54ff0a4376d85fed9a8a8fd4848d4cf26125416caff6c62e0d18baf7aaf7ba",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-drop-hover.png",
+      "sha256": "cf07d432b4c41c94b7b9d57a6bfb099dea65e1a6ca81e2339d03b354931900a5",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c1-drop-pressed.png",
+      "sha256": "164c4d2c9d36ad051690e09bedf90b599c2ccd11e9275f8f938c2dbea33fd720",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-unselected-idle.png",
+      "sha256": "1a8403e1b9651a6c9426b568a8eafa2e55903898ddf948b31100500e1289f5df",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-unselected-hover.png",
+      "sha256": "7e093aba1b5215bc88bc1a6d833ed7723e943802d91842f6908dd233772e237c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-unselected-pressed.png",
+      "sha256": "ec1f7028944c053c69c24bb7c6ef4a2ee32e773aa0ed728ef5cabc2837a8b462",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-selected-idle.png",
+      "sha256": "1a6f99b3dd6336887fca5cb17980d17d24c6f8d0c022413a475dfc696c6b603c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-selected-hover.png",
+      "sha256": "f324dd101d04f666378a4b5eb1d243d73e892b33da09d50c78730a79785b068e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-selected-pressed.png",
+      "sha256": "876e093f28a793bc7ae8a3cea16118a9582040b7563afd87fa8317924cf474b0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-modifier-idle.png",
+      "sha256": "2b43956267d50f43a6e452b3999527dd4fc6562347769c05b87d151c8a56188a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-modifier-hover.png",
+      "sha256": "5eef58f7e5dfe549cf186f3295d3aaa073084619cde938708f133c726f53d917",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-modifier-pressed.png",
+      "sha256": "0b94ad838df992dd3c2866fe1db6fcaf8f92b4105d07e279436cf9ff949420c0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-dragging-idle.png",
+      "sha256": "a7d26c6d09e81079cf405a0930eea8da17761650938e3880af19a05e8d96f233",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-dragging-hover.png",
+      "sha256": "a8eb2c01a9ac4594b4f7d003bcd76e4cbc4cc708ef4f4334a2f5e031cf0184b9",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-dragging-pressed.png",
+      "sha256": "74f920b5f8bed8612f88b40cdf6cf55494ec091e0bc8768838b83240073f42a0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-drop-idle.png",
+      "sha256": "4639153ad3ec34884903690760db398efbf004fc56ae1c9c006698b30251be54",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-drop-hover.png",
+      "sha256": "5a5a886730b1f034d2477dd4d0369b36ed74ee31d04b0ba317eaded1be1c698e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c2-drop-pressed.png",
+      "sha256": "055de0364f4af72e10f092286a4d0330cdfad997555aa2c040e4fb53796cc61d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-unselected-idle.png",
+      "sha256": "8f19b546683494283e7073873b188e23295bd5ccf3dd92dcf06054b357c246f6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-unselected-hover.png",
+      "sha256": "0f990deb02cb5a33f22fb27036cf9e24cc69e9409c89bc1a51fdbea1cba3fd02",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-unselected-pressed.png",
+      "sha256": "869bcc7b1f18f1b7d7a8af700d08b8af401c29f9bd832536bd34bfafb07f8288",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-selected-idle.png",
+      "sha256": "5c2be3933b42e3517de3de3c371d853ae5d714145d8875d4de160fe19a8edc40",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-selected-hover.png",
+      "sha256": "30ff76856c900126687a115a1ac755b0e964b827ae78b825b9e5c2fa6f5c1b28",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-selected-pressed.png",
+      "sha256": "95e0ac103982935de8c11e02fc2e1bfd65b261e430a5906bf3f22248f131e623",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-modifier-idle.png",
+      "sha256": "0388a39372d34c0f3386da272123794d02620eee7fad9e7be4ed6e6fce650114",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-modifier-hover.png",
+      "sha256": "33140e21833861071f26bc7afb9067a144f87da5ea79ef860a78774c22c38bb1",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-modifier-pressed.png",
+      "sha256": "f1f19d8b97f1662311f375329532e34123f7bf8b22bfa36c3ebc1656552d4369",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-dragging-idle.png",
+      "sha256": "6b2fceb4701993ec46b65072bca867226fdb881ab9ccb70d8b697e6ee905ee54",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-dragging-hover.png",
+      "sha256": "9402d88f7d60b2462e877dd4c756365757b7c7b53b3f46bc84cfc20b47126e88",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-dragging-pressed.png",
+      "sha256": "db3c421c3cdaea8b07789f3436eeb56015a789583d4bd0ccf9345937dcb35b4b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-drop-idle.png",
+      "sha256": "efe5dcb8a7e74cabcfb9edeb4a0d9f555647bdf3e35ec517264f6e772262e95d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-drop-hover.png",
+      "sha256": "6a7318836279e9f7d66a934f380a8da17b8cb3426b72e142c6f0aa7a26bc0762",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c3-drop-pressed.png",
+      "sha256": "761e2a40ef692e950ab4234213d1f572d632465beb830c0da9fb8fb5edcd5e62",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-unselected-idle.png",
+      "sha256": "b18a8ea6a8279bd2b5c31877f135c57bb227d9bcadde1916c51aee3d8d29956b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-unselected-hover.png",
+      "sha256": "a0f679eeee5014044abd707ec01dcf5d179d275dca75928c0ed4c519f9f0c4dc",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-unselected-pressed.png",
+      "sha256": "35a045d19bf75d69b2b4b4c934561ac73b03b24ebf92346672454e8eaf56d1e6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-selected-idle.png",
+      "sha256": "c6d9e182caf81ec66ddd543a6eb5a0fc282eef4a2a9e2a7cbab0c685cc1f46dd",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-selected-hover.png",
+      "sha256": "f36738039ebacbb07062e7ef6f5b54a7b8d4b11b6873efe4b7864e5a0f22c247",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-selected-pressed.png",
+      "sha256": "b4cb78e94b1c3fbc9df3868399030df2cc5cc978b56ca5218cda36fad57657d0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-modifier-idle.png",
+      "sha256": "2399df7d21f9f3867c5492643be6d490ff87489438f2cd7e777d0edf8267d719",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-modifier-hover.png",
+      "sha256": "f1d9bd1ae14a718e8c373043f512066fe436c6bf89491858d53f19e82c92cd78",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-modifier-pressed.png",
+      "sha256": "f685ca844922e5676de6ad2b5de7968f46e68e0363aa8c5d4c0fcf41d3bd3ff7",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-dragging-idle.png",
+      "sha256": "a8f68ab611a25c59f3e3a0e5a00b37f5e53c3c2adcbc65f090f6c5005376f93c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-dragging-hover.png",
+      "sha256": "de1c6d314efd59aa2eb8cbb026821ce034c3a64713af5903549663c0706650e7",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-dragging-pressed.png",
+      "sha256": "2ab96989c9f8a2088b062643958596072350390c4e16280f598b52bf3ee7067d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-drop-idle.png",
+      "sha256": "3f5eed48e7f187aabba6be2a16112a128ffb8b5cb1733c7b7e342c516c53fa05",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-drop-hover.png",
+      "sha256": "e8076e182b767dd49765ae3114bfdcf3fcbdf106a37c249669111537ed46e39c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c4-drop-pressed.png",
+      "sha256": "6c45be7d0d0ee8ef4ffb4f2d727c86246410feb63d6a8af582e5f2b852238459",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-unselected-idle.png",
+      "sha256": "b4c61a237b8c6d7b9f8fea5166d4d85e6459e95d0df8bea0cc54428f1d9c539b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-unselected-hover.png",
+      "sha256": "4a513d0f370e55f594aed74d6a721db8e65c03330f744b44571ce5c7c3a73955",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-unselected-pressed.png",
+      "sha256": "28c2994e8d930b55b1b414054c7ab9f577e15c4017ea20940e79ac0266415c7d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-selected-idle.png",
+      "sha256": "a22ee4a258aa2c6c856e53ab053cc4c85f145cefddfcf8fb1223f373affbbe65",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-selected-hover.png",
+      "sha256": "fc632b7da45a006d405c2b8a5a8c21ca12c69a29b9ffdc1cae8781844dc2bfa6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-selected-pressed.png",
+      "sha256": "57ea54a0c95b3b5bbb527b56ffe8e6a758265c50ac41d4304dfd6df0e8f691c6",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-modifier-idle.png",
+      "sha256": "d729b00fbd3d12efaeec6ceed5b6ad924f09591260028b49fc23ff345a69df47",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-modifier-hover.png",
+      "sha256": "18661e7ace0905bde39f8e17ac78bbb8d1c0927e555c0771b10a38f665643881",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-modifier-pressed.png",
+      "sha256": "f080268be68b556bf4036bbd17dc1c2539f97ac85b9aa0f4f018e4343a2c8e6d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-dragging-idle.png",
+      "sha256": "247647a4a03554e7978eb9f2f360d0d1816cdfd4ea40d0c7b25a0e45dbfa398a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-dragging-hover.png",
+      "sha256": "28061c9cfec776123f5deb947953dde56dd6e60cb0c5c19af9de47735ac8686c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-dragging-pressed.png",
+      "sha256": "efc4792b9d1db14035ff49cf00397dae22e3666b6278cc6fa138510f7e18c706",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-drop-idle.png",
+      "sha256": "305ddbfb666fa88cbf2fd56c7bfbae7f584e195f8941e6157a78611792e8bec4",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-drop-hover.png",
+      "sha256": "d23b7b172bd3bc0fb87b0ec3aa646fc00eb3df38e632ea5ee12b9810a81655cb",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c5-drop-pressed.png",
+      "sha256": "f157464d355b63d8bcdf95be299ab316c942e16dc7bb8ba9aeb7e84bafe60e6e",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-unselected-idle.png",
+      "sha256": "ff4caee907541ccee3ce32c5e2b3d25c7b65d94421e81eaa78400e6943d6ca94",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-unselected-hover.png",
+      "sha256": "85757af425ae275be842ec326d25402e6d85026fea01f66e1b378317a875f0c8",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-unselected-pressed.png",
+      "sha256": "800bfd7b2c41fd13079fcd6cb3a02bc02f4071b8eeb7fbc07d0127d5d0f4ac42",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-selected-idle.png",
+      "sha256": "ba102c5155a1c6b2edf191c6f681acf53eb3942ad2ab0b9516fbe1aff83b9afb",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-selected-hover.png",
+      "sha256": "dddeb6bb94742938e1dfa530579875b9d27b89d54a57d4ba15da361833bd0b37",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-selected-pressed.png",
+      "sha256": "f895b1a8a2ca3fb8acf7955e86a3da45f8e2a34e880447d52b9667b32fbb9e13",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-modifier-idle.png",
+      "sha256": "57d7e38a63c1abb3b0aeec9435d67a56f8752ca2f4825197e6a8eafc743d872c",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-modifier-hover.png",
+      "sha256": "f62b65d44a822d5c04f79e8b9510e83ccdafe624513cfcb0bfce8fbe709ac68d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-modifier-pressed.png",
+      "sha256": "fbf7146ecd422ad8a7b3b86f6012a04348e4e5b4d1da0449153fa964541dc8c0",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-dragging-idle.png",
+      "sha256": "c1f0e2ee06b68a65e1fcdf695eec92ac76723683657ff6b4bb5ec0f3f8389b5a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-dragging-hover.png",
+      "sha256": "01b68503753be3cf55166703c6b2234e709f3dd234b2fe79b06cf3af8ba9fd2b",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-dragging-pressed.png",
+      "sha256": "29f0716988f34d4184f43726b9696c248381ecced021de2ef2884f26e96a4145",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-drop-idle.png",
+      "sha256": "22e99d6c0d426bb46af48eb4d9c6623b573d4ef332b3e81c63ff73439ebd0aba",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-drop-hover.png",
+      "sha256": "24b8b4c84613ab5d49a33086bb2367fd51a80eae4169f697c491a64f892cd22d",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/cell-r3c6-drop-pressed.png",
+      "sha256": "e7f6d0ca5f574376e6443681e4460af1e2a449ae00d14b9b7827200666c0734a",
+      "size": [
+        54,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/item-detail-idle.png",
+      "sha256": "c71854576fd2f2ac257abbdac8742d2e09807b2de245fb2cc68cf5ad9037ebdc",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/item-detail-hover.png",
+      "sha256": "e32a93fae3e3818447298a90fbf9b13840dc27b00d2f874b60e25fa1ef9a5a9b",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/item-detail-pressed.png",
+      "sha256": "20348cacfbf3f5dce463053a277c2767bfb5b34414a82fe330651e288586cb10",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-unselected-idle.png",
+      "sha256": "439acdefcebad0d1881f2250aa8586c57972bb72cc94817030f894bcec65be64",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-unselected-hover.png",
+      "sha256": "4f6e4769113230e53e939b44dec93fee9f2ecc87fcdbc760933c12e0bc3462b3",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-unselected-pressed.png",
+      "sha256": "410ac46a5523cceb686b3fa49e17ba11bc81b05f7f5c34058671882b9d0a6dc3",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-selected-idle.png",
+      "sha256": "99913ca2c90dacdfc067971510a0fed43c8d28204cb177bd026bd09d3e953611",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-selected-hover.png",
+      "sha256": "e35a1568b5b5f37122eecc45a47852f08afb56e5eae06ec5c4c454e1e123f16a",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-item-selected-pressed.png",
+      "sha256": "c481d9c648f04fba3460cf4f0571598a63ea05e079913b4eec9021c4a4f540f9",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-unselected-idle.png",
+      "sha256": "b3bb2346c4095fae9c8c0dbad88b719079678814d8e8b7f212dd912419736fb6",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-unselected-hover.png",
+      "sha256": "1aa62fe749f6e3034b61be21bc82cd2b142f7b3ec09be1355a809330564bb4fe",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-unselected-pressed.png",
+      "sha256": "fb2c80059d3e482b767e69c78995c7ba487071485759fe7082cbfa8ea8f4ca98",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-selected-idle.png",
+      "sha256": "db6b097fc774f4c8f605162fc220be461ebcf4f0b60bdf7637669ceecc92c44a",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-selected-hover.png",
+      "sha256": "1dffb03dceb2f2f3a8e617357d8059bdd8458af932afc2093a12b0e930ff6199",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-equip-selected-pressed.png",
+      "sha256": "5e63f32cd0ec91c170f61cc10f81cfd426d3a10f322f2800199e36fea36b949c",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-unselected-idle.png",
+      "sha256": "e33bede78a47db17eafe64b9f9b916ae4babc1d565b8a680ce6ecbbd0bc66fc7",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-unselected-hover.png",
+      "sha256": "7f487a7177845a7a3ef050b772a401cc72baec348bb335490a58aabc4772e481",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-unselected-pressed.png",
+      "sha256": "9697bac35af696c2629424b5158a7c95d4191ba6289de012dda7758a69258106",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-selected-idle.png",
+      "sha256": "52bc7376c4a90d151c696f5c5d52a38cbc7a6770525ff517b19eb8629aff71f5",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-selected-hover.png",
+      "sha256": "5b0a997cd7b1a5771db73274b13d3ab6c80452e52b1a04dd9a7965e9e3a237da",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-1-selected-pressed.png",
+      "sha256": "1f701dd2073a920052d4f9ab24bbbd659033857c6feb9e978df027678bb9a63b",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-unselected-idle.png",
+      "sha256": "c4689265934e7fe81a100e2af5f8554aedbff29d7463fc04996d9d6970f932eb",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-unselected-hover.png",
+      "sha256": "a4e7e7793c10fc4af6bdeb6403986799bd8b8ed4b40fc6e045d8f72eea828fc2",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-unselected-pressed.png",
+      "sha256": "0186473e7441f1b672e38a5a6f5845fcb3c3144d0373f6e325bb7e4c4c43bcd3",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-selected-idle.png",
+      "sha256": "56a25404285399ad9536d7a5b0d11640f62b94b8fe48216c32e73af8023fa072",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-selected-hover.png",
+      "sha256": "f447933ef418db57db958ea43ee1fd9f043b63218d809ebf4526844fd12548b9",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-etc-2-selected-pressed.png",
+      "sha256": "bc37112286713ec00df680428ceab4d4e36a2cbb70b696a5fea627247ea95050",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-unselected-idle.png",
+      "sha256": "056595820b1704552992afde034403ab48712d55681fcd62850369791e985066",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-unselected-hover.png",
+      "sha256": "876bd831eb87d04013ee93244209be435ca39029cec78ec4efa71f4390ead922",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-unselected-pressed.png",
+      "sha256": "e84a3e2bd864f5348111a86338168d904b56402ce08d85d61133c80543045419",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-selected-idle.png",
+      "sha256": "412991d2d0982f8529730c0024cd89e3caffdbc606dbe60aae3000df49e9c4fe",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-selected-hover.png",
+      "sha256": "6c718a0c25fd6ccb7f38fea741a9bc1f4b5e5a6aa7e0259250e4050d32eb2a63",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/tab-cash-selected-pressed.png",
+      "sha256": "fe75d594f3aa700f8090722126028bf90b08c13abb96aade2dbc6ef95494c799",
+      "size": [
+        26,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-minimize-idle.png",
+      "sha256": "0254204afbe7de3b5cc2077a5358c2bdd7084788aa0d9a35a6a2db3b3f64d900",
+      "size": [
+        17,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-minimize-hover.png",
+      "sha256": "96741f4d5b1ae248774abb69f9fb9850aa6b8cd54f324780bfe6da57b3d14db3",
+      "size": [
+        17,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-minimize-pressed.png",
+      "sha256": "6bddfc3c522f161ac09cb107d99afd269a95fc3db451f5e1e7047585a0567256",
+      "size": [
+        17,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-close-idle.png",
+      "sha256": "f8d09a68a54a2c56543bee075ce59b75f0babfdda6f3da85c21fedf34dd85a6c",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-close-hover.png",
+      "sha256": "e1d934e76762d942da094ded3cbb4314dd75652bf7465499710e6834b05813d5",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/inventory-close-pressed.png",
+      "sha256": "4befb5cb3611d9423febaf9873ae2b23aba105663ede71a7dd10549b1824a5be",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-grip-idle.png",
+      "sha256": "a18819a6286e52f30557ea872ed543cae5d7c6491264e8797960c21e04c38296",
+      "size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-grip-hover.png",
+      "sha256": "70e8b0a65eec60cc9801ccaae3c8c0a0ef889fd9627b0cf452c9abd4d5edca63",
+      "size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-grip-pressed.png",
+      "sha256": "073fac997b000aa674696575eb36138ff763cab7e2f142f835c5465ba4d36219",
+      "size": [
+        24,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-title-fill.png",
+      "sha256": "64b8d97fc2ee1f46fd7ebd79fb1d6096147df4260066a36985072d36e2a54050",
+      "size": [
+        100,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-footer.png",
+      "sha256": "1f456546809c2a3e8f2a853706de5b0bc655b2d7eda6386f8f41fd47320179b5",
+      "size": [
+        484,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-footer-fill.png",
+      "sha256": "85e34467329c179d844cc25e01c73b4a510a1cb9778d2331e2a6d7d42d369cbb",
+      "size": [
+        100,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/resize-right-edge.png",
+      "sha256": "c78fc2c2081116b8270406d1c458920ab54b674f88f90456ead0628c975e682c",
+      "size": [
+        4,
+        100
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/clean-plate.png",
+      "sha256": "11dd3b1d04abc2dbb84cb3a8fe384c1428dddace9578c9df13986077f80a8e81",
+      "size": [
+        484,
+        303
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/inventory/minimized-plate.png",
+      "sha256": "c025d7b3c600db59b9c2f2aadb4d3e42df4bc431abb3eedf7d2e577d19eb520c",
+      "size": [
+        484,
+        28
+      ]
+    }
+  ]
+}

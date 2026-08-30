@@ -7,6 +7,7 @@ const ControlWindowScript = preload("res://control_library/control_window.gd")
 
 var options: ControlWindow
 var skill_tree: ControlWindow
+var inventory: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var _last_json := ""
@@ -37,6 +38,7 @@ func _ready() -> void:
 		windows[str(window_spec.id)] = window
 	options = windows.get("options")
 	skill_tree = windows.get("skill_tree")
+	inventory = windows.get("inventory")
 	_publish()
 
 

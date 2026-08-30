@@ -11,6 +11,7 @@ suites=(
   "run_control_runtime_contracts.gd:control-runtime-contracts.json"
   "run_inventory_spec_contracts.gd:inventory-spec-contracts.json"
   "run_inventory_contracts.gd:inventory-contracts.json"
+  "run_inventory_window_contracts.gd:inventory-window-contracts.json"
   "run_options_window_contracts.gd:options-window-contracts.json"
   "run_skill_tree_contracts.gd:skill-tree-contracts.json"
   "run_skill_tree_window_contracts.gd:skill-tree-window-contracts.json"
