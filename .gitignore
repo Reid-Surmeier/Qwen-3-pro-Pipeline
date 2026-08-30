@@ -7,3 +7,5 @@ __pycache__/
 artifacts/figma/candidates/
 artifacts/figma/uploaded-node-4-146.png
 artifacts/figma/uploaded-node-4-147.png
+replica-b/web/
+replica-b/evidence/**/*.import

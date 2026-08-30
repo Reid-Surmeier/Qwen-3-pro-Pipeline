@@ -1,0 +1,254 @@
+{
+ "reference": "artifacts/references/ro-desktop-b/reference-native.png",
+ "window_rect": [
+  1108,
+  297,
+  424,
+  202
+ ],
+ "assets": {
+  "slider-left.png": {
+   "note": "source-cut (BGM row)",
+   "size": [
+    15,
+    22
+   ],
+   "sha256": "cd0b82f65bec7e8d"
+  },
+  "slider-left-hover.png": {
+   "note": "derived: 18% tint toward title_bar_blue",
+   "size": [
+    15,
+    22
+   ],
+   "sha256": "cac8520519517d45"
+  },
+  "slider-left-pressed.png": {
+   "note": "derived: 1px inset nudge",
+   "size": [
+    15,
+    22
+   ],
+   "sha256": "7c415f046016c159"
+  },
+  "slider-right.png": {
+   "note": "source-cut (BGM row)",
+   "size": [
+    15,
+    21
+   ],
+   "sha256": "179ec4a31fd2b223"
+  },
+  "slider-right-hover.png": {
+   "note": "derived: 18% tint toward title_bar_blue",
+   "size": [
+    15,
+    21
+   ],
+   "sha256": "a744a8c18395f8d1"
+  },
+  "slider-right-pressed.png": {
+   "note": "derived: 1px inset nudge",
+   "size": [
+    15,
+    21
+   ],
+   "sha256": "2173425fb64e241e"
+  },
+  "slider-thumb.png": {
+   "note": "source-cut (BGM row)",
+   "size": [
+    14,
+    14
+   ],
+   "sha256": "2d25c8eb882a8ef5"
+  },
+  "slider-thumb-hover.png": {
+   "note": "derived: 18% tint toward title_bar_blue",
+   "size": [
+    14,
+    14
+   ],
+   "sha256": "59541794f25cabe4"
+  },
+  "slider-thumb-pressed.png": {
+   "note": "derived: 1px inset nudge",
+   "size": [
+    14,
+    14
+   ],
+   "sha256": "f4a84b22ec04510d"
+  },
+  "slider-track.png": {
+   "note": "source-cut (BGM row), baked thumb healed with the track's own left span",
+   "size": [
+    225,
+    15
+   ],
+   "sha256": "8ac307cb0dcaa2f8"
+  },
+  "check-on.png": {
+   "note": "source-cut: the checked 'skill' box",
+   "size": [
+    18,
+    17
+   ],
+   "sha256": "9c3778e4611591cc"
+  },
+  "check-off.png": {
+   "note": "source-cut: the unchecked 'attack' box",
+   "size": [
+    18,
+    17
+   ],
+   "sha256": "49794e52e498adb4"
+  },
+  "check-on-small.png": {
+   "note": "derived: 'skill' glyph point-resampled 18x17->16x16 for the small 'on' boxes",
+   "size": [
+    16,
+    16
+   ],
+   "sha256": "cec3aef39ffb928d"
+  },
+  "check-off-small.png": {
+   "note": "source-cut: the unchecked BGM 'on' box",
+   "size": [
+    16,
+    16
+   ],
+   "sha256": "8cfcafd15f100976"
+  },
+  "dropdown-arrow.png": {
+   "note": "source-cut",
+   "size": [
+    30,
+    30
+   ],
+   "sha256": "f690d24e2a60e1fa"
+  },
+  "dropdown-arrow-hover.png": {
+   "note": "derived hover tint",
+   "size": [
+    30,
+    30
+   ],
+   "sha256": "4e76ec35cfef8965"
+  },
+  "dropdown-field.png": {
+   "note": "source-cut field, value text healed with the field's own background rows \u2014 StyleBoxTexture 4px margins; live text renders the value",
+   "size": [
+    268,
+    30
+   ],
+   "sha256": "1bbd82acbb675fca"
+  },
+  "list-panel.png": {
+   "note": "derived: the field's own surface reused as the open-list panel (nine-patch)",
+   "size": [
+    268,
+    30
+   ],
+   "sha256": "1bbd82acbb675fca"
+  },
+  "list-hover-bar.png": {
+   "note": "derived: hover bar = the title bar's own vertical gradient column x1310, repeated \u2014 the skin token, not a flat colour",
+   "size": [
+    200,
+    18
+   ],
+   "sha256": "2c09688c993df2d6"
+  },
+  "btn-minimize.png": {
+   "note": "source-cut",
+   "size": [
+    19,
+    18
+   ],
+   "sha256": "dd351936fdf941c7"
+  },
+  "btn-minimize-hover.png": {
+   "note": "derived hover tint",
+   "size": [
+    19,
+    18
+   ],
+   "sha256": "4ca545e86c462a94"
+  },
+  "btn-minimize-pressed.png": {
+   "note": "derived 1px nudge",
+   "size": [
+    19,
+    18
+   ],
+   "sha256": "36589f605897a364"
+  },
+  "btn-close.png": {
+   "note": "source-cut",
+   "size": [
+    22,
+    25
+   ],
+   "sha256": "7eec725b72ef5b17"
+  },
+  "btn-close-hover.png": {
+   "note": "derived hover tint",
+   "size": [
+    22,
+    25
+   ],
+   "sha256": "83c4f030ff1b1a48"
+  },
+  "btn-close-pressed.png": {
+   "note": "derived 1px nudge",
+   "size": [
+    22,
+    25
+   ],
+   "sha256": "c861bba56c0a649b"
+  },
+  "title-icon.png": {
+   "note": "source-cut",
+   "size": [
+    20,
+    19
+   ],
+   "sha256": "d12deb57f2171526"
+  },
+  "chrome-plate.png": {
+   "note": "derived: window crop with every label, value, glyph and control healed out; chrome only \u2014 borders, pinstripe column, panel fills, separator, title gradient",
+   "size": [
+    424,
+    202
+   ],
+   "sha256": "057a7c6fe73dec83"
+  },
+  "minimized-window.png": {
+   "note": "derived AUTHORED minimized form: the title strip completed with the window's own bottom border rows \u2014 a finished compact window, not a crop. intent-specified pending #108",
+   "size": [
+    424,
+    28
+   ],
+   "sha256": "a2387a11126a95d4"
+  }
+ },
+ "tokens": {
+  "title_bar_blue": [
+   199,
+   219,
+   240
+  ],
+  "title_ink": [
+   78,
+   91,
+   138
+  ],
+  "label_ink": [
+   83,
+   101,
+   132
+  ],
+  "derivation": "medians sampled from this window's own pixels (title span x1300..1459 y303..320; saturated title glyph ink; dark pixels of the BGM label)"
+ },
+ "provenance": "rects reused from Version A manifest (prototype/options-window@d58c55b); all pixels source-cut; derived states deterministic"
+}

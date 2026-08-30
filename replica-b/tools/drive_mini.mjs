@@ -1,0 +1,14 @@
+import { createRequire } from "node:module";
+const require = createRequire("/home/reidsurmeier/.qwen-pipeline-claude-wt/godot/qa/web/node_modules/");
+const { chromium } = require("playwright");
+const OUT=process.argv[2];
+const b=await chromium.launch(); const p=await b.newPage({viewport:{width:1536,height:1024},ignoreHTTPSErrors:true});
+await p.goto("https://windows-wsl.taile06c45.ts.net/godot-v2-options-b/",{waitUntil:"networkidle",timeout:60000}); await p.waitForTimeout(9000);
+const shot=async n=>p.screenshot({path:`${OUT}/${n}.png`,clip:{x:1090,y:280,width:446,height:300}});
+const st=async()=>p.evaluate(()=>({min:window.godotQaState?.minimized,vis:window.godotQaState?.visible}));
+await p.mouse.move(1491,311); await p.waitForTimeout(400); await shot("m0-hover-minimize");
+await p.mouse.click(1491,311); await p.waitForTimeout(300); await shot("m1-minimized"); console.log("min1",JSON.stringify(await st()));
+await p.mouse.click(1491,311); await p.waitForTimeout(300); await shot("m2-restored"); console.log("min2",JSON.stringify(await st()));
+await p.mouse.click(1517,312); await p.waitForTimeout(300); await p.screenshot({path:`${OUT}/m3-closed.png`});
+await p.mouse.click(35,20);  await p.waitForTimeout(300); await shot("m4-reopened"); console.log("final",JSON.stringify(await st()));
+await b.close();
