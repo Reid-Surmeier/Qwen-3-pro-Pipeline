@@ -127,6 +127,74 @@ def ink_silhouette_iou(
     return silhouette_iou(frame, anchor, ground)
 
 
+
+def border_leak(frame: Image.Image, anchor: Image.Image, matte: tuple[int, int, int]) -> float:
+    """Fraction of the Anchor's border ring the frame has drawn into.
+
+    In filled framing the key colour is the tile's edge, so it is also the containment
+    test: anything of the icon that appears out there has left the tile. The brief says
+    so in words and the model does it anyway — observed on the 2026-08-30 sweep, where
+    the magnifying glass crossed the border on several poses.
+
+    Zero means the icon stayed inside. This is deterministic and cheap, unlike every
+    fidelity metric tried for filled tiles, because it asks a question the framing
+    actually answers.
+    """
+    a = _mask(anchor, matte)   # True where the Anchor draws
+    f = _mask(frame, matte)
+    ring = [i for i, on in enumerate(a) if not on]  # the Anchor's border
+    if not ring:
+        return 0.0
+    return sum(1 for i in ring if f[i]) / len(ring)
+
+
+MAX_BORDER_LEAK = 0.02
+MIN_INNER_MARGIN = 0.03
+
+
+def inner_margin(anchor: Image.Image, matte: tuple[int, int, int]) -> float:
+    """Smallest gap between the drawing and the edge of its tile, as a fraction of width.
+
+    A gesture needs somewhere to happen. An Anchor whose drawing already touches the
+    tile edge leaves the only free space outside the tile, and that is where the model
+    puts the movement — which then reads, correctly, as the icon leaving its box.
+
+    This was a mistake in building the Anchor, not in the brief: cropping the icon to
+    its own content and scaling it to fill the square threw away the margin the icon
+    was drawn with. Observed 2026-08-30 on the sweep, where the drawing bbox and the
+    tile bbox were identical on all four sides.
+    """
+    on = _mask(anchor, matte)
+    w, h = anchor.size
+    tile_x = [i % w for i, v in enumerate(on) if v]
+    tile_y = [i // w for i, v in enumerate(on) if v]
+    if not tile_x:
+        return 0.0
+    tile = (min(tile_x), min(tile_y), max(tile_x), max(tile_y))
+
+    # the tile's ground, not the frame's: outside a filled tile the commonest colour is
+    # the key colour, which would make every tile pixel count as ink
+    px = list(anchor.convert("RGB").getdata())
+    inside = [p for i, p in enumerate(px) if on[i]]
+    ground = max(set(inside), key=inside.count) if inside else (0, 0, 0)
+    ink = [
+        (i % w, i // w)
+        for i, p in enumerate(px)
+        if on[i] and p != ground
+    ]
+    if not ink:
+        return 0.0
+    xs = [p[0] for p in ink]
+    ys = [p[1] for p in ink]
+    gaps = [
+        min(xs) - tile[0],
+        min(ys) - tile[1],
+        tile[2] - max(xs),
+        tile[3] - max(ys),
+    ]
+    return min(gaps) / max(1, tile[2] - tile[0] + 1)
+
+
 def silhouette_iou(frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]) -> float:
     a, b = _mask(frame, matte), _mask(reference, matte)
     inter = sum(1 for x, y in zip(a, b) if x and y)
@@ -192,6 +260,7 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         # metric is calibrated against human verdicts on filled tiles, filled runs are
         # certified by a person looking at the state-set GIF.
         checks["human_gate_required"] = False
+        checks["stayed_in_the_tile"] = report["max_border_leak"] <= MAX_BORDER_LEAK
     elif "anchor_silhouette_iou" in report:
         checks["matches_anchor"] = (
             report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
@@ -337,6 +406,8 @@ def conform_states(
     settle_trim: float = 0.25,
     frame_mode: str = "matte",
     state_hold_ms: int = 134,
+    cycle_poses: int = 12,
+    pose_hold_ms: int = 100,
 ) -> dict:
     """Conform one multi-state take into a State Set: one certified directory per state.
 
@@ -372,6 +443,16 @@ def conform_states(
     palette = extract_palette(ref, colors)
     source_snapped = snap_and_lock(ref, palette, grid)
     anchor_fill = mask_fill_ratio(source_snapped, matte)
+    if frame_mode == "filled":
+        margin = inner_margin(source_snapped, matte)
+        if margin < MIN_INNER_MARGIN:
+            raise RetroError(
+                f"Anchor {reference.name} leaves the drawing only {margin:.1%} of the "
+                f"tile's width as margin (min {MIN_INNER_MARGIN:.0%}). A gesture needs "
+                f"somewhere to happen inside the tile; with none, the only free space is "
+                f"outside it, and that is where the movement goes. Rebuild the Anchor "
+                f"keeping the margin the icon was drawn with."
+            )
     if frame_mode == "matte" and anchor_fill > MAX_ANCHOR_MASK_FILL:
         raise RetroError(
             f"Anchor {reference.name} fills {anchor_fill:.1%} of its own bounding box, so its "
@@ -404,6 +485,9 @@ def conform_states(
             "frame0_identity": round(identity_fraction(snapped[0], source_snapped), 4),
             "anchor_silhouette_iou": round(silhouette_iou(snapped[0], source_snapped, matte), 4),
             "anchor_pixel_identity": round(identity_fraction(snapped[0], source_snapped), 4),
+            "max_border_leak": round(
+                max(border_leak(f, source_snapped, matte) for f in snapped), 4
+            ),
             "anchor_ink_silhouette_iou": round(
                 ink_silhouette_iou(snapped[0], source_snapped, ground_color(source_snapped)), 4
             ),
@@ -444,13 +528,38 @@ def conform_states(
         optimize=False,
     )
 
+    # The whole gesture as one evenly-beaten cycle. Concatenating the four states'
+    # frames does not work: each state is deduped inside its own quarter, so the groups
+    # carry different numbers of poses and different amounts of change, and the result
+    # reads as jerky even though every frame is correct. Deduping the take as a whole
+    # and holding every pose for the same time is what the era's frame tables do.
+    whole = dedupe_frames(
+        [snap_and_lock(f, palette, grid) for f in raw], cycle_poses
+    )
+    whole_out = [f.resize((delivery, delivery), Image.NEAREST) for f in whole]
+    whole_out[0].save(
+        out_dir / "full-cycle.gif",
+        save_all=True,
+        append_images=whole_out[1:],
+        duration=pose_hold_ms,
+        loop=0,
+        optimize=False,
+    )
+
     summary = {
         "states": states,
         "state_set_gif": str(out_dir / "state-set.gif"),
+        "full_cycle_gif": str(out_dir / "full-cycle.gif"),
+        "cycle_poses": cycle_poses,
+        "pose_hold_ms": pose_hold_ms,
+        "max_border_leak": max(r["max_border_leak"] for r in states.values())
+        if states
+        else 0.0,
         "state_hold_ms": state_hold_ms,
         "state_order": list(spans),
         "total_source_frames": len(raw),
         "anchor_mask_fill_ratio": round(anchor_fill, 4),
+        "anchor_inner_margin": round(inner_margin(source_snapped, matte), 4),
         "settle_trim": settle_trim,
         "frame_mode": frame_mode,
         "certified": all(r["certified"] for r in states.values()),

@@ -60,3 +60,41 @@ holds still throughout and the cycle returns to its starting pose.
 
 Remaining defect: the glass grows and shrinks slightly through the sweep, which the
 brief forbids. Worth one more pass; it is not the icon falling apart.
+
+## The reference animation, and why you could not see it
+
+Reid: *"what reference animation are you giving it? I don't see that in the PR. Did you
+load a reference video?"*
+
+Yes — and the PR never showed it, which is a fair complaint about the PR rather than the
+run. `REFERENCE-coin-spin.gif` is the animation every sweep run was given, passed as a
+video URL in `input_references`, verifiable in each run's `request.json`. It is the
+Pokemon TCG duel coin's full eight-step spin, reconstructed from the game's own
+`AnimData167` frame table, 224x224, seven frames, 0.47 seconds.
+
+It is the **cadence** authority, not the shape authority: one large gesture, many flat
+held poses, a steady beat, returning to the pose it began in. Nothing about a coin is
+meant to appear in a magnifying glass.
+
+## Take five: the Anchor had nowhere to move
+
+Reid on take four: *"the motion is jerky and the icon moves outside the green window box."*
+
+Both were real, and the second was a mistake in the Anchor rather than the brief.
+
+**Outside the box.** Take four's Anchor was built by cropping the icon to its own content
+and scaling it to fill the square — which threw away the margin the icon was drawn with.
+Measured afterwards, its drawing bbox and its tile bbox were identical on all four sides:
+zero margin. A gesture needs somewhere to happen, and with no room inside the tile the
+only free space was outside it. `inner_margin` now refuses such an Anchor, and the
+rebuilt one keeps the icon's own margins (7.8% of tile width) inside a 384px tile with a
+48px border.
+
+**Jerky.** The full-cycle GIF was four states' frames concatenated, each deduped inside
+its own quarter, so the groups carried different pose counts and different amounts of
+change. `full-cycle.gif` now dedupes the take as a whole and holds every pose for the
+same time, which is what the era's frame tables do.
+
+`border_leak` also went in: in filled framing the key colour is the tile edge, so it is
+also the containment test — a question the framing can actually answer, unlike every
+fidelity metric tried for filled tiles.

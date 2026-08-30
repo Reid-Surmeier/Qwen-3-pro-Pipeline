@@ -127,9 +127,19 @@ def test_filled_mode_asserts_no_automatic_fidelity_check() -> None:
         "frame0_identity": 0.72,
     }
 
-    filled = certify(dict(base, frame_mode="filled", anchor_pixel_identity=0.41))
+    filled = certify(
+        dict(base, frame_mode="filled", anchor_pixel_identity=0.41, max_border_leak=0.0)
+    )
     assert "matches_anchor" not in filled["checks"]
     assert filled["checks"]["human_gate_required"] is False
+    # containment is not a fidelity judgement, it is a fact the framing can answer
+    assert filled["checks"]["stayed_in_the_tile"] is True
+
+    escaped = certify(
+        dict(base, frame_mode="filled", anchor_pixel_identity=0.41, max_border_leak=0.09)
+    )
+    assert escaped["checks"]["stayed_in_the_tile"] is False
+    assert not escaped["certified"]
 
     # matte keeps the calibrated silhouette decision
     drifted = certify(dict(base, frame_mode="matte", anchor_silhouette_iou=0.466))
@@ -138,3 +148,49 @@ def test_filled_mode_asserts_no_automatic_fidelity_check() -> None:
 
     faithful = certify(dict(base, frame_mode="matte", anchor_silhouette_iou=0.979))
     assert faithful["certified"]
+
+
+def test_border_leak_sees_the_icon_leaving_its_tile() -> None:
+    """Reid, on the sweep: 'the icon moves outside the green window box.' In filled
+    framing the key colour is the tile edge, so it is also the containment test, and
+    unlike every fidelity metric tried here this one asks a question the framing
+    actually answers."""
+    from PIL import Image
+
+    from seedance_icons.retro import MAX_BORDER_LEAK, border_leak
+
+    matte = (0, 255, 0)
+    anchor = Image.new("RGB", (20, 20), matte)
+    anchor.paste(Image.new("RGB", (12, 12), (255, 255, 255)), (4, 4))  # tile, 4px border
+
+    contained = anchor.copy()
+    contained.paste(Image.new("RGB", (4, 4), (0, 0, 255)), (6, 6))
+    assert border_leak(contained, anchor, matte) == 0.0
+
+    escaped = anchor.copy()
+    escaped.paste(Image.new("RGB", (6, 6), (0, 0, 255)), (0, 0))  # over the border
+    assert border_leak(escaped, anchor, matte) > MAX_BORDER_LEAK
+
+
+def test_inner_margin_catches_an_anchor_with_nowhere_to_move() -> None:
+    """The bug behind 'the icon moves outside the green window box': the Anchor was
+    built by cropping the icon to its own content and scaling it to fill the square,
+    which threw away the margin it was drawn with. The drawing then touched the tile
+    edge on all four sides, so the only free space left was outside the tile."""
+    from PIL import Image
+
+    from seedance_icons.retro import MIN_INNER_MARGIN, inner_margin
+
+    matte = (0, 255, 0)
+
+    # green border, white tile, blue drawing — the real structure
+    no_margin = Image.new("RGB", (40, 40), matte)
+    no_margin.paste(Image.new("RGB", (24, 24), (255, 255, 255)), (8, 8))  # tile
+    no_margin.paste(Image.new("RGB", (24, 4), (0, 0, 255)), (8, 8))       # ink on the tile edge
+    assert inner_margin(no_margin, matte) == 0.0
+    assert inner_margin(no_margin, matte) < MIN_INNER_MARGIN
+
+    with_margin = Image.new("RGB", (40, 40), matte)
+    with_margin.paste(Image.new("RGB", (24, 24), (255, 255, 255)), (8, 8))  # tile
+    with_margin.paste(Image.new("RGB", (12, 12), (0, 0, 255)), (14, 14))    # ink inside it
+    assert inner_margin(with_margin, matte) >= MIN_INNER_MARGIN

@@ -209,6 +209,8 @@ def cmd_retro_conform_states(args: argparse.Namespace) -> None:
         settle_trim=args.settle_trim,
         frame_mode=args.frame_mode,
         state_hold_ms=args.state_hold_ms,
+        cycle_poses=args.cycle_poses,
+        pose_hold_ms=args.pose_hold_ms,
     )
     print(json.dumps(summary, indent=2))
     if not summary["certified"]:
@@ -306,6 +308,14 @@ def parser() -> argparse.ArgumentParser:
         type=int,
         default=134,
         help="Hold per state in the state-set GIF; 134 ms is the era binary-swap cadence",
+    )
+    retro_states.add_argument(
+        "--cycle-poses", type=int, default=12,
+        help="Poses in the whole-gesture cycle; set it to the number the brief enumerates",
+    )
+    retro_states.add_argument(
+        "--pose-hold-ms", type=int, default=100,
+        help="Even hold per pose in the full-cycle GIF; the era beat is 67-134 ms",
     )
     retro_states.add_argument(
         "--frame-mode",
