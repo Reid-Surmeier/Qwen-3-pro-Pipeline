@@ -4,12 +4,14 @@ Issue: [#138](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/138)
 
 ## Current candidate
 
-The v003 candidate is a 336 x 126 native-pixel closed Assembly plus a 336 x 196
-open-dropdown export. It supersedes rejected v001 and v002 without deleting
+The v004 candidate is a 336 x 126 native-pixel closed Assembly plus a 336 x 196
+open-dropdown export. It supersedes rejected v001, v002, and v003 without deleting
 their history. All replacement text is rendered once on the native pixel grid;
 the RO source supplies the inner frame, title glass, field bevels, control
 sprites, footer, and the entire `OK` / lowercase `cancel` pair. The museum
-screenshot supplies only the nine sort-option strings and their order.
+screenshot supplies only the nine sort-option strings and their order. The
+owner-supplied title crop is a hash-locked authority for the title palette and
+offset-depth treatment.
 
 The mapping is:
 
@@ -49,13 +51,13 @@ surface from candidate 1.
 
 The two raw candidates are preserved under
 `artifacts/runs/custom-filters-ro-render-v001/`. Candidate 1 was the more
-coherent compact layout. V003 imports only its popup frame and row surface
+coherent compact layout. V004 imports only its popup frame and row surface
 through a glyph-free mask. It imports no generated lettering or generated
-closed-state control pixels. No new paid request was made for v003.
+closed-state control pixels. No new paid request was made for v004.
 
 ## Assembly and fidelity check
 
-`scripts/assemble_custom_filters_ro_v003.py` first reduces the complete 1088 x
+`scripts/assemble_custom_filters_ro_v004.py` first reduces the complete 1088 x
 504 style source once to its 272 x 126 pixel grid with nearest-neighbor
 sampling. It then widens the shell at native resolution with exact source
 halves and a bounded center donor strip, and composes the replacement UI at 336
@@ -66,11 +68,22 @@ pixels.
 
 All body labels, values, radio labels, and all nine popup options use one 10 px
 PixelMplus size at native resolution. The three closed-state baselines have
-equal 21 px gaps. Their 4x review pixels come only from nearest-neighbor
-enlargement, so no independently hinted 40 px glyphs enter the output. The
-title remains the source-matched larger native size. The pinned file is
-`godot/fonts/PixelMplus10-Regular.ttf`, SHA-256
-`01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7`.
+equal 21 px gaps. Body glyphs reproduce the source's offset depth: a far gray
+layer at `(2,2)`, a near light-blue layer at `(1,1)`, and the dark source
+stroke on top. Labels use source-measured navy `(46,69,96)`; values use the
+same depth layers with black main strokes. Their 4x review pixels come only
+from nearest-neighbor enlargement, so no independently hinted 40 px glyphs
+enter the output.
+
+The title uses the dedicated PixelMplus12 face plus the owner crop's measured
+treatment: gray depth at `(1,1)`, light highlight at `(-1,-1)`, and black main
+strokes. The hash-locked authorities are
+`godot/fonts/PixelMplus10-Regular.ttf` at
+`01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7`,
+`godot/fonts/PixelMplus12-Regular.ttf` at
+`02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12`,
+and `artifacts/references/custom-filters-ro-v001/title-text-authority.png` at
+`0e297d8786a0d8413b31c776f0beecd0fb6422e08eeb9e8f4de46d5997cd2caa`.
 
 After native enlargement, the review exports restore byte-exact
 full-resolution source crops for the close control, both arrows, both radios,
@@ -92,6 +105,8 @@ Machine verification records:
 - zero content-assembly changes outside that predeclared mask relative to the
   widened shell;
 - both native dimensions and all exact strings are frozen by tests;
+- body and title palettes are measured from their hash-locked authorities;
+  tests require every native offset layer in the outputs;
 - inner frame caps plus native controls are exact source pixels, and the review
   controls are byte-identical full-resolution source crops;
 - the actual closed and open review exports differ from nearest-neighbor native
@@ -107,14 +122,14 @@ Byte-exact claims are limited to the named arrows, radios, and button pair.
 
 ## Outputs
 
-- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/contact-sheet.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/native-edit-mask.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/actual-difference-mask-native.png`
-- `artifacts/runs/custom-filters-ro-assembly-v003/verification.json`
+- `artifacts/runs/custom-filters-ro-assembly-v004/custom-filters-closed-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/custom-filters-closed.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/custom-filters-open-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/custom-filters-open.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/contact-sheet.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/native-edit-mask.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/actual-difference-mask-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/verification.json`
 
 ## Verification boundary
 
