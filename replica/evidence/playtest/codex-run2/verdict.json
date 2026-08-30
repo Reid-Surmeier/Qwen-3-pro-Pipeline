@@ -1,0 +1,10 @@
+{
+ "verdict": "FAIL",
+ "actions": 29,
+ "frames_verified": 63,
+ "unexercised": [],
+ "problems": [
+  "effect-slider-track: does not match expected \u2014 Before the click the Effect thumb was near x=1300. After the click the right arrow had the hover outline and the thumb moved only a few pixels right rather than",
+  "dropdown-arrow: does not match expected \u2014 Before Escape the full options window was visible and the dropdown list was closed. After Escape the entire window disappeared and the reopen label appeared at "
+ ]
+}
