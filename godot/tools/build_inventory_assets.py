@@ -208,6 +208,7 @@ def main() -> None:
         "right_edge_width": 4,
         "anchored_right_controls": ["inventory.minimize", "inventory.close"],
         "stale_title_controls_geometry": {"x": 436, "y": 0, "width": 48, "height": 24},
+        "stale_footer_geometry": {"x": 0, "y": 278, "width": 484, "height": 25},
         "stale_footer_grip_geometry": grip_geometry,
         "stale_right_edge_geometry": {"x": 480, "y": 24, "width": 4, "height": 255},
         "title_fill": save(title_fill, "resize-title-fill.png", records),

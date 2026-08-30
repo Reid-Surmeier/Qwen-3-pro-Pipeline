@@ -141,6 +141,8 @@ func qa_state() -> Dictionary:
 			"requested": [_resize_requested.x, _resize_requested.y],
 			"clamped": [_resize_clamped.x, _resize_clamped.y],
 			"motion_samples": _resize_motion_samples,
+			"stale_footer_covered": _resize_old_footer_cover != null \
+				and _resize_old_footer_cover.visible,
 			"stale_title_controls_covered": _resize_old_title_controls_cover != null \
 				and _resize_old_title_controls_cover.visible,
 			"stale_footer_grip_covered": _resize_old_footer_grip_cover != null \
@@ -273,8 +275,11 @@ func _layout_resize_frame() -> void:
 		node.visible = resized
 	if not resized:
 		return
-	_resize_old_footer_cover.position = Vector2(0, home.y - footer_height)
-	_resize_old_footer_cover.size = Vector2(minf(size.x, home.x), footer_height)
+	var footer_cover: Dictionary = frame.stale_footer_geometry
+	_resize_old_footer_cover.position = Vector2(
+		float(footer_cover.x), float(footer_cover.y))
+	_resize_old_footer_cover.size = Vector2(
+		minf(size.x, float(footer_cover.width)), float(footer_cover.height))
 	_resize_old_footer_cover.visible = size.y > home.y
 	var right_cover: Dictionary = frame.stale_right_edge_geometry
 	_resize_old_right_edge_cover.position = Vector2(

@@ -24,6 +24,7 @@ func _run() -> void:
 		and idle_resize.clamped == [484.0, 303.0], str(idle_resize))
 	await _tabs_reverse()
 	await _single_and_double_activate()
+	await _pending_single_cancelled_by_modifier()
 	await _modifier_reverse_and_reject()
 	await _drag_drop_and_rejections()
 	await _resize_and_alignment()
@@ -72,6 +73,25 @@ func _single_and_double_activate() -> void:
 		and semantic.filter(func(entry): return entry.get("gesture") == "DoubleActivate").size() == 1
 		and semantic.filter(func(entry): return entry.get("gesture") == "Activate").is_empty(),
 		str([opened, semantic]))
+
+
+func _pending_single_cancelled_by_modifier() -> void:
+	var first := Vector2(69, 761)
+	var third := Vector2(177, 761)
+	var log_before := window.runtime.interaction_log.size()
+	await _click(first)
+	await _click(third, true)
+	await create_timer(0.25).timeout
+	var state: Dictionary = window.qa_state().controls["inventory.items"]
+	var semantic: Array = window.runtime.interaction_log.slice(log_before).filter(func(entry):
+		return entry.get("control_id") == "inventory.items" \
+			and entry.get("gesture") in ["Activate", "ModifierActivate"])
+	_check("pending-single-cancelled-by-modifier", state.last_gesture == "ModifierActivate"
+		and state.selected_items == ["r0c2"]
+		and semantic.filter(func(entry): return entry.get("gesture") == "ModifierActivate").size() == 1
+		and semantic.filter(func(entry): return entry.get("gesture") == "Activate").is_empty(),
+		str([state, semantic]))
+	await _click(third, true)
 
 
 func _modifier_reverse_and_reject() -> void:
@@ -145,7 +165,8 @@ func _resize_and_alignment() -> void:
 		and maximum.window.resize.motion_samples >= 30 and maximum.window.geometry_version == 1,
 		str(maximum.window))
 	_check("resized-stale-chrome-covered",
-		maximum.window.resize.stale_title_controls_covered
+		maximum.window.resize.stale_footer_covered
+		and maximum.window.resize.stale_title_controls_covered
 		and maximum.window.resize.stale_footer_grip_covered
 		and maximum.window.resize.stale_right_edge_covered,
 		str(maximum.window.resize))

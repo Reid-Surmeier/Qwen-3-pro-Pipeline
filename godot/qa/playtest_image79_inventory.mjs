@@ -140,6 +140,25 @@ record("inventory.items", "DoubleActivate", "OpenInventoryItem",
     no_single: doubleLog.every((entry) => entry.gesture !== "Activate"),
   }, { before: selectedFrame, after: openedFrame });
 
+const logBeforeRace = (await inventory()).interaction_log.length;
+await click(69, 761);
+await page.keyboard.down("Control");
+await click(177, 761);
+await page.keyboard.up("Control");
+await page.waitForTimeout(260);
+const raceState = await control("inventory.items");
+const raceLog = (await inventory()).interaction_log.slice(logBeforeRace)
+  .filter((entry) => ["Activate", "ModifierActivate"].includes(entry.gesture));
+check("pending-single-cancelled-by-modifier",
+  raceState.last_gesture === "ModifierActivate"
+    && raceState.selected_items.includes("r0c2")
+    && raceLog.filter((entry) => entry.gesture === "ModifierActivate").length === 1
+    && raceLog.every((entry) => entry.gesture !== "Activate"),
+  { raceState, raceLog });
+await page.keyboard.down("Control");
+await click(177, 761);
+await page.keyboard.up("Control");
+
 await page.keyboard.down("Control");
 await click(177, 761);
 await page.keyboard.up("Control");
@@ -291,6 +310,7 @@ record("inventory", "Resize", "ResizeWindow",
     continuous: resized.window.resize.motion_samples >= 30,
     aligned,
     stale_chrome_covered: resized.window.resize.stale_title_controls_covered
+      && resized.window.resize.stale_footer_covered
       && resized.window.resize.stale_footer_grip_covered
       && resized.window.resize.stale_right_edge_covered,
   }, { before: resizeBefore, mid: resizeMid, after: resizeAfter }, sizeSamples);

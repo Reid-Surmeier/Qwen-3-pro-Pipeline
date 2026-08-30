@@ -299,6 +299,11 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	_held_item = ""
 	_held_button = 0
 	_double_pending = false
+	var schedules_single: bool = not was_dragging and button == MOUSE_BUTTON_LEFT \
+		and modifiers.is_empty() and not was_double \
+		and "DoubleActivate" in spec.gestures
+	if not schedules_single:
+		_single_generation += 1
 	var result: Dictionary
 	if was_dragging:
 		var target := _item_at_global(event.global_position)

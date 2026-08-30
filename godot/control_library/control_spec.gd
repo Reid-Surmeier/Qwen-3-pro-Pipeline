@@ -113,7 +113,8 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	if window.has("drag_geometry"):
 		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
 	if "Resize" in (gestures if gestures is Array else []):
-		_validate_resize_contract(window.get("resize"), window.get("controls"),
+		_validate_resize_contract(window.get("resize"), window.get("geometry"),
+			window.get("controls"),
 			path + ".resize", errors, asset_exists)
 	elif window.has("resize"):
 		errors.append(_error(Errors.CONTROL_BINDING, path + ".resize",
@@ -308,11 +309,23 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 		var detail_view: Variant = value.get("detail_view") if value is Dictionary else null
 		var detail_size: Variant = detail_view.get("size") \
 			if detail_view is Dictionary else null
-		if not detail_view is Dictionary or not detail_size is Array \
-				or detail_size.size() != 2 or not _positive_number(detail_size[0]) \
-				or not _positive_number(detail_size[1]):
+		var detail_offset: Variant = detail_view.get("offset") \
+			if detail_view is Dictionary else null
+		var detail_padding: Variant = detail_view.get("padding") \
+			if detail_view is Dictionary else null
+		var detail_valid: bool = detail_view is Dictionary \
+			and detail_size is Array and detail_size.size() == 2 \
+			and _positive_number(detail_size[0]) and _positive_number(detail_size[1]) \
+			and detail_offset is Array and detail_offset.size() == 2 \
+			and _number(detail_offset[0]) and _number(detail_offset[1]) \
+			and detail_padding is Array and detail_padding.size() == 2 \
+			and _number(detail_padding[0]) and float(detail_padding[0]) >= 0.0 \
+			and _number(detail_padding[1]) and float(detail_padding[1]) >= 0.0 \
+			and _positive_number(detail_view.get("font_size")) \
+			and not str(detail_view.get("font_color", "")).is_empty()
+		if not detail_valid:
 			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value.detail_view",
-				"DoubleActivate requires a manifest-owned detail view"))
+				"DoubleActivate requires a complete manifest-owned detail view"))
 		else:
 			_validate_state_set(detail_view.get("state_set"), ["ready"],
 				INTERACTION_PHASES, path + ".value.detail_view.state_set",
@@ -404,7 +417,8 @@ static func _validate_gestures(gestures: Variant, path: String,
 				"unsupported gesture: %s" % str(gesture)))
 
 
-static func _validate_resize_contract(resize: Variant, controls: Variant, path: String,
+static func _validate_resize_contract(resize: Variant, window_geometry: Variant,
+		controls: Variant, path: String,
 		errors: Array[Dictionary], asset_exists: Callable) -> void:
 	if not resize is Dictionary:
 		errors.append(_error(Errors.INVALID_GEOMETRY, path,
@@ -423,9 +437,8 @@ static func _validate_resize_contract(resize: Variant, controls: Variant, path: 
 	if not valid:
 		errors.append(_error(Errors.INVALID_GEOMETRY, path,
 			"Resize minimum must be positive and no larger than maximum"))
-	if resize is Dictionary and resize.has("state_set"):
-		_validate_state_set(resize.state_set, ["ready"], INTERACTION_PHASES,
-			path + ".state_set", errors, asset_exists)
+	_validate_state_set(resize.get("state_set"), ["ready"], INTERACTION_PHASES,
+		path + ".state_set", errors, asset_exists)
 	var frame: Variant = resize.get("frame") if resize is Dictionary else null
 	if not frame is Dictionary:
 		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
@@ -443,9 +456,46 @@ static func _validate_resize_contract(resize: Variant, controls: Variant, path: 
 	if not dimensions_valid:
 		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
 			"Resize frame sizes must be present and positive"))
-	for field in ["stale_title_controls_geometry", "stale_footer_grip_geometry",
-			"stale_right_edge_geometry"]:
+	for field in ["stale_title_controls_geometry", "stale_footer_geometry",
+			"stale_footer_grip_geometry", "stale_right_edge_geometry"]:
 		_validate_geometry(frame.get(field), path + ".frame." + field, errors)
+	var grip: Variant = resize.get("grip_geometry")
+	var title_cover: Variant = frame.get("stale_title_controls_geometry")
+	var footer_cover: Variant = frame.get("stale_footer_geometry")
+	var grip_cover: Variant = frame.get("stale_footer_grip_geometry")
+	var right_cover: Variant = frame.get("stale_right_edge_geometry")
+	var relationships_valid: bool = valid and dimensions_valid \
+		and window_geometry is Dictionary and grip is Dictionary \
+		and title_cover is Dictionary and footer_cover is Dictionary \
+		and grip_cover is Dictionary and right_cover is Dictionary
+	if relationships_valid:
+		var home_width := float(home_size[0])
+		var home_height := float(home_size[1])
+		var title_height := float(frame.title_height)
+		var footer_height := float(frame.footer_height)
+		var edge_width := float(frame.right_edge_width)
+		relationships_valid = float(window_geometry.get("width", -1)) == home_width \
+			and float(window_geometry.get("height", -1)) == home_height \
+			and float(minimum[0]) <= home_width and home_width <= float(maximum[0]) \
+			and float(minimum[1]) <= home_height and home_height <= float(maximum[1]) \
+			and float(grip.get("x", -1)) + float(grip.get("width", -1)) == home_width \
+			and float(grip.get("y", -1)) + float(grip.get("height", -1)) == home_height \
+			and grip == grip_cover \
+			and float(title_cover.get("y", -1)) == 0.0 \
+			and float(title_cover.get("height", -1)) == title_height \
+			and float(title_cover.get("x", -1)) + float(title_cover.get("width", -1)) == home_width \
+			and float(footer_cover.get("x", -1)) == 0.0 \
+			and float(footer_cover.get("width", -1)) == home_width \
+			and float(footer_cover.get("y", -1)) + float(footer_cover.get("height", -1)) == home_height \
+			and float(footer_cover.get("height", -1)) >= footer_height \
+			and float(right_cover.get("x", -1)) + float(right_cover.get("width", -1)) == home_width \
+			and float(right_cover.get("width", -1)) == edge_width \
+			and float(right_cover.get("y", -1)) == title_height \
+			and float(right_cover.get("y", -1)) + float(right_cover.get("height", -1)) \
+				== home_height - footer_height
+	if not relationships_valid:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
+			"Resize frame, home Window, grip, and stale-cover geometry must agree"))
 	var anchored: Variant = frame.get("anchored_right_controls")
 	var declared := {}
 	if controls is Array:

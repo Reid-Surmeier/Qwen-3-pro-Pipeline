@@ -15,8 +15,10 @@ func _init() -> void:
 	_contract_modifier_policy_fails_closed()
 	_contract_drop_targets_fail_closed()
 	_contract_item_identity_fails_closed()
+	_contract_detail_view_fails_closed()
 	_contract_resize_bounds_fail_closed()
 	_contract_resize_frame_fails_closed()
+	_contract_resize_relationships_fail_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
 
@@ -71,6 +73,14 @@ func _contract_item_identity_fails_closed() -> void:
 		str(errors))
 
 
+func _contract_detail_view_fails_closed() -> void:
+	var fixture := _fixture()
+	fixture.windows[0].controls[1].value.detail_view.erase("padding")
+	var errors: Array[Dictionary] = ControlSpec.validate(fixture, func(_path): return true)
+	_check("missing-detail-padding-fails-closed",
+		_has_code(errors, Errors.INVALID_STATE_SET), str(errors))
+
+
 func _contract_resize_bounds_fail_closed() -> void:
 	var fixture := _fixture()
 	fixture.windows[0].resize.minimum = [735, 513]
@@ -92,6 +102,27 @@ func _contract_resize_frame_fails_closed() -> void:
 		_has_code(geometry_errors, Errors.INVALID_GEOMETRY)
 		and _has_code(control_errors, Errors.CONTROL_BINDING),
 		str({"geometry": geometry_errors, "control": control_errors}))
+
+
+func _contract_resize_relationships_fail_closed() -> void:
+	var wrong_home := _fixture()
+	wrong_home.windows[0].resize.frame.home_size = [1, 1]
+	var home_errors: Array[Dictionary] = ControlSpec.validate(
+		wrong_home, func(_path): return true)
+	var wrong_grip := _fixture()
+	wrong_grip.windows[0].resize.grip_geometry.x = 0
+	wrong_grip.windows[0].resize.grip_geometry.y = 0
+	var grip_errors: Array[Dictionary] = ControlSpec.validate(
+		wrong_grip, func(_path): return true)
+	var missing_state := _fixture()
+	missing_state.windows[0].resize.erase("state_set")
+	var state_errors: Array[Dictionary] = ControlSpec.validate(
+		missing_state, func(_path): return true)
+	_check("resize-relationships-fail-closed",
+		_has_code(home_errors, Errors.INVALID_GEOMETRY)
+		and _has_code(grip_errors, Errors.INVALID_GEOMETRY)
+		and _has_code(state_errors, Errors.INVALID_STATE_SET),
+		str({"home": home_errors, "grip": grip_errors, "state": state_errors}))
 
 
 func _fixture() -> Dictionary:
@@ -124,6 +155,7 @@ func _fixture() -> Dictionary:
 			"drag_geometry": {"x": 24, "y": 0, "width": 390, "height": 24},
 			"resize": {"grip_geometry": {"x": 460, "y": 279, "width": 24, "height": 24},
 				"minimum": [332, 220], "maximum": [734, 512],
+				"state_set": {"ready": variants},
 				"frame": {"home_size": [484, 303], "title_height": 24,
 					"footer_height": 24, "right_edge_width": 4,
 					"anchored_right_controls": ["inventory.tabs"],
@@ -131,6 +163,8 @@ func _fixture() -> Dictionary:
 						"width": 48, "height": 24},
 					"stale_footer_grip_geometry": {"x": 460, "y": 279,
 						"width": 24, "height": 24},
+					"stale_footer_geometry": {"x": 0, "y": 278,
+						"width": 484, "height": 25},
 					"stale_right_edge_geometry": {"x": 480, "y": 24,
 						"width": 4, "height": 255},
 					"title_fill": "fixture", "footer": "fixture",

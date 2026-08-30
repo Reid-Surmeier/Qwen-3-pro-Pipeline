@@ -4118,6 +4118,12 @@
             "width": 48,
             "height": 24
           },
+          "stale_footer_geometry": {
+            "x": 0,
+            "y": 278,
+            "width": 484,
+            "height": 25
+          },
           "stale_footer_grip_geometry": {
             "x": 460,
             "y": 279,
