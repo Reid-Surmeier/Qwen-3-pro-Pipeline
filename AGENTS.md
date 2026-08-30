@@ -73,34 +73,102 @@ The owner reviews **versions, not fragments**. Main is not the review surface:
 - Direct pushes to `main` are limited to what the owner explicitly names
   (this procedure section itself was one such push).
 
-### Current milestone: Godot Interactive Replica
+### Current milestone: the reusable screenshot → Interactive Replica system
 
-The repository's end goal is reverse-engineering the RO-style Japanese HUD
-Reference Screen (`artifacts/references/ro-hud-fullscreen/` on the
-integration line) into a living Godot 4.7.2 replica (`godot/` directory):
-every window draggable, text live, checkboxes and buttons functional, with
-animations mimicking or referenced exactly from the source. The Figma Design
-componentization layer is retired; FigJam remains reference intake only. The
-extraction, fidelity-contract, palette, and vision-verifier machinery of the
-integration line is validated by being used for this — treat gaps found
-while building as defects to fix on the line, not reasons to bypass it.
+The repository's end goal is a **reusable system** that turns a screenshot of a
+windowed pixel UI into an Interactive Replica in Godot 4.7.2 — not a single
+replica. A new Reference Screen brings a new manifest and new assets; it must not
+bring new engine code. The work is charted on **wayfinder map #103**, and the
+proving case is the second RO desktop (`artifacts/references/ro-desktop-b/`,
+FigJam board `wbOhmbJkG83vj2NMgfnQr2` node `1:5`, native 1536×1024, 11 windows,
+239 controls), run through the whole pipeline from the beginning.
 
-The replica must be **self-verifying**: headless import, engine contract
-tests, rendered-frame fidelity checks, and error capture that produces
-machine-readable reports an agent can consume and course-correct from,
-without the owner relaying errors by hand. Multiple testing rounds are
-required before anything is called engineered.
+Start from the map, not from memory: read #103, take the first open, unblocked,
+unassigned child ticket, assign it to yourself before doing any work, and resolve
+one per session (research tickets excepted).
 
-### Paid generation for this milestone run
+The previous milestone — the `ro-hud-fullscreen` replica in `godot/` — was judged
+poorly tested by the owner and is superseded (#102). Do not build on it.
 
-The owner set a cap of **200 Qwen generations** for the current milestone
-run (2026-08-27), superseding ADR 0003's per-issue ceiling for work on this
-milestone only. Everything else in ADR 0003 stands: explicit OpenRouter
-only, smallest useful batch, pre-submission records before spending, full
-provenance, ambiguous requests counted as spent and never blindly retried,
-no paid execution in ordinary CI. Maintain the running count in
-`artifacts/references/ro-hud-fullscreen/generation-ledger.json` on the
-integration line; stop before any request that could exceed 200.
+### Aliveness: every control has a State Set
+
+A Reference Screen shows each control in exactly **one** state. Every interactive
+element owns a full **State Set** — idle, hover, pressed, settled/active, and
+disabled where the Source Game has one — so the missing states must be inventoried
+per control and produced in the same style, then integrated so that hovering and
+pressing visibly change the control. A control that is a region of a flat picture
+with an invisible hit rectangle over it is **not** implemented.
+
+Transitions are **instant**. Every transition measured in the Source Game completes
+in one frame at 30–60 fps (#115); its entire UI layer contains no animation.
+Aliveness here means an immediate state swap, not easing. Adding tweening makes the
+replica less faithful, not more.
+
+Hover states are added **in the same style everywhere**, including where the Source
+Game has none. Any such addition is marked `invented-in-style` on the Behaviour Card
+so the owner can strike it. Pressed, checked and selected states are always
+source-exact.
+
+### The Source Game is the behaviour authority
+
+Before a control is built, its behaviour comes from real footage and screenshots of
+the Source Game, recorded as a **Behaviour Card**: gesture → expected visible
+response, timing in frames, reversibility, whether the source shows a hover state,
+and the evidence (URL, timestamp, fps, crop) under
+`artifacts/references/<game>/behaviour/`. The owner confirms cards; agents never
+author behaviour from imagination and present it as observed.
+
+Two traps, both paid for once:
+
+- **An edit cut is indistinguishable from an instant UI response.** Tutorial footage
+  cuts every few seconds. Verify every timing claim with a cut detector — a per-frame
+  diff over a region containing no UI — before believing it.
+- **Below ~30 fps a drag and a burst of discrete steps look identical.** Re-read any
+  apparent ramp at native frame rate before calling it continuous motion.
+
+Where the Source Game is silent, say so on the card and specify from intent in the
+open. Never present an intent-specified gesture as observed.
+
+### Verification: the Playtester, not a reviewer
+
+Judgement of an Interactive Replica comes from a **Playtester** — an agent that
+drives the running artifact through real input events and produces its own evidence.
+An agent that grades evidence the builder produced is not a verification step; that
+design passed byte-identical before/after frames on 2026-08-27.
+
+- Two Playtesters play **independently and blind to each other**; either one finding
+  a dead or wrong control fails the run. Because Claude Code builds, the Codex
+  session's play is the verdict that counts.
+- Blindness is a **fresh session on a packet directory** — a `git archive` at the
+  candidate SHA with no `.git`, no backlog, no PR text, no host memory or rules —
+  with browser and screenshot tools only. Verified invocations are in
+  `docs/research/blind-playtester-sessions/`.
+- The verdict is **computed from the Play Log**, never asserted by the Playtester.
+  Any `responsive: no` on a catalogued control fails. Any catalogued control not
+  exercised makes the run INCOMPLETE — never a pass.
+- The quality floor and its twelve gates are **ADR 0006**. Mechanical metrics are
+  regression backstops; they never constitute a pass.
+
+### Build unit: one window at a time, one release per screen
+
+One GitHub Issue per window (a **Window Issue**); a window ships only when its Play
+Log is green; every window folds into **one release pull request per Reference
+Screen**. The owner reviews versions, never fragments.
+
+### Paid generation
+
+Missing States are produced by deterministic derivation wherever the Source Game's
+own rendering is a known transform, and by a Qwen Asset Pass otherwise. Every output
+— derived or generated — is reviewed at ≥4× magnification and regenerated when it is
+not acceptable.
+
+The owner set a cap of **300 Qwen generations** for the current Reference Screen
+(2026-08-29), superseding ADR 0003's per-issue ceiling for this milestone only.
+Everything else in ADR 0003 stands: explicit OpenRouter only, smallest useful batch,
+pre-submission records before spending, full provenance, ambiguous requests counted
+as spent and never blindly retried, no paid execution in ordinary CI. Maintain the
+running count in the generation ledger beside the Reference Screen; stop before any
+request that could exceed 300.
 
 ## Branch and worktree rules
 
@@ -150,6 +218,11 @@ git diff --check
 If the change affects JavaScript tooling, ComfyUI integration, deployment, or artifacts, run the relevant additional checks and record them in the pull request.
 
 Do not describe work as verified unless the commands were actually run and their results are reported. Pre-existing failures must be distinguished from failures introduced by the change.
+
+For a change to an Interactive Replica, this baseline is **not** the gate. The gate
+is a green Play Log from a blind Playtester run under ADR 0006 — the commands above
+are regression backstops beneath it. A replica change reported as verified on the
+strength of the baseline alone is reported wrongly.
 
 ## Commit gate
 
