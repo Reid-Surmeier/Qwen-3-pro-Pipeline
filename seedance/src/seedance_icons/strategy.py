@@ -22,9 +22,12 @@ plan.json and printed, never silent.
 
 from __future__ import annotations
 
+import json
 import re
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlparse
 
 from PIL import Image
 
@@ -87,12 +90,178 @@ def _reference_resolves(value: str, brief_path: Path) -> bool:
     return False
 
 
+
+MIN_MULTI_STATE_MOTION_WORDS = 120
+POSE_MARKER = re.compile(
+    r"\bpose (?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b|\bbeat \d+\b",
+    re.IGNORECASE,
+)
+
+
+def enumerated_poses(motion: str) -> int:
+    """How many held poses the motion field actually names."""
+    return len(POSE_MARKER.findall(motion))
+
+
+def check_motion_detail(brief: dict[str, Any]) -> list[str]:
+    """A multi-state gesture must be written pose by pose, not summarised.
+
+    Measured across every brief on disk, motion-field length against outcome:
+
+        24-32 words, 0 poses   batch 1 and 2, a two-frame twinkle. Fine — a small
+                               gesture needs few words, and batch 2 certified at
+                               0.998-1.0 on briefs this short.
+        64-76 words, 0 poses   the two failed four-state takes, 2026-08-30. A large
+                               gesture summarised. The element moved fifteen pixels
+                               when told to move one, twice.
+        123-218 words, 3-6     batch 3 and the magazine-flip batch, all certified.
+                               A large gesture written out pose by pose.
+
+    So the rule is not "write more". It is that the detail has to match the size of
+    what is being asked for: a brief that declares four states and then describes the
+    motion in two sentences has told the model what to end up with and nothing about
+    how to get there, and the model fills that in generously.
+    """
+    violations: list[str] = []
+    states = brief.get("state_map") or {}
+    if len(states) < 2:
+        return violations
+    motion = str(brief.get("motion") or "")
+    words = len(motion.split())
+    poses = enumerated_poses(motion)
+    if words < MIN_MULTI_STATE_MOTION_WORDS:
+        violations.append(
+            f"motion is {words} words for a {len(states)}-state gesture (min "
+            f"{MIN_MULTI_STATE_MOTION_WORDS}): every certified multi-pose run on disk "
+            f"used 123-218 words, and both runs that summarised a large gesture in "
+            f"64-76 words moved the element roughly fifteen times further than asked"
+        )
+    if poses < len(states):
+        violations.append(
+            f"motion names {poses} held poses for {len(states)} states: write the "
+            f"gesture out pose by pose ('Beat 2, five held poses: pose one ...'), the "
+            f"way the certified batch-3 briefs do"
+        )
+    return violations
+
+
+
+MOTION_KINDS = ("translate", "rotate", "scale", "reveal", "blink")
+
+
+def _reference_registry(brief_path: Path) -> dict[str, Any]:
+    """The provenance record next to the reference assets, if it can be found."""
+    for base in (brief_path.parent, *brief_path.parents):
+        candidate = base / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
+        if candidate.exists():
+            # A present but unreadable registry is a broken safety input. Let the
+            # parse/read error stop planning instead of silently skipping the
+            # motion-reference compatibility gate.
+            return json.loads(candidate.read_text())
+    return {}
+
+
+def _registered_reference_name(value: str, registry: dict[str, Any]) -> str | None:
+    """Map a GIF/MP4 path or URL to its provenance-registry entry by stable stem."""
+    path = unquote(urlparse(value).path) if value.startswith("https://") else value
+    stem = Path(path).stem
+    return next((name for name in registry if Path(name).stem == stem), None)
+
+
+def check_reference_matches_motion(
+    brief: dict[str, Any],
+    brief_path: Path,
+    video_references: Sequence[str],
+) -> list[str]:
+    """The reference must move the way the brief says the icon moves.
+
+    A reference does not only teach cadence, it teaches the *kind* of movement, and the
+    wrong kind is worse than none. Observed 2026-08-30: a magnifying glass asked to
+    travel across a bust was handed ref-coin-spin, whose motion_kind is `rotate`. The
+    glass tumbled and changed size instead of travelling, and no amount of brief wording
+    corrected it — the reference was pulling the other way the whole time.
+
+    So the brief declares its motion_kind, the reference registry declares each asset's,
+    and a run whose kinds disagree does not proceed.
+    """
+    violations: list[str] = []
+    reference = str(brief.get("real_reference") or "")
+    registry = (_reference_registry(brief_path) or {}).get("assets") or {}
+    named = [
+        name
+        for name in registry
+        if name in reference or name.replace(".gif", "") in reference
+    ]
+    if not video_references:
+        violations.append(
+            "video_reference is required: pass the actual matching animation with "
+            "--video-reference HTTPS_URL; naming it in real_reference is not model input"
+        )
+        return violations
+
+    non_https = [value for value in video_references if not value.startswith("https://")]
+    if non_https:
+        violations.append(
+            "video_reference must be an HTTPS URL so the provider receives the actual "
+            "animation, not a prose citation or an environment-local path"
+        )
+
+    actual_names = {
+        name
+        for value in video_references
+        if (name := _registered_reference_name(value, registry)) is not None
+    }
+    if registry and len(actual_names) != len(video_references):
+        violations.append(
+            "every video_reference must name an asset registered in provenance.json; "
+            "an unregistered clip has no verified motion_kind"
+        )
+    if named and set(named) != actual_names:
+        violations.append(
+            "the submitted video_reference does not match real_reference: declared "
+            f"{', '.join(sorted(named))}; submitted "
+            f"{', '.join(sorted(actual_names)) or 'no registered asset'}"
+        )
+
+    names_to_check = actual_names or set(named)
+    if not names_to_check:
+        # A legacy corpus citation can still establish provenance, but the actual HTTPS
+        # clip is now mandatory. With no local registry entry there is no motion-kind
+        # metadata to compare deterministically.
+        return violations
+
+    kind = str(brief.get("motion_kind") or "").strip().lower()
+    if not kind:
+        violations.append(
+            f"motion_kind is missing while using reference {min(names_to_check)}: "
+            "declare how the "
+            f"icon moves (one of {', '.join(MOTION_KINDS)}) so the reference can be "
+            f"checked against it"
+        )
+        return violations
+    if kind not in MOTION_KINDS:
+        violations.append(f"motion_kind {kind!r} is not one of {', '.join(MOTION_KINDS)}")
+        return violations
+
+    for name in names_to_check:
+        ref_kind = str(registry[name].get("motion_kind") or "").lower()
+        if ref_kind and ref_kind != kind:
+            violations.append(
+                f"reference {name} moves by {ref_kind!r} but the brief declares "
+                f"{kind!r}: a reference teaches the kind of movement as well as its "
+                f"cadence, and the wrong kind pulls against every word of the brief"
+            )
+    return violations
+
+
 def check_strategy(
     brief: dict[str, Any],
     brief_path: Path,
     prompt: str,
     first_frame: str | None,
     last_frame: str | None,
+    *,
+    video_references: Sequence[str],
 ) -> list[str]:
     """Return the list of strategy violations (empty means the plan may proceed)."""
     violations: list[str] = []
@@ -131,6 +300,11 @@ def check_strategy(
         violations.append(
             f"real_reference does not resolve to any existing file: {reference!r}"
         )
+
+    violations.extend(check_motion_detail(brief))
+    violations.extend(
+        check_reference_matches_motion(brief, brief_path, video_references)
+    )
 
     words = len(prompt.split())
     if words < MIN_PROMPT_WORDS:

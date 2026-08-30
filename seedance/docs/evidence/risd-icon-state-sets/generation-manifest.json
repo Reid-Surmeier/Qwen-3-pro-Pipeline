@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "authoritative_issue": "https://github.com/Reid-Surmeier/risd-godot/issues/7",
+  "claude_session": "https://claude.ai/code/session_013U8Lg9hWtbzk91rRU2b96W",
+  "provider": "openrouter",
+  "owner_approval": {
+    "budget_usd": "10.00",
+    "recorded_at": "2026-08-30T00:04:21Z",
+    "scope": "Costed Icon Foundry pilot; each paid submission also acknowledged its recorded estimate before submission."
+  },
+  "output_count": {
+    "requested": 10,
+    "completed": 10,
+    "image_outputs": 4,
+    "video_outputs": 6
+  },
+  "cost_usd": {
+    "image_pass_actual": "0.16300",
+    "motion_passes_actual": "0.97104",
+    "total_actual": "1.13404"
+  },
+  "artifact_classification": {
+    "source_references": [
+      {
+        "path": "anchor-filled-square.png",
+        "sha256": "dc506737f6693560d6925995ba4d9effd445341d2be18d402fef8072cc1b2035"
+      },
+      {
+        "path": "anchor-tile-with-margin.png",
+        "sha256": "a0a3457c9974fb3d266977c8db785e75a7e6c16099fadc66b922b08ee8c7155b"
+      },
+      {
+        "path": "REFERENCE-coin-spin.gif",
+        "sha256": "b46e6ee3af614ad1bf0b672520848ec2e275c44af9cd419a199a06f4a432648b"
+      },
+      {
+        "path": "REFERENCE-arrow-bob-translate.gif",
+        "sha256": "ca68adc31acbad409d2803c3687e67be70aa0d0d9c4462c4e1fd0694e0f76a82"
+      }
+    ],
+    "approved_output": [
+      "v6-translate-ref-sweep.gif",
+      "v6-translate-ref-poses.png"
+    ],
+    "comparison_evidence": [
+      "stills-1k-candidates.png",
+      "stills-reduced-to-64px.png",
+      "take1-certified-but-broken.png",
+      "take2-anchor-and-four-states.png",
+      "v3-filled-vidref-state-set.gif",
+      "v3-filled-vidref-states.png",
+      "v4-sweep-animated.gif",
+      "v4-sweep-poses.png",
+      "v5-contained-sweep.gif",
+      "v5-contained-poses.png"
+    ],
+    "reproducibility_metadata": [
+      "generation-manifest.json",
+      "take2-states-report.json",
+      "take6-states-report.json",
+      "v4-sweep-brief.json"
+    ]
+  },
+  "image_pass": {
+    "run_id": "risd-icon-ui01-search-v001",
+    "model": "qwen/qwen-image-3-pro",
+    "seed": 5101,
+    "requested_outputs": 4,
+    "completed_outputs": 4,
+    "estimated_cost_usd": "0.1630",
+    "actual_cost_usd": "0.1630",
+    "request_sha256": "967e3cbaa530104406efbbe3510d61292d6672600009783a1f945e2c72308962",
+    "outputs": [
+      {
+        "file": "image-01.png",
+        "sha256": "244c4145cb1e4cff78d93a04f20d452a8e2bf9d9a35440cdeb6828723b248d46"
+      },
+      {
+        "file": "image-02.png",
+        "sha256": "64912924d9ed3f906cbdc2ed8277fdd0501ed4fe434551174d300e7742cbeef9"
+      },
+      {
+        "file": "image-03.png",
+        "sha256": "5889dcd8f136cbc91342997bcfa9019a273518aa8ffe41e7ce43a711c0867b95"
+      },
+      {
+        "file": "image-04.png",
+        "sha256": "642e8ba40dc01cddf6dfce7b9f69ac693ac9936fed8d042e904ffaf39e9845b4"
+      }
+    ],
+    "derived_evidence": [
+      {
+        "path": "stills-1k-candidates.png",
+        "sha256": "f626eb3b124d3048604de6131991a2e42bd86177b905ca694c9594b387188078"
+      },
+      {
+        "path": "stills-reduced-to-64px.png",
+        "sha256": "21c403a42eec5aa59f42c09e9f30d93cf144f150d11b4e2c27dc42c87e6bed8f"
+      }
+    ]
+  },
+  "motion_passes": [
+    {
+      "take": 1,
+      "run_id": "20260830T001901Z-risd-ui01-search-fourstate",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "ca134171a761bb956abc10ebce66a2be771068edb6b2275c396a6988343e7028",
+      "estimated_cost_usd": "0.2268",
+      "acknowledged_cost_usd": "0.2268",
+      "actual_cost_usd": "0.16184",
+      "job_id": "VwOrWBg38ZXfTmFGVIz4",
+      "generation_id": "gen-vid-1788049151-ymmGhz7x3tNZelcGQnXF",
+      "output_sha256": "3f85b7767fd0fddbb2baa6d337dfdc7b602c3529b9e6f0a6baa39bff8e939344",
+      "disposition": "rejected_candidate",
+      "evidence": "take1-certified-but-broken.png"
+    },
+    {
+      "take": 2,
+      "run_id": "20260830T002354Z-risd-ui01-search-fourstate-v2",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "24f301184e7444c5c27f030c18c0f435aae094ccc25b8c6c61c590eb4e18818c",
+      "estimated_cost_usd": "0.2268",
+      "acknowledged_cost_usd": "0.2268",
+      "actual_cost_usd": "0.16184",
+      "job_id": "gdZ2qsYOeIvT4EDIgeLz",
+      "generation_id": "gen-vid-1788049441-4LwfzynBhMW1yPprpjy0",
+      "output_sha256": "f0fc8b0b56050f53065b254194458f9dc774761f37a90727a09dedc3a416cb75",
+      "disposition": "rejected_candidate",
+      "evidence": "take2-anchor-and-four-states.png"
+    },
+    {
+      "take": 3,
+      "run_id": "20260830T004007Z-risd-ui01-search-v3-vidref",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "56c70d4871062fa90836e13763a57468feba5759089f4d675d990520e1067784",
+      "estimated_cost_usd": "0.1361",
+      "acknowledged_cost_usd": "0.1361",
+      "actual_cost_usd": "0.16184",
+      "job_id": "IIpYQm0qH7ijRfAdoFHp",
+      "generation_id": "gen-vid-1788050416-tVn9VA316XXDqriK8aGj",
+      "output_sha256": "7258a69cc61af734abd75a9dd52898c419906a4244ae1863dad1ee1e234043d9",
+      "disposition": "rejected_candidate",
+      "evidence": "v3-filled-vidref-state-set.gif"
+    },
+    {
+      "take": 4,
+      "run_id": "20260830T013500Z-risd-ui01-search-sweep",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "b131b49c12d820a9cade1424296e936b8c7d35f8bba1d6ffe682fdae4ed2449b",
+      "estimated_cost_usd": "0.1361",
+      "acknowledged_cost_usd": "0.1361",
+      "actual_cost_usd": "0.16184",
+      "job_id": "KzS4anIxmXQMQ1E55Sim",
+      "generation_id": "gen-vid-1788053708-Kp0nz2kgz0U90JkhGsEL",
+      "output_sha256": "27f63882285ca2a79e2366b51e4c12ab533043c9ee9a888f12206c44f9de1831",
+      "disposition": "rejected_candidate",
+      "evidence": "v4-sweep-animated.gif"
+    },
+    {
+      "take": 5,
+      "run_id": "20260830T021459Z-risd-ui01-search-sweep-v5",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "5c4ccd9628146cff8293f968e67d5291a4b644fa3a3fe8ca975a2dd7a356aa83",
+      "estimated_cost_usd": "0.1361",
+      "acknowledged_cost_usd": "0.1361",
+      "actual_cost_usd": "0.16184",
+      "job_id": "hBEL36neSZG3kbsSCajn",
+      "generation_id": "gen-vid-1788056107-h1mKIaVyJYDSto8pbQnh",
+      "output_sha256": "32a7376aadba919f4dc31769ddf5b235be007511dad679cb555116caf369ec26",
+      "disposition": "rejected_candidate",
+      "evidence": "v5-contained-sweep.gif"
+    },
+    {
+      "take": 6,
+      "run_id": "20260830T022844Z-risd-ui01-search-sweep-v6",
+      "model": "bytedance/seedance-2.0-mini",
+      "request_sha256": "7e6e9b6168816400be36f576c0aa73531b297d6fb6c7363d92b8ef9309d417a9",
+      "estimated_cost_usd": "0.1361",
+      "acknowledged_cost_usd": "0.1361",
+      "actual_cost_usd": "0.16184",
+      "job_id": "tH6j1EBq7zWCSY0HWQqR",
+      "generation_id": "gen-vid-1788056933-XWEq7p8AuSxL6xBwVACE",
+      "output_sha256": "bce8c70fc0d9dd50a566ecae4c24396cec69184abbe20c5d0ff2af16f2034452",
+      "disposition": "approved_output",
+      "owner_visual_approval_recorded": "2026-08-30",
+      "evidence": "v6-translate-ref-sweep.gif",
+      "evidence_sha256": "ff2ec9f5623af5f9f262da7666b4c11d5a0864137828a3415bc606c9b3d92cd9"
+    }
+  ],
+  "retention": {
+    "raw_paid_outputs": "Retained in the additive local Seedance run directories named above; raw MP4 hashes are recorded here.",
+    "committed_policy": "Approved output, comparison evidence, source references, and reproducibility metadata are committed; rejected raw MP4s are not duplicated in Git."
+  }
+}

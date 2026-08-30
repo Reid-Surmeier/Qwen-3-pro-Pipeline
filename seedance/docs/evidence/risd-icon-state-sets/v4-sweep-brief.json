@@ -1,0 +1,33 @@
+{
+  "grammar": "retro-sprite",
+  "source_authority": "The supplied image is the exact identity authority: the RISD museum browser's Search icon, a cobalt magnifying glass held over a white marble bust, drawn as a 64-pixel sprite and shown here upscaled with hard square pixels so that it fills its tile. The bust, the tile, and the drawing style must remain exactly as captured. Only the magnifying glass acts.",
+  "style_lock": [
+    "the magnifying glass keeps its exact shape, size, colors and hard blocky pixel texture in every pose; it is the same drawn object moved to a new place, never a new drawing",
+    "the marble bust keeps its exact shape, colors and position in every pose and never moves, rotates, or changes",
+    "the icon fills its tile and the thin green border keeps the same thickness in every frame",
+    "every pose is drawn with the same limited palette and the same chunky pixel structure as the captured art",
+    "nothing is repainted, sharpened, smoothed, anti-aliased, or style-modernized",
+    "poses are flat and held; the change from one pose to the next is an instant substitution, never a smooth slide"
+  ],
+  "motion": "The magnifying glass makes one full examining sweep across the bust's face and back, shown the way a Game Boy sprite shows a travelling element: as a cycle of flat held poses, not a smooth glide. Beat 1, one pose: the glass holds exactly as captured, its lens over the bust's right cheek. Beat 2, the sweep out, five held poses in sequence, the glass stepping a long way left across the face and rising as it goes, roughly a fifth of the tile's width per pose: pose one, the lens over the cheek and one step higher, showing the eye; pose two, the lens over the bridge of the nose, showing the eye and the brow; pose three, the lens at the top of its arc over the brow, showing the brow ridge and the hairline; pose four, the lens over the swept hair mass, showing carved hair; pose five, the lens at the far left edge of the head, showing the hair and the marble edge beyond it. Beat 3, the press, two held poses: the glass drops squarely onto the face, its cobalt rim one shade darker, and its lens shows whatever is beneath it one step larger than before. Beat 4, the return, three held poses retracing the sweep right and down, ending on the exact captured pose. The lens contents change with every pose to show the part of the bust the glass is over; the glass itself never changes size or shape.",
+  "timing": "Hold the exact captured pose for roughly the first eighth. Play the eleven-pose examining cycle at a steady beat of about a tenth of a second per pose, each pose flat and completely still for its whole beat. Hold the exact captured pose again through the final eighth, so the last frame is pixel-identical to the first.",
+  "camera": "Static camera. No zoom, no pan, no rotation, no perspective, no depth-of-field, no reframing.",
+  "background": "The icon fills the square frame. The only background is the thin uniform #00FF00 border marking the edge of the tile, exactly as captured, the same thickness in every frame.",
+  "negative_constraints": [
+    "no smooth gliding, easing, motion blur, or trailing; every change is an instant substitution between held poses",
+    "the magnifying glass must not change size, tilt, flatten, stretch, or be redrawn at any point",
+    "the bust must not move, rotate, breathe, or change at any point",
+    "the lens must never be empty, blank, white, or purely reflective; it always shows magnified marble",
+    "no glow, bloom, light rays, particles, sparkles, added objects, or text",
+    "nothing may cross the edge of the tile onto the border, and the border must not grow, shrink, or move",
+    "do not leave a visible loop seam; the final frame returns exactly to the first frame"
+  ],
+  "era_idiom_basis": "Pokemon TCG (GBC) duel coin toss: one gesture rendered as 8 flat metasprite poses each held 4 ticks (~67 ms), assembled per the game's own AnimData167 frame table (pret/poketcg src/data/duel/animations/anims3.asm) — the era's grammar for a large gesture is many held poses at a steady beat, not a small nudge. Travelling-element idiom from Emerald's textbox arrow, which moves in discrete whole-pixel steps (0/+1/+2/+1) per text.c sDownArrowYCoords rather than sliding. The RISD icon set is a deliberate extrapolation: era item icons are static in-client, so the sweep borrows a real gesture cadence rather than copying a real icon animation.",
+  "real_reference": "docs/evidence/board-icons-test/references/ref-coin-spin.mp4 — the Pokemon TCG duel coin's full 8-step spin, reconstructed from the game's own frame table and supplied to this run as a video reference. It is the cadence authority: one large gesture, many flat held poses, a steady beat, returning to the pose it started from.",
+  "state_map": {
+    "idle": "0.00-0.25",
+    "hover": "0.25-0.50",
+    "pressed": "0.50-0.75",
+    "settled": "0.75-1.00"
+  }
+}

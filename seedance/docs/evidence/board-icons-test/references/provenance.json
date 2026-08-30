@@ -3,10 +3,10 @@
   "rule": "Every visible pixel comes from fetched real game graphics (pret decompilation repos). Only cropping, tile placement per the games' own OAM/frame data, documented flips, position offsets, palette application, backdrop color, and 8x NEAREST upscaling were performed. No pixels were drawn or synthesized.",
   "assets": {
     "ref-party-icon-pulse.gif": {
-      "game": "Pokémon Emerald",
+      "game": "Pok\u00e9mon Emerald",
       "platform": "GBA",
       "year": 2004,
-      "element": "Party-menu Pokémon icon, the continuous 2-frame healthy-state loop (Pikachu)",
+      "element": "Party-menu Pok\u00e9mon icon, the continuous 2-frame healthy-state loop (Pikachu)",
       "sources": [
         {
           "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/pokemon/pikachu/icon.png",
@@ -15,14 +15,30 @@
         }
       ],
       "frames": 2,
-      "hold_ms": [100, 100],
-      "cadence_basis": "pokeemerald src/pokemon_icon.c sAnim_0: ANIMCMD_FRAME(0, 6), ANIMCMD_FRAME(1, 6) — 6 ticks at the GBA's ~59.7275 Hz ≈ 100.4 ms per frame (the full-HP cadence)"
+      "hold_ms": [
+        100,
+        100
+      ],
+      "cadence_basis": "pokeemerald src/pokemon_icon.c sAnim_0: ANIMCMD_FRAME(0, 6), ANIMCMD_FRAME(1, 6) \u2014 6 ticks at the GBA's ~59.7275 Hz \u2248 100.4 ms per frame (the full-HP cadence)",
+      "motion_kind": "scale",
+      "motion_kind_basis": "a two-frame breathing loop: the sprite changes size in place and never travels",
+      "deliverables": [
+        {
+          "path": "ref-party-icon-pulse.gif",
+          "sha256": "cea6036e6fbd8f81104d8633835e0f2f059864ad85037b40741fe5dbee7a3bb7"
+        },
+        {
+          "path": "ref-party-icon-pulse.mp4",
+          "sha256": "83f8c53161755e645433d6a735b92b71c2de39e245e677fe6cfd69f318c1ed61",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-textbox-arrow-bob.gif": {
-      "game": "Pokémon Emerald",
+      "game": "Pok\u00e9mon Emerald",
       "platform": "GBA",
       "year": 2004,
-      "element": "Message-box down-arrow (▼) vertical bob — motion, not blink",
+      "element": "Message-box down-arrow (\u25bc) vertical bob \u2014 motion, not blink",
       "sources": [
         {
           "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/fonts/down_arrow.png",
@@ -30,15 +46,38 @@
         }
       ],
       "frames": 4,
-      "hold_ms": [134, 134, 134, 134],
-      "offsets_px": [0, 1, 2, 1],
-      "cadence_basis": "pokeemerald src/text.c: sDownArrowYCoords[] = {0, 1, 2, 1}, delay 8 ticks ≈ 133.9 ms per step (533 ms period)"
+      "hold_ms": [
+        134,
+        134,
+        134,
+        134
+      ],
+      "offsets_px": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "cadence_basis": "pokeemerald src/text.c: sDownArrowYCoords[] = {0, 1, 2, 1}, delay 8 ticks \u2248 133.9 ms per step (533 ms period)",
+      "motion_kind": "translate",
+      "motion_kind_basis": "the arrow moves in discrete whole-pixel steps (0/+1/+2/+1) and never rotates or changes shape",
+      "deliverables": [
+        {
+          "path": "ref-textbox-arrow-bob.gif",
+          "sha256": "ca68adc31acbad409d2803c3687e67be70aa0d0d9c4462c4e1fd0694e0f76a82"
+        },
+        {
+          "path": "ref-textbox-arrow-bob.mp4",
+          "sha256": "f18cd3006605b92ac8ac82cb02a377b34d17067e8c1f17ef5370c94ec5f53f57",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-coin-spin.gif": {
-      "game": "Pokémon Trading Card Game",
+      "game": "Pok\u00e9mon Trading Card Game",
       "platform": "GBC",
       "year": 1998,
-      "element": "Duel coin toss — the full 8-step spin cycle (face → edge → face), metasprite-assembled tile by tile from the game's own frame table",
+      "element": "Duel coin toss \u2014 the full 8-step spin cycle (face \u2192 edge \u2192 face), metasprite-assembled tile by tile from the game's own frame table",
       "sources": [
         {
           "url": "https://raw.githubusercontent.com/pret/poketcg/master/src/gfx/duel/anims/coin.png",
@@ -55,14 +94,36 @@
         }
       ],
       "frames": 8,
-      "hold_ms": [67, 67, 67, 67, 67, 67, 67, 67],
-      "cadence_basis": "poketcg anims3.asm AnimData167: each frame held 4 ticks ≈ 67 ms at ~59.7 Hz"
+      "hold_ms": [
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67
+      ],
+      "cadence_basis": "poketcg anims3.asm AnimData167: each frame held 4 ticks \u2248 67 ms at ~59.7 Hz",
+      "motion_kind": "rotate",
+      "motion_kind_basis": "the coin turns about its vertical axis in place: face, narrowed, edge, narrowed, face",
+      "deliverables": [
+        {
+          "path": "ref-coin-spin.gif",
+          "sha256": "b46e6ee3af614ad1bf0b672520848ec2e275c44af9cd419a199a06f4a432648b"
+        },
+        {
+          "path": "ref-coin-spin.mp4",
+          "sha256": "0677180b760a524d258f1f8b232e9efd98d4d45bd24897b1f59927eeae8c7b9c",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-item-get-bounce.gif": {
-      "game": "Pokémon Emerald",
+      "game": "Pok\u00e9mon Emerald",
       "platform": "GBA",
       "year": 2004,
-      "element": "Poké Ball open + sparkle presentation (item-get / release idiom): closed → opening → open, then the field sparkle plays its real 4-frame cycle above the ball",
+      "element": "Pok\u00e9 Ball open + sparkle presentation (item-get / release idiom): closed \u2192 opening \u2192 open, then the field sparkle plays its real 4-frame cycle above the ball",
       "sources": [
         {
           "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/balls/poke.png",
@@ -76,15 +137,26 @@
         {
           "url": "https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/field_effects/pics/sparkle.png",
           "sha256": "f59dd2d325647fc1cd3ad80fdc91eab73e884302c236ffcae3e99ee52afd0970",
-          "note": "96x16 sheet of six 16x16 cells; sparkle pixels are palette index 14 = pure white, so the backdrop is a dark neutral (96,112,96) to keep them visible — in-game they draw over the overworld scene"
+          "note": "96x16 sheet of six 16x16 cells; sparkle pixels are palette index 14 = pure white, so the backdrop is a dark neutral (96,112,96) to keep them visible \u2014 in-game they draw over the overworld scene"
         }
       ],
       "frames": 8,
-      "hold_ms": [500, 84, 84, 100, 100, 100, 100, 700],
-      "cadence_basis": "pokeemerald src/pokeball.c ball-open AnimCmd steps at 5 ticks ≈ 84 ms; sparkle cells held ~100 ms (6-cell one-shot cycle, middle 4 cells used)"
+      "hold_ms": [
+        500,
+        84,
+        84,
+        100,
+        100,
+        100,
+        100,
+        700
+      ],
+      "cadence_basis": "pokeemerald src/pokeball.c ball-open AnimCmd steps at 5 ticks \u2248 84 ms; sparkle cells held ~100 ms (6-cell one-shot cycle, middle 4 cells used)",
+      "motion_kind": "reveal",
+      "motion_kind_basis": "a one-shot open-and-present: the ball changes state and a sparkle appears, it does not travel"
     },
     "ref-status-flash.gif": {
-      "game": "Pokémon Emerald",
+      "game": "Pok\u00e9mon Emerald",
       "platform": "GBA",
       "year": 2004,
       "element": "Battle status-condition badge (PSN) in a binary on/off alert blink",
@@ -96,11 +168,37 @@
         }
       ],
       "frames": 4,
-      "hold_ms": [134, 134, 134, 300],
-      "cadence_basis": "Badge art is real Emerald data; in-game the badge itself is static — the on/off blink is the era's binary alert idiom (era corpus §2: 100–250 ms on/off cycling, nothing eases), applied at the textbox 8-tick quantum (134 ms)"
+      "hold_ms": [
+        134,
+        134,
+        134,
+        300
+      ],
+      "cadence_basis": "Badge art is real Emerald data; in-game the badge itself is static \u2014 the on/off blink is the era's binary alert idiom (era corpus \u00a72: 100\u2013250 ms on/off cycling, nothing eases), applied at the textbox 8-tick quantum (134 ms)",
+      "motion_kind": "blink",
+      "motion_kind_basis": "a binary on/off substitution with no movement of any kind",
+      "deliverables": [
+        {
+          "path": "ref-status-flash.gif",
+          "sha256": "f81e55bab5d9be7fe112e0e3dd1350372a1d02256b657dfbe34672e576d3fd09"
+        },
+        {
+          "path": "ref-status-flash.mp4",
+          "sha256": "7f78dd7b2d550075b5c01840698126c2183922df703e75f04b3a9e796addc760",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     }
   },
   "skipped": {
-    "ref-card-flip.gif": "No real flip frames obtainable: poketcg's card animations (anims3.asm AnimData158–163) are shuffle translations, not flips, and The Spriters Resource sheet downloads were not fetchable. Nothing was fabricated."
-  }
+    "ref-card-flip.gif": "No real flip frames obtainable: poketcg's card animations (anims3.asm AnimData158\u2013163) are shuffle translations, not flips, and The Spriters Resource sheet downloads were not fetchable. Nothing was fabricated."
+  },
+  "motion_kinds": {
+    "translate": "an element moves to a new position, keeping its shape",
+    "rotate": "an element turns about an axis in place",
+    "scale": "an element changes size in place",
+    "reveal": "an element changes state or is uncovered, one-shot",
+    "blink": "an element is substituted for another with no movement"
+  },
+  "motion_kind_rule": "A run's reference must share the brief's motion_kind. Observed 2026-08-30: a magnifying glass asked to travel across a bust was given ref-coin-spin (rotate) as its reference, and the glass tumbled and changed size instead of travelling. The reference teaches cadence AND the kind of movement; the wrong kind is worse than none."
 }
