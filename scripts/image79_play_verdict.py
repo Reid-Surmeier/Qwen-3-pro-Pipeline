@@ -19,6 +19,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("play_log", type=Path)
     parser.add_argument("--evidence-root", type=Path)
+    parser.add_argument("--manifest", type=Path,
+                        default=ROOT / "godot/data/image-79-control-spec.json")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
@@ -35,7 +37,12 @@ def main() -> int:
         }
     else:
         evidence_root = args.evidence_root or args.play_log.parent
-        verdict = evaluate_play_log(log, evidence_root)
+        try:
+            manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            manifest = None
+            log.setdefault("manifest_error", str(error))
+        verdict = evaluate_play_log(log, evidence_root, manifest)
 
     rendered = json.dumps(verdict, indent=2, sort_keys=True) + "\n"
     if args.output:

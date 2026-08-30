@@ -102,6 +102,11 @@ func qa_state() -> Dictionary:
 	}
 
 
+func reject_action(control_id: String, action: String) -> Dictionary:
+	return _reject(control_id, "", Errors.ACTION_ROUTING,
+		"Window cannot route action: %s" % action)
+
+
 func visual_asset(control_id: String) -> String:
 	if not controls.has(control_id):
 		return ""
@@ -204,6 +209,9 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	if action.is_empty():
 		return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
 			"Button has no Activate Window Action")
+	if action not in ["ToggleMinimized", "CloseWindow"]:
+		return _reject(entry.state.id, gesture, Errors.ACTION_ROUTING,
+			"Button action is not routed: %s" % action)
 	entry.state.interaction_phase = "idle"
 	entry.state.last_action = action
 	return {"ok": true, "action": action,

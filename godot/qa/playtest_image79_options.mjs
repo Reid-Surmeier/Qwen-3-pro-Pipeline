@@ -55,6 +55,12 @@ const shot = async (name) => {
   frames[name] = { path: filename, sha256: sha256(path) };
   return frames[name];
 };
+const invariantShot = async (name) => {
+  const filename = `${name}.png`;
+  const path = resolve(OUT, filename);
+  await page.screenshot({ path, clip: { x: 0, y: 0, width: 100, height: 100 } });
+  return { path: filename, sha256: sha256(path) };
+};
 const checks = [];
 const actions = [];
 const check = (name, passed, detail) => checks.push({ name, passed, detail });
@@ -68,6 +74,7 @@ const record = (controlId, gesture, windowAction, expected, observed, assertions
 };
 
 const idle = await shot("00-idle");
+const invariantBefore = await invariantShot("00-invariant-before");
 
 async function exerciseToggle(id, x, y, index) {
   const target = point(x, y);
@@ -83,6 +90,8 @@ async function exerciseToggle(id, x, y, index) {
   const after = await shot(`${index}-${id.replaceAll(".", "-")}-after`);
   await page.mouse.click(target.x, target.y);
   const reversed = await control(id);
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(20);
   const reversedFrame = await shot(`${index}-${id.replaceAll(".", "-")}-reversed`);
   const assertions = {
     hover_exposed: hovered.interaction_phase === "hover",
@@ -170,6 +179,7 @@ await exerciseRangeDrag("options.bgm", 357, "04", false);
 await exerciseRangeButton("options.effect", 1471, 389, 1, "05");
 await exerciseWheel("options.effect", 1350, 389, "06");
 await exerciseRangeDrag("options.effect", 389, "07", false);
+await exerciseRangeDrag("options.effect", 389, "07b", true);
 
 await exerciseToggle("options.bgm_on", 1494, 359, "08");
 await exerciseToggle("options.effect_on", 1494, 390, "09");
@@ -223,12 +233,16 @@ record("options.skin", "KeyCommand", "DismissDropdown", "Escape dismisses withou
 check("options.skin-key", skinKeyAssertions.dismissed, skinKeyAssertions);
 
 const minimizePoint = point(1490, 313);
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
 const minimizeBefore = await shot("16-options-minimize-before");
 await page.mouse.click(minimizePoint.x, minimizePoint.y);
 const minimized = (await options()).window;
 const minimizeAfter = await shot("16-options-minimize-after");
 await page.mouse.click(minimizePoint.x, minimizePoint.y);
 const restored = (await options()).window;
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
 const restoredFrame = await shot("16-options-minimize-restored");
 const minimizeAssertions = {
   distinct_minimized_plate: minimized.minimized && minimized.size[1] === 28,
@@ -300,8 +314,13 @@ const playLog = {
       { cwd: ROOT, encoding: "utf8" }).trim(),
     window_id: "options",
   },
+  source_reference_sha256: manifest.reference.sha256,
   required_controls: requiredControls,
   required_actions: requiredActions,
+  invariant_frames: {
+    before: invariantBefore,
+    after: await invariantShot("19-invariant-after"),
+  },
   console_errors: errors,
   actions,
 };

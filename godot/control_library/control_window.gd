@@ -161,6 +161,8 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 			"CloseWindow":
 				dismiss_dropdowns()
 				visible = false
+			_:
+				runtime.reject_action(control_id, str(result.action))
 	state_changed.emit(str(spec.id))
 
 

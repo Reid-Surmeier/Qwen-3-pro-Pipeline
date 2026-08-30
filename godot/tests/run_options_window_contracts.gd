@@ -107,7 +107,7 @@ func _dropdown_lifecycle() -> void:
 
 func _escape_without_open_dropdown_is_inert() -> void:
 	await _key(KEY_ESCAPE)
-	_check("closed-dropdown-escape-is-inert", window.visible,
+	_check("closed-dropdown-escape-is-inert", window.qa_state().window.visible,
 		str(window.qa_state().window))
 
 

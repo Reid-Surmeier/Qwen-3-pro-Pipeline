@@ -71,6 +71,8 @@ if capture_required:
         or report["fidelity"].get("pass") is not True \
         or interact_rc != 0 \
         or report["interact"].get("failed", 1) != 0
+else:
+    hard_fail = True
 report["pass"] = not hard_fail
 out.joinpath("report.json").write_text(json.dumps(report, indent=2))
 print(json.dumps({"pass": report["pass"],
@@ -80,4 +82,5 @@ print(json.dumps({"pass": report["pass"],
                   "capture": report["capture"]["file"],
                   "fidelity_pass": report["fidelity"].get("pass"),
                   "interact_failed": report["interact"].get("failed")}))
+raise SystemExit(1 if hard_fail else 0)
 PY

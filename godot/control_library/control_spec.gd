@@ -16,6 +16,13 @@ const GESTURES := [
 	"Activate", "ContextActivate", "DoubleActivate", "ModifierActivate",
 	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
+const ACTIONS_BY_TYPE := {
+	"Button": ["ToggleMinimized", "CloseWindow"],
+	"Toggle": ["ToggleValue"],
+	"Range": ["StepRange", "SetRange"],
+	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
+	"ChoiceGroup": ["SelectChoice"],
+}
 
 
 static func load_and_validate(path: String, asset_exists: Callable = Callable()) -> Dictionary:
@@ -142,12 +149,18 @@ static func _validate_control(control: Variant, window_id: String, control_index
 			if gesture not in GESTURES:
 				errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
 					"unsupported gesture: %s" % str(gesture)))
-	_validate_actions(control.get("actions"), gestures, path + ".actions", errors)
+	_validate_actions(control.get("actions"), gestures, control_type,
+		path + ".actions", errors)
 
 
 static func _validate_type_contract(control: Dictionary, control_type: String,
 		path: String, errors: Array[Dictionary]) -> void:
-	if control_type == "Range":
+	if control_type == "Toggle":
+		var states: Variant = control.get("semantic_states")
+		if not states is Array or states.size() != 2 or states[0] == states[1]:
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".semantic_states",
+				"Toggle requires exactly two distinct semantic states"))
+	elif control_type == "Range":
 		_validate_range_contract(control, path, errors)
 	elif control_type == "Dropdown" or control_type == "ChoiceGroup":
 		_validate_choice_contract(control, control_type, path, errors)
@@ -276,19 +289,24 @@ static func _validate_state_set(state_set: Variant, semantic_states: Array,
 					errors, asset_exists)
 
 
-static func _validate_actions(actions: Variant, gestures: Variant, path: String,
+static func _validate_actions(actions: Variant, gestures: Variant, control_type: String,
+		path: String,
 		errors: Array[Dictionary]) -> void:
 	if not actions is Array or actions.is_empty():
 		errors.append(_error(Errors.CONTROL_BINDING, path,
 			"at least one gesture-to-action binding is required"))
 		return
 	var declared: Array = gestures if gestures is Array else []
+	var allowed: Array = ACTIONS_BY_TYPE.get(control_type, [])
 	for action_index in actions.size():
 		var action: Variant = actions[action_index]
 		if not action is Dictionary or str(action.get("action", "")).is_empty() \
 				or action.get("gesture") not in declared:
 			errors.append(_error(Errors.CONTROL_BINDING, "%s[%d]" % [path, action_index],
 				"binding must name a declared gesture and non-empty Window Action"))
+		elif not allowed.is_empty() and str(action.action) not in allowed:
+			errors.append(_error(Errors.ACTION_ROUTING, "%s[%d].action" % [path, action_index],
+				"Window Action is not supported by %s: %s" % [control_type, str(action.action)]))
 
 
 static func _validate_geometry(geometry: Variant, path: String,

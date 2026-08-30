@@ -13,7 +13,9 @@ _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
-def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
+def evaluate_play_log(
+    log: Any, evidence_root: Path | str, manifest: Any | None = None
+) -> dict[str, Any]:
     """Return PASS, FAIL, INCOMPLETE, or INVALID without trusting log claims."""
     problems: list[str] = []
     failures: list[str] = []
@@ -35,6 +37,14 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
         if not _nonempty_string(candidate.get("window_id")):
             problems.append("candidate.window_id must be a non-empty string")
 
+    expected_controls, expected_actions, range_specs = _manifest_requirements(
+        manifest, candidate, problems
+    )
+    source_sha = log.get("source_reference_sha256")
+    manifest_sha = manifest.get("reference", {}).get("sha256") if isinstance(manifest, dict) else None
+    if not _SHA256.fullmatch(str(source_sha or "")) or source_sha != manifest_sha:
+        problems.append("source_reference_sha256 must match the frozen manifest reference")
+
     required = log.get("required_controls")
     if not isinstance(required, list) or not required or not all(
         _nonempty_string(control_id) for control_id in required
@@ -43,6 +53,8 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
         required = []
     elif len(set(required)) != len(required):
         problems.append("required_controls must not contain duplicates")
+    if expected_controls and set(required) != expected_controls:
+        problems.append("required_controls do not exactly match the frozen manifest")
 
     required_actions = log.get("required_actions")
     required_action_keys: list[tuple[str, str, str]] = []
@@ -65,6 +77,8 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
             required_action_keys.append(fields)  # type: ignore[arg-type]
         if len(set(required_action_keys)) != len(required_action_keys):
             problems.append("required_actions must not contain duplicates")
+    if expected_actions and set(required_action_keys) != expected_actions:
+        problems.append("required_actions do not exactly match the frozen manifest")
 
     console_errors = log.get("console_errors")
     if not isinstance(console_errors, list) or not all(
@@ -82,6 +96,7 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
 
     seen: set[str] = set()
     seen_actions: set[tuple[str, str, str]] = set()
+    range_endpoints: dict[str, set[str]] = {control_id: set() for control_id in range_specs}
     verified_frames: set[Path] = set()
     for index, action in enumerate(actions):
         label = f"actions[{index}]"
@@ -144,6 +159,53 @@ def evaluate_play_log(log: Any, evidence_root: Path | str) -> dict[str, Any]:
             verified = _verify_frame(frame, root, frame_label, problems)
             if verified is not None:
                 verified_frames.add(verified)
+        before = frames.get("before") if isinstance(frames, dict) else None
+        after = frames.get("after") if isinstance(frames, dict) else None
+        if isinstance(before, dict) and isinstance(after, dict) \
+                and before.get("sha256") == after.get("sha256"):
+            failures.append(f"{label} intended region did not change")
+        if window_action == "ToggleValue":
+            reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
+            if not isinstance(reversed_frame, dict):
+                problems.append(f"{label}.frames.reversed is required for reversible ToggleValue")
+            elif isinstance(before, dict) and reversed_frame.get("sha256") != before.get("sha256"):
+                failures.append(f"{label} did not reverse to its before frame")
+        if window_action == "ToggleMinimized":
+            restored = frames.get("restored") if isinstance(frames, dict) else None
+            if not isinstance(restored, dict):
+                problems.append(f"{label}.frames.restored is required for reversible minimize")
+            elif isinstance(before, dict) and restored.get("sha256") != before.get("sha256"):
+                failures.append(f"{label} restore did not reproduce its before frame")
+        if window_action == "SetRange" and control_id in range_specs \
+                and isinstance(action.get("motion_samples"), list):
+            samples = [float(value) for value in action["motion_samples"]]
+            if samples:
+                minimum, maximum = range_specs[control_id]
+                if min(samples) <= minimum:
+                    range_endpoints[control_id].add("minimum")
+                if max(samples) >= maximum:
+                    range_endpoints[control_id].add("maximum")
+                increasing = all(b >= a for a, b in zip(samples, samples[1:]))
+                decreasing = all(b <= a for a, b in zip(samples, samples[1:]))
+                if not (increasing or decreasing):
+                    failures.append(f"{label} Range samples are not monotonic")
+
+    invariant_frames = log.get("invariant_frames")
+    if not isinstance(invariant_frames, dict):
+        problems.append("invariant_frames must contain before and after crops")
+    else:
+        invariant_paths = [
+            _verify_frame(invariant_frames.get(role), root,
+                          f"invariant_frames.{role}", problems)
+            for role in ("before", "after")
+        ]
+        verified_frames.update(path for path in invariant_paths if path is not None)
+        if all(path is not None for path in invariant_paths) \
+                and invariant_paths[0].read_bytes() != invariant_paths[1].read_bytes():
+            failures.append("declared invariant region changed")
+    for control_id, endpoints in range_endpoints.items():
+        if endpoints != {"minimum", "maximum"}:
+            failures.append(f"{control_id} did not prove both Range endpoints")
 
     unexercised = [control_id for control_id in required if control_id not in seen]
     unexercised_actions = [
@@ -198,6 +260,50 @@ def _verify_frame(
 
 def _nonempty_string(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
+
+
+def _manifest_requirements(
+    manifest: Any, candidate: Any, problems: list[str]
+) -> tuple[set[str], set[tuple[str, str, str]], dict[str, tuple[float, float]]]:
+    if not isinstance(manifest, dict):
+        problems.append("a frozen ControlSpec manifest is required")
+        return set(), set(), {}
+    window_id = candidate.get("window_id") if isinstance(candidate, dict) else None
+    windows = manifest.get("windows")
+    if not isinstance(windows, list):
+        problems.append("manifest.windows must be an array")
+        return set(), set(), {}
+    window = next(
+        (entry for entry in windows if isinstance(entry, dict) and entry.get("id") == window_id),
+        None,
+    )
+    if window is None or not isinstance(window.get("controls"), list):
+        problems.append("candidate window is absent from the frozen manifest")
+        return set(), set(), {}
+    controls: set[str] = set()
+    actions: set[tuple[str, str, str]] = set()
+    range_specs: dict[str, tuple[float, float]] = {}
+    for control in window["controls"]:
+        if not isinstance(control, dict) or not _nonempty_string(control.get("id")):
+            problems.append("manifest contains a malformed control")
+            continue
+        control_id = control["id"]
+        controls.add(control_id)
+        value = control.get("value")
+        if control.get("type") == "Range" and isinstance(value, dict) \
+                and isinstance(value.get("minimum"), (int, float)) \
+                and isinstance(value.get("maximum"), (int, float)):
+            range_specs[control_id] = (float(value["minimum"]), float(value["maximum"]))
+        for binding in control.get("actions", []):
+            if not isinstance(binding, dict):
+                problems.append(f"manifest action for {control_id} is malformed")
+                continue
+            key = (control_id, binding.get("gesture"), binding.get("action"))
+            if not all(_nonempty_string(value) for value in key):
+                problems.append(f"manifest action for {control_id} is malformed")
+                continue
+            actions.add(key)  # type: ignore[arg-type]
+    return controls, actions, range_specs
 
 
 def _invalid(problem: str) -> dict[str, Any]:

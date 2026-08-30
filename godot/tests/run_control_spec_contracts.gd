@@ -103,6 +103,23 @@ func _contract_failures_are_named_and_fail_closed() -> void:
 	cases.append({"name": "missing-binding", "manifest": bad_binding,
 		"expected": "ControlBindingError", "assets": _all_assets_exist})
 
+	var unknown_action := _valid_manifest()
+	unknown_action.windows[0].controls[0].actions[0].action = "InventedAction"
+	cases.append({"name": "unknown-action", "manifest": unknown_action,
+		"expected": "ActionRoutingError", "assets": _all_assets_exist})
+
+	var malformed_toggle := _valid_manifest()
+	malformed_toggle.windows[0].controls[0].type = "Toggle"
+	malformed_toggle.windows[0].controls[0].semantic_states = ["only"]
+	malformed_toggle.windows[0].controls[0].initial_semantic_state = "only"
+	malformed_toggle.windows[0].controls[0].state_set = {
+		"only": {"idle": "res://options/close-idle.png",
+			"hover": "res://options/close-hover.png",
+			"pressed": "res://options/close-pressed.png"}}
+	malformed_toggle.windows[0].controls[0].actions[0].action = "ToggleValue"
+	cases.append({"name": "malformed-toggle", "manifest": malformed_toggle,
+		"expected": "InvalidStateSet", "assets": _all_assets_exist})
+
 	var bad_surface_geometry := _valid_manifest()
 	bad_surface_geometry.windows[0].controls[0].surfaces = {
 		"icon": {"geometry": {"x": 0, "y": 0, "width": 0, "height": 8},

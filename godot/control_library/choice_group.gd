@@ -40,8 +40,9 @@ func _ready() -> void:
 
 
 func _phase(choice: String, phase: String) -> void:
-	runtime.set_interaction_phase(spec.id, phase, choice)
+	var result: Dictionary = runtime.set_interaction_phase(spec.id, phase, choice)
 	_refresh()
+	changed.emit(spec.id, result)
 
 
 func _choice_input(event: InputEvent, choice: String) -> void:
