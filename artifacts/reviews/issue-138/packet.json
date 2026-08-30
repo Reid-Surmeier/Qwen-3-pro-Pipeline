@@ -3,7 +3,7 @@
   "issue": 138,
   "pull_request": 82,
   "baseline_commit": "5eef7690b18148bd99c6f466be497dd227e118bd",
-  "candidate_commit": "0db239e74765bfbee9b88853998a21ca3aebfb8d",
+  "candidate_commit": "8d0155358e4479e2e48f139dfefc015b4010a9d9",
   "acceptance_contract": "docs/reviews/issue-138-contract.md",
   "references": [
     {
@@ -44,7 +44,7 @@
     "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open-native.png": "f20f911d3f5f22e3acd46e926c2fb36e0b0f9bd798d2ccb3144990d353e3b32c",
     "artifacts/runs/custom-filters-ro-assembly-v003/native-edit-mask-4x.png": "e630fd89eb8335a85865ebecc82e57c3e87224345e2e1d61db2b50d9d570b0a3",
     "artifacts/runs/custom-filters-ro-assembly-v003/actual-difference-mask-4x.png": "8eaf9600ee7a6ddb6510589ec577f14a756616e6af34a95be06b29d252d18ed2",
-    "artifacts/runs/custom-filters-ro-assembly-v003/verification.json": "264f4a0ab6a3151f640f030ad9e7f8c78375e6add5fc056cc3cacb77f1fd9cbf",
+    "artifacts/runs/custom-filters-ro-assembly-v003/verification.json": "07a36e1c5f5ea68948effae5b8594394d95d61206426a7917b0979b9b720501b",
     "artifacts/runs/custom-filters-ro-assembly-v003/run.json": "307c0d535cb3031aa16a8481c1378ea8642b038f610e16917986982521903aec"
   },
   "launch": {
