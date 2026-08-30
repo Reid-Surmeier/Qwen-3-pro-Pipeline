@@ -206,7 +206,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             if openrouter_key
             else None
         ),
-        alibaba_client=(AlibabaImageClient(alibaba_key) if alibaba_key else None),
+        alibaba_client=(
+            AlibabaImageClient(alibaba_key, timeout=resolve_timeout_seconds())
+            if alibaba_key
+            else None
+        ),
     )
     output_directory = args.output_dir or _default_run_directory()
     record = write_run_artifacts(

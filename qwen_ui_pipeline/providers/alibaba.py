@@ -10,6 +10,7 @@ import urllib.request
 from typing import Any, Callable, Mapping, Sequence
 
 from ..prompt_manifest import compile_edit_brief
+from .openrouter import keepalive_urlopen, resolve_timeout_seconds
 
 
 MODEL_NAMES = {
@@ -80,13 +81,20 @@ class AlibabaImageClient:
         api_key: str,
         *,
         endpoint: str = DEFAULT_ENDPOINT,
-        opener: Callable[..., Any] = urllib.request.urlopen,
+        opener: Callable[..., Any] = keepalive_urlopen,
+        timeout: float | None = None,
     ):
         if not api_key:
             raise ValueError("Alibaba Model Studio API key is required")
         self._api_key = api_key
         self._endpoint = endpoint
         self._opener = opener
+        # Was a literal 180 inside generate(). A generation slower than that timed out
+        # client-side while the provider kept working and billing — the same failure the
+        # OpenRouter client had, and it went unnoticed here because nothing had ever run
+        # a long job through this path. Measured 2026-08-30: an Alibaba Asset Pass died
+        # at 183 s with nothing returned.
+        self._timeout = float(timeout) if timeout else resolve_timeout_seconds()
 
     def generate(self, request_body: Mapping[str, Any]) -> dict[str, Any]:
         request = urllib.request.Request(
@@ -100,7 +108,7 @@ class AlibabaImageClient:
             },
         )
         try:
-            with self._opener(request, timeout=180) as response:
+            with self._opener(request, timeout=self._timeout) as response:
                 payload = json.loads(response.read())
         except urllib.error.HTTPError as error:
             detail = ""
