@@ -1,0 +1,102 @@
+{
+  "issue": 138,
+  "assembly": "custom-filters-ro-v002",
+  "status": "candidate_pending_owner_visual_approval",
+  "style_source": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+  "style_source_sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+  "data_source": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+  "data_source_sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
+  "data_source_usage": "strings and order only",
+  "rejected_parent": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png",
+  "rejected_parent_sha256": "385c5fc1bc9c934d0e8024d39be57a1d740311497a946c69547710c45a680cc5",
+  "font": "godot/fonts/PixelMplus10-Regular.ttf",
+  "font_sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7",
+  "body_font_size": 40,
+  "body_font_sizes_used": [
+    40
+  ],
+  "row_baselines": [
+    120,
+    204,
+    288
+  ],
+  "row_gaps": [
+    84,
+    84
+  ],
+  "source_button_pair_exact": true,
+  "source_dropdown_arrows_exact": true,
+  "source_radios_exact": true,
+  "source_control_sprites_rescaled": false,
+  "source_field_middles_nine_sliced": true,
+  "qwen_popup_surface_source": "artifacts/runs/custom-filters-ro-render-v001/image-01.png",
+  "qwen_popup_surface_source_sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c",
+  "qwen_popup_surface_box": [
+    1150,
+    374,
+    1768,
+    864
+  ],
+  "generated_glyph_pixels_in_final": false,
+  "review_size": [
+    1344,
+    504
+  ],
+  "native_size": [
+    336,
+    126
+  ],
+  "open_review_size": [
+    1344,
+    784
+  ],
+  "open_native_size": [
+    336,
+    196
+  ],
+  "changed_pixels": 146582,
+  "permitted_mask_pixels": 312720,
+  "changed_pixels_outside_permitted_mask": 0,
+  "actual_is_subset_of_permitted_mask": true,
+  "closed_sha256": "c18db0804ca57dfb6b196d313b10911e5a10a312252e4956be7419d9eef81b02",
+  "open_sha256": "cd3263c175c02ccd5ec7be22323dfbcf8c412ca3adedc717f6941ded21c8ca5e",
+  "exact_copy": {
+    "title": "Custom filters",
+    "custom_filters": "Custom filters:",
+    "images_per_page": "Images per page:",
+    "page_value": "20",
+    "sort_by": "Sort by:",
+    "selected_sort": "Relevance",
+    "choices": [
+      "On",
+      "Off"
+    ],
+    "source_buttons": [
+      "OK",
+      "cancel"
+    ],
+    "sort_options": [
+      "Relevance",
+      "Title (a-z)",
+      "Title (z-a)",
+      "Date (newest-oldest)",
+      "Date (oldest-newest)",
+      "Artist/Maker (a-z)",
+      "Artist/Maker (z-a)",
+      "Accession Number (0-9)",
+      "Accession Number (9-0)"
+    ]
+  },
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "usage": "candidate 1 supplies only the masked popup frame and row surface; no generated glyph or closed-state control pixels",
+    "new_requests_for_v002": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}

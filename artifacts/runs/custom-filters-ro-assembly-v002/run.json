@@ -1,0 +1,35 @@
+{
+  "issue": 138,
+  "method": "widened source-derived shell with byte-exact source control sprites",
+  "rejected": "custom-filters-ro-assembly-v001",
+  "corrections": [
+    "byte-exact full-resolution OK/cancel source crop",
+    "byte-exact source dropdown arrows and radio controls",
+    "one 40-pixel body font size on three 84-pixel row baselines",
+    "source-derived fields plus masked Qwen popup surface"
+  ],
+  "outputs": {
+    "closed": "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png",
+    "closed_native": "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed-native.png",
+    "open": "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open.png",
+    "open_native": "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open-native.png",
+    "permitted": "artifacts/runs/custom-filters-ro-assembly-v002/permitted-edit-mask.png",
+    "permitted_native": "artifacts/runs/custom-filters-ro-assembly-v002/permitted-edit-mask-native.png",
+    "actual": "artifacts/runs/custom-filters-ro-assembly-v002/actual-difference-mask.png",
+    "actual_native": "artifacts/runs/custom-filters-ro-assembly-v002/actual-difference-mask-native.png",
+    "contact": "artifacts/runs/custom-filters-ro-assembly-v002/contact-sheet.png"
+  },
+  "verification": "artifacts/runs/custom-filters-ro-assembly-v002/verification.json",
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "usage": "candidate 1 supplies only the masked popup frame and row surface; no generated glyph or closed-state control pixels",
+    "new_requests_for_v002": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}
