@@ -1,0 +1,28 @@
+{
+  "export_url": "https://windows-wsl.taile06c45.ts.net/godot-ro-hud/",
+  "viewport": { "width": 1973, "height": 1319 },
+  "actions": [
+    {
+      "control": "party-list scrollbar thumb",
+      "gesture": "drag (1222,420) -> (1222,600)",
+      "observed": "The scrollbar thumb and party-list contents appear unchanged after the drag; no visible change.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-31-38-266Z.png", "page-2026-08-30T00-31-48-157Z.png"]
+    },
+    {
+      "control": "status button",
+      "gesture": "click (521,82)",
+      "observed": "The status button and the surrounding 基本情報 window appear unchanged; no visible change.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-31-58-847Z.png", "page-2026-08-30T00-32-07-020Z.png"]
+    },
+    {
+      "control": "OK button",
+      "gesture": "click (1731,638)",
+      "observed": "The OK button and チャットルーム作成 window remain visible and unchanged; no visible change.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-32-11-690Z.png", "page-2026-08-30T00-32-22-451Z.png"]
+    }
+  ],
+  "notes": "The build was already loaded on the first screenshot. The 1973 x 1319 canvas filled the viewport and the magenta background reached all four edges, so I used scale 1 with offsetX 0 and offsetY 0; the coordinates lined up."
+}

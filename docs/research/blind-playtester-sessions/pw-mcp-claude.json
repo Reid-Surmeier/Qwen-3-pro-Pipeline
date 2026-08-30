@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "browser": {
+      "command": "node",
+      "args": [
+        "/tmp/playtest/out/mcp/node_modules/@playwright/mcp/cli.js",
+        "--isolated",
+        "--headless",
+        "--no-sandbox",
+        "--viewport-size", "1973x1319",
+        "--caps", "vision",
+        "--output-dir", "/tmp/playtest/claude"
+      ],
+      "env": { "PLAYWRIGHT_BROWSERS_PATH": "/home/reidsurmeier/.cache/ms-playwright" }
+    }
+  }
+}

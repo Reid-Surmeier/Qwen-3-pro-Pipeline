@@ -1,0 +1,28 @@
+{
+  "export_url": "https://windows-wsl.taile06c45.ts.net/godot-ro-hud/",
+  "viewport": { "width": 1973, "height": 1319 },
+  "actions": [
+    {
+      "control": "party-list scrollbar thumb",
+      "gesture": "drag (1222,420) -> (1222,600)",
+      "observed": "No visible change. The scrollbar thumb in the パーティー window stays at the same place at the top of its track and the member list (SakumaRiri through Meltina) is unchanged. A screenshot taken mid-drag with the button still held (page-2026-08-30T00-31-12-034Z.png) also showed no movement and no pressed/highlighted thumb, so there was no transient response either.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-30-59-743Z.png", "page-2026-08-30T00-31-16-771Z.png"]
+    },
+    {
+      "control": "status button",
+      "gesture": "click (521,82)",
+      "observed": "No visible change. The status button in the 基本情報 window looks identical before and after, with no pressed or settled state, and no status window opened anywhere on screen.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-31-21-332Z.png", "page-2026-08-30T00-31-26-812Z.png"]
+    },
+    {
+      "control": "OK button",
+      "gesture": "click (1731,638)",
+      "observed": "No visible change. The OK button in the チャットルーム作成 window shows no pressed state and the window neither closed nor changed; every other window is also unchanged.",
+      "responsive": false,
+      "screenshots": ["page-2026-08-30T00-31-32-680Z.png", "page-2026-08-30T00-31-38-562Z.png"]
+    }
+  ],
+  "notes": "The build loaded on the first screenshot (page-2026-08-30T00-30-49-736Z.png), roughly 2 s after navigation, with no loading bar or splash. The magenta background reaches all four edges with no letterboxing, so scale = 1, offsetX = 0, offsetY = 0 and design coordinates were passed to the mouse tools unchanged. All three sets of given coordinates landed on their intended controls (the thumb at 1222,420, the status button at 521,82 and the OK button at 1731,638 were each under the cursor). The drag was performed as real pointer events: move, mouse down, three intermediate moves at y=470/530/600, mouse up; an extra screenshot was taken while the button was still held. The whole HUD appears to be a static mock: nothing in any window reacted to any of the three gestures."
+}
