@@ -1,17 +1,28 @@
 # Behaviour Cards v1 — Ragnarok Online, Japanese client, classic-era UI
 
 Research ticket [#104](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/104), extended in
-place by [#115](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/115), under map
-[#103](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/103). Written 2026-08-29.
-**The owner confirms these cards; this document does not decide anything.**
+place by [#115](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/115) and again by
+[#117](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/117), under map
+[#103](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/103). Written 2026-08-29, extended
+2026-08-30. **The owner confirms these cards; this document does not decide anything.**
 
-Everything #115 added is marked `(#115)` where it sits, so the two passes stay tellable apart. #104's
-own wording is kept wherever it was right, including where it recorded not knowing something.
+Everything #115 added is marked `(#115)` where it sits and everything #117 added is marked `(#117)`, so
+the three passes stay tellable apart. #104's own wording is kept wherever it was right, including where
+it recorded not knowing something.
+
+**Three evidence classes, and they answer different questions.** #104 and #115 are **video-observed** —
+gestures read frame by frame off footage of the running client, which is where every timing and every
+pixel form in this document comes from. #117 adds **manual-attested** — the publisher stating in prose
+what a control is *for*, which is where the *purposes*, the modes, the keyboard map and the cross-window
+gestures come from. What neither reaches is **intent-specified**. The manual never gives a duration and
+its screenshots are the wrong client; the video corpus never explains what a button is for. Each class
+is labelled wherever it is used.
 
 One card per control type in the Control Catalogue. Each card says what gesture produces what visible
 response, how long the response takes **in frames**, whether it reverses, and **whether the Source Game
 shows a hover state**. Hover is being added in-style everywhere regardless — the card exists to record
-what the source actually did, not to authorise a decision.
+what the source actually did, not to authorise a decision. `## Manual-attested behaviour` then works the
+other way round — **per window**, keyed to the eleven windows of Reference Screen image 79.
 
 Where the evidence does not reach, the card says **unverified**. Nothing here is inferred silently.
 
@@ -65,11 +76,31 @@ it is quoted in **list rows**, which is scale-free. They are also a *current* (2
 than the classic-era build; every finding taken from them is a behaviour the tutorial corpus and the
 GungHo manual already show the form of.
 
-### Secondary — official GungHo Japanese play manual
+### Primary for *behaviour* — official GungHo Japanese play manual (promoted by [#117](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/117))
 
-Screenshots under `https://ragnarokonline.gungho.jp/playmanual/images/…`. These are the publisher's own
-captures of the same client. Used where they show a state set the videos do not (tab active/inactive,
-the skill stepper on a fresh character).
+**Owner rule, 2026-08-30: the official jRO play manual is the _behaviour_ authority for how windows and
+menus work. It is _not_ an artwork reference.** Its screenshots show the updated client UI, which is not
+the UI in Reference Screen image 79. Nothing in it may be copied as art, and no statement in it may be
+transplanted onto image 79's layout without checking that image 79 actually has the control.
+
+Under that rule the manual stops being a source of *screenshots* and becomes a source of *statements*:
+it is the publisher describing, in its own words, what each control does. That makes it the document's
+**third evidence class** — see `## Manual-attested behaviour` below, which extracts every behavioural
+statement in it and maps each one to image 79's windows and controls.
+
+Pages read in full (fetched 2026-08-30, extracted as Markdown):
+
+| Page | URL |
+| --- | --- |
+| 各ウィンドウについて (27 window sections) | `https://ragnarokonline.gungho.jp/playmanual/operation/window.html` |
+| 基本的な操作 | `https://ragnarokonline.gungho.jp/playmanual/operation/operation.html` |
+| 設定方法 | `https://ragnarokonline.gungho.jp/playmanual/novice/config.html` |
+| ショートカット一覧 (44 shortcuts) | `https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html` |
+
+Its **screenshots** continue to be used exactly as #104 used them, and only that way: where they show a
+state set the videos do not (tab active/inactive, the skill stepper on a fresh character, the resize
+grip's own annotation). Those crops live under `artifacts/references/ro-source-game/behaviour/` and are
+retained for private study.
 
 ### Secondary — roBrowser
 
@@ -439,7 +470,7 @@ the login パスワード入力 dialogue.
 | | |
 | --- | --- |
 | **Form** | A sunken field with a light interior and a dark border. Text is left-aligned with a small inset. |
-| **Caret** | **Confirmed.** A thin vertical bar drawn immediately after the last character (`01-replay-filename-typed.png`: `replay010101|`; `02-chatroom-title-caret.png`: `ちゃっとるーむ|`). In an empty field the caret sits at the field's left inset (`03-chat-input-bar.png`). Blink rate is **unverified**. |
+| **Caret** | **Confirmed.** A thin vertical bar drawn immediately after the last character (`01-replay-filename-typed.png`: `replay010101\|`; `02-chatroom-title-caret.png`: `ちゃっとるーむ\|`). In an empty field the caret sits at the field's left inset (`03-chat-input-bar.png`). Blink rate is **unverified**. |
 | **Typing → response** | Characters appear left to right and the caret advances. Confirmed by the presence of partial typed content, not by a frame-by-frame capture; per-keystroke latency is **unverified**. |
 | **Masked input** | Confirmed: the password field renders `****`, one glyph per character (`04-login-password-masked.png`). |
 | **Disabled field** | Confirmed: in the same dialogue, 新規パスワード and 確認パスワード are drawn with a **grey interior and a grey label** while the active field is white with a black label. This is the client's own disabled-input rendering. |
@@ -533,33 +564,864 @@ see the closing section.
 
 ---
 
+## Manual-attested behaviour — the official jRO play manual (#117)
+
+Ticket [#117](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/117), 2026-08-30, under map
+[#103](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/103). Everything in this section is
+marked `(#117)` where it appears elsewhere in the document.
+
+This section adds a **third evidence class** to the two the cards already carried. Every statement below
+is quoted from the publisher's own manual, in Japanese, with the page it came from, and then mapped —
+or explicitly *not* mapped — to a window and control in Reference Screen image 79
+(`artifacts/references/ro-desktop-b/control-inventory.json` and `window-rects.json`, branch
+`research/image-79-native-scale`: 11 windows, 239 controls).
+
+### The three evidence classes
+
+| Class | What it is | What it can settle | What it cannot |
+| --- | --- | --- | --- |
+| **video-observed** (#104, #115) | A gesture and its response read frame by frame off footage of the running client. | Timing, state sets, pixel form, whether a thing actually happens. | Anything nobody happened to do on camera — thumb drag, window drag, hold-to-repeat. |
+| **manual-attested** (#117) | The publisher stating in prose what a control does. | *Intent and outcome* — what a button opens, what a gesture is *for*, what a mode means, which key does what. | **Timing, form, or pixels.** The manual never says how long anything takes and its pictures are the wrong client. |
+| **intent-specified** | A decision the owner makes where neither of the above reaches. | Whatever is left. | — |
+
+**The two classes are complementary in exactly the way the gaps needed.** The video corpus is strong on
+timing and blind to purpose; the manual is strong on purpose and silent on timing. Three of #104's
+long-standing "form confirmed, gesture unverified" entries are answered below *as gestures* — the
+minimize toggle, the bottom-right resize drag, and drag-an-item-out-to-drop — while their timings stay
+exactly as unverified as they were.
+
+### The two rules this section follows
+
+The manual documents **the current jRO client**. Image 79 is an older layout. So:
+
+1. **A statement is only mapped where image 79 has the control.** Where it does not, the statement is
+   recorded verbatim and labelled 🕘 **modern client; not directly attested for image 79's layout**.
+   It is never transplanted.
+2. **Where the manual's window and image 79's window disagree in structure, the disagreement is the
+   finding**, and it is written down as such — the オプション window is the clearest case and is worth
+   reading before anything else here.
+
+Markers used throughout:
+
+| | |
+| --- | --- |
+| ✅ | Attested, and image 79 has the control the statement is about. |
+| ⚠️ | Candidate mapping — plausible, not certain, and the reason for the doubt is given. |
+| 🕘 | Modern client; not directly attested for image 79's layout. |
+| ❌ | The manual says nothing about this. |
+
+---
+
+### The finding that reframes the ticket: image 79 splits one modern window into two
+
+The ticket expected a divergence at the オプション window — "the オプション window with BGM/Effect sliders
+vs today's button menu". It is real, and it is bigger and cleaner than that: **image 79 has both halves,
+as two separate windows, and the modern client has merged them into one.**
+
+The manual's §18 オプションウィンドウ opens with a sentence that describes image 79's window and then
+presents a table that describes image 79's *other* window:
+
+> 「BGMやEffectなどのオプションを設定できる。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §18 オプションウィンドウ
+
+That lead sentence is an exact description of image 79's `options` window, which contains a **BGM
+slider, an Effect slider and a Skin dropdown** and nothing else. But §18's table underneath it lists
+five *buttons* — キャラクター選択 / ゲーム設定 / ショートカット設定 / ゲームを終了する / 閉じる — and
+those are image 79's `system-menu` window, near-line-for-line.
+
+So the lead sentence is **residue**: the manual kept describing the old window while its table was
+updated to the new one. Read together, the two halves of §18 attest the older two-window arrangement
+that image 79 shows, and date the merge to somewhere between them.
+
+| | Image 79 | Modern client per the manual |
+| --- | --- | --- |
+| Sound/skin settings surface | `options` — BGM slider, Effect slider, Skin dropdown, `on` mute boxes | moved into ゲーム設定 (オプション＞ゲーム設定＞基本設定, per [config.html](https://ragnarokonline.gungho.jp/playmanual/novice/config.html)) |
+| Session command menu | `system-menu` — セーブポイントへ / キャラクター選択 / サウンド設定 / 環境設定 / ショートカット / ゲーム終了 / return to game | **is** the オプションウィンドウ (§18's table) |
+
+**Do not take the manual's §18 table as a description of image 79's オプション window.** It describes
+image 79's システムメニュー.
+
+---
+
+### Cross-cutting, manual-attested
+
+These are behaviours the manual states about the client generally, or about a control type rather than
+one window. They belong beside the cross-cutting findings near the top of this document.
+
+#### M1. The ⊖ button is a maximize/minimize **toggle** ✅ — and this is the first statement of what it does
+
+> 「ウィンドウ右上のボタンで、最大化／最小化の切り替えも可能だ。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §1 基本ウィンドウ
+
+**This is new information for the `minimize / restore` card**, whose "Gesture → response for `⊖`" has
+read **unverified** since #104 — no frame in either corpus caught a `⊖` click or a collapsed window, and
+roBrowser gave three contradictory behaviours. The manual settles the *semantics*: it is a **two-state
+toggle** between 最大化 and 最小化, operated by the **top-right** button, and it is **reversible by the
+same button**. Image 79 carries a `minimize` control on **six** windows (`basic-info`, `status`,
+`options`, `equipment-items`, `system-menu`, `inventory`), each at the top right, each ~14–17 px square.
+
+What the manual still does **not** give, and what stays unverified: how many frames the toggle takes,
+what the minimized window looks like (a bare title strip? the 基本情報 collapse the videos caught?), and
+whether the glyph changes. The manual's word is 最小化, not "collapse to title bar", and it says nothing
+about the intermediate. **Timing and form remain video-or-intent questions.**
+
+⚠️ One caution against over-reading: the video corpus separately confirms a *different* collapse control
+on 基本情報 — a small triangular handle in the middle of the separator below the stats block
+(`minimize-restore/01`, `/02`). Whether the top-right `⊖` and that handle are the same mechanism, or two,
+is **unverified**. The manual describes only the top-right button.
+
+#### M2. Two windows in image 79 have no `✕`, and the manual explains both ✅
+
+A structural fact fell out of cross-checking the inventory against the shortcut list. Of image 79's 11
+windows, exactly **two carry a `minimize` but no `close`** — `basic-info` and `system-menu` — and the
+manual accounts for each independently:
+
+> 「**F11** ゲーム内の基本情報ウィンドウ以外を閉じる／ウィンドウをすべて隠す」
+> — [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html)
+
+基本情報 is the one window the client's own "close everything" key **exempts**. It is the persistent
+window; it is not meant to be closed, which is why it has no `✕` and only a `⊖`.
+
+> 「閉じる | オプションウィンドウを閉じる。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §18 オプションウィンドウ
+
+システムメニュー closes by its own **footer button** — image 79's bottom row button, read as
+`return to game` in the inventory — exactly as the manual's option window closes by its 閉じる row rather
+than by a title-bar `✕`.
+
+Neither window is missing a control. Both are the manual's design.
+
+#### M3. Right-click on an icon opens a detail window ✅ — stated twice, for two different grids
+
+> 「アイテムにカーソルを合わせて右クリックすれば、アイテムの詳細が別ウィンドウで表示される。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §5 アイテムウィンドウ
+
+> 「各スキルアイコン | アイコンにカーソルを合わせて右クリックすることで、スキルの詳細ウィンドウが開く。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §3 スキルウィンドウ
+
+Two independent statements of the same grammar: **hover a grid cell, right-click, a separate detail
+window opens.** Note the shared phrasing 「カーソルを合わせて右クリック」 — hovering is part of the
+described gesture in both. Maps to image 79's `inventory` (28 grid cells) and `skill-tree` (27 grid
+cells). ⚠️ The manual states it for the *item* window, not the *storage* window; image 79's `storage`
+(35 grid cells) is not covered — see M9.
+
+This gives the `list row / grid cell selection` card its missing **right-button** gesture. The card
+records hover (pink fill, tooltip) and selection, and left `dblclick` from roBrowser only; right-click
+was not in it at all.
+
+#### M4. The bottom-right corner drag-resizes ✅ — the gesture for a grip the cards had only seen
+
+> 「アイテムウィンドウと、アイテムの詳細ウィンドウでは、ウィンドウの右下部分をマウスでドラッグすると、表示範囲を変えられる。説明文が長いアイテムを確認するときに便利だ。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §5 アイテムウィンドウ
+
+The `window title drag` card confirms a **diagonal hatched resize grip at the bottom-right corner**
+(`window-drag/04-manual-resize-grip.png`, circled by the manual's own annotation) and says only "Resize
+is a separate control" — it never had a statement of what the grip *does*. Now it does: **drag it with
+the mouse and the window's 表示範囲 (visible extent) changes.**
+
+Two limits worth keeping honest:
+
+- The manual names **only two windows** for this — the item window and the item detail window. It does
+  **not** say every window resizes. Image 79's `inventory` is the attested target; `storage`,
+  `skill-tree` and `chat-room` are ⚠️ **candidates by analogy only**.
+- This is the **one sustained drag gesture in the whole manual**, and the #115 title-bar-drag hunt is
+  still open. The manual attests resize-drag exists; it gives **no** motion profile, no threshold, no
+  frame count, no clamping. The card's ≥30-frame monotonic-drag gate still has no source reference.
+
+#### M5. Dragging an item out of the window drops it on the ground ✅
+
+> 「ドロップロック | 鍵をかけておくと、アイテムをウィンドウの外にドラッグしてもアイテムをドロップしなくなる。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §5 アイテムウィンドウ
+
+Stated as the *lock's* purpose, but it attests the underlying gesture plainly: **drag an item outside
+the window and it is dropped.** That is a grid-cell behaviour with a consequence outside the UI, and
+nothing in either video corpus caught it. The 🕘 ドロップロック control itself is modern — image 79's
+`inventory` has no lock — but the gesture it guards against is what image 79's 28 grid cells do.
+
+#### M6. Alt+right-click moves an item **between** the inventory and storage windows ✅
+
+> 「**Alt+右クリック** 指定したアイテムを所持アイテムや倉庫などのウィンドウ間で移動させる」
+> — [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html)
+
+**This is the only sentence in the entire manual corpus that mentions 倉庫** (see M9), and it is a real
+behavioural statement about image 79: it names 所持アイテム and 倉庫 — image 79's `inventory` and
+`storage` — as a pair of windows items move *between*, by a modifier-click rather than a drag. Image 79
+shows both windows open simultaneously, which is precisely the situation this shortcut exists for.
+
+#### M7. Shift+left-click writes an item's info into the chat window ✅
+
+> 「**Shift+左クリック** 指定したアイテムの情報をチャットウィンドウに作成する」
+> — [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html)
+
+A cross-window behaviour with both ends present in image 79: a grid cell in `inventory` or `storage`
+produces text in `chat-room`'s input field. Worth recording because it is a rare attested *link* between
+two windows rather than a behaviour inside one.
+
+#### M8. Right-click on a character raises a context menu ✅ (mechanism, not a window)
+
+> 「ほかのプレイヤーに話しかけるときは、対象を右クリックをして「1:1ウィンドウを開く」を選ぼう。」
+> — [operation.html](https://ragnarokonline.gungho.jp/playmanual/operation/operation.html) 話しかける
+
+> 「機能制限設定 | クリックで機能制限のON、OFFを切り替えられる。右クリックメニューなど、一部の機能を制限して誤クリックを防ぐ。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §12 パーティーウィンドウ
+
+The client has a **right-click context menu on characters** carrying named entries, and a global
+"function restriction" mode that suppresses it to prevent misclicks. No context menu appears in image
+79, so there is no control to map — but this is the mechanism that starts a trade (§11, M10) and opens a
+1:1 chat, and both of those are referenced from windows image 79 does have.
+
+#### M9. Ctrl+Tab cycles a window through **three** display states ✅ (mechanism, no target in image 79)
+
+> 「Ctrl+Tabキーを押すことで、「デフォルト」「半透明表示」「表示なし」を切り替えられる。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §7 ミニマップウインドウ
+
+> 「**Ctrl+Tab** マップウィンドウの表示／半透明化／非表示の切り替え」
+> — [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html)
+
+Both pages agree: **a three-state cycle — default → semi-transparent → hidden → default.** ❌ **Image 79
+has no minimap window**, so there is nothing to map this to. It is recorded anyway because it is a
+*state model* the client uses and nothing else in this document has: a window visibility that is not
+binary. A second shortcut confirms semi-transparency is a general client idiom —
+「**Ctrl+End** 他のユーザーの半透明化の切り替え」 — so a replica that only has shown/hidden is missing a
+state the source has.
+
+#### M10. The trade flow is a two-stage confirm: both OK, then trade ✅ (mechanism, no target in image 79)
+
+> 「アイテムやZenyの受け渡し時に使用。受け渡ししたいプレイヤーキャラクターを右クリックすると表示されるメニューから、選択する。アイテムの場合はウィンドウにドラッグ＆ドロップ、Zenyの場合は「send yours」欄に金額を入力。お互いに［OK］をクリックし、［trade］を選べば、交換が成立する。」
+> — [window.html](https://ragnarokonline.gungho.jp/playmanual/operation/window.html) §11 交換ウィンドウ
+
+❌ **Image 79 has no trade window**, so nothing maps. It is recorded because of the *pattern*, which
+recurs in windows image 79 does have: **an arming action separate from a committing action**, with the
+commit disabled until both parties have armed. That is the same shape as the skill window's
+allocate-then-確定 model #115 measured (pending red digits, arrows hidden window-wide, `cancel`
+discards). Two independent instances of one interaction grammar is worth knowing before designing a
+replica's confirm behaviour.
+
+The manual also attests a side effect that is pure client behaviour:
+「スクリーンショットを撮るチェックボックスにチェックを入れると、[trade]をクリックした際に、自動的にスクリーンショットが撮影されます。」
+— a checkbox whose effect fires on *another* control's click.
+
+#### M11. The setup utility shows a tooltip on hover ⚠️
+
+> 「オプションタブでは、ゲーム内のチャットコマンドや、Alt+Yキーで表示されるコマンドリストの設定内容の一部を編集できます。各項目にマウスカーソルを合わせると、コマンドについての説明がでます。」
+> — [config.html](https://ragnarokonline.gungho.jp/playmanual/novice/config.html) 画面・サウンド設定
+
+The document's tooltip finding (#115: icon buttons, grid cells and list rows raise a floating label on
+hover) gets a written statement of the same idiom — **hover an item, an explanation appears** — but
+⚠️ this sentence is about the external **setup.exe** utility, not the in-game client, so it is
+corroboration of the house style, not evidence about a game window. The manual gives **no** tooltip
+delay anywhere, so that stays **unverified**.
+
+### Keyboard shortcuts that open a window
+
+All from [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html) unless noted.
+This is a straight extraction; the right-hand column is the mapping to image 79.
+
+| Key | Manual text | Image 79 target |
+| --- | --- | --- |
+| **Alt+V** | 基本ウィンドウの開閉 | ✅ `basic-info` |
+| **Alt+A** | ステータスウィンドウの開閉 | ✅ `status` |
+| **Alt+S** | スキルウィンドウの開閉 | ✅ `skill-tree` |
+| **Alt+Q** | 装備ウィンドウの開閉 | ✅ `equipment-items` |
+| **Alt+E** | アイテムウィンドウの開閉 | ✅ `inventory` |
+| **Alt+O** | オプションウィンドウの開閉 | ⚠️ `options` **or** `system-menu` — the manual's オプションウィンドウ is image 79's `system-menu` (see above), so this key most likely opens `system-menu`. Not resolvable from the manual. |
+| **Alt+Z** | パーティーウィンドウの開閉 | ✅ `party` |
+| **Alt+H** | 友達ウィンドウの開閉 | ✅ `party` in its 友達 state (the same window — see W7) |
+| **Alt+C** | チャットウィンドウの開閉 | 🕘 the **room-creation** dialog (§17), which image 79 does not have — *not* the chat log |
+| **Alt+F10** | 会話ウィンドウの表示/非表示の切り替え | ✅ `chat-room` (which is the 会話ウィンドウ — see W11) |
+| **Esc** | ウィンドウを閉じる／ゲーム終了などのゲームオプションウィンドウを表示する | ✅ closes a window; raises `system-menu` (「ゲーム終了などの」 matches its ゲーム終了 button) |
+| **F11** | ゲーム内の基本情報ウィンドウ以外を閉じる／ウィンドウをすべて隠す | ✅ global; exempts `basic-info` (see M2) |
+| **Alt+.** | ワールドマップの表示／非表示 | ❌ no world-map window in image 79 |
+| **Alt+N** | ナビゲーションウィンドウの開閉 | 🕘 modern |
+| **Alt+U** | クエストウィンドウの開閉 | 🕘 modern; no quest window in image 79 |
+| **Alt+P** | パーティ設定ウィンドウの開閉 | ❌ separate window, not in image 79 |
+| **Alt+I** | 友達設定ウィンドウの開閉 | ❌ not in image 79 |
+| **Alt+M** | ショートカットリストの開閉 | ❌ not in image 79 |
+| **Alt+L** | エモーションリストの開閉 | ❌ not in image 79 |
+| **Alt+G** | ギルドウィンドウの開閉（加入時のみ） | ❌ not in image 79 — note the **conditional**: the key does nothing unless you are in a guild |
+| **Alt+R / Alt+T** | ホムンクルス情報ウィンドウの開閉／待機⇔独自行動の切り替え（所持している時のみ） | 🕘 modern, conditional |
+| **Alt+Y** | 「ゲーム設定」の「その他」タブの開閉 | 🕘 modern |
+| **Alt+B** | メモリアルダンジョン情報ウィンドウの開閉（挑戦時のみ） | 🕘 modern, conditional |
+| **Ctrl+Q** | 装備能力値ウィンドウの開閉 | 🕘 modern |
+| **Ctrl+Z** | パーティー掲示板の開閉 | 🕘 modern |
+| **F12 / Ctrl+F12** | ショートカットウィンドウの表示がスライドする／（1～4）の表示/非表示の切り替え | ❌ no shortcut window in image 79 |
+| **F10** | 会話ウィンドウの大きさを変更する | ✅ `chat-room` — but see W11, the two pages disagree |
+| **Ctrl+Tab** | マップウィンドウの表示／半透明化／非表示の切り替え | ❌ see M9 |
+| **Ctrl+End** | 他のユーザーの半透明化の切り替え | ❌ world, not UI |
+| **Ctrl+H** | モンスター討伐状況の表示／非表示の切り替え | 🕘 modern |
+| **Insert** | 座る/立つの切り替え。ノービスの基本スキルLv.3以上が必要 | ❌ world, not UI — recorded for the **conditional**: a key gated on a skill level |
+| **Tab** | 入力ウィンドウのあいだをカーソル移動できる | ✅ text-field behaviour; `chat-room`'s input |
+| **Shift+Insert / Shift+Delete** | コピーしたテキストの貼り付け／テキストの切り取り | ✅ text-field behaviour |
+| **Alt+Enter / Ctrl+Enter / Shift+Enter** | オープンチャット時に発言がギルド／パーティー／同盟ギルドメッセージになる | ✅ `chat-room` input — see W11 |
+
+**Nine of image 79's eleven windows have an attested open/close key** — though one of the nine rests on
+`Alt+O`, which the manual cannot split between `options` and `system-menu`, so strictly it is eight
+certain and one ambiguous. The two windows with **no** key at all are `equipment-card` and `storage` —
+the same two the manual does not document at all (W3, W9).
+
+---
+
+### What the manual says each of image 79's eleven windows does
+
+One subsection per window, keyed to the `key` field in `window-rects.json`. Control counts are from
+`control-inventory.json`.
+
+#### W1. `basic-info` — 基本情報 · manual §1 基本ウィンドウ · 14 controls
+
+> 「プレイキャラクターの諸情報を確認できるウィンドウ。項目別に配置されたボタンを押すことで、ステータスや装備アイテム、所持アイテムなどの個別情報が表示される。ウィンドウ右上のボタンで、最大化／最小化の切り替えも可能だ。」
+
+✅ **The purpose statement maps exactly.** Image 79's `basic-info` is 4 meters + 8 text buttons + a
+title drag + a minimize, and the sentence describes precisely that: a status readout whose buttons open
+individual windows, plus a top-right maximize/minimize toggle (M1).
+
+**The eight buttons.** The manual's §1 button table gives one sentence per button, and **all eight of
+image 79's buttons have an exact match**:
+
+| Image 79 button | Manual sentence | |
+| --- | --- | --- |
+| `status` | 「ステータスウィンドウを開きます。」 | ✅ → `status` (W4) |
+| `equip` | 「装備ウィンドウを開きます。」 | ✅ → `equipment-items` (W6) |
+| `items` | 「アイテムウィンドウを開きます。」 | ✅ → `inventory` (W10) |
+| `skill` | 「スキルウィンドウを開きます。」 | ✅ → `skill-tree` (W2) |
+| `chat` | 「チャットウィンドウを開きます。」 | ⚠️ the manual's チャットウィンドウ is the **room-creation** dialog (§17); image 79's `chat-room` is the 会話ウィンドウ. Either the older button opened the log, or it opened a room dialog image 79 does not show. **Not resolvable from the manual.** |
+| `friend` | 「パーティー・友達ウィンドウを開きます。」 | ✅ → `party` (W7), which is one window with two states |
+| `map` | 「ワールドマップウィンドウを開きます。」 | ✅ opens a window image 79 does not contain |
+| `option` | 「オプションウィンドウを開きます。」 | ✅ → `system-menu` (W8), per the §18 finding above |
+
+Note the button table's *phrasing* is uniform — every row is 「…ウィンドウを開きます。」 — so a
+`basic-info` button is attested as a **plain window-opener**, not a toggle. (The `Alt+` keys are
+attested as 開閉 — toggles. The buttons are not.) Image 79 renders `status` in a `selected` state, which
+the manual does not describe: ❌ **whether these buttons show which window is open is not attested.**
+
+**The meters.** 「HP | キャラクターの生命力。」「SP | 「アクティブスキル」を使用するために必要なポイント。」
+「Base Lv | キャラクター自身のレベル。」「Job Lv | キャラクターの職業レベル。」
+「Weight | キャラクターが持てるアイテム重量と限界値。」「Zeny | 所持金を表す（Zenyはゲーム内通貨の単位）。」
+✅ All four of image 79's meters (HP, SP, Base Lv. 60, Job Lv. 47) are covered.
+
+🕘 **Modern:** 「AP | 「APを消費するスキル」を使用するために必要なポイント。4次職、上位特殊2次職、スピリットハンドラーから表示されます。」 — AP is a 4th-job-era stat and image 79 has no AP meter. The manual's own
+sentence dates it, which is useful: image 79 predates 4th jobs.
+
+🕘 **Modern:** the §1 table lists **21** buttons (adding ギルド設定, クエスト, ナビゲーション, リプレイ記録,
+メール, 実績, Tips, スペシャルアイテムショップ, ショートカット設定, 期間限定デイリーボーナス,
+パーティー掲示板, 冒険ガイド, and one 未実装). Image 79 has **8**. The 13 extra are the modern client's.
+
+#### W2. `skill-tree` — スキルツリー · manual §3 スキルウィンドウ · 59 controls
+
+> 「キャラクターの所持スキル状況を確認できる。スキルポイントを獲得したときは、この画面で習得と強化ができ、未習得の場合は灰色で表示される。」
+
+✅ **Directly confirmed by image 79's own contents.** The window has 26 steppers, and **eight** of them
+read a zero current value — `デーモン.. 0/5`, `魔法反射 0/3`, `ストリッ.. 0/5`, `ペイニッ.. 0/5`,
+`セイフティ.. 0/5`, `ターンア.. 0/10` and `エクスピア.. 0/1` ×2. Those are the 未習得 skills, and the
+manual says they render **grey**. This is a manual-attested *rendering rule* for a state image 79 shows,
+on eight controls, and the `stepper` card had nothing on it.
+
+> 「ちなみに、習得するだけで効果を発揮するスキルを「パッシブスキル」、SPを消費して使用できるスキルを「アクティブスキル」と呼ぶ。」
+
+✅ Vocabulary, and it explains W1's SP meter sentence.
+
+**The tree/list toggle.**
+
+> 「表示ウィンドウは2種類あり、右上の[－]ボタンをクリックすると「ツリー表示」と「リスト表示」を切り替えられる。」
+
+⚠️ **Function attested; the control differs.** The manual says a **top-right** button toggles between
+**ツリー表示 and リスト表示** — a two-state view toggle, reversible by the same button. Image 79 has a
+top-right inline title-bar button labelled **`View`** at `[1022, 6, 53, 19]`, which is the right position
+and the right kind of control for exactly this job. But the manual's glyph is `[－]` and image 79's is a
+word, so **the mapping is a candidate, not a fact.** What is worth taking is the *semantics*: image 79's
+window is titled スキル**ツリー** and the manual attests that a tree is one of two mutually exclusive
+renderings of the same data.
+
+⚠️ Note the collision this creates: `[－]` is also the glyph family of the minimize `⊖` (M1). On the
+skill window the manual assigns a top-right `[－]` to **view switching**, not minimizing — and image 79's
+`skill-tree` indeed has **no minimize control at all**, only a `close`. The two agree. Recorded because
+a replica that puts a minimize on the skill window would contradict both sources.
+
+**Right-click for detail.** 「各スキルアイコン | アイコンにカーソルを合わせて右クリックすることで、スキルの詳細ウィンドウが開く。」 ✅ → the 27 grid cells. See M3.
+
+🕘 **Modern:** 「スキル詳細ウィンドウ内の時計アイコンをクリックすると、詠唱関連情報ウィンドウが開き、詠唱時間とディレイの内訳や詳細が確認できる。」 — a detail-window-within-a-detail-window; not attested for image 79.
+
+🕘 **Modern — the job-class tab strip.** 「職業分類のタブ | タブをクリックすることで、各職業のスキルの画面が表示される。」 and 「特定のアイテムを装備したり、スキル「クローンスキル」で追加されるスキルは、「その他」タブに表示される。」 **Image 79's `skill-tree` has no tabs whatsoever** (its 59 controls are 1 title drag,
+1 close, 1 checkbox, 3 buttons, 27 grid cells, 26 steppers). The modern skill window is tabbed by job
+tier; image 79's is a single flat tree. **Do not add a tab strip to image 79's skill window on the
+strength of this sentence.**
+
+> 「スキルポイント | 現在、スキルポイントを振り分けられるポイント。」
+
+✅ Confirms the footer counter #115 measured going `16` → `15 / 16`.
+
+❌ **Not covered:** image 79's title-bar checkbox `スキル説明表示`, its `View` button as such, and its
+footer `use` / `close` buttons. The manual's §3 has no footer-button table at all. The video corpus is
+the only source for those (`checkbox/03`, `/04` capture the 説明表示 checkbox in both states).
+
+#### W3. `equipment-card` — 装備カード · **no manual section** · 4 controls
+
+❌ **The manual does not document this window.** Its 各ウィンドウについて index names 27 windows and
+**装備カード is not among them**. Nothing in window.html, operation.html, config.html or shortcut.html
+refers to it, and it has no open/close shortcut key.
+
+The nearest the manual comes is M3's 「アイテムの詳細が**別ウィンドウ**で表示される」 — right-clicking an
+item opens a separate detail window, itself bottom-right resizable (M4). Image 79's `equipment-card` is
+a small window with **1 grid cell and a scrollbar**, which is the shape a single-item detail view would
+have. **That is a resemblance, not an attestation, and it is recorded as speculation only.** The manual
+supports no claim about this window.
+
+#### W4. `status` — ステータス · manual §2 ステータスウィンドウ · 15 controls
+
+> 「キャラクターのステータス情報を表示するウィンドウ。左に並んだ各ステータスは、レベルアップ時に強化できる。右に並んだステータスは、各ステータスと装備アイテムによって数値が変化する。」
+
+✅ **A two-column model, and it maps.** Image 79's `status` has six read-only text fields — Str, Agi,
+Vit, Int, Dex, Luk — each rendered as a `base + bonus` pair, five of them carrying a raise stepper. The
+manual attests the split: the **left** column is the raisable one, the **right** column is derived from
+those and from equipment. Image 79's field states (`1 +2 -> 2`, `92+10 -> 11`) are exactly that
+`base + equipment bonus` form.
+
+> 「Status Point | レベルアップ時に獲得できる、キャラクターステータス強化用のポイント。」
+
+✅ The currency the five steppers spend.
+
+**Why Int has no stepper — a manual-attested candidate.** Image 79 shows raise steppers on Str, Agi,
+Vit, Dex and Luk but **not on Int**, whose value is `92+10` while the others sit at `1 +n`.
+
+> 「左に並んだ各ステータスの純粋なステータスには上限値があります。」
+
+⚠️ The manual attests that base stats have a **cap**, which would remove the raise control — a genuinely
+useful explanation for an asymmetry in image 79 that no video evidence covers. But it is **one of two
+candidates**: the other is simply that the character has too few status points for the next Int step
+(cost rises with the stat). **Not resolvable from image 79 alone.** Recorded as a candidate, and it is a
+reminder that a stepper's presence in this client is *state-dependent* — the same lesson #115 learned on
+the skill window's window-wide arrow hiding.
+
+🕘 **Modern — the whole 特性ステータス system.** 「ウィンドウ左下の「特性ステータス」ボタンで、特性ステータス関連の表示ON/OFFの切り替えが可能です。」 plus the Pow / Sta / Wis / Spl / Con / Crt block and
+P.Atk, S.Matk, Res, Mres, H.Plus, C.Rate, T.Status Point. Image 79 has none of it, consistent with W1's
+missing AP meter. 🕘 The 「特性ステータス」 **toggle button** is likewise modern.
+
+❌ **Not covered:** image 79's vertical tab at `[8, 241, 13, 165]` (labelled `職業/status`, selected).
+The manual's status window has no tab; the modern equivalent is a button, not a tab. The manual attests
+nothing about it.
+
+#### W5. `options` — オプション · manual §18 lead sentence + config.html · 12 controls
+
+**Read the §18 finding above first** — image 79's `options` is *not* the manual's オプションウィンドウ
+table, which is image 79's `system-menu`.
+
+> 「BGMやEffectなどのオプションを設定できる。」
+> — window.html §18, lead sentence
+
+✅ **This one sentence is the attestation for the whole window**, and it is exact: image 79's `options`
+holds a **BGM** slider and an **Effect** slider, named in that order, exactly as the sentence names them.
+
+**The `on` checkboxes beside the sliders — the best behavioural detail in this window.**
+
+> 「サウンド設定 | 「off」にチェックを入れると、音量設定を変えずに、音が消せます。」
+> — [config.html](https://ragnarokonline.gungho.jp/playmanual/novice/config.html) 基本設定
+
+> 「サウンド設定 | 「全てミュート」にチェックを入れると、音量設定を変えずに、全ての音が消せます。」
+> — [config.html](https://ragnarokonline.gungho.jp/playmanual/novice/config.html) 画面・サウンド設定
+
+✅ Two independent statements of the same rule, and the load-bearing clause is
+**「音量設定を変えずに」 — *without changing the volume setting*.** So image 79's two `on` checkboxes
+(one per slider, both `unchecked`) are **mutes that do not move the slider**: the thumb keeps its
+position while the sound is silenced, and unchecking restores the same level. The `slider` card lists
+its gesture→response as **unverified** and this does not change that — but it does settle the
+**relationship** between the checkbox and the slider beside it, which the card never addressed. 🕘 The
+modern control is labelled `off` (or 全てミュート) and image 79's is labelled `on`, so the polarity is
+inverted between eras; the *independence from the volume value* is the attested part.
+
+**The Skin dropdown.**
+
+> 「スキン | ゲーム内のウィンドウのスキンを変更できます。 新しくスキンを追加するには、ラグナロクオンラインのゲームクライアントが保存されているRagnarok Online フォルダの中のSkinの中に保存してください。」
+> — [config.html](https://ragnarokonline.gungho.jp/playmanual/novice/config.html) 基本設定
+
+✅ Image 79's `options` has a closed dropdown at `[1224, 416, 294, 26]` reading **`Classic Blue`**. The
+manual attests (a) it changes the skin of the game's **windows**, and (b) **its option list is populated
+from a folder on disk** — which is why the video corpus's dropdown contains a user-installed
+`scribbling kid` beside `<Basic Skin>`. That is a genuinely useful structural fact: the list is not a
+fixed enumeration. It also corroborates the `dropdown` card's cut-verified finding that committing a
+skin **repaints every window on screen in one frame** — the manual says the setting's scope is
+ゲーム内のウィンドウ, i.e. all of them.
+
+🕘 **Modern:** in the current client this whole surface lives at オプション＞ゲーム設定＞基本設定, three
+levels down a menu, not in the オプション window itself.
+
+❌ **Not covered:** image 79's four checkboxes `attack` / `skill` / `item` / `option` at y≈467 (states
+`unchecked` / `checked` / `checked` / `unchecked`). config.html has a 操作設定 section but **prints no
+table for it** — only a screenshot — so the manual names none of these rows. The video corpus reads the
+analogous row as グラフィック設定's スナップ attack/skill/item (`checkbox/02`), which is the better source.
+The manual is silent.
+
+#### W6. `equipment-items` — 装備アイテム · manual §4 装備ウィンドウ · 16 controls
+
+> 「キャラクターが装備している武器、防具を表示。アイテムウィンドウからドラッグ＆ドロップするか、ダブルクリック（持ち替え装備の場合、Ctrl+ダブルクリック）で装備する。装備をしたときに、同じ箇所にすでに装備品がある場合、古いものは自動的にアイテムウィンドウに移動する。」
+
+✅ **Three separate behaviours, all mappable to image 79's 10 grid cells:**
+
+1. **Equip by drag-and-drop** from the item window — `inventory` (W10) → `equipment-items`. A second
+   attested cross-window gesture, alongside M6 and M7.
+2. **Equip by double-click** — confirming `dblclick` as this client's "use/act" gesture on a grid cell,
+   which the `list row / grid cell selection` card had only from roBrowser.
+3. **Displacement is automatic and reversed** — equipping into an occupied slot sends the old item back
+   to the item window by itself. A state rule with no user gesture, and nothing in the video corpus
+   covers it.
+
+**The tabs — an era marker.** 「一般装備 | 現在装備中の一般装備を表示する。」 and
+「補助装備 | 現在装備中の衣装装備とシャドウ装備を表示する。」
+
+⚠️ Image 79's two tabs read **`一般装備` (selected)** and **`衣装装備`**. The first matches the manual
+exactly. The second does not: the modern client's second tab is **補助装備**, a *container* for 衣装装備
+**and** シャドウ装備, while image 79's is 衣装装備 alone. So image 79 predates shadow gear, and its second
+tab shows costume equipment only. ✅ The *behaviour* — a tab strip switching which equipped set is
+displayed — is attested; ❌ the modern tab's contents are not image 79's.
+
+⚠️ **The `items` button.** Image 79 has a button labelled `items` at `[212, 635, 52, 24]`. The manual's
+§4 table contains exactly one `item`-labelled row —
+「item | カートアイテムウィンドウを表示する。(カートがあるときに表示される)」 — but that button is
+**conditional on owning a cart**, and image 79's character is an Acolyte-line character (its skill tree
+is ヒール / ブレッシング / キリエエリソン / サンクチュアリ), a class that has no cart. **So the manual's
+`item` row is probably not what image 79's `items` button is, and the manual attests nothing about it.**
+Recorded as a rejected mapping so nobody re-proposes it.
+
+🕘 **Modern — everything else in §4's table:** 称号 (titles), ダメージ (damage skin), off (dismount),
+装備公開, 持ち替え装備 with its 取り消し/実行 pair and 10-second cooldown, 装備一括解除, 装備能力値.
+Image 79 has none of these controls. Two are worth recording anyway as *client idioms*: 持ち替え装備's
+**実行/取り消し** pair is another instance of the arm-then-commit grammar (M10), and its
+「※再度実行するのに10秒の再使用待機時間があります。」 attests that **a button can be on cooldown**, a
+disabled-state cause the `button` card lists as only partially verified.
+
+#### W7. `party` — パーティー · manual §12 パーティー・友達ウィンドウ · 14 controls
+
+> 「パーティーメンバーのリストと、ログイン/ログアウト情報を表示できる。ログインしているメンバーは現在位置も表示される。パーティーメンバーが同一マップ上にいる場合は、ミニマップにキャラクターのいる位置が表示される。」
+
+✅ **Directly confirmed by image 79's own contents.** Its five list rows read
+`SakumaRiri（フェイヨン..`, `Sebas*（フェイヨン...`, `ANRI（フェイヨン森）`, `Show_A（フェイヨン森..`,
+`AyanaIshizuka（フェイヨン...` — a name followed by a **parenthesised map location**. The manual explains
+exactly that: **the location is shown because the member is logged in.** A logged-out member would show
+the name without it. That is a per-row state distinction image 79 only shows one side of, now attested.
+The row also carries an HP bar (`1109/1109`, `1340/1340`, …), which §12 does **not** mention — ❌ not
+attested.
+
+**The party/friends switch.**
+
+> 「（切り替えボタン）| パーティーウィンドウと友達ウィンドウを切り替えられる。」
+
+✅ **Function attested; form differs, and the difference matters.** The manual describes a **button**
+that switches between the party window and the friends window. Image 79 implements the same switch as a
+**radio pair** — `友達` (unselected) and `パーティー` (selected) at y=750. So the two "windows" the manual
+names are ✅ **one window with two mutually exclusive modes**, which is why `Alt+Z` and `Alt+H` both land
+here (see the shortcut table). 🕘 The modern client's *control* is a button; image 79's is a radio pair
+— and a radio pair is the more honest rendering of "exactly one of two", so the older form states the
+model more clearly than the newer one.
+
+**The buttons.** Image 79 has five icon-only buttons — read as `memo`, `info`, `target`, `search`,
+`leave` — at y=719. §12's table names six functions: パーティー掲示板, パーティー設定, 機能制限設定,
+パーティー招待, パーティー脱退, ミニパーティーウィンドウの自動整列.
+
+- ✅ `leave` → 「パーティー脱退 | パーティーから脱退する。」 The only confident match.
+- ⚠️ `search` → 「パーティー招待 | 入力した名前のキャラクターをパーティーに招待する。」 Possible — invite
+  works by **typing a name**, which fits a search-shaped control — but image 79's `party` window has no
+  text field, so where the name would be typed is unclear. **Candidate only.**
+- ❌ `memo`, `info`, `target` — the manual names its buttons by *function*, image 79's are icon-only,
+  and the icon sets differ between eras. **No mapping is defensible.** Do not guess these from §12.
+
+> 「※パーティーに加入していないときは、ウィンドウに「パーティー作成」ボタンが出現します。ボタンを押してパーティー名を入力すれば、パーティーが作成できます。」
+
+✅ **A conditional control**, and a useful one: this window's button set **changes with party
+membership**. Image 79 shows the in-a-party state (five members listed). A replica needs the other one.
+
+Two more attested behaviours with no control in image 79:
+🕘 「機能制限設定 | クリックで機能制限のON、OFFを切り替えられる。右クリックメニューなど、一部の機能を制限して誤クリックを防ぐ。」 (see M8) and, from the 友達ウィンドウ table,
+「1：1会話 | リスト内の指定メンバーと1対1で会話ができる。」「消す | 登録リストから削除できる。」 — both
+belong to the 友達 mode image 79 does not show.
+
+🕘 **Modern:** パーティー掲示板 (§14), パーティー募集 (§15), and the whole recruitment system, plus
+ミニパーティーウィンドウの自動整列.
+
+**Party settings** are a separate window (§13, `Alt+P`) that image 79 does not have. Its three radio
+groups — 経験値の分配方法 (各自で取得 / 公平に分配), アイテムの収集方式 (各自で取得 / パーティー全体で共有),
+アイテムの分配方式 (各自で取得 / 一定確率で分配) — are the source of the `radio` card's "three groups"
+frame, and §13 attests 「設定できるのは、パーティーを組織したリーダーのみ。」 — ✅ **the whole window is
+read-only for non-leaders**, a permission-driven disabled state the cards do not otherwise have.
+
+#### W8. `system-menu` — システムメニュー · manual §18 オプションウィンドウ (table) · 9 controls
+
+**This window is the manual's オプションウィンドウ.** Five of image 79's seven buttons have a
+sentence-level match in §18's table:
+
+| Image 79 button | Manual row and sentence | |
+| --- | --- | --- |
+| `キャラクター選択` | **キャラクター選択** — 「キャラクター選択画面に行く。」 | ✅ exact, label and all |
+| `ゲーム終了` | **ゲームを終了する** — 「ゲームをやめる。」 | ✅ function exact; image 79's label is shorter |
+| `ショートカット` | **ショートカット設定** — 「ショートカットキーを設定できる。」 | ✅ function exact; image 79's label is shorter |
+| `サウンド設定` | **ゲーム設定** — 「グラフィックやBGMなどの設定が行える。」 | ✅ **split in image 79** — see below |
+| `環境設定` | **ゲーム設定** — 「グラフィックやBGMなどの設定が行える。」 | ✅ the other half of the same split |
+| `return to game` | **閉じる** — 「オプションウィンドウを閉じる。」 | ✅ function match, label differs — and see M2 |
+| `セーブポイントへ` | — | ❌ **no row in the manual** |
+
+**The ゲーム設定 split is a second era marker, and it corroborates the video corpus.** The modern manual
+has **one** row, ゲーム設定, covering 「グラフィックやBGMなど」. Image 79 has **two** buttons,
+`サウンド設定` and `環境設定`. And the #104 video corpus independently shows exactly that older
+arrangement — **サウンド設定 and グラフィック設定 as two separate windows** (`checkbox/01`,
+`checkbox/02`, `close/01`). Three sources agree that the modern client merged what image 79 keeps apart.
+config.html shows the merged form as a tabbed 基本設定 / 表示設定 / 操作設定 / 描画設定 / その他.
+
+❌ **`セーブポイントへ` is not attested.** The manual's option window has no such row. The *concept* is
+documented — 「戦闘不能になったり、「蝶の羽」を使用したときに戻る場所は、セーブを行なうと変更できる。」
+([operation.html](https://ragnarokonline.gungho.jp/playmanual/operation/operation.html) セーブする) —
+but a **menu button that returns you there** appears nowhere in the manual. This is image 79's window
+having a control the current client does not, and the manual cannot say what it does.
+
+✅ **`Esc` raises this window.** 「Esc | ウィンドウを閉じる／ゲーム終了などのゲームオプションウィンドウを表示する」 — the phrase 「ゲーム終了などの」 identifies it by its ゲーム終了 button, which image 79's
+`system-menu` has. Note `Esc` is attested as doing **two different things** depending on context: close
+the focused window, or, with nothing to close, raise this menu.
+
+#### W9. `storage` — 倉庫 · **no manual section** · 48 controls
+
+❌ **The manual does not document the storage window.** The 各ウィンドウについて index lists 27 windows
+and **倉庫 is not one of them**. This is the largest gap in the manual relative to image 79 — 48 controls,
+the second-largest window on screen, and it has no section, no shortcut key, and no table.
+
+**One sentence in the entire corpus mentions it**, and it is a real behavioural statement (M6):
+
+> 「**Alt+右クリック** 指定したアイテムを所持アイテムや倉庫などのウィンドウ間で移動させる」
+> — [shortcut.html](https://ragnarokonline.gungho.jp/playmanual/novice/shortcut.html)
+
+✅ **Alt+right-click moves an item between the inventory and the storage window.** Image 79 has both
+windows open at once — `inventory` (28 grid cells) and `storage` (35) — which is exactly the arrangement
+this shortcut serves.
+
+**What is not attested, and must not be borrowed from §5 アイテムウィンドウ.** It is tempting to
+transplant the item window's statements onto storage, because both are tabbed grids. **The tab sets
+prove they are different windows:**
+
+| | Tabs |
+| --- | --- |
+| Manual §5 アイテムウィンドウ | 消耗アイテム / 装備アイテム / 収集アイテム / 個人用 — **four** |
+| Image 79 `inventory` | 5 tabs (`item`, `equip`, `etc`, `etc`, `cash`) |
+| Image 79 `storage` | **six** — 消耗品 / 装備品 / **カード** / **材料** / 収集品 / その他 |
+
+Storage has カード and 材料 categories the item window does not, and その他 where the item window has
+個人用. So §5's tab sentence does not describe storage. Likewise ❌ **unattested for storage:** the
+right-click-for-detail gesture (M3 is stated for the item window only), the bottom-right resize (M4
+names only the item window and the item detail window), and image 79's footer buttons `list mode`,
+`search` ×2, `sort` and `close`. **The video corpus is the only source for this window** — and
+fortunately it is the strong one, since #115's 4 h 44 m of unedited footage is almost entirely storage
+work (the wheel scroll, the row tooltip and the row selection were all measured here).
+
+#### W10. `inventory` — 所持アイテム · manual §5 アイテムウィンドウ · 38 controls
+
+The manual's richest window section, and most of it maps.
+
+> 「キャラクターが所持しているアイテムを表示する。左側のタブをクリックすることで「消耗アイテム」、「装備アイテム」、「収集アイテム」、「個人用」を切り替えられる。」
+
+✅ **Tabs are on the left and click switches category** — image 79's five tabs sit at `x = 10`, a
+vertical strip down the left edge, which matches 「左側のタブ」 exactly. ⚠️ The **category set** does not:
+the manual's four are 消耗 / 装備 / 収集 / 個人, image 79 has five (`item`, `equip`, `etc`, `etc`, `cash`).
+🕘 The 個人 tab is modern — the manual introduces it together with NPC売却ロック and a Shift+右クリック
+gesture to file items into it, all later additions. **Take the gesture, not the category list.**
+
+Per-tab sentences, ✅ for the first three: 「消耗 | 回復アイテムなどの消費アイテムを表示する。」
+「装備 | キャラクターが装備していない装備アイテムを表示する。」 — note this one is a **filter rule**, not
+just a label: the equip tab shows only *un*equipped gear, so equipping an item removes it from this tab
+(and W6 attests the reverse). 「収集 | 収集品や貴重品など、消費アイテムに分類されないアイテムが表示される。」
+
+> 「アイテムにカーソルを合わせて右クリックすれば、アイテムの詳細が別ウィンドウで表示される。」
+
+✅ Right-click a grid cell → detail window. See M3.
+
+> 「アイテムウィンドウと、アイテムの詳細ウィンドウでは、ウィンドウの右下部分をマウスでドラッグすると、表示範囲を変えられる。」
+
+✅ **The bottom-right drag-resize, attested for this window by name.** See M4. Image 79's `inventory` is
+the one window in the frame for which resize is explicitly attested.
+
+> 「カバンアイコン | 現在のアイテム所持種類数。アイテムは100種類までしか持てないので注意しよう。」
+
+✅ A **counter with a hard cap of 100 kinds** — a display whose value has a documented limit.
+
+> 「ドロップロック | 鍵をかけておくと、アイテムをウィンドウの外にドラッグしてもアイテムをドロップしなくなる。」
+
+✅ For the gesture (M5); 🕘 for the lock control, which image 79 lacks.
+
+⚠️ **The magnifier button.** Image 79's `inventory` has an icon button at `[109, 976, 19, 20]` read as
+`search`. §5's only magnifier-icon control is
+「アイテム比較 | 拡大鏡アイコンをクリックしてONにすると、装備アイテムを右クリックした時に現在装備中のアイテムの詳細ウィンドウも一緒に表示されます。」 — a **toggle** that makes right-click open *two* detail
+windows for comparison. The icon matches; the feature is a modern one, and the minimap has an unrelated
+虫眼鏡ボタン too. **Candidate only — probably not this.** Recorded so the resemblance is on the record
+with its doubt attached.
+
+✅ **Shift+左クリック** writes the item's info to the chat window (M7). 🕘 **Shift+右クリック** files it
+into the 個人 tab — modern.
+
+#### W11. `chat-room` — チャットルーム · manual §10 **会話ウィンドウ** · 10 controls
+
+**A mapping correction first, because the title is misleading.** `window-rects.json` titles this window
+チャットルーム, which is the manual's §17 チャットウィンドウ — 「チャットルームを作成するウィンドウ。」, a
+creation dialog with Title / Limit / Sign fields. **Image 79's window is not that.** It holds five
+read-only log lines, a scrollbar, a text input and an icon button. That is the manual's **§10 会話ウィンドウ**, the conversation log. All statements below are from §10.
+
+> 「主にプレイヤー同士の会話内容が表示されるウィンドウ。ステータス変化時や、アイテム入手時の報告メッセージなども表示される。」
+
+✅ **Confirmed by image 79's own contents.** Four of its five log rows are player speech
+(`Sebas*：レイドリック終わったー`, `SakumaRiri：おつかれさま〜`, `ANRI：もう1周いきますか？`,
+`Show_A：いきましょう！`) and the fifth is `経験値が 10800 上がりました。` — a system report line. The
+manual's sentence names exactly that mix: player conversation **plus** status-change and item-acquisition
+reports in the same log. ✅ **One log, two kinds of line**, and the `text field + send` card's finding
+that lines are **coloured by scope** is the rendering that keeps them apart.
+
+> 「下段右側の空欄にメッセージを入れ、Enterキーを押すと、同一画面内の全プレイヤーにメッセージを送信する（送信先の指定も可能）。」
+
+✅ **Enter-to-send, attested.** Three things in one sentence, all mapping to image 79's input field at
+`[1044, 978, 458, 21]` (state: `empty, caret at left`):
+
+1. The input is at the **bottom right** of the window — image 79's is.
+2. **Enter sends.** This is the manual's statement of the gesture #115 measured frame by frame
+   (field clears in 1 frame, log line appended 100 ms later). Manual and video agree on the gesture;
+   only the video has the timing.
+3. The **default scope is everyone on the same screen**, and the target is selectable
+   (「送信先の指定も可能」). The video corpus confirms the selector's contents
+   (全体に送る / パーティーに送る / ギルドに送る).
+
+**Send scope from the keyboard**, all from shortcut.html and all ✅ for image 79's input field:
+
+| | |
+| --- | --- |
+| 「**Ctrl+Enter** オープンチャット時に発言がパーティーメッセージになる」 | → party |
+| 「**Alt+Enter** オープンチャット時に発言がギルドメッセージになる」 | → guild |
+| 「**Shift+Enter** オープンチャット時に発言が同盟ギルドメッセージになる」 | → allied guild |
+
+A **modifier on the send key overrides the scope for one message** — a behaviour the video corpus does
+not cover at all, and one that pairs with the scope dropdown rather than replacing it. Note the
+precondition 「オープンチャット時」: these apply while the input bar is open.
+
+> 「（入力欄）| コマンドを入力したり、会話の内容を入力できる。」
+
+✅ **The same field takes chat text and slash commands.** The manual uses this throughout — 「/where」
+(§8), 「/minimap」 (§7), 「/agency」 (§14) — so the input is a dual-purpose field, and a replica that
+treats it as chat-only is missing half its job.
+
+**F10 — and the two pages disagree, so both are recorded.**
+
+> 「F10キー | 表示する行を増やせる。」 — window.html §10
+
+> 「**F10** 会話ウィンドウの大きさを変更する」 — shortcut.html
+
+⚠️ §10 says F10 **increases the number of displayed rows**; shortcut.html says it **changes the window's
+size**. These are compatible (more rows = a taller window) but not identical, and §10's 増やせる implies a
+one-way cycle while shortcut.html's 変更する does not. **The row count is the attested quantity; whether
+it wraps back to the smallest is not stated.** Image 79 shows **five** log rows — one point on whatever
+that cycle is. ✅ Separately, 「**Alt+F10** 会話ウィンドウの表示/非表示の切り替え」 toggles the whole window.
+
+🕘 **Modern — the entire tab strip.** 「＋ | 会話ウィンドウのタブを増やせる。」「- | 会話ウィンドウのタブを減らせる。」「>> | 会話ウィンドウのタブを分離できる。」「◎ | タブに表示する情報を選択できる。」
+「鍵 | ウィンドウの位置を固定できる。」 **Image 79's `chat-room` has no tabs and no such control strip** —
+it has a single icon button at `[1505, 978, 21, 21]` beside the input. The five-control row is the modern
+client's. Two of them are worth recording as *concepts* even so: **>> detaches a tab into its own
+window**, and **鍵 pins a window's position** — a lock that would directly answer the `window title drag`
+card's question of whether windows can be prevented from moving. Neither is attested for image 79.
+
+⚠️ Image 79's single icon button is a **candidate** for §10's 「（送信先）| どこに送るか選択できる。」 (the
+send-scope selector, which the video corpus confirms exists in this era) or for
+「（耳打ちリスト）| 耳打ちリストから話す相手を選べる。」 (the whisper-target list). **The manual cannot
+distinguish them**, and the inventory's guess of `chat settings` is a third possibility.
+
+🕘 **§17 チャットウィンドウ** — the room-creation dialog with Title / Limit / Sign and a public/private
+radio pair — is a **separate window** image 79 does not show, though the `radio` and `dropdown` cards
+both draw evidence from it in the video corpus. Its one non-obvious rule:
+「チャットルームの作成には、ノービスの「基本スキル」Lv4以上が必要となる。」 — ✅ another **skill-gated
+control**, like Insert/sitting.
+
+---
+
+### What the manual does not cover
+
+Stated plainly, because a coverage table's blanks are as useful as its ticks.
+
+**Two of image 79's eleven windows have no manual section at all:**
+
+1. **`storage` (倉庫)** — 48 controls, six tabs, four footer buttons. Not in the 27-window index, no
+   shortcut key, no table. One shortcut sentence mentions the word 倉庫 (M6) and that is the whole of it.
+2. **`equipment-card` (装備カード)** — 4 controls. Not in the index under any name; nothing anywhere
+   refers to it.
+
+**Whole categories the manual never addresses, for any window:**
+
+- **Timing.** Not one duration, frame count, easing or transition anywhere in four pages. Every timing
+  in this document is video-observed, and always will be. The single exception is a *cooldown*
+  (持ち替え装備's 10 seconds), which is a game rule, not a UI transition.
+- **Hover, pressed and disabled states.** The manual describes what controls *do*, never what they
+  *look like* while you interact with them. It never mentions a hover state, a pressed state, a
+  highlight, or a disabled rendering. The one adjacent statement (M11) is about setup.exe.
+- **The title bar.** No statement about dragging a window by its title bar, about z-order, snapping,
+  clamping, or where a window opens. The `window title drag` card gains **nothing** from the manual
+  except the 鍵 pin concept (modern, chat window only) and the resize grip's purpose (M4).
+- **Scrollbars.** Not one sentence. No thumb drag, no arrow step, no wheel. #115's two open gestures
+  stay open.
+- **Hold-to-repeat**, on any stepper or arrow, anywhere.
+- **Sound.** No statement that any control makes a sound when clicked or hovered (the video corpus has
+  `button/01-menu-hover-sound.png`).
+- **Window open/close animation or position memory.** Nothing on whether a window reopens where it was,
+  which #115 inferred from streamers' fixed layouts.
+
+**And one asymmetry worth naming.** The manual is at its most detailed exactly where the video corpus is
+thinnest — cross-window gestures (M5, M6, M7, W6's drag-to-equip), conditional and permission-gated
+controls (W7's パーティー作成, §13's leader-only settings, §17's skill gate), and what a mode *means*
+(W2's tree/list, W5's mute-without-changing-volume). Those are things a player does rarely and a
+streamer never does on camera. It is silent exactly where the video corpus is strong. Neither source
+would have produced this document alone.
+
 ## Coverage summary
 
-| Control | Idle | Hover in source | Pressed | Selected / active | Transition timing | Gesture → action |
-| --- | --- | --- | --- | --- | --- | --- |
-| button | ✅ | ✅ **yes, 1 frame @60 fps** | ✅ **yes — third sprite, held ~150–200 ms** | ✅ | ✅ **1 frame, cut-verified ×5** | ✅ **click → action measured** |
-| checkbox | ✅ | ❌ unverified | ❌ unverified | ✅ both states | ❌ unverified | ⚠️ inferred |
-| radio | ✅ | ❌ unverified | ❌ unverified | ✅ both states | ❌ unverified | ⚠️ inferred |
-| tab | ✅ | ❌ unverified | ❌ unverified | ✅ full set | ❌ unverified | ⚠️ inferred |
-| stepper | ✅ | ✅ **yes — pink cell frame** | ✅ **yes — icon darkens while held** | n/a | ✅ **1 frame, cut-verified** | ✅ **one click = one point, pending; cancel discards** |
-| slider | ✅ + end clamp | ❌ unverified | ❌ unverified | n/a | ❌ unverified | ❌ unverified |
-| scrollbar | ✅ + thumb sizing | ❌ unverified | ❌ unverified | n/a | ✅ **wheel = 1 frame @60 fps, ×40** | ⚠️ **wheel ✅ (3 rows/notch, clamped); drag ❌; arrow ❌** |
-| dropdown | ✅ | ✅ **yes, 1 frame** | ✅ arrow inset while open | ✅ | ✅ **1 frame, cut-verified ×4** | ✅ |
-| list / grid selection | ✅ | ✅ **yes** (both kinds) | ❌ unverified | ✅ | ❌ unverified (cut) | ✅ states only |
-| window title drag | ✅ | ❌ unverified | ❌ unverified | n/a | ❌ unverified | ❌ unverified |
-| minimize / restore | ✅ | ❌ unverified | ❌ unverified | ✅ both panel states | ❌ unverified | ❌ unverified |
-| close | ✅ | ❌ unverified | n/a | n/a | ⚠️ open = 1 frame (verified); close not measured | ❌ gesture unverified |
-| text field + send | ✅ + caret + masked + disabled | ❌ unverified | n/a | ✅ | ✅ **clear 1 frame; log +100 ms** | ✅ **send measured** |
+The first six columns are **video-observed** (#104, #115) and are unchanged. The last column is the new
+**manual-attested** class (#117) — the publisher's own statement of what the control is *for*. It never
+carries timing or form; see `## Manual-attested behaviour` for every sentence and its mapping.
 
-**#104's five gaps, and where they stand after #115**
+| Control | Idle | Hover in source | Pressed | Selected / active | Transition timing | Gesture → action | **Manual-attested (#117)** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| button | ✅ | ✅ **yes, 1 frame @60 fps** | ✅ **yes — third sprite, held ~150–200 ms** | ✅ | ✅ **1 frame, cut-verified ×5** | ✅ **click → action measured** | ✅ **purpose of all 8 `basic-info` + 6 of 7 `system-menu` buttons, one sentence each**; a button can be on **cooldown** (10 s). ❌ nothing on hover/pressed/timing; ❌ nothing on the `selected` marking image 79 shows |
+| checkbox | ✅ | ❌ unverified | ❌ unverified | ✅ both states | ❌ unverified | ⚠️ inferred | ✅ **the `on` box mutes 「音量設定を変えずに」 — independent of its slider**; drop-lock; 機能制限 ON/OFF; a checkbox whose effect fires on *another* control's click (trade screenshot) |
+| radio | ✅ | ❌ unverified | ❌ unverified | ✅ both states | ❌ unverified | ⚠️ inferred | ✅ **party/friends is one window in two exclusive modes**; §13's three groups are **leader-only** (permission-gated disabled state) |
+| tab | ✅ | ❌ unverified | ❌ unverified | ✅ full set | ❌ unverified | ⚠️ inferred | ✅ **click switches category; the item window's strip is on the left**; the equip tab is a **filter rule** (unequipped only). ⚠️ category sets differ between eras and between `inventory` and `storage` |
+| stepper | ✅ | ✅ **yes — pink cell frame** | ✅ **yes — icon darkens while held** | n/a | ✅ **1 frame, cut-verified** | ✅ **one click = one point, pending; cancel discards** | ✅ **skill points are the currency; 未習得 skills render grey**; base stats have a **cap**, a candidate reason a raise arrow is absent. ❌ still nothing on hold-to-repeat |
+| slider | ✅ + end clamp | ❌ unverified | ❌ unverified | n/a | ❌ unverified | ❌ unverified | ✅ **BGM and Effect named as this window's two sliders**; muting does not move the thumb. ❌ no gesture, no range, no step |
+| scrollbar | ✅ + thumb sizing | ❌ unverified | ❌ unverified | n/a | ✅ **wheel = 1 frame @60 fps, ×40** | ⚠️ **wheel ✅ (3 rows/notch, clamped); drag ❌; arrow ❌** | ❌ **nothing whatsoever.** Not one sentence about a scrollbar in four pages — thumb drag and arrow step stay exactly as open as #115 left them |
+| dropdown | ✅ | ✅ **yes, 1 frame** | ✅ arrow inset while open | ✅ | ✅ **1 frame, cut-verified ×4** | ✅ | ✅ **Skin's scope is 「ゲーム内のウィンドウ」 — all of them**, corroborating the 1-frame whole-UI reskin; **the option list is populated from a folder on disk**, not fixed |
+| list / grid selection | ✅ | ✅ **yes** (both kinds) | ❌ unverified | ✅ | ❌ unverified (cut) | ✅ states only | ✅ **right-click → detail window** (stated twice); **double-click equips**; **drag out of the window = drop on the ground**; **Alt+right-click moves an item between windows**; **Shift+left-click writes it to chat**; a party row shows a location **because the member is logged in** |
+| window title drag | ✅ | ❌ unverified | ❌ unverified | n/a | ❌ unverified | ❌ unverified | ✅ **the bottom-right corner drag-resizes** — the gesture for the grip #104 had only *seen* (item window + item detail window, by name). ❌ still nothing on title-bar drag, z-order, snapping or position memory. 🕘 a **鍵 pin** exists in the modern chat window |
+| minimize / restore | ✅ | ❌ unverified | ❌ unverified | ✅ both panel states | ❌ unverified | ❌ unverified | ✅ **the biggest single gain: `⊖` is a two-state 最大化／最小化 toggle on the top-right button, reversible by itself** — the card's central "unverified" is now answered *semantically*. ❌ timing, minimized form and glyph change all still unverified |
+| close | ✅ | ❌ unverified | n/a | n/a | ⚠️ open = 1 frame (verified); close not measured | ❌ gesture unverified | ✅ **a gesture at last: `Esc` closes the focused window; `F11` closes every window except 基本情報.** That also explains why image 79's `basic-info` and `system-menu` carry no `✕` (M2). ❌ timing still not measured |
+| text field + send | ✅ + caret + masked + disabled | ❌ unverified | n/a | ✅ | ✅ **clear 1 frame; log +100 ms** | ✅ **send measured** | ✅ **Enter sends; the default scope is everyone on the same screen**; **Ctrl / Alt / Shift + Enter override the scope for one message**; the field takes **slash commands** as well as speech; `Tab` moves between input fields; `F10` changes the log's row count |
+
+**Manual coverage of image 79's eleven windows**
+
+| Window | Manual section | Verdict |
+| --- | --- | --- |
+| `basic-info` | §1 基本ウィンドウ | ✅ **Best-covered window.** Purpose, the ⊖ toggle, all 4 meters and all 8 buttons attested one sentence each. 13 modern buttons and the AP meter excluded. |
+| `skill-tree` | §3 スキルウィンドウ | ✅ Purpose, the grey 未習得 rendering, right-click detail, the skill-point counter. ⚠️ tree/list toggle attested but image 79's control is `View`, not `[－]`. 🕘 job-tab strip is modern — image 79 has none. ❌ 説明表示 checkbox and the `use`/`close` footer. |
+| `equipment-card` | **none** | ❌ **Not in the manual's 27-window index under any name.** Nothing attested. |
+| `status` | §2 ステータスウィンドウ | ✅ The two-column raisable/derived model and Status Point. ⚠️ the stat cap as a candidate reason Int has no stepper. 🕘 the whole 特性ステータス block. ❌ image 79's vertical tab. |
+| `options` | §18 **lead sentence** + config.html | ✅ 「BGMやEffectなどのオプションを設定できる。」 is exact; mute-without-changing-volume; the Skin dropdown's scope and folder-backed list. ⚠️ **§18's button table is NOT this window — it is `system-menu`.** ❌ the four attack/skill/item/option checkboxes. |
+| `equipment-items` | §4 装備ウィンドウ | ✅ Drag-to-equip, double-click-to-equip, automatic displacement back to the item window; the 一般装備 tab. ⚠️ image 79's second tab is 衣装装備, the manual's is 補助装備 (predates shadow gear). ❌ the `items` button (the manual's `item` row is the cart button, and this character has no cart). |
+| `party` | §12 パーティー・友達ウィンドウ | ✅ The member list, **location shown because logged in**, the party/friends switch as one window in two modes, `leave`. ⚠️ `search` → パーティー招待 only. ❌ `memo`, `info`, `target`; ❌ the per-row HP bar. |
+| `system-menu` | §18 **table** オプションウィンドウ | ✅ 6 of 7 buttons matched sentence-for-sentence; `Esc` raises it; its footer button is the manual's 閉じる. ✅ image 79 splits ゲーム設定 into サウンド設定 + 環境設定, which the video corpus independently confirms. ❌ `セーブポイントへ` has no row. |
+| `storage` | **none** | ❌ **Not in the index.** 48 controls, no section, no key. One sentence in four pages mentions 倉庫: Alt+right-click moves items between it and the inventory. Its six tabs differ from the item window's, so §5 must **not** be transplanted. |
+| `inventory` | §5 アイテムウィンドウ | ✅ **Richest section.** Left tab strip, per-tab filter rules, right-click detail, **bottom-right drag-resize by name**, the 100-kind cap, drag-out-to-drop, Shift+left-click to chat. ⚠️ the magnifier button (アイテム比較 is modern). 🕘 the 個人 tab. |
+| `chat-room` | §10 **会話ウィンドウ** | ✅ **Note the correction: this is §10, not §17.** The mixed player/system log, Enter-to-send with same-screen default scope, modifier+Enter scope overrides, slash commands, F10 row count, Alt+F10 toggle. ⚠️ two pages disagree on what F10 does. 🕘 the entire +/-/>>/◎/鍵 tab strip. ⚠️ the single icon button is unidentifiable. |
+
+**Nine of eleven windows are covered; two are not covered at all.** The two uncovered ones —
+`equipment-card` and `storage` — are also the only two with no keyboard shortcut in the manual.
+
+**#104's five gaps, and where they stand after #115 and #117**
+
+| # | Gap | Status after #115 (video) | What #117 (manual) adds |
+| --- | --- | --- | --- |
+| 1 | A scrollbar being driven | ⚠️ **Partly closed.** The **wheel** is measured — 3 rows per notch, one frame, clamped at the ends. **Thumb drag and arrow step are still open.** | ❌ **Nothing.** The manual contains no sentence about a scrollbar. |
+| 2 | A window being dragged | ❌ **Still open.** No title-bar drag exists in any footage searched. | ⚠️ **A neighbouring gesture closes instead.** The bottom-right **resize** drag is now attested with its effect (M4). The **title-bar** drag is not mentioned anywhere. 🕘 The modern chat window has a 鍵 that pins a window's position — evidence the client models "movable" as a togglable property. |
+| 3 | A chat message typed and sent | ✅ **Closed.** Field-clear and log-append measured as two cut-verified one-frame events 100 ms apart. | ✅ **Widened.** Enter-to-send confirmed in prose, plus the default scope (everyone on the same screen), three modifier+Enter scope overrides, and the field's dual role as a command line. |
+| 4 | A skill stepper arrow clicked | ✅ **Closed.** One click = one pending point; the counter, the red digit and the window-wide arrow hide all land in one cut-verified frame; `cancel` on 確定 discards. **Hold-to-repeat is the one part still open.** | ⚠️ Adds the **grey 未習得 rendering** and the **stat cap** as a second reason an arrow can be absent. ❌ Hold-to-repeat still unmentioned. |
+| 5 | A button held long enough to show a pressed sprite | ✅ **Closed twice over** — the dialog OK button (5 presses, 117–200 ms) and, independently, the skill cell's darkening icon. | n/a — the manual never describes an interaction state. |
+
+**A sixth gap, opened and closed by #117 itself**
 
 | # | Gap | Status |
 | --- | --- | --- |
-| 1 | A scrollbar being driven | ⚠️ **Partly closed.** The **wheel** is measured — 3 rows per notch, one frame, clamped at the ends. **Thumb drag and arrow step are still open.** |
-| 2 | A window being dragged | ❌ **Still open.** No title-bar drag exists in any footage searched. |
-| 3 | A chat message typed and sent | ✅ **Closed.** Field-clear and log-append measured as two cut-verified one-frame events 100 ms apart. |
-| 4 | A skill stepper arrow clicked | ✅ **Closed.** One click = one pending point; the counter, the red digit and the window-wide arrow hide all land in one cut-verified frame; `cancel` on 確定 discards. **Hold-to-repeat is the one part still open.** |
-| 5 | A button held long enough to show a pressed sprite | ✅ **Closed twice over** — the dialog OK button (5 presses, 117–200 ms) and, independently, the skill cell's darkening icon. |
+| 6 | What `⊖` actually does | ✅ **Closed semantically.** 「ウィンドウ右上のボタンで、最大化／最小化の切り替えも可能だ。」 — a reversible two-state toggle on the top-right button (M1). ⚠️ Its **timing, its minimized form and whether the glyph changes remain unverified**, and only video can settle those. |
 
 **What is left, and how to get it**
 
@@ -582,3 +1444,16 @@ are specified **from intent**, with roBrowser's *metrics* (13 px bar, 6 px minim
 magnet, no clamping, 500 ms release fade) as the only secondary — and with roBrowser explicitly **not**
 treated as evidence for gesture behaviour, since #115 has now caught it being wrong once already: it
 hard-codes one row per wheel notch, and the real client moves three.
+
+**#117 changes that position in one respect and confirms it in another.** It confirms it for the
+scrollbar: the manual has nothing, so thumb drag and arrow step really are intent-specified and no
+further reading will change that. It changes it for **purpose**: a large class of things the replica has
+to get right — what a button opens, what a mode means, which key reaches which window, what a gesture is
+*for* — is now **manual-attested** rather than intent-specified, and does not need to be invented. The
+division of labour that falls out is worth stating once, plainly:
+
+| Question | Ask |
+| --- | --- |
+| *What does this control do?* | the **manual** — it answers for 9 of image 79's 11 windows |
+| *How does it look and how long does it take?* | the **video corpus** — the manual answers neither, ever |
+| *What about `storage`, `equipment-card`, scrollbar gestures, and window drag?* | **intent**, and the video corpus where it reaches — the manual is silent on all four |
