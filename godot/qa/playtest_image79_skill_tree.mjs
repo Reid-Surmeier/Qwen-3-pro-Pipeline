@@ -67,11 +67,13 @@ const checks = [];
 const actions = [];
 const check = (name, passed, detail) => checks.push({ name, passed, detail });
 const record = (controlId, gesture, windowAction, expected, observed, assertions,
-  actionFrames = {}) => {
+  actionFrames = {}, motionSamples = undefined) => {
   const matches = Object.values(assertions).every(Boolean);
-  actions.push({ control_id: controlId, gesture, window_action: windowAction,
+  const action = { control_id: controlId, gesture, window_action: windowAction,
     expected, observed, responsive: matches, matches_expected: matches,
-    assertions, frames: actionFrames });
+    assertions, frames: actionFrames };
+  if (motionSamples !== undefined) action.motion_samples = motionSamples;
+  actions.push(action);
   check(`${controlId}:${gesture}:${windowAction}`, matches, assertions);
 };
 const click = async (x, y, button = "left") => {
@@ -96,22 +98,24 @@ check("idle-factual-state", initial.window.pending === false
 
 await click(757, 87);
 const selected = await control("skill_tree.skills");
+const selectedFrame = await shot("01-selected");
 record("skill_tree.skills", "Activate", "SelectSkill",
   "left click selects r1c3", JSON.stringify(selected), {
     selected: selected.value === "r1c3",
     gesture_distinct: selected.last_gesture === "Activate",
     action_routed: selected.last_action === "SelectSkill",
-  }, { after: await shot("01-selected") });
+  }, { before: idle, after: selectedFrame });
 
 await click(757, 87, "right");
 const detailed = await control("skill_tree.skills");
 const detailedWindow = (await skillTree()).window;
+const detailedFrame = await shot("02-context-detail");
 record("skill_tree.skills", "ContextActivate", "OpenSkillDetail",
   "right click opens the selected skill detail", JSON.stringify(detailed), {
     context_gesture: detailed.last_gesture === "ContextActivate",
     action_routed: detailed.last_action === "OpenSkillDetail",
     detail_visible: detailed.detail_visible && detailedWindow.detail_item === "r1c3",
-  }, { after: await shot("02-context-detail") });
+  }, { before: selectedFrame, after: detailedFrame });
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT,
   "godot/data/image-79-control-spec.json"), "utf8"));
@@ -119,6 +123,7 @@ const windowSpec = manifest.windows.find((entry) => entry.id === "skill_tree");
 const stepperSpecs = windowSpec.controls.filter((entry) => entry.type === "Stepper");
 for (const [index, spec] of stepperSpecs.entries()) {
   const before = await control(spec.id);
+  const beforeFrame = await shot(`03-${String(index).padStart(2, "0")}-${spec.id}-before`);
   const direction = before.target < before.maximum ? 1 : -1;
   const x = before.geometry.x + (direction > 0 ? before.geometry.width - 4 : 4);
   const y = before.geometry.y + before.geometry.height / 2;
@@ -128,14 +133,14 @@ for (const [index, spec] of stepperSpecs.entries()) {
   const allHidden = Object.values(pending.controls)
     .filter((entry) => entry.type === "Stepper")
     .every((entry) => entry.arrows_visible === false);
-  const actionFrames = index === 0 ? { after: await shot("03-stepper-pending") } : {};
+  const afterFrame = await shot(`03-${String(index).padStart(2, "0")}-${spec.id}-after`);
   record(spec.id, "Activate", "StepSkill", "one arrow step starts one Window transaction",
     `${before.text} -> ${after.text}`, {
       target_changed: after.target === before.target + direction * before.step,
       pending_same_frame: pending.window.pending && after.pending,
       all_arrows_hidden: allHidden,
       live_current_target_text: after.text === `${after.current} / ${after.target}`,
-    }, actionFrames);
+    }, { before: beforeFrame, after: afterFrame });
   await click(1046, 569);
   const cancelled = await skillTree();
   check(`${spec.id}:cancel-reset`, !cancelled.window.pending
@@ -148,8 +153,10 @@ const commitBefore = await control(commitId);
 await click(commitBefore.geometry.x + commitBefore.geometry.width - 4,
   commitBefore.geometry.y + commitBefore.geometry.height / 2);
 const preCommit = await control(commitId);
+const commitPendingFrame = await shot("04-commit-before");
 await click(957, 569);
 const committed = await skillTree();
+const committedFrame = await shot("04-committed");
 record("skill_tree.use", "Activate", "CommitSkillChanges",
   "Use commits every pending target and restores all arrows",
   JSON.stringify(committed.controls[commitId]), {
@@ -158,51 +165,66 @@ record("skill_tree.use", "Activate", "CommitSkillChanges",
     arrows_restored: Object.values(committed.controls)
       .filter((entry) => entry.type === "Stepper")
       .every((entry) => entry.arrows_visible),
-  }, { after: await shot("04-committed") });
+  }, { before: commitPendingFrame, after: committedFrame });
 
 const cancelBefore = await control(commitId);
 await click(cancelBefore.geometry.x + cancelBefore.geometry.width - 4,
   cancelBefore.geometry.y + cancelBefore.geometry.height / 2);
+const cancelPendingFrame = await shot("05-cancel-before");
 await click(1046, 569);
 const cancelled = await skillTree();
+const cancelledFrame = await shot("05-cancelled");
 record("skill_tree.cancel", "Activate", "CancelSkillChanges",
   "Cancel discards every pending target and restores all arrows",
   JSON.stringify(cancelled.controls[commitId]), {
     target_restored: cancelled.controls[commitId].target === cancelBefore.current,
     transaction_cleared: !cancelled.window.pending,
     arrows_restored: cancelled.controls[commitId].arrows_visible,
-  }, { after: await shot("05-cancelled") });
+  }, { before: cancelPendingFrame, after: cancelledFrame });
 
 await click(1048, 15);
 const list = await skillTree();
 record("skill_tree.view", "Activate", "ToggleSkillView",
   "View changes the reversible tree/list presentation", JSON.stringify(list.window), {
     list_mode: list.window.view_mode === "list" && list.controls["skill_tree.skills"].list_mode,
-  }, { after: await shot("06-list-view") });
+  }, { before: cancelledFrame, after: await shot("06-list-view") });
 await click(1048, 15);
 const tree = await skillTree();
 check("skill-tree-view-reversible", tree.window.view_mode === "tree"
   && !tree.controls["skill_tree.skills"].list_mode, tree.window);
-await shot("07-tree-restored");
+const treeRestoredFrame = await shot("07-tree-restored");
 
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
 const descriptionBefore = await control("skill_tree.descriptions");
+const descriptionBeforeFrame = await shot("08-descriptions-before");
 await click(758, 19);
 const descriptionAfter = await control("skill_tree.descriptions");
+const descriptionAfterFrame = await shot("08-descriptions-on");
+await click(758, 19);
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
+const descriptionReversedFrame = await shot("08-descriptions-reversed");
 record("skill_tree.descriptions", "Activate", "ToggleValue",
   "description checkbox toggles and is reversible", JSON.stringify(descriptionAfter), {
     toggled: descriptionAfter.semantic_state !== descriptionBefore.semantic_state,
-  }, { after: await shot("08-descriptions-on") });
-await click(758, 19);
+  }, { before: descriptionBeforeFrame, after: descriptionAfterFrame,
+    reversed: descriptionReversedFrame });
 check("skill-tree-descriptions-reversible",
   (await control("skill_tree.descriptions")).semantic_state === descriptionBefore.semantic_state,
   await control("skill_tree.descriptions"));
 
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
 const minimizeBefore = await shot("09-minimize-before");
 await click(503, 12);
 const minimized = (await skillTree()).window;
 const minimizeAfter = await shot("09-minimized");
 await click(503, 12);
 const restored = (await skillTree()).window;
+await page.mouse.move(0, 0);
+await page.waitForTimeout(20);
+const minimizeRestoredFrame = await shot("10-minimize-restored");
 record("skill_tree.minimize", "Activate", "ToggleMinimized",
   "swap to a purpose-built title strip and restore the full Window",
   JSON.stringify({ minimized, restored }), {
@@ -211,33 +233,37 @@ record("skill_tree.minimize", "Activate", "ToggleMinimized",
     position_preserved: minimized.position[0] === restored.position[0]
       && minimized.position[1] === restored.position[1],
   }, { before: minimizeBefore, after: minimizeAfter,
-    restored: await shot("10-minimize-restored") });
+    restored: minimizeRestoredFrame });
 
 const title = point(620, 14);
 const dragBefore = await shot("11-drag-before");
 await page.mouse.move(title.x, title.y);
 await page.mouse.down();
 const positionSamples = [];
-for (let index = 0; index < 21; index += 1) {
-  const t = index / 20;
+let dragMid;
+for (let index = 0; index < 31; index += 1) {
+  const t = index / 30;
   await page.mouse.move(title.x + 50 * t, title.y + 65 * t);
   await page.waitForTimeout(15);
-  positionSamples.push((await skillTree()).window.position);
+  positionSamples.push((await skillTree()).window.position[0]);
+  if (index === 15) dragMid = await shot("11-drag-mid");
 }
 await page.mouse.up();
 const moved = (await skillTree()).window;
+const dragAfter = await shot("11-drag-after");
 record("skill_tree", "Drag", "MoveWindow", "Window follows continuous pointer motion",
   JSON.stringify(moved.position), {
-    continuous_samples: positionSamples.length === 21,
+    continuous_samples: positionSamples.length === 31,
     pointer_delta_applied: Math.abs(moved.position[0] - 542) < 1
       && Math.abs(moved.position[1] - 65) < 1,
-  }, { before: dragBefore, after: await shot("11-drag-after") });
+  }, { before: dragBefore, mid: dragMid, after: dragAfter }, positionSamples);
 
 await click(moved.position[0] + 598, moved.position[1] + 15);
 const closed = (await skillTree()).window;
+const closedFrame = await shot("12-closed");
 record("skill_tree.close", "Activate", "CloseWindow", "close hides in one frame",
   JSON.stringify(closed), { hidden: closed.visible === false },
-  { after: await shot("12-closed") });
+  { before: dragAfter, after: closedFrame });
 
 const manifestActions = windowSpec.controls.flatMap((entry) =>
   entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`));
