@@ -23,6 +23,7 @@ DATA_SOURCE = REFERENCE_DIR / "data-sort-dropdown.png"
 RAW_RUN = ROOT / "artifacts/runs/custom-filters-ro-render-v001"
 DEFAULT_OUTPUT = ROOT / "artifacts/runs/custom-filters-ro-assembly-v001"
 FONT = ROOT / "godot/fonts/PixelMplus10-Regular.ttf"
+FONT_SHA256 = "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
 
 NATIVE_SIZE = (272, 126)
 OPEN_SIZE = (272, 196)
@@ -312,6 +313,8 @@ def main() -> int:
     style_path = args.style_source.resolve()
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
+    if sha256(FONT) != FONT_SHA256:
+        raise RuntimeError("pinned PixelMplus font hash does not match")
     source = Image.open(style_path).convert("RGBA")
     closed, permitted = assemble_closed(source)
     open_state = assemble_open(closed)
@@ -353,6 +356,8 @@ def main() -> int:
         "data_source": repo_path(DATA_SOURCE),
         "data_source_sha256": sha256(DATA_SOURCE),
         "data_source_usage": "strings and order only; assembler never opens this image",
+        "font": repo_path(FONT),
+        "font_sha256": FONT_SHA256,
         "qwen_candidates_usage": "diagnostic evidence only; assembler never opens them until contact-sheet rendering",
         "closed_native_sha256": sha256(closed_native),
         "open_native_sha256": sha256(open_native),
@@ -386,6 +391,10 @@ def main() -> int:
         "sources": {
             "style": repo_path(style_path),
             "data_only": repo_path(DATA_SOURCE),
+        },
+        "font": {
+            "path": repo_path(FONT),
+            "sha256": FONT_SHA256,
         },
         "outputs": {
             "closed_native": repo_path(closed_native),

@@ -5,6 +5,10 @@
     "style": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
     "data_only": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png"
   },
+  "font": {
+    "path": "godot/fonts/PixelMplus10-Regular.ttf",
+    "sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
+  },
   "outputs": {
     "closed_native": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed-native.png",
     "closed_review": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png",

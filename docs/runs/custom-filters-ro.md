@@ -65,7 +65,9 @@ The page and sort controls reuse the source dropdown-arrow sprite exactly. The
 On and Off controls reuse the source selected and unselected radio sprites
 exactly. English copy uses the repository-pinned PixelMplus font at its native
 10-pixel grid so glyphs do not collapse at the unsupported 8-pixel size used in
-the rejected first Assembly render.
+the rejected first Assembly render. The pinned file is
+`godot/fonts/PixelMplus10-Regular.ttf`, SHA-256
+`01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7`.
 
 Machine verification records:
 

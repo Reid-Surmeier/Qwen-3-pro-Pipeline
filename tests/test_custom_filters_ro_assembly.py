@@ -66,6 +66,13 @@ class CustomFiltersRoAssemblyTests(unittest.TestCase):
             ),
         )
 
+    def test_body_font_provenance_is_pinned(self) -> None:
+        self.assertEqual(
+            assembly.FONT_SHA256,
+            "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7",
+        )
+        self.assertEqual(assembly.sha256(assembly.FONT), assembly.FONT_SHA256)
+
     def test_source_dropdown_and_radio_chrome_are_reused(self) -> None:
         arrow = self.baseline.crop(assembly.SOURCE_ARROW_BOX)
         self.assertEqual(

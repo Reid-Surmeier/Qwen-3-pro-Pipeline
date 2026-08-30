@@ -6,6 +6,8 @@
   "data_source": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
   "data_source_sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
   "data_source_usage": "strings and order only; assembler never opens this image",
+  "font": "godot/fonts/PixelMplus10-Regular.ttf",
+  "font_sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7",
   "qwen_candidates_usage": "diagnostic evidence only; assembler never opens them until contact-sheet rendering",
   "closed_native_sha256": "ccb1d9aca89d4e1736a58f5b8dc6ead148e8414dd9f0e890c509f6bf0c493e26",
   "open_native_sha256": "7a7270c725f3f527c388aef87a6666ece6ae289e4be13522d6bab60bb08ca42c",
