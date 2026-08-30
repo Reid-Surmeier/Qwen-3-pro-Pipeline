@@ -60,3 +60,29 @@ def test_segment_never_returns_empty() -> None:
     """A span narrower than one frame still owns a frame; a state with no pixels is
     a worse failure than a state with one."""
     assert len(_segment(list(range(3)), (0.4, 0.45))) >= 1
+
+
+def test_mask_fill_ratio_separates_a_panel_from_a_silhouette() -> None:
+    """A guard born of a real failure: an Anchor on an opaque panel makes every
+    silhouette metric meaningless, because the mask becomes the panel. The overall
+    matte fraction cannot see this — a small panel in a large matte field still
+    leaves most of the frame as background — so the test is shape, not area."""
+    from PIL import Image
+
+    from seedance_icons.retro import MAX_ANCHOR_MASK_FILL, mask_fill_ratio
+
+    matte = (0, 255, 0)
+
+    panel = Image.new("RGB", (40, 40), matte)
+    panel.paste(Image.new("RGB", (16, 16), (254, 254, 253)), (12, 12))
+    assert mask_fill_ratio(panel, matte) == 1.0
+    assert mask_fill_ratio(panel, matte) > MAX_ANCHOR_MASK_FILL
+
+    # a diagonal, the crudest possible real silhouette
+    icon = Image.new("RGB", (40, 40), matte)
+    for i in range(16):
+        icon.putpixel((12 + i, 12 + i), (0, 0, 0))
+    assert mask_fill_ratio(icon, matte) < 0.2
+
+    empty = Image.new("RGB", (10, 10), matte)
+    assert mask_fill_ratio(empty, matte) == 0.0

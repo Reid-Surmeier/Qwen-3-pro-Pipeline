@@ -56,6 +56,34 @@ def _mask(frame: Image.Image, matte: tuple[int, int, int]) -> list[bool]:
     ]
 
 
+
+def mask_fill_ratio(image: Image.Image, matte: tuple[int, int, int]) -> float:
+    """How completely the non-matte pixels fill their own bounding box.
+
+    Why this is checked, and why the obvious check does not work: `silhouette_iou`
+    compares the *non-matte mask*. If an Anchor carries the icon on an opaque panel,
+    the mask is that panel — a rectangle that never moves — so the IoU reads 1.0 no
+    matter what the icon does inside it. A run then certifies with states visibly
+    redrawn. Observed on the first four-state take, 2026-08-30.
+
+    Measuring the overall matte fraction misses it, because a small panel inside a
+    large matte field still leaves most of the frame as background. What distinguishes
+    a panel from an icon is *shape*: a panel fills its bounding box completely, an icon
+    does not. A silhouette that fills its own box is not a silhouette.
+    """
+    on = _mask(image, matte)
+    w = image.width
+    xs = [i % w for i, v in enumerate(on) if v]
+    ys = [i // w for i, v in enumerate(on) if v]
+    if not xs:
+        return 0.0
+    box = (max(xs) - min(xs) + 1) * (max(ys) - min(ys) + 1)
+    return sum(on) / max(1, box)
+
+
+MAX_ANCHOR_MASK_FILL = 0.92
+
+
 def silhouette_iou(frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]) -> float:
     a, b = _mask(frame, matte), _mask(reference, matte)
     inter = sum(1 for x, y in zip(a, b) if x and y)
@@ -262,6 +290,15 @@ def conform_states(
         ref = ref.resize((delivery, delivery), Image.NEAREST)
     palette = extract_palette(ref, colors)
     source_snapped = snap_and_lock(ref, palette, grid)
+    anchor_fill = mask_fill_ratio(source_snapped, matte)
+    if anchor_fill > MAX_ANCHOR_MASK_FILL:
+        raise RetroError(
+            f"Anchor {reference.name} fills {anchor_fill:.1%} of its own bounding box, so its "
+            f"silhouette is effectively a rectangle — the icon is sitting on an opaque panel "
+            f"rather than on the matte. Every silhouette metric would measure that panel and "
+            f"every state would certify regardless of what it drew. Key the icon's own "
+            f"background to the matte first."
+        )
     palette_rgb = {tuple(palette.getpalette()[i * 3 : i * 3 + 3]) for i in range(colors)}
 
     states: dict[str, dict] = {}
@@ -310,6 +347,7 @@ def conform_states(
         "states": states,
         "state_order": list(spans),
         "total_source_frames": len(raw),
+        "anchor_mask_fill_ratio": round(anchor_fill, 4),
         "settle_trim": settle_trim,
         "certified": all(r["certified"] for r in states.values()),
         "uncertified_states": [n for n, r in states.items() if not r["certified"]],

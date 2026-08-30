@@ -164,7 +164,7 @@ def cmd_wait(args: argparse.Namespace) -> None:
 
 
 def cmd_retro_conform(args: argparse.Namespace) -> None:
-    from .retro import conform_states,   conform, conform_states
+    from .retro import conform
 
     run = Path(args.run)
     report = conform(
@@ -181,6 +181,8 @@ def cmd_retro_conform(args: argparse.Namespace) -> None:
 
 def cmd_retro_conform_states(args: argparse.Namespace) -> None:
     """Cut one multi-state take into a State Set and certify each state separately."""
+    from .retro import conform_states
+
     run = Path(args.run)
     video = _run_video(run) if "_run_video" in globals() else None
     if video is None:
