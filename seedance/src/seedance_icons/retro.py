@@ -14,6 +14,7 @@ import subprocess
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any, Mapping
 
 from PIL import Image
 
@@ -164,3 +165,160 @@ def conform(
     report["hold_frames_at_24fps"] = hold
     (out_dir / "retro-report.json").write_text(json.dumps(report, indent=2) + "\n")
     return report
+
+
+DEFAULT_STATE_MAP = {
+    "idle": (0.00, 0.25),
+    "hover": (0.25, 0.50),
+    "pressed": (0.50, 0.75),
+    "settled": (0.75, 1.00),
+}
+
+
+def parse_state_map(raw: Mapping[str, Any] | None) -> dict[str, tuple[float, float]]:
+    """Read a brief's state_map ({"idle": "0.00-0.25", ...}) into fractional spans.
+
+    Spans must be within [0, 1], ordered, non-overlapping, and cover the whole take;
+    a gap or an overlap means the cut is ambiguous, which is a brief bug, not a
+    rounding detail.
+    """
+    if not raw:
+        return dict(DEFAULT_STATE_MAP)
+    spans: dict[str, tuple[float, float]] = {}
+    for name, value in raw.items():
+        if isinstance(value, (list, tuple)) and len(value) == 2:
+            lo, hi = float(value[0]), float(value[1])
+        else:
+            text = str(value).replace("\u2013", "-")
+            parts = [p for p in text.split("-") if p.strip()]
+            if len(parts) != 2:
+                raise RetroError(f"state_map[{name!r}] is not a 'lo-hi' span: {value!r}")
+            lo, hi = float(parts[0]), float(parts[1])
+        if not (0.0 <= lo < hi <= 1.0):
+            raise RetroError(f"state_map[{name!r}] span {lo}-{hi} is not inside 0..1")
+        spans[name] = (lo, hi)
+    ordered = sorted(spans.items(), key=lambda kv: kv[1][0])
+    for (a_name, (_, a_hi)), (b_name, (b_lo, _)) in zip(ordered, ordered[1:]):
+        if abs(a_hi - b_lo) > 1e-6:
+            raise RetroError(
+                f"state_map has a gap or overlap between {a_name!r} and {b_name!r} "
+                f"({a_hi} then {b_lo}); the cut would be ambiguous"
+            )
+    if abs(ordered[0][1][0]) > 1e-6 or abs(ordered[-1][1][1] - 1.0) > 1e-6:
+        raise RetroError("state_map must cover the whole take, from 0.0 to 1.0")
+    return dict(ordered)
+
+
+def _segment(frames: list[Image.Image], span: tuple[float, float]) -> list[Image.Image]:
+    """Frames inside a fractional span, always at least one frame."""
+    lo, hi = span
+    a = int(round(lo * len(frames)))
+    b = int(round(hi * len(frames)))
+    return frames[a:b] or frames[a : a + 1] or frames[-1:]
+
+
+def conform_states(
+    video: Path,
+    reference: Path,
+    out_dir: Path,
+    *,
+    state_map: Mapping[str, Any] | None = None,
+    fps: int = 6,
+    max_frames: int = 8,
+    grid: int = 160,
+    delivery: int = 640,
+    colors: int = 16,
+    matte: tuple[int, int, int] = (0, 255, 0),
+    settle_trim: float = 0.25,
+) -> dict:
+    """Conform one multi-state take into a State Set: one certified directory per state.
+
+    The single-loop `conform` path is untouched — its calibration against Issue #87
+    depends on it. This is the four-state sibling: same reduction, same thresholds,
+    cut first.
+
+    `settle_trim` drops the leading fraction of each segment before conformance, so a
+    state's frames come from the part where the pose is *held* rather than from the
+    step into it. A brief that asks for instant steps still emits a transition frame
+    or two at each boundary, and those frames are neither state.
+    """
+    if shutil.which("ffmpeg") is None:
+        raise RetroError("ffmpeg is required for retro conformance")
+    spans = parse_state_map(state_map)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        subprocess.run(
+            ["ffmpeg", "-loglevel", "error", "-y", "-i", str(video),
+             "-vf", f"fps={fps}", f"{tmp}/f%04d.png"],
+            check=True,
+        )
+        raw = [Image.open(p).convert("RGB") for p in sorted(Path(tmp).glob("f*.png"))]
+    if not raw:
+        raise RetroError(f"No frames extracted from {video}")
+
+    ref = Image.open(reference).convert("RGB")
+    if ref.size != (delivery, delivery):
+        ref = ref.resize((delivery, delivery), Image.NEAREST)
+    palette = extract_palette(ref, colors)
+    source_snapped = snap_and_lock(ref, palette, grid)
+    palette_rgb = {tuple(palette.getpalette()[i * 3 : i * 3 + 3]) for i in range(colors)}
+
+    states: dict[str, dict] = {}
+    for name, span in spans.items():
+        segment = _segment(raw, span)
+        if settle_trim > 0 and len(segment) > 2:
+            segment = segment[int(len(segment) * settle_trim) :] or segment[-1:]
+        duration = len(segment) / fps
+        snapped = dedupe_frames([snap_and_lock(f, palette, grid) for f in segment], max_frames)
+        out_of_palette = sum(
+            1 for frame in snapped for p in frame.getdata() if tuple(p) not in palette_rgb
+        )
+        ious = [silhouette_iou(f, snapped[0], matte) for f in snapped[1:]] or [1.0]
+        report = {
+            "state": name,
+            "span": list(span),
+            "source_frames": len(segment),
+            "unique_frames": len(snapped),
+            "effective_fps": round(len(snapped) / duration, 2) if duration else 0.0,
+            "out_of_palette_pixels": out_of_palette,
+            "min_silhouette_iou": round(min(ious), 4),
+            "frame0_identity": round(identity_fraction(snapped[0], source_snapped), 4),
+            "anchor_silhouette_iou": round(silhouette_iou(snapped[0], source_snapped, matte), 4),
+            "grid": grid,
+            "palette_colors": colors,
+            "reference": str(reference),
+        }
+        report.update(certify(report))
+
+        state_dir = out_dir / name
+        state_dir.mkdir(parents=True, exist_ok=True)
+        for i, frame in enumerate(snapped):
+            frame.resize((delivery, delivery), Image.NEAREST).save(state_dir / f"frame{i:02d}.png")
+        subprocess.run(
+            ["ffmpeg", "-loglevel", "error", "-y", "-framerate", str(fps),
+             "-i", f"{state_dir}/frame%02d.png",
+             "-vf", "split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=none",
+             str(state_dir / "conformed.gif")],
+            check=True,
+        )
+        report["hold_frames_at_24fps"] = max(1, round(24 / fps))
+        (state_dir / "retro-report.json").write_text(json.dumps(report, indent=2) + "\n")
+        states[name] = report
+
+    summary = {
+        "states": states,
+        "state_order": list(spans),
+        "total_source_frames": len(raw),
+        "settle_trim": settle_trim,
+        "certified": all(r["certified"] for r in states.values()),
+        "uncertified_states": [n for n, r in states.items() if not r["certified"]],
+        "anchor_silhouette_iou_note": (
+            "anchor_silhouette_iou compares each state's first frame to the Anchor. It is "
+            "recorded as a diagnostic only: the certification thresholds were calibrated on "
+            "single-loop runs in Issue #87 and no threshold for this metric has been "
+            "calibrated against human verdicts yet."
+        ),
+    }
+    (out_dir / "states-report.json").write_text(json.dumps(summary, indent=2) + "\n")
+    return summary

@@ -164,7 +164,7 @@ def cmd_wait(args: argparse.Namespace) -> None:
 
 
 def cmd_retro_conform(args: argparse.Namespace) -> None:
-    from .retro import conform
+    from .retro import conform_states,   conform, conform_states
 
     run = Path(args.run)
     report = conform(
@@ -177,6 +177,40 @@ def cmd_retro_conform(args: argparse.Namespace) -> None:
         colors=args.colors,
     )
     print(json.dumps(report, indent=2))
+
+
+def cmd_retro_conform_states(args: argparse.Namespace) -> None:
+    """Cut one multi-state take into a State Set and certify each state separately."""
+    run = Path(args.run)
+    video = _run_video(run) if "_run_video" in globals() else None
+    if video is None:
+        candidates = sorted((run / "outputs").glob("*.mp4"))
+        if not candidates:
+            raise SystemExit(f"No mp4 in {run / 'outputs'}")
+        video = candidates[0]
+    state_map = None
+    brief_path = run / "brief.json"
+    if args.state_map:
+        state_map = json.loads(Path(args.state_map).read_text())
+        state_map = state_map.get("state_map", state_map)
+    elif brief_path.exists():
+        state_map = json.loads(brief_path.read_text()).get("state_map")
+    summary = conform_states(
+        video,
+        Path(args.reference),
+        run / "states",
+        state_map=state_map,
+        fps=args.fps,
+        max_frames=args.max_frames,
+        grid=args.grid,
+        colors=args.colors,
+        settle_trim=args.settle_trim,
+    )
+    print(json.dumps(summary, indent=2))
+    if not summary["certified"]:
+        raise SystemExit(
+            "uncertified states: " + ", ".join(summary["uncertified_states"])
+        )
 
 
 def cmd_verify(args: argparse.Namespace) -> None:
@@ -251,6 +285,19 @@ def parser() -> argparse.ArgumentParser:
     retro.add_argument("--grid", type=int, default=160)
     retro.add_argument("--colors", type=int, default=16)
     retro.set_defaults(func=cmd_retro_conform)
+    retro_states = sub.add_parser(
+        "retro-conform-states",
+        help="Cut a multi-state take into a State Set and certify each state",
+    )
+    retro_states.add_argument("run")
+    retro_states.add_argument("--reference", required=True, help="Exact Anchor image")
+    retro_states.add_argument("--state-map", help="JSON file carrying a state_map; defaults to the run's brief")
+    retro_states.add_argument("--fps", type=int, default=6)
+    retro_states.add_argument("--max-frames", type=int, default=8)
+    retro_states.add_argument("--grid", type=int, default=160)
+    retro_states.add_argument("--colors", type=int, default=16)
+    retro_states.add_argument("--settle-trim", type=float, default=0.25)
+    retro_states.set_defaults(func=cmd_retro_conform_states)
     verify = sub.add_parser("verify", help="Run independent media and anchor checks")
     verify.add_argument("run")
     verify.add_argument("--capabilities")
