@@ -20,3 +20,9 @@ Root cause of #1/#3/#4/#5: urllib opens the socket without TCP keepalive; the id
 | 10 | pass1-minimal (node, terse prompt) | new …7cc | 1K 16:9 n=1 | 1679x944 | HTTP 400 Alibaba content moderation after 205 s | no |
 
 Verdict on Qwen for this map: of 5 attempts that reached the provider after the keepalive fix or via curl, 2 returned unedited copies and 3 were moderation-blocked. Total map spend $0.293.
+
+## v008 (2026-08-30)
+- compose_v3 rev5→rev18 review loop: lakes-aware NE 50m layer, white-land cells, EDT patch splitting,
+  Greenwich #64669C removal, AA/marker/dash cleanups, plate-interior reconstruction.
+- Gates: fidelity outside_changed=0; spot checks 75/75 ok. No paid calls this round ($0).
+- Deployed to FigJam node 16:67; commit 9a131d5.
