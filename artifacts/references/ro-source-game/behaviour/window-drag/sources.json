@@ -1,0 +1,88 @@
+{
+  "control_type": "window-drag",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-skill-titlebar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        40,
+        142,
+        548,
+        26
+      ],
+      "shows": "スキルリスト title bar — the drag surface: window icon, title text, an inline ☐説明表示 checkbox, then ⊖ and ✕ at the right.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-inventory-titlebar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:13:50.000",
+      "timestamp_s": 830.0,
+      "frame_index_at_30fps": 24900,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        303,
+        186,
+        288,
+        20
+      ],
+      "shows": "所持アイテム title bar with the same ⊖ / ✕ pair.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-chat-input-drag-bar.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "timestamp": "00:03:05.000",
+      "timestamp_s": 185.0,
+      "frame_index_at_30fps": 5550,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        2,
+        506,
+        612,
+        34
+      ],
+      "shows": "会話ウィンドウ input bar — for this window the input row, not a title bar, is the surface the guide describes as the move handle.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "04-manual-resize-grip.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window05_02.jpg",
+      "shows": "Official manual, circled in the manual's own red annotation: the diagonal hatched resize grip at a window's bottom-right corner (distinct from the title-bar drag).",
+      "crop_xywh_in_source": [
+        150,
+        190,
+        50,
+        45
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    }
+  ]
+}

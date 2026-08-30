@@ -1,0 +1,221 @@
+{
+  "control_type": "stepper",
+  "source_game": "Ragnarok Online — Japanese client (GungHo Online Entertainment), classic-era windowed UI",
+  "collected": "2026-08-29",
+  "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+  "note": "Video frames are primary evidence. GungHo play-manual screenshots are marked secondary. roBrowser source (https://github.com/vthibault/roBrowser) is cited in docs/research/ro-behaviour-cards.md as secondary evidence only; no roBrowser file is copied here.",
+  "frames": [
+    {
+      "file": "01-skill-stepper-present.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:56.500",
+      "timestamp_s": 596.5,
+      "frame_index_at_30fps": 17895,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        410,
+        136,
+        350,
+        62
+      ],
+      "shows": "スキルリスト: the キリエエリソン cell reads ◁ 7 / 7 ▷ — a small blue left triangle, the level pair, a small blue right triangle. Neighbouring cells with a bare number carry no arrows.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "02-skill-no-stepper.png",
+      "kind": "primary — gameplay video frame",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "timestamp": "00:09:40.000",
+      "timestamp_s": 580.0,
+      "frame_index_at_30fps": 17400,
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "crop_xywh_in_1280x720": [
+        85,
+        160,
+        350,
+        72
+      ],
+      "shows": "The same cell 16.5 s earlier reads 7 / 7 with no arrows. Same character, same window, same skill-point total shown in the footer.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "03-manual-skilllist-steppers.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window03.png",
+      "shows": "Official manual: ◀ 5 / 5 ▶ on a learned skill while unlearned (greyscale) neighbours carry no level and no arrows. スキルポイント : 39 in the footer.",
+      "crop_xywh_in_source": [
+        100,
+        78,
+        290,
+        60
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    },
+    {
+      "file": "04-manual-skilllist-no-steppers.png",
+      "kind": "secondary — official GungHo JP play manual screenshot",
+      "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window03_2.png",
+      "shows": "Official manual, その他 tab of the same window: levels 10 / 2 / 1 shown with no arrows at all.",
+      "crop_xywh_in_source": [
+        40,
+        26,
+        290,
+        60
+      ],
+      "licence": "Private study. Cropped from the official GungHo Japanese play manual for non-commercial research into UI behaviour. (C) GungHo Online Entertainment, Inc. / Gravity Co., Ltd."
+    },
+    {
+      "file": "05-click-before.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:09:00.733",
+      "timestamp_s": 540.7333,
+      "frame_index_at_30fps": 16222,
+      "crop_xywh_in_1280x720": [
+        372,
+        110,
+        545,
+        400
+      ],
+      "shows": "スキルリスト one frame BEFORE the ▷ arrow's click registers. Footer reads スキルポイント : 16; サンクチュアリ reads ◁ 7 / 7 ▷; every raisable cell shows its ◁ ▷ arrows.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "06-click-after.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:09:00.767",
+      "timestamp_s": 540.7667,
+      "frame_index_at_30fps": 16223,
+      "crop_xywh_in_1280x720": [
+        372,
+        110,
+        545,
+        400
+      ],
+      "shows": "The very next frame. THREE changes at once: the footer reads スキルポイント : 15 / 16, サンクチュアリ's level digit turns RED, and every stepper's ◁ ▷ arrows disappear window-wide. Cut-verified — two independent UI-free regions differ by 0.20 and 0.29 across this pair.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "07-cell-states.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:08:58.500",
+      "timestamp_s": 538.5,
+      "frame_index_at_30fps": 16155,
+      "crop_xywh_in_1280x720": [
+        806,
+        156,
+        92,
+        48
+      ],
+      "shows": "The サンクチュアリ cell in five states, 6x, stacked top to bottom: (1) idle 00:08:58.500 — BLUE icon frame, ◁ 7 / 7 ▷; (2) hover 00:09:00.533 — frame turns PINK, icon still bright, arrows still there; (3) PRESSED 00:09:00.667 — the icon tile DARKENS while the button is held; (4) allocated 00:09:00.800 — icon bright again, level digit RED, arrows gone; (5) pointer away 00:09:07.000 — frame blue again, reading ◁ 7 / 8 ▷ with the 7 still red. Press-on and press-off are each a single cut-verified frame (UI-free region 0.01 and 0.29).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "08-arrows-hide-elsewhere.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:09:00.733",
+      "timestamp_s": 540.7333,
+      "frame_index_at_30fps": 16222,
+      "crop_xywh_in_1280x720": [
+        400,
+        162,
+        80,
+        40
+      ],
+      "shows": "The キリエエリソン cell — a DIFFERENT skill, far from the pointer — at 00:09:00.733, 00:09:00.767 and 00:09:06.100, 6x. Its value stays 7 / 7 throughout, but its arrows vanish in the same frame the point is spent and return when the pending state is discarded. The arrows are a window-wide mode, not a per-cell hover affordance.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "09-confirm-dialog.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:09:05.950",
+      "timestamp_s": 545.95,
+      "frame_index_at_30fps": 16379,
+      "crop_xywh_in_1280x720": [
+        500,
+        296,
+        292,
+        126
+      ],
+      "shows": "確定 raises a modal `message` dialog — 「確定したポイントは戻せません。※前提スキルが必要なスキル習得の際は、下位職でのポイント数にご注意ください。」 — with its own scrollbar and an OK / cancel footer. 2x.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "10-after-cancel.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "P7t7cIvtEQo",
+      "url": "https://www.youtube.com/watch?v=P7t7cIvtEQo",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その１)",
+      "channel": "FRIES17",
+      "uploaded": "2020-05-09",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:09:06.100",
+      "timestamp_s": 546.1,
+      "frame_index_at_30fps": 16383,
+      "crop_xywh_in_1280x720": [
+        372,
+        110,
+        545,
+        400
+      ],
+      "shows": "After `cancel` on that dialog: the footer is back to スキルポイント : 16, サンクチュアリ back to a black 7 / 7, and every stepper's arrows are back. Cancel DISCARDS the pending allocation rather than returning to it. The revert lands in one cut-verified frame at 00:09:06.033 (UI-free region 0.00).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    }
+  ],
+  "issues": [
+    "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+    "Reid-Surmeier/Qwen-3-pro-Pipeline#115"
+  ]
+}
