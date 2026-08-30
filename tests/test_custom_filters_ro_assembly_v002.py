@@ -62,6 +62,32 @@ class CustomFiltersRoAssemblyV002Tests(unittest.TestCase):
             (84, 84),
         )
 
+    def test_required_copy_is_frozen_independently_from_production_data(self) -> None:
+        expected_options = (
+            "Relevance",
+            "Title (a-z)",
+            "Title (z-a)",
+            "Date (newest-oldest)",
+            "Date (oldest-newest)",
+            "Artist/Maker (a-z)",
+            "Artist/Maker (z-a)",
+            "Accession Number (0-9)",
+            "Accession Number (9-0)",
+        )
+        expected_copy = {
+            "title": "Custom filters",
+            "custom_filters": "Custom filters:",
+            "images_per_page": "Images per page:",
+            "page_value": "20",
+            "sort_by": "Sort by:",
+            "selected_sort": "Relevance",
+            "choices": ("On", "Off"),
+            "source_buttons": ("OK", "cancel"),
+            "sort_options": expected_options,
+        }
+        self.assertEqual(assembly.SORT_OPTIONS, expected_options)
+        self.assertEqual(assembly.EXACT_COPY, expected_copy)
+
     def test_source_control_sprites_are_not_rescaled(self) -> None:
         self.assertEqual(
             assembly.PAGE_FIELD_BOX[3] - assembly.PAGE_FIELD_BOX[1],
@@ -116,6 +142,11 @@ class CustomFiltersRoAssemblyV002Tests(unittest.TestCase):
             actual, ImageChops.invert(self.permitted)
         )
         self.assertIsNone(outside.getbbox())
+
+    def test_mask_claim_is_only_relative_to_the_widened_shell(self) -> None:
+        self.assertNotEqual(self.source.size, self.closed.size)
+        self.assertEqual(self.baseline.size, self.closed.size)
+        self.assertEqual(self.permitted.size, self.closed.size)
 
     def test_v001_is_retained_as_rejected_history(self) -> None:
         self.assertTrue(assembly.REJECTED_V001.exists())

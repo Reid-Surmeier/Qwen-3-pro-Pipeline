@@ -1,5 +1,5 @@
 #!/usr/bin/env python3.12
-"""Build Issue #138 v002 from source-owned RO chrome.
+"""Build Issue #138 v002 from source-derived RO chrome.
 
 The source window is widened only to make the required English copy fit at one
 source-matched size. Existing controls are never redrawn: the OK/cancel pair,
@@ -151,7 +151,12 @@ def count_pixels(mask: Image.Image) -> int:
     return sum(mask.convert("L").histogram()[1:])
 
 
-def permitted_edit_mask() -> Image.Image:
+def assembly_edit_mask() -> Image.Image:
+    """Predeclare content edits relative to the widened source-derived shell.
+
+    This is not an ADR 0002 exact-preservation mask against the differently
+    sized source image. Exactness is claimed only for named source sprites.
+    """
     permitted = Image.new("L", REVIEW_SIZE, 0)
     for box in EDIT_BOXES:
         permitted.paste(255, box)
@@ -246,7 +251,7 @@ def assemble_closed(
     source: Image.Image,
 ) -> tuple[Image.Image, Image.Image, Image.Image]:
     baseline = widened_shell(source)
-    permitted = permitted_edit_mask()
+    permitted = assembly_edit_mask()
     output = baseline.copy()
 
     draw_text(
@@ -474,9 +479,13 @@ def main() -> int:
         "open_review_size": list(open_state.size),
         "open_native_size": list(OPEN_NATIVE_SIZE),
         "changed_pixels": count_pixels(actual),
-        "permitted_mask_pixels": count_pixels(permitted),
-        "changed_pixels_outside_permitted_mask": count_pixels(outside),
-        "actual_is_subset_of_permitted_mask": outside.getbbox() is None,
+        "fidelity_mode": "source-derived extension plus masked content assembly",
+        "strict_exact_preservation_claim": False,
+        "mask_comparison_baseline": "deterministic widened source-derived shell",
+        "source_shell_transform_included_in_mask_comparison": False,
+        "assembly_edit_mask_pixels": count_pixels(permitted),
+        "changed_pixels_outside_assembly_edit_mask": count_pixels(outside),
+        "actual_is_subset_of_assembly_edit_mask": outside.getbbox() is None,
         "closed_sha256": sha256(paths["closed"]),
         "open_sha256": sha256(paths["open"]),
         "exact_copy": {

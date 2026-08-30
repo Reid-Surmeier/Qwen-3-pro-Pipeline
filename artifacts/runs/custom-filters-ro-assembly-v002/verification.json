@@ -55,9 +55,13 @@
     196
   ],
   "changed_pixels": 146582,
-  "permitted_mask_pixels": 312720,
-  "changed_pixels_outside_permitted_mask": 0,
-  "actual_is_subset_of_permitted_mask": true,
+  "fidelity_mode": "source-derived extension plus masked content assembly",
+  "strict_exact_preservation_claim": false,
+  "mask_comparison_baseline": "deterministic widened source-derived shell",
+  "source_shell_transform_included_in_mask_comparison": false,
+  "assembly_edit_mask_pixels": 312720,
+  "changed_pixels_outside_assembly_edit_mask": 0,
+  "actual_is_subset_of_assembly_edit_mask": true,
   "closed_sha256": "c18db0804ca57dfb6b196d313b10911e5a10a312252e4956be7419d9eef81b02",
   "open_sha256": "cd3263c175c02ccd5ec7be22323dfbcf8c412ca3adedc717f6941ded21c8ca5e",
   "exact_copy": {

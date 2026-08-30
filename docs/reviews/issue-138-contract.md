@@ -30,10 +30,12 @@ frame and row surface described below.
   pixels. Qwen candidate 1 supplies only the masked popup frame, selected-row
   treatment, and row surface. Generated glyphs and generated closed-state
   controls do not enter the candidate.
-- **C6 - Deterministic evidence.** The closed 4x candidate changes 146,582
-  pixels inside a 312,720-pixel permitted mask, with zero changed pixels
-  outside it. Closed/native size is 336 x 126; open/native size is 336 x 196.
-  The retained OpenRouter Qwen pass requested/completed 2/2 images with zero
+- **C6 - Deterministic evidence.** Relative to the deterministic widened
+  source-derived shell, content Assembly changes 146,582 pixels inside a
+  312,720-pixel predeclared mask and zero outside it. Because the source and
+  candidate widths differ, this is not an ADR 0002 strict exact-preservation
+  claim. Closed/native size is 336 x 126; open/native size is 336 x 196. The
+  retained OpenRouter Qwen pass requested/completed 2/2 images with zero
   ambiguity and v002 made no new paid request.
 
 PASS means no specified defect is found. The verdict is advisory evidence and

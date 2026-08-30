@@ -6,7 +6,7 @@ Issue: [#138](https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/issues/138)
 
 The v002 candidate is a 336 x 126 native-pixel closed Assembly plus a 336 x 196
 open-dropdown export. It supersedes the rejected v001 attempt without deleting
-that history. The RO chat-room window owns the frame, shadow, pink border,
+that history. The RO chat-room window supplies the frame, shadow, pink border,
 glass title bar, field bevels, radio controls, dropdown arrows, footer, and the
 entire `OK` / lowercase `cancel` button pair. The museum screenshot supplies
 only the nine sort-option strings and their order.
@@ -80,14 +80,20 @@ deterministically at the same 40 px size.
 Machine verification records:
 
 - the permitted-region mask is created from the five fixed edit boxes before
-  composition, and the separately computed actual-difference mask is its
-  subset;
-- zero changed pixels outside that predeclared permitted-region mask;
+  content composition on the deterministic widened shell, and the separately
+  computed actual-difference mask is its subset;
+- zero content-assembly changes outside that predeclared mask relative to the
+  widened shell;
 - both native dimensions and all exact strings are frozen by tests;
 - source arrows, radio sprites, and the `OK` / `cancel` pair are byte-identical;
 - the password field is removed from the source layout;
 - the 336 x 196 open canvas contains the entire dropdown, including all nine
   options below the closed window's edge.
+
+Because the canvas is widened from 272 to 336 native pixels, this run is not an
+ADR 0002 exact-preservation claim against the differently sized source image.
+The mask result covers content edits after deterministic source extension.
+Byte-exact claims are limited to the named arrows, radios, and button pair.
 
 ## Outputs
 
@@ -102,7 +108,7 @@ Machine verification records:
 
 ## Verification boundary
 
-The automated checks establish source ownership, copy, dimensions, control
-reuse, option order, and mask containment. They do not constitute human visual
-approval. The owner still decides whether the spacing, lettering, and overall
-RO-style match are accepted.
+The automated checks establish deterministic source extension, exact named
+sprite reuse, copy, dimensions, option order, and content-mask containment.
+They do not constitute human visual approval. The owner still decides whether
+the spacing, lettering, and overall RO-style match are accepted.
