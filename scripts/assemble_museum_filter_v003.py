@@ -27,6 +27,7 @@ BODY_FONT = ROOT / "godot/fonts/PixelMplus10-Regular.ttf"
 TITLE_FONT = ROOT / "godot/fonts/PixelMplus12-Regular.ttf"
 NATIVE_SIZE = (313, 211)
 SCALE = 4
+REVIEW_SIZE = tuple(dimension * SCALE for dimension in NATIVE_SIZE)
 
 WHITE = (0xFF, 0xFF, 0xFF)
 FIELD_FILL = (0xF9, 0xF3, 0xF7)
@@ -38,20 +39,15 @@ TAB_OFF_FILL = (0xF3, 0xEF, 0xF4)
 TAB_OFF_INK = (0x8B, 0x89, 0x8C)
 TAB_ON_INK = (0x3A, 0x3B, 0x3F)
 
-TITLE_SOURCE = (20, 6, 160, 21)
 TITLE_EDIT = (19, 5, 160, 21)
 OBJECT_TAB = (8, 28, 21, 63)
 MATERIAL_TAB = (8, 73, 21, 120)
 SEARCH_LABEL = (31, 39, 74, 53)
 SEARCH_PLACEHOLDER_TARGET = (81, 39, 123, 53)
-SEARCH_PLACEHOLDER_SOURCE = (83, 39, 125, 53)
 MATCH_LABEL = (31, 66, 72, 80)
 ANY_TARGET = (90, 66, 116, 80)
-ANY_SOURCE = (92, 66, 118, 80)
 ALL_TARGET = (142, 66, 165, 80)
-ALL_SOURCE = (146, 66, 169, 80)
 TRAILING_TARGET = (167, 66, 257, 80)
-TRAILING_SOURCE = (171, 66, 261, 80)
 LEFT_ROWS = (49, 94, 147, 184)
 RIGHT_ROWS_TARGET = (190, 94, 301, 184)
 ROW_STRIDE = 19
@@ -311,17 +307,22 @@ def make_contact_sheet(
     candidate: Image.Image,
     mask: Image.Image,
 ) -> Image.Image:
-    full_baseline = baseline.resize((1252, 844), Image.Resampling.NEAREST)
-    full_candidate = candidate.resize((1252, 844), Image.Resampling.NEAREST)
-    full_mask = mask.resize((1252, 844), Image.Resampling.NEAREST)
-    rejected = rejected.convert("RGB").resize((1252, 844), Image.Resampling.NEAREST)
+    full_baseline = baseline.resize(REVIEW_SIZE, Image.Resampling.NEAREST)
+    full_candidate = candidate.resize(REVIEW_SIZE, Image.Resampling.NEAREST)
+    full_mask = mask.resize(REVIEW_SIZE, Image.Resampling.NEAREST)
+    rejected = rejected.convert("RGB").resize(REVIEW_SIZE, Image.Resampling.NEAREST)
 
     overlay = full_baseline.copy()
     tint = Image.new("RGB", overlay.size, (255, 0, 255))
     overlay.paste(tint, (0, 0), full_mask.point(lambda value: value // 2))
 
     margin, label_height = 24, 48
-    sheet = Image.new("RGB", (2528, 1832), (24, 22, 29))
+    full_width, full_height = REVIEW_SIZE
+    sheet_size = (
+        2 * full_width + 3 * margin,
+        2 * (full_height + label_height) + 3 * margin,
+    )
+    sheet = Image.new("RGB", sheet_size, (24, 22, 29))
     draw = ImageDraw.Draw(sheet)
     font = ImageFont.truetype(
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24
@@ -333,10 +334,10 @@ def make_contact_sheet(
         (full_candidate, "Assembly v003 — deterministic text composition", 1, 1),
     )
     for panel, label, column, row in panels:
-        x = margin + column * (1252 + margin)
-        y = margin + row * (844 + label_height + margin)
+        x = margin + column * (full_width + margin)
+        y = margin + row * (full_height + label_height + margin)
         sheet.paste(panel, (x, y))
-        draw.text((x, y + 854), label, font=font, fill=WHITE)
+        draw.text((x, y + full_height + 10), label, font=font, fill=WHITE)
     return sheet
 
 
@@ -372,7 +373,7 @@ def write_verification(
         "edit_mask_native": {
             "path": repo_path(native_mask_path), "sha256": sha256(native_mask_path)
         },
-        "dimensions": {"native": list(NATIVE_SIZE), "review": [1252, 844]},
+        "dimensions": {"native": list(NATIVE_SIZE), "review": list(REVIEW_SIZE)},
         "fidelity_check": {
             "changed_pixels_native": count_mask_pixels(actual_mask),
             "declared_mask_pixels_native": count_mask_pixels(declared_mask),
@@ -425,9 +426,9 @@ def main() -> int:
     verification_path = args.output_dir / "verification.json"
 
     output.save(native_path)
-    output.resize((1252, 844), Image.Resampling.NEAREST).save(output_path)
+    output.resize(REVIEW_SIZE, Image.Resampling.NEAREST).save(output_path)
     declared_mask.save(native_mask_path)
-    declared_mask.resize((1252, 844), Image.Resampling.NEAREST).save(mask_path)
+    declared_mask.resize(REVIEW_SIZE, Image.Resampling.NEAREST).save(mask_path)
     make_contact_sheet(baseline, rejected, output, declared_mask).save(contact_path)
     write_verification(
         verification_path,
