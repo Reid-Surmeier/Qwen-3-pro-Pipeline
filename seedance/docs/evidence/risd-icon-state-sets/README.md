@@ -31,3 +31,32 @@ Seedance will not honour a one-or-two sprite-pixel displacement. Told to move an
 element two pixels it moves it fifteen, in both takes and under two very different
 briefs. `idle` and `settled` — the two states that ask for *no* movement — are correct
 in both takes. The moving states are not.
+
+## Take four: the sweep
+
+`v4-sweep-animated.gif`, `v4-sweep-poses.png`, `v4-sweep-brief.json`.
+
+Reid, on take three: *"it works, but again it's very static, there should be more
+movement besides a hover animation — review the later stages of the seedance ticket and
+see how that helped."*
+
+Measuring the briefs answers it. Motion-field length against outcome, every brief on disk:
+
+| Motion field | Runs | Outcome |
+| --- | --- | --- |
+| 24-32 words, 0 named poses | batch 1, batch 2 | a two-frame twinkle; batch 2 certified 0.998-1.0 |
+| 64-76 words, 0 named poses | takes 1 and 3 | large gesture summarised; element moved ~15x further than asked |
+| 123-218 words, 3-6 poses | batch 3, magazine-flip | large gesture written pose by pose; all certified |
+
+The later stages did not get smaller and tighter. They got **bigger and enumerated** — a
+full coin spin as eight named held poses, grounded in the game's own frame table. Every
+attempt here to fix wandering by clamping the movement harder made the icon more static
+without making it more faithful.
+
+Take four asks for an eleven-pose examining sweep: 248 motion words, 9 named poses, the
+glass travelling a fifth of the tile per pose across the whole head with the lens
+contents changing as it goes. 40.1% of pixels differ at the peak of the cycle. The bust
+holds still throughout and the cycle returns to its starting pose.
+
+Remaining defect: the glass grows and shrinks slightly through the sweep, which the
+brief forbids. Worth one more pass; it is not the icon falling apart.
