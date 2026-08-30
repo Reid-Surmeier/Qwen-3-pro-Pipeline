@@ -304,6 +304,7 @@ await page.reload({ waitUntil: "networkidle", timeout: 90000 });
 await page.waitForFunction(() => window.godotQaState?.windows?.skill_tree,
   undefined, { timeout: 90000 });
 await page.waitForTimeout(2500);
+await click(600, 15);
 const keyBefore = await shot("13-key-before");
 await page.keyboard.press("Escape");
 await page.waitForTimeout(50);
