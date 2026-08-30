@@ -77,8 +77,14 @@ func _contract_detail_view_fails_closed() -> void:
 	var fixture := _fixture()
 	fixture.windows[0].controls[1].value.detail_view.erase("padding")
 	var errors: Array[Dictionary] = ControlSpec.validate(fixture, func(_path): return true)
+	var oversized := _fixture()
+	oversized.windows[0].controls[1].value.detail_view.padding = [1000, 1000]
+	var oversized_errors: Array[Dictionary] = ControlSpec.validate(
+		oversized, func(_path): return true)
 	_check("missing-detail-padding-fails-closed",
-		_has_code(errors, Errors.INVALID_STATE_SET), str(errors))
+		_has_code(errors, Errors.INVALID_STATE_SET)
+		and _has_code(oversized_errors, Errors.INVALID_STATE_SET),
+		str({"missing": errors, "oversized": oversized_errors}))
 
 
 func _contract_resize_bounds_fail_closed() -> void:
@@ -118,11 +124,19 @@ func _contract_resize_relationships_fail_closed() -> void:
 	missing_state.windows[0].resize.erase("state_set")
 	var state_errors: Array[Dictionary] = ControlSpec.validate(
 		missing_state, func(_path): return true)
+	var old_footer := _fixture()
+	old_footer.windows[0].resize.frame.stale_footer_geometry = {
+		"x": 0, "y": 279, "width": 484, "height": 24,
+	}
+	var footer_errors: Array[Dictionary] = ControlSpec.validate(
+		old_footer, func(_path): return true)
 	_check("resize-relationships-fail-closed",
 		_has_code(home_errors, Errors.INVALID_GEOMETRY)
 		and _has_code(grip_errors, Errors.INVALID_GEOMETRY)
-		and _has_code(state_errors, Errors.INVALID_STATE_SET),
-		str({"home": home_errors, "grip": grip_errors, "state": state_errors}))
+		and _has_code(state_errors, Errors.INVALID_STATE_SET)
+		and _has_code(footer_errors, Errors.INVALID_GEOMETRY),
+		str({"home": home_errors, "grip": grip_errors, "state": state_errors,
+			"footer": footer_errors}))
 
 
 func _fixture() -> Dictionary:

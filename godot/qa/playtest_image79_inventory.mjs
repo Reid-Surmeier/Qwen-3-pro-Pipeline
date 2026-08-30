@@ -220,13 +220,16 @@ const dragBefore = await shot("05-drag-before");
 await page.mouse.move(dragStart.x, dragStart.y);
 await page.mouse.down();
 const dragSamples = [];
+const dragMotionCounts = [];
 let dragMid;
 for (let index = 0; index < 40; index += 1) {
 	const t = index / 39;
-  await page.mouse.move(dragStart.x + (dragEnd.x - dragStart.x) * t,
-    dragStart.y + (dragEnd.y - dragStart.y) * t);
-  await page.waitForTimeout(15);
-  dragSamples.push((await control("inventory.items")).gesture_drag.motion_samples);
+  const sample = [dragStart.x + (dragEnd.x - dragStart.x) * t,
+    dragStart.y + (dragEnd.y - dragStart.y) * t];
+  await page.mouse.move(sample[0], sample[1]);
+	await page.waitForTimeout(15);
+  dragSamples.push(sample);
+  dragMotionCounts.push((await control("inventory.items")).gesture_drag.motion_samples);
   if (index === 20) dragMid = await shot("05-drag-mid");
 }
 await page.mouse.up();
@@ -236,7 +239,7 @@ record("inventory.items", "DragDrop", "MoveInventoryItem",
   "31-sample drag swaps one pair atomically and suppresses click", JSON.stringify(movedItem), {
     swapped_once: movedItem.item_version === 1
       && movedItem.item_values.r0c0 === "r0c1" && movedItem.item_values.r0c1 === "r0c0",
-    motion_factual: Math.max(...dragSamples) >= 30,
+    motion_factual: Math.max(...dragMotionCounts) >= 30,
     no_trailing_click: (await inventory()).interaction_log
       .filter((entry) => entry.gesture === "Activate").length === activateBeforeDrag,
     detail_follows_item: movedItem.opened_item_value === "r0c0"

@@ -146,9 +146,12 @@ def evaluate_play_log(
             required_roles.add("mid")
             samples = action.get("motion_samples")
             def valid_motion_sample(sample: object) -> bool:
-                if isinstance(sample, (int, float)) and not isinstance(sample, bool):
-                    return True
-                return window_action != "SetRange" and isinstance(sample, list) \
+                if window_action == "SetRange" or gesture == "Drag":
+                    if isinstance(sample, (int, float)) and not isinstance(sample, bool):
+                        return True
+                if window_action == "SetRange":
+                    return isinstance(sample, (int, float)) and not isinstance(sample, bool)
+                return isinstance(sample, list) \
                     and len(sample) == 2 and all(
                         isinstance(axis, (int, float)) and not isinstance(axis, bool)
                         for axis in sample
@@ -158,7 +161,24 @@ def evaluate_play_log(
                     or not all(valid_motion_sample(sample) for sample in samples):
                 problems.append(
                     f"{label} {gesture} requires at least 30 motion samples"
+                    + ("" if window_action == "SetRange" or gesture == "Drag"
+                       else "; pointer samples must be two-dimensional")
                 )
+            elif window_action != "SetRange" and gesture in {"Resize", "DragDrop"}:
+                origin_x, origin_y = samples[0]
+                crossed_threshold = any(
+                    ((sample[0] - origin_x) ** 2 + (sample[1] - origin_y) ** 2) ** 0.5 > 4.0
+                    for sample in samples[1:]
+                )
+                if not crossed_threshold:
+                    problems.append(f"{label} {gesture} motion never crosses the pointer threshold")
+                if gesture == "Resize" and not (
+                    isinstance(assertions, dict) and any(
+                        assertions.get(name) is True
+                        for name in ("maximum", "minimum", "clamped", "endpoint_clamped")
+                    )
+                ):
+                    problems.append(f"{label} Resize requires a named clamp assertion")
         if not isinstance(frames, dict):
             problems.append(f"{label}.frames must be an object")
             continue

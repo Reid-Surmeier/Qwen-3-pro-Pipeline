@@ -56,7 +56,7 @@ class PlayLogVerdictTests(unittest.TestCase):
                     "responsive": True,
                     "matches_expected": True,
                     "assertions": {"moved": True},
-                    "motion_samples": list(range(31)),
+                    "motion_samples": [[index, index * 2] for index in range(31)],
                     "frames": {"before": self.before, "mid": self.mid, "after": self.after},
                 },
                 {
@@ -192,6 +192,26 @@ class PlayLogVerdictTests(unittest.TestCase):
         drag["motion_samples"] = [[index, index * 2] for index in range(31)]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
+
+    def test_pointer_motion_rejects_scalars_and_stationary_points(self) -> None:
+        for gesture in ("Resize", "DragDrop"):
+            for samples in ([0] * 31, [[0, 0]] * 31):
+                with self.subTest(gesture=gesture, samples=samples[0]):
+                    log = self._valid_log()
+                    action = log["actions"][0]
+                    action["gesture"] = gesture
+                    action["motion_samples"] = samples
+                    if gesture == "Resize":
+                        action["assertions"]["maximum"] = True
+                    log["required_actions"][0]["gesture"] = gesture
+                    manifest = self._manifest()
+                    manifest["windows"][0]["actions"][0]["gesture"] = gesture
+                    verdict = evaluate_play_log(log, self.root, manifest)
+                    self.assertEqual("INVALID", verdict["verdict"], verdict)
+                    self.assertTrue(any(
+                        "two-dimensional" in problem or "threshold" in problem
+                        for problem in verdict["problems"]
+                    ), verdict)
 
     def test_resize_and_drag_drop_require_motion_evidence(self) -> None:
         for gesture in ("Resize", "DragDrop"):

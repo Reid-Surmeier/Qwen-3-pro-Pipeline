@@ -321,6 +321,8 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 			and detail_padding is Array and detail_padding.size() == 2 \
 			and _number(detail_padding[0]) and float(detail_padding[0]) >= 0.0 \
 			and _number(detail_padding[1]) and float(detail_padding[1]) >= 0.0 \
+			and float(detail_padding[0]) * 2.0 < float(detail_size[0]) \
+			and float(detail_padding[1]) * 2.0 < float(detail_size[1]) \
 			and _positive_number(detail_view.get("font_size")) \
 			and not str(detail_view.get("font_color", "")).is_empty()
 		if not detail_valid:
@@ -486,8 +488,8 @@ static func _validate_resize_contract(resize: Variant, window_geometry: Variant,
 			and float(title_cover.get("x", -1)) + float(title_cover.get("width", -1)) == home_width \
 			and float(footer_cover.get("x", -1)) == 0.0 \
 			and float(footer_cover.get("width", -1)) == home_width \
-			and float(footer_cover.get("y", -1)) + float(footer_cover.get("height", -1)) == home_height \
-			and float(footer_cover.get("height", -1)) >= footer_height \
+			and float(footer_cover.get("y", -1)) == home_height - footer_height - 1.0 \
+			and float(footer_cover.get("height", -1)) == footer_height + 1.0 \
 			and float(right_cover.get("x", -1)) + float(right_cover.get("width", -1)) == home_width \
 			and float(right_cover.get("width", -1)) == edge_width \
 			and float(right_cover.get("y", -1)) == title_height \
