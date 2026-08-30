@@ -5,7 +5,9 @@ from __future__ import annotations
 import json
 import base64
 import hashlib
+import http.client
 import math
+import socket
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -19,6 +21,37 @@ DEFAULT_ENDPOINT = "https://openrouter.ai/api/v1/images"
 DEFAULT_TIMEOUT_SECONDS = 180
 
 
+class _KeepAliveHTTPSConnection(http.client.HTTPSConnection):
+    """HTTPS connection that sends TCP keepalive probes while idle.
+
+    An image edit can sit idle for minutes between the request and the
+    first response byte. Without keepalives a NAT or proxy in the path can
+    drop the idle mapping, and the finished (billed) response never reaches
+    the client, which then waits out the whole read timeout. curl enables
+    keepalives by default; urllib does not. Measured 2026-08-30: the same
+    224 s request completed via curl and hung for 900 s via plain urllib.
+    """
+
+    def connect(self):
+        super().connect()
+        sock = self.sock
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+        for name, value in (("TCP_KEEPIDLE", 30), ("TCP_KEEPINTVL", 15), ("TCP_KEEPCNT", 8)):
+            option = getattr(socket, name, None)
+            if option is not None:
+                sock.setsockopt(socket.IPPROTO_TCP, option, value)
+
+
+class _KeepAliveHTTPSHandler(urllib.request.HTTPSHandler):
+    def https_open(self, req):
+        return self.do_open(_KeepAliveHTTPSConnection, req, context=self._context)
+
+
+def keepalive_urlopen(request, *, timeout):
+    """urlopen equivalent whose HTTPS sockets send TCP keepalive probes."""
+    return urllib.request.build_opener(_KeepAliveHTTPSHandler()).open(request, timeout=timeout)
+
+
 class OpenRouterImageClient:
     """Small synchronous client for the dedicated OpenRouter Image API."""
 
@@ -27,7 +60,7 @@ class OpenRouterImageClient:
         api_key: str,
         *,
         endpoint: str = DEFAULT_ENDPOINT,
-        opener: Callable[..., Any] = urllib.request.urlopen,
+        opener: Callable[..., Any] = keepalive_urlopen,
         timeout: float = DEFAULT_TIMEOUT_SECONDS,
     ):
         if not api_key:
