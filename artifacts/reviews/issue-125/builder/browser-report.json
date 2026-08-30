@@ -70,6 +70,15 @@
       }
     },
     {
+      "name": "options.effect-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
       "name": "options.bgm_on-activate",
       "passed": true,
       "detail": {
@@ -188,10 +197,10 @@
     }
   ],
   "consoleEntries": [
-    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
-    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    "[warning] [.WebGL-0x14a4075b9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x14a4075b9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x14a4075b9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x14a4075b9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
   ],
   "final": {
     "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
@@ -302,7 +311,7 @@
             "z_index": 0
           },
           "options.effect": {
-            "active_surface": "",
+            "active_surface": "track",
             "geometry": {
               "height": 24,
               "width": 264,
@@ -310,7 +319,7 @@
               "y": 467
             },
             "id": "options.effect",
-            "interaction_phase": "idle",
+            "interaction_phase": "hover",
             "last_action": "SetRange",
             "last_error": null,
             "last_result": {
@@ -322,7 +331,7 @@
             "semantic_state": "enabled",
             "text": "",
             "type": "Range",
-            "value": 100,
+            "value": 0,
             "visible": false,
             "z_index": 0
           },
@@ -1193,6 +1202,237 @@
             "gesture": "Drag",
             "semantic_state": "enabled",
             "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 96.6666627728768
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 93.3333255457536
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 89.9999883186304
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 86.6666510915072
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 83.333313864384
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 79.9999766372608
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 76.6666394101376
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 73.3333605898624
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 70.0000233627392
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 66.666686135616
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 63.3333489084928
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 60.0000116813696
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 56.6666744542464
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 53.3333372271232
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 50
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 46.6666627728768
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 43.3333255457536
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 39.9999883186304
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 36.6666510915072
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 33.333313864384
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 29.9999766372608
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 26.6666394101376
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 23.3333605898624
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 20.0000233627392
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 16.666686135616
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 13.3333489084928
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 10.0000116813696
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 6.66667445424641
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 3.33333722712321
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
           },
           {
             "accepted": true,

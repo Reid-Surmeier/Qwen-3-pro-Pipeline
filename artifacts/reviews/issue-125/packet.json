@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 125,
   "pull_request": 82,
-  "candidate_commit": "3b73278e5a04a408b8c8aed9422393606eed34e2",
+  "candidate_commit": "7dcc651993319b5cfbb1aee1049bc7b9c82d0caf",
   "acceptance_contract": "docs/reviews/issue-125-contract.md",
   "references": [
     {
@@ -24,7 +24,7 @@
     ]
   },
   "launch": {
-    "command": "GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 godot/qa/image79.sh",
-    "clean_state_command": "git status --short --branch"
+    "command": "DISPLAY=:99 $HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --path godot -- --screen=image79",
+    "clean_state_command": "restart the launch command; image79_options.tscn constructs manifest initial state on every launch"
   }
 }

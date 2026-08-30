@@ -1,18 +1,23 @@
 {
   "schema_version": 1,
   "issue": 125,
-  "candidate_commit": "3b73278e5a04a408b8c8aed9422393606eed34e2",
+  "candidate_commit": "7dcc651993319b5cfbb1aee1049bc7b9c82d0caf",
   "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
   "files": [
     {"path": "00-idle.png", "sha256": "8ae817197ef6e4faa4dc3313d4c52893ee6a165df1be77b0f570ef3817be93e4"},
     {"path": "01-bgm-drag-mid.png", "sha256": "dc64a83f5c9ce5d413afb4b6eee10750da72de3910ee20c259686d3b4ee7e04f"},
     {"path": "02-bgm-left-endpoint.png", "sha256": "99d172505116dabef9d7688b00a20cfd9c6437670b57dc69543a34a1bad20438"},
     {"path": "03-bgm-right-endpoint.png", "sha256": "ab37dc5bd13e2cb322bf458adc952655150de228aee4d34998de152bd6618f02"},
-    {"path": "04-skin-open.png", "sha256": "a855a21fa3ce8bdad7b454569d49679b36d7cd79db187682df07b3a30c40da43"},
+    {"path": "04-skin-open.png", "sha256": "f71176e24e9cc3ac208f2e4e53aadad9b141a623b80751b6df17ed69dbbde622"},
     {"path": "05-minimized.png", "sha256": "443dfc1bc1c839fac96a4de6a62f094db912e776ab7ac15f89642111532cb103"},
-    {"path": "06-restored.png", "sha256": "6a72fefbb996d8358bc20b13fef7ba7c3fd97e9226844252b45a0bbf715fe6c9"},
-    {"path": "browser-report.json", "sha256": "5cc83bdeb10a3572dc371441503673cfc1b31b7c95ab2eab972e01db977a078d"},
-    {"path": "play-log.json", "sha256": "716a63867a1e006e84157a65dd7841fff6b253bb0246423567289125c3490817"},
-    {"path": "verdict.json", "sha256": "374e218e11e452bc32ea7d1e71318ef91fe56f1bde85e6d4fd3922afe2f0b27d"}
-  ]
+    {"path": "06-restored.png", "sha256": "e60b18b8a8f1ad800abe50274c5e408b88f6ee27c4c706a439154d986e4cb869"},
+    {"path": "browser-report.json", "sha256": "f1233fa9f9ac4db2df582cab7be58dced7a720835f9138c6c47bf727da946721"},
+    {"path": "play-log.json", "sha256": "e6b0088a21530aebe93eb81e62f2491cf39fbb55d72a6468102d99ab201089b7"},
+    {"path": "verdict.json", "sha256": "94c255f3e85f6d0c51a7f8845344ddf1bbd2986bb19df4c066eb2bc0872aa91c"}
+  ],
+  "play_log_frame_corpus": {
+    "count": 54,
+    "classification": "comparison evidence",
+    "hash_authority": "play-log.json frames and invariant_frames"
+  }
 }

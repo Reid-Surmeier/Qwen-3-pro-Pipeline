@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,17 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
     )
     if commit.returncode != 0:
         problems.append("candidate is not a commit in this repository")
+    for relative in (
+        "godot/data/image-79-control-spec.json",
+        "godot/image79_options.tscn",
+        "godot/control_library/control_window.gd",
+    ):
+        result = subprocess.run(
+            ["git", "cat-file", "-e", f"{candidate}:{relative}"],
+            cwd=repository, capture_output=True, check=False,
+        )
+        if result.returncode != 0:
+            problems.append(f"candidate snapshot is missing {relative}")
     _require_file(repository, packet.get("acceptance_contract"), "acceptance_contract", problems)
     for index, reference in enumerate(packet.get("references", [])):
         _verify_hashed_file(repository, reference, f"references[{index}]", problems)
@@ -49,6 +61,22 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
         root = manifest_path.parent
         for index, entry in enumerate(manifest.get("files", [])):
             _verify_hashed_file(root, entry, f"evidence files[{index}]", problems)
+        play_log_path = root / "play-log.json"
+        try:
+            play_log = json.loads(play_log_path.read_text())
+            manifest_bytes = subprocess.run(
+                ["git", "show", f"{candidate}:godot/data/image-79-control-spec.json"],
+                cwd=repository, capture_output=True, check=True,
+            ).stdout
+            control_manifest = json.loads(manifest_bytes)
+            if str(repository) not in sys.path:
+                sys.path.insert(0, str(repository))
+            from qwen_ui_pipeline.play_log import evaluate_play_log
+            verdict = evaluate_play_log(play_log, root, control_manifest)
+            if verdict.get("verdict") != "PASS":
+                problems.append(f"committed Play Log is not reproducible: {verdict}")
+        except (OSError, json.JSONDecodeError, subprocess.CalledProcessError) as error:
+            problems.append(f"committed Play Log cannot be verified: {error}")
     return problems
 
 
@@ -77,11 +105,16 @@ def _verify_hashed_file(root: Path, entry: Any, label: str, problems: list[str])
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("packet", type=Path)
-    parser.add_argument("--candidate", required=True)
-    parser.add_argument("--repository", type=Path, default=Path.cwd())
+    parser.add_argument("packet_positional", nargs="?", type=Path)
+    parser.add_argument("--packet", type=Path)
+    parser.add_argument("--candidate", "--expect-sha", dest="candidate", required=True)
+    parser.add_argument("--repository", "--repo", dest="repository", type=Path,
+                        default=Path.cwd())
     args = parser.parse_args()
-    problems = validate_packet(args.packet.resolve(), args.repository.resolve(), args.candidate)
+    packet = args.packet or args.packet_positional
+    if packet is None:
+        parser.error("--packet is required")
+    problems = validate_packet(packet.resolve(), args.repository.resolve(), args.candidate)
     print(json.dumps({"valid": not problems, "candidate": args.candidate, "problems": problems}))
     return 1 if problems else 0
 
