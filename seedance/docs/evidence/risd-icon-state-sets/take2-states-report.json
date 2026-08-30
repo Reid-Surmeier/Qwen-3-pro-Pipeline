@@ -1,0 +1,130 @@
+{
+  "states": {
+    "idle": {
+      "state": "idle",
+      "span": [
+        0.0,
+        0.25
+      ],
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 0.734,
+      "frame0_identity": 0.9248,
+      "anchor_silhouette_iou": 0.9793,
+      "grid": 120,
+      "palette_colors": 16,
+      "reference": "/home/reidsurmeier/Qwen-3-pro-Pipeline/artifacts/references/risd-icon-anchors-v001/ANCHOR-ui01-search-480x4-keyed.png",
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": false
+      },
+      "diagnostics": {
+        "frame0_identity": 0.9248
+      },
+      "certified": false,
+      "hold_frames_at_24fps": 4
+    },
+    "hover": {
+      "state": "hover",
+      "span": [
+        0.25,
+        0.5
+      ],
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 0.994,
+      "frame0_identity": 0.8638,
+      "anchor_silhouette_iou": 0.4663,
+      "grid": 120,
+      "palette_colors": 16,
+      "reference": "/home/reidsurmeier/Qwen-3-pro-Pipeline/artifacts/references/risd-icon-anchors-v001/ANCHOR-ui01-search-480x4-keyed.png",
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true
+      },
+      "diagnostics": {
+        "frame0_identity": 0.8638
+      },
+      "certified": true,
+      "hold_frames_at_24fps": 4
+    },
+    "pressed": {
+      "state": "pressed",
+      "span": [
+        0.5,
+        0.75
+      ],
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 0.9911,
+      "frame0_identity": 0.874,
+      "anchor_silhouette_iou": 0.529,
+      "grid": 120,
+      "palette_colors": 16,
+      "reference": "/home/reidsurmeier/Qwen-3-pro-Pipeline/artifacts/references/risd-icon-anchors-v001/ANCHOR-ui01-search-480x4-keyed.png",
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true
+      },
+      "diagnostics": {
+        "frame0_identity": 0.874
+      },
+      "certified": true,
+      "hold_frames_at_24fps": 4
+    },
+    "settled": {
+      "state": "settled",
+      "span": [
+        0.75,
+        1.0
+      ],
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 0.9731,
+      "frame0_identity": 0.9183,
+      "anchor_silhouette_iou": 0.955,
+      "grid": 120,
+      "palette_colors": 16,
+      "reference": "/home/reidsurmeier/Qwen-3-pro-Pipeline/artifacts/references/risd-icon-anchors-v001/ANCHOR-ui01-search-480x4-keyed.png",
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true
+      },
+      "diagnostics": {
+        "frame0_identity": 0.9183
+      },
+      "certified": true,
+      "hold_frames_at_24fps": 4
+    }
+  },
+  "state_order": [
+    "idle",
+    "hover",
+    "pressed",
+    "settled"
+  ],
+  "total_source_frames": 72,
+  "anchor_mask_fill_ratio": 0.6896,
+  "settle_trim": 0.25,
+  "certified": false,
+  "uncertified_states": [
+    "idle"
+  ],
+  "anchor_silhouette_iou_note": "anchor_silhouette_iou compares each state's first frame to the Anchor. It is recorded as a diagnostic only: the certification thresholds were calibrated on single-loop runs in Issue #87 and no threshold for this metric has been calibrated against human verdicts yet."
+}
