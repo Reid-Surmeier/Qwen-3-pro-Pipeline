@@ -10,6 +10,7 @@ var spec: Dictionary
 var runtime: ControlRuntime
 var visuals := {}
 var hits := {}
+var list_labels := {}
 var list_overlay: Control
 var detail_panel: PanelContainer
 var detail_label: Label
@@ -48,10 +49,9 @@ func set_list_mode(enabled: bool) -> void:
 func show_detail(item: String) -> void:
 	if item not in spec.value.items:
 		return
-	var label := str(spec.value.get("labels", {}).get(item, item))
 	var surface: Dictionary = spec.surfaces[item]
 	var geometry: Dictionary = surface.geometry
-	detail_label.text = "%s\nContext detail" % label
+	detail_label.text = str(spec.value.details[item])
 	detail_panel.position = Vector2(
 		minf(float(geometry.x) + float(geometry.width) + 8.0, size.x - 156.0),
 		minf(float(geometry.y), size.y - 50.0))
@@ -64,6 +64,7 @@ func rendered_facts() -> Dictionary:
 		"list_mode": _list_mode,
 		"detail_visible": detail_panel != null and detail_panel.visible,
 		"detail_text": "" if detail_label == null else detail_label.text,
+		"list_values": _list_values(),
 	}
 
 
@@ -111,6 +112,7 @@ func _add_list_overlay() -> void:
 		label.add_theme_font_size_override("font_size", 14)
 		label.add_theme_color_override("font_color", Color8(42, 37, 42))
 		list_overlay.add_child(label)
+		list_labels[item] = label
 	add_child(list_overlay)
 	list_overlay.visible = false
 
@@ -137,6 +139,13 @@ func _stepper_text(item: String) -> String:
 	var control_id := "skill_tree.stepper.%s" % item
 	var state: Dictionary = runtime.qa_state().controls.get(control_id, {})
 	return str(state.get("text", ""))
+
+
+func _list_values() -> Dictionary:
+	var values := {}
+	for item in spec.value.items:
+		values[str(item)] = _stepper_text(str(item))
+	return values
 
 
 func _entered(item: String) -> void:
@@ -182,6 +191,9 @@ func _refresh() -> void:
 		var path := runtime.visual_surface_asset(spec.id, item)
 		if not path.is_empty():
 			visuals[item].texture = load(path)
+	var labels: Dictionary = spec.value.get("labels", {})
+	for item in list_labels:
+		list_labels[item].text = "%s   %s" % [str(labels.get(item, item)), _stepper_text(item)]
 
 
 func _point(geometry: Dictionary) -> Vector2:

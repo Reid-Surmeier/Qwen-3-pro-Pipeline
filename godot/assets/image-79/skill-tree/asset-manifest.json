@@ -19,7 +19,7 @@
   "assets": [
     {
       "path": "godot/assets/image-79/skill-tree/clean-plate.png",
-      "sha256": "474728570b8eb4b8dace85265c5d758c11ed19331a8048c787ad0206b06ae0be",
+      "sha256": "031e691e60b6aecd919116a0cfef309901bae24b59bd5d063acc2105d3fe54ab",
       "size": [
         611,
         595
@@ -1507,1250 +1507,1250 @@
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-hover.png",
-      "sha256": "026e0660683961ac5c381e9b808e5ae36d9d3c1d656848cddb969691fcb1f606",
+      "sha256": "b1f89412cca5a9378495bfb2722d8e1890fc940eab958ea2084ecd951b5effa8",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-idle.png",
-      "sha256": "a51f1951b0e7560cba04c536913825a1d9886a56a26d848f40e4d55dccc43fb6",
+      "sha256": "ae3e9690df41b4ee3584bc7c844eaaeaa30805947eefa5479554681c619728ee",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-pressed.png",
-      "sha256": "f438ef53506bcc374d31a716a2c8d0a779eb7a21dd1f0c35a9bdea5000f87ac2",
+      "sha256": "5d1c0362a1cfbba77bad018c8b9af9bbb569173f09af83fe648c99c5745d70c8",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-hover.png",
-      "sha256": "772d337318d7361a4d9f655a7a291bb09ae38cebaa2bbddb7d61c2976754eab3",
+      "sha256": "8f88adfa3f5b18bd307dd9302774a9729723c2bc9e02a8a1269ec5333ea48879",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-idle.png",
-      "sha256": "b8c4160dfb796e3271e3a0ced7756532f295c6f0035c30ac4bde044f3365ff79",
+      "sha256": "5289a5d54c18ec15cd2b5396be71012c4e942f563ac3e3e71b8454a1bf9d4e3f",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-pressed.png",
-      "sha256": "107fd91bfd10e65a1784fae64207423c900738a1483e5fae1fbb9d329f648979",
+      "sha256": "f75a47f540885e42959f5ce46d45e7a10fb3ec7958d3b52c76fe6a7d98158d8f",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-hover.png",
-      "sha256": "ff2b73e38fc613353bf6329bccd64080c856753021e5f4c4d83820983d9f5b5a",
+      "sha256": "8399921b8bde89e56c78a28817665d2f1de79322efc09fd9d7b80250972b12b0",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-idle.png",
-      "sha256": "e6082b1c5f5a4afe6187a876b35461d94a38b47ede2d9e70c012d75eddb1e332",
+      "sha256": "d04af0278386e03d54391ca5a83bbbd03d2c4ed19bc6d87e669f79086ad01240",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-pressed.png",
-      "sha256": "9550acd6f26e70d746c0fd3de84f1555b8e7fb0124298777aa79a53baff586d1",
+      "sha256": "f290f97b16958f9d2ef5f7c191ff86dd24fd67d72e222e6eaa7b1e5772ac763b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-hover.png",
-      "sha256": "dccdab9808c948454b9dd12ce1a1565534cbd903c3c3daf56bfaa409378df37e",
+      "sha256": "5214eda1545d7722253a45728d4d5dff85c4767ac875f9f0878dc1e64c1a56a2",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-idle.png",
-      "sha256": "d31818eaf3c9f4a2be610e9b8b910179a62d6f0803d80fdf40faeab4e2ae5906",
+      "sha256": "2ccceae24f1510e573c8898c636164bdd95927f06a3677c7380648e4a8a16a97",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-pressed.png",
-      "sha256": "5a89562d588f409297c16b695da1425adad8e8f87b9e557b01fe4b05b30b7eaa",
+      "sha256": "250b6b5317bde14333a3bb88465ee7a56dddd24b0dce0b3e9ce5080c0c768ea7",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-hover.png",
-      "sha256": "6a23548e7343e8564bc1cccda23ed73ea93e2ff346e92d3fda2491cf83c040df",
+      "sha256": "ac2cec0a8f653365092e6ffa88f6862edfc99caf3d304b7ca016b46f03f50b03",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-idle.png",
-      "sha256": "f68ea54ff9e9e552ece5ebbcb28de904350a1575f8f343cb5dc73af2561f8429",
+      "sha256": "e020445a77539b3d7d4f0fd67015b961451fdb94c07a63197dba89b16ed9e80f",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-pressed.png",
-      "sha256": "177fe7b7c2db7bc56785ab2c0af4737aa56bcdd2f514c69dd2a006750cf22d2a",
+      "sha256": "82b8c1adc80b487d0d7d33407464cc0538f523d5682eb36dbe5d996f715a84ea",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-hover.png",
-      "sha256": "b63302f225b6cea732958cf3875ddf69fe9c2a031b343788687869b1a652a876",
+      "sha256": "b8482b63ac013564bfaaa1561e08317a166fc394fc9f609aa8b94635e4d057cc",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-idle.png",
-      "sha256": "cbaa40208aa892941bea97ddf5d6077a2e6ff4ed775ee12b024ae6743dbe136c",
+      "sha256": "9e0613e22164aeda524862400bcf4a48b01b50c9c121afc9f176938eceebb4bd",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-pressed.png",
-      "sha256": "0736b5bcdc28c3e3d278858349c231e16bd1fd9ca80902525032fb35e4fcbe5e",
+      "sha256": "e4f9185d9d94a5888c82e15b0bcc07d066cb7a16b6f6aacbbe1d4b47e2ef362e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-hover.png",
-      "sha256": "7c1f9b0b4f99894a441470699c64b164335b081570b3e94feef1b27641c10af2",
+      "sha256": "21c364cb63a60779cffefd3ef6cf5d9ac8c73e8be56663391d71cbc5874fd5c3",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-idle.png",
-      "sha256": "8e244b89f58b619e9bb02779fa75a7c2488a100cdbcc069ed831b018b27953bb",
+      "sha256": "b00a6c7b3f7cec9ddc2e20155d179f26e5e083b34ad716914feb5c7a336f2b43",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-pressed.png",
-      "sha256": "5871087e519454010b3030003c3b2e90ab70b4d538bb57833ae687a113a2f6f6",
+      "sha256": "04c13259159191574d756cef638e4bc06c440d6203a9bee9d2718dbfe0372bc6",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-hover.png",
-      "sha256": "26c5cbcc65cd1a8f0a0dc397afefbd97ed1c5071164aa6160035b23efa64956b",
+      "sha256": "8fc5ce4818ec06d212ff609706037e3f173d0cf4c245fbb310b81ed38f34968d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-idle.png",
-      "sha256": "eb21744f504df357637c0bbcc1ae836bb33baaa059192549b2f0fa996966994c",
+      "sha256": "4ff5fc4c29bc6962014c96873057e16214d745c8f16ac80750d8e4964d37cdbc",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-pressed.png",
-      "sha256": "4d2f630443d98a383c73c658994d72eb0d611e2e65606eefbd15287dba027664",
+      "sha256": "00e3cd3d073e56512dfc8312db1942d731e77dbfa80ab8c9d622ab3788b6c479",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-hover.png",
-      "sha256": "1d069e925644c235f45ef93eb3f81a838a3e73499e18964fc1c4132cb667f1db",
+      "sha256": "028e84b3c1b3db336043df2514f09c0b09e5484e6738a56f04879377f784d0ca",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-idle.png",
-      "sha256": "0b1ca3fd4805181c6e4d2e2c73123616eab9de0f943fc348eb743a62d8ea6a0f",
+      "sha256": "474cd93d598884f70da17bde3e4a9adebe6fb867e349a710fbf7770ac3046311",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-pressed.png",
-      "sha256": "c60ed4f41659759896a11b907b446588cba846546f0ccc16d97d62c956acc2fa",
+      "sha256": "36ed1bf3f58e36aef1bac949a374d5cf0905f7677e0b337b6c6cc9f4068bc6f5",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-hover.png",
-      "sha256": "980f1543389c7a56a1530bcf6b09ad94602c9d108bd96c0097bb8885815a0bc3",
+      "sha256": "2a72c883b607ac4aa44008c04b1fed20b17bb830846ab9f775ce345e133e44fd",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-idle.png",
-      "sha256": "877994a0b9dbdc593472682317a3c2e22fb818e97c890e620f43448190060d47",
+      "sha256": "bd1b965009c85aa2d76ab85c29fa01fe5ebf927872a8d3c51ed9cfb6612c2157",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-pressed.png",
-      "sha256": "a64d406865d084c68db526e0c2351d25e7a8c505ec0b520027ea16301088c201",
+      "sha256": "0c302f54a5207fb0b914735ed9fcaff137149f2be1b39b6de6b89d2f9c610a1a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-hover.png",
-      "sha256": "251565be6a2d0dcae0fc71d9e2b437b0117834117760fb3a1c9a8478098ec892",
+      "sha256": "4685cf2aafd3abcee6edd59be58b77b45d0b1a3853c0e7d3ded4fd709834b461",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-idle.png",
-      "sha256": "8ef128d6998d358c8e935f9a94738094db60bbd7196e6c920453d7df25f4ff42",
+      "sha256": "f476b97c48035a5c8f364220568030c4624a9443b0e75b64e51f0ec6058b25b9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-pressed.png",
-      "sha256": "fd39b74950018731c27208145c51e08d55ac36f8f1a1bbedd7eb30be95a9433c",
+      "sha256": "9897c43b3130eb5ae7dd08fb0f8b6ab79d89c78147e7e42c86d758982bc6359d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-hover.png",
-      "sha256": "32f6c197786390bd1e9ef4906172db5ae3c06d9c47ad88d3d2386102796943c2",
+      "sha256": "b6224f3352255de8dd7b1bdfdf668a6d06528e5a668afc4f10e99b7645bf52d5",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-idle.png",
-      "sha256": "7096e140d4f7887ce75f91d544600313777ce5aada669373660e9da1d5c35570",
+      "sha256": "9ce872bfda3ca721471956b93f3ef5f9ab1fead2b9f84a3bf922c60f784be099",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-pressed.png",
-      "sha256": "aad2fa7e9a72f23149a8cabc074b60ec499bd9ad2fd2f946db0239df8b97a52f",
+      "sha256": "7c70623bcc3d1fe2b92476af0c266c899e831dd540c4c8fe9e5e2aaa80728012",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-hover.png",
-      "sha256": "96ee74500f0c11698c2a824ce64d50fc8d979f294703591c9075f2613442a1a5",
+      "sha256": "5e31908568e4c9c83588561cd9c486b6f20d4c7dbf8b96bd80f59b19c0fafb68",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-idle.png",
-      "sha256": "80afde8851a8c4ec5a3e5c0f1c724be8d31df5577035b7b9b4c84d2df9a23ded",
+      "sha256": "99856712794e84c75a34df80e4afe05c0f68f086cbfd5d8d4cc79493b606e1fb",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-pressed.png",
-      "sha256": "d1f1485126ce600168107260dfd3a4136d31efc7bc8256418915e9ee2ddbbe1d",
+      "sha256": "0435a7b1de3954130f00c26b8c79488eb17d5ca4eca501fe14e9c6d33a69a49a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-hover.png",
-      "sha256": "c9b7912da43498435514309992af1d54d2eb2da017742bbe330d19c3b4169dbd",
+      "sha256": "273c5c7432684303641cb69b6ad979deb2e069047496d8468996539b3c07b137",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-idle.png",
-      "sha256": "8c6270cc5c965108ddf98489aa73fa539197efb1100d42d2605132cde6ee51f2",
+      "sha256": "78839dce6718d8a889bbc19c5fc02661ac7a0a17eb367dd88ca476b54b22b462",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-pressed.png",
-      "sha256": "a52cf356698b3f674231b672f4e7f31dc430c9c3b01e4dde51099d92c1f9ee35",
+      "sha256": "e73e627473fd7aaaa7168a72838c804ee5d16a2a2888c92db426ac851d9273b9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-hover.png",
-      "sha256": "34efd097e7c6b8866b3c941b4c97330f34d37647e1d59463961509f86e7b5331",
+      "sha256": "f4e1b94e6a45589457ae2cbd2c8a729eb77bd1134ca9217914164f0974653759",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-idle.png",
-      "sha256": "10fe646361e99561b0920b2a5057e074c29bdf1adfd8d09031bf7333b3e39bb7",
+      "sha256": "3b440eba727a53c1a85a5ea4aa63be5afefa6e153d3f6591ae52750e83dd0119",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-pressed.png",
-      "sha256": "ebd566651e3fc6cbc275fffec997700b7116df843a63409b2e3a0a405440ab8e",
+      "sha256": "9126dbee7098f550713426b07bf547f9713ae5ba5fb81b837a99b3fec71f93e3",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-hover.png",
-      "sha256": "c27578e6a81ef50265436f127c3ad0e96a42198c626a2660a44894d69a5be2f6",
+      "sha256": "2e95e5d2800e56a928d08fe47921903bb99e89a420ff8c4d325e44b750bef102",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-idle.png",
-      "sha256": "9960193d30ee85ce5cbac14ec2ca2bb22f362896027b682199bac7894502ddfc",
+      "sha256": "ac4e6d46c585a58192b81eacd691e92c2f9904000fc78e992fb9746d35338ea2",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-pressed.png",
-      "sha256": "3e2d3e936b05935044127856b1af84c81b88ddaa8e3c0b1c471e176a24ac1667",
+      "sha256": "b90345285295175e4c952f54378d8e56d3db31532257ec543c0c69fac6dc44fd",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-hover.png",
-      "sha256": "4fd3cbbd6b2757cb9cbf294dc18a40f90d22cf69fa63f8360cfcd6bb28198781",
+      "sha256": "6fa75a13307bc37eb3f28c31e5ca7cacf3ef01e27bd27b85cfd36989b24b404a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-idle.png",
-      "sha256": "d320f1cd21a52523ac6aa456f88f44f5077bd206b4659a06bcc0a47db42887ad",
+      "sha256": "84478e1cb9b5977e9684429699682af8bd3d7581fb6e3682be66506b8bea757d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-pressed.png",
-      "sha256": "a3b4f566ef22b24626c026048ceb540aacef5911dd0717bb4b1a5ddacd7993fc",
+      "sha256": "8d71f239e49d048759aa48008c0f052ab7d4e9c81a6a74292d74db5ea8e456a0",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-hover.png",
-      "sha256": "fd3150cdd91fc31d0aa2cdc2ba3b6d0ea74b44bf81a5330739b4365ba7e34d7c",
+      "sha256": "84893fa8e8ad381d4ee1849297d9388c7f084c72ae6cc218d75bc32a6c9592a3",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-idle.png",
-      "sha256": "0cfa229e0d0d0078eaea161192a76cfca54d1ebb268232f8d24238afd20c4900",
+      "sha256": "b7e78e466f8bfb65fcd81df77f01e9b13c3f42dd7f40d64276134ebed515ccf7",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-pressed.png",
-      "sha256": "70e19bca34de8fafc28976eebd53af3123420a2d146d0810a79aa9c75617c06a",
+      "sha256": "310d864dc4894432188241b7effd0da14fa21424e0684c289887e873f86f8e39",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-hover.png",
-      "sha256": "6ebcafadd1219332ed37c785869afa45bb471300cea8cc4bbdcac0e38a22e188",
+      "sha256": "9a32a5d0ab99b7800821f7ea8e052bd68ccf0ee620a2b8a41c17e208bf39bc8c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-idle.png",
-      "sha256": "baff9a25e17fe6316a5d2f14e3bf2a3e59c53365fe641f40c64ca3e34bf1d89d",
+      "sha256": "57461f6dea9091d8dfe82b688a00c6006c5685df69feb7d87268d438a351c4c5",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-pressed.png",
-      "sha256": "19d466702fc2434aefa18f5475bcba0b4e5d5484a95f3754a1cc853b91daab54",
+      "sha256": "019eb78e6d9ca3e666dd3a1cfa317c5f02dc2e5f0ded0785cbcc3fcf4508f7cb",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-hover.png",
-      "sha256": "8e6178bcc73b6af66f669fc2a3ebe3f14591400fe7b848cf852acb2406208661",
+      "sha256": "496a6b7f8400820b868c52c80a8fd1165b82dc754cc920efd83d227c0a7fc185",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-idle.png",
-      "sha256": "fd526887a4effb63886f3e1466aaeec223d99535d9b4d89160f4a9677126ce50",
+      "sha256": "37ba02a238c4326a848fe78004eedff4382c2b6f3ded551ec98b1651ff3c3829",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-pressed.png",
-      "sha256": "9b3328548b4e9a276ff0b72862e4818808e5bcd35caf3cdc24d03d3837252670",
+      "sha256": "5df2e18a6752e2db939f0317fc42605cd06e113c0f2bec8a81620c178ca26485",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-hover.png",
-      "sha256": "8944dacf00321d079bf0715ca7a95adb9a834f5710627c26509fd65e44c50736",
+      "sha256": "6a7cc322e94f6dbc2ff44767ac0c18b4dd6a69779d29e81ccf16a58e4e0a36fb",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-idle.png",
-      "sha256": "c5b62077156fd35877baad0de2fad3ffc9ed45c9d6d3848204f4a5988fba35a5",
+      "sha256": "0c1e7a3b06ddc55220c03416467febffe7f18c30f0203ee7bf60d94cf3045ae0",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-pressed.png",
-      "sha256": "cece2f24bc7f675c5348f74b92f5a244a105bab3cd059290cbb30061c5fc0e23",
+      "sha256": "85e8f269bf082bf1dd9ed12cea87082a821ab223c235535dde22a575fdf95825",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-hover.png",
-      "sha256": "42210a7bfaa21717aad812bce45c97040ac5667b9310d7ac044a22acc208cf9b",
+      "sha256": "f83e5729d4f624e7b24758bcb37ac378decfdf93b64126fd04ba87300252c514",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-idle.png",
-      "sha256": "bbe7427d8f6fb8dc505fe49cf4dded155a0a25d5d614ec01e340a3d2e1eb55be",
+      "sha256": "68fefe1568825ed7c207560f7b4d8ec301804b877f0ab2386ddeb4df5841f2f7",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-pressed.png",
-      "sha256": "d2cdb4b0753f51cdaf758234d639ab84a1581448d974da9cc1260996e956dc83",
+      "sha256": "151a65bda01b3f8275a13a6dc81a538ed976c0173baf15678572e9d3856a27c0",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-hover.png",
-      "sha256": "91c26238c8928c36e7417a780bd49ae854491f3e37242a7f7bd9323348cbc2ec",
+      "sha256": "072972fcf03c45b0fb753b12bdd68c70c8b70fd20057b528bc8d2f91aa1eb6ae",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-idle.png",
-      "sha256": "264eb239392778ad0327ea82f4de8a6b46dd716d677e26526afb2636ad154374",
+      "sha256": "cbf39a3c1c98e3d2fd4cc28796d9b5d6b975072ba3bd2bd5b621524171c07e80",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-pressed.png",
-      "sha256": "0a734d35ff1823ad580b29113ceb4e099b4959b911f5f44c28f1211fe1654595",
+      "sha256": "029da8f1437f267000ffccae6145fbe46e2e64e580d01079594c2e75549c2b79",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-hover.png",
-      "sha256": "9ad27ff16a9689a7c1d9f3fa9bc2960b33773da2c98433dfeee4378ea9768d23",
+      "sha256": "ff1fb7c4d389afc12cb6b2dcd3819aecee8ea7906a9520de0d3bdc860863616b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-idle.png",
-      "sha256": "ff74cd7d1567dff01b26eb7efa9a1c50911c31cc47b51258700b09860574dac4",
+      "sha256": "10f7ee89930f6238bfb48bcdac11e9cbeca05de6c53a18764e70645fa395f63e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-pressed.png",
-      "sha256": "d5e2d5cae432c0d7e55fef586decd860f574e77e4b8b4bded03bbfe31d171fdc",
+      "sha256": "076c3b6d8d89c4e25ef88fd59cbea728db4281041df6e48fbce7f0d57116b536",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-hover.png",
-      "sha256": "74301ff8b7adf91d0e8e0ddf0c7bdebf2bdc0dbcfb608e7dd79eeecc80a1de6e",
+      "sha256": "c1501ad8ce7bcdfddeacb8d622b778981a75c3df9ab3b0ef9cf69bda0a0e9d26",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-idle.png",
-      "sha256": "4fbf84fab3a04156cdf612ca35eabc2ca0a88f6676d63f364a5951b44832ba5f",
+      "sha256": "3e1b32ed00c43045bf7d81cc9ff0e967a1c821c4bd7fcd904978c3060ef45fab",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-pressed.png",
-      "sha256": "21d6585aa6d0e5cfe0fd46bdfbe1b03b236c166091a37fecb8dc52b6b82b5d4a",
+      "sha256": "3b2c1ffe0bd8cc90acf321fc205a31c50071668f75298f76301ec8a3da36450e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-hover.png",
-      "sha256": "837ebf6d8be15f8d8f29f59bcf401bc55c571325dd739852a92d36072a2b8fc5",
+      "sha256": "dff3386fb6f9b975bbe4a37272d5619e8dde514371c3de145933339a5fddf8b2",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-idle.png",
-      "sha256": "eb3875f8c6899695a769cfa37303c7c85085a04ba4477e05ee5b5915d70701bb",
+      "sha256": "c529ebdf546f4416b18a0d800213b059b67868df1bda0891c4a2580f62cc2bef",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-pressed.png",
-      "sha256": "6485008a234fc76a75a376adfc47921cbe0bc9d973348fceceb58550dabc6f93",
+      "sha256": "cd6d3cf1af95f7c182bfc0e1d1dfa01413c1481d1aeb3e49ea5eca225468ec04",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-hover.png",
-      "sha256": "4cc707b0a13b975402366e0e71c7f5e0c00e892032bba277f501e0768d67280a",
+      "sha256": "86ed4e29fad8e01ce60b5f17c922066561fe813206388e2090d5712e09c3b5c9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-idle.png",
-      "sha256": "f42129d3670ee85c5d9f274496391072f897bf3b4b8664a3111de863a8b08887",
+      "sha256": "de766c04c3e7474751f48fc23eefcedb7e21aff121ec96973a84ec1306c8ddc9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-pressed.png",
-      "sha256": "d91e9618f85e30bb4ff60534f0b1b2877e524c3dfd68d8aa81a612e9d0577432",
+      "sha256": "8f16d8848326a3ad616428376151620e9f11797dbf99113dacbd152b184532b4",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-hover.png",
-      "sha256": "bdcf905eba6852b3e6d86bd88444b7dde597f9d1e0772099a4fc9891f3978f72",
+      "sha256": "dcbc06f96bd057c27d4bd9aa8dc03c1ca4b09bdec9da1c7e91140e0b812181d4",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-idle.png",
-      "sha256": "ba19eb910cba2fb31f92e273ebc7039cfcce3477b3e3e25063b9de9a8387c15a",
+      "sha256": "5ed4cd8ca658769915ceb8b2cce4782f5167b383b9e87d0ab69c0b512d077401",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-pressed.png",
-      "sha256": "086d384c772340015f4e7a72bd4b53b623577d90067acd515ab77f1c1e776793",
+      "sha256": "d089c4ab7276fa02b655ccef92c5a4188548914cd9e6eef401f0a9a9f67de67b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-hover.png",
-      "sha256": "48e70b06ce6859e61ea37d9c786702c82d58bb5fd7ecd2bd2b1c0b3b6efb6142",
+      "sha256": "7e386d5defc6c2cb5eb0933ee67379675ea9e6c4fced3cf64d660998b93aad67",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-idle.png",
-      "sha256": "6df4c6334914475d999b23cb35e3fc8fbba067afffe91b772be34afe27c20131",
+      "sha256": "9f0abd254f04935352cdfdc66b24d8273f283d86231778b9c91405628fb11676",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-pressed.png",
-      "sha256": "650a0ef5b6cefcd76887ee31de91644bc44e0eb05f09b5eb6322925b382010ee",
+      "sha256": "80cb51947c7e2e3ca543767c6a385ce626bfa58ff3d3ac8e4c1d745fcc046d1b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-hover.png",
-      "sha256": "48e102945e57b5b204041b447b07213c410fce08e4c032da03fb3fb5f5c7413d",
+      "sha256": "b0e3169bcd57d5aa98a6b9cb3147645f3a39db6a9b1f64531dd10004478fcc27",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-idle.png",
-      "sha256": "9024c70be2b672feab248957c5e3246c46c7afa569b565655ff19b5b26cd0c71",
+      "sha256": "8708f16aca2a8ea6ea08fe37e854d3562ce28b57c7e90903203fdb0418b95f2c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-pressed.png",
-      "sha256": "b0100b8442667b365cb2255f4f2e7ba695e977a241b41e86eae460727c6c8800",
+      "sha256": "1688d9ab0e19809d47c04c6ea850cc7335cdbcdb06fb12257c5fc77c25904464",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-hover.png",
-      "sha256": "b73ff58be8a40af6212e62bcdf69114bccb6949e7488d79725adc6e2b2b6691b",
+      "sha256": "7045e9a51321fff78ee85f6d7005d7f6ef0a2c6ef969778c67018f478a6bfec7",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-idle.png",
-      "sha256": "ddc4dbd9faf16e7d41e97bccdb59ce9295d51a827f72471ca94770bbc619b464",
+      "sha256": "1dd57868334a5f2d47e6533679eb6d3f2a770f3eac29e13a8bfa92891e95d596",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-pressed.png",
-      "sha256": "68d19509aa3894f52c5674776830baf47f1bdfbc2bbef551238968ee0bc168a8",
+      "sha256": "909017335abf91e1addb900395692b8edf26d84607ac0172dd03b02484f786c6",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-hover.png",
-      "sha256": "092ab7878ea80a8f691e4a443ab9fbf65ea01cc3dc2a9441c5b487c6da7c5b72",
+      "sha256": "d53ae0570bae011611c9e5fdf56938b35719a704483a9e26973a47aad089d91e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-idle.png",
-      "sha256": "1b7c828d6e439da19df57f285766820d6a07c0cd3d1e77cb95f3b24b5f3d4920",
+      "sha256": "5203a107648e31046e4f76c74b62b7f6c30a248ada0d6124b5220bfe7855654b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-pressed.png",
-      "sha256": "cb6234bd9000e724cad28ec5a181e5a7562272ee5b2087386043115224659897",
+      "sha256": "b399a7f87bf948a51d4cdc7bb52a5889109a8d7fd4f89ffc6876c16982af8164",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-hover.png",
-      "sha256": "cbac373e1d86b3c03a044ff179d1e224b19720a0fc72d4f14ad322dcef0fa7b4",
+      "sha256": "f8edbeb0e8e8499099dcf9cf0f59cb1eecf5645827a78fbaf282776c6336504e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-idle.png",
-      "sha256": "8514d233e09167571d7497c831293350ea1caaa8689eecbe6b343ccc8fba99fc",
+      "sha256": "31427973e789581738d9dd9c5abd02ebe8802da7f3d49bc4bcb18b89a1b1cb2f",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-pressed.png",
-      "sha256": "24f57308c82e20b97f08421e49985652804036007eb6e623646b6235b524acbe",
+      "sha256": "1a9dbdd298aefd404273f3266c629d977af8ac1675ebfd0f4bbb7a19ddbac98b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-hover.png",
-      "sha256": "9cdeaf9f8e412eb64fc0dfe2fb9a888fa7d03728e453b978137257969aee1d59",
+      "sha256": "9da9b37f5e8b34eebcdce25d5df7006af56ef94b7ed774e98e6b3e3146a2275c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-idle.png",
-      "sha256": "cdbcb480089384044105ba5ffe63f81a7de8955013d4ea9b437385f6694fda71",
+      "sha256": "51c575b095e38a15287c85d72e5bbb5502ce8cc18306aaa609a2b585d7d9359b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-pressed.png",
-      "sha256": "f201146d407d801e232925929550532d7d0723d3f6717f4c11534f57add7379d",
+      "sha256": "9dc14c583fdc38f60217589792a81e755e0e70517217073d30275095957384ab",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-hover.png",
-      "sha256": "0b375ae17589466c55c13a75b4eb4342332cde7de1d9212181506066a2e4be83",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-idle.png",
-      "sha256": "0e8dc572d0b633ff888920912cc71fab0443a058ab123b988bd65cfe71b37d77",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-pressed.png",
-      "sha256": "d07c1ba79c812ecf7b5390a22e75a0f553e74deb2740da1a85944803e46db645",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-hover.png",
-      "sha256": "7dda1ac394c471cc8b3a14fdbf10eb05118fa99774c2b30f80170c966159cfd0",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-idle.png",
-      "sha256": "e473bbd38904723059e35ac6cb1080d5cbc0e92beec1b27e2af592e8b2e03cef",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-pressed.png",
-      "sha256": "2e18bf7fa0f33ef0a1908403ef97c961b4dbfbec3449ced0ab479a1178c00675",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-hover.png",
-      "sha256": "e0b4fd127873aec86f71f0fd587c65e3c82c00339a40dff36a625165e0879061",
+      "sha256": "f39825b29c025989ba46ce200b53a3bc097371ea2876ae27fab0d89e04f9dd90",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-idle.png",
-      "sha256": "aab081ef95a23472a478cd8075d0e8e9fdc1d5b93ef132b40c4a0c8a159feed5",
+      "sha256": "3a360cb42c88c182e5c2b956b2c3cd91a94933e3a0fb79d6ac1a52230e1efd8a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-pressed.png",
-      "sha256": "6c6cd21294097096ad7f65214c8d284884356185efb34e2f050d1255946102c7",
+      "sha256": "b9f567bf0a0e0269ab2fcfa8c36772cee873c85b6bb552024a361318d287d192",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-hover.png",
-      "sha256": "bf783d3833ae5a5b10ea55ef610d8bc7b23f10fdbd2d565fccaac12fd496ef16",
+      "sha256": "9ae303facfa7c2b096116ed9571ce757492c301651fd8274fd5e2a6ef4dd1243",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-idle.png",
-      "sha256": "f7349c917a63857a13c2c427a92e777114a4620b6402ee80ffcae1428b66f762",
+      "sha256": "7dce4653868c18734d95cbc39d81f305f8fcfab451b64ccd0e4abeb35c67ff4a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-pressed.png",
-      "sha256": "b1c1319ca6e849660e96ce02809973d7465c573b55c5da6ae2dd1b948eeedd1c",
+      "sha256": "37bccccf0bd97a87d0f29602e438e1e00e9c17cf833c2a55c11d5124066b0765",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-hover.png",
-      "sha256": "6cfddb18e2084c01095171368f98e69cc6400fa3cc45c1af3bac7f2d529f3480",
+      "sha256": "3e83f304dfc661f64a7f4d5bb7a604952865c70e59505aa9c1745fc371f77ab1",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-idle.png",
-      "sha256": "0c076ef185ee176016983dcc9e3fdae28a9bb505b55bd4257b4b6054220dbd54",
+      "sha256": "62be6bee35717617839e8b1db27d5c54df6e36ae28683f5d9fa80822efc2afd1",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-pressed.png",
-      "sha256": "54c15570a9003c7608d1ea8bf4edb5df24c12281e8671eec17086af052f16f8d",
+      "sha256": "c77264742ad839c84573054d97772374d721397538202f22878628500b546d85",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-hover.png",
-      "sha256": "be109fe9a8cb0085f7beae0e4bf3faca41aa916e5662b636c27b9aa2c71aadf2",
+      "sha256": "b0d98054b4aff98f4b146bdd221094ba7123d0785eb230b303cb96d92528d2b9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-idle.png",
-      "sha256": "80c41f272e3c542829bfaa07413ac13591b90330430ed5aab5aa5624d9b140ba",
+      "sha256": "9a50a04c895f5fb99312b0547c70f751b3fc635e42cbbcc38d7a8c3071061906",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-pressed.png",
-      "sha256": "0c2e034970a9fcf9f069b2b13a5e49692df4a50c0ddb1edcc4ddea282896f034",
+      "sha256": "3f36b0cfa0e8d09d230ecaef6821b9c6e023d093ffd4a20db290bb5285d97a79",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-hover.png",
-      "sha256": "fd849363c5a5c395c7fdb3643c3c0a8b5e8c9caa10fdaa3c9971664c223351d1",
+      "sha256": "271e092d01b113b0891159b35171b7364e3a90283df2a8f0c0d62f78044c0d5d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-idle.png",
-      "sha256": "2b0c52d0e8f43e12c1e36186c01146c40b189af1eada10f91fc4fae739bfdf02",
+      "sha256": "2d000426343e4ad111454df0fe94e188b8ad4773443605ec23a131de6b9da90a",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-pressed.png",
-      "sha256": "da76d0c42aea5655f808281b38cca84478f738fffee8e7a435c4bd4f19215b58",
+      "sha256": "fa796465b49125f382053c37d632ca6eb0d65ffc3bda3d9c65855339313020b9",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-hover.png",
-      "sha256": "059ce1f51b4e407e28cd1475d6a71f2f129e05abdb6f995a1900ba295b3d77d3",
+      "sha256": "8b6fe154dabac59d61a51e1fce21371aa8701d442eb650c08c7eaeb2a414333c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-idle.png",
-      "sha256": "66c68b5eb43922ddc443430af3248f00e255a021755b38b124754bae412504ab",
+      "sha256": "ea10def57105a972b7f8789aa76ae380771246304397bf7c680312f4d858d80b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-pressed.png",
-      "sha256": "4858606ac91f6d95365403b688d068e64c1d57e76cce7b70d691ebd807c6207a",
+      "sha256": "f99c5aaa469ac7748efdaf944a259b2df862a31f991842022907c4d5b5bc62db",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-hover.png",
-      "sha256": "b8cc1705bb23c9d009a9a4d7ec183267e6887fbab884124306d3e4a86bea0877",
+      "sha256": "b1099725095700104d5188b324fc727fb81befa3128791b9dce8fed2d5faafb7",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-idle.png",
-      "sha256": "edabba41cf40780d92ede108141239bcb1277dc296cf4f2485693c04a1bd686c",
+      "sha256": "666690127321ae437f5d6e7db3ce78d07597942134a8d32e473e2c3e05193304",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-pressed.png",
-      "sha256": "018a9e47a28bac3196cbe05566754b8e47eeab2e7dfdfc4041dac3c9057401c8",
+      "sha256": "bbfe0d31f1d6b306fb42c3554f57a0f083a26a8779df36008a0527c40f5c3c47",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-hover.png",
-      "sha256": "fdd06f5750b9b61101ce28b337c84bd9ce496aaaf938e799ae5865a19ae74a57",
+      "sha256": "6207f8c8545018a1228366b9be0e806fb9ce3c119eb8bd604d86088e85afbe2c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-idle.png",
-      "sha256": "29865f0b2e674caa9bdfc3d60dfc2fde543b6357131812a0fc677cc3c905d4c9",
+      "sha256": "a572bf59d87e5e446b492bd18096aff4acbd6904583c7edc683144fe749a6f07",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-pressed.png",
-      "sha256": "a38195b202a13c214065f4c6d7bef1b97b764683871e6d04783eb199c03436d8",
+      "sha256": "03b714e6e5bb288b17ef788e5f5c06aa3d102eda1e738bfae3b1d9e2fbcf7c7b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-hover.png",
-      "sha256": "12023d3972477c435103f9d0cf844829b9002bc7cf8b1c9c3831f472cf346282",
+      "sha256": "e4f5bd6de8a8807cca9701b13b20ae0b1199b47cc84f183bb0daae01402e704b",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-idle.png",
-      "sha256": "b05ee836b6d74d5bbc5bce97ee498ae02a5bc24efcc47eef63e4a3a08c359779",
+      "sha256": "a3c9a43aefba298770743d2c4c467c22d61bcdef54a175d3e327e33aae6d353d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-pressed.png",
-      "sha256": "a019a50292defdb22c415ec3999624d7afbdff255d2a62693212a359a17c712a",
+      "sha256": "ca709a254fa32d1927313b7c271e77931a80cbcd0912d555df0dce5bb3d43723",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-hover.png",
-      "sha256": "43f1a7b7f16ce99465b10635706734d9629b5e2d4a2cd7fab34f0de04f0f9bcf",
+      "sha256": "3d05b974b72277cb5448c593a58b20cf9f6a5f7933f3e96e52f68248e71c0eb5",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-idle.png",
-      "sha256": "2d9488d1803392ce1cb1585cb3671dee175ef9d5795d934dd5d57b1e641fa55b",
+      "sha256": "da855a613b13f576fd5c2e24d2966ed442447fa3dfe8d1a49027530e00d55caf",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-pressed.png",
-      "sha256": "1ffd2e1238ba90d21d892a618d592ea7481804c753c771443fa56bace078e025",
+      "sha256": "b9d74b98986ddb774472cab4282ae74f63978af082cdc34b3437f091c63c559e",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-hover.png",
-      "sha256": "f684e02bd0d75b717ba6cf0eee984e6c4d58cd90eb36bd4e339a76282b5417f9",
+      "sha256": "31e65560db6b55f22812eb0e6d6b44d03be78afd9a565ac0c9c15a161bceb064",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-idle.png",
-      "sha256": "b5fc3a5d0b21b86c9b542660efbdbe332444d0fc02871252b12e871486c952e7",
+      "sha256": "84462b3d65328afb5f12c33cf9bc012713eb40be3c932645a737e7c2c04906f0",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-pressed.png",
-      "sha256": "89a2f816616505d9121ed43d6f1e4cd94d115bc946e5eed46c30babfe1f57fd9",
+      "sha256": "428199a481536b525f138e9d0584e7c05a78c88de4d8fb275f98db9d5245f21d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-hover.png",
-      "sha256": "6ec3f61f2a5543007d9670417a6a26a2ce3a33104419e63ec58397cb3e5668d8",
+      "sha256": "df52c144d81943fb474b377b114a856aace3e441f084b44492f774c4d92ad721",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-idle.png",
-      "sha256": "22c506cdbc9741ca19ec0be33409546dc0950d5af2df5a56444c73de59e9984d",
+      "sha256": "92eb324d147ebd4411bf5857a3c941a768fdc7ad424a9c56b022bfefaf224f61",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-pressed.png",
-      "sha256": "4f98788ce34f1a2fd7aa2bbde04000ce2f03eb1907879c690b39fb7a6e1466ca",
+      "sha256": "f1cd7e7c6079ba492eeb4be0e9e60cd81b98cd5b0f85f7159bd9bcc552b43913",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-hover.png",
-      "sha256": "f3701107c79e57f6b5f49d3b9aaa678dbdd70767f24f61216308bea5d0a87069",
+      "sha256": "d699b02c1b8154ece53d2d131b43c2a2c2493c1a3e51807730220aad4eaf2a97",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-idle.png",
-      "sha256": "351c5bb3d77bc161f6187f77e7edef06d9823f4bd23e5e5e3ff35efeeac37835",
+      "sha256": "2a87cfc15c94575d4d22355c4eeeb447da73fc268ee611dd3708df7cd1954996",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-pressed.png",
-      "sha256": "dc1a69caa03f34d7d36c2849c63db6d2daf8733310ddf3441674678487dc5f46",
+      "sha256": "09b45e09be174a7d88aac9bb5bcf87076f3178fcb416539d3437182f8bbcf262",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-hover.png",
-      "sha256": "582a441c9beb7ad5feb68a12573482dcc697dfa961676346a33709cb8221fe5d",
+      "sha256": "7445fe451d972ed7081e1f80579471d8d6a549313d44dacc2a6605c0bcfcad5f",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-idle.png",
-      "sha256": "e24919d2a7f621b01bbf51ba4ca9de6cfe4e1038e81196f399a23338ff982a22",
+      "sha256": "756e75de9ca6d37e6221736ef0d52648ac03a1f50d33770b5026fd13a239a9f4",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-pressed.png",
-      "sha256": "5dc752e4d32cebce716e6a7c6e6fb51702ba5554377bec2f589d04db51c4e820",
+      "sha256": "4913cbaa7925000b8d8b167e75eece8a041d6d3f74ecf7dd28725c6d28fe6add",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-hover.png",
-      "sha256": "4d42795f25ff50fad91251f6fb1433e47af06be5894e5910233c7707f534e8fd",
+      "sha256": "8747186d64e74fd0ab8d426a137abb2512c0d088056e7b1b1150e4646b23aaec",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-idle.png",
-      "sha256": "54be1788001cf2a72760a77bc7303165db99170328d26a7d2c3a319b0e9bcd5f",
+      "sha256": "e4520707d43a226fedf0c12ea9d06d3996f820fb98c0832ac24562a2c3352400",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-pressed.png",
-      "sha256": "207fd7d2cab97a5d548d835429a166d81ca6c398c7f9ba6876b9e67770eedf1c",
+      "sha256": "9317a4b4710e90d800d5b2a44a9c96e87dca29ae9276220cb53d90ec3f5398cc",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-hover.png",
-      "sha256": "b7ee4f391e27a765a8f84aebc41de85b69d1519be3e81b813b8ac9bf07dac99b",
+      "sha256": "2722131a6bb6b849ae2bcba421826a72747425b065cb7e779da851be6de9e30c",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-idle.png",
-      "sha256": "bc02507224e23b78ec49a3e4dfbcc40cf12bd3c0f963184dc6d543e188247511",
+      "sha256": "032a67e3f5b59fe19c2d79fe85f686beb0deedd4bf10642c360a0968b22871b8",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {
       "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-pressed.png",
-      "sha256": "4a12a0952212ea80296d76e10d2f59dba731da018ee8e0f71e6cd3654b0b9819",
+      "sha256": "0ab29e52655845ddca68d7c1764ac78fad9b1660c2b9df9184d89924deb8de4d",
       "size": [
-        15,
-        16
+        18,
+        17
       ]
     },
     {

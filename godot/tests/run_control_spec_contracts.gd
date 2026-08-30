@@ -11,6 +11,7 @@ func _init() -> void:
 	_contract_valid_manifest_is_accepted()
 	_contract_options_manifest_is_complete()
 	_contract_skill_tree_control_types_are_frozen()
+	_contract_window_adapter_fields_fail_closed()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
@@ -84,7 +85,8 @@ func _contract_skill_tree_control_types_are_frozen() -> void:
 			"semantic_states": ["unselected", "selected"],
 			"initial_semantic_state": "unselected",
 			"state_set": {"unselected": variants, "selected": variants},
-			"value": {"items": ["heal", "holy-light"], "initial": "heal"},
+			"value": {"items": ["heal", "holy-light"], "initial": "heal",
+				"details": {"heal": "heal\n7 / 7", "holy-light": "holy-light\n5 / 5"}},
 			"surfaces": {
 				"heal": {"geometry": {"x": 0, "y": 0, "width": 42, "height": 42},
 					"state_set": {"unselected": variants, "selected": variants}},
@@ -134,6 +136,46 @@ func _contract_skill_tree_control_types_are_frozen() -> void:
 	_check("selection-context-binding-fails-closed",
 		"ControlBindingError" in context_errors.map(func(error): return error.code),
 		str(context_errors))
+
+	var missing_details := fixture.duplicate(true)
+	missing_details.windows[0].controls[0].value.details.erase("holy-light")
+	var detail_errors: Array = ControlSpec.validate(missing_details, _all_assets_exist)
+	_check("selection-details-fail-closed",
+		"InvalidStateSet" in detail_errors.map(func(error): return error.code),
+		str(detail_errors))
+
+
+func _contract_window_adapter_fields_fail_closed() -> void:
+	var fixture := _valid_manifest()
+	var minimize: Dictionary = fixture.windows[0].controls[0].duplicate(true)
+	minimize.id = "options.minimize"
+	minimize.actions[0].action = "ToggleMinimized"
+	fixture.windows[0].controls.append(minimize)
+	fixture.windows[0].drag_geometry = {"x": 0, "y": 0, "width": 200, "height": 24}
+	fixture.windows[0].minimized_controls = ["options.minimize", "options.close"]
+	fixture.windows[0].plates.list = "res://options/list.png"
+	_check("valid-window-adapter-fields",
+		ControlSpec.validate(fixture, _all_assets_exist).is_empty())
+
+	var bad_drag := fixture.duplicate(true)
+	bad_drag.windows[0].drag_geometry.width = 0
+	var drag_errors: Array = ControlSpec.validate(bad_drag, _all_assets_exist)
+	_check("invalid-drag-geometry-fails-closed",
+		"InvalidGeometry" in drag_errors.map(func(error): return error.code), str(drag_errors))
+
+	var bad_minimized := fixture.duplicate(true)
+	bad_minimized.windows[0].minimized_controls = ["options.missing"]
+	var minimized_errors: Array = ControlSpec.validate(bad_minimized, _all_assets_exist)
+	_check("unknown-minimized-control-fails-closed",
+		"InvalidControlSpec" in minimized_errors.map(func(error): return error.code),
+		str(minimized_errors))
+
+	var bad_list := fixture.duplicate(true)
+	var list_errors: Array = ControlSpec.validate(bad_list,
+		func(path: String) -> bool: return not path.ends_with("list.png"))
+	_check("missing-list-plate-fails-closed",
+		"AssetIntegrityError" in list_errors.map(func(error): return error.code),
+		str(list_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:

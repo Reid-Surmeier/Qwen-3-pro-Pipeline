@@ -44,11 +44,15 @@ func _selection_and_context_activate() -> void:
 		str(selected))
 	_check("real-context-activate", detailed.last_gesture == "ContextActivate"
 		and detailed.last_action == "OpenSkillDetail"
-		and window_state.detail_item == "r1c3" and detailed.detail_visible,
+		and window_state.detail_item == "r1c3" and detailed.detail_visible
+		and detailed.detail_text == str(window.spec.controls[4].value.details["r1c3"]),
 		str([detailed, window_state]))
 
 
 func _step_commit_cancel() -> void:
+	# Reversing the view dismisses the context panel before rendered-pixel checks.
+	await _click(Vector2(1048, 15), MOUSE_BUTTON_LEFT)
+	await _click(Vector2(1048, 15), MOUSE_BUTTON_LEFT)
 	var stepper_id := "skill_tree.stepper.r2c4"
 	var increment := Vector2(877, 220)
 	await _click(increment, MOUSE_BUTTON_LEFT)
@@ -59,6 +63,8 @@ func _step_commit_cancel() -> void:
 			all_hidden = all_hidden and not bool(pending.controls[control_id].arrows_visible)
 	_check("real-stepper-pending", pending.window.pending and all_hidden
 		and pending.controls[stepper_id].text == "0 / 6", str(pending.controls[stepper_id]))
+	_check("real-stepper-pending-has-no-rendered-arrows",
+		_pending_arrow_pixel_count() == 0, str(_pending_arrow_pixel_count()))
 
 	await _click(Vector2(957, 569), MOUSE_BUTTON_LEFT)
 	var committed: Dictionary = window.qa_state()
@@ -67,6 +73,15 @@ func _step_commit_cancel() -> void:
 		and committed.controls[stepper_id].target == 6
 		and committed.controls[stepper_id].arrows_visible,
 		str(committed.controls[stepper_id]))
+
+	var max_id := "skill_tree.stepper.r1c3"
+	var max_before: Dictionary = window.qa_state().controls[max_id].duplicate(true)
+	await _click(Vector2(793, 120), MOUSE_BUTTON_LEFT)
+	var max_after: Dictionary = window.qa_state().controls[max_id]
+	_check("real-stepper-bound-rejected", not max_after.last_result.accepted
+		and max_after.last_result.error.code == "TransactionRejectedError"
+		and max_after.target == max_before.target and not window.qa_state().window.pending,
+		str(max_after))
 
 	await _click(increment, MOUSE_BUTTON_LEFT)
 	await _click(Vector2(1046, 569), MOUSE_BUTTON_LEFT)
@@ -85,9 +100,28 @@ func _view_reversal() -> void:
 	var tree_state: Dictionary = window.qa_state()
 	_check("real-view-reversal", list_state.window.view_mode == "list"
 		and list_state.controls["skill_tree.skills"].list_mode
+		and list_state.controls["skill_tree.skills"].list_values["r2c4"] == "6 / 6"
 		and tree_state.window.view_mode == "tree"
 		and not tree_state.controls["skill_tree.skills"].list_mode,
 		str([list_state.window, tree_state.window]))
+
+
+func _pending_arrow_pixel_count() -> int:
+	var image := get_root().get_texture().get_image()
+	var count := 0
+	for control in window.spec.controls:
+		if str(control.type) != "Stepper":
+			continue
+		for surface_name in ["decrement", "increment"]:
+			var surface: Dictionary = control.surfaces[surface_name]
+			var x0 := int(window.global_position.x + control.geometry.x + surface.geometry.x) - 2
+			var y0 := int(window.global_position.y + control.geometry.y + surface.geometry.y)
+			for y in range(y0, y0 + int(surface.geometry.height) + 2):
+				for x in range(x0, x0 + int(surface.geometry.width) + 8):
+					var color := image.get_pixel(x, y)
+					if color.b > 0.45 and color.b > color.r + 0.12 and color.b > color.g + 0.03:
+						count += 1
+	return count
 
 
 func _description_toggle_reversal() -> void:

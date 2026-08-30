@@ -13,6 +13,8 @@ func _init() -> void:
 	runtime = ControlRuntime.new()
 	runtime.configure(_fixture())
 	_contract_context_activate_is_distinct()
+	_contract_declared_actions_drive_runtime()
+	_contract_stepper_bounds_reject_without_mutation()
 	_contract_step_hides_every_arrow_in_one_frame()
 	_contract_commit_and_cancel_are_window_transactions()
 	_contract_qa_state_covers_every_stable_id()
@@ -31,7 +33,8 @@ func _fixture() -> Dictionary:
 				"semantic_states": ["unselected", "selected"],
 				"initial_semantic_state": "unselected", "state_set": {
 					"unselected": variants, "selected": variants},
-				"value": {"items": ["heal", "holy-light"], "initial": "heal"},
+				"value": {"items": ["heal", "holy-light"], "initial": "heal",
+					"details": {"heal": "heal\n7 / 7", "holy-light": "holy-light\n5 / 5"}},
 				"gestures": ["Activate", "ContextActivate"],
 				"actions": [
 					{"gesture": "Activate", "action": "SelectSkill"},
@@ -80,6 +83,46 @@ func _contract_context_activate_is_distinct() -> void:
 		and selected.action == "SelectSkill" and detailed.action == "OpenSkillDetail"
 		and state.value == "heal" and state.last_gesture == "ContextActivate",
 		str([selected, detailed, state]))
+
+
+func _contract_declared_actions_drive_runtime() -> void:
+	var remapped := ControlRuntime.new()
+	var fixture := _fixture()
+	fixture.controls[0].actions = [
+		{"gesture": "Activate", "action": "OpenSkillDetail"},
+		{"gesture": "ContextActivate", "action": "SelectSkill"},
+	]
+	remapped.configure(fixture)
+	var activated: Dictionary = remapped.dispatch("skill_tree.skills", "Activate",
+		{"item": "holy-light"})
+	var contextual: Dictionary = remapped.dispatch("skill_tree.skills", "ContextActivate",
+		{"item": "heal"})
+	_check("declared-selection-actions-drive-runtime", activated.ok and contextual.ok
+		and activated.action == "OpenSkillDetail" and contextual.action == "SelectSkill",
+		str([activated, contextual]))
+
+
+func _contract_stepper_bounds_reject_without_mutation() -> void:
+	var bounded := ControlRuntime.new()
+	bounded.configure(_fixture())
+	var before_max: Dictionary = bounded.qa_state().controls["skill_tree.stepper.holy-light"]
+	bounded.controls["skill_tree.stepper.holy-light"].state.target = 10
+	bounded.controls["skill_tree.stepper.holy-light"].state.current = 10
+	var rejected_max: Dictionary = bounded.dispatch("skill_tree.stepper.holy-light", "Activate",
+		{"direction": 1})
+	var after_max: Dictionary = bounded.qa_state().controls["skill_tree.stepper.holy-light"]
+	bounded.controls["skill_tree.stepper.heal"].state.target = 0
+	bounded.controls["skill_tree.stepper.heal"].state.current = 0
+	var rejected_min: Dictionary = bounded.dispatch("skill_tree.stepper.heal", "Activate",
+		{"direction": -1})
+	var after_min: Dictionary = bounded.qa_state().controls["skill_tree.stepper.heal"]
+	_check("stepper-bounds-reject-without-mutation", not rejected_max.ok and not rejected_min.ok
+		and rejected_max.error.code == "TransactionRejectedError"
+		and rejected_min.error.code == "TransactionRejectedError"
+		and after_max.target == 10 and not after_max.pending
+		and after_min.target == 0 and not after_min.pending
+		and before_max.last_action == after_max.last_action,
+		str([rejected_max, rejected_min, after_max, after_min]))
 
 
 func _contract_step_hides_every_arrow_in_one_frame() -> void:

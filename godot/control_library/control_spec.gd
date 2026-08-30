@@ -100,6 +100,11 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 			errors, asset_exists)
 		_validate_asset(str(plates.get("minimized", "")), path + ".plates.minimized",
 			errors, asset_exists)
+		if plates.has("list"):
+			_validate_asset(str(plates.get("list", "")), path + ".plates.list",
+				errors, asset_exists)
+	if window.has("drag_geometry"):
+		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
 	var controls: Variant = window.get("controls")
 	if not controls is Array or controls.is_empty():
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".controls",
@@ -108,6 +113,37 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	for control_index in controls.size():
 		_validate_control(controls[control_index], window_id, control_index,
 			control_ids, errors, asset_exists)
+	if window.has("minimized_controls"):
+		_validate_minimized_controls(window.minimized_controls, controls,
+			path + ".minimized_controls", errors)
+
+
+static func _validate_minimized_controls(value: Variant, controls: Array,
+		path: String, errors: Array[Dictionary]) -> void:
+	if not value is Array or value.is_empty():
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			"minimized Controls must be a non-empty array"))
+		return
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	var seen := {}
+	var has_restore := false
+	for index in value.size():
+		var control_id := str(value[index])
+		if control_id.is_empty() or seen.has(control_id) or not declared.has(control_id):
+			errors.append(_error(Errors.INVALID_CONTROL_SPEC,
+				"%s[%d]" % [path, index],
+				"minimized Control must be unique and belong to this Window"))
+		else:
+			seen[control_id] = true
+			var actions: Variant = declared[control_id].get("actions", [])
+			has_restore = has_restore or (actions is Array and actions.any(func(binding):
+				return binding is Dictionary and binding.get("action") == "ToggleMinimized"))
+	if not has_restore:
+		errors.append(_error(Errors.CONTROL_BINDING, path,
+			"minimized Controls must retain a ToggleMinimized restore action"))
 
 
 static func _validate_control(control: Variant, window_id: String, control_index: int,
@@ -241,9 +277,13 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 		valid = valid and item is String and not str(item).is_empty() and not unique.has(item)
 		unique[item] = true
 	valid = valid and initial in items
+	var details: Variant = value.get("details") if value is Dictionary else null
+	valid = valid and details is Dictionary and items.all(func(item):
+		return details.has(str(item)) and details[item] is String \
+			and not str(details[item]).is_empty())
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
-			"SelectionView requires unique non-empty items and a declared initial item"))
+			"SelectionView requires unique items, an initial item, and detail text for every item"))
 	var surfaces: Variant = control.get("surfaces")
 	if not surfaces is Dictionary or not items.all(func(item):
 		return surfaces.has(str(item)) and surfaces[str(item)] is Dictionary \

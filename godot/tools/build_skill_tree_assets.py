@@ -113,14 +113,27 @@ def main() -> None:
     transparent_path = save(transparent, "transparent.png", records)
     parent_variants = {phase: transparent_path for phase in ["idle", "hover", "pressed"]}
 
+    value_pattern = re.compile(r"(\d+)\s*/\s*(\d+)")
+    stepper_values: dict[str, tuple[int, int]] = {}
+    for entry in steppers:
+        match = value_pattern.search(entry["label"])
+        if not match:
+            raise ValueError(f"Stepper value missing from {entry['label']}")
+        stepper_values[stable_cell_id(entry["rect"])] = (
+            int(match.group(1)), int(match.group(2)))
+
     selection_geometry = {"x": 30, "y": 60, "width": 550, "height": 470}
     item_ids: list[str] = []
     item_surfaces: dict[str, object] = {}
     item_labels: dict[str, str] = {}
+    item_details: dict[str, str] = {}
     for entry in grids:
         item = stable_cell_id(entry["rect"])
         item_ids.append(item)
         item_labels[item] = entry["label"]
+        values = stepper_values.get(item)
+        item_details[item] = (f"{entry['label']}\n{values[0]} / {values[1]}"
+                              if values else f"{entry['label']}\n—")
         geometry = rel(entry["rect"])
         crop = window.crop(box(geometry))
         clean_draw.rectangle(box(geometry), fill=BODY)
@@ -144,15 +157,19 @@ def main() -> None:
             {"gesture": "ContextActivate", "action": "OpenSkillDetail"},
         ],
         ["unselected", "selected"], "unselected",
-        value={"items": item_ids, "initial": "r1c3", "labels": item_labels},
+        value={"items": item_ids, "initial": "r1c3", "labels": item_labels,
+               "details": item_details},
         surfaces=item_surfaces,
     )
 
     stepper_specs: list[dict[str, object]] = []
-    value_pattern = re.compile(r"(\d+)\s*/\s*(\d+)")
     for entry in steppers:
         item = stable_cell_id(entry["rect"])
         geometry = rel(entry["rect"])
+        # The inventory rectangle ended before the right-arrow pixels. Own the
+        # complete source group so a pending transaction can hide every arrow.
+        geometry["width"] += 10
+        geometry["height"] += 1
         crop = window.crop(box(geometry))
         clean_draw.rectangle(box(geometry), fill=BODY)
         match = value_pattern.search(entry["label"])
@@ -160,10 +177,9 @@ def main() -> None:
             raise ValueError(f"Stepper value missing from {entry['label']}")
         current, target = (int(match.group(1)), int(match.group(2)))
         maximum = max(current, target, 10)
-        # Keep the arrow crop source-exact without carrying the adjacent baked
-        # digits into the live value region. Fifteen pixels contains each
-        # source arrow and leaves 42 pixels for the widest `10 / 10` label.
-        arrow_width = min(15, geometry["width"] // 3)
+        # Eighteen pixels owns each complete source arrow while leaving a
+        # 46-pixel live value region for the widest `10 / 10` label.
+        arrow_width = min(18, geometry["width"] // 3)
         left = crop.crop((0, 0, arrow_width, geometry["height"]))
         right = crop.crop((geometry["width"] - arrow_width, 0,
                            geometry["width"], geometry["height"]))
