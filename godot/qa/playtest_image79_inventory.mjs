@@ -143,7 +143,7 @@ record("inventory.items", "DoubleActivate", "OpenInventoryItem",
 const logBeforeRace = (await inventory()).interaction_log.length;
 await click(69, 761);
 await page.keyboard.down("Control");
-const modifierRacePoint = point(177, 761);
+const modifierRacePoint = point(69, 761);
 await page.mouse.move(modifierRacePoint.x, modifierRacePoint.y);
 await page.mouse.down();
 await page.waitForTimeout(260);
@@ -157,13 +157,13 @@ const raceLog = (await inventory()).interaction_log.slice(logBeforeRace)
   .filter((entry) => ["Activate", "ModifierActivate"].includes(entry.gesture));
 check("pending-single-cancelled-by-modifier",
   raceState.last_gesture === "ModifierActivate"
-    && raceState.selected_items.includes("r0c2")
+    && raceState.selected_items.includes("r0c0")
     && heldRaceLog.length === 0
     && raceLog.filter((entry) => entry.gesture === "ModifierActivate").length === 1
     && raceLog.every((entry) => entry.gesture !== "Activate"),
   { heldRaceLog, raceState, raceLog });
 await page.keyboard.down("Control");
-await click(177, 761);
+await click(69, 761);
 await page.keyboard.up("Control");
 
 await page.keyboard.down("Control");
