@@ -1,0 +1,34 @@
+{
+  "issue": 138,
+  "method": "source-owned deterministic native Assembly after bounded Qwen Render Pass",
+  "sources": {
+    "style": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+    "data_only": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png"
+  },
+  "font": {
+    "path": "godot/fonts/PixelMplus10-Regular.ttf",
+    "sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
+  },
+  "outputs": {
+    "closed_native": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed-native.png",
+    "closed_review": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png",
+    "open_native": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-open-native.png",
+    "open_review": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-open.png",
+    "mask_native": "artifacts/runs/custom-filters-ro-assembly-v001/edit-mask-native.png",
+    "mask_review": "artifacts/runs/custom-filters-ro-assembly-v001/edit-mask.png",
+    "actual_difference_mask_native": "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask-native.png",
+    "actual_difference_mask_review": "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask.png",
+    "contact_sheet": "artifacts/runs/custom-filters-ro-assembly-v001/contact-sheet.png",
+    "verification": "artifacts/runs/custom-filters-ro-assembly-v001/verification.json"
+  },
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}

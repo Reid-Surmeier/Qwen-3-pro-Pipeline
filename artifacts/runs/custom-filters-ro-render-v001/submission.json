@@ -1,0 +1,30 @@
+{
+  "client_id": "954cbbd7-d55b-46e0-bdee-87c262b7470a",
+  "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+  "submitted_at": "2026-08-30T16:12:04-04:00",
+  "completed_at": "2026-08-30T16:14:38-04:00",
+  "duration_seconds": 154.313,
+  "status": "success",
+  "requested_outputs": 2,
+  "completed_outputs": 2,
+  "ambiguous_outputs": 0,
+  "queue_after_completion": {
+    "running": 0,
+    "pending": 0
+  },
+  "outputs": [
+    {
+      "comfyui_path": "custom-filters/ro/v001_00001_.png",
+      "repository_path": "artifacts/runs/custom-filters-ro-render-v001/image-01.png",
+      "sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c"
+    },
+    {
+      "comfyui_path": "custom-filters/ro/v001_00002_.png",
+      "repository_path": "artifacts/runs/custom-filters-ro-render-v001/image-02.png",
+      "sha256": "c880d35ca86d583e4f8869face46f51e4da21d5b7e8c810509d090a1e80b5e0c"
+    }
+  ],
+  "estimated_cost_usd": 0.10,
+  "actual_cost_usd": null,
+  "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+}

@@ -1,10 +1,10 @@
 {
   "cap": 200,
-  "requested": 23,
-  "completed": 15,
+  "requested": 25,
+  "completed": 17,
   "ambiguous": 8,
   "actual_cost_usd": 0.215,
-  "estimated_cost_usd_when_actual_unexposed": 0.5,
+  "estimated_cost_usd_when_actual_unexposed": 0.6,
   "batches": [
     {
       "name": "backdrop-v1",
@@ -291,6 +291,24 @@
       "files": [
         {"file": "artifacts/runs/museum-filter-retro-skin-v005/image-01.png", "sha256": "8e2cc8a4aa1dc84e382277ec166433c41e0452c7c1a4c9e8425cbe381c429c3c"},
         {"file": "artifacts/runs/museum-filter-retro-skin-v005/image-02.png", "sha256": "86d9838fed6cf6c0e7dc528a8c13a5139feb79d0f50706f556585f8d4d36a764"}
+      ]
+    },
+    {
+      "name": "issue-138-custom-filters-ro-v001",
+      "issue": 138,
+      "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+      "requested": 2,
+      "completed": 2,
+      "ambiguous": 0,
+      "status": "success",
+      "seed": 20260903,
+      "model": "qwen/qwen-image-3-pro",
+      "provider": "openrouter",
+      "usage": null,
+      "estimated_cost_usd": 0.1,
+      "files": [
+        {"file": "artifacts/runs/custom-filters-ro-render-v001/image-01.png", "sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c"},
+        {"file": "artifacts/runs/custom-filters-ro-render-v001/image-02.png", "sha256": "c880d35ca86d583e4f8869face46f51e4da21d5b7e8c810509d090a1e80b5e0c"}
       ]
     }
   ]

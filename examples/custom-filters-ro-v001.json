@@ -1,0 +1,92 @@
+{
+  "objective": "Rebuild reference image 1 as the same early-2000s Japanese online-game dialog, changing its content into a Custom filters panel. Reference image 1 owns the complete visual system and geometry. Reference image 2 supplies only the nine Sort by strings and their order.",
+  "reference_role": "REFERENCE IMAGE 1 IS THE SOLE VISUAL AUTHORITY: preserve its landscape window proportions, magenta double frame, pale blue glass title bar, dusty-rose close button, white panel, gray pixel rules, raster text character, beveled fields, blue dropdown arrow, radio controls, striped footer, and OK/Cancel buttons. REFERENCE IMAGE 2 IS DATA ONLY: read its nine option strings in order, but copy none of its modern sans typography, gray selected bar, rounded menu, shadow, spacing, crop, color, or pixels. The output must look like reference image 1 even when the dropdown is shown.",
+  "preservation_invariants": [
+    "Keep one landscape window filling the output at the same width-to-height relationship as reference image 1. Preserve the title bar height, frame thickness, inner margins, row rhythm, footer height and button positions.",
+    "Keep the old-game raster construction: deliberate square pixel steps, pale gray highlights, thin gray rules and low-resolution beveled controls. Do not modernize, round or smooth the interface.",
+    "Keep the source control vocabulary: long inset text field on row one, compact numeric dropdown and larger dropdown across rows two and three, two radio choices on row four, and OK/Cancel at bottom right.",
+    "Remove the password row and its field entirely. Close the resulting space so the footer begins after the On/Off row; do not leave a blank password slot.",
+    "Exact Copy is semantic authority even if Qwen lettering is imperfect; deterministic Assembly will own final text and controls."
+  ],
+  "canvas": [
+    "One wide RO-style dialog with transparent or neutral exterior only where reference image 1 has its existing shadow. No desktop, browser, card, museum artwork, second window or added background.",
+    "Use a 16:9 Render Pass only as a model transport canvas; keep the visible window itself close to reference image 1's approximately 2.16:1 silhouette and do not stretch it vertically."
+  ],
+  "regions": [
+    {
+      "name": "title and custom-filter row",
+      "change": "Set the title bar to Custom filters. Replace the Tpc. label with Custom filters: and retain the long source-style inset field on that row.",
+      "preserve": ["title glass", "close button", "magenta frame", "row-one field geometry"]
+    },
+    {
+      "name": "images-per-page row",
+      "change": "Replace Ppl. with Images per page:. Keep a compact source-style numeric dropdown showing 20 with the blue arrow button at its right edge.",
+      "preserve": ["source row height", "source bevel treatment", "blue dropdown triangle"]
+    },
+    {
+      "name": "sort-by row and dropdown data",
+      "change": "Replace Room with Sort by:. Use the source's old-game dropdown control, selected value Relevance. Its menu data is exactly the nine Exact Copy options, in order. Do not use the rounded modern menu style from reference image 2.",
+      "preserve": ["source dropdown arrow", "pixel borders", "old-game menu anatomy"]
+    },
+    {
+      "name": "on-off row",
+      "change": "Replace Sec. choices with On and Off. On is selected with the source cyan-blue radio center; Off is unselected.",
+      "preserve": ["two source radio circles", "source spacing and pixel shading"]
+    },
+    {
+      "name": "footer",
+      "change": "Remove the Pw. label and password field completely, move the striped footer directly below the On/Off row, and retain OK and Cancel at bottom right.",
+      "preserve": ["striped footer", "gray top rule", "OK and Cancel bevels and placement"]
+    }
+  ],
+  "exact_copy": [
+    {"region": "title bar", "text": "Custom filters"},
+    {"region": "row one label", "text": "Custom filters:"},
+    {"region": "row two label", "text": "Images per page:"},
+    {"region": "row two selected value", "text": "20"},
+    {"region": "row three label", "text": "Sort by:"},
+    {"region": "row three selected value", "text": "Relevance"},
+    {"region": "row four selected choice", "text": "On"},
+    {"region": "row four unselected choice", "text": "Off"},
+    {"region": "button", "text": "OK"},
+    {"region": "button", "text": "Cancel"},
+    {"region": "sort option 1", "text": "Relevance"},
+    {"region": "sort option 2", "text": "Title (a-z)"},
+    {"region": "sort option 3", "text": "Title (z-a)"},
+    {"region": "sort option 4", "text": "Date (newest-oldest)"},
+    {"region": "sort option 5", "text": "Date (oldest-newest)"},
+    {"region": "sort option 6", "text": "Artist/Maker (a-z)"},
+    {"region": "sort option 7", "text": "Artist/Maker (z-a)"},
+    {"region": "sort option 8", "text": "Accession Number (0-9)"},
+    {"region": "sort option 9", "text": "Accession Number (9-0)"}
+  ],
+  "style": [
+    "Match reference image 1's early-2000s Japanese MMORPG client pixels exactly in spirit: pale sky-blue glass, hot magenta outer frame, white content, gray pixel bevels, blue triangular dropdown controls, low-resolution raster typography and striped lower band.",
+    "The dropdown menu, if visible, is a rectangular old-game popup with gray one-pixel borders, white or faint-striped rows and a pale blue selected row. It must not resemble the modern rounded menu in reference image 2."
+  ],
+  "asset_rules": [
+    "Exactly one window, one long row-one field, one images-per-page dropdown, one Sort by dropdown, two radio controls, one striped footer and two buttons.",
+    "No password label, password field, Ppl., Room, Sec., Tpc., Japanese copy, museum artwork, modern gray selected pill, rounded menu, drop shadow card, extra tabs or extra controls."
+  ],
+  "negative_constraints": [
+    "Do not copy any visual treatment from reference image 2. No modern sans, macOS menu, gray rounded selected band, large rounded corners, translucent card, soft modern shadow or museum thumbnail.",
+    "Do not leave or invent Japanese text. Do not show Tpc., Ppl., Room, Sec., Pw., password, public/private, opaque/non-opaque, people counter suffix or chat-room value.",
+    "Do not omit, reorder, abbreviate or respell any Sort by option. Preserve the parentheses, hyphens, slash and digit order exactly.",
+    "Do not add a password row or leave blank space where it was. Do not move OK/Cancel out of the striped footer.",
+    "Do not stretch the source window vertically or turn it into a tall menu panel."
+  ],
+  "quality_checks": [
+    "At thumbnail scale it is unmistakably the same magenta-framed RO dialog family as reference image 1.",
+    "The visible structure reads Custom filters, Images per page 20, Sort by Relevance, On/Off, then the striped OK/Cancel footer with no password row.",
+    "Any open dropdown uses the RO pixel-control language while exposing all nine data-only strings from reference image 2.",
+    "No modern menu styling or museum image pixels enter the result."
+  ],
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "output": {
+    "count": 2,
+    "resolution": "2K",
+    "aspect_ratio": "16:9",
+    "seed": 20260903
+  }
+}

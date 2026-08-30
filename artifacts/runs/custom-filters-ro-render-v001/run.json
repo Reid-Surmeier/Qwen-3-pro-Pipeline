@@ -1,0 +1,38 @@
+{
+  "outputs": [
+    {
+      "bytes": 1070047,
+      "file": "image-01.png",
+      "media_type": "image/png",
+      "sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c"
+    },
+    {
+      "bytes": 1221895,
+      "file": "image-02.png",
+      "media_type": "image/png",
+      "sha256": "c880d35ca86d583e4f8869face46f51e4da21d5b7e8c810509d090a1e80b5e0c"
+    }
+  ],
+  "provenance": {
+    "issue": 138,
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "client_id": "954cbbd7-d55b-46e0-bdee-87c262b7470a",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "seed": 20260903,
+    "estimated_cost_usd": 0.10,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output.",
+    "reference_sha256": [
+      "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+      "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085"
+    ],
+    "brief_sha256": "a8cc299f3a3b71864cec73b462ef40a2f6dfb096e9d5f68f9350801533ac3493",
+    "workflow_sha256": "13a03dc1fb7c13ba1d4b60fbc1b7365ef21dbed233a633245a54e57d6fd536ee",
+    "submission_request_sha256": "6e95742ccfa74d183d5c901e9e87f9d803d42d1dca29cf3b6f456cece3b55e9e"
+  },
+  "usage": {}
+}
