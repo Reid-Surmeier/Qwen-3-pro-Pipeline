@@ -21,7 +21,18 @@
       ],
       "cadence_basis": "pokeemerald src/pokemon_icon.c sAnim_0: ANIMCMD_FRAME(0, 6), ANIMCMD_FRAME(1, 6) \u2014 6 ticks at the GBA's ~59.7275 Hz \u2248 100.4 ms per frame (the full-HP cadence)",
       "motion_kind": "scale",
-      "motion_kind_basis": "a two-frame breathing loop: the sprite changes size in place and never travels"
+      "motion_kind_basis": "a two-frame breathing loop: the sprite changes size in place and never travels",
+      "deliverables": [
+        {
+          "path": "ref-party-icon-pulse.gif",
+          "sha256": "cea6036e6fbd8f81104d8633835e0f2f059864ad85037b40741fe5dbee7a3bb7"
+        },
+        {
+          "path": "ref-party-icon-pulse.mp4",
+          "sha256": "83f8c53161755e645433d6a735b92b71c2de39e245e677fe6cfd69f318c1ed61",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-textbox-arrow-bob.gif": {
       "game": "Pok\u00e9mon Emerald",
@@ -49,7 +60,18 @@
       ],
       "cadence_basis": "pokeemerald src/text.c: sDownArrowYCoords[] = {0, 1, 2, 1}, delay 8 ticks \u2248 133.9 ms per step (533 ms period)",
       "motion_kind": "translate",
-      "motion_kind_basis": "the arrow moves in discrete whole-pixel steps (0/+1/+2/+1) and never rotates or changes shape"
+      "motion_kind_basis": "the arrow moves in discrete whole-pixel steps (0/+1/+2/+1) and never rotates or changes shape",
+      "deliverables": [
+        {
+          "path": "ref-textbox-arrow-bob.gif",
+          "sha256": "ca68adc31acbad409d2803c3687e67be70aa0d0d9c4462c4e1fd0694e0f76a82"
+        },
+        {
+          "path": "ref-textbox-arrow-bob.mp4",
+          "sha256": "f18cd3006605b92ac8ac82cb02a377b34d17067e8c1f17ef5370c94ec5f53f57",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-coin-spin.gif": {
       "game": "Pok\u00e9mon Trading Card Game",
@@ -84,7 +106,18 @@
       ],
       "cadence_basis": "poketcg anims3.asm AnimData167: each frame held 4 ticks \u2248 67 ms at ~59.7 Hz",
       "motion_kind": "rotate",
-      "motion_kind_basis": "the coin turns about its vertical axis in place: face, narrowed, edge, narrowed, face"
+      "motion_kind_basis": "the coin turns about its vertical axis in place: face, narrowed, edge, narrowed, face",
+      "deliverables": [
+        {
+          "path": "ref-coin-spin.gif",
+          "sha256": "b46e6ee3af614ad1bf0b672520848ec2e275c44af9cd419a199a06f4a432648b"
+        },
+        {
+          "path": "ref-coin-spin.mp4",
+          "sha256": "0677180b760a524d258f1f8b232e9efd98d4d45bd24897b1f59927eeae8c7b9c",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     },
     "ref-item-get-bounce.gif": {
       "game": "Pok\u00e9mon Emerald",
@@ -143,7 +176,18 @@
       ],
       "cadence_basis": "Badge art is real Emerald data; in-game the badge itself is static \u2014 the on/off blink is the era's binary alert idiom (era corpus \u00a72: 100\u2013250 ms on/off cycling, nothing eases), applied at the textbox 8-tick quantum (134 ms)",
       "motion_kind": "blink",
-      "motion_kind_basis": "a binary on/off substitution with no movement of any kind"
+      "motion_kind_basis": "a binary on/off substitution with no movement of any kind",
+      "deliverables": [
+        {
+          "path": "ref-status-flash.gif",
+          "sha256": "f81e55bab5d9be7fe112e0e3dd1350372a1d02256b657dfbe34672e576d3fd09"
+        },
+        {
+          "path": "ref-status-flash.mp4",
+          "sha256": "7f78dd7b2d550075b5c01840698126c2183922df703e75f04b3a9e796addc760",
+          "derivation": "Deterministic GIF-to-MP4 media conversion for HTTPS video-reference input; no generated or redrawn frames."
+        }
+      ]
     }
   },
   "skipped": {

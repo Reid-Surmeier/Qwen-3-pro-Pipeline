@@ -1,8 +1,9 @@
 # RISD icon State Sets — evidence
 
-Two four-state Motion Passes of the same icon (UI-01 Search, RISD museum browser),
-2026-08-30. Together they calibrated `min_anchor_silhouette_iou` and exposed the
-Anchor-shape hole that `mask_fill_ratio` now closes.
+Six four-state Motion Passes of the same icon (UI-01 Search, RISD museum browser),
+2026-08-30. Together they calibrated `min_anchor_silhouette_iou`, exposed the
+Anchor-shape hole that `mask_fill_ratio` now closes, and produced the owner-approved
+translation-reference sweep in take six.
 
 | File | What it shows |
 | --- | --- |
@@ -11,6 +12,8 @@ Anchor-shape hole that `mask_fill_ratio` now closes.
 | `take1-certified-but-broken.png` | Take one, all four states **certified**, two visibly wrong: the magnifier floats free with an empty lens in `hover` and flattens into an ellipse in `pressed`. The Anchor carried an opaque white panel, so the silhouette mask was a rectangle and every IoU read 1.0. |
 | `take2-anchor-and-four-states.png` | Take two with a keyed Anchor and a rigid-stamp brief. Left to right: Anchor, idle, hover, pressed, settled. Deformation is gone; displacement is not — the brief asked for two sprite pixels and got roughly fifteen. |
 | `take2-states-report.json` | The certification record for take two. |
+| `take6-states-report.json` | Take six machine certification: all four states pass cadence, palette, stability, and containment; filled-mode fidelity remains a human gate. |
+| `generation-manifest.json` | OpenRouter provider/model, request and job IDs, exact estimates and actual costs, output hashes, approval scope, retention, and artifact classification for all ten paid outputs. |
 
 ## The numbers that separated
 
@@ -153,11 +156,15 @@ which is what a hand-authored frame table does.
 | 5 | coin spin (rotate) | 2.138 | 0.424 | 0.0 |
 | 6 | arrow bob (translate) | **1.018** | **0.199** | 0.0095 |
 
-**Still wrong, and the next thing to fix:** the bust does not hold still. It is specified
-as frozen and it visibly changes across poses. Filled framing has no fidelity metric, so
-nothing catches this but a person looking. A targeted one is possible — mask out the
-cobalt glass and compare only the marble across frames — and would catch exactly this.
+**Owner disposition:** Reid approved take six's final animation on 2026-08-30 and asked
+to merge it, so `v6-translate-ref-sweep.gif` is the approved output. The bust still
+changes slightly across poses despite the frozen-subject constraint. That is retained as
+a non-blocking follow-up observation rather than silently erased from the record. A
+targeted check can mask out the cobalt glass and compare only the marble across frames.
 
 **Still missing:** a large-travel translation reference. The arrow bob moves 2 px. Both
 pret and The Spriters Resource were searched for a magnifier or sweep with a documented
 frame table and neither has one. Amplitude currently comes entirely from the brief.
+
+Total measured spend for this evidence set is **$1.13404**: one four-output Qwen Image
+3 Pro Asset Pass at $0.16300 and six Seedance 2.0 Mini Motion Passes at $0.16184 each.

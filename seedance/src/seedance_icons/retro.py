@@ -12,9 +12,11 @@ import json
 import shutil
 import subprocess
 import tempfile
+from collections.abc import Mapping
 from dataclasses import dataclass
+from itertools import pairwise
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from PIL import Image
 
@@ -91,12 +93,10 @@ MAX_ANCHOR_MASK_FILL = 0.92
 #              silhouette is a rectangle is a bug (see mask_fill_ratio).
 #   "filled" — the icon fills its tile edge to edge, the key colour is only a thin
 #              border marking the edge. Every frame's silhouette is then the same
-#              square whatever is drawn inside it, so silhouette IoU is worthless and
-#              per-pixel identity against the Anchor is the only thing that can see
-#              drift. Reid's rule, 2026-08-30: the key colour locks the square, it is
-#              not the ground the icon sits in.
+#              square whatever is drawn inside it, so containment is automated and
+#              fidelity remains a human review. Reid's rule, 2026-08-30: the key
+#              colour locks the square, it is not the ground the icon sits in.
 FRAME_MODES = ("matte", "filled")
-MIN_ANCHOR_PIXEL_IDENTITY = 0.80
 
 
 def ground_color(image: Image.Image) -> tuple[int, int, int]:
@@ -165,7 +165,7 @@ def inner_margin(anchor: Image.Image, matte: tuple[int, int, int]) -> float:
     tile bbox were identical on all four sides.
     """
     on = _mask(anchor, matte)
-    w, h = anchor.size
+    w = anchor.width
     tile_x = [i % w for i, v in enumerate(on) if v]
     tile_y = [i // w for i, v in enumerate(on) if v]
     if not tile_x:
@@ -245,7 +245,7 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "silhouette_stable": report["min_silhouette_iou"] >= t.min_silhouette_iou,
     }
     mode = report.get("frame_mode")
-    if mode == "filled":  # noqa: SIM102 - the comment below is the decision
+    if mode == "filled":
         # Deliberately no automatic fidelity check. Four metrics were tried against the
         # 2026-08-30 filled-tile run and not one of them separates a good state from a
         # bad one:
@@ -259,7 +259,6 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         # is handed, which is exactly the failure this gate exists to prevent. Until a
         # metric is calibrated against human verdicts on filled tiles, filled runs are
         # certified by a person looking at the state-set GIF.
-        checks["human_gate_required"] = False
         checks["stayed_in_the_tile"] = report["max_border_leak"] <= MAX_BORDER_LEAK
     elif "anchor_silhouette_iou" in report:
         checks["matches_anchor"] = (
@@ -269,6 +268,7 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "checks": checks,
         "diagnostics": {"frame0_identity": report["frame0_identity"]},
         "certified": all(checks.values()),
+        "human_gate_required": mode == "filled",
     }
 
 
@@ -372,7 +372,7 @@ def parse_state_map(raw: Mapping[str, Any] | None) -> dict[str, tuple[float, flo
             raise RetroError(f"state_map[{name!r}] span {lo}-{hi} is not inside 0..1")
         spans[name] = (lo, hi)
     ordered = sorted(spans.items(), key=lambda kv: kv[1][0])
-    for (a_name, (_, a_hi)), (b_name, (b_lo, _)) in zip(ordered, ordered[1:]):
+    for (a_name, (_, a_hi)), (b_name, (b_lo, _)) in pairwise(ordered):
         if abs(a_hi - b_lo) > 1e-6:
             raise RetroError(
                 f"state_map has a gap or overlap between {a_name!r} and {b_name!r} "
@@ -386,8 +386,8 @@ def parse_state_map(raw: Mapping[str, Any] | None) -> dict[str, tuple[float, flo
 def _segment(frames: list[Image.Image], span: tuple[float, float]) -> list[Image.Image]:
     """Frames inside a fractional span, always at least one frame."""
     lo, hi = span
-    a = int(round(lo * len(frames)))
-    b = int(round(hi * len(frames)))
+    a = round(lo * len(frames))
+    b = round(hi * len(frames))
     return frames[a:b] or frames[a : a + 1] or frames[-1:]
 
 
@@ -423,7 +423,7 @@ def step_evenness(frames: list[Image.Image], matte: tuple[int, int, int]) -> flo
     cents = [ink_centroid(f, matte) for f in frames]
     steps = [
         ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
-        for a, b in zip(cents, cents[1:])
+        for a, b in pairwise(cents)
         if a and b
     ]
     if len(steps) < 2:
@@ -452,7 +452,7 @@ def resample_by_travel(
         return frames
     cents = [ink_centroid(f, matte) for f in frames]
     cum = [0.0]
-    for a, b in zip(cents, cents[1:]):
+    for a, b in pairwise(cents):
         d = (((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5) if (a and b) else 0.0
         cum.append(cum[-1] + d)
     total = cum[-1]

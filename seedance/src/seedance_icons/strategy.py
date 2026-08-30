@@ -24,8 +24,10 @@ from __future__ import annotations
 
 import json
 import re
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
+from urllib.parse import unquote, urlparse
 
 from PIL import Image
 
@@ -152,14 +154,25 @@ def _reference_registry(brief_path: Path) -> dict[str, Any]:
     for base in (brief_path.parent, *brief_path.parents):
         candidate = base / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
         if candidate.exists():
-            try:
-                return json.loads(candidate.read_text())
-            except Exception:
-                return {}
+            # A present but unreadable registry is a broken safety input. Let the
+            # parse/read error stop planning instead of silently skipping the
+            # motion-reference compatibility gate.
+            return json.loads(candidate.read_text())
     return {}
 
 
-def check_reference_matches_motion(brief: dict[str, Any], brief_path: Path) -> list[str]:
+def _registered_reference_name(value: str, registry: dict[str, Any]) -> str | None:
+    """Map a GIF/MP4 path or URL to its provenance-registry entry by stable stem."""
+    path = unquote(urlparse(value).path) if value.startswith("https://") else value
+    stem = Path(path).stem
+    return next((name for name in registry if Path(name).stem == stem), None)
+
+
+def check_reference_matches_motion(
+    brief: dict[str, Any],
+    brief_path: Path,
+    video_references: Sequence[str],
+) -> list[str]:
     """The reference must move the way the brief says the icon moves.
 
     A reference does not only teach cadence, it teaches the *kind* of movement, and the
@@ -179,16 +192,49 @@ def check_reference_matches_motion(brief: dict[str, Any], brief_path: Path) -> l
         for name in registry
         if name in reference or name.replace(".gif", "") in reference
     ]
-    if not named:
-        # An era-corpus citation with no asset on disk. Nothing to compare against, and
-        # the briefs calibrated before this check existed are all of this shape, so
-        # requiring a declaration here would invalidate them retroactively.
+    if not video_references:
+        violations.append(
+            "video_reference is required: pass the actual matching animation with "
+            "--video-reference HTTPS_URL; naming it in real_reference is not model input"
+        )
+        return violations
+
+    non_https = [value for value in video_references if not value.startswith("https://")]
+    if non_https:
+        violations.append(
+            "video_reference must be an HTTPS URL so the provider receives the actual "
+            "animation, not a prose citation or an environment-local path"
+        )
+
+    actual_names = {
+        name
+        for value in video_references
+        if (name := _registered_reference_name(value, registry)) is not None
+    }
+    if registry and len(actual_names) != len(video_references):
+        violations.append(
+            "every video_reference must name an asset registered in provenance.json; "
+            "an unregistered clip has no verified motion_kind"
+        )
+    if named and set(named) != actual_names:
+        violations.append(
+            "the submitted video_reference does not match real_reference: declared "
+            f"{', '.join(sorted(named))}; submitted "
+            f"{', '.join(sorted(actual_names)) or 'no registered asset'}"
+        )
+
+    names_to_check = actual_names or set(named)
+    if not names_to_check:
+        # A legacy corpus citation can still establish provenance, but the actual HTTPS
+        # clip is now mandatory. With no local registry entry there is no motion-kind
+        # metadata to compare deterministically.
         return violations
 
     kind = str(brief.get("motion_kind") or "").strip().lower()
     if not kind:
         violations.append(
-            f"motion_kind is missing while using reference {named[0]}: declare how the "
+            f"motion_kind is missing while using reference {min(names_to_check)}: "
+            "declare how the "
             f"icon moves (one of {', '.join(MOTION_KINDS)}) so the reference can be "
             f"checked against it"
         )
@@ -197,7 +243,7 @@ def check_reference_matches_motion(brief: dict[str, Any], brief_path: Path) -> l
         violations.append(f"motion_kind {kind!r} is not one of {', '.join(MOTION_KINDS)}")
         return violations
 
-    for name in named:
+    for name in names_to_check:
         ref_kind = str(registry[name].get("motion_kind") or "").lower()
         if ref_kind and ref_kind != kind:
             violations.append(
@@ -214,6 +260,8 @@ def check_strategy(
     prompt: str,
     first_frame: str | None,
     last_frame: str | None,
+    *,
+    video_references: Sequence[str],
 ) -> list[str]:
     """Return the list of strategy violations (empty means the plan may proceed)."""
     violations: list[str] = []
@@ -254,7 +302,9 @@ def check_strategy(
         )
 
     violations.extend(check_motion_detail(brief))
-    violations.extend(check_reference_matches_motion(brief, brief_path))
+    violations.extend(
+        check_reference_matches_motion(brief, brief_path, video_references)
+    )
 
     words = len(prompt.split())
     if words < MIN_PROMPT_WORDS:

@@ -1,0 +1,92 @@
+{
+  "frame_mode": "filled",
+  "certified": true,
+  "human_gate_required": true,
+  "human_gate_note": "Filled framing has no calibrated fidelity metric. Certified means cadence, palette, stability, and containment passed; the owner separately approved the rendered animation.",
+  "uncertified_states": [],
+  "max_border_leak": 0.0095,
+  "anchor_inner_margin": 0.0781,
+  "step_evenness_raw": 1.018,
+  "step_evenness_resampled": 0.199,
+  "cycle_poses": 12,
+  "pose_hold_ms": 100,
+  "state_hold_ms": 134,
+  "state_order": [
+    "idle",
+    "hover",
+    "pressed",
+    "settled"
+  ],
+  "total_source_frames": 72,
+  "settle_trim": 0.25,
+  "states": {
+    "idle": {
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 1.0,
+      "max_border_leak": 0.0,
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true,
+        "stayed_in_the_tile": true
+      },
+      "certified": true,
+      "human_gate_required": true
+    },
+    "hover": {
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 1.0,
+      "max_border_leak": 0.0,
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true,
+        "stayed_in_the_tile": true
+      },
+      "certified": true,
+      "human_gate_required": true
+    },
+    "pressed": {
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 0.9947,
+      "max_border_leak": 0.0095,
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true,
+        "stayed_in_the_tile": true
+      },
+      "certified": true,
+      "human_gate_required": true
+    },
+    "settled": {
+      "source_frames": 14,
+      "unique_frames": 8,
+      "effective_fps": 3.43,
+      "out_of_palette_pixels": 0,
+      "min_silhouette_iou": 1.0,
+      "max_border_leak": 0.0,
+      "checks": {
+        "unique_frames_in_range": true,
+        "effective_fps_ok": true,
+        "palette_locked": true,
+        "silhouette_stable": true,
+        "stayed_in_the_tile": true
+      },
+      "certified": true,
+      "human_gate_required": true
+    }
+  }
+}

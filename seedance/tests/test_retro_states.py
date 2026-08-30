@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import json
+import shutil
+import subprocess
+from pathlib import Path
+
 import pytest
 
 from seedance_icons.retro import (
@@ -131,9 +136,10 @@ def test_filled_mode_asserts_no_automatic_fidelity_check() -> None:
         dict(base, frame_mode="filled", anchor_pixel_identity=0.41, max_border_leak=0.0)
     )
     assert "matches_anchor" not in filled["checks"]
-    assert filled["checks"]["human_gate_required"] is False
+    assert filled["human_gate_required"] is True
     # containment is not a fidelity judgement, it is a fact the framing can answer
     assert filled["checks"]["stayed_in_the_tile"] is True
+    assert filled["certified"]
 
     escaped = certify(
         dict(base, frame_mode="filled", anchor_pixel_identity=0.41, max_border_leak=0.09)
@@ -194,3 +200,67 @@ def test_inner_margin_catches_an_anchor_with_nowhere_to_move() -> None:
     with_margin.paste(Image.new("RGB", (24, 24), (255, 255, 255)), (8, 8))  # tile
     with_margin.paste(Image.new("RGB", (12, 12), (0, 0, 255)), (14, 14))    # ink inside it
     assert inner_margin(with_margin, matte) >= MIN_INNER_MARGIN
+
+
+@pytest.mark.skipif(shutil.which("ffmpeg") is None, reason="ffmpeg is required")
+def test_conform_states_emits_four_certified_state_directories(tmp_path: Path) -> None:
+    """Exercise the public artifact path, including ffmpeg extraction and reports."""
+    from PIL import Image
+
+    from seedance_icons.retro import conform_states
+
+    matte = (0, 255, 0)
+    frames = tmp_path / "frames"
+    frames.mkdir()
+    reference = Image.new("RGB", (40, 40), matte)
+    reference.paste(Image.new("RGB", (32, 32), (255, 255, 255)), (4, 4))
+    for index in range(8):
+        frame = reference.copy()
+        frame.paste(Image.new("RGB", (8, 8), (0, 0, 255)), (14 + index % 2, 14))
+        frame.save(frames / f"frame{index:02d}.png")
+        if index == 0:
+            frame.save(tmp_path / "anchor.png")
+
+    video = tmp_path / "take.mkv"
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-loglevel",
+            "error",
+            "-y",
+            "-framerate",
+            "8",
+            "-i",
+            str(frames / "frame%02d.png"),
+            "-c:v",
+            "ffv1",
+            "-pix_fmt",
+            "rgb24",
+            str(video),
+        ],
+        check=True,
+    )
+
+    output = tmp_path / "states"
+    summary = conform_states(
+        video,
+        tmp_path / "anchor.png",
+        output,
+        fps=8,
+        grid=40,
+        delivery=40,
+        colors=4,
+        settle_trim=0,
+        frame_mode="filled",
+        cycle_poses=4,
+    )
+
+    assert summary["certified"] is True
+    assert summary["human_gate_required"] is True
+    assert list(summary["states"]) == ["idle", "hover", "pressed", "settled"]
+    for state in summary["states"]:
+        report_path = output / state / "retro-report.json"
+        assert report_path.is_file()
+        assert json.loads(report_path.read_text())["certified"] is True
+    assert (output / "state-set.gif").is_file()
+    assert (output / "full-cycle.gif").is_file()

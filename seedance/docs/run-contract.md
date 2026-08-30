@@ -42,6 +42,10 @@ A plan is refused unless:
 4. **Both frame anchors are crisp**: local files, ≤ 32 unique non-matte colors, exact
    integer NEAREST blocks (batch 3 first-frame RMSE 4.0–4.3 vs 4.6–5.1 soft). Soft
    screenshot crops are refused by pixel inspection, not by filename.
+5. **The actual motion reference is submitted** with `--video-reference HTTPS_URL`.
+   Naming a clip in `real_reference` is provenance, not model input. When the clip is
+   in the reference registry, its stable filename and `motion_kind` must match both the
+   declaration and the URL that will be sent to OpenRouter.
 
 `submit` independently refuses any plan whose `plan.json` lacks a passing (or explicitly
 waived) `strategy_gate` record, so pre-gate plans cannot be submitted either.

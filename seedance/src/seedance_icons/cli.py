@@ -75,7 +75,12 @@ def cmd_plan(args: argparse.Namespace) -> None:
     brief = load_brief(brief_path)
     grammar = str(brief.get("grammar") or DEFAULT_GRAMMAR)
     violations = check_strategy(
-        brief, brief_path, request["prompt"], args.first_frame, args.last_frame
+        brief,
+        brief_path,
+        request["prompt"],
+        args.first_frame,
+        args.last_frame,
+        video_references=args.video_reference,
     )
     waiver = args.waive_strategy_gate
     if violations and waiver is None:
@@ -184,12 +189,10 @@ def cmd_retro_conform_states(args: argparse.Namespace) -> None:
     from .retro import conform_states
 
     run = Path(args.run)
-    video = _run_video(run) if "_run_video" in globals() else None
-    if video is None:
-        candidates = sorted((run / "outputs").glob("*.mp4"))
-        if not candidates:
-            raise SystemExit(f"No mp4 in {run / 'outputs'}")
-        video = candidates[0]
+    candidates = sorted((run / "outputs").glob("*.mp4"))
+    if not candidates:
+        raise SystemExit(f"No mp4 in {run / 'outputs'}")
+    video = candidates[0]
     state_map = None
     brief_path = run / "brief.json"
     if args.state_map:
@@ -324,8 +327,8 @@ def parser() -> argparse.ArgumentParser:
         help=(
             "matte: the icon floats in the key colour, fidelity is silhouette IoU. "
             "filled: the icon fills its tile and the key colour is only a border, "
-            "fidelity is per-pixel identity — a silhouette metric cannot see anything "
-            "there, because every frame's outline is the same square."
+            "containment is checked automatically and fidelity requires human review "
+            "because every frame's silhouette is the same square."
         ),
     )
     retro_states.set_defaults(func=cmd_retro_conform_states)
