@@ -87,6 +87,61 @@ def _reference_resolves(value: str, brief_path: Path) -> bool:
     return False
 
 
+
+MIN_MULTI_STATE_MOTION_WORDS = 120
+POSE_MARKER = re.compile(
+    r"\bpose (?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b|\bbeat \d+\b",
+    re.IGNORECASE,
+)
+
+
+def enumerated_poses(motion: str) -> int:
+    """How many held poses the motion field actually names."""
+    return len(POSE_MARKER.findall(motion))
+
+
+def check_motion_detail(brief: dict[str, Any]) -> list[str]:
+    """A multi-state gesture must be written pose by pose, not summarised.
+
+    Measured across every brief on disk, motion-field length against outcome:
+
+        24-32 words, 0 poses   batch 1 and 2, a two-frame twinkle. Fine — a small
+                               gesture needs few words, and batch 2 certified at
+                               0.998-1.0 on briefs this short.
+        64-76 words, 0 poses   the two failed four-state takes, 2026-08-30. A large
+                               gesture summarised. The element moved fifteen pixels
+                               when told to move one, twice.
+        123-218 words, 3-6     batch 3 and the magazine-flip batch, all certified.
+                               A large gesture written out pose by pose.
+
+    So the rule is not "write more". It is that the detail has to match the size of
+    what is being asked for: a brief that declares four states and then describes the
+    motion in two sentences has told the model what to end up with and nothing about
+    how to get there, and the model fills that in generously.
+    """
+    violations: list[str] = []
+    states = brief.get("state_map") or {}
+    if len(states) < 2:
+        return violations
+    motion = str(brief.get("motion") or "")
+    words = len(motion.split())
+    poses = enumerated_poses(motion)
+    if words < MIN_MULTI_STATE_MOTION_WORDS:
+        violations.append(
+            f"motion is {words} words for a {len(states)}-state gesture (min "
+            f"{MIN_MULTI_STATE_MOTION_WORDS}): every certified multi-pose run on disk "
+            f"used 123-218 words, and both runs that summarised a large gesture in "
+            f"64-76 words moved the element roughly fifteen times further than asked"
+        )
+    if poses < len(states):
+        violations.append(
+            f"motion names {poses} held poses for {len(states)} states: write the "
+            f"gesture out pose by pose ('Beat 2, five held poses: pose one ...'), the "
+            f"way the certified batch-3 briefs do"
+        )
+    return violations
+
+
 def check_strategy(
     brief: dict[str, Any],
     brief_path: Path,
@@ -131,6 +186,8 @@ def check_strategy(
         violations.append(
             f"real_reference does not resolve to any existing file: {reference!r}"
         )
+
+    violations.extend(check_motion_detail(brief))
 
     words = len(prompt.split())
     if words < MIN_PROMPT_WORDS:
