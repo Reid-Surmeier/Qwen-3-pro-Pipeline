@@ -1,0 +1,21 @@
+{
+  "issue": 139,
+  "version": "v003",
+  "references": [
+    {
+      "role": "approved-v002-composition-material-and-style-authority",
+      "path": "artifacts/runs/kidpix-sketchbook-v002/final-01.png",
+      "sha256": "f8a336493d1c61f9b00fcdcc8be1c60d579360495556244027e5121806f5e10d"
+    },
+    {
+      "role": "kidpix-flat-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-kidpix-ui.png",
+      "sha256": "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b"
+    },
+    {
+      "role": "flat-map-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-world-map.png",
+      "sha256": "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e"
+    }
+  ]
+}

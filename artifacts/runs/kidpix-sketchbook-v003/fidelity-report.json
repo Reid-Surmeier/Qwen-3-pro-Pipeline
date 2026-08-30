@@ -1,0 +1,35 @@
+{
+  "issue": 139,
+  "version": "v003",
+  "status": "machine-checks-passed-pending-owner-visual-approval",
+  "candidate": {
+    "path": "artifacts/runs/kidpix-sketchbook-v003/final-01.png",
+    "dimensions": "1024x1024",
+    "sha256": "95828700b6b679c70cc1fefee01d1670d6a96e650f5ee22836bb649e44905ace",
+    "corner_rgbs": [
+      [255, 255, 255],
+      [255, 255, 255],
+      [255, 255, 255],
+      [255, 255, 255]
+    ],
+    "outer_16px_pure_white_fraction": 1.0,
+    "nonwhite_bbox": [128, 191, 893, 843],
+    "nonwhite_pixels_left_of_x_128": 0,
+    "red_cover_pixels_in_outer_perimeter": 0,
+    "assembly_changed_pixels": 34522
+  },
+  "visual_findings": [
+    "All eight metal rings and all visible binding hardware are absent.",
+    "The spread reads as a 90-degree overhead orthographic page plane with straight horizontal top and bottom edges and straight vertical side edges.",
+    "The deterministic Assembly replaced the residual right-side wall with one dark vertical pixel outline and replaced bottom depth with one dark horizontal pixel outline.",
+    "Exactly one cobalt pencil remains over the straight center crease.",
+    "Both pages remain blank and no red cover is visible around the outer perimeter.",
+    "The exterior background is exact pure white and the complete icon remains inside the square canvas."
+  ],
+  "assembly": {
+    "operation": "Normalize the connected generated exterior to pure white; remove the right-side wall and bottom depth outside the pencil; reconstruct both boundaries as single flat dark pixel outlines while preserving the raw pencil and page faces.",
+    "command": "convert image-01.png -alpha off -fuzz 30% -fill white -draw 'color 0,0 floodfill' -fill white -draw 'rectangle 894,0 1023,1023' -draw 'rectangle 0,836 447,1023' -draw 'rectangle 519,836 1023,1023' -fill '#f9ebc9' -draw 'rectangle 140,824 447,829' -draw 'rectangle 519,824 887,829' -fill '#172121' -draw 'rectangle 140,830 447,835' -draw 'rectangle 519,830 887,835' -draw 'rectangle 888,198 893,835' final-01.png",
+    "raw_output_preserved": true
+  },
+  "verification_boundary": "These are deterministic pixel checks plus builder visual inspection. They do not replace owner visual approval or the repository independent blind artifact-review gate if proposed for integration."
+}

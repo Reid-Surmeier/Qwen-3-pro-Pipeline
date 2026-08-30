@@ -1,0 +1,27 @@
+{
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "compiled_prompt_source": "workflows/kidpix-sketchbook-v003.api.json node 2 inputs.edit_brief_json",
+  "compiled_prompt_source_sha256": "6f023ef5a7fed0bc02586168a5ef986a61f7b704937a5717e90c1e9fe4f0070c",
+  "input_references": [
+    {
+      "type": "image_url",
+      "role": "approved-v002-composition-material-and-style-authority",
+      "image_url": "[recorded separately]"
+    },
+    {
+      "type": "image_url",
+      "role": "kidpix-flat-pixel-style-only",
+      "image_url": "[recorded separately]"
+    },
+    {
+      "type": "image_url",
+      "role": "flat-map-pixel-style-only",
+      "image_url": "[recorded separately]"
+    }
+  ],
+  "n": 1,
+  "resolution": "1K",
+  "aspect_ratio": "1:1",
+  "seed": 20260906
+}

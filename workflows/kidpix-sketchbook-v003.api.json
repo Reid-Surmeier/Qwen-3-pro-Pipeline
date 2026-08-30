@@ -1,0 +1,84 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "kidpix-sketchbook-v002-final-01.png"
+    }
+  },
+  "2": {
+    "class_type": "QwenImage3Render",
+    "inputs": {
+      "edit_brief_json": "{\"asset_rules\": [\"Exactly one flat open two-page book and exactly one pencil.\", \"Zero metal rings and zero binding hardware of any kind.\", \"Exactly two blank page faces separated by one straight vertical center crease.\", \"No red cover or visible side thickness.\", \"No second book, second pencil, variation grid or reference-sheet layout.\"], \"canvas\": [\"Square 1:1 canvas at 1024 by 1024 with the complete book centered and fully inside the frame.\", \"Exact top-down orthographic plan view: the camera is perpendicular to the page plane at 90 degrees.\", \"The open spread is a flat horizontal rectangle made from two equal cream page rectangles with a straight vertical center crease.\", \"The top and bottom edges are straight horizontal parallel lines. The left and right edges are straight vertical parallel lines. Opposite edges do not converge or taper.\", \"Background is flat exact pure white with a clear margin on every side.\"], \"exact_copy\": [], \"model\": \"qwen/qwen-image-3-pro\", \"negative_constraints\": [\"No ring, metal ring, spiral, coil, loop, wire, clip, binder, binding hole, punched hole, tab, hinge or hardware anywhere.\", \"No three-quarter, isometric, oblique or perspective view. No angled or jagged outer book edge. No converging or tapered edges.\", \"No visible front, left, right or bottom side thickness. No red cover strip, page curl, folded corner, raised rim, protruding center tab, bevel, cast shadow or three-dimensional wedge.\", \"Do not remove, hide, duplicate or recolor the pencil.\", \"No drawing, bust, face, person, sculpture, lettering, symbols, holes or marks on either page.\", \"No UI chrome, toolbar, map, countries, grid, clock labels, colorful circles, logo, caption, border, tile, desk, hands or background scene.\", \"No smooth vector curves, soft feathering, airbrush, watercolor, paper texture, glossy 3D shading or continuous-tone gradients.\"], \"objective\": \"Edit reference image 1 into a strict 90-degree top-down orthographic flat Sketchbook icon. Remove every metal ring and all binding hardware. Keep exactly one cobalt pencil. Replace the irregular perspective book silhouette with two flat symmetric blank cream page rectangles separated by a straight vertical center crease on a pure-white background.\", \"output\": {\"aspect_ratio\": \"1:1\", \"count\": 1, \"resolution\": \"1K\", \"seed\": 20260906}, \"preservation_invariants\": [\"Keep exactly one open book and exactly one cobalt-blue pencil resting over the center crease.\", \"Keep both page faces completely blank: no drawing, bust, portrait, line, letter, number, doodle, hole or annotation.\", \"Keep the v002 warm cream pages, cobalt pencil, dark stair-stepped outlines and limited flat color ramps.\", \"Keep one centered landscape-shaped icon fully inside a square pure-white canvas with generous white margin.\", \"Keep the pencil's wood tip, dark graphite point, cobalt body and silver-navy end cap recognizable.\"], \"provider\": \"openrouter\", \"quality_checks\": [\"At a glance the camera reads as exactly 90 degrees overhead and the book reads as a flat diagrammatic page plane.\", \"There are no metal rings, binding holes or other binding hardware anywhere in the image.\", \"All four outer book edges are straight, horizontal or vertical, parallel and untapered; both pages are equal and symmetric.\", \"There is no visible red cover, side thickness, curl, raised edge or cast shadow.\", \"The one cobalt pencil remains intact and both cream pages remain completely blank.\", \"The exterior background is pure white.\"], \"reference_role\": \"Reference image 1 is the approved v002 final and is authoritative for object identity, page color, cobalt pencil, blank-page state, limited palette, dark pixel outlines, scale and white margin. It is not authoritative for the metal rings, red cover depth, irregular edges or perspective; those must be removed. Reference image 2 is style-only authority for hard early Kid Pix raster character. Reference image 3 is style-only authority for flat orthographic pixel regions, crisp outlines and white negative space. Do not copy interface, map, text or decorations from either style reference.\", \"regions\": [{\"change\": \"Delete all eight grey metal rings and every trace of spiral, coil, loop, clip, tab, binding hole or hardware from the left edge and from all other edges. Reconstruct the exposed left page boundary as one uninterrupted straight vertical cream page edge with a dark pixel contour.\", \"name\": \"binding removal\", \"preserve\": [\"left page width\", \"warm cream page color\", \"dark pixel contour\"]}, {\"change\": \"Rebuild the book silhouette into a strict flat orthographic rectangle. Straighten the jagged and angled top edges, square all four outer corners, make the left and right pages equal and symmetric around a straight vertical center crease, and remove every cue of perspective or depth.\", \"name\": \"orthographic reconstruction\", \"preserve\": [\"open two-page landscape spread\", \"centered scale\", \"blank cream pages\", \"generous white margin\"]}, {\"change\": \"Remove the complete red cover strip and visible thickness along the bottom and every outer edge. Remove page curls, raised rims, side walls, shadows and protruding center tabs. The final object is one flat page plane with a simple dark pixel outline against white.\", \"name\": \"cover and depth removal\", \"preserve\": [\"flat cream page faces\", \"simple pixel outline\"]}, {\"change\": \"Keep one cobalt pencil over the center crease, drawn from the same perpendicular top-down orthographic camera with no cast shadow and no duplicate.\", \"name\": \"pencil\", \"preserve\": [\"cobalt-blue body\", \"wood tip\", \"dark graphite point\", \"silver and navy end cap\"]}], \"style\": [\"Flat early-1990s Kid Pix-era pixel icon: hard square steps, crisp dark pixel outlines and a deliberately limited solid palette.\", \"Diagrammatic orthographic object icon, not a perspective illustration and not a 3D object.\", \"No antialiasing, gradients, paper grain, painterly texture, soft lighting, cast shadow or photographic depth.\"]}",
+      "reference_images": [
+        "10",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "kidpix-sketchbook/v003",
+      "images": [
+        "2",
+        0
+      ]
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "kidpix-sketchbook-v003-style-ui.png"
+    }
+  },
+  "5": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "kidpix-sketchbook-v003-style-map.png"
+    }
+  },
+  "6": {
+    "class_type": "ResizeAndPadImage",
+    "inputs": {
+      "image": ["1", 0],
+      "target_width": 1024,
+      "target_height": 1024,
+      "padding_color": "white",
+      "interpolation": "nearest-exact"
+    }
+  },
+  "7": {
+    "class_type": "ResizeAndPadImage",
+    "inputs": {
+      "image": ["4", 0],
+      "target_width": 1024,
+      "target_height": 1024,
+      "padding_color": "white",
+      "interpolation": "nearest-exact"
+    }
+  },
+  "8": {
+    "class_type": "ResizeAndPadImage",
+    "inputs": {
+      "image": ["5", 0],
+      "target_width": 1024,
+      "target_height": 1024,
+      "padding_color": "white",
+      "interpolation": "nearest-exact"
+    }
+  },
+  "9": {
+    "class_type": "ImageBatch",
+    "inputs": {
+      "image1": ["6", 0],
+      "image2": ["7", 0]
+    }
+  },
+  "10": {
+    "class_type": "ImageBatch",
+    "inputs": {
+      "image1": ["9", 0],
+      "image2": ["8", 0]
+    }
+  }
+}

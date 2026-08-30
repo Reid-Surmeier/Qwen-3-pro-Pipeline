@@ -1,0 +1,64 @@
+{
+  "issue": 139,
+  "version": "v003",
+  "outputs": [
+    {
+      "role": "successful-raw-render-pass",
+      "file": "image-01.png",
+      "bytes": 291860,
+      "media_type": "image/png",
+      "sha256": "d411dcd95e44b6072c6dbb03777c60db655a9a0cd657a4e675ee3f7d5414be95",
+      "note": "The Qwen Render Pass removed all metal rings and reconstructed the spread as a near-rectangular overhead view. Deterministic finishing removed residual right and bottom edge depth and normalized the exterior background."
+    },
+    {
+      "role": "approved-for-owner-review-assembly",
+      "file": "final-01.png",
+      "bytes": 261295,
+      "media_type": "image/png",
+      "sha256": "95828700b6b679c70cc1fefee01d1670d6a96e650f5ee22836bb649e44905ace"
+    },
+    {
+      "role": "comparison-evidence",
+      "file": "contact-sheet.png",
+      "bytes": 1029530,
+      "media_type": "image/png",
+      "sha256": "368ed0968bdd6ea929d5287e68542c4c91e227b23bee3459c4a41036174e51de"
+    },
+    {
+      "role": "raw-edge-review-evidence",
+      "file": "review-right-edge-3x.png",
+      "bytes": 46051,
+      "media_type": "image/png",
+      "sha256": "34d973ea4480f376350a3371a4696ae730a356847cc569df36f117b7cf3deea7"
+    }
+  ],
+  "provenance": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "e94b997d-c67a-46ba-9956-08cd457b01e9",
+    "client_id": "1b0311c7-5a58-44f2-8d92-4eaaa1f5d31f",
+    "prompt_request_sha256": "cb2ee714ad8b2610c345f0b24b30907ecb4fe07feac962c2c18a99386226177c",
+    "workflow_sha256": "6f023ef5a7fed0bc02586168a5ef986a61f7b704937a5717e90c1e9fe4f0070c",
+    "brief_sha256": "08a2fc59eb3501123f4087bff193d463ebd865f6d2eb9ba3f75d9563f087789d",
+    "reference_sha256": [
+      "f8a336493d1c61f9b00fcdcc8be1c60d579360495556244027e5121806f5e10d",
+      "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b",
+      "4d41c25c9c17ebfd6e7ec33acdfa1edfe588948924e875ecdb514e318a8ffd6e"
+    ],
+    "submitted_at": "2026-08-30T16:45:46-04:00",
+    "completed_at": "2026-08-30T16:47:38-04:00",
+    "duration_seconds": 112.122,
+    "requested_outputs": 1,
+    "completed_outputs": 1,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.05,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+  },
+  "usage": {
+    "input_image_count": 3,
+    "output_image_count": 1,
+    "output_width": 1024,
+    "output_height": 1024
+  }
+}
