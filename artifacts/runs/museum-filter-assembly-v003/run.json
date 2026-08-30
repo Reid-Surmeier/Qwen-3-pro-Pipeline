@@ -10,10 +10,20 @@
     "native_sha256": "f7f2f47ebd96ed2f14cc5b06a58e215bac69a48f561c5af4dd5f01281ef49e07",
     "ownership": "all background, title-bar gradient, right bead, close button, frame, controls, layout, crop, and non-edit pixels"
   },
-  "existing_donor": {
-    "path": "artifacts/runs/museum-filter-retro-skin-v005/image-02.png",
-    "sha256": "86d9838fed6cf6c0e7dc528a8c13a5139feb79d0f50706f556585f8d4d36a764",
-    "ownership": "registered native-scale foreground glyph pixels only; no surrounding background pixels"
+  "deterministic_sources": {
+    "style_glass": {
+      "path": "artifacts/references/museum-filter-retro-skin-v001/style-ro-options-window-flat-rgb.png",
+      "sha256": "da4c642543dff6baaa9f7a4c9925ef829e8bee48747fcf3abe60be8177ab052d"
+    },
+    "body_font": {
+      "path": "godot/fonts/PixelMplus10-Regular.ttf",
+      "sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
+    },
+    "title_font": {
+      "path": "godot/fonts/PixelMplus12-Regular.ttf",
+      "sha256": "02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12"
+    },
+    "ownership": "exact English strings and binary glyph silhouettes; no generated raster is used in Assembly v003"
   },
   "rejected_predecessor": {
     "path": "artifacts/runs/museum-filter-assembly-v002/assembly-v002.png",
@@ -22,34 +32,36 @@
   },
   "assembly": {
     "script": "scripts/assemble_museum_filter_v003.py",
-    "script_sha256": "e82deeb1f3798ebe6673201a838f65cd256affe5a490e226b0dea8f052709a86",
-    "method": "Register the existing donor to Assembly v001 at 313x211, restore old glyph silhouettes from v001-owned backgrounds, admit donor foreground-valued pixels only, derive the declared mask from the actual RGB difference, then enlarge 4x with nearest-neighbour resampling."
+    "script_sha256": "6a0f264848232856cc872484566b1bd172e36a3675b095de17971f591f362dfe",
+    "method": "At 313x211, predeclare a shape-aware mask from Assembly v001's old exact-ink glyphs and repository-pinned PixelMplus glyph silhouettes, restore only those old title/background pixels, render the exact English strings through the declared mask, verify the actual RGB difference is a subset, then enlarge 4x with nearest-neighbour resampling."
   },
   "outputs": [
     {
       "path": "artifacts/runs/museum-filter-assembly-v003/assembly-v003.png",
       "width": 1252,
       "height": 844,
-      "sha256": "d7804e2a990c6a9f5b97db87007c31b16803832549cc8737e3ea8abad2ae2e9a"
+      "sha256": "541e9cecae7faf688dbb911a8a75b57e566f342d838e8918f1ac6915c585e93f"
     },
     {
       "path": "artifacts/runs/museum-filter-assembly-v003/assembly-v003-native.png",
       "width": 313,
       "height": 211,
-      "sha256": "9440495d38577aeaf209e9355ce6ee4d2bf441185f40f0d7b8a7d1e1b858093e"
+      "sha256": "568da35241215734d7964d8b2e520740ae11e3d19e47d96ce9c3bccc29d5e0d6"
     },
     {
       "path": "artifacts/runs/museum-filter-assembly-v003/contact-sheet.png",
       "width": 2528,
       "height": 1832,
-      "sha256": "fca923af7dd0791eca0cd35b899c46a222b8f88b3bda15e330c8bce8edc2c941"
+      "sha256": "4bf547b14448dc07185ac638cf2ff37cf004583184a677b9e0a85140ba18c967"
     }
   ],
   "verification": {
     "path": "artifacts/runs/museum-filter-assembly-v003/verification.json",
-    "changed_pixels_native": 6197,
-    "changed_pixels_review_scale": 99152,
-    "mask_equals_actual_changed_pixels": true,
+    "changed_pixels_native": 4207,
+    "changed_pixels_review_scale": 67312,
+    "declared_mask_pixels_native": 4831,
+    "declared_mask_pixels_review_scale": 77296,
+    "actual_changes_are_subset_of_declared_mask": true,
     "changed_pixels_outside_declared_mask": 0,
     "outside_declared_mask_max_channel_error": 0,
     "right_bead_and_close_byte_identical": true,
@@ -60,9 +72,9 @@
     "exact_copy_entries_checked": 19,
     "exact_copy_entries_matching": 19,
     "header": "Assembly v001 gradient and right bead retained; only title glyph silhouettes changed",
-    "lettering": "legible native grayscale raster edges without rectangular field or panel patches",
+    "lettering": "legible deterministic PixelMplus glyphs with binary raster edges and no rectangular field or panel patches",
     "tabs": "object remains active; material remains inactive; v001 tab silhouettes and backgrounds retained",
-    "seams": "no rectangular donor-background seam found"
+    "seams": "no rectangular background seam found"
   },
   "approval_boundary": "Deterministic checks and implementer readback passed; owner visual approval remains required."
 }

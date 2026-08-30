@@ -7,10 +7,11 @@ Reference Screen: `artifacts/references/museum-filter-retro-skin-v001/style-ro-o
 ## Outcome
 
 **Four full-redraw Render Passes failed to reach the required fidelity, so the
-work moved to Assembly.  A final two-output Qwen edit pass supplied foreground
-donors, but Assembly v002 was rejected because rectangular masks imported their
-backgrounds. Assembly v003 keeps Assembly v001's backgrounds and composites
-only native-scale glyph pixels.**
+work moved to Assembly. A final two-output Qwen edit pass helped diagnose the
+remaining defects, but Assembly v002 was rejected because rectangular masks
+imported its backgrounds. Assembly v003 uses no generated raster: it keeps
+Assembly v001's backgrounds and renders exact copy through native-scale,
+shape-aware masks with repository-pinned pixel fonts.**
 
 ## What each pass got wrong
 
@@ -31,19 +32,21 @@ The objective outside-mask score was true but insufficient because the declared
 mask itself owned far more background than the actual foreground change.
 
 Assembly v003 therefore returns to the 313×211 Assembly v001 native image. It
-restores the old glyph silhouettes from Assembly v001-owned backgrounds,
-registers the existing v005 candidate 2 at native scale, and admits only its
-foreground-valued glyph pixels. The title-bar gradient, right bead, close
-button, tab silhouettes, controls, frame, crop, and every other background
-pixel remain Assembly v001 pixels. The result is enlarged 4× with nearest-
-neighbour resampling; no new Render Pass ran.
+predeclares a permitted mask from the old exact-ink glyph pixels and new
+PixelMplus glyph silhouettes, restores only the old text pixels from
+Assembly-v001-owned backgrounds, and renders the exact strings through that
+mask. The title-bar gradient, right bead, close button, tab silhouettes,
+controls, frame, crop, and every other background pixel remain Assembly v001
+pixels. The result is enlarged 4× with nearest-neighbour resampling; no new
+Render Pass ran and no v005 raster enters the final Assembly.
 
-The v003 mask is the actual RGB difference rather than a declaration of
-enclosing rectangles: 6,197 native pixels (99,152 review-scale pixels), with
-zero changes and zero maximum channel error outside it. Every individual edit
-box is 36.3% filled or less, rather than being a solid donor patch. The right
-header controls are byte-identical to Assembly v001, and full/native visual
-readback found all 19 Exact Copy entries present.
+The v003 mask is declared before composition and contains 4,831 native pixels
+(77,296 review-scale pixels). The actual difference is a strict 4,207-pixel
+native subset (67,312 review-scale pixels), with zero changes and zero maximum
+channel error outside the declaration. Every individual edit box is 36.5%
+filled or less, rather than being a solid background patch. The right header
+controls are byte-identical to Assembly v001, and full/native visual readback
+found all 19 Exact Copy entries present.
 
 ## Why the first four passes did not fix it
 
@@ -72,9 +75,11 @@ The search-field edge, dropdown, body checkboxes, checkbox states, layout,
 border and crop remain Assembly v001 pixels outside those masks.
 
 The v002 Fidelity Check reported zero changed pixels outside its rectangles,
-but that did not prove the rectangles were correctly owned. v003 closes that
-gap by deriving the edit mask from the actual foreground-shaped RGB change.
-Human visual approval still decides whether the repaired regions are accepted.
+but that did not prove the rectangles were correctly owned. The first v003
+attempt still derived its mask from the completed output, which made that proof
+circular. The corrected v003 declares old and new glyph silhouettes first, then
+proves the completed output is a subset. Human visual approval still decides
+whether the repaired regions are accepted.
 
 ## Rule taken from this
 
