@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "issue": 126,
+  "prototype_disposition": "throwaway",
+  "reference": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024],
+    "window_rect": {"x": 492, "y": 0, "width": 611, "height": 595}
+  },
+  "inventory": {
+    "source": "artifacts/references/ro-desktop-b/control-inventory.json",
+    "title_drag": 1,
+    "description_toggle": 1,
+    "view_button": 1,
+    "close_controls": 2,
+    "use_button": 1,
+    "selection_items": 27,
+    "steppers": 26
+  },
+  "behaviour_cards": [
+    {
+      "id": "skill-tree-select",
+      "gesture": "Activate",
+      "window_action": "SelectSkill",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "source-game list/grid selection card plus issue-122 owner-approved composition"
+    },
+    {
+      "id": "skill-tree-context-detail",
+      "gesture": "ContextActivate",
+      "window_action": "OpenSkillDetail",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-122 owner decision: right-click skill detail"
+    },
+    {
+      "id": "skill-tree-step",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-115 cut-verified source footage",
+      "contract": "Text is current / target. One accepted step changes target by one and hides every Stepper arrow in the Window in the same frame."
+    },
+    {
+      "id": "skill-tree-use",
+      "gesture": "Activate",
+      "window_action": "CommitSkillChanges",
+      "response_frames": 1,
+      "reversible": false,
+      "authority": "issue-122 owner-approved allocation adapter composition"
+    },
+    {
+      "id": "skill-tree-cancel",
+      "gesture": "Activate",
+      "window_action": "CancelSkillChanges",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-115 source footage: cancel discards pending point"
+    },
+    {
+      "id": "skill-tree-view",
+      "gesture": "Activate",
+      "window_action": "ToggleSkillView",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-122 owner decision: reversible tree/list action"
+    },
+    {
+      "id": "skill-tree-minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "manual-attested shared Window behavior; source-owned title bead is the intent-specified hit surface"
+    }
+  ],
+  "state_set_decisions": {
+    "selection_view": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["unselected", "selected"],
+      "pressed_transform": "source-game confirmed icon darkening while held",
+      "hover_transform": "one-pixel source-skin #46599F outline",
+      "selected_transform": "two-pixel source-skin #46599F outline"
+    },
+    "stepper": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["ready", "pending", "disabled"],
+      "text_format": "current / target",
+      "pending_scope": "window",
+      "pending_arrow_visibility": "hidden for every Stepper in the same frame"
+    }
+  },
+  "gesture_decisions": {
+    "ContextActivate": {
+      "input": "right mouse button release on a declared SelectionView item",
+      "emits": "factual button, local/global pointer position, stable item ID, modifiers",
+      "must_not_fallback_to": "Activate"
+    }
+  },
+  "manifest_decisions": {
+    "window_id": "skill_tree",
+    "stable_item_ids": "skill_tree.skill.<row>-<column>",
+    "stable_stepper_ids": "skill_tree.stepper.<row>-<column>",
+    "shared_types_added": ["SelectionView", "Stepper"],
+    "window_actions": [
+      "SelectSkill",
+      "OpenSkillDetail",
+      "StepSkill",
+      "CommitSkillChanges",
+      "CancelSkillChanges",
+      "ToggleSkillView"
+    ]
+  },
+  "prototype_result": {
+    "driver": "Playwright Chromium real pointer input",
+    "checks": 8,
+    "passed": 8,
+    "finding_promoted_to_test": "Window-level pending state must own all Stepper arrow visibility; per-control inline visibility can override the transaction state and leave stale arrows."
+  }
+}

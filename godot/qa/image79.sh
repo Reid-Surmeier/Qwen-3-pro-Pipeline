@@ -10,6 +10,7 @@ suites=(
   "run_control_spec_contracts.gd:control-spec-contracts.json"
   "run_control_runtime_contracts.gd:control-runtime-contracts.json"
   "run_options_window_contracts.gd:options-window-contracts.json"
+  "run_skill_tree_contracts.gd:skill-tree-contracts.json"
 )
 exit_code=0
 reports=()

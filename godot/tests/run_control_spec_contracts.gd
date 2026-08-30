@@ -10,6 +10,7 @@ var results: Array[Dictionary] = []
 func _init() -> void:
 	_contract_valid_manifest_is_accepted()
 	_contract_options_manifest_is_complete()
+	_contract_skill_tree_control_types_are_frozen()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
@@ -68,6 +69,71 @@ func _contract_options_manifest_is_complete() -> void:
 		and options.id == "options" and ids.size() == 11
 		and "options.bgm" in ids and "options.effect" in ids
 		and "options.skin" in ids, str(loaded.errors))
+
+
+func _contract_skill_tree_control_types_are_frozen() -> void:
+	var fixture := _valid_manifest()
+	var variants := {"idle": "res://fixture.png", "hover": "res://fixture.png",
+		"pressed": "res://fixture.png"}
+	fixture.windows[0].id = "skill_tree"
+	fixture.windows[0].controls = [
+		{
+			"id": "skill_tree.skills", "type": "SelectionView",
+			"geometry": {"x": 30, "y": 60, "width": 550, "height": 470},
+			"interaction_phases": ["idle", "hover", "pressed"],
+			"semantic_states": ["unselected", "selected"],
+			"initial_semantic_state": "unselected",
+			"state_set": {"unselected": variants, "selected": variants},
+			"value": {"items": ["heal", "holy-light"], "initial": "heal"},
+			"surfaces": {
+				"heal": {"geometry": {"x": 0, "y": 0, "width": 42, "height": 42},
+					"state_set": {"unselected": variants, "selected": variants}},
+				"holy-light": {"geometry": {"x": 100, "y": 0, "width": 42, "height": 42},
+					"state_set": {"unselected": variants, "selected": variants}},
+			},
+			"gestures": ["Activate", "ContextActivate"],
+			"actions": [
+				{"gesture": "Activate", "action": "SelectSkill"},
+				{"gesture": "ContextActivate", "action": "OpenSkillDetail"},
+			],
+		},
+		{
+			"id": "skill_tree.stepper.heal", "type": "Stepper",
+			"geometry": {"x": 126, "y": 111, "width": 72, "height": 16},
+			"interaction_phases": ["idle", "hover", "pressed"],
+			"semantic_states": ["ready", "pending", "disabled"],
+			"initial_semantic_state": "ready",
+			"state_set": {"ready": variants, "pending": variants,
+				"disabled": {"idle": "res://fixture.png"}},
+			"value": {"minimum": 0, "maximum": 10, "current": 7,
+				"target": 7, "step": 1},
+			"surfaces": {
+				"decrement": {"geometry": {"x": 0, "y": 0, "width": 18, "height": 16},
+					"state_set": {"visible": variants, "hidden": variants}},
+				"increment": {"geometry": {"x": 54, "y": 0, "width": 18, "height": 16},
+					"state_set": {"visible": variants, "hidden": variants}},
+			},
+			"gestures": ["Activate"],
+			"actions": [{"gesture": "Activate", "action": "StepSkill"}],
+		},
+	]
+	var errors: Array = ControlSpec.validate(fixture, _all_assets_exist)
+	_check("skill-tree-control-contracts", errors.is_empty(), str(errors))
+
+	var bad_stepper := fixture.duplicate(true)
+	bad_stepper.windows[0].controls[1].value.target = 11
+	var stepper_errors: Array = ControlSpec.validate(bad_stepper, _all_assets_exist)
+	_check("stepper-bounds-fail-closed",
+		"InvalidStateSet" in stepper_errors.map(func(error): return error.code),
+		str(stepper_errors))
+
+	var bad_context := fixture.duplicate(true)
+	bad_context.windows[0].controls[0].actions = [
+		{"gesture": "Activate", "action": "SelectSkill"}]
+	var context_errors: Array = ControlSpec.validate(bad_context, _all_assets_exist)
+	_check("selection-context-binding-fails-closed",
+		"ControlBindingError" in context_errors.map(func(error): return error.code),
+		str(context_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:
