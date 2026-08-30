@@ -70,8 +70,8 @@ All body labels, values, radio labels, and all nine popup options use one 10 px
 PixelMplus size at native resolution. The three closed-state baselines have
 equal 21 px gaps. Body glyphs reproduce the source's offset depth: a far gray
 layer at `(2,2)`, a near light-blue layer at `(1,1)`, and the dark source
-stroke on top. Labels use source-measured navy `(46,69,96)`; values use the
-same depth layers with black main strokes. Their 4x review pixels come only
+stroke on top. Labels, values, radio copy, and popup options all use the
+source-measured navy `(46,69,96)`. Their 4x review pixels come only
 from nearest-neighbor enlargement, so no independently hinted 40 px glyphs
 enter the output.
 
@@ -111,6 +111,8 @@ Machine verification records:
   controls are byte-identical full-resolution source crops;
 - the actual closed and open review exports differ from nearest-neighbor native
   enlargement only inside the named full-resolution source-control overlays;
+- the popup difference against the closed candidate on a transparent 336 x 196
+  canvas is contained inside its separately declared open-state mask;
 - the password field is removed from the source layout;
 - the popup edges align with the sort field and every measured option-text
   bound, including the ninth option, stays inside the 336 x 196 open canvas.
@@ -129,6 +131,8 @@ Byte-exact claims are limited to the named arrows, radios, and button pair.
 - `artifacts/runs/custom-filters-ro-assembly-v004/contact-sheet.png`
 - `artifacts/runs/custom-filters-ro-assembly-v004/native-edit-mask.png`
 - `artifacts/runs/custom-filters-ro-assembly-v004/actual-difference-mask-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/open-native-edit-mask.png`
+- `artifacts/runs/custom-filters-ro-assembly-v004/open-actual-difference-mask-native.png`
 - `artifacts/runs/custom-filters-ro-assembly-v004/verification.json`
 
 ## Verification boundary

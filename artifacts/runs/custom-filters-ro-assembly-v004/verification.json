@@ -90,9 +90,9 @@
         0
       ],
       [
-        16,
-        16,
-        16,
+        46,
+        69,
+        96,
         255
       ]
     ]
@@ -183,9 +183,14 @@
   "strict_exact_preservation_claim": false,
   "mask_comparison_baseline": "deterministic native widened shell",
   "native_edit_mask_pixels": 26208,
-  "changed_pixels": 15924,
+  "changed_pixels": 15923,
   "changed_pixels_outside_native_edit_mask": 0,
   "actual_is_subset_of_native_edit_mask": true,
+  "open_mask_comparison_baseline": "closed candidate on transparent 336x196 canvas",
+  "open_native_edit_mask_pixels": 15360,
+  "open_changed_pixels": 14959,
+  "open_changed_pixels_outside_native_edit_mask": 0,
+  "open_actual_is_subset_of_native_edit_mask": true,
   "qwen_popup_surface_source": "artifacts/runs/custom-filters-ro-render-v001/image-01.png",
   "qwen_popup_surface_source_sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c",
   "generated_glyph_pixels_in_final": false,
@@ -216,10 +221,10 @@
       "Accession Number (9-0)"
     ]
   },
-  "closed_native_sha256": "9026f61b16c20b65f575097696471127a7f89af13796d8507884509474fffe2e",
-  "closed_sha256": "12e3f69911a8f2c641a46e3b59de7f0ba2c7ff4a94bcd332c180da7e0e1ace55",
-  "open_native_sha256": "da2b36895bf78870f01427bc55b78cd5ec03f6a64ae3dd24a2883c6de010351c",
-  "open_sha256": "18eb0111a3d644a0d15f196463064e59cb14a80dadc7583bc5bdce232b6187a9",
+  "closed_native_sha256": "e7aa2ff950a2543309ba24d4b0aa4acadcc243ad90af41152a80b7315a2214e2",
+  "closed_sha256": "b5b947e8cd93608db46935e91b5091b76dcecddbf87448e7b50b1d146b9c9cd3",
+  "open_native_sha256": "d88ea6968280e2dbd21a0cbb84861cbadfaf176029ea7d3110394a2a152787d4",
+  "open_sha256": "74ae6eecab92097db4cf02766c0dabcceb2e967cd4a876f2a57214299194804d",
   "render_pass": {
     "provider": "openrouter",
     "model": "qwen/qwen-image-3-pro",

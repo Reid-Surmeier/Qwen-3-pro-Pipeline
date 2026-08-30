@@ -91,7 +91,6 @@ SORT_FIELD_BOX = (204, 49, 324, 65)
 POPUP_BOX = (204, 64, 324, 192)
 
 LABEL_INK = (46, 69, 96, 255)
-BODY_INK = (16, 16, 16, 255)
 BODY_NEAR_DEPTH_INK = (177, 199, 228, 255)
 BODY_FAR_DEPTH_INK = (188, 197, 206, 255)
 TITLE_INK = (0, 1, 7, 255)
@@ -107,7 +106,7 @@ LABEL_TEXT_EFFECTS = (
 VALUE_TEXT_EFFECTS = (
     ((2, 2), BODY_FAR_DEPTH_INK),
     ((1, 1), BODY_NEAR_DEPTH_INK),
-    ((0, 0), BODY_INK),
+    ((0, 0), LABEL_INK),
 )
 TITLE_TEXT_EFFECTS = (
     ((1, 1), TITLE_DEPTH_INK),
@@ -140,13 +139,13 @@ EXACT_COPY = {
 }
 
 BODY_TEXT_RULES = (
-    {"text": "Custom filters:", "xy": (14, ROW_BASELINES[0]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
-    {"text": "Images per page:", "xy": (13, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
-    {"text": "20", "xy": (102, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
-    {"text": "Sort by:", "xy": (160, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
-    {"text": "Relevance", "xy": (208, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
-    {"text": "On", "xy": (63, ROW_BASELINES[2]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
-    {"text": "Off", "xy": (100, ROW_BASELINES[2]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
+    {"text": EXACT_COPY["custom_filters"], "xy": (14, ROW_BASELINES[0]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
+    {"text": EXACT_COPY["images_per_page"], "xy": (13, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
+    {"text": EXACT_COPY["page_value"], "xy": (102, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
+    {"text": EXACT_COPY["sort_by"], "xy": (160, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": LABEL_TEXT_EFFECTS},
+    {"text": EXACT_COPY["selected_sort"], "xy": (208, ROW_BASELINES[1]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
+    {"text": EXACT_COPY["choices"][0], "xy": (63, ROW_BASELINES[2]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
+    {"text": EXACT_COPY["choices"][1], "xy": (100, ROW_BASELINES[2]), "size": BODY_FONT_SIZE, "effects": VALUE_TEXT_EFFECTS},
 )
 
 
@@ -360,11 +359,22 @@ def qwen_popup_surface(width: int, height: int) -> Image.Image:
     return panel
 
 
-def assemble_open(closed: Image.Image) -> Image.Image:
+def open_baseline(closed: Image.Image) -> Image.Image:
     if closed.size != NATIVE_SIZE:
         raise ValueError(f"closed state must be {NATIVE_SIZE}, got {closed.size}")
     output = Image.new("RGBA", OPEN_NATIVE_SIZE, (0, 0, 0, 0))
     output.paste(closed, (0, 0))
+    return output
+
+
+def open_edit_mask() -> Image.Image:
+    mask = Image.new("L", OPEN_NATIVE_SIZE, 0)
+    mask.paste(255, POPUP_BOX)
+    return mask
+
+
+def assemble_open(closed: Image.Image) -> Image.Image:
+    output = open_baseline(closed)
     width = POPUP_BOX[2] - POPUP_BOX[0]
     height = POPUP_BOX[3] - POPUP_BOX[1]
     panel = qwen_popup_surface(width, height)
@@ -467,6 +477,16 @@ def main() -> int:
     shell = clean_exterior(extend_native_shell(native))
     closed, declared = assemble_closed(source)
     open_state = assemble_open(closed)
+    open_base = open_baseline(closed)
+    open_declared = open_edit_mask()
+    open_actual = changed_pixel_mask(open_base, open_state)
+    open_outside = ImageChops.multiply(
+        open_actual, ImageChops.invert(open_declared)
+    )
+    if open_outside.getbbox() is not None:
+        raise RuntimeError(
+            f"open Assembly changed pixels outside its mask: {open_outside.getbbox()}"
+        )
     actual = changed_pixel_mask(shell, closed)
     outside = ImageChops.multiply(actual, ImageChops.invert(declared))
 
@@ -479,6 +499,10 @@ def main() -> int:
         "declared": output_dir / "native-edit-mask-4x.png",
         "actual_native": output_dir / "actual-difference-mask-native.png",
         "actual": output_dir / "actual-difference-mask-4x.png",
+        "open_declared_native": output_dir / "open-native-edit-mask.png",
+        "open_declared": output_dir / "open-native-edit-mask-4x.png",
+        "open_actual_native": output_dir / "open-actual-difference-mask-native.png",
+        "open_actual": output_dir / "open-actual-difference-mask-4x.png",
         "contact": output_dir / "contact-sheet.png",
     }
     closed.save(paths["closed_native"])
@@ -489,6 +513,10 @@ def main() -> int:
     review_from_native(declared).save(paths["declared"])
     actual.save(paths["actual_native"])
     review_from_native(actual).save(paths["actual"])
+    open_declared.save(paths["open_declared_native"])
+    review_from_native(open_declared).save(paths["open_declared"])
+    open_actual.save(paths["open_actual_native"])
+    review_from_native(open_actual).save(paths["open_actual"])
     with Image.open(REJECTED_V003) as rejected:
         make_contact_sheet(source, rejected, closed, open_state).save(paths["contact"])
 
@@ -547,6 +575,11 @@ def main() -> int:
         "changed_pixels": count_pixels(actual),
         "changed_pixels_outside_native_edit_mask": count_pixels(outside),
         "actual_is_subset_of_native_edit_mask": outside.getbbox() is None,
+        "open_mask_comparison_baseline": "closed candidate on transparent 336x196 canvas",
+        "open_native_edit_mask_pixels": count_pixels(open_declared),
+        "open_changed_pixels": count_pixels(open_actual),
+        "open_changed_pixels_outside_native_edit_mask": count_pixels(open_outside),
+        "open_actual_is_subset_of_native_edit_mask": open_outside.getbbox() is None,
         "qwen_popup_surface_source": repo_path(QWEN_POPUP_SOURCE),
         "qwen_popup_surface_source_sha256": QWEN_POPUP_SOURCE_SHA256,
         "generated_glyph_pixels_in_final": False,

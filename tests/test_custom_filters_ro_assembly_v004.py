@@ -24,6 +24,8 @@ class CustomFiltersRoAssemblyV004Tests(unittest.TestCase):
         )
         cls.closed, cls.declared = assembly.assemble_closed(cls.source)
         cls.open_state = assembly.assemble_open(cls.closed)
+        cls.open_baseline = assembly.open_baseline(cls.closed)
+        cls.open_declared = assembly.open_edit_mask()
         cls.review = assembly.closed_review(cls.closed, cls.source)
         cls.open_review = assembly.open_review(cls.open_state, cls.source)
 
@@ -135,7 +137,7 @@ class CustomFiltersRoAssemblyV004Tests(unittest.TestCase):
             (
                 ((2, 2), assembly.BODY_FAR_DEPTH_INK),
                 ((1, 1), assembly.BODY_NEAR_DEPTH_INK),
-                ((0, 0), assembly.BODY_INK),
+                ((0, 0), assembly.LABEL_INK),
             ),
         )
         self.assertEqual(assembly.TITLE_INK, (0, 1, 7, 255))
@@ -157,7 +159,7 @@ class CustomFiltersRoAssemblyV004Tests(unittest.TestCase):
         )
         value_pixels = set(self.closed.crop((102, 51, 120, 66)).getdata())
         self.assertTrue(
-            {assembly.BODY_INK, assembly.BODY_NEAR_DEPTH_INK, assembly.BODY_FAR_DEPTH_INK}
+            {assembly.LABEL_INK, assembly.BODY_NEAR_DEPTH_INK, assembly.BODY_FAR_DEPTH_INK}
             <= value_pixels
         )
         title_pixels = set(self.closed.crop(assembly.TITLE_EDIT_BOX).getdata())
@@ -246,6 +248,12 @@ class CustomFiltersRoAssemblyV004Tests(unittest.TestCase):
         actual = assembly.changed_pixel_mask(self.shell, self.closed)
         outside = ImageChops.multiply(actual, ImageChops.invert(self.declared))
         self.assertIsNone(outside.getbbox())
+
+    def test_open_popup_changes_are_contained_relative_to_predeclared_open_mask(self) -> None:
+        actual = assembly.changed_pixel_mask(self.open_baseline, self.open_state)
+        outside = ImageChops.multiply(actual, ImageChops.invert(self.open_declared))
+        self.assertIsNone(outside.getbbox())
+        self.assertEqual(self.open_declared.getbbox(), assembly.POPUP_BOX)
 
     def test_v001_v002_and_v003_are_retained_as_rejected_history(self) -> None:
         self.assertTrue(assembly.REJECTED_V001.exists())
