@@ -1,0 +1,93 @@
+{
+  "issue": 138,
+  "assembly": "custom-filters-ro-v001",
+  "style_source": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+  "style_source_sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+  "data_source": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+  "data_source_sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
+  "data_source_usage": "strings and order only; assembler never opens this image",
+  "qwen_candidates_usage": "diagnostic evidence only; assembler never opens them until contact-sheet rendering",
+  "closed_native_sha256": "ccb1d9aca89d4e1736a58f5b8dc6ead148e8414dd9f0e890c509f6bf0c493e26",
+  "open_native_sha256": "7a7270c725f3f527c388aef87a6666ece6ae289e4be13522d6bab60bb08ca42c",
+  "edit_boxes": [
+    [
+      10,
+      6,
+      248,
+      24
+    ],
+    [
+      13,
+      27,
+      257,
+      46
+    ],
+    [
+      13,
+      48,
+      257,
+      66
+    ],
+    [
+      13,
+      68,
+      257,
+      87
+    ],
+    [
+      178,
+      94,
+      259,
+      115
+    ]
+  ],
+  "changed_native_pixels": 14811,
+  "declared_mask_pixels": 14811,
+  "declared_mask_equals_actual_difference": true,
+  "changed_pixels_outside_edit_boxes": 0,
+  "closed_native_size": [
+    272,
+    126
+  ],
+  "open_native_size": [
+    272,
+    196
+  ],
+  "exact_copy": {
+    "title": "Custom filters",
+    "custom_filters": "Custom filters:",
+    "images_per_page": "Images per page:",
+    "page_value": "20",
+    "sort_by": "Sort by:",
+    "selected_sort": "Relevance",
+    "choices": [
+      "On",
+      "Off"
+    ],
+    "buttons": [
+      "OK",
+      "Cancel"
+    ],
+    "sort_options": [
+      "Relevance",
+      "Title (a-z)",
+      "Title (z-a)",
+      "Date (newest-oldest)",
+      "Date (oldest-newest)",
+      "Artist/Maker (a-z)",
+      "Artist/Maker (z-a)",
+      "Accession Number (0-9)",
+      "Accession Number (9-0)"
+    ]
+  },
+  "sort_option_count": 9,
+  "password_row_present": false,
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "requested_outputs": 2,
+  "completed_outputs": 2,
+  "ambiguous_outputs": 0,
+  "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+  "estimated_cost_usd": 0.1,
+  "actual_cost_usd": null
+}
