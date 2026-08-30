@@ -83,6 +83,21 @@ def mask_fill_ratio(image: Image.Image, matte: tuple[int, int, int]) -> float:
 
 MAX_ANCHOR_MASK_FILL = 0.92
 
+# Two framings, two fidelity metrics, because the metric has to measure something the
+# framing leaves free to vary.
+#
+#   "matte"  — the icon floats in the key colour. Its silhouette is the icon, so
+#              silhouette IoU against the Anchor is meaningful, and an Anchor whose
+#              silhouette is a rectangle is a bug (see mask_fill_ratio).
+#   "filled" — the icon fills its tile edge to edge, the key colour is only a thin
+#              border marking the edge. Every frame's silhouette is then the same
+#              square whatever is drawn inside it, so silhouette IoU is worthless and
+#              per-pixel identity against the Anchor is the only thing that can see
+#              drift. Reid's rule, 2026-08-30: the key colour locks the square, it is
+#              not the ground the icon sits in.
+FRAME_MODES = ("matte", "filled")
+MIN_ANCHOR_PIXEL_IDENTITY = 0.80
+
 
 def silhouette_iou(frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]) -> float:
     a, b = _mask(frame, matte), _mask(reference, matte)
@@ -118,6 +133,11 @@ class RetroThresholds:
     max_effective_fps: float = 10.0
     min_silhouette_iou: float = 0.90
     min_anchor_silhouette_iou: float = 0.90
+    # filled-square runs cannot use a silhouette metric at all: every frame's outline is
+    # the same tile. Per-pixel identity against the Anchor is what remains. The 0.80
+    # starting point is NOT calibrated against human verdicts yet — it is a placeholder
+    # chosen so a one-pixel shift of one element passes and a redraw does not.
+    min_anchor_pixel_identity: float = 0.80
 
 
 def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
@@ -128,7 +148,12 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         "palette_locked": report["out_of_palette_pixels"] == 0,
         "silhouette_stable": report["min_silhouette_iou"] >= t.min_silhouette_iou,
     }
-    if "anchor_silhouette_iou" in report:
+    mode = report.get("frame_mode")
+    if mode == "filled":
+        checks["matches_anchor"] = (
+            report["anchor_pixel_identity"] >= t.min_anchor_pixel_identity
+        )
+    elif "anchor_silhouette_iou" in report:
         checks["matches_anchor"] = (
             report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
         )
@@ -271,6 +296,8 @@ def conform_states(
     colors: int = 16,
     matte: tuple[int, int, int] = (0, 255, 0),
     settle_trim: float = 0.25,
+    frame_mode: str = "matte",
+    state_hold_ms: int = 134,
 ) -> dict:
     """Conform one multi-state take into a State Set: one certified directory per state.
 
@@ -285,6 +312,8 @@ def conform_states(
     """
     if shutil.which("ffmpeg") is None:
         raise RetroError("ffmpeg is required for retro conformance")
+    if frame_mode not in FRAME_MODES:
+        raise RetroError(f"frame_mode must be one of {FRAME_MODES}, not {frame_mode!r}")
     spans = parse_state_map(state_map)
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -304,7 +333,7 @@ def conform_states(
     palette = extract_palette(ref, colors)
     source_snapped = snap_and_lock(ref, palette, grid)
     anchor_fill = mask_fill_ratio(source_snapped, matte)
-    if anchor_fill > MAX_ANCHOR_MASK_FILL:
+    if frame_mode == "matte" and anchor_fill > MAX_ANCHOR_MASK_FILL:
         raise RetroError(
             f"Anchor {reference.name} fills {anchor_fill:.1%} of its own bounding box, so its "
             f"silhouette is effectively a rectangle — the icon is sitting on an opaque panel "
@@ -335,6 +364,8 @@ def conform_states(
             "min_silhouette_iou": round(min(ious), 4),
             "frame0_identity": round(identity_fraction(snapped[0], source_snapped), 4),
             "anchor_silhouette_iou": round(silhouette_iou(snapped[0], source_snapped, matte), 4),
+            "anchor_pixel_identity": round(identity_fraction(snapped[0], source_snapped), 4),
+            "frame_mode": frame_mode,
             "grid": grid,
             "palette_colors": colors,
             "reference": str(reference),
@@ -356,12 +387,30 @@ def conform_states(
         (state_dir / "retro-report.json").write_text(json.dumps(report, indent=2) + "\n")
         states[name] = report
 
+    # The artifact a person actually judges: the four states cycling at the era cadence,
+    # each held, substituted instantly. Per-state GIFs show what a state contains; this
+    # shows what the icon does.
+    cycle = [
+        Image.open(out_dir / name / "frame00.png").convert("RGB") for name in spans
+    ]
+    cycle[0].save(
+        out_dir / "state-set.gif",
+        save_all=True,
+        append_images=cycle[1:],
+        duration=state_hold_ms,
+        loop=0,
+        optimize=False,
+    )
+
     summary = {
         "states": states,
+        "state_set_gif": str(out_dir / "state-set.gif"),
+        "state_hold_ms": state_hold_ms,
         "state_order": list(spans),
         "total_source_frames": len(raw),
         "anchor_mask_fill_ratio": round(anchor_fill, 4),
         "settle_trim": settle_trim,
+        "frame_mode": frame_mode,
         "certified": all(r["certified"] for r in states.values()),
         "uncertified_states": [n for n, r in states.items() if not r["certified"]],
         "anchor_silhouette_iou_note": (

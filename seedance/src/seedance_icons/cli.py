@@ -207,6 +207,8 @@ def cmd_retro_conform_states(args: argparse.Namespace) -> None:
         grid=args.grid,
         colors=args.colors,
         settle_trim=args.settle_trim,
+        frame_mode=args.frame_mode,
+        state_hold_ms=args.state_hold_ms,
     )
     print(json.dumps(summary, indent=2))
     if not summary["certified"]:
@@ -299,6 +301,23 @@ def parser() -> argparse.ArgumentParser:
     retro_states.add_argument("--grid", type=int, default=160)
     retro_states.add_argument("--colors", type=int, default=16)
     retro_states.add_argument("--settle-trim", type=float, default=0.25)
+    retro_states.add_argument(
+        "--state-hold-ms",
+        type=int,
+        default=134,
+        help="Hold per state in the state-set GIF; 134 ms is the era binary-swap cadence",
+    )
+    retro_states.add_argument(
+        "--frame-mode",
+        choices=("matte", "filled"),
+        default="matte",
+        help=(
+            "matte: the icon floats in the key colour, fidelity is silhouette IoU. "
+            "filled: the icon fills its tile and the key colour is only a border, "
+            "fidelity is per-pixel identity — a silhouette metric cannot see anything "
+            "there, because every frame's outline is the same square."
+        ),
+    )
     retro_states.set_defaults(func=cmd_retro_conform_states)
     verify = sub.add_parser("verify", help="Run independent media and anchor checks")
     verify.add_argument("run")

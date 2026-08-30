@@ -111,3 +111,34 @@ def test_anchor_iou_gates_only_state_set_runs() -> None:
     verdict = certify(redrawn_state)
     assert verdict["checks"]["matches_anchor"] is False
     assert not verdict["certified"]
+
+
+def test_filled_mode_switches_the_fidelity_metric() -> None:
+    """A filled tile has the same silhouette in every frame, so a silhouette metric
+    cannot see a redraw there. The framing decides which metric can see anything."""
+    from seedance_icons.retro import certify
+
+    base = {
+        "unique_frames": 4,
+        "effective_fps": 6.0,
+        "out_of_palette_pixels": 0,
+        "min_silhouette_iou": 0.998,
+        "frame0_identity": 0.72,
+    }
+
+    # filled: a perfect silhouette score must not rescue a redrawn tile
+    redrawn_tile = dict(
+        base, frame_mode="filled", anchor_silhouette_iou=1.0, anchor_pixel_identity=0.41
+    )
+    verdict = certify(redrawn_tile)
+    assert verdict["checks"]["matches_anchor"] is False
+    assert not verdict["certified"]
+
+    faithful_tile = dict(
+        base, frame_mode="filled", anchor_silhouette_iou=1.0, anchor_pixel_identity=0.93
+    )
+    assert certify(faithful_tile)["certified"]
+
+    # matte mode keeps using the silhouette, as calibrated
+    drifted = dict(base, frame_mode="matte", anchor_silhouette_iou=0.466)
+    assert not certify(drifted)["certified"]

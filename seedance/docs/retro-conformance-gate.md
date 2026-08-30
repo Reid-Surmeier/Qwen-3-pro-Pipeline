@@ -47,3 +47,36 @@ briefs): all five certified at IoU 0.998–1.0 — and exposed frame0_identity a
 paleness-biased, leading to its demotion to a diagnostic. Recalibrate against human
 verdicts as batches accumulate; thresholds live in `RetroThresholds`
 (`src/seedance_icons/retro.py`).
+
+## Framing: the key colour locks the square, it is not the ground
+
+Owner rule, 2026-08-30. A generated icon **fills its tile**. The `#00FF00` key colour
+marks the edge of that tile and nothing more — a thin border, not a field the icon sits
+in the middle of.
+
+The reason is behavioural, and it was measured. Given a large key-coloured field around
+a small icon, Seedance treats that field as somewhere to go: asked for a two-pixel
+shift, in two takes under two very different briefs, it moved the element roughly
+fifteen pixels and off its subject. An icon that already fills its tile has nowhere to
+travel to.
+
+This changes which fidelity metric can see anything, so `conform_states` takes a
+`--frame-mode`:
+
+| Mode | Framing | Fidelity metric | Why |
+| --- | --- | --- | --- |
+| `matte` | icon floats in the key colour | `anchor_silhouette_iou` >= 0.90 | the silhouette *is* the icon; calibrated on the two 2026-08-30 takes (accepted 0.955-0.979, rejected 0.466-0.529) |
+| `filled` | icon fills the tile, key colour is a border | `anchor_pixel_identity` >= 0.80 | every frame's outline is the same square, so a silhouette metric is blind by construction; the threshold is a placeholder, not yet calibrated against human verdicts |
+
+`mask_fill_ratio` — the guard that refuses an Anchor whose silhouette is a rectangle —
+applies to `matte` runs only. In `filled` mode a rectangular silhouette is the intent.
+
+## Every Motion Pass carries a video reference
+
+Owner rule, 2026-08-30. Not a citation in the brief: the actual animation, passed as
+`--video-reference` with an HTTPS URL, so the model sees the cadence rather than reading
+about it. Pair each icon's motion with a real animation that behaves the same way.
+
+It is also cheaper. A video input switches OpenRouter to the
+`video_tokens_with_video_input` SKU: the same twelve-second run estimated $0.2268
+without a reference and $0.1361 with one.
