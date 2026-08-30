@@ -74,6 +74,28 @@ candidate and enlarged before/after crops are recorded in
 `artifacts/runs/museum-filter-assembly-v004/contact-sheet.png`. This is machine
 verification of scope and integration, not the owner's subjective approval.
 
+The owner accepted the direction but rejected v004 as final because the tight
+13px masks visibly clipped both beads, the material-tab stair profile ran in
+the opposite direction, and the `material` copy sat against the tab edge.
+
+## Assembly v005 bead and tab geometry correction
+
+Assembly v005 again starts from v001. Each bead is recut from a padded 64×64
+region in the full-resolution Reference Screen and downsampled into a 15×15
+native asset whose alpha mask has a guaranteed empty pixel on every side. This
+keeps the soft circular edge complete without restoring a square donor patch.
+The close button keeps v004's foreground-only correction.
+
+The inactive tab grows from 16 to 20 native pixels wide. Its source-like stairs
+now run from wide top and bottom tips to a narrower middle, reversing v004's
+profile. The exact v001 `material` bitmap is moved two native pixels inward;
+its rightmost glyph pixel has three clear pixels before the middle border.
+
+The v005 declared mask exactly equals the actual baseline-to-candidate
+difference: 696 native pixels, all inside the same three semantic regions, with
+zero changes outside. The complete English/body/control layer outside the
+marked material-tab copy remains byte-identical to v001. No generation ran.
+
 ## Why the first four passes did not fix it
 
 The failure is not prompt quality. It is a category error: the chrome —
