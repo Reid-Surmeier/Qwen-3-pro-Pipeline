@@ -3,14 +3,18 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from PIL import Image, ImageChops
-
-from scripts import assemble_museum_filter_v003 as assembly
+try:
+    from PIL import Image, ImageChops
+    from scripts import assemble_museum_filter_v003 as assembly
+    HAVE_PIL = True
+except ImportError:
+    HAVE_PIL = False
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@unittest.skipUnless(HAVE_PIL, "Pillow is not installed")
 class ShapeAwareMuseumFilterAssemblyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
