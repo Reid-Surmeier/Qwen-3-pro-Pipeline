@@ -67,5 +67,23 @@
       "model added country names (Canada, United States, Brazil, AUSTRALIA, Apia, Papeete, Brasilia) - reads well, not in source",
       "Kiribati label not restored"
     ]
+  },
+  "v006": {
+    "file": "final-v006-assembled.png",
+    "sha256": "dc5bb82a920a80583cddb45628f54ced01db9d763797cfb57603a45fbef9a3f5",
+    "method": "repo ASSEMBLY discipline (ADR 0001/0002): source-locked native WorldTimeZone GIF as Reference (exact typography/halos/borders untouched), gpt-image-2 recolour as Render Pass (colours only, patch-majority transfer), one gpt-image-2 MARKER pass painting plates magenta for localization only; deterministic composite with declared regions R1-R7 and a fidelity gate.",
+    "fidelity": {
+      "declared_pixels": 179603,
+      "changed_pixels": 154262,
+      "outside_changed": 0,
+      "passed": true
+    },
+    "marker_pass_cost_usd": 0.145,
+    "known_nits": [
+      "a few 1-px white dashes on interior zone-boundary rows (Kazakhstan/Mongolia/China)",
+      "INDIA caps partially faded",
+      "one green pixel patch on KAMCHATKA's T",
+      "London label tail clipped by its plate in the source"
+    ]
   }
 }

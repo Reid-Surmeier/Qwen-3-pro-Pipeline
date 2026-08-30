@@ -1,0 +1,56 @@
+{
+  "reference": {
+    "file": "wtz-map-12map-1001x485.gif",
+    "sha256": "90338b9cdbdd59ad60a7876f5e928d957837f1a816d6bd1e08ebed8f545c61e5",
+    "size": [
+      1001,
+      485
+    ]
+  },
+  "render": {
+    "file": "render-cropped.png",
+    "sha256": "7bd813d6070d4ffa28059c5c45861f61e835c025857638e23a50b82fd753336c"
+  },
+  "alignment": {
+    "blocks": 1,
+    "dx": [
+      -25.0,
+      0.0,
+      0.0
+    ],
+    "dy": [
+      -5.0,
+      0.0,
+      0.0
+    ],
+    "overlap_before": 12443,
+    "overlap_after": 16506
+  },
+  "declared_pixels": 179603,
+  "changed_pixels": 154262,
+  "outside_changed": 0,
+  "passed": true,
+  "regions": {
+    "R1_badges": 103,
+    "R2_tags": 11,
+    "R3": 12170,
+    "R4": 5625,
+    "R5": 812,
+    "R6_patches": 350,
+    "R6_pixels": 91009,
+    "R7": 10735
+  },
+  "palette": [
+    "#fcc904",
+    "#bf95ee",
+    "#02b301",
+    "#f0031f",
+    "#0095fd",
+    "#60f9c0",
+    "#fb6665",
+    "#7b323b",
+    "#c3ca87",
+    "#f97c3e",
+    "#04b039"
+  ]
+}
