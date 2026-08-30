@@ -1,0 +1,15 @@
+{
+ "verdict": "FAIL",
+ "actions": 32,
+ "frames_verified": 63,
+ "unexercised": [
+  "effect-on"
+ ],
+ "problems": [
+  "dropdown-row: NOT RESPONSIVE \u2014 The list remained open and the field still read Classic Blue. I could not see a distinct highlight bar move onto the second row in the after screenshot.",
+  "dropdown-row: does not match expected \u2014 The list remained open and the field still read Classic Blue. I could not see a distinct highlight bar move onto the second row in the after screenshot.",
+  "hover-minimize: NOT RESPONSIVE \u2014 The minimize button looked the same before and after the one-second rest. No pointer was rendered in either screenshot, so a hand cursor could not be seen.",
+  "hover-minimize: does not match expected \u2014 The minimize button looked the same before and after the one-second rest. No pointer was rendered in either screenshot, so a hand cursor could not be seen.",
+  "close: does not match expected \u2014 The full options window was visible before Escape. After Escape the entire window disappeared and the reopen label appeared at the top-left."
+ ]
+}

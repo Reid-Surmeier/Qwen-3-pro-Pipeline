@@ -21,7 +21,7 @@
     15,
     22
    ],
-   "sha256": "cac8520519517d45"
+   "sha256": "a3a49aedf836eef4"
   },
   "slider-left-pressed.png": {
    "note": "derived: 1px inset nudge",
@@ -45,7 +45,7 @@
     15,
     21
    ],
-   "sha256": "a744a8c18395f8d1"
+   "sha256": "f1aa0294b1985f3b"
   },
   "slider-right-pressed.png": {
    "note": "derived: 1px inset nudge",
@@ -69,7 +69,7 @@
     14,
     14
    ],
-   "sha256": "59541794f25cabe4"
+   "sha256": "b735fa98400b0b3b"
   },
   "slider-thumb-pressed.png": {
    "note": "derived: 1px inset nudge",
@@ -133,7 +133,7 @@
     30,
     30
    ],
-   "sha256": "4e76ec35cfef8965"
+   "sha256": "8f205761d70efe78"
   },
   "dropdown-field.png": {
    "note": "source-cut field, value text healed with the field's own background rows \u2014 StyleBoxTexture 4px margins; live text renders the value",
@@ -173,7 +173,7 @@
     19,
     18
    ],
-   "sha256": "4ca545e86c462a94"
+   "sha256": "b8a7558cf4bcd858"
   },
   "btn-minimize-pressed.png": {
    "note": "derived 1px nudge",
@@ -197,7 +197,7 @@
     22,
     25
    ],
-   "sha256": "83c4f030ff1b1a48"
+   "sha256": "169267fcb28b18d8"
   },
   "btn-close-pressed.png": {
    "note": "derived 1px nudge",

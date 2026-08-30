@@ -1,0 +1,297 @@
+{
+  "export_url": "https://windows-wsl.taile06c45.ts.net/godot-v2-options-b/",
+  "viewport": {"width": 1536, "height": 1024},
+  "actions": [
+    {
+      "control": "miss",
+      "gesture": "drag (1250,311) -> (1082,311)",
+      "expected": "the press lands on the visible BGM thumb and the thumb follows the drag",
+      "observed": "The thumb stayed at its initial position in the before and mid screenshots, and it did not look pressed. It was still in the same position after release.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T19-57-32-965Z.png", "mid": "page-2026-08-30T19-57-54-275Z.png", "after": "page-2026-08-30T19-58-05-834Z.png"}
+    },
+    {
+      "control": "miss",
+      "gesture": "drag (1251,313) -> (1082,313)",
+      "expected": "the press lands on the visible BGM thumb and the thumb follows the drag",
+      "observed": "The thumb did not move or darken in the mid screenshot. The released screenshot was visually unchanged at the slider.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T19-58-05-834Z.png", "mid": "page-2026-08-30T19-58-12-958Z.png", "after": "page-2026-08-30T19-58-23-213Z.png"}
+    },
+    {
+      "control": "miss",
+      "gesture": "drag (1429,355) -> (1236,355) while the outer surface was 1728x1152",
+      "expected": "the press lands on the BGM thumb and only the thumb moves left",
+      "observed": "The BGM thumb stayed fixed relative to the window in the mid screenshot while the entire window moved left. The window finished farther left after release, so this press had landed on the title bar instead of the thumb.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T19-58-23-213Z.png", "mid": "page-2026-08-30T19-58-31-809Z.png", "after": "page-2026-08-30T19-59-14-461Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag (1429,355) -> (1236,355)",
+      "expected": "thumb follows the pointer continuously and stops at the left end",
+      "observed": "The thumb was under the moving pointer around x=1330 in the held screenshot and looked darker blue than at rest. After release it stopped at the left end with its center near design x=1246 and returned to its normal look.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T19-59-46-151Z.png", "mid": "page-2026-08-30T19-59-52-260Z.png", "after": "page-2026-08-30T19-59-58-374Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag (1246,355) -> (1470,355)",
+      "expected": "thumb follows the pointer continuously and clamps at the right end",
+      "observed": "The held screenshot showed the darker thumb following the pointer through the middle of the track. After release it stopped at the right-end center near design x=1458 even though the pointer had gone to x=1470.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T19-59-58-374Z.png", "mid": "page-2026-08-30T20-00-05-685Z.png", "after": "page-2026-08-30T20-00-10-961Z.png"}
+    },
+    {
+      "control": "bgm-arrow-right",
+      "gesture": "click (1472,355)",
+      "expected": "the already end-clamped thumb does not move or overshoot",
+      "observed": "The thumb was at the right end before the click. It remained at exactly the same visible position afterward, with no overshoot or other visible response.",
+      "responsive": false,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-10-961Z.png", "after": "page-2026-08-30T20-00-16-550Z.png"}
+    },
+    {
+      "control": "bgm-arrow-left",
+      "gesture": "click (1230,355)",
+      "expected": "the thumb steps a little to the left",
+      "observed": "Before the click the thumb was at the right end. Afterward its center was visibly a few pixels left of that end.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-16-550Z.png", "after": "page-2026-08-30T20-00-22-315Z.png"}
+    },
+    {
+      "control": "effect-slider-track",
+      "gesture": "click (1300,389)",
+      "expected": "the Effect thumb moves directly to the clicked track position",
+      "observed": "The Effect thumb began near the middle of the track. After the track click its center was visibly at design x=1300, directly over the clicked position.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-22-315Z.png", "after": "page-2026-08-30T20-00-29-244Z.png"}
+    },
+    {
+      "control": "bgm-on",
+      "gesture": "click (1493,358)",
+      "expected": "the empty checkbox gains a tick instantly",
+      "observed": "The BGM on square was empty before the click. A blue tick was visible inside it immediately afterward.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-29-244Z.png", "after": "page-2026-08-30T20-00-36-717Z.png"}
+    },
+    {
+      "control": "bgm-on",
+      "gesture": "click (1493,358) again",
+      "expected": "the tick disappears and the checkbox returns to its previous look",
+      "observed": "The checkbox was visibly ticked before the second click. It was empty afterward and matched its original unchecked appearance.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-36-717Z.png", "after": "page-2026-08-30T20-00-41-229Z.png"}
+    },
+    {
+      "control": "checkbox-attack",
+      "gesture": "click (1144,473)",
+      "expected": "the empty attack checkbox gains a tick instantly",
+      "observed": "The attack square was empty before the click. A blue tick was visible in the square afterward.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-41-229Z.png", "after": "page-2026-08-30T20-00-46-734Z.png"}
+    },
+    {
+      "control": "checkbox-skill",
+      "gesture": "click (1234,473)",
+      "expected": "the initially checked skill checkbox becomes empty instantly",
+      "observed": "The skill square contained a blue tick before the click. The tick was gone afterward, leaving an empty square with a focus outline.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-46-734Z.png", "after": "page-2026-08-30T20-00-52-599Z.png"}
+    },
+    {
+      "control": "checkbox-attack",
+      "gesture": "click (1144,473) again",
+      "expected": "the attack checkbox returns to its original empty look",
+      "observed": "The attack square was ticked before this click. It was empty afterward and matched the original unchecked state.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-52-599Z.png", "after": "page-2026-08-30T20-00-57-535Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click (1505,429)",
+      "expected": "the dropdown list opens in one frame and the field value stays Classic Blue",
+      "observed": "The list appeared directly below the field in the after screenshot with four visible rows. The field still read Classic Blue and had not changed merely from opening the list.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-00-57-535Z.png", "after": "page-2026-08-30T20-01-02-971Z.png"}
+    },
+    {
+      "control": "dropdown-row",
+      "gesture": "move pointer to second row (1350,499)",
+      "expected": "a light highlight bar moves from the current row to the second row while the field stays unchanged",
+      "observed": "The list remained open and the field still read Classic Blue. I could not see a distinct highlight bar move onto the second row in the after screenshot.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T20-01-02-971Z.png", "after": "page-2026-08-30T20-01-11-446Z.png"}
+    },
+    {
+      "control": "dropdown-row",
+      "gesture": "click second row (1350,499)",
+      "expected": "the list closes and the second-row name appears in the field",
+      "observed": "The open list disappeared immediately after the click. The field changed from Classic Blue to <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-01-11-446Z.png", "after": "page-2026-08-30T20-01-17-781Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click (1505,429) after selecting <Basic Skin>",
+      "expected": "the list opens again without changing the selected field value",
+      "observed": "The four-row list opened below the field again in one frame. The field continued to show <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-01-17-781Z.png", "after": "page-2026-08-30T20-01-23-506Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "press Escape with the list open",
+      "expected": "the list closes without changing the field",
+      "observed": "The list was visible before Escape and was gone afterward. The field still displayed <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-01-23-506Z.png", "after": "page-2026-08-30T20-01-28-939Z.png"}
+    },
+    {
+      "control": "hover-minimize",
+      "gesture": "move to (1491,311) and rest 1 second",
+      "expected": "the minimize button shows a light hover highlight and the pointer becomes a hand",
+      "observed": "The minimize button looked the same before and after the one-second rest. No pointer was rendered in either screenshot, so a hand cursor could not be seen.",
+      "responsive": false,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T20-01-28-939Z.png", "after": "page-2026-08-30T20-01-34-899Z.png"}
+    },
+    {
+      "control": "hover-thumb",
+      "gesture": "move to BGM thumb (1453,355) and rest 1 second",
+      "expected": "the thumb remains in its normal unpressed look until it is held",
+      "observed": "The BGM thumb stayed at the same position during the hover. Its visible color and shape did not change from the before screenshot.",
+      "responsive": false,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-01-34-899Z.png", "after": "page-2026-08-30T20-01-43-436Z.png"}
+    },
+    {
+      "control": "title-drag",
+      "gesture": "drag (1300,309) -> (900,600) in 8 moves",
+      "expected": "the whole window follows the pointer 1:1 with no easing and stops on release",
+      "observed": "At the held midpoint the window had moved about half of the requested left-and-down displacement. After release it was at the full displacement, with its contents unchanged and no trailing animation.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-01-43-436Z.png", "mid": "page-2026-08-30T20-01-54-910Z.png", "after": "page-2026-08-30T20-02-01-982Z.png"}
+    },
+    {
+      "control": "title-drag",
+      "gesture": "drag (900,600) -> (1300,309) in 8 moves",
+      "expected": "the window follows the pointer back and returns near its starting position",
+      "observed": "The held midpoint showed the window halfway back toward its original location. The released screenshot showed it returned to the original top-right position without animation.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-01-982Z.png", "mid": "page-2026-08-30T20-02-11-522Z.png", "after": "page-2026-08-30T20-02-17-400Z.png"}
+    },
+    {
+      "control": "minimize",
+      "gesture": "click (1491,311)",
+      "expected": "the full window instantly becomes a compact finished title bar with icon, title, and both buttons",
+      "observed": "The full controls were visible before the click. Afterward only the compact title bar remained, with the icon, title, minimize button, and close button all visible.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-17-400Z.png", "after": "page-2026-08-30T20-02-23-966Z.png"}
+    },
+    {
+      "control": "minimize",
+      "gesture": "click (1491,311) again",
+      "expected": "the compact bar instantly restores the full window",
+      "observed": "The before screenshot contained only the compact bar. The full options window returned afterward with the prior slider, dropdown, and checkbox state intact.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-23-966Z.png", "after": "page-2026-08-30T20-02-31-531Z.png"}
+    },
+    {
+      "control": "close",
+      "gesture": "click (1517,312)",
+      "expected": "the window disappears and a small reopen control appears near the top-left",
+      "observed": "The options window disappeared completely after the close click. A small white reopen label appeared near the top-left on the magenta background.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-31-531Z.png", "after": "page-2026-08-30T20-02-36-917Z.png"}
+    },
+    {
+      "control": "reopen",
+      "gesture": "click reopen at (35,23)",
+      "expected": "the options window reappears at its previous position",
+      "observed": "Only the reopen label was visible before the click. The full window returned at the original top-right position afterward and retained <Basic Skin> and the modified slider and checkbox values.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-36-917Z.png", "after": "page-2026-08-30T20-02-44-376Z.png"}
+    }
+  ],
+  "free_play": [
+    {
+      "control": "bgm-on",
+      "gesture": "rapid double-click (1493,358)",
+      "expected": "two immediate toggles return the checkbox to its original empty look",
+      "observed": "The BGM on checkbox was empty before the double-click. It was also empty afterward, with no final-frame difference visible.",
+      "responsive": false,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-44-376Z.png", "after": "page-2026-08-30T20-02-57-864Z.png"}
+    },
+    {
+      "control": "bgm-slider-thumb",
+      "gesture": "drag (1453,355) -> (1000,700) -> (1453,355)",
+      "expected": "the captured thumb clamps left while the pointer is outside and follows it back when the pointer returns",
+      "observed": "With the button held and the pointer far below-left of the window, the thumb was visibly clamped at the track's left end. When the pointer returned to its starting point and was released, the thumb returned to its original near-right position.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-02-57-864Z.png", "mid": "page-2026-08-30T20-03-09-514Z.png", "after": "page-2026-08-30T20-03-19-026Z.png"}
+    },
+    {
+      "control": "effect-slider-track",
+      "gesture": "click near right track end (1460,389)",
+      "expected": "the Effect thumb moves to the clicked position and clamps at the right end",
+      "observed": "The Effect thumb began at design x=1300. After the click it was visibly at the track's right-end center near design x=1458.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-03-19-026Z.png", "after": "page-2026-08-30T20-03-28-033Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click (1505,429)",
+      "expected": "the dropdown opens without changing <Basic Skin>",
+      "observed": "The list was closed before the click. It opened below the field afterward while the field continued to display <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-03-28-033Z.png", "after": "page-2026-08-30T20-03-37-158Z.png"}
+    },
+    {
+      "control": "dropdown-arrow",
+      "gesture": "click elsewhere on magenta at (800,200)",
+      "expected": "the open list closes without changing the field",
+      "observed": "The list was visible before the outside click and disappeared afterward. The field remained <Basic Skin>.",
+      "responsive": true,
+      "matches_expected": true,
+      "screenshots": {"before": "page-2026-08-30T20-03-37-158Z.png", "after": "page-2026-08-30T20-03-44-678Z.png"}
+    },
+    {
+      "control": "close",
+      "gesture": "press Escape with the dropdown closed",
+      "expected": "Escape has no visible effect when the dropdown is already closed",
+      "observed": "The full options window was visible before Escape. After Escape the entire window disappeared and the reopen label appeared at the top-left.",
+      "responsive": true,
+      "matches_expected": false,
+      "screenshots": {"before": "page-2026-08-30T20-03-44-678Z.png", "after": "page-2026-08-30T20-03-53-263Z.png"}
+    }
+  ],
+  "notes": "The first navigation was fully drawn after about 3 seconds; the calibration reload was fully drawn after about 2 seconds. Magenta reached all four screenshot edges and no black bars were visible. The browser interaction surface was 1536x1024, but every saved CSS screenshot PNG was 1344x896, a uniform 0.875 visual reduction with offsetX=0 and offsetY=0. Pointer input still aligned with the supplied design coordinates when the outer surface was 1536x1024, so the required coordinates were passed unchanged for the real attempts. I temporarily enlarged the outer surface to 1728x1152 while investigating the PNG-size mismatch; that made the pointer scale differ and produced the three logged miss attempts, including one accidental title-bar drag. I restored 1536x1024 and reloaded before the successful BGM drag; page-2026-08-30T19-59-46-151Z.png is the clean loaded shot used for the real sequence. The dropdown row-hover screenshot did not show a distinct highlight-bar movement, and browser screenshots did not render the pointer, so the pointing-hand cursor could not be verified."
+}

@@ -56,9 +56,12 @@ manifest["tokens"]={"title_bar_blue":[int(v) for v in TITLE_BLUE],"title_ink":[i
 
 def to_rgba(a):
     out=np.zeros((a.shape[0],a.shape[1],4),np.uint8); out[:,:,:3]=a; out[:,:,3]=255; return out
-def hover(a):   # tint 18% toward title blue + keep alpha
+def hover(a):   # tint 18% toward title blue + a 1px title-ink outline (the tint alone is invisible at 1:1 — found by the blind Playtester)
     rgb=a[:,:,:3].astype(float); t=rgb*0.82+TITLE_BLUE*0.18
-    out=a.copy(); out[:,:,:3]=np.clip(t,0,255); return out
+    out=a.copy(); out[:,:,:3]=np.clip(t,0,255)
+    out[0,:, :3]=TITLE_INK; out[-1,:, :3]=TITLE_INK; out[:,0,:3]=TITLE_INK; out[:,-1,:3]=TITLE_INK
+    if out.shape[2]==4: out[0,:,3]=255; out[-1,:,3]=255; out[:,0,3]=255; out[:,-1,3]=255
+    return out
 def pressed(a): # 1px inset nudge (content shifts +1,+1), edge row/col repeated
     out=a.copy(); out[1:,1:]=a[:-1,:-1]; return out
 
