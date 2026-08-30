@@ -22,6 +22,7 @@ plan.json and printed, never silent.
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -142,6 +143,71 @@ def check_motion_detail(brief: dict[str, Any]) -> list[str]:
     return violations
 
 
+
+MOTION_KINDS = ("translate", "rotate", "scale", "reveal", "blink")
+
+
+def _reference_registry(brief_path: Path) -> dict[str, Any]:
+    """The provenance record next to the reference assets, if it can be found."""
+    for base in (brief_path.parent, *brief_path.parents):
+        candidate = base / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
+        if candidate.exists():
+            try:
+                return json.loads(candidate.read_text())
+            except Exception:
+                return {}
+    return {}
+
+
+def check_reference_matches_motion(brief: dict[str, Any], brief_path: Path) -> list[str]:
+    """The reference must move the way the brief says the icon moves.
+
+    A reference does not only teach cadence, it teaches the *kind* of movement, and the
+    wrong kind is worse than none. Observed 2026-08-30: a magnifying glass asked to
+    travel across a bust was handed ref-coin-spin, whose motion_kind is `rotate`. The
+    glass tumbled and changed size instead of travelling, and no amount of brief wording
+    corrected it — the reference was pulling the other way the whole time.
+
+    So the brief declares its motion_kind, the reference registry declares each asset's,
+    and a run whose kinds disagree does not proceed.
+    """
+    violations: list[str] = []
+    reference = str(brief.get("real_reference") or "")
+    registry = (_reference_registry(brief_path) or {}).get("assets") or {}
+    named = [
+        name
+        for name in registry
+        if name in reference or name.replace(".gif", "") in reference
+    ]
+    if not named:
+        # An era-corpus citation with no asset on disk. Nothing to compare against, and
+        # the briefs calibrated before this check existed are all of this shape, so
+        # requiring a declaration here would invalidate them retroactively.
+        return violations
+
+    kind = str(brief.get("motion_kind") or "").strip().lower()
+    if not kind:
+        violations.append(
+            f"motion_kind is missing while using reference {named[0]}: declare how the "
+            f"icon moves (one of {', '.join(MOTION_KINDS)}) so the reference can be "
+            f"checked against it"
+        )
+        return violations
+    if kind not in MOTION_KINDS:
+        violations.append(f"motion_kind {kind!r} is not one of {', '.join(MOTION_KINDS)}")
+        return violations
+
+    for name in named:
+        ref_kind = str(registry[name].get("motion_kind") or "").lower()
+        if ref_kind and ref_kind != kind:
+            violations.append(
+                f"reference {name} moves by {ref_kind!r} but the brief declares "
+                f"{kind!r}: a reference teaches the kind of movement as well as its "
+                f"cadence, and the wrong kind pulls against every word of the brief"
+            )
+    return violations
+
+
 def check_strategy(
     brief: dict[str, Any],
     brief_path: Path,
@@ -188,6 +254,7 @@ def check_strategy(
         )
 
     violations.extend(check_motion_detail(brief))
+    violations.extend(check_reference_matches_motion(brief, brief_path))
 
     words = len(prompt.split())
     if words < MIN_PROMPT_WORDS:
