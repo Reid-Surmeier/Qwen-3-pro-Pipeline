@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "82ae10483fd41d365f1ca54fe691e894c9727303",
+  "evidence_bundle_commit": "f939d4474668e06967339efe07ef8370071d16b3",
+  "reviewer": "fresh-context Codex gpt-5.6-sol xhigh packet-only artifact review",
+  "verdict": "pass",
+  "findings": [],
+  "clauses": [
+    {"clause": "1", "verdict": "pass", "observation": "The hash-locked idle Window is source-coherent at 4x; geometry, chrome, icons, typography, values, and complete arrows remain legible without overlap."},
+    {"clause": "2", "verdict": "pass", "observation": "Selection and distinct contextual activation are evidenced; the detail state reports the selected item."},
+    {"clause": "3", "verdict": "pass", "observation": "All 26 Steppers have hash-locked before and after evidence; accepted steps update the live value and hide every Stepper arrow in the same pending frame."},
+    {"clause": "4", "verdict": "pass", "observation": "Bound activation preserves the value, returns TransactionRejectedError, and leaves no transaction pending."},
+    {"clause": "5", "verdict": "pass", "observation": "Use commits and Cancel reverts pending values; both restore all arrows and clear the transaction."},
+    {"clause": "6", "verdict": "pass", "observation": "Tree/list and description toggles reverse; the list exposes the committed live value."},
+    {"clause": "7", "verdict": "pass", "observation": "The reviewer independently reproduced the 611 by 28 minimized strip, restore, continuous title drag, title Close, and focused Escape Close."},
+    {"clause": "8", "verdict": "pass", "observation": "All 29 fail-closed ControlSpec and action-routing contracts pass, including Window bindings and SelectionView ownership mappings."},
+    {"clause": "9", "verdict": "pass", "observation": "Skill Tree covers all 33 controls and 36 required bindings through 37 actions; Options covers 21 actions. Both candidate-bound manifests and all 142 evidence entries verify."}
+  ],
+  "evidence": [
+    "artifacts/reviews/issue-126/packet.json",
+    "artifacts/reviews/issue-126/builder/00-idle.png",
+    "artifacts/reviews/issue-126/builder/02-context-detail.png",
+    "artifacts/reviews/issue-126/builder/02b-bound-rejected.png",
+    "artifacts/reviews/issue-126/builder/04-committed.png",
+    "artifacts/reviews/issue-126/builder/05-cancelled.png",
+    "artifacts/reviews/issue-126/builder/06-list-view.png",
+    "artifacts/reviews/issue-126/builder/09-minimized.png",
+    "artifacts/reviews/issue-126/builder/11-drag-mid.png",
+    "artifacts/reviews/issue-126/builder/13-key-closed.png",
+    "artifacts/reviews/issue-126/builder/play-log.json",
+    "artifacts/reviews/issue-126/builder/verdict.json",
+    "artifacts/reviews/issue-126/options-regression/play-log.json",
+    "artifacts/reviews/issue-126/options-regression/verdict.json"
+  ],
+  "live_review_evidence": "/tmp/issue126-blind-inspection-82ae104/",
+  "review_boundary": "Advisory blind artifact evidence only; this is not owner approval or approval of the complete assembled desktop."
+}

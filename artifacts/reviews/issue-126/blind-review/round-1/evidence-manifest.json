@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "82ae10483fd41d365f1ca54fe691e894c9727303",
+  "files": [
+    {
+      "path": "comment.md",
+      "sha256": "1830b577e4d8969dc72b7a738a02ace7c552c2b2a6d0094003582727552b1349"
+    },
+    {
+      "path": "review.json",
+      "sha256": "956c0aaf38740f40f6b553de786f32e13260a4469eade2a434fc570482860787"
+    }
+  ]
+}
