@@ -1,0 +1,27 @@
+{
+  "client_id": "e06f4cee-fb94-4e3a-abb6-1006f5a23f83",
+  "prompt_id": "28a88ec1-2924-4c4d-8a20-0162b9620f66",
+  "submitted_at": "2026-08-30T19:12:21.318-04:00",
+  "completed_at": "2026-08-30T19:13:46.618-04:00",
+  "duration_seconds": 85.3,
+  "status": "success",
+  "number": 2,
+  "node_errors": {},
+  "requested_outputs": 1,
+  "completed_outputs": 1,
+  "ambiguous_outputs": 0,
+  "queue_after_completion": {
+    "running": 0,
+    "pending": 0
+  },
+  "outputs": [
+    {
+      "comfyui_path": "kidpix-sketchbook/v004_00001_.png",
+      "repository_path": "artifacts/runs/kidpix-sketchbook-v004/image-01.png",
+      "sha256": "b96aa692d9c54da69a8c5f4ef7c70530b6607b66c70a94353b2e5dc0f13a9a5a"
+    }
+  ],
+  "estimated_cost_usd": 0.05,
+  "actual_cost_usd": null,
+  "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+}

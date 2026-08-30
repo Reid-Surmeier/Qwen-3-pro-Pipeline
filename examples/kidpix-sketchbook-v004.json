@@ -1,0 +1,86 @@
+{
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "objective": "Create one blank open Sketchbook image for an interactive drawing surface. Keep a strict top-down flat Kid Pix-era pixel treatment, add a readable thin paper edge around the complete spread and a straight center seam, and remove the baked-in pencil so both pages are available for drawing.",
+  "reference_role": "Reference image 1 is the approved v003 Sketchbook final and is authoritative for warm cream paper, dark stair-stepped pixel contours, limited palette, pure-white exterior background, centered square composition, and strict top-down orientation. It is not authoritative for the pencil, which must be removed. Reference image 2 is geometry-only authority for the readable outer paper edge, softly rounded outer corners, two-page proportions, large usable page area, and clear vertical center seam. Do not copy any portrait, drawing, graphite mark, ribbon, paper texture, shadow, or photographic rendering from reference image 2. Reference image 3 is style-only authority for hard early Kid Pix raster character; do not copy its interface or decorations.",
+  "preservation_invariants": [
+    "Keep exactly one open two-page sketchbook centered on a square pure-white canvas.",
+    "Keep the camera perpendicular to the page plane in a strict 90-degree top-down orthographic view.",
+    "Keep warm-white page interiors, dark pixel outlines, a limited flat color ramp, and generous exterior white margin.",
+    "Keep both page interiors completely blank and large enough to function as the interactive drawing area.",
+    "Keep all book geometry fully inside the canvas."
+  ],
+  "canvas": [
+    "Square 1024 by 1024 canvas.",
+    "The open book occupies most of the width and roughly two-thirds of the height, centered with even pure-white margin.",
+    "The spread is horizontal and symmetric around one straight vertical center seam.",
+    "The camera is exactly overhead with no convergence, tilt, foreshortening, isometric angle, or three-quarter view.",
+    "The exterior background is flat exact pure white."
+  ],
+  "regions": [
+    {
+      "name": "outer paper edge",
+      "change": "Give the complete spread a thin readable flat paper edge around its perimeter, like a small stack of aligned cream sheets seen from overhead. Use a two-to-four-pixel dark contour and one narrow pale cream edge band. Round the four outer corners softly in stepped pixels. The edge must frame the drawable interior without becoming a 3D side wall.",
+      "preserve": [
+        "flat overhead plane",
+        "large blank page interiors",
+        "pure-white exterior"
+      ]
+    },
+    {
+      "name": "center seam",
+      "change": "Add one clear straight vertical center seam from the top page edge to the bottom page edge. Use a narrow two-tone cream and muted-grey pixel line that reads as the fold between left and right pages without a raised ridge or deep shadow.",
+      "preserve": [
+        "equal left and right pages",
+        "strict vertical alignment",
+        "flat page plane"
+      ]
+    },
+    {
+      "name": "blank drawable pages",
+      "change": "Remove the complete cobalt pencil and reconstruct the covered center area as uninterrupted blank paper and seam. Remove every drawing, portrait, graphite stroke, text mark, decoration, ribbon and page annotation from both pages.",
+      "preserve": [
+        "warm-white page color",
+        "clean drawable area",
+        "center seam"
+      ]
+    }
+  ],
+  "exact_copy": [],
+  "style": [
+    "Flat early-1990s Kid Pix-era pixel art with hard square steps, crisp dark contours, and a deliberately limited solid palette.",
+    "Simple orthographic application asset, not a photograph, illustration, mockup, or 3D render.",
+    "Warm-white page faces with one pale cream edge band and restrained muted-grey crease pixels.",
+    "No antialiasing, gradients, paper grain, painterly texture, soft lighting, glossy shading, or cast shadow."
+  ],
+  "asset_rules": [
+    "Exactly one open two-page sketchbook and zero pencils.",
+    "Exactly two blank drawable page interiors separated by one center seam.",
+    "One continuous visible outer paper edge around the complete spread.",
+    "Zero metal rings, spiral binding, holes, clips, tabs, cover strips, ribbons, drawings, portraits, lettering, or extra objects.",
+    "No variation grid, reference sheet, UI chrome, toolbar, caption, border tile, desk, hands, or background scene."
+  ],
+  "negative_constraints": [
+    "Do not copy any face, person, portrait, sketch, graphite line, drawing, ribbon or photographic surface from reference image 2.",
+    "No pencil, pen, eraser, brush, hand, tool, or object on either page.",
+    "No ring, metal ring, spiral, coil, wire, clip, binding hole, punched hole, tab, hinge, or hardware.",
+    "No red cover, colored cover strip, visible bottom cover, page curl, dog-ear, lifted corner, raised rim, side wall, thick book block, bevel, cast shadow, or perspective wedge.",
+    "No perspective convergence, angled horizon, three-quarter, isometric, oblique, tilted, photographed, or foreshortened view.",
+    "No text, symbol, line, doodle, guide, ruled paper, grid, watermark, logo, decoration, page number, or annotation.",
+    "No smooth vector curves, feathered transparency, continuous-tone shading, paper grain, watercolor, airbrush, photographic lighting, or glossy 3D rendering."
+  ],
+  "quality_checks": [
+    "At a glance the asset reads as a flat open sketchbook viewed exactly from above.",
+    "A thin continuous paper edge is visible around the spread and all four outer corners are softly rounded in stepped pixels.",
+    "One straight center seam clearly divides equal left and right blank pages.",
+    "Both page interiors are completely blank and no pencil remains.",
+    "There are no rings, binding hardware, cover strip, drawings, portraits, ribbon, side thickness, curl, or cast shadow.",
+    "The complete book is fully inside the canvas against a pure-white exterior background."
+  ],
+  "output": {
+    "resolution": "1K",
+    "aspect_ratio": "1:1",
+    "count": 1,
+    "seed": 20260907
+  }
+}

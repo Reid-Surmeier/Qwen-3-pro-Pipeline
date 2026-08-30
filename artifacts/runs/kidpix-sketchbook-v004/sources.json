@@ -1,0 +1,21 @@
+{
+  "issue": 139,
+  "version": "v004",
+  "sources": [
+    {
+      "role": "approved-v003-pixel-palette-and-orthographic-authority",
+      "path": "artifacts/runs/kidpix-sketchbook-v003/final-01.png",
+      "sha256": "95828700b6b679c70cc1fefee01d1670d6a96e650f5ee22836bb649e44905ace"
+    },
+    {
+      "role": "owner-attached-open-book-geometry-only-authority",
+      "path": "artifacts/references/kidpix-sketchbook-v004/open-book-geometry-reference.png",
+      "sha256": "c5d01fc9999353adf7871bae0cf238b3b726b781ed398779639286e9e6b21e55"
+    },
+    {
+      "role": "kidpix-flat-pixel-style-only",
+      "path": "artifacts/references/kidpix-sketchbook-v001/style-kidpix-ui.png",
+      "sha256": "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b"
+    }
+  ]
+}

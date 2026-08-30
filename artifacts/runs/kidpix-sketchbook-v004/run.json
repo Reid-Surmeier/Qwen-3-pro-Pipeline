@@ -1,0 +1,43 @@
+{
+  "issue": 139,
+  "version": "v004",
+  "outputs": [
+    {
+      "role": "successful-raw-render-pass-prototype-candidate",
+      "file": "image-01.png",
+      "bytes": 315129,
+      "media_type": "image/png",
+      "sha256": "b96aa692d9c54da69a8c5f4ef7c70530b6607b66c70a94353b2e5dc0f13a9a5a",
+      "note": "One blank top-down open book with a visible outer paper edge and center seam. No deterministic pixel finishing was applied before prototype import. Owner visual approval is pending."
+    }
+  ],
+  "provenance": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "28a88ec1-2924-4c4d-8a20-0162b9620f66",
+    "client_id": "e06f4cee-fb94-4e3a-abb6-1006f5a23f83",
+    "prompt_request_sha256": "1a09c9f555870afcb4fb6ff4c75c8e42bfc9c776d1d31beb70da4cdc64a1b0a3",
+    "workflow_sha256": "38a7ba4b57525c553e46626802d6c9e4d021de4270572f69f2038a6423d02751",
+    "brief_sha256": "7aaf854111485c4cdf640b7066c2e5294cd1fc8a7b45fce373e8b9a64df3b1fd",
+    "reference_sha256": [
+      "95828700b6b679c70cc1fefee01d1670d6a96e650f5ee22836bb649e44905ace",
+      "c5d01fc9999353adf7871bae0cf238b3b726b781ed398779639286e9e6b21e55",
+      "da352e3550cc17a88d68a1d6ac021cf7dc4009719e7b1330c15ca3484c24023b"
+    ],
+    "submitted_at": "2026-08-30T19:12:21.318-04:00",
+    "completed_at": "2026-08-30T19:13:46.618-04:00",
+    "duration_seconds": 85.3,
+    "requested_outputs": 1,
+    "completed_outputs": 1,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.05,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+  },
+  "usage": {
+    "input_image_count": 3,
+    "output_image_count": 1,
+    "output_width": 1024,
+    "output_height": 1024
+  }
+}
