@@ -1,0 +1,1354 @@
+{
+  "url": "http://127.0.0.1:8877/?screen=image79",
+  "facts": {
+    "canvas": {
+      "width": 1536,
+      "height": 1024,
+      "cssWidth": 1536,
+      "cssHeight": 1024,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "scale": 1,
+  "checks": [
+    {
+      "name": "options.bgm-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "stepped": true
+      }
+    },
+    {
+      "name": "options.bgm-wheel",
+      "passed": true,
+      "detail": {
+        "wheel_stepped": true
+      }
+    },
+    {
+      "name": "options.bgm-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.bgm-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.effect-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "stepped": true
+      }
+    },
+    {
+      "name": "options.effect-wheel",
+      "passed": true,
+      "detail": {
+        "wheel_stepped": true
+      }
+    },
+    {
+      "name": "options.effect-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      }
+    },
+    {
+      "name": "options.bgm_on-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.effect_on-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.attack-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.skill-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.item-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.option-activate",
+      "passed": true,
+      "detail": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "options.skin-activate",
+      "passed": true,
+      "detail": {
+        "pressed_exposed": true,
+        "opened": true
+      }
+    },
+    {
+      "name": "options.skin-select",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "closed": true
+      }
+    },
+    {
+      "name": "options.skin-key",
+      "passed": true,
+      "detail": {
+        "dismissed": true
+      }
+    },
+    {
+      "name": "options.minimize-activate",
+      "passed": true,
+      "detail": {
+        "distinct_minimized_plate": true,
+        "restored_state": true,
+        "position_preserved": true
+      }
+    },
+    {
+      "name": "window-drag",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "pointer_delta_applied": true
+      }
+    },
+    {
+      "name": "options.close-activate",
+      "passed": true,
+      "detail": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "manifest-action-coverage",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "zero-console-errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "consoleEntries": [
+    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x17ac0600dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "final": {
+    "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "schema_version": 3,
+    "validation_errors": [],
+    "viewport": [
+      1536,
+      1024
+    ],
+    "windows": {
+      "options": {
+        "controls": {
+          "options.attack": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1054,
+              "y": 556
+            },
+            "id": "options.attack",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "off",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.bgm": {
+            "active_surface": "thumb",
+            "geometry": {
+              "height": 24,
+              "width": 264,
+              "x": 1143,
+              "y": 435
+            },
+            "id": "options.bgm",
+            "interaction_phase": "hover",
+            "last_action": "SetRange",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "SetRange",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "enabled",
+            "text": "",
+            "type": "Range",
+            "value": 100,
+            "visible": false,
+            "z_index": 0
+          },
+          "options.bgm_on": {
+            "active_surface": "",
+            "geometry": {
+              "height": 18,
+              "width": 18,
+              "x": 1405,
+              "y": 440
+            },
+            "id": "options.bgm_on",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.close": {
+            "active_surface": "",
+            "geometry": {
+              "height": 25,
+              "width": 22,
+              "x": 1425,
+              "y": 391
+            },
+            "id": "options.close",
+            "interaction_phase": "idle",
+            "last_action": "CloseWindow",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "CloseWindow",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.effect": {
+            "active_surface": "",
+            "geometry": {
+              "height": 24,
+              "width": 264,
+              "x": 1143,
+              "y": 467
+            },
+            "id": "options.effect",
+            "interaction_phase": "idle",
+            "last_action": "SetRange",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "SetRange",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "enabled",
+            "text": "",
+            "type": "Range",
+            "value": 100,
+            "visible": false,
+            "z_index": 0
+          },
+          "options.effect_on": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 18,
+              "x": 1405,
+              "y": 471
+            },
+            "id": "options.effect_on",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.item": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 19,
+              "x": 1216,
+              "y": 556
+            },
+            "id": "options.item",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "off",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.minimize": {
+            "active_surface": "",
+            "geometry": {
+              "height": 18,
+              "width": 19,
+              "x": 1401,
+              "y": 395
+            },
+            "id": "options.minimize",
+            "interaction_phase": "idle",
+            "last_action": "ToggleMinimized",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleMinimized",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "ready",
+            "text": "",
+            "type": "Button",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.option": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1311,
+              "y": 557
+            },
+            "id": "options.option",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.skill": {
+            "active_surface": "",
+            "geometry": {
+              "height": 19,
+              "width": 20,
+              "x": 1144,
+              "y": 556
+            },
+            "id": "options.skill",
+            "interaction_phase": "idle",
+            "last_action": "ToggleValue",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "ToggleValue",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "on",
+            "text": "",
+            "type": "Toggle",
+            "visible": false,
+            "z_index": 0
+          },
+          "options.skin": {
+            "active_surface": "",
+            "geometry": {
+              "height": 32,
+              "width": 300,
+              "x": 1142,
+              "y": 505
+            },
+            "id": "options.skin",
+            "interaction_phase": "idle",
+            "last_action": "DismissDropdown",
+            "last_error": null,
+            "last_result": {
+              "accepted": true,
+              "action": "DismissDropdown",
+              "error": null
+            },
+            "rendered": true,
+            "semantic_state": "closed",
+            "text": "tanublue",
+            "type": "Dropdown",
+            "value": "tanublue",
+            "visible": false,
+            "z_index": 50
+          }
+        },
+        "interaction_log": [
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Activate",
+            "semantic_state": "enabled",
+            "value": 84.7299
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Wheel",
+            "semantic_state": "enabled",
+            "value": 85.7299
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 85.6459330143541
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 85.7299220619019
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 82.8722502055921
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 80.0145783492823
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 77.1569064929725
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 74.2992346366627
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 71.4415627803529
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 68.5838909240431
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 65.7262774745813
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 62.8686056182715
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 60.0109337619617
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 57.1532619056519
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 54.2955900493421
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 51.4379181930323
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 48.5803047435706
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 45.7226328872608
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 42.864961030951
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 40.0072891746411
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 37.1496173183313
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 34.2919454620215
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 31.4342736057117
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 28.57666015625
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 25.7189882999402
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 22.8613164436304
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 20.0036445873206
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 17.1459727310108
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 14.288300874701
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 11.4306290183911
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 8.57301556892943
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 5.71534371261962
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 2.85767185630981
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 0
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 3.33333722712321
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 6.66667445424641
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 10.0000116813696
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 13.3333489084928
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 16.666686135616
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 20.0000233627392
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 23.3333605898624
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 26.6666394101376
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 29.9999766372608
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 33.333313864384
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 36.6666510915072
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 39.9999883186304
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 43.3333255457536
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 46.6666627728768
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 50
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 53.3333372271232
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 56.6666744542464
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 60.0000116813696
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 63.3333489084928
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 66.666686135616
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 70.0000233627392
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 73.3333605898624
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 76.6666394101376
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 79.9999766372608
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 83.333313864384
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 86.6666510915072
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 89.9999883186304
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 93.3333255457536
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 96.6666627728768
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Activate",
+            "semantic_state": "enabled",
+            "value": 54.1327
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Wheel",
+            "semantic_state": "enabled",
+            "value": 55.1327
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 55.0239234449761
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 55.1326769961124
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 56.6283011550538
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 58.1238669071471
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 59.6194326592404
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 61.1149984113337
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 62.610564163427
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 64.1061883223684
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 65.6017540744617
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 67.097319826555
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 68.5928855786483
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 70.0884513307416
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 71.5840170828349
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 73.0796412417763
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 74.5752069938696
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 76.0707727459629
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 77.5663384980562
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 79.0619042501495
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 80.5575284090909
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 82.0530941611842
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 83.5486599132775
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 85.0442256653708
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 86.5397914174641
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 88.0354155764055
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 89.5309813284988
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 91.0265470805921
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 92.5221128326854
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 94.0176785847787
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 95.513244336872
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 97.0088684958134
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 98.5044342479067
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect",
+            "gesture": "Drag",
+            "semantic_state": "enabled",
+            "value": 100
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm_on",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.bgm_on",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect_on",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.effect_on",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.attack",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.attack",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skill",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skill",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.item",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.item",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.option",
+            "gesture": "Activate",
+            "semantic_state": "off",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.option",
+            "gesture": "Activate",
+            "semantic_state": "on",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skin",
+            "gesture": "Activate",
+            "semantic_state": "open",
+            "value": "Classic Blue"
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skin",
+            "gesture": "Activate",
+            "semantic_state": "closed",
+            "value": "tanublue"
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skin",
+            "gesture": "Activate",
+            "semantic_state": "open",
+            "value": "tanublue"
+          },
+          {
+            "accepted": true,
+            "control_id": "options.skin",
+            "gesture": "KeyCommand",
+            "semantic_state": "closed",
+            "value": "tanublue"
+          },
+          {
+            "accepted": true,
+            "control_id": "options.minimize",
+            "gesture": "Activate",
+            "semantic_state": "ready",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.minimize",
+            "gesture": "Activate",
+            "semantic_state": "ready",
+            "value": null
+          },
+          {
+            "accepted": true,
+            "control_id": "options.close",
+            "gesture": "Activate",
+            "semantic_state": "ready",
+            "value": null
+          }
+        ],
+        "window": {
+          "id": "options",
+          "minimized": false,
+          "position": [
+            1028,
+            387
+          ],
+          "size": [
+            424,
+            202
+          ],
+          "visible": false,
+          "z_index": 0
+        },
+        "window_id": "options"
+      }
+    }
+  },
+  "pass": true,
+  "idle": {
+    "path": "00-idle.png",
+    "sha256": "8ae817197ef6e4faa4dc3313d4c52893ee6a165df1be77b0f570ef3817be93e4"
+  }
+}
