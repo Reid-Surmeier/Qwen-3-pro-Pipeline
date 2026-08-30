@@ -35,5 +35,23 @@
     },
     "source_map_node": "0:28",
     "note": "nearest free full-width slot; left/right of the map were occupied by new stickies at placement time"
+  },
+  "v002": {
+    "file": "final-v002-pixel.png",
+    "sha256": "2167c6096fb99fddd9d3080ff51a0d97bccd20268958c69bbbe6ac68b4e2d195",
+    "size": "1679x857 (source native 1x grid)",
+    "method": "deterministic pixelate_map.py on pass-2: land-boundary block match + affine un-warp, palette snap to 11 dominant flat colours, fringe/speck cleanup, source-exact grid/zone-lines/frame/credit box, source-pixel city labels (badge boxes masked, glyph+word filters), edge-remnant and stray-mark wipes",
+    "flatness": {
+      "background_variation_source": "16.1%",
+      "v001": "72.7%",
+      "v002": "2.8%",
+      "gate": "<=20%"
+    },
+    "cost_usd": 0,
+    "known_nits": [
+      "a few leading capitals partial (Denver, Montreal, CHINA's C)",
+      "small text fragments near the right-edge badge sites",
+      "region caps partially rebuilt"
+    ]
   }
 }
