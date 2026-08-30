@@ -118,11 +118,25 @@ func _contract_choice_group_has_a_window_adapter() -> void:
 	}
 	var choice_window = ControlWindowScript.new()
 	choice_window.configure(fixture)
+	var publication := {"count": 0}
+	choice_window.state_changed.connect(
+		func(_window_id: String): publication.count += 1)
 	get_root().add_child(choice_window)
 	await process_frame
 	var state: Dictionary = choice_window.qa_state().controls["fixture.mode"]
 	_check("choice-group-window-adapter", state.rendered and state.visible
 		and state.geometry.width == 40.0, str(state))
+	var before_press: int = publication.count
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_LEFT
+	press.pressed = true
+	choice_window.control_nodes["fixture.mode"]._choice_input(press, "two")
+	var pressed_state: Dictionary = choice_window.qa_state().controls["fixture.mode"]
+	_check("choice-group-pressed-phase-publication",
+		pressed_state.interaction_phase == "pressed"
+		and publication.count > before_press,
+		str({"state": pressed_state,
+			"published": publication.count - before_press}))
 	choice_window.queue_free()
 
 

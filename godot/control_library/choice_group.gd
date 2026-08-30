@@ -48,8 +48,10 @@ func _phase(choice: String, phase: String) -> void:
 func _choice_input(event: InputEvent, choice: String) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			runtime.set_interaction_phase(spec.id, "pressed", choice)
+			var result: Dictionary = runtime.set_interaction_phase(
+				spec.id, "pressed", choice)
 			_refresh()
+			changed.emit(spec.id, result)
 		else:
 			var result: Dictionary = runtime.dispatch(spec.id, "Activate", {"choice": choice})
 			runtime.set_interaction_phase(spec.id, "hover", choice)
