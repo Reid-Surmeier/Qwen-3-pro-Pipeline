@@ -2,7 +2,7 @@
 
 ## Interface
 
-`control_spec.gd` is the public seam. It loads and validates schema-version 3 ControlSpec manifests and returns either the complete manifest or factual typed errors. No runtime Window is constructed from an invalid manifest.
+`control_spec.gd` is the construction seam. It loads and validates schema-version 3 ControlSpec manifests and returns either the complete manifest or factual typed errors. No runtime Window is constructed from an invalid manifest. `ControlWindow.qa_state()` is the observation seam; adapters may add rendered facts through `rendered_facts()`, which the Window merges into the corresponding public Control state.
 
 ## Errors
 

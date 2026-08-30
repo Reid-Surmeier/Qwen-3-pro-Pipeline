@@ -76,6 +76,8 @@ func qa_state() -> Dictionary:
 		state.controls[control_id].visible = node.is_visible_in_tree()
 		state.controls[control_id].z_index = node.z_index
 		state.controls[control_id].rendered = true
+		if node.has_method("rendered_facts"):
+			state.controls[control_id].merge(node.rendered_facts(), true)
 	state.window = {
 		"id": str(spec.id),
 		"position": [position.x, position.y],

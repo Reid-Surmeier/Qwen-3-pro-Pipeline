@@ -70,6 +70,15 @@ func dismiss() -> Dictionary:
 	return result
 
 
+func rendered_facts() -> Dictionary:
+	return {
+		"rendered_asset": field.texture.resource_path
+			if field != null and field.texture != null else "",
+		"text": label.text if label != null else "",
+		"text_visible": label.visible if label != null else false,
+	}
+
+
 func _build_menu() -> void:
 	menu = Control.new()
 	menu.name = "Menu"
