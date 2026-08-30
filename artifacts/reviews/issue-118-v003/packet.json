@@ -3,7 +3,7 @@
   "issue": 118,
   "pull_request": 82,
   "baseline_commit": "b2e4f594f6fb23e0dcc4e2a3395d492585a35c9b",
-  "candidate_commit": "337d6b0693cf68ea071f2b84496e9a700f33a78e",
+  "candidate_commit": "34929403eaa090d029617f17a516a7e7d8610240",
   "acceptance_contract": "docs/reviews/issue-118-v003-contract.md",
   "references": [
     {
