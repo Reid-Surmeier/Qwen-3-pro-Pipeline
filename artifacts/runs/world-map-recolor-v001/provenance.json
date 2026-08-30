@@ -103,5 +103,30 @@
       "Ireland/UK strait-adjacent colours acceptable",
       "one dead second-fetch attempt rate-limited"
     ]
-  }
+  },
+  "versions": [
+    {
+      "version": "v008",
+      "created": "2026-08-30T23:09:05.100059+00:00",
+      "method": "deterministic assembly rev18 (compose_v3.py) \u2014 no generative model",
+      "source": "wtz-map-12map-1001x485.gif (sha256 90338b9c...)",
+      "gates": {
+        "fidelity_outside_changed": 0,
+        "spot_checks": "75/75 ok"
+      },
+      "fixes_since_v007": [
+        "NE 50m lakes-variant country layer + cubic south-registration correction",
+        "white-filled countries painted via enclosed-cell land fraction (Saudi band, Turkey, Baja, Newfoundland)",
+        "multi-country patches split per-pixel by nearest-seed EDT with drawn borders (Germany, Uruguay, Zambia)",
+        "Greenwich #64669C line + ribbon + caption wiped; corridor reconstructed only where land flanks it",
+        "anti-alias/marker cleanup on painted land; dashed state/zone borders removed by collinear-chain detection",
+        "plate/tag interiors reconstructed via land-ring and 40px sandwich rules"
+      ],
+      "files": [
+        "final-v008-assembly.png",
+        "final-v008-assembly-2x.png",
+        "assembly/fidelity-report-v3.json"
+      ]
+    }
+  ]
 }

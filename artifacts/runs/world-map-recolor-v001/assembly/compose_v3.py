@@ -236,6 +236,29 @@ if corridor:
             if int((labt[sl] == i).sum()) <= 320 and not fills[sl][labt[sl] == i].any():
                 R5[sl] |= (labt[sl] == i)
 
+# Greenwich meridian double line is drawn in slate-blue #64669C — but plates use
+# that colour too, so the corridor logic is limited to the meridian columns.
+GWLINE = eq(0x64, 0x66, 0x9C)
+colsum_gw = GWLINE.sum(axis=0)
+gwcols = np.where(colsum_gw >= 80)[0]
+gwcols = gwcols[np.abs(gwcols - W // 2) <= 20]
+print("greenwich columns:", gwcols.tolist())
+corr_mask = np.zeros((H, W), bool)
+if len(gwcols):
+    corr_mask[:, max(0, int(gwcols.min()) - 6):min(W, int(gwcols.max()) + 7)] = True
+GWL_COR = GWLINE & corr_mask
+gwband = ndimage.binary_dilation(GWL_COR, structure=np.ones((1, 9))) & (eq(0xFC, 0xFE, 0xFC) | GRID)
+seg = np.zeros((H, W), bool)
+if len(gwcols):
+    for x in range(max(0, int(gwcols.min()) - 4), min(W, int(gwcols.max()) + 5)):
+        colm = BLACK[:, x] | GWL_COR[:, x]
+        dcol = np.diff(np.r_[0, colm.view(np.int8), 0])
+        for a, b in zip(np.where(dcol == 1)[0], np.where(dcol == -1)[0]):
+            if b - a >= 4:
+                seg[a:b, x] = True
+bandall = (GWL_COR | gwband | seg) & ~credit
+R5 |= bandall | (GWLINE & ~credit)
+
 # ------------------------------------------------------- country colour layer
 cid = np.load("countries.npy")
 colour_idx = np.load("country-colour-idx.npy")
@@ -247,17 +270,35 @@ dist_idx = ndimage.distance_transform_edt(cid < 0, return_distances=True, return
 cid_near = cid[dist_idx[1][0], dist_idx[1][1]]
 cid_dist = dist_idx[0]
 
-land = fills & ~R1 & ~R2 & ~credit
+WHITE_BG = (g > 235).all(axis=2)
+cells = (WHITE_BG | GRID) & ~ndimage.binary_dilation(BLACK | NAVY | SHADOW, iterations=1)
+labC, nC = ndimage.label(cells)
+border_ids = np.unique(np.r_[labC[0, :], labC[-1, :], labC[:, 0], labC[:, -1]])
+landfrac = ndimage.mean((cid >= 0).astype(np.float32), labC, range(1, nC + 1))
+keepW = np.zeros(nC + 1, bool)
+keepW[1:] = landfrac >= 0.55
+keepW[border_ids] = False
+keepW[0] = False
+white_land = keepW[labC]
+for _ in range(2):   # grow back over the 1-px ring the dark dilation excluded
+    white_land |= ndimage.binary_dilation(white_land) & (WHITE_BG | GRID) & (cid >= 0)
+white_land &= (WHITE_BG | GRID) & ~credit & ~strip
+land = (fills | white_land) & ~R1 & ~R2 & ~credit
 labp, npatch = ndimage.label(land)
 R6 = np.zeros((H, W), bool)
 patch_country = {}
 objs_p = ndimage.find_objects(labp)
+small_ids = []
 for i in range(1, npatch + 1):
     sl = objs_p[i - 1]
     m = labp[sl] == i
-    ids = cid[sl][m]
-    good = ids[ids >= 0]
-    if len(good) >= max(3, 0.3 * m.sum()):
+    if m.sum() < 12:
+        small_ids.append(i)
+        continue
+    core = ndimage.binary_erosion(m, iterations=2)
+    sample = cid[sl][core if core.sum() >= 6 else m]
+    good = sample[sample >= 0]
+    if len(good) >= max(3, 0.3 * (core.sum() if core.sum() >= 6 else m.sum())):
         vals, cts = np.unique(good, return_counts=True)
         patch_country[i] = int(vals[cts.argmax()])
     else:
@@ -269,6 +310,49 @@ for i in range(1, npatch + 1):
             patch_country[i] = int(vals[cts.argmax()])
     if i in patch_country:
         R6[sl] |= m
+# tiny fragments inherit the dominant assigned country around them, else nearest NE
+cty_tmp = np.full((H, W), -1, np.int32)
+for i, ci in patch_country.items():
+    sl = objs_p[i - 1]
+    m = labp[sl] == i
+    t = cty_tmp[sl]; t[m] = ci; cty_tmp[sl] = t
+for i in small_ids:
+    sl = objs_p[i - 1]
+    sl2 = tuple(slice(max(0, a.start - 4), a.stop + 4) for a in sl)
+    m = labp[sl] == i
+    ring = cty_tmp[sl2]
+    vals, cts = np.unique(ring[ring >= 0], return_counts=True)
+    if len(vals):
+        patch_country[i] = int(vals[cts.argmax()])
+    else:
+        near = cid_near[sl][m]
+        dists = cid_dist[sl][m]
+        near = near[(near >= 0) & (dists <= 15)]
+        if len(near):
+            vals, cts = np.unique(near, return_counts=True)
+            patch_country[i] = int(vals[cts.argmax()])
+    if i in patch_country:
+        R6[sl] |= m
+
+# second chance: any sizable patch still unassigned takes the nearest NE country within 40 px
+un_report = []
+for i in range(1, npatch + 1):
+    if i in patch_country:
+        continue
+    sl = objs_p[i - 1]
+    m = labp[sl] == i
+    if m.sum() < 12:
+        continue
+    near = cid_near[sl][m]
+    dists = cid_dist[sl][m]
+    near = near[(near >= 0) & (dists <= 40)]
+    if len(near):
+        vals, cts = np.unique(near, return_counts=True)
+        patch_country[i] = int(vals[cts.argmax()])
+        R6[sl] |= m
+    else:
+        un_report.append({"bbox": [int(sl[1].start), int(sl[0].start), int(sl[1].stop), int(sl[0].stop)], "px": int(m.sum())})
+print("unassigned patches:", json.dumps(un_report))
 
 # ------------------------------------------------------- R7: grey zone lines
 labz, nz = ndimage.label(GREY & ~R5, structure=np.ones((3, 3)))
@@ -287,11 +371,45 @@ wiped = (R1 | R2 | R3 | R4 | R5) & ~credit
 out[wiped] = (0xFC, 0xFE, 0xFC)
 out[wiped & gridmask] = (0xCC, 0xCE, 0xFC)
 
-# paint countries
+# paint countries; patches spanning 2+ countries are painted per-pixel with drawn borders
+multi = 0
 for i, ci in patch_country.items():
     sl = objs_p[i - 1]
     m = labp[sl] == i
-    out[sl][m] = PALETTE[colour_idx[ci]]
+    ids = cid[sl][m]
+    good = ids[ids >= 0]
+    split = False
+    if len(good) > 40:
+        vals, cts = np.unique(good, return_counts=True)
+        share = cts / cts.sum()
+        top2 = share[np.argsort(-share)[:2]]
+        if len(vals) >= 2 and (top2[1] >= 0.12 or int(np.sort(cts)[-2]) >= 30):
+            split = True
+    if not split:
+        out[sl][m] = PALETTE[colour_idx[ci]]
+        continue
+    multi += 1
+    cand_vals = vals[(share >= 0.08) | (cts >= 20)]
+    dmin = np.full(m.shape, 1e18)
+    use = np.full(m.shape, -1, np.int32)
+    for cval in cand_vals:
+        seedm = (cid[sl] == cval) & m
+        if not seedm.any():
+            continue
+        dd = ndimage.distance_transform_edt(~seedm)
+        upd = dd < dmin
+        dmin[upd] = dd[upd]
+        use[upd] = int(cval)
+    ok_px = m & (use >= 0)
+    subout = out[sl]
+    subout[ok_px] = PALETTE[colour_idx[use[ok_px]]]
+    subout[m & ~ok_px] = PALETTE[colour_idx[ci]]
+    # internal border where the country id changes inside the patch
+    bord = np.zeros_like(m)
+    bord[:, 1:] |= (use[:, 1:] != use[:, :-1]) & m[:, 1:] & m[:, :-1] & (use[:, 1:] >= 0) & (use[:, :-1] >= 0)
+    bord[1:, :] |= (use[1:, :] != use[:-1, :]) & m[1:, :] & m[:-1, :] & (use[1:, :] >= 0) & (use[:-1, :] >= 0)
+    subout[bord] = (0x04, 0x02, 0x04)
+print("multi-country patches split:", multi)
 
 # grey lines: between two countries -> black border; inside one country -> its colour; ocean -> light grey
 country_px = np.full((H, W), -1, np.int32)
@@ -312,26 +430,75 @@ ic = np.where(inside_country)
 out[ic[0], ic[1]] = PALETTE[colour_idx[cp_d[ic]]]
 out[ocean_line] = (0xB8, 0xB8, 0xB8)
 
+# plates whose surrounding ring is land get reconstructed across their full box
+plate_full = np.zeros((H, W), bool)
+landgif0 = fills | white_land
+for (x0, y0, x1, y1) in badge_boxes:
+    ys0, ys1 = max(0, y0 - 4), min(H, y1 + 6)
+    xs0, xs1 = max(0, x0 - 4), min(W, x1 + 6)
+    ring = landgif0[ys0:ys1, xs0:xs1].copy()
+    if ring.shape[0] > 4 and ring.shape[1] > 4:
+        ring[2:-2, 2:-2] = False
+    denom = max(1, int(ring.size - max(0, ring.shape[0] - 4) * max(0, ring.shape[1] - 4)))
+    if ring.sum() / denom >= 0.55:
+        plate_full[max(0, y0 - 2):y1 + 4, max(0, x0 - 2):x1 + 4] = True
 # under-plate reconstruction: country colour where NE says land, else white+grid
-under = wiped & (cid >= 0)
+under = wiped & (cid >= 0) & ~bandall
 uc = np.where(under)
 out[uc[0], uc[1]] = PALETTE[colour_idx[cid[uc]]]
 # clip the reconstruction to plausible land: drop reconstructed pixels not near GIF land
-near_gif_land = ndimage.binary_dilation(fills, iterations=8)
+sandL = np.zeros((H, W), bool); sandR = np.zeros((H, W), bool)
+sandU = np.zeros((H, W), bool); sandD = np.zeros((H, W), bool)
+for k in range(1, 41):
+    sandL |= np.roll(landgif0, k, axis=1)
+    sandR |= np.roll(landgif0, -k, axis=1)
+    if k <= 12:
+        sandU |= np.roll(landgif0, k, axis=0)
+        sandD |= np.roll(landgif0, -k, axis=0)
+sandP = (sandL & sandR) | (sandU & sandD)
+near_gif_land = ndimage.binary_dilation(landgif0, iterations=5) | plate_full | (sandP & ~bandall)
 bad = under & ~near_gif_land
 out[bad] = (0xFC, 0xFE, 0xFC)
 out[bad & gridmask] = (0xCC, 0xCE, 0xFC)
+# misregistered land under plates: NE says water but GIF land is near -> nearest country
+under2 = wiped & (cid < 0) & near_gif_land & (cid_dist <= 6) & ~bandall
+under2 |= (plate_full | sandP) & wiped & (cid < 0) & (cid_dist <= 14) & ~bandall
+u2 = np.where(under2)
+out[u2[0], u2[1]] = PALETTE[colour_idx[cid_near[u2]]]
 # outline reconstructed land inside plates
-filled = under & near_gif_land
-edge_px = filled & ~ndimage.binary_erosion(filled | fills | BLACK, iterations=1)
+filled = (under & near_gif_land) | under2
+edge_base = filled & ~bandall
+edge_px = edge_base & ~ndimage.binary_erosion(filled | fills | BLACK, iterations=1)
 out[edge_px] = (0x04, 0x02, 0x04)
+# Greenwich corridor: repaint only pixels sandwiched by real GIF land on both sides
+landgif = fills | white_land
+land_l = np.zeros((H, W), bool)
+land_r = np.zeros((H, W), bool)
+for k in range(1, 8):
+    land_l |= np.roll(landgif, k, axis=1)
+    land_r |= np.roll(landgif, -k, axis=1)
+sandw = bandall & land_l & land_r
+sc = sandw & (cid >= 0)
+si = np.where(sc)
+out[si[0], si[1]] = PALETTE[colour_idx[cid[si]]]
+sn = sandw & (cid < 0) & (cid_dist <= 8)
+sj = np.where(sn)
+out[sj[0], sj[1]] = PALETTE[colour_idx[cid_near[sj]]]
+rest_b = bandall & ~(sc | sn)
+out[rest_b] = (0xFC, 0xFE, 0xFC)
+out[rest_b & gridmask] = (0xCC, 0xCE, 0xFC)
 
 # frame hammer + sliver cleanup around plates
 hug = ndimage.binary_dilation(R1, iterations=3) & (BLACK | SHADOW | GREY) & ~NAVY & ~credit & ~wiped
 far_land = fills & ~ndimage.binary_dilation(R1, iterations=4)
 kill = hug & ~ndimage.binary_dilation(far_land, iterations=1)
-out[kill] = (0xFC, 0xFE, 0xFC)
-out[kill & gridmask] = (0xCC, 0xCE, 0xFC)
+cpk = ndimage.grey_dilation(country_px, size=7)
+kl = kill & (cid >= 0) & (cpk >= 0)
+ki = np.where(kl)
+out[ki[0], ki[1]] = PALETTE[colour_idx[cpk[ki]]]
+kw = kill & ~kl
+out[kw] = (0xFC, 0xFE, 0xFC)
+out[kw & gridmask] = (0xCC, 0xCE, 0xFC)
 wiped |= kill
 dark_left = (BLACK | SHADOW | GREY) & ~wiped & ~credit
 lab_f, n_f = ndimage.label(dark_left, structure=np.ones((3, 3)))
@@ -345,15 +512,41 @@ for i, sl in enumerate(ndimage.find_objects(lab_f), start=1):
         continue
     if (near_wipe[sl][m]).mean() >= 0.35 and not fills[sl][m].any():
         sub = out[sl]
-        sub[m] = (0xFC, 0xFE, 0xFC)
-        sub[m & gridmask[sl]] = (0xCC, 0xCE, 0xFC)
+        ml = m & (cid[sl] >= 0) & (cpk[sl] >= 0)
+        yi2, xi2 = np.where(ml)
+        sub[yi2, xi2] = PALETTE[colour_idx[cpk[sl][yi2, xi2]]]
+        mw = m & ~ml
+        sub[mw] = (0xFC, 0xFE, 0xFC)
+        sub[mw & gridmask[sl]] = (0xCC, 0xCE, 0xFC)
         wiped[sl][m] = True
+
+# artifact sweep: tiny palette-colour islands surrounded by one other colour take it
+artifact_edits = np.zeros((H, W), bool)
+pal_set = {tuple(int(v) for v in c) for c in PALETTE}
+is_pal = np.zeros((H, W), bool)
+for c in PALETTE:
+    is_pal |= (out == c).all(axis=2)
+lab_a, n_a = ndimage.label(is_pal)
+sz_a = ndimage.sum(is_pal, lab_a, range(1, n_a + 1))
+for i in np.where(sz_a < 10)[0] + 1:
+    sl = ndimage.find_objects(lab_a == i)[0]
+    sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in sl)
+    m = lab_a[sl2] == i
+    ring = ndimage.binary_dilation(m, iterations=2) & ~m
+    rc = out[sl2][ring]
+    palr = np.array([tuple(int(v) for v in c) in pal_set for c in rc])
+    if palr.mean() >= 0.7 and palr.any():
+        vals, cts = np.unique(rc[palr], axis=0, return_counts=True)
+        if cts.max() / palr.sum() >= 0.7:
+            out[sl2][m] = vals[cts.argmax()]
+            artifact_edits[sl2] |= m
 
 # restore labels the plate boxes overlapped: navy always; black letter-words all-or-nothing
 pmask = (R1 | R2) & ~credit
 label_edits = np.zeros((H, W), bool)
 nav = NAVY & pmask
 out[nav] = (0x04, 0x02, 0x34)
+cp_g = ndimage.grey_dilation(country_px, size=9)
 lab_b, n_b = ndimage.label(BLACK, structure=np.ones((3, 3)))
 total_b = ndimage.sum(BLACK, lab_b, range(1, n_b + 1))
 inside_b = ndimage.sum(pmask, lab_b, range(1, n_b + 1))
@@ -373,8 +566,12 @@ for wi, wsl in enumerate(ndimage.find_objects(wlab), start=1):
     if len(ids) and (frac_b[ids - 1] >= 0.45).any():
         gone = wm & letters_mask[wsl] & np.isin(lab_b[wsl], ids) & ~R1[wsl] & ~R2[wsl]
         sub = out[wsl]
-        sub[gone] = (0xFC, 0xFE, 0xFC)
-        sub[gone & gridmask[wsl]] = (0xCC, 0xCE, 0xFC)
+        onl = gone & (cp_g[wsl] >= 0) & (cid[wsl] >= 0)
+        yi, xi = np.where(onl)
+        sub[yi, xi] = PALETTE[colour_idx[cp_g[wsl][yi, xi]]]
+        offl = gone & ~onl
+        sub[offl] = (0xFC, 0xFE, 0xFC)
+        sub[offl & gridmask[wsl]] = (0xCC, 0xCE, 0xFC)
         label_edits[wsl] |= gone
         continue
     rest = wm & letters_mask[wsl] & pmask[wsl]
@@ -382,28 +579,158 @@ for wi, wsl in enumerate(ndimage.find_objects(wlab), start=1):
     sub[rest & BLACK[wsl]] = (0x04, 0x02, 0x04)
     sub[rest & NAVY[wsl]] = (0x04, 0x02, 0x34)
 
-declared = R1 | R2 | R3 | R4 | R5 | R6 | R7 | wiped | label_edits
+# anti-alias & marker cleanup: blend pixels keep the OLD fill tint after repainting.
+OUTSET = [tuple(int(v) for v in c) for c in PALETTE] + [
+    (0x04, 0x02, 0x04), (0x04, 0x02, 0x34), (0xFC, 0xFE, 0xFC), (0xCC, 0xCE, 0xFC), (0xB8, 0xB8, 0xB8),
+    (0x34, 0x32, 0x34), (0x64, 0x66, 0x64), (0x6C, 0x6D, 0x6C), (0x5C, 0x5E, 0x5C), (0x5C, 0x5A, 0x5C)]
+known = np.zeros((H, W), bool)
+for c in OUTSET:
+    known |= (out == np.array(c, np.int16)).all(axis=2)
+odd = ~known & ~credit
+landish = ndimage.binary_dilation(R6, iterations=2)
+cp_near = ndimage.grey_dilation(country_px, size=7)
+darkpx = out.sum(axis=2) < 300
+bgnow = ((out == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2)
+         | (out == np.array((0xCC, 0xCE, 0xFC), np.int16)).all(axis=2))
+white_next = ndimage.binary_dilation(bgnow, iterations=1)
+a_dark = odd & landish & darkpx
+a_light = odd & landish & ~darkpx & (cp_near >= 0) & (cid >= 0)
+out[a_dark] = (0x04, 0x02, 0x04)
+al = np.where(a_light)
+out[al[0], al[1]] = PALETTE[colour_idx[cp_near[al]]]
+b_zone = odd & ~landish & ndimage.binary_dilation(ORANGE | GWLINE, iterations=2)
+out[b_zone] = (0xFC, 0xFE, 0xFC)
+out[b_zone & gridmask] = (0xCC, 0xCE, 0xFC)
+artifact_edits |= a_dark | a_light | b_zone
+print("aa cleanup:", int(a_dark.sum()), "dark", int(a_light.sum()), "light", int(b_zone.sum()), "zone")
+
+# dashed zone/state borders inside one country: collinear chains of tiny dashes
+import collections as _c
+GREY_OUT = np.zeros((H, W), bool)
+for c in [(0x64, 0x66, 0x64), (0x6C, 0x6D, 0x6C), (0x5C, 0x5E, 0x5C), (0x5C, 0x5A, 0x5C), (0x34, 0x32, 0x34)]:
+    GREY_OUT |= (out == np.array(c, np.int16)).all(axis=2)
+dashish = ((out == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2) | GREY_OUT) & ~credit
+labK, nK = ndimage.label(dashish, structure=np.ones((3, 3)))
+objsK = ndimage.find_objects(labK)
+cands = []
+for i in range(1, nK + 1):
+    slk = objsK[i - 1]
+    hk, wk = slk[0].stop - slk[0].start, slk[1].stop - slk[1].start
+    if hk <= 4 and wk <= 4 and int((labK[slk] == i).sum()) <= 9:
+        cands.append((i, (slk[0].start + slk[0].stop) // 2, (slk[1].start + slk[1].stop) // 2))
+byx = _c.defaultdict(set)
+byy = _c.defaultdict(set)
+for i, cy, cx in cands:
+    for o in (-1, 0, 1):
+        byx[cx + o].add((cy, i))
+        byy[cy + o].add((cx, i))
+chain_ids = set()
+for d in (byx, byy):
+    for lst0 in d.values():
+        lst = sorted(lst0)
+        run = [lst[0]]
+        for q in lst[1:]:
+            if q[0] - run[-1][0] <= 8:
+                run.append(q)
+            else:
+                if len({t[1] for t in run}) >= 4:
+                    chain_ids |= {t[1] for t in run}
+                run = [q]
+        if len({t[1] for t in run}) >= 4:
+            chain_ids |= {t[1] for t in run}
+pal_lookup = {tuple(int(v) for v in c): k for k, c in enumerate(PALETTE)}
+n_dash = 0
+for i, cy, cx in cands:
+    if i not in chain_ids:
+        continue
+    slk = objsK[i - 1]
+    sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in slk)
+    m2 = labK[sl2] == i
+    ring = ndimage.binary_dilation(m2, iterations=2) & ~m2
+    rc = out[sl2][ring]
+    palr = np.array([tuple(int(v) for v in c) in pal_lookup for c in rc])
+    if palr.any() and palr.mean() >= 0.7:
+        vals3, cts3 = np.unique(rc[palr], axis=0, return_counts=True)
+        if cts3.max() / palr.sum() >= 0.7:
+            out[sl2][m2] = vals3[cts3.argmax()]
+            artifact_edits[sl2] |= m2
+            n_dash += 1
+print("dash chain segments recoloured:", n_dash)
+
+# white dash remnants: tiny white islands ringed by a single country colour (never near text)
+WHITE_OUT = (out == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2) & ~credit
+labW2, nW2 = ndimage.label(WHITE_OUT)
+objsW2 = ndimage.find_objects(labW2)
+darkout = ((out == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2)
+           | (out == np.array((0x04, 0x02, 0x34), np.int16)).all(axis=2))
+n_wd = 0
+for i in range(1, nW2 + 1):
+    slw = objsW2[i - 1]
+    if slw[0].stop - slw[0].start > 4 or slw[1].stop - slw[1].start > 4:
+        continue
+    sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in slw)
+    m2 = labW2[sl2] == i
+    if int(m2.sum()) > 9:
+        continue
+    ring = ndimage.binary_dilation(m2, iterations=2) & ~m2
+    if darkout[sl2][ring].any():
+        continue
+    rc = out[sl2][ring]
+    palr = np.array([tuple(int(v) for v in c) in pal_lookup for c in rc])
+    if palr.any() and palr.mean() >= 0.85:
+        vals4, cts4 = np.unique(rc[palr], axis=0, return_counts=True)
+        if cts4.max() / palr.sum() >= 0.85:
+            out[sl2][m2] = vals4[cts4.argmax()]
+            artifact_edits[sl2] |= m2
+            n_wd += 1
+print("white dash remnants filled:", n_wd)
+
+# orange residue: any off-set colour within 2 px of the (wiped) orange date line
+odd2 = np.zeros((H, W), bool)
+for c in OUTSET:
+    odd2 |= (out == np.array(c, np.int16)).all(axis=2)
+odd2 = ~odd2 & ~credit
+oz = odd2 & ndimage.binary_dilation(ORANGE, iterations=2)
+ozl = oz & (cp_near >= 0) & (cid >= 0)
+oi = np.where(ozl)
+out[oi[0], oi[1]] = PALETTE[colour_idx[cp_near[oi]]]
+ozw = oz & ~ozl
+out[ozw] = (0xFC, 0xFE, 0xFC)
+out[ozw & gridmask] = (0xCC, 0xCE, 0xFC)
+artifact_edits |= oz
+print("orange residue cleared:", int(oz.sum()))
+
+declared = R1 | R2 | R3 | R4 | R5 | R6 | R7 | wiped | label_edits | artifact_edits
 
 # mechanical colour-accuracy spot check on major countries
 names_l = json.load(open("country-names.json"))
 checks = ["Russia", "Canada", "United States of America", "Brazil", "China", "Australia", "India",
-          "Mexico", "Argentina", "Kazakhstan", "Mongolia", "France", "Germany", "Egypt", "South Africa", "Indonesia"]
+          "Mexico", "Argentina", "Kazakhstan", "Mongolia", "France", "Germany", "Egypt", "South Africa", "Indonesia",
+          "Saudi Arabia", "Turkey", "Iran", "Nigeria", "Algeria", "Ethiopia", "Kenya", "Dem. Rep. Congo", "Sudan",
+          "Libya", "Iraq", "Ukraine", "Poland", "Spain", "Sweden", "Norway", "Finland", "Vietnam", "Thailand",
+          "Portugal", "Switzerland", "Austria", "Czechia", "Netherlands", "Belgium", "Chile", "Peru", "Bolivia",
+          "Colombia", "Venezuela", "Paraguay", "Uruguay", "Ecuador", "Japan", "South Korea", "Morocco", "Ghana",
+          "Cameroon", "Angola", "Tanzania", "Mozambique", "Zambia", "Zimbabwe", "Botswana", "Namibia", "Madagascar",
+          "Somalia", "Mali", "Niger", "Chad", "Pakistan", "Afghanistan", "Myanmar", "Malaysia", "Philippines",
+          "New Zealand", "Papua New Guinea", "Cuba", "Guatemala"]
 spot = {}
 for nm in checks:
     if nm not in names_l:
         continue
     ci = names_l.index(nm)
-    m = (country_px == ci)
-    if not m.any():
-        spot[nm] = "no patch"
+    mm = (cid == ci)
+    if not mm.any():
+        spot[nm] = "no NE pixels"
         continue
-    lab_c, n_c = ndimage.label(m)
-    big = int(np.argmax(ndimage.sum(m, lab_c, range(1, n_c + 1)))) + 1
-    ys, xs2 = np.where(lab_c == big)
-    cyx = (int(np.median(ys)), int(np.median(xs2)))
-    got = tuple(int(v) for v in out[cyx])
+    cols = out[mm]
+    keepc = np.array([tuple(int(v) for v in c) in pal_lookup for c in cols])
+    if not keepc.any():
+        spot[nm] = "unpainted"
+        continue
+    vals_c, cts_c = np.unique(cols[keepc], axis=0, return_counts=True)
+    got = tuple(int(v) for v in vals_c[cts_c.argmax()])
     want = tuple(int(v) for v in PALETTE[colour_idx[ci]])
-    spot[nm] = "ok" if got == want else f"got {got} want {want} at {cyx}"
+    spot[nm] = "ok" if got == want else f"got {got} want {want}"
 print("SPOT:", json.dumps(spot))
 
 # ---------------------------------------------------------------- fidelity

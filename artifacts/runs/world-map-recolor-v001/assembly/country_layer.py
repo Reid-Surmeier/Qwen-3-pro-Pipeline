@@ -6,7 +6,7 @@ from scipy import ndimage
 
 H, W = 485, 1001
 prm = json.load(open('projection.json'))
-d = json.load(open('ne_110m_admin0.geojson'))
+d = json.load(open('ne_50m_admin0_lakes.geojson'))
 LON = np.arange(-180, 180, 0.1) + 0.05
 LAT = np.arange(-90, 90, 0.1) + 0.05
 
@@ -42,8 +42,14 @@ for ci, f in enumerate(d['features']):
     cid_grid[m] = ci
 
 yy, xx = np.mgrid[0:H, 0:W]
-lon = (xx - prm['x0']) * prm['kx']
-lat = np.degrees(2*np.arctan(np.exp((prm['y0'] - yy)/prm['k'])) - np.pi/2)
+corr = json.load(open('residual-correction.json'))
+cy, cx = corr['cy'], corr['cx']
+dyf = cy[0] + cy[1]*yy + cy[2]*yy*yy + (cy[3]*yy*yy*yy if len(cy) > 3 else 0)
+dxf = cx[0] + cx[1]*xx
+xs_ = xx - dxf
+ys_ = yy - dyf
+lon = (xs_ - prm['x0']) * prm['kx']
+lat = np.degrees(2*np.arctan(np.exp((prm['y0'] - ys_)/prm['k'])) - np.pi/2)
 li = np.clip(((lon + 180)/0.1).astype(int), 0, len(LON)-1)
 la = np.clip(((lat + 90)/0.1).astype(int), 0, len(LAT)-1)
 cid = cid_grid[la, li]
