@@ -5,7 +5,7 @@ The shell is widened at 272x126 native resolution by inserting a bounded
 center strip. The exterior caps and all named controls remain exact native
 source pixels. Text is drawn once at 10px and every 4x review export is a
 nearest-neighbor enlargement, avoiding independently hinted 40px glyphs and
-full-window resampling halos.
+horizontal stretch or LANCZOS resampling halos during widening.
 """
 from __future__ import annotations
 
@@ -481,7 +481,8 @@ def main() -> int:
         "open_native_resolution": list(OPEN_NATIVE_SIZE),
         "open_review_resolution": list(OPEN_REVIEW_SIZE),
         "review_resampling": "nearest for text and shell; byte-exact full-resolution source overlays for named controls",
-        "full_source_window_resampled": False,
+        "source_normalization_resampling": "complete 1088x504 source reduced once to 272x126 with nearest-neighbor before Assembly",
+        "complete_source_horizontally_resampled_during_widening": False,
         "native_shell_extension": {"insert_at": INSERT_AT, "insert_width": INSERT_WIDTH, "method": "exact halves plus nearest-neighbor center donor strip"},
         "exterior_edge_cleanup": "clean native rounded silhouette outside exact inner frame caps",
         "exact_native_source_pixels": exact_results,

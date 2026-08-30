@@ -42,7 +42,8 @@
     784
   ],
   "review_resampling": "nearest for text and shell; byte-exact full-resolution source overlays for named controls",
-  "full_source_window_resampled": false,
+  "source_normalization_resampling": "complete 1088x504 source reduced once to 272x126 with nearest-neighbor before Assembly",
+  "complete_source_horizontally_resampled_during_widening": false,
   "native_shell_extension": {
     "insert_at": 136,
     "insert_width": 64,

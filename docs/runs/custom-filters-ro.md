@@ -55,12 +55,14 @@ closed-state control pixels. No new paid request was made for v003.
 
 ## Assembly and fidelity check
 
-`scripts/assemble_custom_filters_ro_v003.py` first reduces the style source to
-its 272 x 126 pixel grid, widens the shell there with exact source halves and a
-bounded center donor strip, and composes the replacement UI at 336 x 126.
-It never horizontally resamples the complete 4x screenshot. The noisy outer
-screenshot shadow is replaced by a clean native rounded silhouette while the
-inner frame caps remain exact source pixels.
+`scripts/assemble_custom_filters_ro_v003.py` first reduces the complete 1088 x
+504 style source once to its 272 x 126 pixel grid with nearest-neighbor
+sampling. It then widens the shell at native resolution with exact source
+halves and a bounded center donor strip, and composes the replacement UI at 336
+x 126. The widening step never horizontally stretches or LANCZOS-resamples the
+complete screenshot. The noisy outer screenshot shadow is replaced by a clean
+native rounded silhouette while the inner frame caps remain exact source
+pixels.
 
 All body labels, values, radio labels, and all nine popup options use one 10 px
 PixelMplus size at native resolution. The three closed-state baselines have
@@ -92,9 +94,11 @@ Machine verification records:
 - both native dimensions and all exact strings are frozen by tests;
 - inner frame caps plus native controls are exact source pixels, and the review
   controls are byte-identical full-resolution source crops;
+- the actual closed and open review exports differ from nearest-neighbor native
+  enlargement only inside the named full-resolution source-control overlays;
 - the password field is removed from the source layout;
-- the 336 x 196 open canvas contains the entire dropdown, including all nine
-  options below the closed window's edge.
+- the popup edges align with the sort field and every measured option-text
+  bound, including the ninth option, stays inside the 336 x 196 open canvas.
 
 Because the canvas is widened from 272 to 336 native pixels, this run is not an
 ADR 0002 exact-preservation claim against the differently sized source image.
