@@ -27,7 +27,7 @@ func _run() -> void:
 	await _toggle_reversal()
 	await _range_drag()
 	await _dropdown_lifecycle()
-	await _escape_without_open_dropdown_is_inert()
+	await _escape_without_open_dropdown_closes()
 	await _minimize_restore()
 	await _window_drag()
 	_write_report()
@@ -109,10 +109,14 @@ func _dropdown_lifecycle() -> void:
 		str(selected))
 
 
-func _escape_without_open_dropdown_is_inert() -> void:
+func _escape_without_open_dropdown_closes() -> void:
 	await _key(KEY_ESCAPE)
-	_check("closed-dropdown-escape-is-inert", window.qa_state().window.visible,
-		str(window.qa_state().window))
+	var closed: Dictionary = window.qa_state().window
+	_check("window-key-command-closes", not closed.visible
+		and closed.last_gesture == "KeyCommand" and closed.last_action == "CloseWindow",
+		str(closed))
+	window.reset()
+	await process_frame
 
 
 func _minimize_restore() -> void:

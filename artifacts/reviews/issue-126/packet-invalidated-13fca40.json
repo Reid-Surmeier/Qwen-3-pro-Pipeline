@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "issue": 126,
+  "pull_request": 82,
+  "candidate_commit": "13fca40e2e28491aa259d82b00692475760443aa",
+  "acceptance_contract": "docs/reviews/issue-126-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence": [
+      "artifacts/reviews/issue-126/builder/00-idle.png",
+      "artifacts/reviews/issue-126/builder/01-selected.png",
+      "artifacts/reviews/issue-126/builder/02-context-detail.png",
+      "artifacts/reviews/issue-126/builder/03-00-skill_tree.stepper.r1c1-after.png",
+      "artifacts/reviews/issue-126/builder/04-committed.png",
+      "artifacts/reviews/issue-126/builder/05-cancelled.png",
+      "artifacts/reviews/issue-126/builder/06-list-view.png",
+      "artifacts/reviews/issue-126/builder/09-minimized.png",
+      "artifacts/reviews/issue-126/builder/10-minimize-restored.png",
+      "artifacts/reviews/issue-126/builder/11-drag-mid.png",
+      "artifacts/reviews/issue-126/builder/play-log.json",
+      "artifacts/reviews/issue-126/builder/verdict.json",
+      "artifacts/reviews/issue-126/options-regression/play-log.json",
+      "artifacts/reviews/issue-126/options-regression/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "DISPLAY=:99 $HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue126-blind-review.pid || kill \"$(cat /tmp/issue126-blind-review.pid)\" 2>/dev/null || true; nohup env DISPLAY=:99 $HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --path godot -- --screen=image79 >/tmp/issue126-blind-review.log 2>&1 & echo $! >/tmp/issue126-blind-review.pid"
+  }
+}

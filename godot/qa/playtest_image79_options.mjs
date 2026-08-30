@@ -72,6 +72,9 @@ const record = (controlId, gesture, windowAction, expected, observed, assertions
   if (motionSamples !== undefined) action.motion_samples = motionSamples;
   actions.push(action);
 };
+const manifest = JSON.parse(readFileSync(resolve(ROOT,
+  "godot/data/image-79-control-spec.json"), "utf8"));
+const windowSpec = manifest.windows.find((entry) => entry.id === "options");
 
 const idle = await shot("00-idle");
 const invariantBefore = await invariantShot("00-invariant-before");
@@ -291,9 +294,31 @@ record("options.close", "Activate", "CloseWindow", "close hides the Window in on
   JSON.stringify(closed), closeAssertions, { before: closeBefore, after: closeAfter });
 check("options.close-activate", closeAssertions.hidden, closeAssertions);
 
-const manifest = JSON.parse(readFileSync(resolve(ROOT, "godot/data/image-79-control-spec.json"), "utf8"));
-const manifestActions = manifest.windows[0].controls.flatMap((entry) =>
-  entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`));
+await page.reload({ waitUntil: "networkidle", timeout: 90000 });
+await page.waitForFunction(() => window.godotQaState?.windows?.options,
+  undefined, { timeout: 90000 });
+await page.waitForTimeout(2500);
+const keyBefore = await shot("19-options-key-before");
+// Bring Options to the front without changing semantic state, then exercise
+// its manifest-owned KeyCommand rather than whichever sibling is frontmost.
+const keyFocus = point(WINDOW.x + 100, WINDOW.y + 15);
+await page.mouse.click(keyFocus.x, keyFocus.y);
+await page.keyboard.press("Escape");
+await page.waitForTimeout(50);
+const keyClosed = (await options()).window;
+const keyAfter = await shot("19-options-key-closed");
+record("options", "KeyCommand", "CloseWindow",
+  "Escape routes through the Window binding and hides the frontmost Window",
+  JSON.stringify(keyClosed), {
+    hidden: keyClosed.visible === false,
+    gesture_routed: keyClosed.last_gesture === "KeyCommand",
+    action_routed: keyClosed.last_action === "CloseWindow",
+  }, { before: keyBefore, after: keyAfter });
+
+const windowActions = windowSpec.actions.map((binding) =>
+  `${windowSpec.id}:${binding.gesture}:${binding.action}`);
+const manifestActions = windowActions.concat(windowSpec.controls.flatMap((entry) =>
+  entry.actions.map((binding) => `${entry.id}:${binding.gesture}:${binding.action}`)));
 const covered = new Set(actions.map((entry) =>
   `${entry.control_id}:${entry.gesture}:${entry.window_action}`));
 const missingActions = manifestActions.filter((binding) => !covered.has(binding));
@@ -302,12 +327,14 @@ check("manifest-action-coverage", missingActions.length === 0, missingActions);
 const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
   || entry.startsWith("[pageerror]"));
 check("zero-console-errors", errors.length === 0, errors);
-const requiredControls = manifest.windows[0].controls.map((entry) => entry.id);
-const requiredActions = manifest.windows[0].controls.flatMap((entry) =>
-  entry.actions.map((binding) => ({ control_id: entry.id, gesture: binding.gesture,
-    window_action: binding.action })));
+const requiredControls = windowSpec.controls.map((entry) => entry.id);
+const requiredActions = windowSpec.actions.map((binding) => ({
+  control_id: windowSpec.id, gesture: binding.gesture, window_action: binding.action,
+})).concat(windowSpec.controls.flatMap((entry) => entry.actions.map((binding) => ({
+  control_id: entry.id, gesture: binding.gesture, window_action: binding.action,
+}))));
 const playLog = {
-  schema_version: "image79-play-log-v1",
+  schema_version: "image79-play-log-v2",
   candidate: {
     issue: 125,
     commit_sha: execFileSync("git", ["rev-parse", "HEAD"],
@@ -319,7 +346,7 @@ const playLog = {
   required_actions: requiredActions,
   invariant_frames: {
     before: invariantBefore,
-    after: await invariantShot("19-invariant-after"),
+    after: await invariantShot("20-invariant-after"),
   },
   console_errors: errors,
   actions,

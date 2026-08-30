@@ -44,13 +44,46 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
     _require_file(repository, packet.get("acceptance_contract"), "acceptance_contract", problems)
     for index, reference in enumerate(packet.get("references", [])):
         _verify_hashed_file(repository, reference, f"references[{index}]", problems)
-    evidence = packet.get("candidate", {}).get("evidence", [])
+    candidate_packet = packet.get("candidate", {})
+    evidence = candidate_packet.get("evidence", []) if isinstance(candidate_packet, dict) else []
     if not isinstance(evidence, list) or not evidence:
         problems.append("candidate.evidence must be a non-empty array")
     else:
         for index, relative in enumerate(evidence):
             _require_file(repository, relative, f"candidate.evidence[{index}]", problems)
-    manifest_path = repository / "artifacts" / "reviews" / f"issue-{packet.get('issue')}" / "builder" / "evidence-manifest.json"
+    manifest_relatives = candidate_packet.get("evidence_manifests") \
+        if isinstance(candidate_packet, dict) else None
+    if manifest_relatives is None:
+        manifest_relatives = [
+            f"artifacts/reviews/issue-{packet.get('issue')}/builder/evidence-manifest.json"
+        ]
+    if not isinstance(manifest_relatives, list) or not manifest_relatives or not all(
+        isinstance(relative, str) and relative for relative in manifest_relatives
+    ):
+        problems.append("candidate.evidence_manifests must contain non-empty paths")
+        manifest_relatives = []
+    locked_paths: set[Path] = set()
+    for index, relative in enumerate(manifest_relatives):
+        manifest_path = _require_file(
+            repository, relative, f"candidate.evidence_manifests[{index}]", problems
+        )
+        if manifest_path is not None:
+            locked_paths.update(
+                _validate_evidence_manifest(manifest_path, repository, candidate, problems)
+            )
+    for index, relative in enumerate(evidence if isinstance(evidence, list) else []):
+        evidence_path = _require_file(
+            repository, relative, f"candidate.evidence[{index}]", problems
+        )
+        if evidence_path is not None and evidence_path not in locked_paths:
+            problems.append(f"candidate.evidence[{index}] is not hash-locked by an evidence manifest")
+    return problems
+
+
+def _validate_evidence_manifest(
+    manifest_path: Path, repository: Path, candidate: str, problems: list[str]
+) -> set[Path]:
+    locked_paths: set[Path] = set()
     try:
         manifest = json.loads(manifest_path.read_text())
     except (OSError, json.JSONDecodeError) as error:
@@ -59,8 +92,16 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
         if manifest.get("candidate_commit") != candidate:
             problems.append("evidence manifest candidate does not match")
         root = manifest_path.parent
-        for index, entry in enumerate(manifest.get("files", [])):
+        files = manifest.get("files")
+        if not isinstance(files, list) or not files:
+            problems.append("evidence manifest files must be a non-empty array")
+            files = []
+        for index, entry in enumerate(files):
             _verify_hashed_file(root, entry, f"evidence files[{index}]", problems)
+            if isinstance(entry, dict) and isinstance(entry.get("path"), str):
+                locked = (root / entry["path"]).resolve()
+                if locked.is_relative_to(root.resolve()):
+                    locked_paths.add(locked)
         play_log_path = root / "play-log.json"
         try:
             play_log = json.loads(play_log_path.read_text())
@@ -77,7 +118,7 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
                 problems.append(f"committed Play Log is not reproducible: {verdict}")
         except (OSError, json.JSONDecodeError, subprocess.CalledProcessError) as error:
             problems.append(f"committed Play Log cannot be verified: {error}")
-    return problems
+    return locked_paths
 
 
 def _require_file(root: Path, relative: Any, label: str, problems: list[str]) -> Path | None:

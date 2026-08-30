@@ -1,11 +1,13 @@
 extends Control
-## Issue #125 production tracer desktop. The old release scene remains intact
-## while image 79 expands Window-by-Window behind the schema-v3 seam.
+## Incremental image-79 production desktop. Every integrated Window is built
+## from the same validated schema-v3 manifest and publishes factual QA state.
 
 const ControlSpec = preload("res://control_library/control_spec.gd")
 const ControlWindowScript = preload("res://control_library/control_window.gd")
 
 var options: ControlWindow
+var skill_tree: ControlWindow
+var windows := {}
 var validation_errors: Array = []
 var _last_json := ""
 
@@ -27,20 +29,27 @@ func _ready() -> void:
 		push_error("Image 79 ControlSpec rejected: %s" % str(validation_errors))
 		_publish()
 		return
-	options = ControlWindowScript.new()
-	options.configure(loaded.manifest.windows[0])
-	options.state_changed.connect(_publish)
-	add_child(options)
+	for window_spec in loaded.manifest.windows:
+		var window: ControlWindow = ControlWindowScript.new()
+		window.configure(window_spec)
+		window.state_changed.connect(_publish)
+		add_child(window)
+		windows[str(window_spec.id)] = window
+	options = windows.get("options")
+	skill_tree = windows.get("skill_tree")
 	_publish()
 
 
 func qa_state() -> Dictionary:
+	var window_states := {}
+	for window_id in windows:
+		window_states[window_id] = windows[window_id].qa_state()
 	return {
 		"schema_version": 3,
 		"reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
 		"viewport": [1536, 1024],
 		"validation_errors": validation_errors,
-		"windows": {} if options == null else {"options": options.qa_state()},
+		"windows": window_states,
 	}
 
 

@@ -10,6 +10,8 @@ var results: Array[Dictionary] = []
 func _init() -> void:
 	_contract_valid_manifest_is_accepted()
 	_contract_options_manifest_is_complete()
+	_contract_skill_tree_control_types_are_frozen()
+	_contract_window_adapter_fields_fail_closed()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
@@ -26,6 +28,11 @@ func _valid_manifest() -> Dictionary:
 		"windows": [{
 			"id": "options",
 			"geometry": {"x": 1108, "y": 297, "width": 424, "height": 202},
+			"gestures": ["Drag", "KeyCommand"],
+			"actions": [
+				{"gesture": "Drag", "action": "MoveWindow"},
+				{"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+			],
 			"plates": {
 				"expanded": "res://options/window.png",
 				"minimized": "res://options/minimized.png",
@@ -68,6 +75,157 @@ func _contract_options_manifest_is_complete() -> void:
 		and options.id == "options" and ids.size() == 11
 		and "options.bgm" in ids and "options.effect" in ids
 		and "options.skin" in ids, str(loaded.errors))
+
+
+func _contract_skill_tree_control_types_are_frozen() -> void:
+	var fixture := _valid_manifest()
+	var variants := {"idle": "res://fixture.png", "hover": "res://fixture.png",
+		"pressed": "res://fixture.png"}
+	fixture.windows[0].id = "skill_tree"
+	fixture.windows[0].controls = [
+		{
+			"id": "skill_tree.skills", "type": "SelectionView",
+			"geometry": {"x": 30, "y": 60, "width": 550, "height": 470},
+			"interaction_phases": ["idle", "hover", "pressed"],
+			"semantic_states": ["unselected", "selected"],
+			"initial_semantic_state": "unselected",
+			"state_set": {"unselected": variants, "selected": variants},
+			"value": {"items": ["heal", "holy-light"], "initial": "heal",
+				"details": {"heal": "heal\n7 / 7", "holy-light": "holy-light\n5 / 5"},
+				"value_control_ids": {"heal": "skill_tree.stepper.heal"}},
+			"surfaces": {
+				"heal": {"geometry": {"x": 0, "y": 0, "width": 42, "height": 42},
+					"state_set": {"unselected": variants, "selected": variants}},
+				"holy-light": {"geometry": {"x": 100, "y": 0, "width": 42, "height": 42},
+					"state_set": {"unselected": variants, "selected": variants}},
+			},
+			"gestures": ["Activate", "ContextActivate"],
+			"actions": [
+				{"gesture": "Activate", "action": "SelectSkill"},
+				{"gesture": "ContextActivate", "action": "OpenSkillDetail"},
+			],
+		},
+		{
+			"id": "skill_tree.stepper.heal", "type": "Stepper",
+			"geometry": {"x": 126, "y": 111, "width": 72, "height": 16},
+			"interaction_phases": ["idle", "hover", "pressed"],
+			"semantic_states": ["ready", "pending", "disabled"],
+			"initial_semantic_state": "ready",
+			"state_set": {"ready": variants, "pending": variants,
+				"disabled": {"idle": "res://fixture.png"}},
+			"value": {"minimum": 0, "maximum": 10, "current": 7,
+				"target": 7, "step": 1},
+			"surfaces": {
+				"decrement": {"geometry": {"x": 0, "y": 0, "width": 18, "height": 16},
+					"state_set": {"visible": variants, "hidden": variants}},
+				"increment": {"geometry": {"x": 54, "y": 0, "width": 18, "height": 16},
+					"state_set": {"visible": variants, "hidden": variants}},
+			},
+			"gestures": ["Activate"],
+			"actions": [{"gesture": "Activate", "action": "StepSkill"}],
+		},
+	]
+	var errors: Array = ControlSpec.validate(fixture, _all_assets_exist)
+	_check("skill-tree-control-contracts", errors.is_empty(), str(errors))
+
+	var bad_stepper := fixture.duplicate(true)
+	bad_stepper.windows[0].controls[1].value.target = 11
+	var stepper_errors: Array = ControlSpec.validate(bad_stepper, _all_assets_exist)
+	_check("stepper-bounds-fail-closed",
+		"InvalidStateSet" in stepper_errors.map(func(error): return error.code),
+		str(stepper_errors))
+
+	var bad_context := fixture.duplicate(true)
+	bad_context.windows[0].controls[0].actions = [
+		{"gesture": "Activate", "action": "SelectSkill"}]
+	var context_errors: Array = ControlSpec.validate(bad_context, _all_assets_exist)
+	_check("selection-context-binding-fails-closed",
+		"ControlBindingError" in context_errors.map(func(error): return error.code),
+		str(context_errors))
+
+	var missing_details := fixture.duplicate(true)
+	missing_details.windows[0].controls[0].value.details.erase("holy-light")
+	var detail_errors: Array = ControlSpec.validate(missing_details, _all_assets_exist)
+	_check("selection-details-fail-closed",
+		"InvalidStateSet" in detail_errors.map(func(error): return error.code),
+		str(detail_errors))
+
+	var foreign_value_control := fixture.duplicate(true)
+	foreign_value_control.windows[0].controls[0].value.value_control_ids.heal = \
+		"other.stepper.heal"
+	var foreign_value_errors: Array = ControlSpec.validate(foreign_value_control,
+		_all_assets_exist)
+	_check("selection-value-control-fails-closed",
+		"ControlBindingError" in foreign_value_errors.map(func(error): return error.code),
+		str(foreign_value_errors))
+
+
+func _contract_window_adapter_fields_fail_closed() -> void:
+	var fixture := _valid_manifest()
+	var minimize: Dictionary = fixture.windows[0].controls[0].duplicate(true)
+	minimize.id = "options.minimize"
+	minimize.actions[0].action = "ToggleMinimized"
+	fixture.windows[0].controls.append(minimize)
+	var list_toggle: Dictionary = fixture.windows[0].controls[0].duplicate(true)
+	list_toggle.id = "options.list-toggle"
+	list_toggle.actions[0].action = "ToggleSkillView"
+	fixture.windows[0].controls.append(list_toggle)
+	fixture.windows[0].drag_geometry = {"x": 0, "y": 0, "width": 200, "height": 24}
+	fixture.windows[0].minimized_controls = ["options.minimize", "options.close"]
+	fixture.windows[0].plates.list = "res://options/list.png"
+	_check("valid-window-adapter-fields",
+		ControlSpec.validate(fixture, _all_assets_exist).is_empty())
+
+	var bad_drag := fixture.duplicate(true)
+	bad_drag.windows[0].drag_geometry.width = 0
+	var drag_errors: Array = ControlSpec.validate(bad_drag, _all_assets_exist)
+	_check("invalid-drag-geometry-fails-closed",
+		"InvalidGeometry" in drag_errors.map(func(error): return error.code), str(drag_errors))
+
+	var bad_minimized := fixture.duplicate(true)
+	bad_minimized.windows[0].minimized_controls = ["options.missing"]
+	var minimized_errors: Array = ControlSpec.validate(bad_minimized, _all_assets_exist)
+	_check("unknown-minimized-control-fails-closed",
+		"InvalidControlSpec" in minimized_errors.map(func(error): return error.code),
+		str(minimized_errors))
+
+	var bad_list := fixture.duplicate(true)
+	var list_errors: Array = ControlSpec.validate(bad_list,
+		func(path: String) -> bool: return not path.ends_with("list.png"))
+	_check("missing-list-plate-fails-closed",
+		"AssetIntegrityError" in list_errors.map(func(error): return error.code),
+		str(list_errors))
+
+	var omitted_list := fixture.duplicate(true)
+	omitted_list.windows[0].plates.erase("list")
+	var omitted_list_errors: Array = ControlSpec.validate(omitted_list, _all_assets_exist)
+	_check("omitted-required-list-plate-fails-closed",
+		"AssetIntegrityError" in omitted_list_errors.map(func(error): return error.code),
+		str(omitted_list_errors))
+
+	var missing_window_action := fixture.duplicate(true)
+	missing_window_action.windows[0].actions = [
+		{"gesture": "Drag", "action": "MoveWindow"}]
+	var missing_window_action_errors: Array = ControlSpec.validate(
+		missing_window_action, _all_assets_exist)
+	_check("window-gesture-binding-fails-closed",
+		"ControlBindingError" in missing_window_action_errors.map(func(error): return error.code),
+		str(missing_window_action_errors))
+
+	var unknown_window_action := fixture.duplicate(true)
+	unknown_window_action.windows[0].actions[0].action = "TeleportWindow"
+	var unknown_window_action_errors: Array = ControlSpec.validate(
+		unknown_window_action, _all_assets_exist)
+	_check("window-action-routing-fails-closed",
+		"ActionRoutingError" in unknown_window_action_errors.map(func(error): return error.code),
+		str(unknown_window_action_errors))
+
+	var missing_key := fixture.duplicate(true)
+	missing_key.windows[0].actions[1].erase("key")
+	var missing_key_errors: Array = ControlSpec.validate(missing_key, _all_assets_exist)
+	_check("window-key-command-fails-closed",
+		"ControlBindingError" in missing_key_errors.map(func(error): return error.code),
+		str(missing_key_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:

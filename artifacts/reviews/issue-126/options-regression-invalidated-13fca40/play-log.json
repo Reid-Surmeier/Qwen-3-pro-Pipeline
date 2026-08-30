@@ -1,0 +1,808 @@
+{
+  "schema_version": "image79-play-log-v1",
+  "candidate": {
+    "issue": 125,
+    "commit_sha": "13fca40e2e28491aa259d82b00692475760443aa",
+    "window_id": "options"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "options.minimize",
+    "options.close",
+    "options.bgm",
+    "options.effect",
+    "options.bgm_on",
+    "options.effect_on",
+    "options.attack",
+    "options.skill",
+    "options.item",
+    "options.option",
+    "options.skin"
+  ],
+  "required_actions": [
+    {
+      "control_id": "options.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "options.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Activate",
+      "window_action": "StepRange"
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Drag",
+      "window_action": "SetRange"
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Wheel",
+      "window_action": "StepRange"
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Activate",
+      "window_action": "StepRange"
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Drag",
+      "window_action": "SetRange"
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Wheel",
+      "window_action": "StepRange"
+    },
+    {
+      "control_id": "options.bgm_on",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.effect_on",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.attack",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.skill",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.item",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.option",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "Activate",
+      "window_action": "ToggleDropdown"
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "Activate",
+      "window_action": "SelectChoice"
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "KeyCommand",
+      "window_action": "DismissDropdown"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "19-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "options.bgm",
+      "gesture": "Activate",
+      "window_action": "StepRange",
+      "expected": "arrow steps the Range and exposes pressed state",
+      "observed": "86.7299 -> 84.7299",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "pressed_exposed": true,
+        "stepped": true
+      },
+      "frames": {
+        "before": {
+          "path": "01-options-bgm-activate-before.png",
+          "sha256": "684b96bf7996c6644a3e8e1369e46c69b513d773b748d0e0ef1eb413c13702af"
+        },
+        "after": {
+          "path": "01-options-bgm-activate-after.png",
+          "sha256": "e13b51d760e5e4ead496d46b3fffb605c2cb8e2911da09fb9e0a75ef394604d4"
+        }
+      }
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Wheel",
+      "window_action": "StepRange",
+      "expected": "wheel input steps and clamps the Range",
+      "observed": "84.7299 -> 85.7299",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "wheel_stepped": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-options-bgm-wheel-before.png",
+          "sha256": "e13b51d760e5e4ead496d46b3fffb605c2cb8e2911da09fb9e0a75ef394604d4"
+        },
+        "after": {
+          "path": "02-options-bgm-wheel-after.png",
+          "sha256": "a8f5fd65d69c0c483abbe941f4cf7328acc876a1776fe913a2dc21f66162c937"
+        }
+      }
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Drag",
+      "window_action": "SetRange",
+      "expected": "31-frame continuous drag reaches a clamped endpoint",
+      "observed": "85.7299 -> 0 across 31 samples",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-options-bgm-drag-before.png",
+          "sha256": "a8f5fd65d69c0c483abbe941f4cf7328acc876a1776fe913a2dc21f66162c937"
+        },
+        "mid": {
+          "path": "03-options-bgm-drag-mid.png",
+          "sha256": "4ab89092081ce980110d783bdf9cf6569698023422ae599510b9d1ea169a6a30"
+        },
+        "after": {
+          "path": "03-options-bgm-drag-after.png",
+          "sha256": "ca1ef1fab6d64e8468dd4f700c51c845d947b88464e41b239b79c05139db975b"
+        }
+      },
+      "motion_samples": [
+        85.7299220619019,
+        82.8722502055921,
+        80.0145783492823,
+        77.1569064929725,
+        74.2992346366627,
+        71.4415627803529,
+        68.5838909240431,
+        65.7262774745813,
+        62.8686056182715,
+        60.0109337619617,
+        57.1532619056519,
+        54.2955900493421,
+        51.4379181930323,
+        48.5803047435706,
+        45.7226328872608,
+        42.864961030951,
+        40.0072891746411,
+        37.1496173183313,
+        34.2919454620215,
+        31.4342736057117,
+        28.57666015625,
+        25.7189882999402,
+        22.8613164436304,
+        20.0036445873206,
+        17.1459727310108,
+        14.288300874701,
+        11.4306290183911,
+        8.57301556892943,
+        5.71534371261962,
+        2.85767185630981,
+        0
+      ]
+    },
+    {
+      "control_id": "options.bgm",
+      "gesture": "Drag",
+      "window_action": "SetRange",
+      "expected": "31-frame continuous drag reaches a clamped endpoint",
+      "observed": "0 -> 100 across 31 samples",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      },
+      "frames": {
+        "before": {
+          "path": "04-options-bgm-drag-before.png",
+          "sha256": "ca1ef1fab6d64e8468dd4f700c51c845d947b88464e41b239b79c05139db975b"
+        },
+        "mid": {
+          "path": "04-options-bgm-drag-mid.png",
+          "sha256": "dc2e60e858678233c7ef85342e14abce85042d5e13d86e76de593f9c0e1f223e"
+        },
+        "after": {
+          "path": "04-options-bgm-drag-after.png",
+          "sha256": "b163a16ac5f6901af163646734f3bf3b3a241333e1856e376f8458be03ea471b"
+        }
+      },
+      "motion_samples": [
+        0,
+        3.33333722712321,
+        6.66667445424641,
+        10.0000116813696,
+        13.3333489084928,
+        16.666686135616,
+        20.0000233627392,
+        23.3333605898624,
+        26.6666394101376,
+        29.9999766372608,
+        33.333313864384,
+        36.6666510915072,
+        39.9999883186304,
+        43.3333255457536,
+        46.6666627728768,
+        50,
+        53.3333372271232,
+        56.6666744542464,
+        60.0000116813696,
+        63.3333489084928,
+        66.666686135616,
+        70.0000233627392,
+        73.3333605898624,
+        76.6666394101376,
+        79.9999766372608,
+        83.333313864384,
+        86.6666510915072,
+        89.9999883186304,
+        93.3333255457536,
+        96.6666627728768,
+        100
+      ]
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Activate",
+      "window_action": "StepRange",
+      "expected": "arrow steps the Range and exposes pressed state",
+      "observed": "52.1327 -> 54.1327",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "pressed_exposed": true,
+        "stepped": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-options-effect-activate-before.png",
+          "sha256": "b163a16ac5f6901af163646734f3bf3b3a241333e1856e376f8458be03ea471b"
+        },
+        "after": {
+          "path": "05-options-effect-activate-after.png",
+          "sha256": "8c9bfeeda053a35298bf002694be2ea666021911c530290aa5dd97cef62b7e19"
+        }
+      }
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Wheel",
+      "window_action": "StepRange",
+      "expected": "wheel input steps and clamps the Range",
+      "observed": "54.1327 -> 55.1327",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "wheel_stepped": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-options-effect-wheel-before.png",
+          "sha256": "8c9bfeeda053a35298bf002694be2ea666021911c530290aa5dd97cef62b7e19"
+        },
+        "after": {
+          "path": "06-options-effect-wheel-after.png",
+          "sha256": "d1c43c8eb500673d9b20c371b0a08b1c3018dba3aeb7688627f8773b01daf584"
+        }
+      }
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Drag",
+      "window_action": "SetRange",
+      "expected": "31-frame continuous drag reaches a clamped endpoint",
+      "observed": "55.1327 -> 100 across 31 samples",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-options-effect-drag-before.png",
+          "sha256": "d1c43c8eb500673d9b20c371b0a08b1c3018dba3aeb7688627f8773b01daf584"
+        },
+        "mid": {
+          "path": "07-options-effect-drag-mid.png",
+          "sha256": "43ab1dda8d82f6119d588a2c7520fb8237a933e1d00e703debf024a35f8921bb"
+        },
+        "after": {
+          "path": "07-options-effect-drag-after.png",
+          "sha256": "27ae10af7ced60d28b94a26d1592c76aeb16b32d0075123f9188127f5fc52643"
+        }
+      },
+      "motion_samples": [
+        55.1326769961124,
+        56.6283011550538,
+        58.1238669071471,
+        59.6194326592404,
+        61.1149984113337,
+        62.610564163427,
+        64.1061883223684,
+        65.6017540744617,
+        67.097319826555,
+        68.5928855786483,
+        70.0884513307416,
+        71.5840170828349,
+        73.0796412417763,
+        74.5752069938696,
+        76.0707727459629,
+        77.5663384980562,
+        79.0619042501495,
+        80.5575284090909,
+        82.0530941611842,
+        83.5486599132775,
+        85.0442256653708,
+        86.5397914174641,
+        88.0354155764055,
+        89.5309813284988,
+        91.0265470805921,
+        92.5221128326854,
+        94.0176785847787,
+        95.513244336872,
+        97.0088684958134,
+        98.5044342479067,
+        100
+      ]
+    },
+    {
+      "control_id": "options.effect",
+      "gesture": "Drag",
+      "window_action": "SetRange",
+      "expected": "31-frame continuous drag reaches a clamped endpoint",
+      "observed": "100 -> 0 across 31 samples",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "monotonic": true,
+        "endpoint_clamped": true
+      },
+      "frames": {
+        "before": {
+          "path": "07b-options-effect-drag-before.png",
+          "sha256": "27ae10af7ced60d28b94a26d1592c76aeb16b32d0075123f9188127f5fc52643"
+        },
+        "mid": {
+          "path": "07b-options-effect-drag-mid.png",
+          "sha256": "6b1001d5646fba802b4a844caee4018090372c23e6603244195e6039e6dd7f0f"
+        },
+        "after": {
+          "path": "07b-options-effect-drag-after.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      },
+      "motion_samples": [
+        100,
+        96.6666627728768,
+        93.3333255457536,
+        89.9999883186304,
+        86.6666510915072,
+        83.333313864384,
+        79.9999766372608,
+        76.6666394101376,
+        73.3333605898624,
+        70.0000233627392,
+        66.666686135616,
+        63.3333489084928,
+        60.0000116813696,
+        56.6666744542464,
+        53.3333372271232,
+        50,
+        46.6666627728768,
+        43.3333255457536,
+        39.9999883186304,
+        36.6666510915072,
+        33.333313864384,
+        29.9999766372608,
+        26.6666394101376,
+        23.3333605898624,
+        20.0000233627392,
+        16.666686135616,
+        13.3333489084928,
+        10.0000116813696,
+        6.66667445424641,
+        3.33333722712321,
+        0
+      ]
+    },
+    {
+      "control_id": "options.bgm_on",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "on -> off -> on",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-options-bgm_on-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "08-options-bgm_on-after.png",
+          "sha256": "a504960356e3a9a525e056941e966fd677de326cf2270b54057017d42ca9eb3a"
+        },
+        "reversed": {
+          "path": "08-options-bgm_on-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.effect_on",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "on -> off -> on",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-options-effect_on-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "09-options-effect_on-after.png",
+          "sha256": "4041a8741182101878529d12cd8923f139059dcc99d47cee5bbc860b1dc287c0"
+        },
+        "reversed": {
+          "path": "09-options-effect_on-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.attack",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "off -> on -> off",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-options-attack-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "10-options-attack-after.png",
+          "sha256": "32956838b401efc22276a06f466acc1794caa30eb3befc7ae91d3addabde0da1"
+        },
+        "reversed": {
+          "path": "10-options-attack-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.skill",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "on -> off -> on",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-options-skill-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "11-options-skill-after.png",
+          "sha256": "70f8b5d5a17c4d1dc6d8cb9c6c84e8de79a05f0e2cad9d468e3ba0d41fa726fa"
+        },
+        "reversed": {
+          "path": "11-options-skill-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.item",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "off -> on -> off",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "12-options-item-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "12-options-item-after.png",
+          "sha256": "e8e4478f0ee84b23ff5529a739934231f2f06c0a8628801bed472d9de14cc2bd"
+        },
+        "reversed": {
+          "path": "12-options-item-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.option",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "toggle in one frame and reverse on a second click",
+      "observed": "on -> off -> on",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "toggled": true,
+        "reversible": true
+      },
+      "frames": {
+        "before": {
+          "path": "13-options-option-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "13-options-option-after.png",
+          "sha256": "20077e1cceb64c67cb5da6c32e04f8ed4ea4e46aff88c00f30161468b1cacf33"
+        },
+        "reversed": {
+          "path": "13-options-option-reversed.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        }
+      }
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "Activate",
+      "window_action": "ToggleDropdown",
+      "expected": "open the themed list in one frame",
+      "observed": "open",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "pressed_exposed": true,
+        "opened": true
+      },
+      "frames": {
+        "before": {
+          "path": "14-options-skin-activate-before.png",
+          "sha256": "4975c4cb61c7565306f1925248911712fd5135aba9a936c1cdf1229492814b8d"
+        },
+        "after": {
+          "path": "14-options-skin-activate-after.png",
+          "sha256": "1fe4055b8d9f590ffce1d176efbaaa81a12a4444beca78c5a84c1d330f69eb3e"
+        }
+      }
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "Activate",
+      "window_action": "SelectChoice",
+      "expected": "select a themed row and close the list",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":32,\"width\":300,\"x\":1222,\"y\":415},\"id\":\"options.skin\",\"interaction_phase\":\"idle\",\"last_action\":\"SelectChoice\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectChoice\",\"error\":null},\"rendered\":true,\"rendered_asset\":\"res://assets/image-79/options/dropdown-field-blank-idle.png\",\"semantic_state\":\"closed\",\"text\":\"tanublue\",\"text_visible\":true,\"type\":\"Dropdown\",\"value\":\"tanublue\",\"visible\":true,\"z_index\":50}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "closed": true
+      },
+      "frames": {
+        "before": {
+          "path": "15-options-skin-select-before.png",
+          "sha256": "1fe4055b8d9f590ffce1d176efbaaa81a12a4444beca78c5a84c1d330f69eb3e"
+        },
+        "after": {
+          "path": "15-options-skin-select-after.png",
+          "sha256": "89622442449f1197179242ec01556abab57ee85eb106116a3ad6013e1f681b61"
+        }
+      }
+    },
+    {
+      "control_id": "options.skin",
+      "gesture": "KeyCommand",
+      "window_action": "DismissDropdown",
+      "expected": "Escape dismisses without changing the value",
+      "observed": "closed",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "dismissed": true
+      },
+      "frames": {
+        "before": {
+          "path": "15-options-skin-key-before.png",
+          "sha256": "91133fc316a4e2af5e2ca37110032abd3ac96a4614b2d46e5cb35c9063b383e5"
+        },
+        "after": {
+          "path": "15-options-skin-key-after.png",
+          "sha256": "89622442449f1197179242ec01556abab57ee85eb106116a3ad6013e1f681b61"
+        }
+      }
+    },
+    {
+      "control_id": "options.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "swap to a purpose-built minimized Window and restore",
+      "observed": "{\"minimized\":{\"detail_item\":\"\",\"id\":\"options\",\"minimized\":true,\"pending\":false,\"position\":[1108,297],\"size\":[424,28],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0},\"restored\":{\"detail_item\":\"\",\"id\":\"options\",\"minimized\":false,\"pending\":false,\"position\":[1108,297],\"size\":[424,202],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "distinct_minimized_plate": true,
+        "restored_state": true,
+        "position_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "16-options-minimize-before.png",
+          "sha256": "89622442449f1197179242ec01556abab57ee85eb106116a3ad6013e1f681b61"
+        },
+        "after": {
+          "path": "16-options-minimize-after.png",
+          "sha256": "9ae723547421f745a1fd326c737dab87a231cfc9f6aefea2aa2ca83cb5e418fb"
+        },
+        "restored": {
+          "path": "16-options-minimize-restored.png",
+          "sha256": "89622442449f1197179242ec01556abab57ee85eb106116a3ad6013e1f681b61"
+        }
+      }
+    },
+    {
+      "control_id": "options",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Window follows the pointer without tweening",
+      "observed": "[1028,387]",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "pointer_delta_applied": true
+      },
+      "frames": {
+        "before": {
+          "path": "17-options-window-drag-before.png",
+          "sha256": "89622442449f1197179242ec01556abab57ee85eb106116a3ad6013e1f681b61"
+        },
+        "mid": {
+          "path": "17-options-window-drag-mid.png",
+          "sha256": "8e7ba70496284d40471561d38381d2e5e38138a4113dbd212a6279ddb3e15e74"
+        },
+        "after": {
+          "path": "17-options-window-drag-after.png",
+          "sha256": "7b8f66afd486fb5a44dfac6881eb819e1b62ded297a992d8e29a9e715dfb589d"
+        }
+      },
+      "motion_samples": [
+        1108,
+        1105.33337402344,
+        1102.66662597656,
+        1100,
+        1097.33337402344,
+        1094.66662597656,
+        1092,
+        1089.33337402344,
+        1086.66662597656,
+        1084,
+        1081.33337402344,
+        1078.66662597656,
+        1076,
+        1073.33337402344,
+        1070.66662597656,
+        1068,
+        1065.33337402344,
+        1062.66662597656,
+        1060,
+        1057.33337402344,
+        1054.66662597656,
+        1052,
+        1049.33337402344,
+        1046.66662597656,
+        1044,
+        1041.33337402344,
+        1038.66662597656,
+        1036,
+        1033.33337402344,
+        1030.66662597656,
+        1028
+      ]
+    },
+    {
+      "control_id": "options.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "close hides the Window in one frame",
+      "observed": "{\"detail_item\":\"\",\"id\":\"options\",\"minimized\":false,\"pending\":false,\"position\":[1028,387],\"size\":[424,202],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "18-options-close-before.png",
+          "sha256": "7b8f66afd486fb5a44dfac6881eb819e1b62ded297a992d8e29a9e715dfb589d"
+        },
+        "after": {
+          "path": "18-options-close-after.png",
+          "sha256": "488a12278a2b4e0cdb052a02183cff332e9bea962727399be78f5306b3623bc8"
+        }
+      }
+    }
+  ]
+}

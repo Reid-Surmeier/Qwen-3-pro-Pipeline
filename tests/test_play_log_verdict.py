@@ -27,7 +27,7 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def _valid_log(self) -> dict:
         return {
-            "schema_version": "image79-play-log-v1",
+            "schema_version": "image79-play-log-v2",
             "candidate": {
                 "issue": 125,
                 "commit_sha": "a" * 40,
@@ -36,6 +36,8 @@ class PlayLogVerdictTests(unittest.TestCase):
             "source_reference_sha256": "b" * 64,
             "required_controls": ["options.bgm", "options.skin"],
             "required_actions": [
+                {"control_id": "options", "gesture": "Drag", "window_action": "MoveWindow"},
+                {"control_id": "options", "gesture": "KeyCommand", "window_action": "CloseWindow"},
                 {"control_id": "options.bgm", "gesture": "Drag", "window_action": "SetRange"},
                 {"control_id": "options.skin", "gesture": "Activate", "window_action": "ToggleDropdown"},
             ],
@@ -45,6 +47,29 @@ class PlayLogVerdictTests(unittest.TestCase):
                 "after": self.invariant_after,
             },
             "actions": [
+                {
+                    "control_id": "options",
+                    "gesture": "Drag",
+                    "window_action": "MoveWindow",
+                    "expected": "move through the Window binding",
+                    "observed": "window moved",
+                    "responsive": True,
+                    "matches_expected": True,
+                    "assertions": {"moved": True},
+                    "motion_samples": list(range(31)),
+                    "frames": {"before": self.before, "mid": self.mid, "after": self.after},
+                },
+                {
+                    "control_id": "options",
+                    "gesture": "KeyCommand",
+                    "window_action": "CloseWindow",
+                    "expected": "Escape closes through the Window binding",
+                    "observed": "window hidden",
+                    "responsive": True,
+                    "matches_expected": True,
+                    "assertions": {"hidden": True},
+                    "frames": {"before": self.before, "after": self.after},
+                },
                 {
                     "control_id": "options.bgm",
                     "gesture": "Drag",
@@ -93,7 +118,12 @@ class PlayLogVerdictTests(unittest.TestCase):
                 ],
             })
         return {"reference": {"sha256": "b" * 64},
-                "windows": [{"id": "options", "controls": controls}]}
+                "windows": [{"id": "options", "gestures": ["Drag", "KeyCommand"],
+                             "actions": [
+                                 {"gesture": "Drag", "action": "MoveWindow"},
+                                 {"gesture": "KeyCommand", "key": "Escape",
+                                  "action": "CloseWindow"},
+                             ], "controls": controls}]}
 
     def test_complete_hash_locked_log_passes(self) -> None:
         verdict = evaluate_play_log(self._valid_log(), self.root, self._manifest())
@@ -102,7 +132,8 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def test_unexercised_control_is_incomplete(self) -> None:
         log = self._valid_log()
-        log["actions"] = log["actions"][:1]
+        log["actions"] = [action for action in log["actions"]
+                          if action["control_id"] != "options.skin"]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INCOMPLETE", verdict["verdict"])
         self.assertEqual(["options.skin"], verdict["unexercised"])
@@ -124,7 +155,8 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def test_false_action_claim_fails(self) -> None:
         log = self._valid_log()
-        log["actions"][1]["matches_expected"] = False
+        next(action for action in log["actions"]
+             if action["control_id"] == "options.skin")["matches_expected"] = False
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("FAIL", verdict["verdict"])
 
@@ -145,8 +177,10 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def test_drag_requires_mid_frame_and_thirty_motion_samples(self) -> None:
         log = self._valid_log()
-        del log["actions"][0]["frames"]["mid"]
-        log["actions"][0]["motion_samples"] = list(range(29))
+        drag = next(action for action in log["actions"]
+                    if action["control_id"] == "options.bgm")
+        del drag["frames"]["mid"]
+        drag["motion_samples"] = list(range(29))
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])
         self.assertTrue(any("30 motion samples" in problem for problem in verdict["problems"]))
@@ -164,6 +198,26 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])
         self.assertTrue(any("frozen manifest" in problem for problem in verdict["problems"]))
+
+    def test_required_actions_cannot_omit_a_window_binding(self) -> None:
+        log = self._valid_log()
+        log["required_actions"] = [action for action in log["required_actions"]
+                                   if action["control_id"] != "options"]
+        log["actions"] = [action for action in log["actions"]
+                          if action["control_id"] != "options"]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"])
+        self.assertTrue(any("frozen manifest" in problem for problem in verdict["problems"]))
+
+    def test_v1_log_remains_compatible_without_window_bindings(self) -> None:
+        log = self._valid_log()
+        log["schema_version"] = "image79-play-log-v1"
+        log["required_actions"] = [action for action in log["required_actions"]
+                                   if action["control_id"] != "options"]
+        log["actions"] = [action for action in log["actions"]
+                          if action["control_id"] != "options"]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"])
 
 
 if __name__ == "__main__":

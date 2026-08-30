@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -25,6 +26,22 @@ class BlindReviewPacketTests(unittest.TestCase):
         packet = ROOT / "artifacts" / "reviews" / "issue-125" / "packet.json"
         problems = MODULE.validate_packet(packet, ROOT, "0" * 40)
         self.assertIn("packet candidate_commit does not match requested candidate", problems)
+
+    def test_issue_126_packet_declares_each_evidence_manifest(self) -> None:
+        packet_path = ROOT / "artifacts" / "reviews" / "issue-126" / "packet.json"
+        packet = json.loads(packet_path.read_text())
+        self.assertEqual(
+            [
+                "artifacts/reviews/issue-126/builder/evidence-manifest.json",
+                "artifacts/reviews/issue-126/options-regression/evidence-manifest.json",
+            ],
+            packet["candidate"]["evidence_manifests"],
+        )
+        self.assertEqual(
+            [],
+            MODULE.validate_packet(packet_path, ROOT,
+                                   "82ae10483fd41d365f1ca54fe691e894c9727303"),
+        )
 
 
 if __name__ == "__main__":
