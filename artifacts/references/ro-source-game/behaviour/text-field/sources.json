@@ -92,6 +92,102 @@
       ],
       "shows": "パスワード入力: an active masked field (****), and below it two greyed, non-editable fields — the client's disabled field state.",
       "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "05-send-before.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:04:00.167",
+      "timestamp_s": 240.1667,
+      "frame_index_at_30fps": 7205,
+      "crop_xywh_in_1280x720": [
+        0,
+        405,
+        600,
+        140
+      ],
+      "shows": "会話ウィンドウ one frame before Enter: the input bar holds 「パーティー」 with the caret after it; the log's last line is 「P_Lioh02 : 全体」. 2x.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "06-send-field-cleared.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:04:00.200",
+      "timestamp_s": 240.2,
+      "frame_index_at_30fps": 7206,
+      "crop_xywh_in_1280x720": [
+        0,
+        405,
+        600,
+        140
+      ],
+      "shows": "The very next frame: the input bar is EMPTY with the caret back at the left inset — and the log is UNCHANGED. The field clears on its own, before anything is echoed. Cut-verified (UI-free region 0.00).",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "07-send-log-appended.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:04:00.300",
+      "timestamp_s": 240.3,
+      "frame_index_at_30fps": 7209,
+      "crop_xywh_in_1280x720": [
+        0,
+        405,
+        600,
+        140
+      ],
+      "shows": "Three frames (100 ms) later: 「P_Lioh02 : パーティー」 appears in the log, in one frame. Cut-verified (UI-free region 0.00). Field-clear and log-append are SEPARATE events 100 ms apart, in that order.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
+    },
+    {
+      "file": "08-send-speech-bubble.png",
+      "kind": "primary — gameplay video frame",
+      "issue": "Reid-Surmeier/Qwen-3-pro-Pipeline#115",
+      "video_id": "oCsKRSKr2nA",
+      "url": "https://www.youtube.com/watch?v=oCsKRSKr2nA",
+      "video_title": "ラグナロクオンライン　スタートアップガイド(ウィンドウ編 その２)",
+      "channel": "FRIES17",
+      "uploaded": "2020-07-05",
+      "video_fps": 30,
+      "decoded_resolution": "1280x720 (game UI at 1:1 pixel scale)",
+      "timestamp": "00:04:00.500",
+      "timestamp_s": 240.5,
+      "frame_index_at_30fps": 7215,
+      "crop_xywh_in_1280x720": [
+        460,
+        150,
+        420,
+        180
+      ],
+      "shows": "The same message also appears as a floating speech bubble above the character's head in the game world — the send has a second, non-UI consequence.",
+      "licence": "Private study. Frame grabbed from a publicly published video for non-commercial research into UI behaviour; not redistributed as media. Ragnarok Online (C) Gravity Co., Ltd. & Lee Myoungjin / GungHo Online Entertainment."
     }
+  ],
+  "issues": [
+    "Reid-Surmeier/Qwen-3-pro-Pipeline#104",
+    "Reid-Surmeier/Qwen-3-pro-Pipeline#115"
   ]
 }
