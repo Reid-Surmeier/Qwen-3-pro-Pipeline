@@ -32,7 +32,7 @@
   },
   "assembly": {
     "script": "scripts/assemble_museum_filter_v003.py",
-    "script_sha256": "6a0f264848232856cc872484566b1bd172e36a3675b095de17971f591f362dfe",
+    "script_sha256": "96be6dde5f7b0ed700d8c1b9766a6535e9d5bd62e52d4e30539b7a7c9c45db45",
     "method": "At 313x211, predeclare a shape-aware mask from Assembly v001's old exact-ink glyphs and repository-pinned PixelMplus glyph silhouettes, restore only those old title/background pixels, render the exact English strings through the declared mask, verify the actual RGB difference is a subset, then enlarge 4x with nearest-neighbour resampling."
   },
   "outputs": [
@@ -69,6 +69,27 @@
   },
   "manual_visual_readback": {
     "scales": ["1252x844", "313x211"],
+    "exact_copy_entries": [
+      "Object type / material",
+      "object",
+      "material",
+      "Search",
+      "Search",
+      "Match",
+      "Any",
+      "All",
+      "selected filters.",
+      "Metal (5,001)",
+      "Paper (3,652)",
+      "Glass (3,182)",
+      "Drawings (2,606)",
+      "Graphite (2,443)",
+      "Paintings (2,395)",
+      "Vessels (2,074)",
+      "Watercolors (1,962)",
+      "Wood (1,899)",
+      "Dishes (1,837)"
+    ],
     "exact_copy_entries_checked": 19,
     "exact_copy_entries_matching": 19,
     "header": "Assembly v001 gradient and right bead retained; only title glyph silhouettes changed",

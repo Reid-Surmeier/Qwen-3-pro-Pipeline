@@ -70,26 +70,40 @@ EDIT_BOXES = (
     RIGHT_ROWS_TARGET,
 )
 
-EXACT_COPY = (
-    "Object type / material",
-    "object",
-    "material",
-    "Search",
-    "Search",
-    "Match",
-    "Any",
-    "All",
-    "selected filters.",
+TITLE_TEXT = "Object type / material"
+OBJECT_TAB_TEXT = "object"
+MATERIAL_TAB_TEXT = "material"
+SEARCH_TEXT = "Search"
+MATCH_TEXT = "Match"
+ANY_TEXT = "Any"
+ALL_TEXT = "All"
+TRAILING_TEXT = "selected filters."
+LEFT_ENTRIES = (
     "Metal (5,001)",
     "Paper (3,652)",
     "Glass (3,182)",
     "Drawings (2,606)",
     "Graphite (2,443)",
+)
+RIGHT_ENTRIES = (
     "Paintings (2,395)",
     "Vessels (2,074)",
     "Watercolors (1,962)",
     "Wood (1,899)",
     "Dishes (1,837)",
+)
+EXACT_COPY = (
+    TITLE_TEXT,
+    OBJECT_TAB_TEXT,
+    MATERIAL_TAB_TEXT,
+    SEARCH_TEXT,
+    SEARCH_TEXT,
+    MATCH_TEXT,
+    ANY_TEXT,
+    ALL_TEXT,
+    TRAILING_TEXT,
+    *LEFT_ENTRIES,
+    *RIGHT_ENTRIES,
 )
 
 
@@ -220,7 +234,7 @@ def replace_title(
 ) -> None:
     restore_title_background(output, baseline, declared)
     glyph = binary_text_mask(
-        "Object type / material", TITLE_FONT, 12
+        TITLE_TEXT, TITLE_FONT, 12
     )
     xy = (20, 6)
     highlight_xy = (xy[0] - 1, xy[1] - 1)
@@ -241,30 +255,27 @@ def assemble_native(baseline: Image.Image) -> tuple[Image.Image, Image.Image]:
 
     replace_title(output, baseline, declared)
     rules = (
-        TextRule(OBJECT_TAB, "object", (10, 30), TAB_ON_INK, WHITE,
+        TextRule(OBJECT_TAB, OBJECT_TAB_TEXT, (10, 30), TAB_ON_INK, WHITE,
                  (TAB_ON_INK,), vertical=True),
-        TextRule(MATERIAL_TAB, "material", (10, 76), TAB_OFF_INK,
+        TextRule(MATERIAL_TAB, MATERIAL_TAB_TEXT, (10, 76), TAB_OFF_INK,
                  TAB_OFF_FILL, (TAB_OFF_INK,), vertical=True),
-        TextRule(SEARCH_LABEL, "Search", (31, 41), LABEL_INK, WHITE,
+        TextRule(SEARCH_LABEL, SEARCH_TEXT, (31, 41), LABEL_INK, WHITE,
                  (LABEL_INK,)),
-        TextRule(SEARCH_PLACEHOLDER_TARGET, "Search", (81, 41), PLACEHOLDER,
+        TextRule(SEARCH_PLACEHOLDER_TARGET, SEARCH_TEXT, (81, 41), PLACEHOLDER,
                  FIELD_FILL, (PLACEHOLDER,)),
-        TextRule(MATCH_LABEL, "Match", (31, 68), LABEL_INK, WHITE,
+        TextRule(MATCH_LABEL, MATCH_TEXT, (31, 68), LABEL_INK, WHITE,
                  (LABEL_INK,)),
-        TextRule(ANY_TARGET, "Any", (90, 68), BODY_INK, WHITE, (BODY_INK,)),
-        TextRule(ALL_TARGET, "All", (142, 68), BODY_INK, WHITE, (BODY_INK,)),
-        TextRule(TRAILING_TARGET, "selected filters.", (167, 68), BODY_INK,
+        TextRule(ANY_TARGET, ANY_TEXT, (90, 68), BODY_INK, WHITE, (BODY_INK,)),
+        TextRule(ALL_TARGET, ALL_TEXT, (142, 68), BODY_INK, WHITE, (BODY_INK,)),
+        TextRule(TRAILING_TARGET, TRAILING_TEXT, (167, 68), BODY_INK,
                  WHITE, (BODY_INK,)),
     )
     for rule in rules:
         clear_and_draw_rule(output, baseline, declared, rule)
 
     columns = (
-        (LEFT_ROWS, ("Metal (5,001)", "Paper (3,652)", "Glass (3,182)",
-                     "Drawings (2,606)", "Graphite (2,443)")),
-        (RIGHT_ROWS_TARGET,
-         ("Paintings (2,395)", "Vessels (2,074)",
-          "Watercolors (1,962)", "Wood (1,899)", "Dishes (1,837)")),
+        (LEFT_ROWS, LEFT_ENTRIES),
+        (RIGHT_ROWS_TARGET, RIGHT_ENTRIES),
     )
     for box, entries in columns:
         old_mask = exact_ink_mask(baseline, box, (BODY_INK, COUNT_INK))
