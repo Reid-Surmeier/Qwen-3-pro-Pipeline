@@ -143,18 +143,25 @@ record("inventory.items", "DoubleActivate", "OpenInventoryItem",
 const logBeforeRace = (await inventory()).interaction_log.length;
 await click(69, 761);
 await page.keyboard.down("Control");
-await click(177, 761);
-await page.keyboard.up("Control");
+const modifierRacePoint = point(177, 761);
+await page.mouse.move(modifierRacePoint.x, modifierRacePoint.y);
+await page.mouse.down();
 await page.waitForTimeout(260);
+const heldRaceLog = (await inventory()).interaction_log.slice(logBeforeRace)
+  .filter((entry) => ["Activate", "ModifierActivate"].includes(entry.gesture));
+await page.mouse.up();
+await page.keyboard.up("Control");
+await page.waitForTimeout(30);
 const raceState = await control("inventory.items");
 const raceLog = (await inventory()).interaction_log.slice(logBeforeRace)
   .filter((entry) => ["Activate", "ModifierActivate"].includes(entry.gesture));
 check("pending-single-cancelled-by-modifier",
   raceState.last_gesture === "ModifierActivate"
     && raceState.selected_items.includes("r0c2")
+    && heldRaceLog.length === 0
     && raceLog.filter((entry) => entry.gesture === "ModifierActivate").length === 1
     && raceLog.every((entry) => entry.gesture !== "Activate"),
-  { raceState, raceLog });
+  { heldRaceLog, raceState, raceLog });
 await page.keyboard.down("Control");
 await click(177, 761);
 await page.keyboard.up("Control");

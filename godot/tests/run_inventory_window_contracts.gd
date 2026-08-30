@@ -80,17 +80,22 @@ func _pending_single_cancelled_by_modifier() -> void:
 	var third := Vector2(177, 761)
 	var log_before := window.runtime.interaction_log.size()
 	await _click(first)
-	await _click(third, true)
+	await _press(third, true)
 	await create_timer(0.25).timeout
+	var during_hold: Array = window.runtime.interaction_log.slice(log_before).filter(func(entry):
+		return entry.get("control_id") == "inventory.items" \
+			and entry.get("gesture") in ["Activate", "ModifierActivate"])
+	await _release(third, true)
 	var state: Dictionary = window.qa_state().controls["inventory.items"]
 	var semantic: Array = window.runtime.interaction_log.slice(log_before).filter(func(entry):
 		return entry.get("control_id") == "inventory.items" \
 			and entry.get("gesture") in ["Activate", "ModifierActivate"])
 	_check("pending-single-cancelled-by-modifier", state.last_gesture == "ModifierActivate"
 		and state.selected_items == ["r0c2"]
+		and during_hold.is_empty()
 		and semantic.filter(func(entry): return entry.get("gesture") == "ModifierActivate").size() == 1
 		and semantic.filter(func(entry): return entry.get("gesture") == "Activate").is_empty(),
-		str([state, semantic]))
+		str([state, during_hold, semantic]))
 	await _click(third, true)
 
 

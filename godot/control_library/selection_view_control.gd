@@ -249,8 +249,7 @@ func _item_input(event: InputEvent, item: String) -> void:
 			_drag_version = int(runtime.qa_state().controls[spec.id].get("item_version", 0))
 			_double_pending = event.button_index == MOUSE_BUTTON_LEFT \
 				and event.double_click and "DoubleActivate" in spec.gestures
-			if _double_pending:
-				_single_generation += 1
+			_single_generation += 1
 			runtime.set_interaction_phase(spec.id, "pressed", item)
 			_refresh()
 			changed.emit(spec.id, {"ok": true, "phase": "pressed", "surface": item})
