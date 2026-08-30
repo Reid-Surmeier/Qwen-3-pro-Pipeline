@@ -9,9 +9,10 @@ Reference Screen: `artifacts/references/museum-filter-retro-skin-v001/style-ro-o
 **Four full-redraw Render Passes failed to reach the required fidelity, so the
 work moved to Assembly. A final two-output Qwen edit pass helped diagnose the
 remaining defects, but Assembly v002 was rejected because rectangular masks
-imported its backgrounds. Assembly v003 uses no generated raster: it keeps
-Assembly v001's backgrounds and renders exact copy through native-scale,
-shape-aware masks with repository-pinned pixel fonts.**
+imported its backgrounds. Assembly v003 was also rejected because it changed
+the complete English layer and still did not integrate three marked regions.
+Assembly v004 returns to v001 and changes only those regions with native-scale
+foreground and repair masks.**
 
 ## What each pass got wrong
 
@@ -47,6 +48,53 @@ channel error outside the declaration. Every individual edit box is 36.5%
 filled or less, rather than being a solid background patch. The right header
 controls are byte-identical to Assembly v001, and full/native visual readback
 found all 19 Exact Copy entries present.
+
+The owner rejected that broader correction: v001's English was the stronger
+source, while the left bead, right bead/close cluster, and inactive material tab
+still showed rectangular donor backgrounds or an unintegrated silhouette.
+
+## Assembly v004 three-region correction
+
+Assembly v004 starts from Assembly v001, not v003. It leaves the complete
+English layer, active object tab, body, controls, layout, frame, crop, and every
+other unmarked pixel byte-identical to v001. No Qwen or other generation ran.
+
+The two 13×13 bead regions and the 19×19 close-button region first recover the
+same resampled title glass used to build v001, then reapply only elliptical or
+button-shaped foreground pixels from the original sprites. This removes the
+captured square blue/cyan backgrounds, including the cyan strip at the far
+right. The inactive material tab first recovers the correctly phased v001 body
+stripes, adds a source-like stepped silhouette, and finally restores the exact
+v001 `material` ink pixels.
+
+The declared v004 edit mask is the exact baseline-to-candidate difference: 404
+native pixels, all within the three marked regions. The actual change and the
+declared mask are byte-identical; zero pixels change outside it. The full-size
+candidate and enlarged before/after crops are recorded in
+`artifacts/runs/museum-filter-assembly-v004/contact-sheet.png`. This is machine
+verification of scope and integration, not the owner's subjective approval.
+
+The owner accepted the direction but rejected v004 as final because the tight
+13px masks visibly clipped both beads, the material-tab stair profile ran in
+the opposite direction, and the `material` copy sat against the tab edge.
+
+## Assembly v005 bead and tab geometry correction
+
+Assembly v005 again starts from v001. Each bead is recut from a padded 64×64
+region in the full-resolution Reference Screen and downsampled into a 15×15
+native asset whose alpha mask has a guaranteed empty pixel on every side. This
+keeps the soft circular edge complete without restoring a square donor patch.
+The close button keeps v004's foreground-only correction.
+
+The inactive tab grows from 16 to 20 native pixels wide. Its source-like stairs
+now run from wide top and bottom tips to a narrower middle, reversing v004's
+profile. The exact v001 `material` bitmap is moved two native pixels inward;
+its rightmost glyph pixel has three clear pixels before the middle border.
+
+The v005 declared mask exactly equals the actual baseline-to-candidate
+difference: 696 native pixels, all inside the same three semantic regions, with
+zero changes outside. The complete English/body/control layer outside the
+marked material-tab copy remains byte-identical to v001. No generation ran.
 
 ## Why the first four passes did not fix it
 

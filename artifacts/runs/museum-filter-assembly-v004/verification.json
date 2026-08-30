@@ -1,0 +1,33 @@
+{
+  "issue": 118,
+  "assembly": "v004",
+  "baseline": "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png",
+  "baseline_sha256": "f7f2f47ebd96ed2f14cc5b06a58e215bac69a48f561c5af4dd5f01281ef49e07",
+  "candidate": "artifacts/runs/museum-filter-assembly-v004/assembly-v004-native.png",
+  "candidate_sha256": "9ad67ac3c0bb1a627b8fba54156332c543cb22cfbbf518ac54db92c7e3d30e7c",
+  "edit_boxes": [
+    [
+      6,
+      6,
+      19,
+      19
+    ],
+    [
+      270,
+      3,
+      307,
+      22
+    ],
+    [
+      3,
+      69,
+      19,
+      124
+    ]
+  ],
+  "changed_pixels": 404,
+  "declared_mask_pixels": 404,
+  "changed_pixels_outside_declared_mask": 0,
+  "unmarked_pixels_identical_to_v001": true,
+  "generation_requests": 0
+}

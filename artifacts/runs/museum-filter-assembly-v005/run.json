@@ -1,0 +1,23 @@
+{
+  "issue": 118,
+  "method": "deterministic native-pixel Assembly from v001",
+  "corrections": [
+    "padded full-resolution source beads",
+    "reversed inactive-tab stair direction",
+    "wider inactive tab with material label moved inward for clearance"
+  ],
+  "frozen": "all pixels outside the declared three-region mask",
+  "provider": null,
+  "model": null,
+  "requested_images": 0,
+  "completed_images": 0,
+  "cost_usd": 0,
+  "outputs": {
+    "native": "artifacts/runs/museum-filter-assembly-v005/assembly-v005-native.png",
+    "review": "artifacts/runs/museum-filter-assembly-v005/assembly-v005.png",
+    "mask_native": "artifacts/runs/museum-filter-assembly-v005/edit-mask-native.png",
+    "mask": "artifacts/runs/museum-filter-assembly-v005/edit-mask.png",
+    "contact_sheet": "artifacts/runs/museum-filter-assembly-v005/contact-sheet.png",
+    "verification": "artifacts/runs/museum-filter-assembly-v005/verification.json"
+  }
+}
