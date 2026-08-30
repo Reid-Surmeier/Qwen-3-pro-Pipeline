@@ -33,7 +33,9 @@ page.on("pageerror", (error) => consoleEntries.push(`[pageerror] ${String(error)
 await page.goto(URL, { waitUntil: "networkidle", timeout: 90000 });
 await page.waitForFunction(() => window.godotQaState?.windows?.skill_tree,
   undefined, { timeout: 90000 });
-await page.waitForTimeout(2000);
+// QA state is available before the Web renderer has uploaded every texture.
+// Freeze evidence only after the same settling interval as the Options drive.
+await page.waitForTimeout(8000);
 
 const facts = await page.evaluate(() => {
   const canvas = document.querySelector("canvas");
@@ -85,6 +87,12 @@ const click = async (x, y, button = "left") => {
   await page.waitForTimeout(20);
 };
 
+const manifest = JSON.parse(readFileSync(resolve(ROOT,
+  "godot/data/image-79-control-spec.json"), "utf8"));
+const windowSpec = manifest.windows.find((entry) => entry.id === "skill_tree");
+const selectionSpec = windowSpec.controls.find((entry) => entry.type === "SelectionView");
+const stepperSpecs = windowSpec.controls.filter((entry) => entry.type === "Stepper");
+
 const idle = await shot("00-idle");
 const invariantBefore = await invariantShot("00-invariant-before");
 const initial = await skillTree();
@@ -115,12 +123,30 @@ record("skill_tree.skills", "ContextActivate", "OpenSkillDetail",
     context_gesture: detailed.last_gesture === "ContextActivate",
     action_routed: detailed.last_action === "OpenSkillDetail",
     detail_visible: detailed.detail_visible && detailedWindow.detail_item === "r1c1",
+    detail_manifest_backed: detailed.detail_text === selectionSpec.value.details.r1c1,
   }, { before: selectedFrame, after: detailedFrame });
 
-const manifest = JSON.parse(readFileSync(resolve(ROOT,
-  "godot/data/image-79-control-spec.json"), "utf8"));
-const windowSpec = manifest.windows.find((entry) => entry.id === "skill_tree");
-const stepperSpecs = windowSpec.controls.filter((entry) => entry.type === "Stepper");
+// Dismiss the detail through the reversible view Action so the pending-frame
+// corpus exposes every Stepper region for blind visual review.
+await click(1048, 15);
+await click(1048, 15);
+await page.waitForTimeout(2000);
+check("context-detail-dismissed-before-stepper-visuals",
+  (await control("skill_tree.skills")).detail_visible === false,
+  await control("skill_tree.skills"));
+
+const boundSpec = stepperSpecs.find((entry) => entry.id === "skill_tree.stepper.r1c3");
+const boundBefore = await control(boundSpec.id);
+await click(boundBefore.geometry.x + boundBefore.geometry.width - 4,
+  boundBefore.geometry.y + boundBefore.geometry.height / 2);
+const boundAfter = await control(boundSpec.id);
+check("stepper-bound-rejected-without-transaction",
+  boundAfter.last_result.accepted === false
+    && boundAfter.last_result.error?.code === "TransactionRejectedError"
+    && boundAfter.target === boundBefore.target
+    && (await skillTree()).window.pending === false,
+  boundAfter);
+
 for (const [index, spec] of stepperSpecs.entries()) {
   const before = await control(spec.id);
   const beforeFrame = await shot(`03-${String(index).padStart(2, "0")}-${spec.id}-before`);
@@ -187,6 +213,8 @@ const list = await skillTree();
 record("skill_tree.view", "Activate", "ToggleSkillView",
   "View changes the reversible tree/list presentation", JSON.stringify(list.window), {
     list_mode: list.window.view_mode === "list" && list.controls["skill_tree.skills"].list_mode,
+    committed_values_live: list.controls["skill_tree.skills"].list_values.r2c4
+      === committed.controls[commitId].text,
   }, { before: cancelledFrame, after: await shot("06-list-view") });
 await click(1048, 15);
 const tree = await skillTree();
