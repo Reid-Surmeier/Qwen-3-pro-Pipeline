@@ -1,6 +1,6 @@
 # Issue 125 blind artifact contract
 
-Review candidate `36d746224ac15040d16cda4f30507fd644bbe133` without relying on the builder narrative.
+Review candidate `e395a3413a4d6bfc05582eaf17340662cc6420c2` without relying on the builder narrative.
 
 ## Visual authority
 

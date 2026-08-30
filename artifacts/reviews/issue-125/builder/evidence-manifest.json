@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 125,
-  "candidate_commit": "36d746224ac15040d16cda4f30507fd644bbe133",
+  "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
   "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
   "files": [
     {"path": "00-idle.png", "sha256": "8ae817197ef6e4faa4dc3313d4c52893ee6a165df1be77b0f570ef3817be93e4"},
@@ -11,8 +11,8 @@
     {"path": "04-skin-open.png", "sha256": "f71176e24e9cc3ac208f2e4e53aadad9b141a623b80751b6df17ed69dbbde622"},
     {"path": "05-minimized.png", "sha256": "443dfc1bc1c839fac96a4de6a62f094db912e776ab7ac15f89642111532cb103"},
     {"path": "06-restored.png", "sha256": "fbf3a756ecb8ced50df6a4261f2ac2a9741ade50cc6a494853122c46efc423f2"},
-    {"path": "browser-report.json", "sha256": "7713e82c2dcfe2e1bb8c7a1c1173a21873188e56bfcfeac04b49e58bb2ca53ce"},
-    {"path": "play-log.json", "sha256": "59a62ec0b38e8f6ce5fb94c9ba397dc6c707158f9e38b374cdced27fc974a2ad"},
+    {"path": "browser-report.json", "sha256": "a265a8b67d0291e7c4200a9105aea59bd3817d262cbbaa7c4ba29a689eb58e4b"},
+    {"path": "play-log.json", "sha256": "e25c438c0e1cd61f6bf4f173369c41a65b16624d03b2091c799fb5a2b9d6ce60"},
     {"path": "verdict.json", "sha256": "94c255f3e85f6d0c51a7f8845344ddf1bbd2986bb19df4c066eb2bc0872aa91c"}
   ],
   "play_log_frame_corpus": {

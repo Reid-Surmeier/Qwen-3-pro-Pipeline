@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 125,
   "pull_request": 82,
-  "candidate_commit": "36d746224ac15040d16cda4f30507fd644bbe133",
+  "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
   "acceptance_contract": "docs/reviews/issue-125-contract.md",
   "references": [
     {
