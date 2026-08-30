@@ -1,0 +1,385 @@
+{
+ "source": "GungHo Online Entertainment — ラグナロクオンライン 公式プレイマニュアル (各ウィンドウについて; 設定方法)",
+ "pages": [
+  "https://ragnarokonline.gungho.jp/playmanual/operation/window.html",
+  "https://ragnarokonline.gungho.jp/playmanual/novice/config.html"
+ ],
+ "retrieved": "2026-08-30",
+ "licence": "© Gravity Co., Ltd. & Lee MyoungJin (studio DTDS); © GungHo Online Entertainment, Inc. — private study reference only, not redistributed",
+ "skin": "<Basic Skin> — the same chrome family as Reference Screen image 79 (title bar, ⊖/⊗ buttons, slider arrows + round thumb, checkbox, radio, dropdown, tabs)",
+ "note": "Modern client layouts; windows differ in content from image 79 but the control artwork is the same skin at true 1:1 client pixels",
+ "assets": [
+  {
+   "file": "config01.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config01.png",
+   "size": [
+    566,
+    555
+   ],
+   "mode": "RGB",
+   "bytes": 109465,
+   "sha256": "1407c5aed22595167eba310d25dd992bc6913c05e154c3ec081440d612f04f97"
+  },
+  {
+   "file": "config02.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config02.png",
+   "size": [
+    400,
+    350
+   ],
+   "mode": "RGB",
+   "bytes": 13502,
+   "sha256": "b4a4ae5002c55f357f6c1f75792411aa588e0ea34af840cbf0e5624915702a42"
+  },
+  {
+   "file": "config03.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config03.png",
+   "size": [
+    399,
+    350
+   ],
+   "mode": "RGBA",
+   "bytes": 11300,
+   "sha256": "cc1e3fb3c900bf83b963597c6f304061e7de9d9380527fbfe5c3cb52c5a5d350"
+  },
+  {
+   "file": "config04.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config04.png",
+   "size": [
+    435,
+    432
+   ],
+   "mode": "RGB",
+   "bytes": 12447,
+   "sha256": "c5d5fe41920da00f80ca54fa5d8cfdbbd607ff442d75d2cb33f4c914c456d603"
+  },
+  {
+   "file": "config05.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config05.png",
+   "size": [
+    565,
+    555
+   ],
+   "mode": "RGB",
+   "bytes": 59810,
+   "sha256": "fe67e037ac734b62bb19536457e39cf1e96164fb98acc99b038d69bf5e314dd6"
+  },
+  {
+   "file": "config051.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config051.png",
+   "size": [
+    400,
+    350
+   ],
+   "mode": "RGBA",
+   "bytes": 15128,
+   "sha256": "f843abe28c4533c7c83f721828d897c72a3123e548c0ace8f12a289cee88201f"
+  },
+  {
+   "file": "config06.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config06.png",
+   "size": [
+    400,
+    350
+   ],
+   "mode": "RGBA",
+   "bytes": 21159,
+   "sha256": "207346fdc6a972ea423067b43be9d4d597614689ed894e0ac3702e12de4a50d1"
+  },
+  {
+   "file": "config07.png",
+   "title": "ゲーム設定 / 設定方法 page image",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/novice/config/config07.png",
+   "size": [
+    397,
+    350
+   ],
+   "mode": "RGBA",
+   "bytes": 15508,
+   "sha256": "412a3f8f4270032e9510e7882b03e95d507c21ba8f151ce7ff5f152a388fe383"
+  },
+  {
+   "file": "window01-1.png",
+   "title": "基本ウィンドウ (icon tray)",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window01-1.png",
+   "size": [
+    219,
+    158
+   ],
+   "mode": "RGBA",
+   "bytes": 4235,
+   "sha256": "1d2c8e60b89cec2628e90c91b81cf2f88fd825f349b57c40ce99d8c24f3bb53b"
+  },
+  {
+   "file": "window01.png",
+   "title": "基本ウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window01.png",
+   "size": [
+    220,
+    368
+   ],
+   "mode": "RGB",
+   "bytes": 89510,
+   "sha256": "27afa81ab9f73b58d8cc22c9e44fcc09a926d1838b62de001585af078b88d944"
+  },
+  {
+   "file": "window02.jpg",
+   "title": "ステータスウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window02.jpg",
+   "size": [
+    279,
+    241
+   ],
+   "mode": "RGB",
+   "bytes": 23881,
+   "sha256": "249f55b62e8916b5c8e823255b68800190aff8230f6fe8be0815261c7b907924"
+  },
+  {
+   "file": "window03.png",
+   "title": "スキルウィンドウ (tree)",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window03.png",
+   "size": [
+    560,
+    400
+   ],
+   "mode": "RGBA",
+   "bytes": 24885,
+   "sha256": "d50fd791e43296478f8929482ae8ef555e4c7b2c47164c3b76da5359a025f838"
+  },
+  {
+   "file": "window03_2.png",
+   "title": "スキルウィンドウ (その他 tab)",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window03_2.png",
+   "size": [
+    560,
+    400
+   ],
+   "mode": "RGBA",
+   "bytes": 18998,
+   "sha256": "22520bcac69050c03dabce90c01ac829a0b2d4fd74231f1628505766d04801cf"
+  },
+  {
+   "file": "window04.png",
+   "title": "装備ウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window04.png",
+   "size": [
+    559,
+    342
+   ],
+   "mode": "RGB",
+   "bytes": 42562,
+   "sha256": "650f4fc984a085f59e8dee84707d3c730c2a50314adb95d88f9366bfaa41267f"
+  },
+  {
+   "file": "window05.png",
+   "title": "アイテムウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window05.png",
+   "size": [
+    279,
+    170
+   ],
+   "mode": "RGBA",
+   "bytes": 6609,
+   "sha256": "46636c4dbc9c1045a105b20940976f97ccdffe5157ce1586b19e9cecc5c6b70e"
+  },
+  {
+   "file": "window05_02.jpg",
+   "title": "アイテム詳細",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window05_02.jpg",
+   "size": [
+    200,
+    235
+   ],
+   "mode": "RGB",
+   "bytes": 17024,
+   "sha256": "52ec3b3702b2f2ff3ebbb3e4c2e87cdaea1c77da9fe5596b79b81abacba112d4"
+  },
+  {
+   "file": "window06.png",
+   "title": "ショートカットウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window06.png",
+   "size": [
+    359,
+    184
+   ],
+   "mode": "RGBA",
+   "bytes": 17025,
+   "sha256": "0a506d2fba338529c2e14c534c2fa623f529a65247e9dda5c2cea08b3bdee5fb"
+  },
+  {
+   "file": "window07.gif",
+   "title": "ミニマップ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window07.gif",
+   "size": [
+    128,
+    140
+   ],
+   "mode": "P",
+   "bytes": 19226,
+   "sha256": "29c3d38fac6673f68278df16fc861a03e373d659f3f2e6310257f4fbd3a3107b"
+  },
+  {
+   "file": "window07_2.gif",
+   "title": "ミニマップ拡大",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window07_2.gif",
+   "size": [
+    516,
+    559
+   ],
+   "mode": "P",
+   "bytes": 200527,
+   "sha256": "b1c1aa9d9aadaa700684461668231406b17e70e85869cd0c6d5cd0520378eaef"
+  },
+  {
+   "file": "window10.jpg",
+   "title": "会話ウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window10.jpg",
+   "size": [
+    530,
+    120
+   ],
+   "mode": "RGB",
+   "bytes": 40090,
+   "sha256": "5681bfea9eb56eff5957e2699eef6abcabcde82399523b21cf70489f3e9cc9eb"
+  },
+  {
+   "file": "window11.png",
+   "title": "交換ウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window11.png",
+   "size": [
+    500,
+    337
+   ],
+   "mode": "RGBA",
+   "bytes": 31770,
+   "sha256": "18f3f3d895de360f37914a107c3a0b8094e04890b11b5148e4c98c2b95af3bdf"
+  },
+  {
+   "file": "window12.png",
+   "title": "パーティーウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window12.png",
+   "size": [
+    273,
+    296
+   ],
+   "mode": "RGB",
+   "bytes": 9056,
+   "sha256": "6048d0020e7eec10295b12861d6fd6f98c28161de058d9c508acc0ae177f609f"
+  },
+  {
+   "file": "window12_1.png",
+   "title": "パーティー (no party)",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window12_1.png",
+   "size": [
+    273,
+    296
+   ],
+   "mode": "RGBA",
+   "bytes": 7647,
+   "sha256": "b462abf127712d30c013b7e5935dc0e1c4c0045eb5afcf48a63b920bd32843e9"
+  },
+  {
+   "file": "window12_2.png",
+   "title": "友達ウィンドウ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window12_2.png",
+   "size": [
+    273,
+    311
+   ],
+   "mode": "RGB",
+   "bytes": 19586,
+   "sha256": "40d2b3d94ff6e07b414c444fb4b3a3c37083dd6f36f64611c38310c9ab5ae275"
+  },
+  {
+   "file": "window13.gif",
+   "title": "パーティー設定",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window13.gif",
+   "size": [
+    280,
+    245
+   ],
+   "mode": "P",
+   "bytes": 5087,
+   "sha256": "c1db6fdb56d1f66d2b8e6ef0ca211ae0192484b83974d6b77425ba500b853209"
+  },
+  {
+   "file": "window15.gif",
+   "title": "チャットルーム作成",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window15.gif",
+   "size": [
+    280,
+    120
+   ],
+   "mode": "P",
+   "bytes": 5045,
+   "sha256": "770d1513f9eb576a63700fdbd93776545dffa859df30d3af3c120ab2832c3cf3"
+  },
+  {
+   "file": "window16.png",
+   "title": "ゲームオプション (menu)",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window16.png",
+   "size": [
+    280,
+    139
+   ],
+   "mode": "RGB",
+   "bytes": 5212,
+   "sha256": "e23c677b34ab663c1c4bf6fc76d576bd7aafe0a15b143a1ffba05df88ff83ed1"
+  },
+  {
+   "file": "window17_1.gif",
+   "title": "ギルド情報タブ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window17_1.gif",
+   "size": [
+    402,
+    319
+   ],
+   "mode": "P",
+   "bytes": 12338,
+   "sha256": "753fc3c28f23e91c87b24d39ae4f33e477ce9b10dc6500de19575b416f6a45eb"
+  },
+  {
+   "file": "window17_2.gif",
+   "title": "ギルドメンバータブ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window17_2.gif",
+   "size": [
+    400,
+    317
+   ],
+   "mode": "P",
+   "bytes": 17595,
+   "sha256": "80eae57bd9f24185991f7fa91e466b0f51bb7a936687764fb69d6d632cfcc21e"
+  },
+  {
+   "file": "window17_3.gif",
+   "title": "職位設定タブ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window17_3.gif",
+   "size": [
+    400,
+    317
+   ],
+   "mode": "P",
+   "bytes": 9695,
+   "sha256": "3896d38c891f13339f058a5aacd8c3a80b699dc888ee835b663877de955c8ca8"
+  },
+  {
+   "file": "window17_4.gif",
+   "title": "その他のタブ",
+   "url": "https://ragnarokonline.gungho.jp/playmanual/images/operation/window17_4.gif",
+   "size": [
+    400,
+    317
+   ],
+   "mode": "P",
+   "bytes": 9076,
+   "sha256": "8cbe869a674280b9195efac756514df08c6cc9bfc7601d5b65e3bccd8d55ce29"
+  }
+ ]
+}
