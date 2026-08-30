@@ -391,6 +391,84 @@ def _segment(frames: list[Image.Image], span: tuple[float, float]) -> list[Image
     return frames[a:b] or frames[a : a + 1] or frames[-1:]
 
 
+
+def ink_centroid(frame: Image.Image, matte: tuple[int, int, int]) -> tuple[float, float] | None:
+    """Centre of mass of everything that is not matte and not the tile's ground."""
+    on = _mask(frame, matte)
+    px = list(frame.convert("RGB").getdata())
+    inside = [p for i, p in enumerate(px) if on[i]]
+    if not inside:
+        return None
+    ground = max(set(inside), key=inside.count)
+    w = frame.width
+    pts = [(i % w, i // w) for i, p in enumerate(px) if on[i] and p != ground]
+    if not pts:
+        return None
+    return (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+
+
+def step_evenness(frames: list[Image.Image], matte: tuple[int, int, int]) -> float:
+    """Spread of per-step travel, relative to its own mean. Lower is steadier.
+
+    A stepped animation is supposed to look stepped; it is not supposed to look
+    lurching. The difference is measurable. Measured on the 2026-08-30 sweeps, the
+    per-frame travel of the moving element was
+
+        0 0 0 0 0 1 26 66 10 13 9 11 6 14 24 98 13 73 32 17 26 40 9 41 0 0 0 ...
+
+    - long stretches where nothing happens, then leaps of a hundred pixels. That is
+    exactly what "jerky" describes, and holding each frame for an equal time cannot fix
+    it, because the unevenness is in the content rather than the timing.
+    """
+    cents = [ink_centroid(f, matte) for f in frames]
+    steps = [
+        ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
+        for a, b in zip(cents, cents[1:])
+        if a and b
+    ]
+    if len(steps) < 2:
+        return 0.0
+    mean = sum(steps) / len(steps)
+    if mean <= 1e-9:
+        return 0.0
+    var = sum((s - mean) ** 2 for s in steps) / len(steps)
+    return (var ** 0.5) / mean
+
+
+def resample_by_travel(
+    frames: list[Image.Image], count: int, matte: tuple[int, int, int]
+) -> list[Image.Image]:
+    """Pick `count` frames spaced evenly along the path the element travels.
+
+    Deduping by time keeps whatever pacing the model produced, and the model paces
+    badly: it dwells, then lunges. Sampling by distance instead puts the same amount of
+    movement between every pair of output frames, which is what a hand-authored sprite
+    cycle does - the frame table exists precisely to make the steps regular.
+
+    This only ever *selects* frames the model drew. Nothing is interpolated, blended or
+    invented.
+    """
+    if count >= len(frames) or count < 2:
+        return frames
+    cents = [ink_centroid(f, matte) for f in frames]
+    cum = [0.0]
+    for a, b in zip(cents, cents[1:]):
+        d = (((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5) if (a and b) else 0.0
+        cum.append(cum[-1] + d)
+    total = cum[-1]
+    if total <= 1e-9:
+        return dedupe_frames(frames, count)
+    targets = [total * i / (count - 1) for i in range(count)]
+    picked: list[int] = []
+    j = 0
+    for t in targets:
+        while j < len(cum) - 1 and cum[j] < t:
+            j += 1
+        if not picked or j != picked[-1]:
+            picked.append(j)
+    return [frames[i] for i in picked]
+
+
 def conform_states(
     video: Path,
     reference: Path,
@@ -533,9 +611,8 @@ def conform_states(
     # carry different numbers of poses and different amounts of change, and the result
     # reads as jerky even though every frame is correct. Deduping the take as a whole
     # and holding every pose for the same time is what the era's frame tables do.
-    whole = dedupe_frames(
-        [snap_and_lock(f, palette, grid) for f in raw], cycle_poses
-    )
+    snapped_all = [snap_and_lock(f, palette, grid) for f in raw]
+    whole = resample_by_travel(snapped_all, cycle_poses, matte)
     whole_out = [f.resize((delivery, delivery), Image.NEAREST) for f in whole]
     whole_out[0].save(
         out_dir / "full-cycle.gif",
@@ -550,8 +627,15 @@ def conform_states(
         "states": states,
         "state_set_gif": str(out_dir / "state-set.gif"),
         "full_cycle_gif": str(out_dir / "full-cycle.gif"),
-        "cycle_poses": cycle_poses,
+        "cycle_poses": len(whole),
         "pose_hold_ms": pose_hold_ms,
+        "step_evenness_raw": round(step_evenness(snapped_all, matte), 3),
+        "step_evenness_resampled": round(step_evenness(whole, matte), 3),
+        "step_evenness_note": (
+            "spread of per-step travel over its own mean; lower is steadier. The raw "
+            "figure is the model's own pacing, the resampled figure is what the cycle "
+            "GIF plays. Sampling by distance rather than by time is what closes the gap."
+        ),
         "max_border_leak": max(r["max_border_leak"] for r in states.values())
         if states
         else 0.0,
