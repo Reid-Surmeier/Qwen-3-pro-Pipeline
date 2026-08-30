@@ -2,7 +2,8 @@
   "schema_version": 1,
   "issue": 118,
   "pull_request": 82,
-  "candidate_commit": "90af97002816d0f68af9a48bacedf2650a73d629",
+  "baseline_commit": "b2e4f594f6fb23e0dcc4e2a3395d492585a35c9b",
+  "candidate_commit": "337d6b0693cf68ea071f2b84496e9a700f33a78e",
   "acceptance_contract": "docs/reviews/issue-118-v003-contract.md",
   "references": [
     {
@@ -18,8 +19,16 @@
       "sha256": "3d4f727f83c1bae55de5805b60433f1c3df3c49377e91c8f58d6e368a235c4b8"
     },
     {
-      "path": "artifacts/runs/museum-filter-retro-skin-v005/image-02.png",
-      "sha256": "86d9838fed6cf6c0e7dc528a8c13a5139feb79d0f50706f556585f8d4d36a764"
+      "path": "artifacts/references/museum-filter-retro-skin-v001/style-ro-options-window-flat-rgb.png",
+      "sha256": "da4c642543dff6baaa9f7a4c9925ef829e8bee48747fcf3abe60be8177ab052d"
+    },
+    {
+      "path": "godot/fonts/PixelMplus10-Regular.ttf",
+      "sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7"
+    },
+    {
+      "path": "godot/fonts/PixelMplus12-Regular.ttf",
+      "sha256": "02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12"
     }
   ],
   "candidate": {
