@@ -3,7 +3,7 @@
   "issue": 138,
   "pull_request": 82,
   "baseline_commit": "5eef7690b18148bd99c6f466be497dd227e118bd",
-  "candidate_commit": "f45e975cc79b633a5ad654fc421870e6cc510e57",
+  "candidate_commit": "0db239e74765bfbee9b88853998a21ca3aebfb8d",
   "acceptance_contract": "docs/reviews/issue-138-contract.md",
   "references": [
     {
@@ -25,30 +25,30 @@
   ],
   "candidate": {
     "evidence": [
-      "artifacts/runs/custom-filters-ro-assembly-v002/contact-sheet.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed-native.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open-native.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/permitted-edit-mask.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/actual-difference-mask.png",
-      "artifacts/runs/custom-filters-ro-assembly-v002/verification.json",
-      "artifacts/runs/custom-filters-ro-assembly-v002/run.json"
+      "artifacts/runs/custom-filters-ro-assembly-v003/contact-sheet.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed-native.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open-native.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/native-edit-mask-4x.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/actual-difference-mask-4x.png",
+      "artifacts/runs/custom-filters-ro-assembly-v003/verification.json",
+      "artifacts/runs/custom-filters-ro-assembly-v003/run.json"
     ]
   },
   "evidence_sha256": {
-    "artifacts/runs/custom-filters-ro-assembly-v002/contact-sheet.png": "776748e40bc037bb5816b2a5a198c521dad7ca0b91d00ff2f7250afedf0f5906",
-    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png": "c18db0804ca57dfb6b196d313b10911e5a10a312252e4956be7419d9eef81b02",
-    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed-native.png": "de9082e789b236609b0bc6ad82e495aa281e7e86fe44e3018c185a728ef194ca",
-    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open.png": "cd3263c175c02ccd5ec7be22323dfbcf8c412ca3adedc717f6941ded21c8ca5e",
-    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open-native.png": "9692bc664b708a30bb11d5556a69b819a9a1b35573c023fafc42a831fa8fc866",
-    "artifacts/runs/custom-filters-ro-assembly-v002/permitted-edit-mask.png": "0f079d140d5c5b77bd8f25882243c80eb0b5de4e52e3761c51e202f00db18c44",
-    "artifacts/runs/custom-filters-ro-assembly-v002/actual-difference-mask.png": "950de4e20d1ebf38b193a2123072a93238dad45313c62ac327cdf916a67419b5",
-    "artifacts/runs/custom-filters-ro-assembly-v002/verification.json": "fb0d0eb5a3721fb24e31fe69d5125f0e123e133a54d90037025644906a46e954",
-    "artifacts/runs/custom-filters-ro-assembly-v002/run.json": "9346bc621cad7e0c2c778e94801c565a3f8713255110f4b37daf637b20b0f9fa"
+    "artifacts/runs/custom-filters-ro-assembly-v003/contact-sheet.png": "d337760ebf4a8b67720c69f1ca05e3600226b48ff19a7e03dd1a73f23f673221",
+    "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png": "ff649d6624aca020217657552d8a6fded8628f6f70b70fc68ae2ca39b7ace1a1",
+    "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed-native.png": "2266dfce6f2fc1f511b7db9e3e270bdd933eff72162e8341b29ba0af12b69505",
+    "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open.png": "29eece27c00bcd9afe9285664d6577df3cc1d37b8970f1bdbbcb0dd9e8a986f1",
+    "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open-native.png": "f20f911d3f5f22e3acd46e926c2fb36e0b0f9bd798d2ccb3144990d353e3b32c",
+    "artifacts/runs/custom-filters-ro-assembly-v003/native-edit-mask-4x.png": "e630fd89eb8335a85865ebecc82e57c3e87224345e2e1d61db2b50d9d570b0a3",
+    "artifacts/runs/custom-filters-ro-assembly-v003/actual-difference-mask-4x.png": "8eaf9600ee7a6ddb6510589ec577f14a756616e6af34a95be06b29d252d18ed2",
+    "artifacts/runs/custom-filters-ro-assembly-v003/verification.json": "264f4a0ab6a3151f640f030ad9e7f8c78375e6add5fc056cc3cacb77f1fd9cbf",
+    "artifacts/runs/custom-filters-ro-assembly-v003/run.json": "307c0d535cb3031aa16a8481c1378ea8642b038f610e16917986982521903aec"
   },
   "launch": {
-    "command": "file artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-open.png",
+    "command": "file artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-open.png",
     "clean_state_command": "true"
   }
 }
