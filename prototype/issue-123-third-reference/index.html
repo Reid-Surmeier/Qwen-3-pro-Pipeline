@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Third Reference Screen reuse probe</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101215; --panel:#191d22; --line:#313740; --ink:#f2f4f7; --muted:#aab2bd; --good:#47d18c; --warn:#ffcb66; --bad:#ff7979; --accent:#70a7ff; --scale:1.45; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(circle at 18% 0,#202936 0,#101215 42rem); color:var(--ink); font:14px/1.45 Inter,ui-sans-serif,system-ui,sans-serif; }
+    button { font:inherit; }
+    .page { max-width:1420px; margin:auto; padding:28px; }
+    header { display:flex; gap:24px; align-items:flex-start; justify-content:space-between; margin-bottom:20px; }
+    h1 { margin:0 0 7px; font-size:24px; letter-spacing:-.03em; }
+    .lede { max-width:820px; margin:0; color:var(--muted); }
+    .chips { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
+    .chip { border:1px solid var(--line); border-radius:999px; padding:6px 10px; background:#15191e; white-space:nowrap; }
+    .chip.good { color:var(--good); border-color:#2d7352; }
+    .chip.warn { color:var(--warn); border-color:#705b2d; }
+    .grid { display:grid; grid-template-columns:minmax(720px,1fr) 390px; gap:18px; align-items:start; }
+    .panel { background:rgba(25,29,34,.94); border:1px solid var(--line); border-radius:12px; box-shadow:0 18px 55px #0007; overflow:hidden; }
+    .panel-head { display:flex; align-items:center; justify-content:space-between; padding:12px 15px; border-bottom:1px solid var(--line); background:#20252b; }
+    .panel-head strong { font-size:13px; letter-spacing:.02em; }
+    .panel-body { padding:16px; }
+    .stage-frame { position:relative; height:620px; overflow:hidden; border-radius:7px; border:1px solid #454b54; background:#29754f; background-image:linear-gradient(45deg,#ffffff0d 25%,transparent 25%,transparent 75%,#ffffff0d 75%),linear-gradient(45deg,#ffffff0d 25%,transparent 25%,transparent 75%,#ffffff0d 75%); background-position:0 0,12px 12px; background-size:24px 24px; }
+    .window-host { position:absolute; left:16px; top:16px; width:calc(474px * var(--scale)); height:calc(403px * var(--scale)); }
+    .pixel-shell { position:absolute; left:0; top:0; width:474px; height:403px; transform:scale(var(--scale)); transform-origin:0 0; image-rendering:pixelated; user-select:none; }
+    .pixel-shell.is-minimized { height:21px; overflow:hidden; }
+    .pixel-shell.is-closed { display:none; }
+    .reference { position:absolute; inset:0; width:474px; height:403px; pointer-events:none; }
+    .hit { position:absolute; border:0; padding:0; margin:0; background:transparent; color:transparent; cursor:pointer; outline:none; }
+    .hit:hover { box-shadow:inset 0 0 0 1px #fff9; background:#8ab7ff24; }
+    .hit:active,.hit.is-active { box-shadow:inset 1px 1px 0 #111,inset -1px -1px 0 #fff; background:#0002; }
+    .hit[data-gesture="drag"] { cursor:move; }
+    .visual { position:absolute; pointer-events:none; font:11px/1 "MS Sans Serif",Tahoma,sans-serif; color:#000; }
+    .zoom-copy { left:134px; top:51px; width:42px; height:13px; display:grid; place-items:center; background:#c0c0c0; }
+    .age-copy { left:193px; top:354px; width:26px; height:15px; display:grid; place-items:center; background:#fff; }
+    .list-copy { left:6px; top:256px; width:138px; height:117px; background:#fff; overflow:hidden; border-right:1px solid #808080; }
+    .list-row { height:16px; padding-left:20px; position:relative; white-space:nowrap; }
+    .list-row::before { content:"⚑"; position:absolute; left:2px; color:#00a000; font-size:10px; }
+    .list-row.selected { color:#fff; background:#000080; }
+    .tab-mark { height:18px; padding:2px 5px 0; background:#c0c0c0; border:1px solid; border-color:#fff #404040 #c0c0c0 #fff; text-align:center; }
+    .animate-copy { left:395px; top:354px; width:69px; height:20px; display:grid; place-items:center; background:#c0c0c0; border:2px outset #eee; }
+    .timeline-mark { left:200px; top:275px; width:264px; height:54px; }
+    .timeline-mark::after { content:""; position:absolute; top:0; bottom:0; left:var(--progress,0%); width:2px; background:#e11; }
+    .popup { position:absolute; z-index:80; min-width:104px; padding:2px; color:#000; background:#c0c0c0; border:2px outset #fff; box-shadow:2px 2px 0 #0008; font:11px/1.2 "MS Sans Serif",Tahoma,sans-serif; }
+    .popup button { display:block; width:100%; border:0; padding:3px 18px 3px 8px; background:transparent; color:#000; text-align:left; white-space:nowrap; }
+    .popup button:hover,.popup button:focus { color:#fff; background:#000080; outline:0; }
+    .popup .selected::before { content:"✓ "; }
+    .reopen { position:absolute; left:14px; bottom:14px; display:none; border:1px solid #bfc6cf; border-radius:6px; color:#fff; background:#20252b; padding:7px 11px; }
+    .reopen.show { display:block; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .toolbar button,.scenario button { color:#e9edf2; background:#262c33; border:1px solid #424a54; border-radius:6px; padding:7px 10px; cursor:pointer; }
+    .toolbar button:hover,.scenario button:hover { border-color:#719ee5; }
+    .audit { display:grid; gap:9px; }
+    .audit-row { display:grid; grid-template-columns:1fr auto; gap:12px; padding:10px 11px; border:1px solid var(--line); border-radius:8px; background:#15191e; }
+    .audit-row span { color:var(--muted); }
+    .value.good { color:var(--good); }.value.warn { color:var(--warn); }.value.bad { color:var(--bad); }
+    .state { margin:14px 0; padding:11px; border-radius:8px; border:1px solid var(--line); background:#0f1215; font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; min-height:132px; }
+    .tabs { display:flex; gap:5px; border-bottom:1px solid var(--line); margin:0 -16px 12px; padding:0 16px; }
+    .tabs button { color:var(--muted); background:none; border:0; border-bottom:2px solid transparent; padding:7px 8px; cursor:pointer; }
+    .tabs button.active { color:#fff; border-color:var(--accent); }
+    .scenario { display:none; min-height:128px; }
+    .scenario.active { display:block; }
+    .scenario h3 { font-size:14px; margin:0 0 5px; }.scenario p { color:var(--muted); margin:0 0 10px; }
+    .log { margin:0; max-height:180px; overflow:auto; padding:0; list-style:none; font:11px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .log li { border-top:1px solid #282e35; padding:5px 0; color:#c8cfd8; }
+    .note { color:var(--muted); font-size:12px; margin-top:10px; }
+    @media (max-width:1150px) { .grid{grid-template-columns:1fr}.stage-frame{height:620px} }
+    @media (max-width:760px) { :root{--scale:1.08}.page{padding:14px}.stage-frame{height:470px}.grid{grid-template-columns:minmax(0,1fr)}header{display:block}.chips{justify-content:flex-start;margin-top:12px} }
+  </style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <div>
+      <h1>Third Reference Screen reuse probe</h1>
+      <p class="lede">Question: can a materially different pixel UI be described as assets, State Sets, gestures and Window data without changing the screenshot-to-app engine? Free-play the GolfStudio candidate, then inspect the honest zero-diff verdict.</p>
+    </div>
+    <div class="chips">
+      <span class="chip good">candidate packet: loads</span>
+      <span class="chip good">gesture vocabulary: covered</span>
+      <span class="chip warn">Godot zero-diff: not yet provable</span>
+    </div>
+  </header>
+
+  <section class="grid">
+    <div class="panel">
+      <div class="panel-head"><strong>GolfStudio — 474×403 source-locked candidate</strong><span id="mode-label">normal</span></div>
+      <div class="panel-body">
+        <div class="stage-frame" id="stage-frame">
+          <div class="window-host" id="window-host">
+            <div class="pixel-shell" id="pixel-shell">
+              <img class="reference" src="reference.png" width="474" height="403" alt="GolfStudio Reference Screen">
+              <div id="visual-layer"></div>
+              <div id="hit-layer"></div>
+              <div id="popup-layer"></div>
+            </div>
+          </div>
+          <button class="reopen" id="reopen">Reopen candidate</button>
+        </div>
+        <div class="toolbar">
+          <button id="reset">Reset Reference Screen</button>
+          <button id="run-happy">Run reuse walkthrough</button>
+          <button id="run-reversal">Run reversal walkthrough</button>
+          <button id="run-diff">Check actual Godot seam</button>
+        </div>
+        <p class="note">The screenshot stays the visual authority. Prototype overlays are deliberately crude and exist only to make the manifest state observable.</p>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <div class="panel-head"><strong>Reuse result</strong><span>Issue 123</span></div>
+      <div class="panel-body">
+        <div class="audit">
+          <div class="audit-row"><span>Reference SHA-256</span><b class="value good">76965f55…d3e4</b></div>
+          <div class="audit-row"><span>Shared gesture modules</span><b class="value good">8 / 12 reused</b></div>
+          <div class="audit-row"><span>New gesture type</span><b class="value good">none</b></div>
+          <div class="audit-row"><span>Candidate-only files</span><b class="value good">manifest + asset + data</b></div>
+          <div class="audit-row"><span>Actual Godot engine diff</span><b class="value warn" id="diff-verdict">not measurable yet</b></div>
+        </div>
+
+        <div class="state" id="state"></div>
+
+        <div class="tabs" role="tablist">
+          <button class="active" data-scenario="reuse">Reuse</button>
+          <button data-scenario="edge">Hard edge</button>
+          <button data-scenario="scope">Scope</button>
+        </div>
+        <div class="scenario active" data-scenario-panel="reuse">
+          <h3>Manifest-only happy path</h3>
+          <p>Select a club, change a tab, change zoom, step Age, scroll the list, and drag the title. The same generic dispatcher handles every action.</p>
+          <button data-walk="happy">Play this sequence</button>
+        </div>
+        <div class="scenario" data-scenario-panel="edge">
+          <h3>The claim that must stay honest</h3>
+          <p>The Options prototype does not yet expose this dispatcher: `desktop.gd` preloads `options_window.gd`, and that file constructs every Options control explicitly. Therefore an actual Godot zero-diff comparison has no frozen shared engine baseline.</p>
+          <button data-walk="diff">Show the blocked verdict</button>
+        </div>
+        <div class="scenario" data-scenario-panel="scope">
+          <h3>Unsupported on purpose</h3>
+          <p>The candidate proves Window, Button, Tabs, Range, ScrollView, Dropdown, SelectionView and Stepper. File-system dialogs and the four-frame swing artwork remain outside this smallest tracer; they are semantic adapters/assets, not missing pointer gestures.</p>
+        </div>
+
+        <h3>Play Log</h3>
+        <ol class="log" id="log"></ol>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<script>
+/*
+  One planning prototype for Wayfinder issue 123.
+  The pure engine below knows only manifest operations. Candidate-specific
+  geometry, assets, values, labels and action bindings live in SCREEN_PACKET.
+*/
+const ENGINE_REV = "gesture-dispatcher-v1";
+const SOURCE = Object.freeze({
+  file: "reference.png",
+  size: [474, 403],
+  sha256: "76965f552c2337685de8b73a62df35465462e25b6bcf730ba02ebd49870ed3e4"
+});
+const CLUBS = ["fleabane","clover","Solomon's seal","wild pink","violet","black-eyed Susan","Pink daisy","cornflower","iris","sunflower","yarrow"];
+
+const SCREEN_PACKET = Object.freeze({
+  id: "golfstudio-main",
+  source: SOURCE,
+  initialState: {
+    window:{x:0,y:0,mode:"normal"}, openMenu:null, tool:"select", zoom:128,
+    club:"fleabane", libraryStart:0, age:36, panel:"life-cycle", progress:100,
+    playing:false
+  },
+  stateSets: {
+    Button:["idle","hover","pressed","settled"], Dropdown:["closed","open","row-hover","committed"],
+    SelectionView:["idle","row-hover","selected"], Tabs:["idle","hover","pressed","active"],
+    Stepper:["idle","hover","pressed","clamped"], Range:["idle","hover","pressed","dragging","settled"],
+    ScrollView:["idle","hover","dragging","clamped"], Window:["idle","dragging","minimized","closed"]
+  },
+  modules:["Window","Button","Tabs","Range","ScrollView","Dropdown","SelectionView","Stepper"],
+  controls:[
+    {id:"title",module:"Window",gesture:"drag",rect:[2,2,414,18],binding:{op:"window-move"}},
+    {id:"minimize",module:"Window",gesture:"activate",rect:[418,5,15,14],binding:{op:"set",path:"window.mode",value:"minimized"}},
+    {id:"maximize",module:"Window",gesture:"activate",rect:[435,5,15,14],binding:{op:"cycle",path:"window.mode",values:["normal","maximized"]}},
+    {id:"close",module:"Window",gesture:"activate",rect:[452,5,15,14],binding:{op:"set",path:"window.mode",value:"closed"}},
+    ...[["file",8,22,27],["edit",38,22,27],["club",68,22,32],["layout",102,22,39],["options",144,22,43],["window",190,22,44],["help",237,22,31]].map(([id,x,y,w])=>({id:`menu-${id}`,module:"Dropdown",gesture:"activate",rect:[x,y,w,17],binding:{op:"toggle",path:"openMenu",value:id}})),
+    ...[["select",10],["pan",34],["rotate",58],["zoom",82]].map(([id,x])=>({id:`tool-${id}`,module:"SelectionView",gesture:"activate",rect:[x,46,23,22],binding:{op:"set",path:"tool",value:id}})),
+    {id:"zoom-field",module:"Dropdown",gesture:"activate",rect:[132,48,58,19],binding:{op:"toggle",path:"openMenu",value:"zoom"}},
+    {id:"zoom-200",module:"Dropdown",gesture:"commit",rect:null,binding:{op:"set",path:"zoom",value:200}},
+    {id:"zoom-128",module:"Dropdown",gesture:"commit",rect:null,binding:{op:"set",path:"zoom",value:128}},
+    {id:"scale-fit",module:"Button",gesture:"activate",rect:[197,46,86,22],binding:{op:"set",path:"zoom",value:128}},
+    {id:"library",module:"SelectionView",gesture:"select-row",rect:[6,256,138,117],binding:{op:"select-visible",path:"club",items:CLUBS,startPath:"libraryStart",rowHeight:16}},
+    {id:"library-scroll",module:"ScrollView",gesture:"wheel",rect:[144,256,14,117],binding:{op:"step",path:"libraryStart",delta:1,min:0,max:4}},
+    {id:"age-down",module:"Stepper",gesture:"activate",rect:[220,360,14,10],binding:{op:"step",path:"age",delta:-1,min:1,max:999}},
+    {id:"age-up",module:"Stepper",gesture:"activate",rect:[220,350,14,10],binding:{op:"step",path:"age",delta:1,min:1,max:999}},
+    ...[["life-cycle",176,56],["rotation",234,57],["parameters",292,68],["parts",359,39]].map(([id,x,w])=>({id:`tab-${id}`,module:"Tabs",gesture:"activate",rect:[x,378,w,20],binding:{op:"set",path:"panel",value:id}})),
+    {id:"animate",module:"Button",gesture:"activate",rect:[394,352,72,23],binding:{op:"toggle-boolean",path:"playing"}},
+    {id:"timeline",module:"Range",gesture:"drag",rect:[200,275,264,54],binding:{op:"range-pointer",path:"progress",min:0,max:100}}
+  ],
+  unsupported:["native file chooser adapter","four-frame swing State Set artwork","canvas pan/rotate semantic adapter"]
+});
+
+function clone(value){ return JSON.parse(JSON.stringify(value)); }
+function getAt(object,path){ return path.split(".").reduce((value,key)=>value[key],object); }
+function setAt(object,path,value){ const keys=path.split("."); const copy=clone(object); let target=copy; for(const key of keys.slice(0,-1)) target=target[key]; target[keys.at(-1)]=value; return copy; }
+function clamp(value,min,max){ return Math.max(min,Math.min(max,value)); }
+
+function reducePacket(state, control, input={}) {
+  const b=control.binding; let next=clone(state);
+  if(b.op==="set") next=setAt(next,b.path,b.value);
+  else if(b.op==="toggle") next=setAt(next,b.path,getAt(next,b.path)===b.value?null:b.value);
+  else if(b.op==="toggle-boolean") next=setAt(next,b.path,!getAt(next,b.path));
+  else if(b.op==="cycle") { const values=b.values; next=setAt(next,b.path,values[(values.indexOf(getAt(next,b.path))+1)%values.length]); }
+  else if(b.op==="step") next=setAt(next,b.path,clamp(getAt(next,b.path)+(input.delta??b.delta),b.min,b.max));
+  else if(b.op==="select-visible") { const row=clamp(Math.floor(input.localY/b.rowHeight),0,6); const value=b.items[getAt(next,b.startPath)+row]; if(value) next=setAt(next,b.path,value); }
+  else if(b.op==="range-pointer") next=setAt(next,b.path,Math.round(b.min+clamp(input.ratio,0,1)*(b.max-b.min)));
+  else if(b.op==="window-move") next=setAt(setAt(next,"window.x",Math.round(input.x)),"window.y",Math.round(input.y));
+  return next;
+}
+
+const ui={ host:document.querySelector("#window-host"), shell:document.querySelector("#pixel-shell"), hits:document.querySelector("#hit-layer"), visuals:document.querySelector("#visual-layer"), popups:document.querySelector("#popup-layer"), state:document.querySelector("#state"), log:document.querySelector("#log"), reopen:document.querySelector("#reopen"), mode:document.querySelector("#mode-label") };
+let state=clone(SCREEN_PACKET.initialState); let history=[]; let dragging=null;
+
+function record(control,input={}) {
+  history.unshift({control:control.id,gesture:control.gesture,action:control.binding.op,state:{club:state.club,zoom:state.zoom,age:state.age,panel:state.panel,window:state.window.mode}});
+  history=history.slice(0,18);
+}
+function dispatch(control,input={}) { state=reducePacket(state,control,input); if(control.binding.op!=="window-move"||!input.quiet) record(control,input); render(); }
+
+function makeHit(control){
+  if(!control.rect)return null;
+  const node=document.createElement("button"); node.className="hit"; node.dataset.id=control.id; node.dataset.gesture=control.gesture; node.title=`${control.id} · ${control.module} · ${control.gesture}`;
+  const [x,y,w,h]=control.rect; Object.assign(node.style,{left:`${x}px`,top:`${y}px`,width:`${w}px`,height:`${h}px`});
+  if(control.gesture==="activate") node.addEventListener("click",()=>dispatch(control));
+  if(control.gesture==="select-row") node.addEventListener("click",e=>dispatch(control,{localY:e.offsetY}));
+  if(control.gesture==="wheel") node.addEventListener("wheel",e=>{e.preventDefault();dispatch(control,{delta:e.deltaY>0?1:-1});},{passive:false});
+  if(control.id==="library") node.addEventListener("wheel",e=>{e.preventDefault();dispatch(SCREEN_PACKET.controls.find(c=>c.id==="library-scroll"),{delta:e.deltaY>0?1:-1});},{passive:false});
+  if(control.id==="title") node.addEventListener("pointerdown",e=>{dragging={control,startX:e.clientX,startY:e.clientY,x:state.window.x,y:state.window.y};node.setPointerCapture(e.pointerId)});
+  if(control.id==="timeline") node.addEventListener("pointerdown",e=>{dragging={control};node.setPointerCapture(e.pointerId);dispatch(control,{ratio:e.offsetX/node.clientWidth})});
+  node.addEventListener("pointermove",e=>{
+    if(!dragging||dragging.control!==control)return;
+    if(control.id==="title") dispatch(control,{x:dragging.x+(e.clientX-dragging.startX)/1.45,y:dragging.y+(e.clientY-dragging.startY)/1.45,quiet:true});
+    else dispatch(control,{ratio:e.offsetX/node.clientWidth,quiet:true});
+  });
+  node.addEventListener("pointerup",()=>{ if(dragging?.control===control){record(control);dragging=null;render();} });
+  return node;
+}
+SCREEN_PACKET.controls.forEach(control=>{const hit=makeHit(control);if(hit)ui.hits.append(hit)});
+
+function popupButton(label,onClick,selected=false){ const b=document.createElement("button");b.textContent=label;b.className=selected?"selected":"";b.onclick=onClick;return b; }
+function renderPopup(){
+  ui.popups.replaceChildren(); if(!state.openMenu)return;
+  const popup=document.createElement("div"); popup.className="popup";
+  if(state.openMenu==="zoom"){
+    Object.assign(popup.style,{left:"132px",top:"67px"});
+    [64,100,128,200,256].forEach(value=>popup.append(popupButton(`${value}%`,()=>{state=setAt(state,"zoom",value);state=setAt(state,"openMenu",null);history.unshift({control:"zoom-option",gesture:"commit",action:"set",state:{zoom:value}});render()},state.zoom===value)));
+  } else {
+    const opener=SCREEN_PACKET.controls.find(c=>c.id===`menu-${state.openMenu}`); Object.assign(popup.style,{left:`${opener.rect[0]}px`,top:"39px"});
+    const items={file:["New","Open…","Save","Close"],edit:["Undo","Reset values"],club:CLUBS.slice(0,7),layout:["Toolbar","Club library","Analysis panel"],options:["Reduced motion","Preferences…"],window:["Normal","Minimize","Presentation"],help:["Controls","About"]}[state.openMenu];
+    items.forEach(label=>popup.append(popupButton(label,()=>{history.unshift({control:`menu-${state.openMenu}`,gesture:"commit",action:label,state:{}});state=setAt(state,"openMenu",null);render()})));
+  }
+  ui.popups.append(popup);
+}
+
+function renderVisuals(){
+  ui.visuals.replaceChildren();
+  const zoom=document.createElement("div");zoom.className="visual zoom-copy";zoom.textContent=`${state.zoom}%`;ui.visuals.append(zoom);
+  const age=document.createElement("div");age.className="visual age-copy";age.textContent=state.age;ui.visuals.append(age);
+  const list=document.createElement("div");list.className="visual list-copy";
+  CLUBS.slice(state.libraryStart,state.libraryStart+7).forEach(club=>{const row=document.createElement("div");row.className=`list-row${club===state.club?" selected":""}`;row.textContent=club;list.append(row)});ui.visuals.append(list);
+  const tabs={"life-cycle":[176,56,"Life cycle"],rotation:[234,57,"Rotation"],parameters:[292,68,"Parameters"],parts:[359,39,"Parts"]};
+  const [x,w,label]=tabs[state.panel];const tab=document.createElement("div");tab.className="visual tab-mark";Object.assign(tab.style,{left:`${x}px`,top:"377px",width:`${w}px`});tab.textContent=label;ui.visuals.append(tab);
+  const animate=document.createElement("div");animate.className="visual animate-copy";animate.textContent=state.playing?"Stop":"Animate";ui.visuals.append(animate);
+  const timeline=document.createElement("div");timeline.className="visual timeline-mark";timeline.style.setProperty("--progress",`${state.progress}%`);ui.visuals.append(timeline);
+}
+
+function render(){
+  ui.host.style.left=`${16+state.window.x*1.45}px`; ui.host.style.top=`${16+state.window.y*1.45}px`;
+  ui.shell.classList.toggle("is-minimized",state.window.mode==="minimized");ui.shell.classList.toggle("is-closed",state.window.mode==="closed");
+  ui.reopen.classList.toggle("show",["closed","minimized"].includes(state.window.mode)); ui.mode.textContent=state.window.mode;
+  renderVisuals();renderPopup();
+  ui.state.textContent=`Engine ${ENGINE_REV}\nScreen ${SCREEN_PACKET.id}\nclub: ${state.club}\nzoom: ${state.zoom}%   age: ${state.age}\npanel: ${state.panel}   progress: ${state.progress}\nwindow: ${state.window.mode} @ ${state.window.x},${state.window.y}\nopen surface: ${state.openMenu??"none"}`;
+  ui.log.replaceChildren(...history.map(item=>{const li=document.createElement("li");li.textContent=`${item.gesture} · ${item.control} → ${item.action}`;return li}));
+  document.querySelectorAll(".hit").forEach(hit=>{const id=hit.dataset.id;hit.classList.toggle("is-active",id===`tool-${state.tool}`||id===`tab-${state.panel}`)});
+}
+
+function reset(){state=clone(SCREEN_PACKET.initialState);history=[];document.querySelector("#diff-verdict").textContent="not measurable yet";document.querySelector("#diff-verdict").className="value warn";render();}
+function control(id){return SCREEN_PACKET.controls.find(c=>c.id===id)}
+async function play(ids){reset();for(const [id,input] of ids){dispatch(control(id),input||{});await new Promise(r=>setTimeout(r,230));}}
+function showDiff(){const v=document.querySelector("#diff-verdict");v.textContent="BLOCKED — no frozen engine seam";v.className="value bad";history.unshift({control:"godot-source-diff",gesture:"audit",action:"BLOCKED: options_window.gd is hard-coded",state:{}});render();}
+document.querySelector("#reset").onclick=reset;
+document.querySelector("#run-happy").onclick=()=>play([["tool-pan"],["zoom-field"],["zoom-200"],["zoom-field"],["tab-parameters"],["age-up"],["library",{localY:48}],["library-scroll",{delta:1}]]);
+document.querySelector("#run-reversal").onclick=()=>play([["tab-parts"],["tab-life-cycle"],["age-up"],["age-down"],["zoom-field"],["zoom-200"],["zoom-field"],["zoom-field"],["zoom-128"],["zoom-field"]]);
+document.querySelector("#run-diff").onclick=showDiff;document.querySelectorAll('[data-walk="happy"]').forEach(b=>b.onclick=document.querySelector("#run-happy").onclick);document.querySelectorAll('[data-walk="diff"]').forEach(b=>b.onclick=showDiff);
+ui.reopen.onclick=()=>{state=setAt(state,"window.mode","normal");history.unshift({control:"reopen",gesture:"activate",action:"set normal",state:{}});render()};
+document.querySelectorAll("[data-scenario]").forEach(button=>button.onclick=()=>{document.querySelectorAll("[data-scenario]").forEach(b=>b.classList.toggle("active",b===button));document.querySelectorAll("[data-scenario-panel]").forEach(p=>p.classList.toggle("active",p.dataset.scenarioPanel===button.dataset.scenario))});
+document.addEventListener("pointerdown",e=>{if(state.openMenu&&!e.target.closest(".popup")&&!e.target.closest('[data-id^="menu-"], [data-id="zoom-field"]')){state=setAt(state,"openMenu",null);render()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&state.openMenu){state=setAt(state,"openMenu",null);render()}});
+render();
+</script>
+</body>
+</html>
