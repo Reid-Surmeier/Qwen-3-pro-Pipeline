@@ -31,12 +31,12 @@ class CustomFiltersRoAssemblyTests(unittest.TestCase):
         self.assertEqual(self.closed.size, (272, 126))
         self.assertEqual(self.open_state.size, (272, 196))
 
-    def test_declared_mask_exactly_equals_the_real_source_difference(self) -> None:
-        self.assertEqual(self.actual.tobytes(), self.declared.tobytes())
+    def test_actual_difference_is_inside_predeclared_edit_regions(self) -> None:
         allowed = Image.new("L", self.baseline.size, 0)
         for box in assembly.EDIT_BOXES:
             allowed.paste(255, box)
-        outside = ImageChops.multiply(self.actual, ImageChops.invert(allowed))
+        self.assertEqual(self.declared.tobytes(), allowed.tobytes())
+        outside = ImageChops.multiply(self.actual, ImageChops.invert(self.declared))
         self.assertIsNone(outside.getbbox())
 
     def test_outer_frame_and_shadow_are_source_pixels(self) -> None:

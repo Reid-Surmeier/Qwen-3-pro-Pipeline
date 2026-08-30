@@ -69,8 +69,10 @@ the rejected first Assembly render.
 
 Machine verification records:
 
-- declared mask equals the actual source-to-candidate difference;
-- zero changed pixels outside the five edit regions;
+- the permitted-region mask is created from the five fixed edit boxes before
+  composition, and the separately computed actual-difference mask is its
+  subset;
+- zero changed pixels outside that predeclared permitted-region mask;
 - both native dimensions and all exact strings are frozen by tests;
 - the password field differs from and is removed from the source;
 - the 272 x 196 open canvas contains the entire dropdown, including all nine
@@ -84,6 +86,7 @@ Machine verification records:
 - `artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-open.png`
 - `artifacts/runs/custom-filters-ro-assembly-v001/contact-sheet.png`
 - `artifacts/runs/custom-filters-ro-assembly-v001/edit-mask-native.png`
+- `artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask-native.png`
 - `artifacts/runs/custom-filters-ro-assembly-v001/verification.json`
 
 ## Verification boundary

@@ -28,9 +28,10 @@ only and must not contribute visible styling or pixels.
   selected and unselected radio sprites. No generated control raster enters
   the final Assembly.
 - **C6 — Deterministic evidence.** The closed candidate has 14,811 changed
-  native pixels, all inside five declared edit regions. The declared mask
-  exactly equals the actual difference, and zero pixels change outside the
-  regions. The open state is 272 x 196. The Qwen Render Pass requested and
+  native pixels inside a 19,649-pixel permitted-region mask created from five
+  fixed edit boxes before composition. The separately computed actual mask is
+  a subset, and zero pixels change outside the permitted regions. The open
+  state is 272 x 196. The Qwen Render Pass requested and
   completed two images with zero ambiguity; those images are diagnostic only.
 
 PASS means no specified defect is found. The verdict is advisory evidence and

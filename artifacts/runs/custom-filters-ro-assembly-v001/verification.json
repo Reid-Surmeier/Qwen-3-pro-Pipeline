@@ -42,8 +42,8 @@
     ]
   ],
   "changed_native_pixels": 14811,
-  "declared_mask_pixels": 14811,
-  "declared_mask_equals_actual_difference": true,
+  "permitted_mask_pixels": 19649,
+  "actual_difference_is_subset_of_permitted_mask": true,
   "changed_pixels_outside_edit_boxes": 0,
   "closed_native_size": [
     272,

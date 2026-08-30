@@ -121,6 +121,14 @@ def changed_pixel_mask(before: Image.Image, after: Image.Image) -> Image.Image:
     return maximum.point(lambda value: 255 if value else 0)
 
 
+def permitted_edit_mask() -> Image.Image:
+    """Declare every source pixel Assembly may change before composition."""
+    permitted = Image.new("L", NATIVE_SIZE, 0)
+    for box in EDIT_BOXES:
+        permitted.paste(255, box)
+    return permitted
+
+
 def crisp_font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.truetype(str(FONT), size)
 
@@ -185,6 +193,7 @@ def title_background(baseline: Image.Image) -> Image.Image:
 
 def assemble_closed(source: Image.Image) -> tuple[Image.Image, Image.Image]:
     baseline = native_source(source)
+    permitted = permitted_edit_mask()
     output = baseline.copy()
 
     output.paste(title_background(baseline), TITLE_EDIT_BOX[:2])
@@ -230,13 +239,10 @@ def assemble_closed(source: Image.Image) -> tuple[Image.Image, Image.Image]:
     draw_button(output, (219, 94, 258, 114), EXACT_COPY["buttons"][1])
 
     actual = changed_pixel_mask(baseline, output)
-    allowed = Image.new("L", NATIVE_SIZE, 0)
-    for box in EDIT_BOXES:
-        allowed.paste(255, box)
-    outside = ImageChops.multiply(actual, ImageChops.invert(allowed))
+    outside = ImageChops.multiply(actual, ImageChops.invert(permitted))
     if outside.getbbox() is not None:
         raise RuntimeError(f"Assembly changed source pixels outside edit boxes: {outside.getbbox()}")
-    return output, actual
+    return output, permitted
 
 
 def assemble_open(closed: Image.Image) -> Image.Image:
@@ -307,7 +313,7 @@ def main() -> int:
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     source = Image.open(style_path).convert("RGBA")
-    closed, declared = assemble_closed(source)
+    closed, permitted = assemble_closed(source)
     open_state = assemble_open(closed)
 
     closed_native = output_dir / "custom-filters-closed-native.png"
@@ -316,14 +322,16 @@ def main() -> int:
     open_review = output_dir / "custom-filters-open.png"
     mask_native = output_dir / "edit-mask-native.png"
     mask_review = output_dir / "edit-mask.png"
+    actual_native = output_dir / "actual-difference-mask-native.png"
+    actual_review = output_dir / "actual-difference-mask.png"
     contact = output_dir / "contact-sheet.png"
 
     closed.save(closed_native)
     closed.resize((closed.width * SCALE, closed.height * SCALE), Image.Resampling.NEAREST).save(closed_review)
     open_state.save(open_native)
     open_state.resize((open_state.width * SCALE, open_state.height * SCALE), Image.Resampling.NEAREST).save(open_review)
-    declared.save(mask_native)
-    declared.resize((declared.width * SCALE, declared.height * SCALE), Image.Resampling.NEAREST).save(mask_review)
+    permitted.save(mask_native)
+    permitted.resize((permitted.width * SCALE, permitted.height * SCALE), Image.Resampling.NEAREST).save(mask_review)
     make_contact_sheet(
         source,
         Image.open(RAW_RUN / "image-01.png"),
@@ -334,6 +342,9 @@ def main() -> int:
 
     baseline = native_source(source)
     actual = changed_pixel_mask(baseline, closed)
+    actual.save(actual_native)
+    actual.resize((actual.width * SCALE, actual.height * SCALE), Image.Resampling.NEAREST).save(actual_review)
+    outside = ImageChops.multiply(actual, ImageChops.invert(permitted))
     verification = {
         "issue": 138,
         "assembly": "custom-filters-ro-v001",
@@ -347,9 +358,9 @@ def main() -> int:
         "open_native_sha256": sha256(open_native),
         "edit_boxes": [list(box) for box in EDIT_BOXES],
         "changed_native_pixels": count_pixels(actual),
-        "declared_mask_pixels": count_pixels(declared),
-        "declared_mask_equals_actual_difference": actual.tobytes() == declared.tobytes(),
-        "changed_pixels_outside_edit_boxes": 0,
+        "permitted_mask_pixels": count_pixels(permitted),
+        "actual_difference_is_subset_of_permitted_mask": outside.getbbox() is None,
+        "changed_pixels_outside_edit_boxes": count_pixels(outside),
         "closed_native_size": list(closed.size),
         "open_native_size": list(open_state.size),
         "exact_copy": {
@@ -383,6 +394,8 @@ def main() -> int:
             "open_review": repo_path(open_review),
             "mask_native": repo_path(mask_native),
             "mask_review": repo_path(mask_review),
+            "actual_difference_mask_native": repo_path(actual_native),
+            "actual_difference_mask_review": repo_path(actual_review),
             "contact_sheet": repo_path(contact),
             "verification": repo_path(output_dir / "verification.json"),
         },

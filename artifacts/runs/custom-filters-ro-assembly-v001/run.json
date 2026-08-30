@@ -12,6 +12,8 @@
     "open_review": "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-open.png",
     "mask_native": "artifacts/runs/custom-filters-ro-assembly-v001/edit-mask-native.png",
     "mask_review": "artifacts/runs/custom-filters-ro-assembly-v001/edit-mask.png",
+    "actual_difference_mask_native": "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask-native.png",
+    "actual_difference_mask_review": "artifacts/runs/custom-filters-ro-assembly-v001/actual-difference-mask.png",
     "contact_sheet": "artifacts/runs/custom-filters-ro-assembly-v001/contact-sheet.png",
     "verification": "artifacts/runs/custom-filters-ro-assembly-v001/verification.json"
   },
