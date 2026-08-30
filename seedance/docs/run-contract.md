@@ -20,9 +20,10 @@ The request payload is local and ignored because data URLs can be large or priva
 request remains inspectable. If the payload is lost, recreate it from the brief and locked sources;
 do not reconstruct or guess a paid request from the sanitized record.
 
-Before submission, the CLI re-fetches capabilities and refuses a changed canonical model version.
-The exact decimal estimate must be provided to `--acknowledge-cost`. This gate documents approval;
-it does not promise the provider invoice will equal the estimate.
+Before submission, the CLI recomputes `request_sha256`, re-fetches capabilities, and
+refuses either a payload changed since planning or a changed canonical model version.
+The exact decimal estimate must be provided to `--acknowledge-cost`. This gate documents
+approval; it does not promise the provider invoice will equal the estimate.
 
 
 ## Strategy gate (enforced at plan time; owner instruction 2026-08-27)

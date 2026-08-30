@@ -79,9 +79,9 @@ Filled framing has **no calibrated fidelity metric**. Four were tried against th
 | silhouette vs the icon's own ground | all 1.0 | the generated ground shifts hue |
 
 A fifth guess would be a number that certifies whatever it is handed, which is the
-failure this gate exists to prevent. So a filled run's `certified` covers cadence and
-palette only, `human_gate_required` is set, and a person judges `states/state-set.gif`
-against the Anchor.
+failure this gate exists to prevent. So a filled run's `certified` covers cadence,
+palette, within-state stability, and tile containment; `human_gate_required` is set,
+and a person judges `states/state-set.gif` against the Anchor.
 
 `mask_fill_ratio` — the guard that refuses an Anchor whose silhouette is a rectangle —
 applies to `matte` runs only. In `filled` mode a rectangular silhouette is the intent.

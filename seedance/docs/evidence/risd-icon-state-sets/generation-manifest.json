@@ -21,10 +21,22 @@
   },
   "artifact_classification": {
     "source_references": [
-      "anchor-filled-square.png",
-      "anchor-tile-with-margin.png",
-      "REFERENCE-coin-spin.gif",
-      "REFERENCE-arrow-bob-translate.gif"
+      {
+        "path": "anchor-filled-square.png",
+        "sha256": "dc506737f6693560d6925995ba4d9effd445341d2be18d402fef8072cc1b2035"
+      },
+      {
+        "path": "anchor-tile-with-margin.png",
+        "sha256": "a0a3457c9974fb3d266977c8db785e75a7e6c16099fadc66b922b08ee8c7155b"
+      },
+      {
+        "path": "REFERENCE-coin-spin.gif",
+        "sha256": "b46e6ee3af614ad1bf0b672520848ec2e275c44af9cd419a199a06f4a432648b"
+      },
+      {
+        "path": "REFERENCE-arrow-bob-translate.gif",
+        "sha256": "ca68adc31acbad409d2803c3687e67be70aa0d0d9c4462c4e1fd0694e0f76a82"
+      }
     ],
     "approved_output": [
       "v6-translate-ref-sweep.gif",

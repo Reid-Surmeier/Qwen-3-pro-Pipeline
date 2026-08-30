@@ -229,11 +229,6 @@ class RetroThresholds:
     max_effective_fps: float = 10.0
     min_silhouette_iou: float = 0.90
     min_anchor_silhouette_iou: float = 0.90
-    # filled-square runs cannot use a silhouette metric at all: every frame's outline is
-    # the same tile. Per-pixel identity against the Anchor is what remains. The 0.80
-    # starting point is NOT calibrated against human verdicts yet — it is a placeholder
-    # chosen so a one-pixel shift of one element passes and a redraw does not.
-    min_anchor_pixel_identity: float = 0.80  # kept for reporting; no longer a check
 
 
 def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
@@ -653,7 +648,8 @@ def conform_states(
             "filled framing has no calibrated fidelity metric: silhouette measures the "
             "tile, identity measures a model that re-renders rather than copies. A "
             "person judges states/state-set.gif against the Anchor. `certified` here "
-            "means the cadence and palette checks passed, not that the picture is right."
+            "means cadence, palette, stability, and containment passed, not that the "
+            "picture is right."
         )
         if frame_mode == "filled"
         else None,

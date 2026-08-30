@@ -127,6 +127,13 @@ def cmd_submit(args: argparse.Namespace) -> None:
         )
     request = json.loads(payload_path.read_text())
     plan = json.loads((run / "plan.json").read_text())
+    planned_digest = plan.get("request_sha256")
+    actual_digest = request_digest(request)
+    if not isinstance(planned_digest, str) or actual_digest != planned_digest:
+        raise SystemExit(
+            "Request payload changed since planning; recreate the plan and obtain a "
+            "new exact cost acknowledgement"
+        )
     allowed, reason = submit_allowed(plan)
     if not allowed:
         raise SystemExit(f"Strategy gate refuses submission: {reason}")
