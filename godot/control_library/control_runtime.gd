@@ -314,7 +314,28 @@ func _dispatch_selection_view(entry: Dictionary, gesture: String,
 		gesture, payload)
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
+	var context_action := _selection_context_action(entry, gesture)
+	if not context_action.is_empty():
+		entry.state.last_action = context_action
+		if context_action not in ["OpenSkillDetail", "OpenInventoryItem"]:
+			entry.state.opened_item = ""
+		result.action = context_action
 	return result
+
+
+func _selection_context_action(entry: Dictionary, gesture: String) -> String:
+	for route in entry.spec.value.get("context_actions", []):
+		if not route is Dictionary or str(route.get("gesture", "")) != gesture:
+			continue
+		var condition: Variant = route.get("when")
+		if not condition is Dictionary:
+			continue
+		var context_id := str(condition.get("control_id", ""))
+		if not controls.has(context_id):
+			continue
+		if controls[context_id].state.get("value") == condition.get("value"):
+			return str(route.get("action", ""))
+	return ""
 
 
 func set_selection_drag_state(control_id: String, active: bool, source: String = "",

@@ -64,7 +64,11 @@ func _run() -> void:
 		and str(rendered_after_equip.windows.inventory.controls["inventory.items"]
 			.rendered_foreign_identity_assets.r0c0).contains("slot-head-unselected-idle")
 		and str(rendered_after_equip.windows.equipment_items.controls["equipment_items.slots"]
-			.rendered_foreign_identity_assets.head).contains("cell-r0c0-unselected-idle"),
+			.rendered_foreign_identity_assets.head).contains("cell-r0c0-unselected-idle")
+		and rendered_after_equip.windows.inventory.controls["inventory.items"]
+			.rendered_foreign_identity_visibility.r0c0
+		and rendered_after_equip.windows.equipment_items.controls["equipment_items.slots"]
+			.rendered_foreign_identity_visibility.head,
 		str([desktop.last_transaction, drag_feedback]))
 	var reverse_feedback: Dictionary = await _drag_between(equipment_point, inventory_point, desktop)
 	var restored_inventory: Dictionary = desktop.inventory.runtime.qa_state().controls["inventory.items"]
@@ -77,6 +81,38 @@ func _run() -> void:
 		and restored_inventory.item_version == before_inventory.item_version + 2
 		and restored_equipment.item_version == before_equipment.item_version + 2,
 		str([desktop.last_transaction, reverse_feedback]))
+	var rejection_inventory: Dictionary = restored_inventory.item_values.duplicate(true)
+	var rejection_equipment: Dictionary = restored_equipment.item_values.duplicate(true)
+	await _drag_between(inventory_point, Vector2(200.0, 435.0), desktop)
+	_check("real-invalid-drop-rejects-and-preserves-both",
+		not desktop.last_transaction.get("ok", false)
+		and desktop.last_transaction.error.code == "TransactionRejectedError"
+		and desktop.inventory.runtime.qa_state().controls[
+			"inventory.items"].item_values == rejection_inventory
+		and desktop.equipment_items.runtime.qa_state().controls[
+			"equipment_items.slots"].item_values == rejection_equipment,
+		str(desktop.last_transaction))
+	var tab_result := desktop.inventory.runtime.dispatch("inventory.tabs", "Activate",
+		{"choice": "equip"})
+	desktop.inventory._control_changed("inventory.tabs", tab_result)
+	var double_before_inventory: Dictionary = desktop.inventory.runtime.qa_state().controls[
+		"inventory.items"]
+	var double_before_equipment: Dictionary = desktop.equipment_items.runtime.qa_state().controls[
+		"equipment_items.slots"]
+	var double_result := desktop.inventory.runtime.dispatch("inventory.items",
+		"DoubleActivate", {"item": "r0c0"})
+	desktop.inventory._control_changed("inventory.items", double_result)
+	var double_state: Dictionary = desktop.qa_state()
+	_check("equip-tab-double-activate-owns-explicit-action",
+		double_result.get("action") == "EquipInventoryItem"
+		and desktop.last_transaction.get("ok", false)
+		and double_state.windows.inventory.controls["inventory.items"].opened_item == ""
+		and not double_state.windows.inventory.controls["inventory.items"].detail_visible
+		and double_state.windows.inventory.controls["inventory.items"].item_version \
+			== double_before_inventory.item_version + 1
+		and double_state.windows.equipment_items.controls["equipment_items.slots"].item_version \
+			== double_before_equipment.item_version + 1,
+		str([double_result, desktop.last_transaction]))
 	desktop._equipment_transaction("equip", "r0c0", "head")
 	var displaced_inventory: Dictionary = desktop.inventory.runtime.qa_state().controls["inventory.items"]
 	var displaced_equipment: Dictionary = desktop.equipment_items.runtime.qa_state().controls["equipment_items.slots"]

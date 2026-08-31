@@ -4599,6 +4599,16 @@
                 }
               }
             },
+            "context_actions": [
+              {
+                "gesture": "DoubleActivate",
+                "when": {
+                  "control_id": "inventory.tabs",
+                  "value": "equip"
+                },
+                "action": "EquipInventoryItem"
+              }
+            ],
             "foreign_identity_assets": {
               "head": "res://assets/image-79/equipment-items/slot-head-unselected-idle.png",
               "face": "res://assets/image-79/equipment-items/slot-face-unselected-idle.png",

@@ -86,12 +86,17 @@ func rendered_facts() -> Dictionary:
 	var opened_item := str(runtime.qa_state().controls[spec.id].get("opened_item", ""))
 	var rendered_values := {}
 	var rendered_assets := {}
+	var rendered_visibility := {}
+	var foreign_visibility := {}
 	var visible_count := 0
 	for item in hits:
 		var identity := _item_identity(item)
 		rendered_values[str(item)] = identity
-		rendered_assets[str(item)] = runtime.visual_surface_asset(spec.id, str(item)) \
-			if not identity.is_empty() else ""
+		var visual: TextureRect = visuals[item]
+		rendered_visibility[str(item)] = visual.is_visible_in_tree()
+		rendered_assets[str(item)] = str(visual.texture.resource_path) \
+			if visual.is_visible_in_tree() and visual.texture != null else ""
+		foreign_visibility[str(item)] = foreign_visuals[item].is_visible_in_tree()
 		if not identity.is_empty():
 			visible_count += 1
 	return {
@@ -107,6 +112,8 @@ func rendered_facts() -> Dictionary:
 		"rendered_item_values": rendered_values,
 		"rendered_asset_paths": rendered_assets,
 		"rendered_foreign_identity_assets": _rendered_foreign_identity_assets(),
+		"rendered_surface_visibility": rendered_visibility,
+		"rendered_foreign_identity_visibility": foreign_visibility,
 		"visible_item_count": visible_count,
 	}
 
@@ -522,11 +529,10 @@ func _item_identity(item: String) -> String:
 
 func _rendered_foreign_identity_assets() -> Dictionary:
 	var rendered := {}
-	var assets: Dictionary = spec.value.get("foreign_identity_assets", {})
 	for item in hits:
-		var identity := _item_identity(str(item))
-		if identity not in spec.value.items and assets.has(identity):
-			rendered[str(item)] = str(assets[identity])
+		var visual: TextureRect = foreign_visuals[item]
+		if visual.is_visible_in_tree() and visual.texture != null:
+			rendered[str(item)] = str(visual.texture.resource_path)
 	return rendered
 
 

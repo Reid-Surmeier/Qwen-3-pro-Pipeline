@@ -12,7 +12,14 @@ Desktop Action Router remains the only owner of the two-Window transaction.
 `ControlRuntime.selection_slots()` and `apply_selection_slots()` are the public
 snapshot/apply seam. Empty equipment slots may remain visible and hit-testable
 through `show_empty_slots`; foreign logical identities use manifest-owned
-source assets so a committed displacement visibly changes both Windows.
+source assets so a committed displacement visibly changes both Windows. The
+construction seam validates `show_empty_slots`, `identity_surfaces`, and every
+`foreign_identity_assets` resource before construction. The observation seam
+reports the visibility and `resource_path` of the actual TextureRect nodes,
+not a predicted manifest path. Conditional `context_actions` are explicit
+manifest bindings resolved from same-Window choice state before local action
+handling; the Inventory Equip tab uses this to own `EquipInventoryItem`
+without opening stale item detail.
 
 ## Errors
 
@@ -23,6 +30,8 @@ source assets so a committed displacement visibly changes both Windows.
 `res://tests/run_control_spec_contracts.gd` tests this seam from issue literals. Runtime controls and Windows are tested through their manifest actions and QA-state results, never through private node structure.
 The Equipment Items contracts additionally drive real 31-sample pointer paths
 across Inventory and Equipment Items and inspect only public QA state.
+They include invalid-destination rejection frames, explicit Equip-tab
+DoubleActivate ownership, and adversarial foreign-asset validation.
 
 ## Implementation freedom
 

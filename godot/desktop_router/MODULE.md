@@ -26,8 +26,8 @@ from `control_errors.gd`. Every rejection preserves supplied data byte-for-byte.
 rejection atomicity at the public `transfer()` seam. The Equipment Card contract
 proves attested open, factual close, and unattested-detail refusal.
 `res://tests/run_equipment_items_contracts.gd` proves equip, unequip,
-displacement, stale-version rejection, invalid-slot rejection, and byte-for-byte
-preservation of both supplied slot maps on every failure.
+displacement, stale-version rejection, invalid-slot and empty-source rejection,
+and byte-for-byte preservation of both supplied slot maps on every failure.
 
 ## Implementation freedom
 

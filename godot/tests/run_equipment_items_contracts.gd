@@ -74,6 +74,18 @@ func _router_contracts() -> void:
 		_check("rejection-is-named-and-preserves-input", not invalid.get("ok", false)
 			and invalid.error.code in ["TransactionRejectedError", "GestureConflictError"]
 			and inventory == before_inventory and equipment == before_equipment, str(invalid))
+	var equip_empty := Router.equipment_transaction(inventory, equipment, "equip",
+		"r0c1", "head", 3, 7)
+	_check("equip-empty-source-preserves-both", not equip_empty.get("ok", false)
+		and equip_empty.error.code == "TransactionRejectedError"
+		and inventory == before_inventory and equipment == before_equipment,
+		str(equip_empty))
+	var unequip_empty := Router.equipment_transaction(inventory, equipment, "unequip",
+		"r0c0", "robe", 3, 7)
+	_check("unequip-empty-source-preserves-both", not unequip_empty.get("ok", false)
+		and unequip_empty.error.code == "TransactionRejectedError"
+		and inventory == before_inventory and equipment == before_equipment,
+		str(unequip_empty))
 
 
 func _runtime_contract() -> void:

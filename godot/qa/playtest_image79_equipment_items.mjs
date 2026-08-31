@@ -96,10 +96,11 @@ const metrics = (before, after) => ({
 const manifest = JSON.parse(readFileSync(resolve(ROOT,
   "godot/data/image-79-control-spec.json"), "utf8"));
 const windowSpec = manifest.windows.find((entry) => entry.id === "equipment_items");
-const approved = new Set(windowSpec.actions.map((binding) =>
-  `equipment_items:${binding.gesture}:${binding.action}`).concat(
-  windowSpec.controls.flatMap((entry) => entry.actions.map((binding) =>
-    `${entry.id}:${binding.gesture}:${binding.action}`))));
+const approved = new Set(manifest.windows.flatMap((window) =>
+  window.actions.map((binding) => `${window.id}:${binding.gesture}:${binding.action}`)
+    .concat(window.controls.flatMap((entry) => entry.actions.concat(
+      entry.value?.context_actions ?? []).map((binding) =>
+      `${entry.id}:${binding.gesture}:${binding.action}`)))));
 const actions = [];
 const checks = [];
 const record = (controlId, gesture, action, assertions, frames, observed,
@@ -126,6 +127,34 @@ const record = (controlId, gesture, action, assertions, frames, observed,
   if (action === "ToggleMinimized") entry.frames.restored = frames.reversed;
   actions.push(entry);
   checks.push({ name: `${controlId}:${gesture}:${action}`,
+    passed: matches && Object.values(entry.contract_facts).every(Boolean),
+    detail: { assertions, contract_facts: entry.contract_facts } });
+};
+const recordRejection = (controlId, gesture, action, assertions, frames, observed,
+  motionSamples) => {
+  const pixelMetrics = metrics(frames.before, frames.after);
+  const reversalMetrics = metrics(frames.before, frames.reversed);
+  const midMetrics = metrics(frames.before, frames.mid);
+  const matches = Object.values(assertions).every(Boolean);
+  const entry = {
+    control_id: controlId, gesture, window_action: action,
+    expected: "named atomic rejection preserves Inventory and Equipment Items",
+    observed: JSON.stringify(observed), responsive: matches, matches_expected: matches,
+    assertions, frames, intended_region: WINDOW_REGION,
+    invariant_region: INVARIANT_REGION, pixel_metrics: pixelMetrics,
+    mid_pixel_metrics: midMetrics, reversal_pixel_metrics: reversalMetrics,
+    motion_samples: motionSamples,
+    contract_facts: {
+      real_gesture_path: motionSamples.length >= 30,
+      transient_feedback_rendered: midMetrics.full_frame_changed_pixels > 0,
+      committed_frame_preserved: pixelMetrics.full_frame_changed_pixels === 0,
+      invariants_stable: pixelMetrics.invariant_region_changed_pixels === 0,
+      source_approved: approved.has(`${controlId}:${gesture}:${action}`),
+      reversible: Object.values(reversalMetrics).every((value) => value === 0),
+    },
+  };
+  actions.push(entry);
+  checks.push({ name: `${controlId}:${gesture}:${action}:named-rejection`,
     passed: matches && Object.values(entry.contract_facts).every(Boolean),
     detail: { assertions, contract_facts: entry.contract_facts } });
 };
@@ -175,6 +204,40 @@ record("equipment_items.slots", "Activate", "SelectEquipmentSlot", {
   routed: selected.controls["equipment_items.slots"].last_action === "SelectEquipmentSlot",
 }, { before: selectBefore, after: selectAfter, reversed: selectReversed },
 selected.controls["equipment_items.slots"]);
+
+// Equip-tab DoubleActivate resolves to its explicit manifest context action
+// before ControlWindow can open local Inventory detail.
+await reload();
+target = point(23, 788);
+await page.mouse.click(target.x, target.y);
+await page.waitForTimeout(100);
+const inventoryDoubleBefore = await shot("02c-inventory-double-before");
+const beforeInventoryDouble = await qa();
+target = point(69, 761);
+await page.mouse.dblclick(target.x, target.y, { delay: 55 });
+await page.waitForTimeout(320);
+const afterInventoryDouble = await qa();
+const inventoryDoubleAfter = await shot("02c-inventory-double-equipped");
+await reload();
+const inventoryDoubleReversed = await shot("02d-inventory-double-reversed");
+record("inventory.items", "DoubleActivate", "EquipInventoryItem", {
+  explicit_action: afterInventoryDouble.windows.inventory.controls[
+    "inventory.items"].last_action === "EquipInventoryItem",
+  no_stale_detail: afterInventoryDouble.windows.inventory.controls[
+    "inventory.items"].opened_item === ""
+    && afterInventoryDouble.windows.inventory.controls[
+      "inventory.items"].detail_visible === false,
+  routed: afterInventoryDouble.last_transaction.ok === true
+    && afterInventoryDouble.last_transaction.operation === "equip",
+  inventory_atomic: afterInventoryDouble.windows.inventory.controls[
+    "inventory.items"].item_version === beforeInventoryDouble.windows.inventory.controls[
+      "inventory.items"].item_version + 1,
+  equipment_atomic: afterInventoryDouble.windows.equipment_items.controls[
+    "equipment_items.slots"].item_version
+    === beforeInventoryDouble.windows.equipment_items.controls[
+      "equipment_items.slots"].item_version + 1,
+}, { before: inventoryDoubleBefore, after: inventoryDoubleAfter,
+  reversed: inventoryDoubleReversed }, afterInventoryDouble.last_transaction);
 
 // DoubleActivate unequips into the selected Inventory slot with two-sided commit.
 await reload();
@@ -237,9 +300,51 @@ record("equipment_items.slots", "DragDrop", "MoveEquipmentItem", {
 }, { before: dragBefore, mid: dragMid, after: dragAfter, reversed: dragReversed },
 afterDrag.last_transaction, dragSamples);
 
+// Invalid destination: a real cross-Window drag reaches the Equipment chrome,
+// returns a named rejection, and commits neither slot map nor version.
+await reload();
+const rejectBefore = await shot("05-rejected-before");
+const beforeReject = await qa();
+const rejectStart = point(69, 761);
+const rejectEnd = point(200, 435);
+const rejectSamples = [];
+await page.mouse.move(rejectStart.x, rejectStart.y);
+await page.mouse.down();
+for (let index = 0; index < 31; index += 1) {
+  const ratio = index / 30;
+  const sample = { x: rejectStart.x + (rejectEnd.x - rejectStart.x) * ratio,
+    y: rejectStart.y + (rejectEnd.y - rejectStart.y) * ratio };
+  rejectSamples.push([sample.x, sample.y]);
+  await page.mouse.move(sample.x, sample.y);
+}
+const rejectMid = await shot("05-rejected-mid", false);
+await page.mouse.up();
+await page.waitForTimeout(180);
+const afterReject = await qa();
+const rejectAfter = await shot("05-rejected-after");
+await reload();
+const rejectReversed = await shot("05b-rejected-reversed");
+recordRejection("inventory.items", "DragDrop", "MoveInventoryItem", {
+  named_rejection: afterReject.last_transaction.ok === false
+    && afterReject.last_transaction.error?.code === "TransactionRejectedError",
+  inventory_values_preserved: JSON.stringify(afterReject.windows.inventory.controls[
+    "inventory.items"].item_values) === JSON.stringify(beforeReject.windows.inventory.controls[
+      "inventory.items"].item_values),
+  equipment_values_preserved: JSON.stringify(afterReject.windows.equipment_items.controls[
+    "equipment_items.slots"].item_values) === JSON.stringify(
+      beforeReject.windows.equipment_items.controls["equipment_items.slots"].item_values),
+  inventory_version_preserved: afterReject.windows.inventory.controls[
+    "inventory.items"].item_version === beforeReject.windows.inventory.controls[
+      "inventory.items"].item_version,
+  equipment_version_preserved: afterReject.windows.equipment_items.controls[
+    "equipment_items.slots"].item_version === beforeReject.windows.equipment_items.controls[
+      "equipment_items.slots"].item_version,
+}, { before: rejectBefore, mid: rejectMid, after: rejectAfter, reversed: rejectReversed },
+afterReject.last_transaction, rejectSamples);
+
 // Window title drag with 31 samples.
 await reload();
-const moveBefore = await shot("05-move-before");
+const moveBefore = await shot("06-move-before");
 const moveStart = point(240, 435);
 const moveEnd = point(280, 395);
 const moveSamples = [];
@@ -252,12 +357,12 @@ for (let index = 0; index < 31; index += 1) {
   moveSamples.push([sample.x, sample.y]);
   await page.mouse.move(sample.x, sample.y);
 }
-const moveMid = await shot("05-move-mid", false);
+const moveMid = await shot("06-move-mid", false);
 await page.mouse.up();
 const moved = await equipment();
-const moveAfter = await shot("05-moved");
+const moveAfter = await shot("06-moved");
 await reload();
-const moveReversed = await shot("05b-move-reversed");
+const moveReversed = await shot("06b-move-reversed");
 record("equipment_items", "Drag", "MoveWindow", {
   moved: moved.window.position[0] !== 0 || moved.window.position[1] !== 423,
   continuous: moveSamples.length >= 30,
@@ -266,28 +371,28 @@ moved.window, moveSamples);
 
 // Title close and keyboard close both reverse by deterministic reload.
 await reload();
-const closeBefore = await shot("06-close-before");
+const closeBefore = await shot("07-close-before");
 target = point(470, 438);
 await page.mouse.click(target.x, target.y);
 await page.waitForTimeout(100);
 const closed = await equipment();
-const closeAfter = await shot("06-closed");
+const closeAfter = await shot("07-closed");
 await reload();
-const closeReversed = await shot("06b-close-reversed");
+const closeReversed = await shot("07b-close-reversed");
 record("equipment_items.close", "Activate", "CloseWindow", {
   hidden: closed.window.visible === false,
 }, { before: closeBefore, after: closeAfter, reversed: closeReversed }, closed.window);
 
 await reload();
-const keyBefore = await shot("07-key-before");
+const keyBefore = await shot("08-key-before");
 target = point(240, 435);
 await page.mouse.click(target.x, target.y);
 await page.keyboard.press("Escape");
 await page.waitForTimeout(100);
 const keyClosed = await equipment();
-const keyAfter = await shot("07-key-closed");
+const keyAfter = await shot("08-key-closed");
 await reload();
-const keyReversed = await shot("07b-key-reversed");
+const keyReversed = await shot("08b-key-reversed");
 record("equipment_items", "KeyCommand", "CloseWindow", {
   hidden: keyClosed.window.visible === false,
   routed: keyClosed.window.last_gesture === "KeyCommand"
@@ -295,7 +400,7 @@ record("equipment_items", "KeyCommand", "CloseWindow", {
 }, { before: keyBefore, after: keyAfter, reversed: keyReversed }, keyClosed.window);
 
 await neutral();
-const invariantAfter = await invariantShot("08-invariant-after");
+const invariantAfter = await invariantShot("09-invariant-after");
 const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
   || entry.startsWith("[pageerror]"));
 const requiredControls = windowSpec.controls.map((entry) => entry.id);

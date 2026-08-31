@@ -512,7 +512,7 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 					"SelectStorageCategory", "SelectStorageItem", \
 					"ToggleStorageSelection", "TransferStorageItem", \
 					"TransferInventoryItem", "SelectEquipmentSlot", \
-					"UnequipEquipmentItem", "MoveEquipmentItem":
+					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))

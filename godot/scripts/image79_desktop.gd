@@ -95,7 +95,7 @@ func _route_desktop_action(window_id: String, control_id: String,
 			str(result.get("value", "")))
 		return
 	if window_id == "inventory" \
-			and str(result.get("gesture", "")) == "DoubleActivate" \
+			and str(result.get("action", "")) == "EquipInventoryItem" \
 			and inventory != null and equipment_items != null \
 			and str(inventory.runtime.qa_state().controls["inventory.tabs"].get(
 				"value", "")) == "equip":
@@ -227,9 +227,6 @@ func _commit_cross_window_drag(finished: Dictionary) -> void:
 	inventory._refresh_all_controls()
 	equipment_items._refresh_all_controls()
 	var target_slot := str(finished.get("target_slot", ""))
-	if target_slot.is_empty():
-		_publish()
-		return
 	var source_is_inventory := str(finished.source_window) == "inventory"
 	var inventory_slot := str(finished.source_slot) if source_is_inventory else target_slot
 	var equipment_slot := target_slot if source_is_inventory else str(finished.source_slot)
