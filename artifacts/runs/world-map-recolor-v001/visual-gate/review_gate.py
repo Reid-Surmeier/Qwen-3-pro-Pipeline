@@ -112,9 +112,9 @@ def _find_runs(mask, lo=28, hi=140):
                 runs.setdefault(y, []).append((int(a), int(b)))
     return runs
 
-def _pair_boxes(mask, transpose=False):
+def _pair_boxes(mask, transpose=False, hi=140):
     m = mask.T if transpose else mask
-    runs = _find_runs(m)
+    runs = _find_runs(m, hi=hi)
     boxes = []
     taken = np.zeros(m.shape, bool)
     for y in sorted(runs):
@@ -131,7 +131,7 @@ def _pair_boxes(mask, transpose=False):
     return [((x0, y0, x1, y1) if not transpose else (y0, x0, y1, x1)) for (y0, y1, x0, x1) in boxes]
 
 blackS = eq(S, 4, 2, 4)
-for (bx0, by0, bx1, by1) in _pair_boxes(blackS) + _pair_boxes(blackS, transpose=True):
+for (bx0, by0, bx1, by1) in _pair_boxes(blackS) + _pair_boxes(blackS, transpose=True, hi=220):
     plate_annot[max(0, by0 - 3):by1 + 3, max(0, bx0 - 3):bx1 + 3] = True
 shadowS = eq(S, 0x34, 0x32, 0x34)
 dark_bs2 = blackS | shadowS
@@ -150,7 +150,8 @@ if second.exists():
                             for yy_ in range(max(0, sl[0].start - 3), min(H, sl[0].start + 3)))
                 f_bot = any(dark_bs2[yy_, sl[1].start:sl[1].stop].mean() >= 0.55
                             for yy_ in range(max(0, sl[0].stop - 3), min(H, sl[0].stop + 3)))
-                if int(shadowS[sl].sum()) >= 6 or (f_top and f_bot):
+                dens_ = float(dmask[sl].mean())
+                if int(shadowS[sl].sum()) >= 6 or (f_top and f_bot) or ((f_top or f_bot) and dens_ >= 0.22):
                     _boxes.append((sl[1].start, sl[0].start, sl[1].stop, sl[0].stop))
 for (bx0, by0, bx1, by1) in _boxes:
     # grow to the true border like the composer does
@@ -180,9 +181,11 @@ for i, sl in enumerate(ndimage.find_objects(labF2), start=1):
     m = labF2[sl] == i
     cnt = int(m.sum())
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
-    if not (20 <= cnt <= 400) or cnt < 0.8 * hh * ww2:
+    if not (20 <= cnt <= 400):
         continue
-    tall = hh >= 2.5 * ww2 and m[:, 0].sum() >= 0.9 * hh and m[:, -1].sum() >= 0.9 * hh
+    tall = hh >= 1.6 * ww2 and m[:, 0].sum() >= 0.9 * hh and m[:, -1].sum() >= 0.9 * hh
+    if cnt < (0.55 if tall else 0.8) * hh * ww2:
+        continue
     flatb = m[0, :].sum() >= 0.9 * ww2 and m[-1, :].sum() >= 0.9 * ww2
     if not (tall or flatb):
         continue
@@ -192,11 +195,19 @@ for i, sl in enumerate(ndimage.find_objects(labF2), start=1):
        sl[1].start - sl2[1].start:sl[1].stop - sl2[1].start] = m
     ring1 = ndimage.binary_dilation(m2, iterations=1) & ~m2
     ring3 = ndimage.binary_dilation(m2, iterations=3) & ~ndimage.binary_dilation(m2, iterations=2)
-    if float(dark_bs2[sl2][ring1].mean()) >= 0.5 and float(whiteS[sl2][ring3].mean()) >= (0.35 if tall else 0.6):
+    greyN = mask_of(S, [(0x64,0x66,0x64),(0x6C,0x6D,0x6C),(0x5C,0x5E,0x5C),(0x5C,0x5A,0x5C),(0x04,0x02,0x34)])
+    if float((dark_bs2 | greyN)[sl2][ring1].mean()) >= 0.5 and float(whiteS[sl2][ring3].mean()) >= (0.35 if tall else 0.6):
         plate_annot[sl2[0].start:sl2[0].stop, sl2[1].start:sl2[1].stop] |= ndimage.binary_dilation(m2, iterations=2)
 
+gwcS = eq(S, 0x64, 0x66, 0x9C)
+gsumS = gwcS.sum(axis=0)
+gcolsS = np.where(gsumS >= 80)[0]
+gcolsS = gcolsS[np.abs(gcolsS - W // 2) <= 20]
+if len(gcolsS):
+    plate_annot[:, max(0, int(gcolsS.min()) - 17):min(W, int(gcolsS.max()) + 18)] = True
+
 annot = plate_annot | ndimage.binary_dilation(
-    mask_of(S, [(0x34,0x32,0x34),(0xFC,0xFE,0x04),(0xFC,0xFE,0x34),(0xFC,0x66,0x04),(0x64,0x66,0x9C)]), iterations=6)
+    mask_of(S, [(0x34,0x32,0x34),(0xFC,0xFE,0x04),(0xFC,0xFE,0x34),(0xFC,0xCE,0x04),(0xF4,0xC3,0x04),(0xFC,0x66,0x04),(0x64,0x66,0x9C)]), iterations=6)
 annot[H - 70:, :360] = True
 annot[:80, :200] = True
 annot[:80, W - 200:] = True
@@ -323,6 +334,16 @@ blk_keep = blackS & ~annot
 ret = float(cand_dark[blk_keep].mean()) if blk_keep.any() else 1.0
 add("A17", "border retention: >=97% of non-annotation black ink survives", ret >= 0.97,
     {"retention": round(ret, 4), "lost_px": int((blk_keep & ~cand_dark).sum())})
+# 17b. dark-blend retention: coastline/border anti-aliasing must stay dark
+luma_S2 = 0.299 * S[..., 0] + 0.587 * S[..., 1] + 0.114 * S[..., 2]
+luma_C2 = 0.299 * C[..., 0] + 0.587 * C[..., 1] + 0.114 * C[..., 2]
+dark_blend = (luma_S2 < 60) & ~mask_of(S, INK) & ~annot
+if dark_blend.any():
+    ret2 = float((luma_C2 < 90)[dark_blend].mean())
+else:
+    ret2 = 1.0
+add("A17b", "dark-blend retention: >=90% of dark anti-alias pixels stay dark", ret2 >= 0.90,
+    {"retention": round(ret2, 4)})
 
 # 15. deliverable identity (published-render hash must be supplied at deploy time)
 add("A15", "deliverable identity: candidate hash recorded; publish step must match it", True,
