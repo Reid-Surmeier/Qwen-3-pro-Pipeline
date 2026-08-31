@@ -39,3 +39,9 @@ Verdict on Qwen for this map: of 5 attempts that reached the provider after the 
   Greenwich caption fully removed via corridor sweep.
 - Gates: fidelity outside_changed=0; spot checks 75/75. $0.
 - Deployed to FigJam node 16:67.
+
+## v011 (2026-08-31, loop 3 continued — plate debris)
+- compose_v3 rev32→rev37: badge boxes grow to true borders, crumb sweeps for plate debris,
+  navy protected from all sweeps. Vladivostok marks gone.
+- Gates: fidelity outside_changed=0; spot checks 75/75. $0.
+- Deployed to FigJam node 16:67.

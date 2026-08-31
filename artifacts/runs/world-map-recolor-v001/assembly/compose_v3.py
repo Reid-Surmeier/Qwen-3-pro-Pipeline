@@ -170,7 +170,7 @@ if copies:
         if h_ <= 26 and w_ <= 110 and dens >= 0.08:
             # grow the bbox to the enclosing plate border (dark ring within 5 px)
             y0, y1, x0, x1 = sl[0].start, sl[0].stop, sl[1].start, sl[1].stop
-            for _ in range(5):
+            for _ in range(14):
                 grew = False
                 if y0 > 0 and dark_bs[y0 - 1, max(0, x0):x1].mean() > 0.25:
                     y0 -= 1; grew = True
@@ -191,6 +191,23 @@ for b in badge_boxes:
     if not any(abs(b[0] - o[0]) <= 3 and abs(b[1] - o[1]) <= 3 for o in dedup):
         dedup.append(b)
 badge_boxes = dedup
+# grow every box to its true border: dashed edges stop the colon walk early
+grown_boxes = []
+for (x0, y0, x1, y1) in badge_boxes:
+    for _ in range(14):
+        grew = False
+        if y0 > 0 and dark_bs[y0 - 1, max(0, x0):x1].mean() > 0.15:
+            y0 -= 1; grew = True
+        if y1 < H and dark_bs[min(H - 1, y1), max(0, x0):x1].mean() > 0.15:
+            y1 += 1; grew = True
+        if x0 > 0 and dark_bs[max(0, y0):y1, x0 - 1].mean() > 0.15:
+            x0 -= 1; grew = True
+        if x1 < W and dark_bs[max(0, y0):y1, min(W - 1, x1)].mean() > 0.15:
+            x1 += 1; grew = True
+        if not grew:
+            break
+    grown_boxes.append((int(x0), int(y0), int(x1), int(y1)))
+badge_boxes = grown_boxes
 for (x0, y0, x1, y1) in badge_boxes:
     if credit[max(0, y0):y1, max(0, x0):x1].any():
         continue
@@ -598,10 +615,11 @@ letters_mask = letter[lab_b] | NAVY
 # ground truth: plate digits change between the two live fetches; labels do not.
 diffbox = np.zeros((H, W), bool)
 for (bx0, by0, bx1, by1) in badge_boxes:
-    slb2 = (slice(max(0, by0), min(H, by1)), slice(max(0, bx0), min(W, bx1)))
+    slb2 = (slice(max(0, by0 - 1), min(H, by1 + 1)), slice(max(0, bx0 - 1), min(W, bx1 + 1)))
     if diff_d[slb2].any():
         diffbox[slb2] = True
 diffbox |= ndimage.binary_dilation(R2, iterations=1)
+stamped_mask = np.zeros((H, W), bool)
 n_wipe_l = n_stamp_l = 0
 for j in range(1, n_b + 1):
     if not letter[j]:
@@ -628,8 +646,60 @@ for j in range(1, n_b + 1):
         st = m_c & pmask[bs]
         sub[st] = (0x04, 0x02, 0x04)
         label_edits[bs] |= st
+        stamped_mask[bs] |= st
         n_stamp_l += 1
 print("letters wiped:", n_wipe_l, "re-stamped:", n_stamp_l)
+
+# crumb sweep: tiny dark bits fully inside plate boxes are digit/border debris
+dark_o2 = (out == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2) & ~credit & ~stamped_mask
+labCR, nCR = ndimage.label(dark_o2, structure=np.ones((3, 3)))
+n_crumb = 0
+for i, slc in enumerate(ndimage.find_objects(labCR), start=1):
+    m = labCR[slc] == i
+    if int(m.sum()) > 8:
+        continue
+    if not R1[slc][m].all():
+        continue
+    sub = out[slc]
+    onl = m & (cp_g[slc] >= 0) & (cid[slc] >= 0)
+    yi, xi = np.where(onl)
+    sub[yi, xi] = PALETTE[colour_idx[cp_g[slc][yi, xi]]]
+    offl = m & ~onl
+    sub[offl] = (0xFC, 0xFE, 0xFC)
+    sub[offl & gridmask[slc]] = (0xCC, 0xCE, 0xFC)
+    artifact_edits[slc] |= m
+    n_crumb += 1
+print("plate crumbs wiped:", n_crumb)
+
+# merged-crumb sweep: small isolated dark clusters hugging plate boxes with no dark neighbours
+dark_o3 = (((out == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2)
+            | (out == np.array((0x34, 0x32, 0x34), np.int16)).all(axis=2))
+           & ~credit & ~stamped_mask)
+nearR1c = ndimage.binary_dilation(R1, iterations=6)
+labM, nM = ndimage.label(ndimage.binary_dilation(dark_o3, iterations=1), structure=np.ones((3, 3)))
+n_mc = 0
+for i, slc in enumerate(ndimage.find_objects(labM), start=1):
+    slc2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in slc)
+    blob = labM[slc2] == i
+    actual = blob & dark_o3[slc2]
+    cnt = int(actual.sum())
+    if cnt == 0 or cnt > 26:
+        continue
+    if float(nearR1c[slc2][actual].mean()) < 0.7:
+        continue
+    ring = ndimage.binary_dilation(blob, iterations=2) & ~blob
+    if dark_o3[slc2][ring].any():
+        continue
+    sub = out[slc2]
+    onl = actual & (cp_g[slc2] >= 0) & (cid[slc2] >= 0)
+    yi, xi = np.where(onl)
+    sub[yi, xi] = PALETTE[colour_idx[cp_g[slc2][yi, xi]]]
+    offl = actual & ~onl
+    sub[offl] = (0xFC, 0xFE, 0xFC)
+    sub[offl & gridmask[slc2]] = (0xCC, 0xCE, 0xFC)
+    artifact_edits[slc2] |= actual
+    n_mc += 1
+print("merged crumbs wiped:", n_mc)
 
 # anti-alias & marker cleanup: blend pixels keep the OLD fill tint after repainting.
 OUTSET = [tuple(int(v) for v in c) for c in PALETTE] + [

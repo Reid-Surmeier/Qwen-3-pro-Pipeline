@@ -169,6 +169,25 @@
         "final-v010-assembly-2x.png",
         "assembly/fidelity-report-v3.json"
       ]
+    },
+    {
+      "version": "v011",
+      "created": "2026-08-31T01:34:50.543267+00:00",
+      "method": "deterministic assembly rev37 (compose_v3.py) \u2014 no generative model",
+      "gates": {
+        "fidelity_outside_changed": 0,
+        "spot_checks": "75/75 ok"
+      },
+      "fixes_since_v010": [
+        "all plate boxes grow to their true borders (dashed edges had stopped the colon walk; Vladivostok '06:01' left edge)",
+        "plate-crumb + merged-crumb sweeps remove digit/border debris in and near wiped boxes (city labels and stamped letters protected; navy never crumb material)",
+        "Vladivostok marks 37px -> 1px; Tokyo/city labels verified intact"
+      ],
+      "files": [
+        "final-v011-assembly.png",
+        "final-v011-assembly-2x.png",
+        "assembly/fidelity-report-v3.json"
+      ]
     }
   ]
 }
