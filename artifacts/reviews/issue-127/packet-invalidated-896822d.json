@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "issue": 127,
+  "pull_request": 82,
+  "candidate_commit": "896822d20751196f853d9cd0f42ff08ee9a1e0d9",
+  "acceptance_contract": "docs/reviews/issue-127-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-127/builder-896822d/evidence-manifest.json",
+      "artifacts/reviews/issue-127/options-regression-896822d/evidence-manifest.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-127/builder-896822d/reference-inventory-4x.png",
+      "artifacts/reviews/issue-127/builder-896822d/idle-inventory-4x.png",
+      "artifacts/reviews/issue-127/builder-896822d/00-idle.png",
+      "artifacts/reviews/issue-127/builder-896822d/01-tab-equip.png",
+      "artifacts/reviews/issue-127/builder-896822d/02-single-selected.png",
+      "artifacts/reviews/issue-127/builder-896822d/03-double-opened.png",
+      "artifacts/reviews/issue-127/builder-896822d/04-modifier-selected.png",
+      "artifacts/reviews/issue-127/builder-896822d/05-drag-mid.png",
+      "artifacts/reviews/issue-127/builder-896822d/05-drag-after.png",
+      "artifacts/reviews/issue-127/builder-896822d/06-window-drag-mid.png",
+      "artifacts/reviews/issue-127/builder-896822d/07-resize-mid.png",
+      "artifacts/reviews/issue-127/builder-896822d/07-resize-after.png",
+      "artifacts/reviews/issue-127/builder-896822d/08-minimized.png",
+      "artifacts/reviews/issue-127/builder-896822d/08-minimize-restored.png",
+      "artifacts/reviews/issue-127/builder-896822d/09-close-after.png",
+      "artifacts/reviews/issue-127/builder-896822d/10-key-after.png",
+      "artifacts/reviews/issue-127/builder-896822d/play-log.json",
+      "artifacts/reviews/issue-127/builder-896822d/report.json",
+      "artifacts/reviews/issue-127/builder-896822d/verdict.json",
+      "artifacts/reviews/issue-127/builder-896822d/control-spec-contracts.json",
+      "artifacts/reviews/issue-127/builder-896822d/control-runtime-contracts.json",
+      "artifacts/reviews/issue-127/builder-896822d/inventory-spec-contracts.json",
+      "artifacts/reviews/issue-127/builder-896822d/inventory-contracts.json",
+      "artifacts/reviews/issue-127/builder-896822d/inventory-window-contracts.json",
+      "artifacts/reviews/issue-127/builder-896822d/image79-contracts.json",
+      "artifacts/reviews/issue-127/options-regression-896822d/00-idle.png",
+      "artifacts/reviews/issue-127/options-regression-896822d/14-options-skin-activate-after.png",
+      "artifacts/reviews/issue-127/options-regression-896822d/16-options-minimize-after.png",
+      "artifacts/reviews/issue-127/options-regression-896822d/17-options-window-drag-mid.png",
+      "artifacts/reviews/issue-127/options-regression-896822d/19-options-key-closed.png",
+      "artifacts/reviews/issue-127/options-regression-896822d/play-log.json",
+      "artifacts/reviews/issue-127/options-regression-896822d/verdict.json",
+      "artifacts/reviews/issue-127/options-regression-896822d/options-window-contracts.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/00-idle.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/02-context-detail.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/04-committed.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/05-cancelled.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/09-minimized.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/11-drag-mid.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/13-key-closed.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/play-log.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/verdict.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/skill-tree-contracts.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-896822d/skill-tree-window-contracts.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --editor --path godot --quit-after 2 && DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue127-blind-review.pid || kill \"$(cat /tmp/issue127-blind-review.pid)\" 2>/dev/null || true; ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --editor --path godot --quit-after 2 >/tmp/issue127-blind-review-import.log 2>&1 && nohup env DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79 >/tmp/issue127-blind-review.log 2>&1 & echo $! >/tmp/issue127-blind-review.pid"
+  }
+}
