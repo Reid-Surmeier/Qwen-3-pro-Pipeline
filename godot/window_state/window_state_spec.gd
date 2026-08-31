@@ -5,16 +5,19 @@ extends RefCounted
 const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const PartyWindowState = preload("res://window_state/party_window_state.gd")
+const SystemMenuWindowState = preload("res://window_state/system_menu_window_state.gd")
 
 
 static func validate(adapter: Variant, controls: Array, path: String,
 		errors: Array[Dictionary], asset_exists: Callable) -> void:
-	if not adapter is Dictionary or str(adapter.get("type", "")) not in ["status", "party"]:
+	if not adapter is Dictionary or str(adapter.get("type", "")) not in ["status", "party", "system_menu"]:
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
 			"Window state adapter must declare a supported type"))
 		return
 	if str(adapter.type) == "party":
 		_validate_party(adapter, controls, path, errors, asset_exists)
+	elif str(adapter.type) == "system_menu":
+		_validate_system_menu(adapter, controls, path, errors)
 	else:
 		_validate_status(adapter, controls, path, errors, asset_exists)
 
@@ -113,6 +116,36 @@ static func _validate_party(adapter: Dictionary, controls: Array, path: String,
 		path + ".presentation.blank_list", errors, asset_exists)
 	_validate_geometry(presentation.get("geometry"),
 		path + ".presentation.geometry", errors)
+
+
+static func _validate_system_menu(adapter: Dictionary, controls: Array,
+		path: String, errors: Array[Dictionary]) -> void:
+	var initialized: Dictionary = SystemMenuWindowState.initialize(adapter)
+	if not initialized.get("ok", false):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			str(initialized.get("error", {}).get("detail", "invalid System Menu adapter"))))
+	var declared := _declared_controls(controls)
+	var policy_ids: Array = adapter.get("actions", {}).keys().map(func(value):
+		return str(value))
+	var open_window_ids: Array = []
+	for control_id in declared:
+		var declared_control: Dictionary = declared[control_id]
+		if _has_action(declared_control, "OpenWindow"):
+			open_window_ids.append(str(control_id))
+	if policy_ids.size() != open_window_ids.size() \
+			or not policy_ids.all(func(control_id): return control_id in open_window_ids) \
+			or not open_window_ids.all(func(control_id): return control_id in policy_ids):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".actions",
+			"System Menu policy must own every same-Window OpenWindow Control exactly once"))
+	for control_id in adapter.get("actions", {}):
+		var control: Variant = declared.get(str(control_id))
+		var route: Dictionary = adapter.actions[control_id]
+		if not control is Dictionary or str(control.get("type", "")) != "Button" \
+				or not _has_action(control, "OpenWindow") \
+				or str(control.get("value", {}).get("target_window", "")) != str(route.target):
+			errors.append(_error(Errors.CONTROL_BINDING,
+				path + ".actions." + str(control_id),
+				"System Menu policy must map a same-Window OpenWindow Button and exact target"))
 
 
 static func _validate_status_presentation(presentation: Variant,

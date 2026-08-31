@@ -11068,6 +11068,452 @@
           }
         }
       ]
+    },
+    {
+      "id": "system_menu",
+      "evidence_policy": {
+        "issue": 134
+      },
+      "geometry": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "minimized_height": 27,
+      "drag_geometry": {
+        "x": 0,
+        "y": 0,
+        "width": 181,
+        "height": 22
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/system-menu/source-plate.png",
+        "minimized": "res://assets/image-79/system-menu/minimized-plate.png"
+      },
+      "backing_color": "#00000000",
+      "display_facts": [
+        {
+          "id": "button-save_point-copy",
+          "text": "セーブポイントへ",
+          "geometry": [
+            8,
+            31,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-character_select-copy",
+          "text": "キャラクター選択",
+          "geometry": [
+            8,
+            65,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-sound_settings-copy",
+          "text": "サウンド設定",
+          "geometry": [
+            8,
+            99,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-environment_settings-copy",
+          "text": "環境設定",
+          "geometry": [
+            8,
+            133,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-shortcuts-copy",
+          "text": "ショートカット",
+          "geometry": [
+            8,
+            167,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-game_exit-copy",
+          "text": "ゲーム終了",
+          "geometry": [
+            8,
+            201,
+            188,
+            27
+          ]
+        },
+        {
+          "id": "button-return_to_game-copy",
+          "text": "return to game",
+          "geometry": [
+            8,
+            235,
+            188,
+            27
+          ]
+        }
+      ],
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "state_adapter": {
+        "type": "system_menu",
+        "actions": {
+          "system_menu.save_point": {
+            "target": "save_point",
+            "disposition": "reject",
+            "reason": "Save-point travel requires a live game session outside this desktop"
+          },
+          "system_menu.character_select": {
+            "target": "character_select",
+            "disposition": "reject",
+            "reason": "Character selection requires a live game session outside this desktop"
+          },
+          "system_menu.sound_settings": {
+            "target": "options",
+            "disposition": "route",
+            "reason": ""
+          },
+          "system_menu.environment_settings": {
+            "target": "environment_settings",
+            "disposition": "reject",
+            "reason": "Environment Settings has no source-complete Window in this release"
+          },
+          "system_menu.shortcuts": {
+            "target": "shortcut_settings",
+            "disposition": "reject",
+            "reason": "Shortcut Settings has no source-complete Window in this release"
+          },
+          "system_menu.game_exit": {
+            "target": "game_exit",
+            "disposition": "reject",
+            "reason": "Game exit requires a live process outside this desktop"
+          }
+        }
+      },
+      "controls": [
+        {
+          "id": "system_menu.minimize",
+          "type": "Button",
+          "geometry": {
+            "x": 181,
+            "y": 5,
+            "width": 14,
+            "height": 14
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/minimize-idle.png",
+              "hover": "res://assets/image-79/system-menu/minimize-hover.png",
+              "pressed": "res://assets/image-79/system-menu/minimize-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleMinimized"
+            }
+          ]
+        },
+        {
+          "id": "system_menu.save_point",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 31,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-save_point-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-save_point-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-save_point-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "save_point"
+          }
+        },
+        {
+          "id": "system_menu.character_select",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 65,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-character_select-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-character_select-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-character_select-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "character_select"
+          }
+        },
+        {
+          "id": "system_menu.sound_settings",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 99,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-sound_settings-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-sound_settings-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-sound_settings-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "options"
+          }
+        },
+        {
+          "id": "system_menu.environment_settings",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 133,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-environment_settings-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-environment_settings-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-environment_settings-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "environment_settings"
+          }
+        },
+        {
+          "id": "system_menu.shortcuts",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 167,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-shortcuts-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-shortcuts-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-shortcuts-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "shortcut_settings"
+          }
+        },
+        {
+          "id": "system_menu.game_exit",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 201,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-game_exit-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-game_exit-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-game_exit-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "game_exit"
+          }
+        },
+        {
+          "id": "system_menu.return_to_game",
+          "type": "Button",
+          "geometry": {
+            "x": 8,
+            "y": 235,
+            "width": 188,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/system-menu/button-return_to_game-idle.png",
+              "hover": "res://assets/image-79/system-menu/button-return_to_game-hover.png",
+              "pressed": "res://assets/image-79/system-menu/button-return_to_game-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

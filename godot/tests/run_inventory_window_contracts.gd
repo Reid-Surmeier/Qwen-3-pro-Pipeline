@@ -18,7 +18,7 @@ func _run() -> void:
 	desktop = current_scene
 	window = desktop.inventory
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
-		and desktop.windows.size() == 9, str(desktop.validation_errors))
+		and desktop.windows.size() == 10, str(desktop.validation_errors))
 	var idle_resize: Dictionary = window.qa_state().window.resize
 	_check("idle-resize-facts", idle_resize.requested == [484.0, 303.0]
 		and idle_resize.clamped == [484.0, 303.0], str(idle_resize))

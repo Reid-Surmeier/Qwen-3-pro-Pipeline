@@ -14,16 +14,15 @@ var equipment_card: ControlWindow
 var equipment_items: ControlWindow
 var status: ControlWindow
 var basic_info: ControlWindow
+var system_menu: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
 var _last_json := ""
 var _cross_window_drag := {}
+var _published_window_states := {}
 
 func _ready() -> void:
-	if OS.has_feature("web"):
-		get_window().content_scale_size = Vector2i(1536, 1024)
-		get_window().size = Vector2i(1536, 1024)
 	var background := ColorRect.new()
 	background.name = "Image79Magenta"
 	background.color = Color8(255, 0, 254)
@@ -52,6 +51,7 @@ func _ready() -> void:
 	equipment_items = windows.get("equipment_items")
 	status = windows.get("status")
 	basic_info = windows.get("basic_info")
+	system_menu = windows.get("system_menu")
 	# Manifest order remains the stable ControlSpec interface (Options first),
 	# while source reset stacking places Basic Info behind overlapping Windows.
 	if basic_info != null:
@@ -61,6 +61,27 @@ func _ready() -> void:
 			"equipment_card", equipment_card.spec.get("detail", {}))
 		if detail_route.get("ok", false):
 			equipment_card.detail_item = str(detail_route.detail_item)
+	_publish()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not (event is InputEventKey) or not event.pressed or event.echo \
+			or event.keycode != KEY_ESCAPE or system_menu == null:
+		return
+	var semantic_before: Dictionary = system_menu.runtime.qa_state()
+	var position_before: Array = system_menu.qa_state().window.position
+	last_transaction = DesktopActionRouter.open_window(windows.keys(), "system_menu")
+	last_transaction.source_window = "desktop"
+	last_transaction.control_id = "desktop.escape"
+	last_transaction.context = "no_frontmost_closeable_window"
+	if last_transaction.get("ok", false):
+		system_menu.visible = true
+		system_menu.move_to_front()
+		last_transaction.position_before = position_before
+		last_transaction.position_after = system_menu.qa_state().window.position
+		last_transaction.semantic_state_preserved = \
+			system_menu.runtime.qa_state() == semantic_before
+		get_viewport().set_input_as_handled()
 	_publish()
 
 
@@ -290,13 +311,34 @@ func _slot_at_global(window_id: String, control_id: String, point: Vector2) -> S
 func _publish(_window_id: String = "") -> void:
 	if has_meta("suppress_publish"):
 		return
-	var json := JSON.stringify(qa_state())
+	var snapshot := qa_state() if not OS.has_feature("web") \
+		else _web_qa_state(_window_id)
+	var json := JSON.stringify(snapshot)
 	if json == _last_json:
 		return
 	_last_json = json
-	print(json)
 	if OS.has_feature("web"):
 		JavaScriptBridge.eval("window.godotQaState = " + json + ";", true)
+	else:
+		print(json)
+
+
+func _web_qa_state(changed_window_id: String) -> Dictionary:
+	if _published_window_states.is_empty() or changed_window_id.is_empty():
+		_published_window_states.clear()
+		for window_id in windows:
+			_published_window_states[window_id] = windows[window_id].qa_state()
+	elif windows.has(changed_window_id):
+		_published_window_states[changed_window_id] = \
+			windows[changed_window_id].qa_state()
+	return {
+		"schema_version": 3,
+		"reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+		"viewport": [1536, 1024],
+		"validation_errors": validation_errors,
+		"windows": _published_window_states,
+		"last_transaction": last_transaction.duplicate(true),
+	}
 
 
 func _process(_delta: float) -> void:
