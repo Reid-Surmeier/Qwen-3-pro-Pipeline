@@ -188,7 +188,10 @@ if copies:
             dens_ = float(diff[sl].mean())
             if int(SHADOW[sl].sum()) >= 6 or (f_top and f_bot) or ((f_top or f_bot) and dens_ >= 0.22):
                 badge_boxes.append((sl[1].start, sl[0].start, sl[1].stop, sl[0].stop))
-badge_boxes += pair_boxes(BLACK) + pair_boxes(BLACK, transpose=True, hi=220)
+badge_boxes += pair_boxes(BLACK)
+for b in pair_boxes(BLACK, transpose=True, hi=220):
+    if b[2] - b[0] <= 18 and float(fills[b[1]:b[3], b[0]:b[2]].mean()) < 0.25:
+        badge_boxes.append(b)   # narrow AND hollow: a bar, not an island
 dedup = []
 for b in badge_boxes:
     if not any(abs(b[0] - o[0]) <= 3 and abs(b[1] - o[1]) <= 3 for o in dedup):
@@ -261,11 +264,12 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
     if not (20 <= cnt <= 400):
         continue
-    tall = hh >= 1.6 * ww2 and m[:, 0].sum() >= 0.9 * hh and m[:, -1].sum() >= 0.9 * hh
-    if cnt < (0.55 if tall else 0.8) * hh * ww2:
+    tall = hh >= 1.6 * ww2
+    straight4 = (m[0, :].sum() >= 0.75 * ww2 and m[-1, :].sum() >= 0.75 * ww2
+                 and m[:, 0].sum() >= 0.75 * hh and m[:, -1].sum() >= 0.75 * hh)
+    if not straight4:
         continue
-    flatb = m[0, :].sum() >= 0.9 * ww2 and m[-1, :].sum() >= 0.9 * ww2
-    if not (tall or flatb):
+    if cnt < (0.55 if tall else 0.8) * hh * ww2:
         continue          # true marker boxes have dead-straight edges
     sl2 = tuple(slice(max(0, a.start - 3), a.stop + 3) for a in sl)
     m2 = np.zeros((sl2[0].stop - sl2[0].start, sl2[1].stop - sl2[1].start), bool)
@@ -367,8 +371,14 @@ for i in range(1, 0):  # DISABLED for v1: recolouring white countries changes so
     O[yy, xx] = colour_of[int(vals[cts.argmax()])]
     white_cells += 1
 
-# lighten grey zone-joint lines in place (owner's original ask)
-O[GREY & ~credit & ~strip] = (0xB8, 0xB8, 0xB8)
+# lighten grey zone-joint LINES only (long+thin); grey outlines/frames stay
+labZ, nZ = ndimage.label(GREY, structure=np.ones((3, 3)))
+lightZ = np.zeros(nZ + 1, bool)
+for i, slz in enumerate(ndimage.find_objects(labZ), start=1):
+    hz, wz = slz[0].stop - slz[0].start, slz[1].stop - slz[1].start
+    cz = int((labZ[slz] == i).sum())
+    lightZ[i] = max(hz, wz) >= 40 and cz <= 0.1 * hz * wz + 3 * max(hz, wz)
+O[lightZ[labZ] & GREY & ~credit & ~strip] = (0xB8, 0xB8, 0xB8)
 
 # ---------------------------------------------------------------- context fill
 donor_land = fills & ~wiped                     # post-recolour palette pixels, source frame
@@ -376,12 +386,18 @@ donor_bg = (WHITE | GRID) & ~wiped
 dl = ndimage.distance_transform_edt(~donor_land, return_distances=True, return_indices=True)
 db = ndimage.distance_transform_edt(~donor_bg)
 wy, wx = np.where(wiped)
-dz = dl[0][wy, wx] - db[wy, wx]
-is_land = np.where(np.abs(dz) > 8, dz < 0, regcid[wy, wx] >= 0)   # grid votes only in ambiguity (#143)
+# under annotations the source carries no truth; the locally-registered grid (#146,
+# residual <=2 px in every populated region) supplies land/sea class and the coastline.
+# Colours still come only from source-frame donors. Documented #143 exception on #147.
+is_land = regcid[wy, wx] >= 0
 ly, lx = wy[is_land], wx[is_land]
 O[ly, lx] = O[dl[1][0][ly, lx], dl[1][1][ly, lx]]
 sy, sx = wy[~is_land], wx[~is_land]
 O[sy, sx] = (0xFC, 0xFE, 0xFC)
+gridland = regcid >= 0
+coast = gridland & ~ndimage.binary_erosion(gridland, iterations=1)
+stroke = coast & wiped & ~ndimage.binary_dilation((DARK | GWLINE) & ~wiped, iterations=2)
+O[stroke] = (0x04, 0x02, 0x04)
 # stranded texture/blend pixels on recoloured land take the neighbour patch colour
 known = fills | WHITE | GRID | BLACK | NAVY | GREY | SHADOW | GWLINE | ORANGE
 luma_S = 0.299 * S[..., 0] + 0.587 * S[..., 1] + 0.114 * S[..., 2]
@@ -396,6 +412,73 @@ O[dy2, dx2] = O[dl[1][0][dy2, dx2], dl[1][1][dy2, dx2]]
 wnow = (O == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2)
 gg = wiped & gridmask & wnow
 O[gg] = (0xCC, 0xCE, 0xFC)
+
+# plate crumbs: small isolated dark clusters hugging wipe boxes, ring free of dark
+pal_set0 = {tuple(int(v) for v in c) for c in colour_of}
+darkC = ((O == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2)
+         | (O == np.array((0x34, 0x32, 0x34), np.int16)).all(axis=2)) & ~credit
+nearW = ndimage.binary_dilation(R1 | R2, iterations=6)
+labK, nK = ndimage.label(ndimage.binary_dilation(darkC, iterations=1), structure=np.ones((3, 3)))
+n_crumb = 0
+for i, slk in enumerate(ndimage.find_objects(labK), start=1):
+    sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in slk)
+    blob = labK[sl2] == i
+    actual = blob & darkC[sl2]
+    cnt = int(actual.sum())
+    if cnt == 0 or cnt > 26:
+        continue
+    if float(nearW[sl2][actual].mean()) < 0.7:
+        continue
+    ring = ndimage.binary_dilation(blob, iterations=2) & ~blob
+    if darkC[sl2][ring].any():
+        continue
+    rcK = O[sl2][ring]
+    palf = np.array([tuple(int(v) for v in c) in pal_set0 for c in rcK])
+    whitef = (rcK == (0xFC, 0xFE, 0xFC)).all(axis=1) | (rcK == (0xCC, 0xCE, 0xFC)).all(axis=1)
+    if len(rcK) and max(float(palf.mean()), float(whitef.mean())) < 0.85:
+        continue          # mixed land/sea ring = a coastline fragment, not plate debris
+    yy3, xx3 = np.where(actual)
+    gy, gx = sl2[0].start + yy3, sl2[1].start + xx3
+    landish = dl[0][gy, gx] < db[gy, gx]
+    O[gy[landish], gx[landish]] = O[dl[1][0][gy[landish], gx[landish]], dl[1][1][gy[landish], gx[landish]]]
+    O[gy[~landish], gx[~landish]] = (0xFC, 0xFE, 0xFC)
+    n_crumb += 1
+print("plate crumbs cleared:", n_crumb)
+
+# ghost rectangles + stranded texture: small palette/white islands ringed by one other colour
+pal_set = {tuple(int(v) for v in c) for c in colour_of}
+for passno in range(2):
+    n_g = 0
+    for kcol in range(len(colour_of) + 1):
+        if kcol < len(colour_of):
+            mask_c = (O == colour_of[kcol]).all(axis=2) & ~credit
+            cap = 420
+        else:
+            mask_c = (O == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2) & ~credit
+            cap = 12
+        labG2, nG2 = ndimage.label(mask_c)
+        if not nG2:
+            continue
+        objsG2 = ndimage.find_objects(labG2)
+        szG2 = ndimage.sum(mask_c, labG2, range(1, nG2 + 1))
+        for i in np.where(szG2 <= cap)[0] + 1:
+            sl = objsG2[i - 1]
+            sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in sl)
+            m = labG2[sl2] == i
+            ring = ndimage.binary_dilation(m, iterations=2) & ~m
+            rc = O[sl2][ring]
+            keepr = np.array([tuple(int(v) for v in c) in pal_set for c in rc])
+            if not keepr.any() or keepr.mean() < 0.75:
+                continue
+            vals7, cts7 = np.unique(rc[keepr], axis=0, return_counts=True)
+            if cts7.max() / keepr.sum() < 0.75:
+                continue
+            win = vals7[cts7.argmax()]
+            if kcol < len(colour_of) and (win == colour_of[kcol]).all():
+                continue
+            O[sl2][m] = win
+            n_g += 1
+    print("ghost/texture islands recoloured:", n_g)
 
 Image.fromarray(O.astype(np.uint8)).save(out_dir / "assembled-v4.png")
 Image.fromarray(O.astype(np.uint8)).resize((W * 2, H * 2), Image.NEAREST).save(out_dir / "assembled-v4-2x.png")

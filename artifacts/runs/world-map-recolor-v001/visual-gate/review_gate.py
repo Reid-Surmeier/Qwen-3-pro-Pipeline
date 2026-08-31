@@ -130,8 +130,13 @@ def _pair_boxes(mask, transpose=False, hi=140):
                     break
     return [((x0, y0, x1, y1) if not transpose else (y0, x0, y1, x1)) for (y0, y1, x0, x1) in boxes]
 
+fillsS = np.zeros((H, W), bool)
+for c in [(0x04,0x9A,0xFC),(0xFC,0x32,0x34),(0x04,0xCE,0x34),(0xFC,0xCE,0x34),(0x04,0xFE,0x54),
+          (0x04,0xBE,0x3C),(0x6C,0xB6,0xFC),(0xFC,0x82,0x84),(0xF7,0x7C,0x7C),(0x94,0xF7,0xC6),
+          (0xCC,0xFE,0x9C),(0x34,0xCE,0xFC),(0xCC,0xC6,0xFC),(0x9C,0xFE,0xCC)]:
+    fillsS |= eq(S, *c)
 blackS = eq(S, 4, 2, 4)
-for (bx0, by0, bx1, by1) in _pair_boxes(blackS) + _pair_boxes(blackS, transpose=True, hi=220):
+for (bx0, by0, bx1, by1) in _pair_boxes(blackS) + [b for b in _pair_boxes(blackS, transpose=True, hi=220) if b[2] - b[0] <= 18 and float(fillsS[b[1]:b[3], b[0]:b[2]].mean()) < 0.25]:
     plate_annot[max(0, by0 - 3):by1 + 3, max(0, bx0 - 3):bx1 + 3] = True
 shadowS = eq(S, 0x34, 0x32, 0x34)
 dark_bs2 = blackS | shadowS
@@ -170,11 +175,6 @@ for (bx0, by0, bx1, by1) in _boxes:
             break
     plate_annot[max(0, y0 - 3):y1 + 3, max(0, x0 - 3):x1 + 3] = True
 # marker rectangles (straight-edged fill boxes framed dark, ringed by sea)
-fillsS = np.zeros((H, W), bool)
-for c in [(0x04,0x9A,0xFC),(0xFC,0x32,0x34),(0x04,0xCE,0x34),(0xFC,0xCE,0x34),(0x04,0xFE,0x54),
-          (0x04,0xBE,0x3C),(0x6C,0xB6,0xFC),(0xFC,0x82,0x84),(0xF7,0x7C,0x7C),(0x94,0xF7,0xC6),
-          (0xCC,0xFE,0x9C),(0x34,0xCE,0xFC),(0xCC,0xC6,0xFC),(0x9C,0xFE,0xCC)]:
-    fillsS |= eq(S, *c)
 whiteS = eq(S, 0xFC, 0xFE, 0xFC) | eq(S, 0xCC, 0xCE, 0xFC)
 labF2, nF2 = ndimage.label(fillsS)
 for i, sl in enumerate(ndimage.find_objects(labF2), start=1):
@@ -183,11 +183,12 @@ for i, sl in enumerate(ndimage.find_objects(labF2), start=1):
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
     if not (20 <= cnt <= 400):
         continue
-    tall = hh >= 1.6 * ww2 and m[:, 0].sum() >= 0.9 * hh and m[:, -1].sum() >= 0.9 * hh
-    if cnt < (0.55 if tall else 0.8) * hh * ww2:
+    tall = hh >= 1.6 * ww2
+    straight4 = (m[0, :].sum() >= 0.75 * ww2 and m[-1, :].sum() >= 0.75 * ww2
+                 and m[:, 0].sum() >= 0.75 * hh and m[:, -1].sum() >= 0.75 * hh)
+    if not straight4:
         continue
-    flatb = m[0, :].sum() >= 0.9 * ww2 and m[-1, :].sum() >= 0.9 * ww2
-    if not (tall or flatb):
+    if cnt < (0.55 if tall else 0.8) * hh * ww2:
         continue
     sl2 = tuple(slice(max(0, a.start - 3), a.stop + 3) for a in sl)
     m2 = np.zeros((sl2[0].stop - sl2[0].start, sl2[1].stop - sl2[1].start), bool)
@@ -314,7 +315,7 @@ add("A10", "label integrity: every word keeps >=90% of its glyph pixels", not ba
 
 # 13. interior strokes: candidate dark ink with no source ink within 3 px, surrounded by land
 src_ink_d = ndimage.binary_dilation(src_dark | src_inkm, iterations=3)
-ghost = cand_dark & ~src_ink_d & ndimage.binary_erosion(cand_land | cand_dark, iterations=1)
+ghost = cand_dark & ~src_ink_d & ndimage.binary_erosion(cand_land | cand_dark, iterations=1) & ~annot
 add("A13", "no interior strokes absent from the source (<=30px tolerance)", int(ghost.sum()) <= 30,
     {"ghost_stroke_px": int(ghost.sum())})
 
