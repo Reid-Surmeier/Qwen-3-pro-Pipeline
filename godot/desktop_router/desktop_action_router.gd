@@ -101,5 +101,13 @@ static func close_detail(window_id: String, detail_id: String) -> Dictionary:
 		"detail_item": detail_id, "visible": false}
 
 
+static func open_window(available_window_ids: Array, target_window: String) -> Dictionary:
+	if target_window.is_empty() or target_window not in available_window_ids:
+		return _error(Errors.ACTION_ROUTING,
+			"destination Window is not declared: %s" % target_window)
+	return {"ok": true, "action": "OpenWindow",
+		"target_window": target_window, "visible": true, "raised": true}
+
+
 static func _error(code: String, detail: String) -> Dictionary:
 	return {"ok": false, "error": {"code": code, "detail": detail}}

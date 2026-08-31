@@ -9486,6 +9486,666 @@
           }
         }
       ]
+    },
+    {
+      "id": "basic_info",
+      "evidence_policy": {
+        "issue": 132
+      },
+      "geometry": {
+        "x": 0,
+        "y": 0,
+        "width": 656,
+        "height": 286
+      },
+      "drag_geometry": {
+        "x": 48,
+        "y": 6,
+        "width": 558,
+        "height": 40
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/basic-info/source-plate.png",
+        "minimized": "res://assets/image-79/basic-info/minimized-plate.png"
+      },
+      "minimized_height": 48,
+      "minimized_controls": [
+        "basic_info.minimize",
+        "basic_info.close"
+      ],
+      "display_facts": [
+        {
+          "id": "name",
+          "text": "SakumaRiri",
+          "geometry": [
+            30,
+            59,
+            176,
+            32
+          ]
+        },
+        {
+          "id": "class",
+          "text": "Acolyte",
+          "geometry": [
+            30,
+            92,
+            140,
+            30
+          ]
+        },
+        {
+          "id": "hp-label",
+          "text": "HP",
+          "geometry": [
+            228,
+            77,
+            39,
+            31
+          ]
+        },
+        {
+          "id": "hp-value",
+          "text": "1092 / 1109",
+          "geometry": [
+            298,
+            86,
+            166,
+            34
+          ]
+        },
+        {
+          "id": "sp-label",
+          "text": "SP",
+          "geometry": [
+            228,
+            127,
+            39,
+            31
+          ]
+        },
+        {
+          "id": "sp-value",
+          "text": "601 / 613",
+          "geometry": [
+            294,
+            128,
+            146,
+            32
+          ]
+        },
+        {
+          "id": "base-level",
+          "text": "Base Lv. 60",
+          "geometry": [
+            48,
+            176,
+            145,
+            28
+          ]
+        },
+        {
+          "id": "job-level",
+          "text": "Job Lv. 47",
+          "geometry": [
+            48,
+            204,
+            145,
+            28
+          ]
+        },
+        {
+          "id": "weight",
+          "text": "Weight : 987 / 2430",
+          "geometry": [
+            28,
+            248,
+            238,
+            32
+          ]
+        },
+        {
+          "id": "zeny",
+          "text": "Zeny : 318,430",
+          "geometry": [
+            276,
+            248,
+            188,
+            32
+          ]
+        }
+      ],
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "controls": [
+        {
+          "id": "basic_info.minimize",
+          "type": "Button",
+          "geometry": {
+            "x": 14,
+            "y": 12,
+            "width": 30,
+            "height": 30
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/basic_info-minimize-idle.png",
+              "hover": "res://assets/image-79/basic-info/basic_info-minimize-hover.png",
+              "pressed": "res://assets/image-79/basic-info/basic_info-minimize-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleMinimized"
+            }
+          ]
+        },
+        {
+          "id": "basic_info.close",
+          "type": "Button",
+          "geometry": {
+            "x": 612,
+            "y": 12,
+            "width": 30,
+            "height": 30
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/basic_info-close-idle.png",
+              "hover": "res://assets/image-79/basic-info/basic_info-close-hover.png",
+              "pressed": "res://assets/image-79/basic-info/basic_info-close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "basic_info.destination.status",
+          "type": "Button",
+          "geometry": {
+            "x": 484,
+            "y": 56,
+            "width": 78,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/destination-status-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-status-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-status-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "status"
+          }
+        },
+        {
+          "id": "basic_info.destination.option",
+          "type": "Button",
+          "geometry": {
+            "x": 572,
+            "y": 56,
+            "width": 84,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/destination-option-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-option-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-option-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "options"
+          }
+        },
+        {
+          "id": "basic_info.destination.items",
+          "type": "Button",
+          "geometry": {
+            "x": 484,
+            "y": 111,
+            "width": 78,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/destination-items-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-items-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-items-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "inventory"
+          }
+        },
+        {
+          "id": "basic_info.destination.equip",
+          "type": "Button",
+          "geometry": {
+            "x": 572,
+            "y": 111,
+            "width": 84,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/destination-equip-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-equip-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-equip-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "equipment_items"
+          }
+        },
+        {
+          "id": "basic_info.destination.skill",
+          "type": "Button",
+          "geometry": {
+            "x": 484,
+            "y": 166,
+            "width": 78,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/destination-skill-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-skill-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-skill-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "OpenWindow"
+            }
+          ],
+          "value": {
+            "target_window": "skill_tree"
+          }
+        },
+        {
+          "id": "basic_info.destination.map",
+          "type": "Button",
+          "geometry": {
+            "x": 572,
+            "y": 166,
+            "width": 84,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/basic-info/destination-map-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-map-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-map-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "UnavailableDestination"
+            }
+          ],
+          "value": {
+            "target_window": "map"
+          }
+        },
+        {
+          "id": "basic_info.destination.chat",
+          "type": "Button",
+          "geometry": {
+            "x": 484,
+            "y": 221,
+            "width": 78,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/basic-info/destination-chat-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-chat-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-chat-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "UnavailableDestination"
+            }
+          ],
+          "value": {
+            "target_window": "chat_room"
+          }
+        },
+        {
+          "id": "basic_info.destination.friend",
+          "type": "Button",
+          "geometry": {
+            "x": 572,
+            "y": 221,
+            "width": 84,
+            "height": 46
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/basic-info/destination-friend-idle.png",
+              "hover": "res://assets/image-79/basic-info/destination-friend-hover.png",
+              "pressed": "res://assets/image-79/basic-info/destination-friend-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "UnavailableDestination"
+            }
+          ],
+          "value": {
+            "target_window": "friends"
+          }
+        },
+        {
+          "id": "basic_info.meter.hp",
+          "type": "Meter",
+          "geometry": {
+            "x": 266,
+            "y": 59,
+            "width": 194,
+            "height": 23
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/meter-hp-idle.png",
+              "hover": "res://assets/image-79/basic-info/meter-hp-hover.png",
+              "pressed": "res://assets/image-79/basic-info/meter-hp-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1109,
+            "current": 1092,
+            "fill_axis": "horizontal",
+            "fill_pixels": 194
+          }
+        },
+        {
+          "id": "basic_info.meter.sp",
+          "type": "Meter",
+          "geometry": {
+            "x": 265,
+            "y": 106,
+            "width": 195,
+            "height": 23
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/meter-sp-idle.png",
+              "hover": "res://assets/image-79/basic-info/meter-sp-hover.png",
+              "pressed": "res://assets/image-79/basic-info/meter-sp-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 613,
+            "current": 601,
+            "fill_axis": "horizontal",
+            "fill_pixels": 195
+          }
+        },
+        {
+          "id": "basic_info.meter.base",
+          "type": "Meter",
+          "geometry": {
+            "x": 208,
+            "y": 187,
+            "width": 232,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/meter-base-idle.png",
+              "hover": "res://assets/image-79/basic-info/meter-base-hover.png",
+              "pressed": "res://assets/image-79/basic-info/meter-base-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 99,
+            "current": 60,
+            "fill_axis": "horizontal",
+            "fill_pixels": 232
+          }
+        },
+        {
+          "id": "basic_info.meter.job",
+          "type": "Meter",
+          "geometry": {
+            "x": 208,
+            "y": 214,
+            "width": 232,
+            "height": 20
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/meter-job-idle.png",
+              "hover": "res://assets/image-79/basic-info/meter-job-hover.png",
+              "pressed": "res://assets/image-79/basic-info/meter-job-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 50,
+            "current": 47,
+            "fill_axis": "horizontal",
+            "fill_pixels": 232
+          }
+        }
+      ]
     }
   ]
 }

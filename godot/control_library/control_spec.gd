@@ -6,6 +6,7 @@ extends RefCounted
 
 const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
+const MeterModule = preload("res://control_library/meter.gd")
 
 const SCHEMA_VERSION := 3
 const CONTROL_TYPES := [
@@ -21,7 +22,8 @@ const ACTIONS_BY_TYPE := {
 	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
-		"SortStorage", "FocusStorageSearch"],
+		"SortStorage", "FocusStorageSearch", "OpenWindow",
+		"UnavailableDestination"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
@@ -305,7 +307,12 @@ static func _validate_control(control: Variant, window_id: String, control_index
 		_validate_surfaces(control.surfaces, path + ".surfaces", errors, asset_exists)
 	_validate_type_contract(control, control_type, path, errors, asset_exists)
 	var gestures: Variant = control.get("gestures")
-	_validate_gestures(gestures, path + ".gestures", errors)
+	if control_type == "Meter":
+		if not gestures is Array or not gestures.is_empty():
+			errors.append(_error(Errors.UNSUPPORTED_GESTURE, path + ".gestures",
+				"Meter is read-only and declares no Gesture Capability"))
+	else:
+		_validate_gestures(gestures, path + ".gestures", errors)
 	_validate_actions(control.get("actions"), gestures, control_type,
 		path + ".actions", errors)
 
@@ -331,6 +338,11 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 		_validate_scroll_view_contract(control, path, errors)
 	elif control_type == "TextField":
 		_validate_text_field_contract(control, path, errors, asset_exists)
+	elif control_type == "Meter":
+		var projected: Dictionary = MeterModule.project(control.get("value"))
+		if not projected.get("ok", false):
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+				str(projected.get("error", {}).get("detail", "invalid Meter"))))
 
 
 static func _validate_range_contract(control: Dictionary, path: String,
@@ -904,6 +916,9 @@ static func _validate_state_set(state_set: Variant, semantic_states: Array,
 static func _validate_actions(actions: Variant, gestures: Variant, control_type: String,
 		path: String,
 		errors: Array[Dictionary]) -> void:
+	if control_type == "Meter" and gestures is Array and gestures.is_empty() \
+			and actions is Array and actions.is_empty():
+		return
 	if not actions is Array or actions.is_empty():
 		errors.append(_error(Errors.CONTROL_BINDING, path,
 			"at least one gesture-to-action binding is required"))

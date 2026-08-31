@@ -6,6 +6,8 @@
 
 `ScrollView.interact()` accepts normalized Wheel, Activate, and Drag payloads and owns row offsets and exact clamps; a manifest may instead declare a zero-range unavailable visual authority, which rejects every gesture without mutation. `TextField.edit()` accepts or rejects complete candidate text atomically. `ControlWindow.action_emitted` publishes accepted Window Actions to the Desktop Action Router without granting it access to private adapter nodes.
 
+`Meter.project()` is the read-only Meter interface. A Meter declares ordered bounds, a current value, fill axis, and source-owned fill extent; it exposes no Gesture Capability and `MeterControl` renders its State Set without making the source plate interactive.
+
 `SelectionViewControl` owns real press/move/release recognition. It publishes
 cross-Window drag phases through `ControlWindow.action_emitted`, while the
 Desktop Action Router remains the only owner of the two-Window transaction.

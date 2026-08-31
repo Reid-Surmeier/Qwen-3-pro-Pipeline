@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "issue": 132,
+  "window_id": "basic_info",
+  "prototype": "discarded after source-window and destination walkthrough",
+  "question": "Can source meters remain exact while destination buttons atomically open or raise only real production Windows?",
+  "source_facts": {
+    "window_rect": [0, 0, 656, 286],
+    "meters": ["hp", "sp", "base", "job"],
+    "live_destinations": ["status", "options", "inventory", "equipment_items", "skill_tree"],
+    "unavailable_destinations": ["map", "chat_room", "friends"]
+  },
+  "behaviour_cards": [
+    {
+      "id": "basic-info-destination",
+      "gesture": "Activate",
+      "action": "OpenWindow",
+      "response_frames": 1,
+      "contract": "A live destination makes its declared Window visible and frontmost without changing target position or semantic state."
+    },
+    {
+      "id": "basic-info-unavailable-destination",
+      "gesture": "Activate",
+      "action": "UnavailableDestination",
+      "response_frames": 1,
+      "contract": "Map, Chat, and Friend remain visible source controls but return a named rejection until complete target Windows exist."
+    },
+    {
+      "id": "basic-info-minimize",
+      "gesture": "Activate",
+      "action": "ToggleMinimized",
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Use a separate 656x48 source-pixel title form; restore position and all meter and destination state."
+    }
+  ],
+  "state_sets": {
+    "destination": ["ready", "disabled"],
+    "meter": ["ready"],
+    "interaction_phases": ["idle", "hover", "pressed"],
+    "window": ["expanded", "minimized", "closed"]
+  },
+  "gestures": ["Activate", "Drag", "KeyCommand"],
+  "provider_requests": 0
+}

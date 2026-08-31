@@ -15,6 +15,7 @@ const SelectionViewControlScript = preload("res://control_library/selection_view
 const StepperControlScript = preload("res://control_library/stepper_control.gd")
 const ScrollViewControlScript = preload("res://control_library/scroll_view_control.gd")
 const TextFieldControlScript = preload("res://control_library/text_field_control.gd")
+const MeterControlScript = preload("res://control_library/meter_control.gd")
 const StatusWindowOverlayScript = preload("res://window_state/status_window_overlay.gd")
 
 var spec: Dictionary
@@ -107,6 +108,8 @@ func _ready() -> void:
 				node = ScrollViewControlScript.new()
 			"TextField":
 				node = TextFieldControlScript.new()
+			"Meter":
+				node = MeterControlScript.new()
 			_:
 				continue
 		node.configure(control_spec, runtime)
@@ -164,6 +167,7 @@ func qa_state() -> Dictionary:
 			"stale_right_edge_covered": _resize_old_right_edge_cover != null \
 				and _resize_old_right_edge_cover.visible},
 	}
+	state.display_facts = spec.get("display_facts", []).duplicate(true)
 	state.status_overlay = status_overlay.rendered_facts() \
 		if status_overlay != null else {"visible": false, "version": 0, "text": {}}
 	return state
@@ -521,7 +525,8 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 					"SelectStorageCategory", "SelectStorageItem", \
 					"ToggleStorageSelection", "TransferStorageItem", \
 					"TransferInventoryItem", "SelectEquipmentSlot", \
-					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem":
+					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem", \
+					"OpenWindow":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
@@ -538,7 +543,8 @@ func _toggle_minimized() -> void:
 	minimized = not minimized
 	if minimized:
 		plate.texture = load(str(spec.plates.minimized))
-		size = Vector2(float(spec.geometry.width), 28)
+		size = Vector2(float(spec.geometry.width),
+			float(spec.get("minimized_height", 28)))
 		plate.size = size
 	else:
 		plate.texture = load(str(spec.plates.expanded))

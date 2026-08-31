@@ -12,6 +12,7 @@ const StepperModule = preload("res://control_library/stepper.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const ScrollViewModule = preload("res://control_library/scroll_view.gd")
 const TextFieldModule = preload("res://control_library/text_field.gd")
+const MeterModule = preload("res://control_library/meter.gd")
 
 var window_spec: Dictionary = {}
 var controls: Dictionary = {}
@@ -94,6 +95,16 @@ func configure(spec: Dictionary) -> Dictionary:
 		elif str(control_spec.type) == "TextField":
 			state.value = str(control_spec.value.initial)
 			state.text = state.value
+		elif str(control_spec.type) == "Meter":
+			var projected: Dictionary = MeterModule.project(control_spec.value)
+			if not projected.get("ok", false):
+				return projected
+			state.minimum = projected.minimum
+			state.maximum = projected.maximum
+			state.current = projected.current
+			state.value = projected.current
+			state.ratio = projected.ratio
+			state.visible_fill_pixels = projected.visible_fill_pixels
 		elif control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
 			if state.value is String:
@@ -567,9 +578,13 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 			"Button has no Activate Window Action")
 	if action not in ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 			"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
-			"SortStorage", "FocusStorageSearch"]:
+			"SortStorage", "FocusStorageSearch", "OpenWindow",
+			"UnavailableDestination"]:
 		return _reject(entry.state.id, gesture, Errors.ACTION_ROUTING,
 			"Button action is not routed: %s" % action)
+	if action == "UnavailableDestination":
+		return _reject(entry.state.id, gesture, Errors.TRANSACTION_REJECTED,
+			"Destination Window is not yet available")
 	if action == "CommitSkillChanges":
 		_commit_steppers()
 	elif action == "CancelSkillChanges":
@@ -577,6 +592,7 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	entry.state.interaction_phase = "idle"
 	entry.state.last_action = action
 	return {"ok": true, "action": action,
+		"target_window": str(entry.spec.get("value", {}).get("target_window", "")),
 		"semantic_state": entry.state.semantic_state}
 
 

@@ -54,8 +54,8 @@ func _run() -> void:
 	get_root().add_child(desktop)
 	await process_frame
 	var initial := desktop.qa_state()
-	_check("assembled-seven-window-state", initial.windows.has("status")
-		and initial.windows.size() == 7 and desktop.status != null, str(initial.keys()))
+	_check("assembled-eight-window-state", initial.windows.has("status")
+		and initial.windows.size() == 8 and desktop.status != null, str(initial.keys()))
 	if desktop.status == null:
 		desktop.queue_free()
 		_finish()
