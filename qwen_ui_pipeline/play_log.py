@@ -740,13 +740,18 @@ def _manifest_requirements(
             problems.append("manifest contains a malformed control")
             continue
         control_id = control["id"]
-        controls.add(control_id)
+        bindings = control.get("actions", [])
+        # Read-only Controls such as Meter publish factual QA state but have no
+        # gesture to exercise. Coverage is action-complete, so inventing a
+        # synthetic action would make the Play Log less truthful.
+        if isinstance(bindings, list) and bindings:
+            controls.add(control_id)
         value = control.get("value")
         if control.get("type") == "Range" and isinstance(value, dict) \
                 and isinstance(value.get("minimum"), (int, float)) \
                 and isinstance(value.get("maximum"), (int, float)):
             range_specs[control_id] = (float(value["minimum"]), float(value["maximum"]))
-        for binding in control.get("actions", []):
+        for binding in bindings:
             if not isinstance(binding, dict):
                 problems.append(f"manifest action for {control_id} is malformed")
                 continue

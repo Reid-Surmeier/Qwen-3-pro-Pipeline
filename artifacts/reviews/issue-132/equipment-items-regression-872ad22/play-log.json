@@ -1,0 +1,980 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 130,
+    "commit_sha": "872ad22d727a04110f0e46dbf377dde5241137f0",
+    "window_id": "equipment_items"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "equipment_items.minimize",
+    "equipment_items.close",
+    "equipment_items.slots"
+  ],
+  "required_actions": [
+    {
+      "control_id": "equipment_items",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "equipment_items",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "equipment_items.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "equipment_items.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "Activate",
+      "window_action": "SelectEquipmentSlot"
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "DoubleActivate",
+      "window_action": "UnequipEquipmentItem"
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "DragDrop",
+      "window_action": "MoveEquipmentItem"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "09-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "equipment_items.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"equipment_items\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[0,423],\"resize\":{\"active\":false,\"clamped\":[484,271],\"motion_samples\":0,\"requested\":[484,271],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,271],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "minimized": true,
+        "restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "after": {
+          "path": "01-minimized.png",
+          "sha256": "5d7be381c45303fd06e838cca4c12dda6dbf03497316c10324878b2b15ed6132"
+        },
+        "reversed": {
+          "path": "01b-restored.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "restored": {
+          "path": "01b-restored.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 119528,
+        "intended_region_changed_pixels": 119528,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "Activate",
+      "window_action": "SelectEquipmentSlot",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"active_surface\":\"face\",\"capacity\":9,\"collection_items\":[\"head\",\"face\",\"armor\",\"weapon\",\"accessory_left\",\"robe\",\"body\",\"accessory_right_1\",\"accessory_right_2\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"head\",\"face\",\"armor\",\"weapon\",\"accessory_left\",\"robe\",\"body\",\"accessory_right_1\",\"accessory_right_2\"],\"geometry\":{\"height\":243,\"width\":484,\"x\":0,\"y\":451},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"equipment_items.slots\",\"interaction_phase\":\"hover\",\"item_values\":{\"accessory_left\":\"accessory_left\",\"accessory_right_1\":\"accessory_right_1\",\"accessory_right_2\":\"accessory_right_2\",\"armor\":\"armor\",\"body\":\"body\",\"face\":\"face\",\"head\":\"head\",\"robe\":\"robe\",\"weapon\":\"weapon\"},\"item_version\":0,\"last_action\":\"SelectEquipmentSlot\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectEquipmentSlot\",\"error\":null},\"list_labels\":{\"accessory_left\":\"accessory_left   \",\"accessory_right_1\":\"accessory_right_1   \",\"accessory_right_2\":\"accessory_right_2   \",\"armor\":\"armor   \",\"body\":\"body   \",\"face\":\"face   \",\"head\":\"head   \",\"robe\":\"robe   \",\"weapon\":\"weapon   \"},\"list_mode\":false,\"list_values\":{\"accessory_left\":\"\",\"accessory_right_1\":\"\",\"accessory_right_2\":\"\",\"armor\":\"\",\"body\":\"\",\"face\":\"\",\"head\":\"\",\"robe\":\"\",\"weapon\":\"\"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"accessory_left\":\"res://assets/image-79/equipment-items/slot-accessory_left-unselected-idle.png\",\"accessory_right_1\":\"res://assets/image-79/equipment-items/slot-accessory_right_1-unselected-idle.png\",\"accessory_right_2\":\"res://assets/image-79/equipment-items/slot-accessory_right_2-unselected-idle.png\",\"armor\":\"res://assets/image-79/equipment-items/slot-armor-unselected-idle.png\",\"body\":\"res://assets/image-79/equipment-items/slot-body-unselected-idle.png\",\"face\":\"res://assets/image-79/equipment-items/slot-face-selected-hover.png\",\"head\":\"res://assets/image-79/equipment-items/slot-head-unselected-idle.png\",\"robe\":\"res://assets/image-79/equipment-items/slot-robe-unselected-idle.png\",\"weapon\":\"res://assets/image-79/equipment-items/slot-weapon-unselected-idle.png\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"accessory_left\":false,\"accessory_right_1\":false,\"accessory_right_2\":false,\"armor\":false,\"body\":false,\"face\":false,\"head\":false,\"robe\":false,\"weapon\":false},\"rendered_item_values\":{\"accessory_left\":\"accessory_left\",\"accessory_right_1\":\"accessory_right_1\",\"accessory_right_2\":\"accessory_right_2\",\"armor\":\"armor\",\"body\":\"body\",\"face\":\"face\",\"head\":\"head\",\"robe\":\"robe\",\"weapon\":\"weapon\"},\"rendered_surface_visibility\":{\"accessory_left\":true,\"accessory_right_1\":true,\"accessory_right_2\":true,\"armor\":true,\"body\":true,\"face\":true,\"head\":true,\"robe\":true,\"weapon\":true},\"scroll_offset\":0,\"selected_item\":\"face\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"accessory_left\":{\"height\":51,\"width\":175,\"x\":11,\"y\":634},\"accessory_right_1\":{\"height\":39,\"width\":180,\"x\":293,\"y\":557},\"accessory_right_2\":{\"height\":61,\"width\":180,\"x\":293,\"y\":596},\"armor\":{\"height\":38,\"width\":175,\"x\":11,\"y\":556},\"body\":{\"height\":40,\"width\":180,\"x\":293,\"y\":517},\"face\":{\"height\":39,\"width\":175,\"x\":11,\"y\":517},\"head\":{\"height\":36,\"width\":175,\"x\":11,\"y\":481},\"robe\":{\"height\":36,\"width\":180,\"x\":293,\"y\":481},\"weapon\":{\"height\":40,\"width\":175,\"x\":11,\"y\":594}},\"text\":\"face\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"face\",\"visible\":true,\"visible_item_count\":9,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-select-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "after": {
+          "path": "02-selected.png",
+          "sha256": "99365315b84e00798379dc3bbddfd4b0dd7e86e277cc313ab049b3ed7ecf11b9"
+        },
+        "reversed": {
+          "path": "02b-select-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 840,
+        "intended_region_changed_pixels": 840,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DoubleActivate",
+      "window_action": "EquipInventoryItem",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"action\":\"EquipItem\",\"displaced_item\":\"head\",\"equipment_slot\":\"head\",\"equipment_version_after\":1,\"equipment_version_before\":0,\"error\":null,\"inventory_slot\":\"r0c0\",\"inventory_version_after\":1,\"inventory_version_before\":0,\"ok\":true,\"operation\":\"equip\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "explicit_action": true,
+        "no_stale_detail": true,
+        "routed": true,
+        "inventory_atomic": true,
+        "equipment_atomic": true
+      },
+      "frames": {
+        "before": {
+          "path": "02c-inventory-double-before.png",
+          "sha256": "e32d94e08f7b3fea2862c5b5054bb347273b32279b7773ed2d2c14ac9a3a0743"
+        },
+        "after": {
+          "path": "02c-inventory-double-equipped.png",
+          "sha256": "8ee8c508002db8f5ebfdef54d5fb4a0177d831cb151db578a175f0b50de1209e"
+        },
+        "reversed": {
+          "path": "02d-inventory-double-reversed.png",
+          "sha256": "e32d94e08f7b3fea2862c5b5054bb347273b32279b7773ed2d2c14ac9a3a0743"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 9417,
+        "intended_region_changed_pixels": 9417,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "DoubleActivate",
+      "window_action": "UnequipEquipmentItem",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"action\":\"UnequipItem\",\"displaced_item\":\"r0c0\",\"equipment_slot\":\"head\",\"equipment_version_after\":1,\"equipment_version_before\":0,\"error\":null,\"inventory_slot\":\"r0c0\",\"inventory_version_after\":1,\"inventory_version_before\":0,\"ok\":true,\"operation\":\"unequip\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "routed": true,
+        "inventory_committed": true,
+        "equipment_committed": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-double-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "after": {
+          "path": "03-double-unequipped.png",
+          "sha256": "ba2e0b073f25aef8aef80260f8119929f661fcfcc2a5faf9b7516db2314af3c3"
+        },
+        "reversed": {
+          "path": "03b-double-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 9417,
+        "intended_region_changed_pixels": 9417,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_items.slots",
+      "gesture": "DragDrop",
+      "window_action": "MoveEquipmentItem",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"action\":\"EquipItem\",\"displaced_item\":\"head\",\"equipment_slot\":\"head\",\"equipment_version_after\":1,\"equipment_version_before\":0,\"error\":null,\"inventory_slot\":\"r0c0\",\"inventory_version_after\":1,\"inventory_version_before\":0,\"ok\":true,\"operation\":\"equip\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "target_feedback": true,
+        "routed": true,
+        "inventory_atomic": true,
+        "equipment_atomic": true,
+        "displaced": true
+      },
+      "frames": {
+        "before": {
+          "path": "04-drag-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "mid": {
+          "path": "04-drag-mid.png",
+          "sha256": "ecfb3c434c501f377f1ea3482bdda48fbcbd8d45ef93e907853cf13f45b8debe"
+        },
+        "after": {
+          "path": "04-drag-equipped.png",
+          "sha256": "ba2e0b073f25aef8aef80260f8119929f661fcfcc2a5faf9b7516db2314af3c3"
+        },
+        "reversed": {
+          "path": "04b-drag-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 9417,
+        "intended_region_changed_pixels": 9417,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          69,
+          761
+        ],
+        [
+          69.96666666666667,
+          752.2666666666667
+        ],
+        [
+          70.93333333333334,
+          743.5333333333333
+        ],
+        [
+          71.9,
+          734.8
+        ],
+        [
+          72.86666666666666,
+          726.0666666666667
+        ],
+        [
+          73.83333333333333,
+          717.3333333333334
+        ],
+        [
+          74.8,
+          708.6
+        ],
+        [
+          75.76666666666667,
+          699.8666666666667
+        ],
+        [
+          76.73333333333333,
+          691.1333333333333
+        ],
+        [
+          77.7,
+          682.4
+        ],
+        [
+          78.66666666666667,
+          673.6666666666666
+        ],
+        [
+          79.63333333333333,
+          664.9333333333334
+        ],
+        [
+          80.6,
+          656.2
+        ],
+        [
+          81.56666666666666,
+          647.4666666666667
+        ],
+        [
+          82.53333333333333,
+          638.7333333333333
+        ],
+        [
+          83.5,
+          630
+        ],
+        [
+          84.46666666666667,
+          621.2666666666667
+        ],
+        [
+          85.43333333333334,
+          612.5333333333333
+        ],
+        [
+          86.4,
+          603.8
+        ],
+        [
+          87.36666666666667,
+          595.0666666666666
+        ],
+        [
+          88.33333333333333,
+          586.3333333333334
+        ],
+        [
+          89.3,
+          577.6
+        ],
+        [
+          90.26666666666667,
+          568.8666666666667
+        ],
+        [
+          91.23333333333333,
+          560.1333333333333
+        ],
+        [
+          92.2,
+          551.4
+        ],
+        [
+          93.16666666666667,
+          542.6666666666666
+        ],
+        [
+          94.13333333333333,
+          533.9333333333334
+        ],
+        [
+          95.1,
+          525.2
+        ],
+        [
+          96.06666666666666,
+          516.4666666666667
+        ],
+        [
+          97.03333333333333,
+          507.73333333333335
+        ],
+        [
+          98,
+          499
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem",
+      "expected_rejection": true,
+      "expected": "named atomic rejection preserves Inventory and Equipment Items",
+      "observed": "{\"action\":null,\"equipment_slot\":\"\",\"equipment_version_before\":0,\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"source and destination slots must exist\"},\"inventory_slot\":\"r0c0\",\"inventory_version_before\":0,\"ok\":false,\"operation\":\"equip\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "named_rejection": true,
+        "inventory_values_preserved": true,
+        "equipment_values_preserved": true,
+        "inventory_version_preserved": true,
+        "equipment_version_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-rejected-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "mid": {
+          "path": "05-rejected-mid.png",
+          "sha256": "f97f0e3956662ad8b5bb42eac3b49ceb33ef3363d7df3a36d0b4007a1c257a88"
+        },
+        "after": {
+          "path": "05-rejected-after.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "reversed": {
+          "path": "05b-rejected-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 3294,
+        "intended_region_changed_pixels": 3294,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "motion_samples": [
+        [
+          69,
+          761
+        ],
+        [
+          73.36666666666666,
+          750.1333333333333
+        ],
+        [
+          77.73333333333333,
+          739.2666666666667
+        ],
+        [
+          82.1,
+          728.4
+        ],
+        [
+          86.46666666666667,
+          717.5333333333333
+        ],
+        [
+          90.83333333333333,
+          706.6666666666666
+        ],
+        [
+          95.2,
+          695.8
+        ],
+        [
+          99.56666666666666,
+          684.9333333333334
+        ],
+        [
+          103.93333333333334,
+          674.0666666666666
+        ],
+        [
+          108.3,
+          663.2
+        ],
+        [
+          112.66666666666666,
+          652.3333333333334
+        ],
+        [
+          117.03333333333333,
+          641.4666666666667
+        ],
+        [
+          121.4,
+          630.6
+        ],
+        [
+          125.76666666666667,
+          619.7333333333333
+        ],
+        [
+          130.13333333333333,
+          608.8666666666667
+        ],
+        [
+          134.5,
+          598
+        ],
+        [
+          138.86666666666667,
+          587.1333333333333
+        ],
+        [
+          143.23333333333335,
+          576.2666666666667
+        ],
+        [
+          147.6,
+          565.4
+        ],
+        [
+          151.96666666666667,
+          554.5333333333333
+        ],
+        [
+          156.33333333333331,
+          543.6666666666667
+        ],
+        [
+          160.7,
+          532.8
+        ],
+        [
+          165.06666666666666,
+          521.9333333333334
+        ],
+        [
+          169.43333333333334,
+          511.06666666666666
+        ],
+        [
+          173.8,
+          500.2
+        ],
+        [
+          178.16666666666669,
+          489.3333333333333
+        ],
+        [
+          182.53333333333333,
+          478.46666666666664
+        ],
+        [
+          186.9,
+          467.59999999999997
+        ],
+        [
+          191.26666666666665,
+          456.73333333333335
+        ],
+        [
+          195.63333333333333,
+          445.8666666666667
+        ],
+        [
+          200,
+          435
+        ]
+      ],
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "transient_feedback_rendered": true,
+        "committed_frame_preserved": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_items",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"equipment_items\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"position\":[40,383],\"resize\":{\"active\":false,\"clamped\":[484,271],\"motion_samples\":0,\"requested\":[484,271],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,271],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "moved": true,
+        "continuous": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-move-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "mid": {
+          "path": "06-move-mid.png",
+          "sha256": "8b7c7667763269477dde06a7dd94d53288db6f72521f1a552de537b571a7b595"
+        },
+        "after": {
+          "path": "06-moved.png",
+          "sha256": "8b7c7667763269477dde06a7dd94d53288db6f72521f1a552de537b571a7b595"
+        },
+        "reversed": {
+          "path": "06b-move-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 154922,
+        "intended_region_changed_pixels": 126670,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          240,
+          435
+        ],
+        [
+          241.33333333333334,
+          433.6666666666667
+        ],
+        [
+          242.66666666666666,
+          432.3333333333333
+        ],
+        [
+          244,
+          431
+        ],
+        [
+          245.33333333333334,
+          429.6666666666667
+        ],
+        [
+          246.66666666666666,
+          428.3333333333333
+        ],
+        [
+          248,
+          427
+        ],
+        [
+          249.33333333333334,
+          425.6666666666667
+        ],
+        [
+          250.66666666666666,
+          424.3333333333333
+        ],
+        [
+          252,
+          423
+        ],
+        [
+          253.33333333333334,
+          421.6666666666667
+        ],
+        [
+          254.66666666666666,
+          420.3333333333333
+        ],
+        [
+          256,
+          419
+        ],
+        [
+          257.3333333333333,
+          417.6666666666667
+        ],
+        [
+          258.6666666666667,
+          416.3333333333333
+        ],
+        [
+          260,
+          415
+        ],
+        [
+          261.3333333333333,
+          413.6666666666667
+        ],
+        [
+          262.6666666666667,
+          412.3333333333333
+        ],
+        [
+          264,
+          411
+        ],
+        [
+          265.3333333333333,
+          409.6666666666667
+        ],
+        [
+          266.6666666666667,
+          408.3333333333333
+        ],
+        [
+          268,
+          407
+        ],
+        [
+          269.3333333333333,
+          405.6666666666667
+        ],
+        [
+          270.6666666666667,
+          404.3333333333333
+        ],
+        [
+          272,
+          403
+        ],
+        [
+          273.3333333333333,
+          401.6666666666667
+        ],
+        [
+          274.6666666666667,
+          400.3333333333333
+        ],
+        [
+          276,
+          399
+        ],
+        [
+          277.3333333333333,
+          397.6666666666667
+        ],
+        [
+          278.6666666666667,
+          396.3333333333333
+        ],
+        [
+          280,
+          395
+        ]
+      ]
+    },
+    {
+      "control_id": "equipment_items.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"equipment_items\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[0,423],\"resize\":{\"active\":false,\"clamped\":[484,271],\"motion_samples\":0,\"requested\":[484,271],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,271],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-close-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "after": {
+          "path": "07-closed.png",
+          "sha256": "a89507848e1076a75cbc165e68326931126fda9609f17cb844067a7efeb0341e"
+        },
+        "reversed": {
+          "path": "07b-close-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 131164,
+        "intended_region_changed_pixels": 131164,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_items",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Equipment Items Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"equipment_items\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[0,423],\"resize\":{\"active\":false,\"clamped\":[484,271],\"motion_samples\":0,\"requested\":[484,271],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,271],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-key-before.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "after": {
+          "path": "08-key-closed.png",
+          "sha256": "a89507848e1076a75cbc165e68326931126fda9609f17cb844067a7efeb0341e"
+        },
+        "reversed": {
+          "path": "08b-key-reversed.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 423,
+        "width": 484,
+        "height": 581
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 131164,
+        "intended_region_changed_pixels": 131164,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}

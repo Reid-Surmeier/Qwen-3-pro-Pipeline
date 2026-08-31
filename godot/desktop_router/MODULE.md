@@ -9,6 +9,8 @@ both expected versions, and normalized modifiers. It returns either two new
 collection snapshots or one typed rejection; it never mutates either input.
 `open_detail()` refuses unattested pixels and `close_detail()` returns a factual
 visibility route without reaching into a Window adapter.
+
+`open_window(available_window_ids, target_window)` validates Basic Info destinations before the desktop makes the target visible and frontmost. Missing targets fail closed; the router never invents a partial Window.
 `equipment_transaction()` accepts immutable Inventory and Equipment slot maps,
 an `equip` or `unequip` operation, both slot IDs, and both expected versions.
 It returns two new maps with one shared version step, including displacement,

@@ -13,6 +13,7 @@ var storage: ControlWindow
 var equipment_card: ControlWindow
 var equipment_items: ControlWindow
 var status: ControlWindow
+var basic_info: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
@@ -50,6 +51,11 @@ func _ready() -> void:
 	equipment_card = windows.get("equipment_card")
 	equipment_items = windows.get("equipment_items")
 	status = windows.get("status")
+	basic_info = windows.get("basic_info")
+	# Manifest order remains the stable ControlSpec interface (Options first),
+	# while source reset stacking places Basic Info behind overlapping Windows.
+	if basic_info != null:
+		move_child(basic_info, 1)
 	if equipment_card != null:
 		var detail_route: Dictionary = DesktopActionRouter.open_detail(
 			"equipment_card", equipment_card.spec.get("detail", {}))
@@ -74,6 +80,31 @@ func qa_state() -> Dictionary:
 
 func _route_desktop_action(window_id: String, control_id: String,
 		result: Dictionary) -> void:
+	if str(result.get("action", "")) == "OpenWindow":
+		var target_id := str(result.get("target_window", ""))
+		var target: ControlWindow = windows.get(target_id)
+		var target_semantic_before: Dictionary = target.runtime.qa_state() \
+			if target != null else {}
+		last_transaction = DesktopActionRouter.open_window(windows.keys(), target_id)
+		last_transaction.source_window = window_id
+		last_transaction.control_id = control_id
+		if last_transaction.get("ok", false):
+			last_transaction.position_before = target.qa_state().window.position
+			target.visible = true
+			target.move_to_front()
+			last_transaction.position_after = target.qa_state().window.position
+			last_transaction.semantic_state_preserved = \
+				target.runtime.qa_state() == target_semantic_before
+		else:
+			var source: ControlWindow = windows.get(window_id)
+			if source != null:
+				var error: Dictionary = last_transaction.get("error", {})
+				source.runtime.reject_action(control_id, "OpenWindow",
+					str(error.get("code", "ActionRoutingError")),
+					str(error.get("detail", "destination Window rejected")))
+				source._refresh_all_controls()
+		_publish()
+		return
 	if result.get("cross_window_drag", false) \
 			or result.get("cross_window_drag_end", false):
 		_route_cross_window_drag(window_id, control_id, result)

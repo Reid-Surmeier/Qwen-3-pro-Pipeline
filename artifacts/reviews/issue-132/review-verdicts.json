@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "issue": 132,
+  "candidate_commit": "872ad22d727a04110f0e46dbf377dde5241137f0",
+  "evidence_commit": "0a5e2f453a493118a817ca04a823fa633f2920b3",
+  "verdicts": [
+    {
+      "review": "specification",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The authoritative source hash, AE-zero 484x205 crop, 484x28 minimized Assembly, all eight exact-SHA Play Logs, 398 evidence hashes, 44 production asset hashes, and repository baselines satisfy every Issue acceptance clause."
+    },
+    {
+      "review": "engineering",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "Every destination reaches the Desktop Action Router; malformed Window presentation and target fields fail closed; semantic preservation is observed; Meter reports actual rendered assets; all regressions pass."
+    },
+    {
+      "review": "blind_artifact",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The source-identical Basic Info artifact, routed live and unavailable destinations, reversible drag/minimize/close paths, and complete eight-Window regression evidence pass fresh-context blind review."
+    }
+  ]
+}

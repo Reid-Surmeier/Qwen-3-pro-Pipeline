@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "issue": 132,
+  "provider_requests": 0,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "window_rect": [
+      0,
+      0,
+      484,
+      205
+    ]
+  },
+  "assembly": "deterministic source-pixel crops and source-palette State Sets",
+  "files": [
+    {
+      "path": "godot/assets/image-79/basic-info/source-plate.png",
+      "sha256": "a7d0a9c38daea185ff8fd8c12be61d9fc76cf260e6ae0111df0c689dc9cfd7b9",
+      "size": [
+        484,
+        205
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/minimized-plate.png",
+      "sha256": "e8ed45024f923abd91126d6c8c1de1f4d54f4ce5df2de72f3f963ce7ceba6972",
+      "size": [
+        484,
+        28
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-close-idle.png",
+      "sha256": "b7a92569398c1e68ac33645b73b0e4ea60256090d94fcc11d2205644cc4d8d07",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-close-hover.png",
+      "sha256": "d6e7c731d1947210aa935d8c19180f13d405ecbbcf9afa1d6ebb3b42520c7962",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-close-pressed.png",
+      "sha256": "d86be1221fb3fbe599f950752d346796276b4c3b8bed6aec603ea8091cc8fc54",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-minimize-idle.png",
+      "sha256": "7ecdada751081c00f747cdd1a6ba3db2b573b4883c790eb6f71acc36a8c1a49d",
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-minimize-hover.png",
+      "sha256": "caf3842095a4f872ce423ff8d6c9b048143da6d116e2e35520b03219efc8aeb8",
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/basic_info-minimize-pressed.png",
+      "sha256": "ee1d582f48cac47c9fa2c4f86d527a71c81edf20d9e2d253a5f9156125c5f893",
+      "size": [
+        16,
+        16
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-status-idle.png",
+      "sha256": "c0228679349e4499bdf671dad68ae45a533f2c9dc5681980921d4748bed5c13a",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-status-hover.png",
+      "sha256": "e191c928c9f342ac1a543968b9e74f08db8918207b4165185e32f92087d23d69",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-status-pressed.png",
+      "sha256": "743f2cc78ae7e693f459c2e85e74d4559c3fd8f592660d4a3ae61b42801d6564",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-option-idle.png",
+      "sha256": "bd4be2ea1732dd7904660bbdb038a6f6ad9378b195ed50f740bfb959ba9b7168",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-option-hover.png",
+      "sha256": "2c6276b3ad1851e773fa87367fbe15b62d1cdba6fddb0e733e23cec3128a7bc4",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-option-pressed.png",
+      "sha256": "5b9d0635544bd6efb86661abb9edb4059e14bd944769604d6242933547a2162d",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-items-idle.png",
+      "sha256": "9fab9081807047a208ec7951d0abc6b943c572b2164e3039763769039a044d65",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-items-hover.png",
+      "sha256": "db7c0ffe9d8aa256444143fca027420ef744a9e5c353a604ea38c281c5072f64",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-items-pressed.png",
+      "sha256": "04f6f02f3ae7ee336f1b137c901b0cd1d3af1d69a8dde5fb9f84a1d30ff31a24",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-equip-idle.png",
+      "sha256": "7a844449572ef88cb598517e4764677665141d3ecd55c042f82f53da4d8ae98e",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-equip-hover.png",
+      "sha256": "6e3efe3a81c04e2284c350017e2af664c9aef7c4cb426eb8f9f41e175e38e767",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-equip-pressed.png",
+      "sha256": "1f14b08ae16159a391b8c5296d1d922a18f3c2c8a59ae106c607b56c75335d60",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-skill-idle.png",
+      "sha256": "ac8dbed612a2258d579c32ae24a5b22b58d104d6616f4982586fed97b992bf4d",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-skill-hover.png",
+      "sha256": "a38ce7cce29b10fa8abccb2ba5805026fb3a4e090f00b5f3809d3b16360dacd3",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-skill-pressed.png",
+      "sha256": "b994d5609463d977dcc725208255b5e7cfbfa4f1cca850df0a3624069d55680b",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-map-idle.png",
+      "sha256": "6218467df40fa94e82483b794ab70020277593b67050ab4091bc9c33f6c64aaa",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-map-hover.png",
+      "sha256": "59a7c9636d96ef3df49078e2cf853f1eedd75c333223ca0b7283249267941302",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-map-pressed.png",
+      "sha256": "dd3f6554be3a70309636e43ff39f505003e65cee17357d5722fc414ffcca2e09",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-chat-idle.png",
+      "sha256": "e22c6f0925840aa63a9b3715887cfab7df44f6f3175d5f58b99f36e7206b8af8",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-chat-hover.png",
+      "sha256": "48429144117bff5d4acae87b680fe50655cba03d2cb1bff01f17e187214532a6",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-chat-pressed.png",
+      "sha256": "11ebb5e554a54160a85777070b3fe81e6a6972aa6ba8e20cbedcbd0e121bfcea",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-friend-idle.png",
+      "sha256": "3ae14cdc5fe74318a0d243b4bf39491a8d1980b9caf04ace71870d4f9ac4598d",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-friend-hover.png",
+      "sha256": "6b8faea9f529b6850184517a0f1953a5c7e621e34fb8125f7f02755d56eed069",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/destination-friend-pressed.png",
+      "sha256": "ea75b41383bc1a2f268e2b3a12b5f5279a2a53c6622c84ce3818128e8f7843af",
+      "size": [
+        48,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-hp-idle.png",
+      "sha256": "f9aad6347084566e16bb5e40fd2db8ff574110619d4dd4be3f11cd66ae6682c7",
+      "size": [
+        151,
+        15
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-hp-hover.png",
+      "sha256": "c92fe437123967f969779080808f2b1ddf54154ecbd870d7ea67d78595fb624f",
+      "size": [
+        151,
+        15
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-hp-pressed.png",
+      "sha256": "6483e1deaccaa2fca75a4292b4bc4f41974dc066bd053c21f71a0479bcb7632a",
+      "size": [
+        151,
+        15
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-sp-idle.png",
+      "sha256": "6d515a1205a22940f15eca50ddcd0334a80cabcdf7c4433e80854f96dc997ff7",
+      "size": [
+        151,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-sp-hover.png",
+      "sha256": "4e21c9827c82680ec2f03a86c904a98272551f21c41ae348eec3719084810d93",
+      "size": [
+        151,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-sp-pressed.png",
+      "sha256": "d362c03fe0999ea63b9303cf75e6298560b576cd01d9804701e748a3e100a4d4",
+      "size": [
+        151,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-base-idle.png",
+      "sha256": "50b75baf0b618ba88e295c63bce1cb3abe552738fb863ab24133b507771d4118",
+      "size": [
+        184,
+        11
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-base-hover.png",
+      "sha256": "b322534b01cf036a7a9c66b37a2c92c268eb0916dab00ac884057b3016cfac1d",
+      "size": [
+        184,
+        11
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-base-pressed.png",
+      "sha256": "9b455298af524c664d2c34c4c6cc5964cd4e87637342c6e6552bdcaf892515d4",
+      "size": [
+        184,
+        11
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-job-idle.png",
+      "sha256": "b519a0336151fbb9321a2b7b0684411966caf2a64bbb784bfff132c45b7e51c3",
+      "size": [
+        184,
+        11
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-job-hover.png",
+      "sha256": "13df7c60d80b0b27cdd84405fe7a67f7e2b37264da2bebe07eb279689425d8c1",
+      "size": [
+        184,
+        11
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/basic-info/meter-job-pressed.png",
+      "sha256": "c11eb0f4e0dcee6418d19398e0ad981881ccb434416c4035e0c6a5f33259b7f5",
+      "size": [
+        184,
+        11
+      ]
+    }
+  ]
+}
