@@ -1,0 +1,184 @@
+{
+  "candidate": "final-v011-assembly.png",
+  "source": "wtz-map-12map-1001x485.gif",
+  "mechanical_pass": false,
+  "checks": [
+    {
+      "id": "A2",
+      "name": "registration: region land-centroid shift <=2px",
+      "pass": false,
+      "detail": {
+        "north-america": 9.41,
+        "south-america": 4.22,
+        "europe": 3.2,
+        "great-britain": 7.99,
+        "africa": 8.94,
+        "middle-east": 2.47,
+        "asia": 1.9,
+        "se-asia": 10.76,
+        "australia": 9.86
+      }
+    },
+    {
+      "id": "A3",
+      "name": "coverage: >=98% of source land fills painted (source frame)",
+      "pass": false,
+      "detail": {
+        "coverage": 0.9038
+      }
+    },
+    {
+      "id": "A4",
+      "name": "sea stays sea: <=0.5% of deep ocean land-painted",
+      "pass": false,
+      "detail": {
+        "violation_frac": 0.03523,
+        "violation_px": 6267
+      }
+    },
+    {
+      "id": "A6",
+      "name": "component count per region within +-1 (no fusion/fragmentation)",
+      "pass": false,
+      "detail": {
+        "north-america": {
+          "source": 43,
+          "candidate": 17
+        },
+        "south-america": {
+          "source": 18,
+          "candidate": 4
+        },
+        "europe": {
+          "source": 33,
+          "candidate": 21
+        },
+        "great-britain": {
+          "source": 10,
+          "candidate": 6
+        },
+        "africa": {
+          "source": 44,
+          "candidate": 30
+        },
+        "middle-east": {
+          "source": 14,
+          "candidate": 11
+        },
+        "asia": {
+          "source": 59,
+          "candidate": 27
+        },
+        "se-asia": {
+          "source": 23,
+          "candidate": 10
+        },
+        "australia": {
+          "source": 13,
+          "candidate": 5
+        }
+      }
+    },
+    {
+      "id": "A7",
+      "name": "palette census: candidate flat colours <= source's + 2 (final rule awaits pinned palette, #145)",
+      "pass": true,
+      "detail": {
+        "candidate": 11,
+        "source": 27
+      }
+    },
+    {
+      "id": "A9",
+      "name": "anchoring: >=97% of coastal ink marks still touch land",
+      "pass": false,
+      "detail": {
+        "anchored_frac": 0.7834,
+        "orphaned_px": 1905
+      }
+    },
+    {
+      "id": "A10",
+      "name": "label integrity: every word keeps >=90% of its glyph pixels",
+      "pass": false,
+      "detail": {
+        "damaged_words": 49,
+        "worst": [
+          {
+            "x": 880,
+            "y": 86,
+            "survival": 0.0,
+            "px": 30
+          },
+          {
+            "x": 804,
+            "y": 99,
+            "survival": 0.0,
+            "px": 30
+          },
+          {
+            "x": 931,
+            "y": 99,
+            "survival": 0.0,
+            "px": 29
+          },
+          {
+            "x": 730,
+            "y": 116,
+            "survival": 0.0,
+            "px": 31
+          },
+          {
+            "x": 651,
+            "y": 119,
+            "survival": 0.0,
+            "px": 27
+          },
+          {
+            "x": 582,
+            "y": 121,
+            "survival": 0.0,
+            "px": 34
+          },
+          {
+            "x": 762,
+            "y": 136,
+            "survival": 0.0,
+            "px": 22
+          },
+          {
+            "x": 702,
+            "y": 196,
+            "survival": 0.0,
+            "px": 29
+          }
+        ]
+      }
+    },
+    {
+      "id": "A13",
+      "name": "no interior strokes absent from the source (<=30px tolerance)",
+      "pass": false,
+      "detail": {
+        "ghost_stroke_px": 799
+      }
+    },
+    {
+      "id": "A15",
+      "name": "deliverable identity: candidate hash recorded; publish step must match it",
+      "pass": true,
+      "detail": {
+        "sha256": "1c0154a18f9a4582398763f60fadcfb3d1ce9fc73092f3e6832e2e13d98acba6"
+      }
+    },
+    {
+      "id": "A16",
+      "name": "frame declaration: all assertions above sample the SOURCE-raster frame",
+      "pass": true,
+      "detail": {
+        "frame": "source raster 1001x485"
+      }
+    }
+  ],
+  "note": "mechanical PASS is necessary, never sufficient: an independent visual reviewer must read the pair-*.png packet and return ship/no-ship before any deploy."
+}

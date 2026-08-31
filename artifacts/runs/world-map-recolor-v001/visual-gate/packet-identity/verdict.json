@@ -1,0 +1,98 @@
+{
+  "candidate": "wtz-map-12map-1001x485.gif",
+  "source": "wtz-map-12map-1001x485.gif",
+  "mechanical_pass": true,
+  "checks": [
+    {
+      "id": "A2",
+      "name": "registration: region land-centroid shift <=2px",
+      "pass": true,
+      "detail": {
+        "north-america": 0.0,
+        "south-america": 0.0,
+        "europe": 0.0,
+        "great-britain": 0.0,
+        "africa": 0.0,
+        "middle-east": 0.0,
+        "asia": 0.0,
+        "se-asia": 0.0,
+        "australia": 0.0
+      }
+    },
+    {
+      "id": "A3",
+      "name": "coverage: >=98% of source land fills painted (source frame)",
+      "pass": true,
+      "detail": {
+        "coverage": 1.0
+      }
+    },
+    {
+      "id": "A4",
+      "name": "sea stays sea: <=0.5% of deep ocean land-painted",
+      "pass": true,
+      "detail": {
+        "violation_frac": 0.0,
+        "violation_px": 0
+      }
+    },
+    {
+      "id": "A6",
+      "name": "component count per region within +-1 (no fusion/fragmentation)",
+      "pass": true,
+      "detail": {}
+    },
+    {
+      "id": "A7",
+      "name": "palette census: candidate flat colours <= source's + 2 (final rule awaits pinned palette, #145)",
+      "pass": true,
+      "detail": {
+        "candidate": 27,
+        "source": 27
+      }
+    },
+    {
+      "id": "A9",
+      "name": "anchoring: >=97% of coastal ink marks still touch land",
+      "pass": true,
+      "detail": {
+        "anchored_frac": 1.0,
+        "orphaned_px": 0
+      }
+    },
+    {
+      "id": "A10",
+      "name": "label integrity: every word keeps >=90% of its glyph pixels",
+      "pass": true,
+      "detail": {
+        "damaged_words": 0,
+        "worst": []
+      }
+    },
+    {
+      "id": "A13",
+      "name": "no interior strokes absent from the source (<=30px tolerance)",
+      "pass": true,
+      "detail": {
+        "ghost_stroke_px": 0
+      }
+    },
+    {
+      "id": "A15",
+      "name": "deliverable identity: candidate hash recorded; publish step must match it",
+      "pass": true,
+      "detail": {
+        "sha256": "90338b9cdbdd59ad60a7876f5e928d957837f1a816d6bd1e08ebed8f545c61e5"
+      }
+    },
+    {
+      "id": "A16",
+      "name": "frame declaration: all assertions above sample the SOURCE-raster frame",
+      "pass": true,
+      "detail": {
+        "frame": "source raster 1001x485"
+      }
+    }
+  ],
+  "note": "mechanical PASS is necessary, never sufficient: an independent visual reviewer must read the pair-*.png packet and return ship/no-ship before any deploy."
+}
