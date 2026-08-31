@@ -1,0 +1,11 @@
+{
+  "issue": 139,
+  "version": "v005",
+  "sources": [
+    {
+      "role": "owner-attached-moleskine-geometry-paper-and-gutter-authority",
+      "path": "artifacts/references/kidpix-sketchbook-v005/moleskine-geometry-reference.png",
+      "sha256": "c5d01fc9999353adf7871bae0cf238b3b726b781ed398779639286e9e6b21e55"
+    }
+  ]
+}

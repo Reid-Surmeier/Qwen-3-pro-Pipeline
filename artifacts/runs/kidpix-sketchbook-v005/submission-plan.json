@@ -1,0 +1,50 @@
+{
+  "issue": 139,
+  "version": "v005",
+  "status": "planned-not-submitted",
+  "planned_at": "2026-08-30T20:06:42-04:00",
+  "question": "Can one smooth high-resolution blank open-book asset match the owner's Moleskine-like reference, including layered paper edges and a recessed center gutter, without the rejected Minecraft-like pixel treatment?",
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "endpoint": "http://10.255.255.254:8188/prompt",
+  "client_id": "281b5d95-90bf-407a-bac0-628a9ca8c518",
+  "requested_outputs": 1,
+  "resolution": "1K",
+  "aspect_ratio": "1:1",
+  "seed": 20260908,
+  "estimated_cost_usd": 0.05,
+  "actual_cost_usd": null,
+  "issue_allowance": {
+    "maximum_outputs": 10,
+    "prior_requested_outputs": 5,
+    "prior_completed_outputs": 5,
+    "prior_ambiguous_outputs": 0,
+    "remaining_before_this_request": 5,
+    "remaining_after_this_request_if_ambiguous": 4
+  },
+  "references": [
+    {
+      "role": "owner-attached-moleskine-geometry-paper-and-gutter-authority",
+      "path": "artifacts/references/kidpix-sketchbook-v005/moleskine-geometry-reference.png",
+      "sha256": "c5d01fc9999353adf7871bae0cf238b3b726b781ed398779639286e9e6b21e55"
+    }
+  ],
+  "brief": {
+    "path": "examples/kidpix-sketchbook-v005.json",
+    "sha256": "9d9fe5baa50b7ddfe933f0d936489755cf3899682da920044118605a7011988b",
+    "approximate_tokens": 1706,
+    "budget_tokens": 4500
+  },
+  "workflow": {
+    "path": "workflows/kidpix-sketchbook-v005.api.json",
+    "sha256": "c94d098678c1c2c36232d1cb71df09b9196515c9c5511b414b88fc03e6d3f09f"
+  },
+  "prompt_request_sha256": "8732c2fac25ae24a953a87e2a6313f062cc074c05421dff5ee4def566160dd9d",
+  "submission_rule": "Submit this exact one-output workflow and client ID once. If enqueue or provider result is ambiguous, count the requested output against the Issue allowance and reconcile router, worker, output and provider state before any retry. No blind retry is authorized.",
+  "stop_rule": "Stop after this one Render Pass and inspect it at native size before any prototype import or additional generation.",
+  "queue_preflight": {
+    "checked_at": "2026-08-30T20:06:42-04:00",
+    "running": 0,
+    "pending": 0
+  }
+}

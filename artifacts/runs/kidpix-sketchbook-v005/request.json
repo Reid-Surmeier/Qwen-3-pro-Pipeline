@@ -1,0 +1,17 @@
+{
+  "model": "qwen/qwen-image-3-pro",
+  "provider": "openrouter",
+  "compiled_prompt_source": "workflows/kidpix-sketchbook-v005.api.json node 2 inputs.edit_brief_json",
+  "compiled_prompt_source_sha256": "c94d098678c1c2c36232d1cb71df09b9196515c9c5511b414b88fc03e6d3f09f",
+  "input_references": [
+    {
+      "type": "image_url",
+      "role": "owner-attached-moleskine-geometry-paper-and-gutter-authority",
+      "image_url": "[recorded separately]"
+    }
+  ],
+  "n": 1,
+  "resolution": "1K",
+  "aspect_ratio": "1:1",
+  "seed": 20260908
+}

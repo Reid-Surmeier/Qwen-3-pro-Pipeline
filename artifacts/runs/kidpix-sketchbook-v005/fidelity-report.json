@@ -1,0 +1,39 @@
+{
+  "issue": 139,
+  "version": "v005",
+  "candidate": {
+    "path": "artifacts/runs/kidpix-sketchbook-v005/image-01.png",
+    "sha256": "d438ae66575c64721c0e6508000bfcaa44a59a2cfec0d9f01d0c3bb118a52c48",
+    "width": 1024,
+    "height": 1024,
+    "channels": "srgb"
+  },
+  "visual_inspection": {
+    "one_open_two_page_book": true,
+    "smooth_antialiased_rendering": true,
+    "moleskine_like_physical_construction": true,
+    "visible_layered_outer_paper_edge": true,
+    "softly_rounded_corners": true,
+    "clear_recessed_center_gutter": true,
+    "both_pages_blank": true,
+    "pencil_absent_from_base_image": true,
+    "portraits_or_drawings_absent": true,
+    "metal_binding_absent": true,
+    "usable_as_bounded_page_prototype": true,
+    "owner_visual_approval": "pending"
+  },
+  "pixel_samples": {
+    "corner_top_left": "srgb(255,254,255)",
+    "corner_top_right": "srgb(253,253,253)",
+    "corner_bottom_left": "srgb(255,255,255)",
+    "corner_bottom_right": "srgb(255,254,254)",
+    "left_page_interior": "srgb(252,245,227)",
+    "right_page_interior": "srgb(253,246,229)",
+    "center_gutter": "srgb(213,194,164)"
+  },
+  "limitations": [
+    "The raw Render Pass is a prototype candidate, not an approved output.",
+    "The exterior is visually white but not exact pure white at every sampled corner; no deterministic normalization was applied.",
+    "The interactive drawing hitbox is an inset approximation and remains subject to owner visual approval."
+  ]
+}

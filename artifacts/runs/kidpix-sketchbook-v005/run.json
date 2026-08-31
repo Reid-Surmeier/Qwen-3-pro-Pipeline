@@ -1,0 +1,41 @@
+{
+  "issue": 139,
+  "version": "v005",
+  "outputs": [
+    {
+      "role": "successful-raw-render-pass-smooth-prototype-candidate",
+      "file": "image-01.png",
+      "bytes": 509659,
+      "media_type": "image/png",
+      "sha256": "d438ae66575c64721c0e6508000bfcaa44a59a2cfec0d9f01d0c3bb118a52c48",
+      "note": "One smooth blank Moleskine-like open book with layered paper edges and a recessed center gutter. No deterministic finishing was applied before prototype import. Owner visual approval is pending."
+    }
+  ],
+  "provenance": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "prompt_id": "c8afb856-91a2-4895-a493-2a9deb05d05b",
+    "client_id": "281b5d95-90bf-407a-bac0-628a9ca8c518",
+    "prompt_request_sha256": "8732c2fac25ae24a953a87e2a6313f062cc074c05421dff5ee4def566160dd9d",
+    "workflow_sha256": "c94d098678c1c2c36232d1cb71df09b9196515c9c5511b414b88fc03e6d3f09f",
+    "brief_sha256": "9d9fe5baa50b7ddfe933f0d936489755cf3899682da920044118605a7011988b",
+    "reference_sha256": [
+      "c5d01fc9999353adf7871bae0cf238b3b726b781ed398779639286e9e6b21e55"
+    ],
+    "submitted_at": "2026-08-30T20:07:19-04:00",
+    "completed_at": "2026-08-30T20:08:58-04:00",
+    "duration_seconds": 98.2,
+    "requested_outputs": 1,
+    "completed_outputs": 1,
+    "ambiguous_outputs": 0,
+    "estimated_cost_usd": 0.05,
+    "actual_cost_usd": null,
+    "actual_cost_note": "OpenRouter usage was not exposed by the ComfyUI history output."
+  },
+  "usage": {
+    "input_image_count": 1,
+    "output_image_count": 1,
+    "output_width": 1024,
+    "output_height": 1024
+  }
+}

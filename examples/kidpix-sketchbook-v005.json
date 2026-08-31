@@ -1,0 +1,85 @@
+{
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "objective": "Create one smooth high-resolution blank open Moleskine-style sketchbook for an interactive drawing surface. Match the supplied real book's rounded paper geometry, layered perimeter, and visibly recessed center gutter while removing all drawings and loose accessories.",
+  "reference_role": "Reference image 1 is authoritative for the open-book proportions, near-orthographic overhead view, warm cream paper material, softly rounded corners, layered outer paper edges, and deeply readable vertical center seam. Remove every portrait, graphite mark, drawing, ribbon and shadow-producing loose object. Preserve the convincing physical book construction rather than flattening it into one rectangular sheet.",
+  "preservation_invariants": [
+    "Keep exactly one complete open two-page sketchbook centered on a square clean-white canvas.",
+    "Keep the camera nearly perpendicular to the paper plane in an overhead orthographic presentation.",
+    "Keep two large warm-cream blank page interiors with softly rounded outer corners.",
+    "Keep a continuous layered paper perimeter and a clearly recessed vertical center gutter.",
+    "Keep the entire book fully inside the canvas with generous white exterior margin."
+  ],
+  "canvas": [
+    "Square 1024 by 1024 output.",
+    "The horizontal open spread occupies most of the canvas width and roughly three quarters of its height.",
+    "Center the book with even clean-white exterior space around all four sides.",
+    "Use a true overhead or extremely shallow near-orthographic view with no dramatic perspective convergence.",
+    "Show the complete outer paper edge and all rounded corners."
+  ],
+  "regions": [
+    {
+      "name": "blank page interiors",
+      "change": "Remove every portrait, face, pencil line, crosshatch, graphite mark, text mark, decoration, ribbon and page annotation. Reconstruct both page faces as uninterrupted warm cream drawing paper with restrained natural tonal variation.",
+      "preserve": [
+        "page proportions",
+        "softly rounded outer corners",
+        "large drawable interiors"
+      ]
+    },
+    {
+      "name": "center gutter",
+      "change": "Preserve and clarify the real book's recessed vertical center seam from top to bottom. Use a narrow soft occlusion gradient and subtle folded-paper curvature so the two pages visibly meet in a Moleskine-like gutter. The gutter stays darker than the page faces and must remain readable at normal display size.",
+      "preserve": [
+        "symmetric left and right pages",
+        "vertical alignment",
+        "physical open-book construction"
+      ]
+    },
+    {
+      "name": "outer paper edge",
+      "change": "Keep several thin aligned cream paper layers visible around the perimeter, with soft antialiased rounded corners and a restrained edge shadow immediately under the paper stack. The edge must be dimensional enough to read as a book but remain close to orthographic.",
+      "preserve": [
+        "clean white exterior",
+        "complete visible book",
+        "large blank page area"
+      ]
+    }
+  ],
+  "exact_copy": [],
+  "style": [
+    "Smooth high-resolution editorial product illustration with natural cream paper and subtle material depth.",
+    "Clean antialiased contours, restrained soft shading, gentle paper curvature, and no blocky raster treatment.",
+    "Quiet Moleskine-style physical construction: rounded page corners, layered paper perimeter, and a recessed central fold.",
+    "Minimal clean-white presentation suitable for placing inside a software window."
+  ],
+  "asset_rules": [
+    "Exactly one open two-page blank sketchbook and zero loose objects.",
+    "Exactly two blank drawable page interiors separated by one clearly recessed center gutter.",
+    "One continuous layered paper edge around the complete spread.",
+    "Zero pencil, eraser, ribbon, portraits, drawings, text, rings, metal hardware, toolbar, UI chrome, hands, or desk props.",
+    "No labels, captions, page numbers, logos, watermark, variation grid, or reference sheet."
+  ],
+  "negative_constraints": [
+    "No pixel art, voxel art, Minecraft blocks, stair-stepped contours, nearest-neighbor scaling, dithering, limited retro palette, or thick black outline.",
+    "No single flat rectangular sheet, missing gutter, painted center line, featureless center, or seam hidden by uniform cream fill.",
+    "No face, person, portrait, sketch, graphite line, handwriting, ruled line, grid, decoration, ribbon or bookmark.",
+    "No pencil, pen, eraser, brush, hand, tool, ring, spiral, coil, wire, clip, hole, tab, hinge, or metal hardware.",
+    "No red cover strip, colored binding, lifted corner, dog-ear, thick perspective wedge, dramatic cast shadow, desk, room, or background scene.",
+    "No three-quarter view, isometric camera, tilted horizon, strong foreshortening, or book cropped by the canvas."
+  ],
+  "quality_checks": [
+    "At a glance the image reads as a smooth real open Moleskine-like sketchbook rather than a pixel icon or flat card.",
+    "The recessed center gutter remains visible from top edge to bottom edge and clearly separates two page faces.",
+    "Multiple subtle paper layers remain readable around the outer perimeter and the corners are smoothly rounded.",
+    "Both page interiors are completely blank, warm cream, and large enough for drawing.",
+    "There is no pencil, portrait, drawing, ribbon, UI content, metal binding, blocky outline, or Minecraft-like treatment.",
+    "The complete book is centered and fully visible against a clean white exterior."
+  ],
+  "output": {
+    "resolution": "1K",
+    "aspect_ratio": "1:1",
+    "count": 1,
+    "seed": 20260908
+  }
+}
