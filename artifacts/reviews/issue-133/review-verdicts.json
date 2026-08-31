@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "issue": 133,
+  "candidate_commit": "ccc6feaa65427132e6ac8ac538ee784531f5124c",
+  "evidence_commit": "e74d5d4a4d270c998e88b1ec005c4f95264a518e",
+  "verdicts": [
+    {
+      "review": "specification",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "Both prior blockers are closed; all 441 evidence hashes and nine exact-candidate Play Logs independently pass, the retained Behaviour Card matches the implementation, and the source, state, gesture, regression, and no-provider clauses are satisfied."
+    },
+    {
+      "review": "engineering",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "Party policy remains behind the generic Window-state adapter seam; relationship and action-map validation fail closed; the Options overlap regression is proved through public browser evidence; all exact-candidate regressions and baselines pass."
+    },
+    {
+      "review": "blind_artifact",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The hash-locked source crop, Party/Friends semantics, complete State Sets, named rejections, rapid gesture, reversible Window gestures, and eight prior-window regressions pass fresh-context blind review."
+    }
+  ]
+}
