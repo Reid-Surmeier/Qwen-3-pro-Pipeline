@@ -13,8 +13,8 @@ static func interact(spec: Dictionary, state: Dictionary, gesture: String,
 		return _error(Errors.CONTROL_BINDING,
 			"ScrollView gesture has no declared Window Action: %s" % gesture)
 	var value: Dictionary = spec.get("value", {})
-	var minimum := int(value.get("minimum", 0))
-	var maximum := int(value.get("maximum", 0))
+	var minimum := int(state.get("minimum", value.get("minimum", 0)))
+	var maximum := int(state.get("maximum", value.get("maximum", 0)))
 	var next := int(state.get("offset", value.get("initial", minimum)))
 	match gesture:
 		"Wheel":
@@ -42,7 +42,8 @@ static func interact(spec: Dictionary, state: Dictionary, gesture: String,
 	state.value = state.offset
 	state.semantic_state = "at_start" if state.offset == minimum else (
 		"at_end" if state.offset == maximum else "between")
-	state.interaction_phase = "idle"
+	state.interaction_phase = "dragging" if gesture == "Drag" \
+		and "dragging" in spec.get("interaction_phases", []) else "idle"
 	state.last_action = action
 	state.last_gesture = gesture
 	return {"ok": true, "action": action, "offset": state.offset,

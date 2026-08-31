@@ -134,7 +134,8 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 			return false
 		var actions: Variant = control.get("actions", [])
 		return actions is Array and actions.any(func(binding):
-			return binding is Dictionary and binding.get("action") == "ToggleSkillView"))
+			return binding is Dictionary and binding.get("action") in [
+				"ToggleSkillView", "ToggleStorageView"]))
 	if requires_list_plate and (not plates is Dictionary or not plates.has("list")):
 		errors.append(_error(Errors.ASSET_INTEGRITY, path + ".plates.list",
 			"a list plate is required when ToggleSkillView is bound"))
@@ -142,6 +143,7 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 		_validate_control(controls[control_index], window_id, control_index,
 			control_ids, errors, asset_exists)
 	_validate_selection_value_controls(controls, window_id, path, errors)
+	_validate_linked_selection_controls(controls, path, errors)
 	if window.has("minimized_controls"):
 		_validate_minimized_controls(window.minimized_controls, controls,
 			path + ".minimized_controls", errors)
@@ -173,6 +175,27 @@ static func _validate_minimized_controls(value: Variant, controls: Array,
 	if not has_restore:
 		errors.append(_error(Errors.CONTROL_BINDING, path,
 			"minimized Controls must retain a ToggleMinimized restore action"))
+
+
+static func _validate_linked_selection_controls(controls: Array, path: String,
+		errors: Array[Dictionary]) -> void:
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	for index in controls.size():
+		var control: Variant = controls[index]
+		if not control is Dictionary or str(control.get("type", "")) not in [
+				"ScrollView", "TextField"]:
+			continue
+		var value: Variant = control.get("value", {})
+		var linked_id := str(value.get("selection_control_id", "")) \
+			if value is Dictionary else ""
+		if linked_id.is_empty() or not declared.has(linked_id) \
+				or str(declared[linked_id].get("type", "")) != "SelectionView":
+			errors.append(_error(Errors.CONTROL_BINDING,
+				"%s.controls[%d].value.selection_control_id" % [path, index],
+				"linked Control must be a SelectionView declared in the same Window"))
 
 
 static func _validate_control(control: Variant, window_id: String, control_index: int,
@@ -234,7 +257,7 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 	elif control_type == "ScrollView":
 		_validate_scroll_view_contract(control, path, errors)
 	elif control_type == "TextField":
-		_validate_text_field_contract(control, path, errors)
+		_validate_text_field_contract(control, path, errors, asset_exists)
 
 
 static func _validate_range_contract(control: Dictionary, path: String,
@@ -579,7 +602,7 @@ static func _validate_scroll_view_contract(control: Dictionary, path: String,
 
 
 static func _validate_text_field_contract(control: Dictionary, path: String,
-		errors: Array[Dictionary]) -> void:
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
 	var value: Variant = control.get("value")
 	var valid := value is Dictionary and value.get("initial") is String \
 		and _positive_number(value.get("maximum_length")) \
@@ -596,6 +619,8 @@ static func _validate_text_field_contract(control: Dictionary, path: String,
 		func(token): return tokens.has(token) and not str(tokens[token]).is_empty()):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".tokens",
 			"TextField requires font, font_size, and font_color tokens"))
+	elif tokens is Dictionary:
+		_validate_asset(str(tokens.font), path + ".tokens.font", errors, asset_exists)
 
 
 static func _validate_surfaces(surfaces: Variant, path: String,

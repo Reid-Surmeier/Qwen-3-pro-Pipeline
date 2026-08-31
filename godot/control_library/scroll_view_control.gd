@@ -105,6 +105,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _set_from_global_y(global_y: float) -> void:
+	runtime.set_interaction_phase(spec.id, "dragging", "thumb")
 	var track: TextureRect = visuals.track
 	var thumb: TextureRect = visuals.thumb
 	var local_y := global_y - global_position.y

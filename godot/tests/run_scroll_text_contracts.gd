@@ -34,6 +34,14 @@ func _init() -> void:
 	_check("thumb-continuous-and-clamped", middle.ok and middle.offset == 3
 		and start.ok and start.offset == 0 and scroll_state.semantic_state == "at_start",
 		str([middle, start, scroll_state]))
+	var runtime_clamped_state := {"offset": 0, "minimum": 0, "maximum": 0,
+		"semantic_state": "at_start", "interaction_phase": "idle", "last_action": ""}
+	var runtime_clamped := ScrollView.interact(scroll_spec, runtime_clamped_state,
+		"Wheel", {"direction": 1})
+	_check("runtime-bounds-override-stale-manifest-bounds",
+		runtime_clamped.ok and runtime_clamped.offset == 0
+		and runtime_clamped_state.semantic_state == "at_start",
+		str([runtime_clamped, runtime_clamped_state]))
 
 	var text_spec := {"actions": [{"gesture": "KeyCommand",
 		"action": "FilterStorage"}], "value": {"initial": "", "maximum_length": 24,

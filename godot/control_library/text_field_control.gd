@@ -54,7 +54,7 @@ func focus_field() -> void:
 
 
 func _focus(focused: bool) -> void:
-	runtime.set_interaction_phase(spec.id, "hover" if focused else "idle",
+	runtime.set_interaction_phase(spec.id, "focused" if focused else "idle",
 		"field" if focused else "")
 	_refresh()
 	changed.emit(spec.id, {"ok": true, "focused": focused})

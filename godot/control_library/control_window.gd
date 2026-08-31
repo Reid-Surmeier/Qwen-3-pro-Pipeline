@@ -481,9 +481,9 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 				dismiss_dropdowns()
 				visible = false
 			"ToggleSkillView":
-				_toggle_skill_view()
+				_toggle_view_mode()
 			"ToggleStorageView":
-				_toggle_skill_view()
+				_toggle_view_mode()
 			"FocusStorageSearch":
 				var search: Variant = control_nodes.get("storage.search")
 				if search != null and search.has_method("focus_field"):
@@ -546,7 +546,7 @@ func _toggle_minimized() -> void:
 			_show_selection_detail(detail_item)
 
 
-func _toggle_skill_view() -> void:
+func _toggle_view_mode() -> void:
 	view_mode = "list" if view_mode == "tree" else "tree"
 	detail_item = ""
 	_apply_view_mode()

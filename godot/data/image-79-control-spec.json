@@ -6169,9 +6169,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c0-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c0-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c0-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c0-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c0-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c0-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c0-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c0-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c0-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c0-transferring-pressed.png"
                 }
               }
             },
@@ -6194,9 +6199,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c1-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c1-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c1-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c1-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c1-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c1-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c1-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c1-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c1-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c1-transferring-pressed.png"
                 }
               }
             },
@@ -6219,9 +6229,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c2-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c2-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c2-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c2-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c2-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c2-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c2-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c2-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c2-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c2-transferring-pressed.png"
                 }
               }
             },
@@ -6244,9 +6259,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c3-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c3-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c3-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c3-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c3-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c3-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c3-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c3-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c3-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c3-transferring-pressed.png"
                 }
               }
             },
@@ -6269,9 +6289,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c4-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c4-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c4-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c4-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c4-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c4-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c4-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c4-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c4-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c4-transferring-pressed.png"
                 }
               }
             },
@@ -6294,9 +6319,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c5-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c5-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c5-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c5-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c5-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c5-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c5-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c5-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c5-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c5-transferring-pressed.png"
                 }
               }
             },
@@ -6319,9 +6349,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r0c6-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r0c6-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r0c6-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r0c6-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r0c6-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c6-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c6-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r0c6-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c6-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c6-transferring-pressed.png"
                 }
               }
             },
@@ -6344,9 +6379,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c0-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c0-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c0-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c0-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c0-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c0-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c0-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c0-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c0-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c0-transferring-pressed.png"
                 }
               }
             },
@@ -6369,9 +6409,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c1-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c1-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c1-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c1-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c1-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c1-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c1-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c1-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c1-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c1-transferring-pressed.png"
                 }
               }
             },
@@ -6394,9 +6439,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c2-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c2-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c2-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c2-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c2-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c2-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c2-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c2-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c2-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c2-transferring-pressed.png"
                 }
               }
             },
@@ -6419,9 +6469,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c3-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c3-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c3-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c3-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c3-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c3-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c3-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c3-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c3-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c3-transferring-pressed.png"
                 }
               }
             },
@@ -6444,9 +6499,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c4-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c4-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c4-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c4-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c4-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c4-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c4-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c4-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c4-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c4-transferring-pressed.png"
                 }
               }
             },
@@ -6469,9 +6529,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c5-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c5-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c5-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c5-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c5-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c5-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c5-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c5-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c5-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c5-transferring-pressed.png"
                 }
               }
             },
@@ -6494,9 +6559,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r1c6-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r1c6-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r1c6-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r1c6-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r1c6-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c6-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c6-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r1c6-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c6-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c6-transferring-pressed.png"
                 }
               }
             },
@@ -6519,9 +6589,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c0-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c0-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c0-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c0-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c0-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c0-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c0-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c0-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c0-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c0-transferring-pressed.png"
                 }
               }
             },
@@ -6544,9 +6619,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c1-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c1-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c1-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c1-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c1-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c1-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c1-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c1-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c1-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c1-transferring-pressed.png"
                 }
               }
             },
@@ -6569,9 +6649,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c2-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c2-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c2-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c2-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c2-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c2-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c2-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c2-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c2-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c2-transferring-pressed.png"
                 }
               }
             },
@@ -6594,9 +6679,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c3-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c3-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c3-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c3-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c3-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c3-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c3-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c3-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c3-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c3-transferring-pressed.png"
                 }
               }
             },
@@ -6619,9 +6709,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c4-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c4-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c4-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c4-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c4-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c4-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c4-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c4-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c4-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c4-transferring-pressed.png"
                 }
               }
             },
@@ -6644,9 +6739,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c5-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c5-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c5-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c5-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c5-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c5-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c5-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c5-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c5-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c5-transferring-pressed.png"
                 }
               }
             },
@@ -6669,9 +6769,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r2c6-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r2c6-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r2c6-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r2c6-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r2c6-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c6-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c6-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r2c6-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c6-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c6-transferring-pressed.png"
                 }
               }
             },
@@ -6694,9 +6799,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c0-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c0-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c0-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c0-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c0-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c0-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c0-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c0-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c0-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c0-transferring-pressed.png"
                 }
               }
             },
@@ -6719,9 +6829,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c1-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c1-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c1-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c1-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c1-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c1-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c1-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c1-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c1-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c1-transferring-pressed.png"
                 }
               }
             },
@@ -6744,9 +6859,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c2-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c2-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c2-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c2-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c2-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c2-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c2-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c2-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c2-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c2-transferring-pressed.png"
                 }
               }
             },
@@ -6769,9 +6889,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c3-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c3-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c3-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c3-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c3-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c3-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c3-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c3-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c3-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c3-transferring-pressed.png"
                 }
               }
             },
@@ -6794,9 +6919,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c4-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c4-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c4-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c4-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c4-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c4-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c4-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c4-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c4-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c4-transferring-pressed.png"
                 }
               }
             },
@@ -6819,9 +6949,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c5-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c5-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c5-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c5-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c5-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c5-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c5-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c5-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c5-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c5-transferring-pressed.png"
                 }
               }
             },
@@ -6844,9 +6979,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r3c6-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r3c6-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r3c6-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r3c6-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r3c6-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c6-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c6-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r3c6-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c6-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c6-transferring-pressed.png"
                 }
               }
             },
@@ -6869,9 +7009,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c0-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c0-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c0-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c0-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c0-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c0-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c0-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c0-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c0-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c0-transferring-pressed.png"
                 }
               }
             },
@@ -6894,9 +7039,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c1-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c1-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c1-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c1-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c1-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c1-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c1-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c1-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c1-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c1-transferring-pressed.png"
                 }
               }
             },
@@ -6919,9 +7069,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c2-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c2-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c2-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c2-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c2-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c2-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c2-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c2-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c2-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c2-transferring-pressed.png"
                 }
               }
             },
@@ -6944,9 +7099,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c3-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c3-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c3-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c3-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c3-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c3-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c3-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c3-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c3-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c3-transferring-pressed.png"
                 }
               }
             },
@@ -6969,9 +7129,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c4-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c4-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c4-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c4-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c4-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c4-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c4-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c4-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c4-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c4-transferring-pressed.png"
                 }
               }
             },
@@ -6994,9 +7159,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c5-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c5-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c5-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c5-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c5-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c5-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c5-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c5-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c5-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c5-transferring-pressed.png"
                 }
               }
             },
@@ -7019,9 +7189,14 @@
                   "pressed": "res://assets/image-79/storage/cell-r4c6-selected-pressed.png"
                 },
                 "modifier_selected": {
-                  "idle": "res://assets/image-79/storage/cell-r4c6-transfer-idle.png",
-                  "hover": "res://assets/image-79/storage/cell-r4c6-transfer-hover.png",
-                  "pressed": "res://assets/image-79/storage/cell-r4c6-transfer-pressed.png"
+                  "idle": "res://assets/image-79/storage/cell-r4c6-modifier-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c6-modifier-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c6-modifier-pressed.png"
+                },
+                "transferring": {
+                  "idle": "res://assets/image-79/storage/cell-r4c6-transferring-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c6-transferring-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c6-transferring-pressed.png"
                 }
               }
             }
@@ -7039,7 +7214,8 @@
           "interaction_phases": [
             "idle",
             "hover",
-            "pressed"
+            "pressed",
+            "dragging"
           ],
           "semantic_states": [
             "at_start",
@@ -7051,17 +7227,20 @@
             "at_start": {
               "idle": "res://assets/image-79/storage/transparent.png",
               "hover": "res://assets/image-79/storage/transparent.png",
-              "pressed": "res://assets/image-79/storage/transparent.png"
+              "pressed": "res://assets/image-79/storage/transparent.png",
+              "dragging": "res://assets/image-79/storage/transparent.png"
             },
             "between": {
               "idle": "res://assets/image-79/storage/transparent.png",
               "hover": "res://assets/image-79/storage/transparent.png",
-              "pressed": "res://assets/image-79/storage/transparent.png"
+              "pressed": "res://assets/image-79/storage/transparent.png",
+              "dragging": "res://assets/image-79/storage/transparent.png"
             },
             "at_end": {
               "idle": "res://assets/image-79/storage/transparent.png",
               "hover": "res://assets/image-79/storage/transparent.png",
-              "pressed": "res://assets/image-79/storage/transparent.png"
+              "pressed": "res://assets/image-79/storage/transparent.png",
+              "dragging": "res://assets/image-79/storage/transparent.png"
             }
           },
           "gestures": [
@@ -7101,19 +7280,22 @@
               },
               "state_set": {
                 "at_start": {
-                  "idle": "res://assets/image-79/storage/scroll-up-idle.png",
-                  "hover": "res://assets/image-79/storage/scroll-up-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                  "idle": "res://assets/image-79/storage/scroll-up-muted-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-up-muted-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-up-muted-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-up-muted-pressed.png"
                 },
                 "between": {
                   "idle": "res://assets/image-79/storage/scroll-up-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-up-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-up-pressed.png"
                 },
                 "at_end": {
                   "idle": "res://assets/image-79/storage/scroll-up-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-up-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-up-pressed.png"
                 }
               }
             },
@@ -7137,17 +7319,20 @@
                 "at_start": {
                   "idle": "res://assets/image-79/storage/scroll-down-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-down-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-down-pressed.png"
                 },
                 "between": {
                   "idle": "res://assets/image-79/storage/scroll-down-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-down-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-down-pressed.png"
                 },
                 "at_end": {
-                  "idle": "res://assets/image-79/storage/scroll-down-idle.png",
-                  "hover": "res://assets/image-79/storage/scroll-down-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                  "idle": "res://assets/image-79/storage/scroll-down-muted-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-down-muted-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-down-muted-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-down-muted-pressed.png"
                 }
               }
             },
@@ -7162,17 +7347,20 @@
                 "at_start": {
                   "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-thumb-pressed.png"
                 },
                 "between": {
                   "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-thumb-pressed.png"
                 },
                 "at_end": {
                   "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
                   "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
-                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/storage/scroll-thumb-pressed.png"
                 }
               }
             }
@@ -7260,7 +7448,8 @@
           "interaction_phases": [
             "idle",
             "hover",
-            "pressed"
+            "pressed",
+            "focused"
           ],
           "semantic_states": [
             "empty",
@@ -7271,12 +7460,14 @@
             "empty": {
               "idle": "res://assets/image-79/storage/search-empty-idle.png",
               "hover": "res://assets/image-79/storage/search-empty-hover.png",
-              "pressed": "res://assets/image-79/storage/search-empty-pressed.png"
+              "pressed": "res://assets/image-79/storage/search-empty-pressed.png",
+              "focused": "res://assets/image-79/storage/search-empty-hover.png"
             },
             "filtered": {
               "idle": "res://assets/image-79/storage/search-filtered-idle.png",
               "hover": "res://assets/image-79/storage/search-filtered-hover.png",
-              "pressed": "res://assets/image-79/storage/search-filtered-pressed.png"
+              "pressed": "res://assets/image-79/storage/search-filtered-pressed.png",
+              "focused": "res://assets/image-79/storage/search-filtered-hover.png"
             }
           },
           "gestures": [

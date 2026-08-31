@@ -2,8 +2,8 @@
 // keyboard input produce the Storage Play Log and evidence frames.
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { execFileSync, spawnSync } from "node:child_process";
+import { mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -64,6 +64,37 @@ const invariantShot = async (name) => {
   await page.screenshot({ path, clip: { x: 1400, y: 800, width: 100, height: 100 } });
   return { path: `${name}.png`, sha256: sha256(path) };
 };
+const ae = (left, right, crop = undefined) => {
+  const leftPath = resolve(OUT, left.path);
+  const rightPath = resolve(OUT, right.path);
+  let comparedLeft = leftPath;
+  let comparedRight = rightPath;
+  const temporary = [];
+  if (crop) {
+    const geometry = `${crop.width}x${crop.height}+${crop.x}+${crop.y}`;
+    comparedLeft = resolve(OUT, `.pixel-left-${process.pid}.png`);
+    comparedRight = resolve(OUT, `.pixel-right-${process.pid}.png`);
+    temporary.push(comparedLeft, comparedRight);
+    for (const [input, output] of [[leftPath, comparedLeft], [rightPath, comparedRight]]) {
+      const cropped = spawnSync("convert", [input, "-crop", geometry, "+repage", output],
+        { encoding: "utf8" });
+      if (cropped.status !== 0) throw new Error(cropped.stderr || "ImageMagick crop failed");
+    }
+  }
+  const compared = spawnSync("compare", ["-metric", "AE", comparedLeft, comparedRight,
+    "null:"], { encoding: "utf8" });
+  for (const path of temporary) unlinkSync(path);
+  const raw = `${compared.stderr ?? ""}${compared.stdout ?? ""}`.trim();
+  const value = Number(raw);
+  if (!Number.isFinite(value)) throw new Error(`ImageMagick AE failed: ${raw}`);
+  return value;
+};
+const pixelMetrics = (before, after, crop = { x: 492, y: 569, width: 600, height: 433 }) => ({
+  full_frame_changed_pixels: ae(before, after),
+  intended_region_changed_pixels: ae(before, after, crop),
+  invariant_region_changed_pixels: ae(before, after,
+    { x: 1400, y: 800, width: 100, height: 100 }),
+});
 const record = (controlId, gesture, action, assertions, actionFrames, observed,
   motionSamples = undefined) => {
   const matches = Object.values(assertions).every(Boolean);
@@ -71,9 +102,25 @@ const record = (controlId, gesture, action, assertions, actionFrames, observed,
     expected: "manifest and Behaviour Card", observed: typeof observed === "string"
       ? observed : JSON.stringify(observed), responsive: matches,
     matches_expected: matches, assertions, frames: actionFrames };
+  if (actionFrames.before && actionFrames.after) {
+    entry.pixel_metrics = pixelMetrics(actionFrames.before, actionFrames.after);
+  }
+  if (actionFrames.before && actionFrames.reversed) {
+    entry.reversal_pixel_metrics = pixelMetrics(actionFrames.before, actionFrames.reversed);
+  }
   if (motionSamples !== undefined) entry.motion_samples = motionSamples;
   actions.push(entry);
   check(`${controlId}:${gesture}:${action}`, matches, assertions);
+};
+const attachReversal = (frame, assertions) => {
+  const entry = actions.at(-1);
+  entry.frames.reversed = frame;
+  entry.reversal_assertions = assertions;
+  entry.reversal_pixel_metrics = pixelMetrics(entry.frames.before, frame);
+  const matches = Object.values(assertions).every(Boolean);
+  entry.matches_expected = entry.matches_expected && matches;
+  entry.responsive = entry.matches_expected;
+  check(`${entry.control_id}:${entry.gesture}:reversal`, matches, assertions);
 };
 const click = async (x, y) => {
   const target = point(x, y);
@@ -138,6 +185,13 @@ record("storage.categories", "Activate", "SelectStorageCategory", {
   selected: category.value === "equipment",
   routed: category.last_action === "SelectStorageCategory",
 }, { before: focusFrame, after: categoryFrame }, category.value);
+await click(537, 668);
+await page.mouse.move(...Object.values(point(1200, 700)));
+const categoryReversed = await shot("01b-category-reversed");
+attachReversal(categoryReversed, {
+  restored_initial_category: (await control("storage.categories")).value === "consumable",
+});
+await click(537, 704);
 
 const scrollPoint = point(1007, 800);
 await page.mouse.move(scrollPoint.x, scrollPoint.y);
@@ -149,20 +203,37 @@ record("storage.scroll", "Wheel", "ScrollStorage", {
   exact_three_rows: wheel.offset === 3,
   one_frame_state: wheel.last_action === "ScrollStorage",
 }, { before: categoryFrame, after: wheelFrame }, wheel.offset);
+await page.mouse.wheel(0, -120);
+await page.waitForTimeout(60);
+const wheelReversed = await shot("02b-wheel-reversed");
+attachReversal(wheelReversed, {
+  exact_start: (await control("storage.scroll")).offset === 0,
+});
+await page.mouse.wheel(0, 120);
+await page.waitForTimeout(60);
 
 await click(1007, 946);
+await click(1007, 946);
+await click(1007, 946);
 const arrow = await control("storage.scroll");
+const arrowEndFrame = await shot("03-arrow-endpoint");
+for (let index = 0; index < 7; index += 1) await click(1007, 646);
+const arrowStart = await control("storage.scroll");
+const arrowStartFrame = await shot("03b-arrow-start-endpoint");
 record("storage.scroll", "Activate", "StepStorageScroll", {
-  exact_one_row: arrow.offset === 4,
-}, { before: wheelFrame, after: await shot("03-arrow-one-row") }, arrow.offset);
+  clamps_exact_end: arrow.offset === arrow.maximum,
+  clamps_exact_start: arrowStart.offset === arrowStart.minimum,
+}, { before: wheelFrame, after: arrowEndFrame, reversed: arrowStartFrame },
+JSON.stringify({ end: arrow, start: arrowStart }));
 
-const thumbStart = point(1007, 862);
-const thumbEnd = point(1007, 680);
+const thumbStart = point(1007, 683);
+const thumbEnd = point(1007, 925);
 await page.mouse.move(thumbStart.x, thumbStart.y);
 await page.mouse.down();
 const thumbMotionSamples = [];
 const offsetSamples = [];
 let thumbMid;
+let thumbDuring;
 for (let index = 0; index < 31; index += 1) {
   const t = index / 30;
   const sample = [thumbStart.x, thumbStart.y + (thumbEnd.y - thumbStart.y) * t];
@@ -170,17 +241,30 @@ for (let index = 0; index < 31; index += 1) {
   await page.waitForTimeout(12);
   thumbMotionSamples.push(sample);
   offsetSamples.push((await control("storage.scroll")).offset);
-  if (index === 15) thumbMid = await shot("04-thumb-drag-mid");
+  if (index === 15) {
+    thumbDuring = await control("storage.scroll");
+    thumbMid = await shot("04-thumb-drag-mid");
+  }
 }
 await page.mouse.up();
 const dragged = await control("storage.scroll");
+const thumbEndFrame = await shot("04-thumb-end");
+await page.mouse.move(thumbEnd.x, thumbEnd.y);
+await page.mouse.down();
+await page.mouse.move(thumbStart.x, thumbStart.y, { steps: 31 });
+await page.mouse.up();
+const thumbReversed = await control("storage.scroll");
+const thumbReversedFrame = await shot("04b-thumb-reversed");
 record("storage.scroll", "Drag", "SetStorageScrollOffset", {
   continuous: thumbMotionSamples.length === 31,
-  moved_toward_start: dragged.offset < arrow.offset,
-  clamped: dragged.offset >= 0 && dragged.offset <= dragged.maximum,
+  dragging_state_visible: thumbDuring?.interaction_phase === "dragging",
+  clamps_exact_end: dragged.offset === dragged.maximum,
+  clamps_exact_start: thumbReversed.offset === thumbReversed.minimum,
   offset_changed: new Set(offsetSamples).size > 1,
-}, { before: wheelFrame, mid: thumbMid, after: await shot("04-thumb-drag") },
-JSON.stringify({ state: dragged, offsets: offsetSamples }), thumbMotionSamples);
+}, { before: arrowStartFrame, mid: thumbMid, after: thumbEndFrame,
+  reversed: thumbReversedFrame },
+JSON.stringify({ end: dragged, start: thumbReversed, offsets: offsetSamples }),
+thumbMotionSamples);
 
 await click(779, 977);
 await page.keyboard.type("Potion 70", { delay: 25 });
@@ -191,10 +275,11 @@ record("storage.search", "KeyCommand", "FilterStorage", {
   accepted_text_rendered: searched.controls["storage.search"].rendered_text === "Potion 70",
   filtered_one: searched.controls["storage.items"].filtered_items.length === 1,
   scroll_reset: searched.controls["storage.scroll"].offset === 0,
-}, { before: frames["04-thumb-drag"], after: searchFrame },
+}, { before: thumbReversedFrame, after: searchFrame },
 searched.controls["storage.search"].rendered_text);
 
 await click(632, 977);
+const treeRestoredFrame = await shot("07c-tree-restored");
 const listed = await storage();
 const listFrame = await shot("06-list-mode");
 record("storage.list", "Activate", "ToggleStorageView", {
@@ -202,9 +287,15 @@ record("storage.list", "Activate", "ToggleStorageView", {
 }, { before: searchFrame, after: listFrame }, listed.window.view_mode);
 await click(878, 977);
 const sorted = await control("storage.items");
+const sortedFrame = await shot("07-sorted");
+await click(878, 977);
+const sortReversed = await control("storage.items");
+const sortReversedFrame = await shot("07b-sort-reversed");
 record("storage.sort", "Activate", "SortStorage", {
   reversed_order: sorted.sort_ascending === false,
-}, { before: listFrame, after: await shot("07-sorted") }, sorted.sort_ascending);
+  restored_order: sortReversed.sort_ascending === true,
+}, { before: listFrame, after: sortedFrame, reversed: sortReversedFrame },
+JSON.stringify({ sorted: sorted.sort_ascending, restored: sortReversed.sort_ascending }));
 await click(632, 977);
 
 await click(779, 977);
@@ -220,7 +311,7 @@ record("storage.items", "ModifierDoubleActivate", "TransferStorageItem", {
     === JSON.stringify(beforeReject.windows.storage.controls["storage.items"].collection_items),
   target_preserved: JSON.stringify(rejected.windows.inventory.controls["inventory.items"].collection_items)
     === JSON.stringify(beforeReject.windows.inventory.controls["inventory.items"].collection_items),
-}, { before: frames["07-sorted"], after: await shot("08-transfer-rejected") },
+}, { before: treeRestoredFrame, after: await shot("08-transfer-rejected") },
 rejected.last_transaction);
 
 await ctrlDouble(69, 761);
@@ -270,11 +361,23 @@ for (let index = 0; index < 31; index += 1) {
 await page.mouse.up();
 const moved = await storage();
 const windowDragAfter = await shot("11-window-moved");
+const reverseStart = point(760, 580);
+const reverseEnd = point(700, 620);
+await page.mouse.move(reverseStart.x, reverseStart.y);
+await page.mouse.down();
+await page.mouse.move(reverseEnd.x, reverseEnd.y, { steps: 31 });
+await page.mouse.up();
+const restoredMove = await storage();
+const windowDragReversed = await shot("11b-window-restored");
 record("storage", "Drag", "MoveWindow", {
   moved: moved.window.position[0] === 552 && moved.window.position[1] === 569,
   continuous: windowMotionSamples.length === 31,
-}, { before: windowDragBefore, mid: windowDragMid, after: windowDragAfter },
-moved.window.position, windowMotionSamples);
+  restored: restoredMove.window.position[0] === 492
+    && restoredMove.window.position[1] === 609,
+}, { before: windowDragBefore, mid: windowDragMid, after: windowDragAfter,
+  reversed: windowDragReversed },
+JSON.stringify({ moved: moved.window.position, restored: restoredMove.window.position }),
+windowMotionSamples);
 
 const invariantAfter = await invariantShot("11-invariant-after");
 
@@ -287,8 +390,12 @@ record("storage.close", "Activate", "CloseWindow", {
   hidden: titleClosed.visible === false,
   routed: titleClosedState.controls["storage.close"].last_action === "CloseWindow",
 }, { before: titleCloseBefore, after: await shot("12-title-close-after") }, titleClosedState);
-
 await reloadStorage();
+const titleCloseRestored = await shot("12b-title-close-restored");
+attachReversal(titleCloseRestored, {
+  restored: (await storage()).window.visible === true,
+});
+
 const bottomCloseBefore = await shot("13-bottom-close-before");
 await click(965, 977);
 const bottomClosedState = await storage();
@@ -297,8 +404,12 @@ record("storage.bottom_close", "Activate", "CloseWindow", {
   hidden: bottomClosed.visible === false,
   routed: bottomClosedState.controls["storage.bottom_close"].last_action === "CloseWindow",
 }, { before: bottomCloseBefore, after: await shot("13-bottom-close-after") }, bottomClosedState);
-
 await reloadStorage();
+const bottomCloseRestored = await shot("13b-bottom-close-restored");
+attachReversal(bottomCloseRestored, {
+  restored: (await storage()).window.visible === true,
+});
+
 await click(700, 620);
 const keyCloseBefore = await shot("14-key-close-before");
 await page.keyboard.press("Escape");

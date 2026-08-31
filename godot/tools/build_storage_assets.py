@@ -63,10 +63,12 @@ def variants(image: Image.Image, stem: str, records: list[dict[str, object]],
 def control(control_id: str, control_type: str, geometry: dict[str, int],
             state_set: dict[str, object], gestures: list[str],
             actions: list[dict[str, str]], semantic_states: list[str] | None = None,
-            initial: str | None = None, **extra: object) -> dict[str, object]:
+            initial: str | None = None,
+            interaction_phases: list[str] | None = None,
+            **extra: object) -> dict[str, object]:
     states = semantic_states or ["ready"]
     return {"id": control_id, "type": control_type, "geometry": geometry,
-            "interaction_phases": ["idle", "hover", "pressed"],
+            "interaction_phases": interaction_phases or ["idle", "hover", "pressed"],
             "semantic_states": states, "initial_semantic_state": initial or states[0],
             "state_set": state_set, "gestures": gestures, "actions": actions, **extra}
 
@@ -104,8 +106,10 @@ def main() -> None:
         surfaces[slot] = {"geometry": local, "state_set": {
             "unselected": variants(crop, f"cell-{slot}-unselected", records),
             "selected": variants(crop, f"cell-{slot}-selected", records, BLUE, 2),
-            "modifier_selected": variants(crop, f"cell-{slot}-transfer", records,
-                                          MODIFIER, 3),
+            "modifier_selected": variants(crop, f"cell-{slot}-modifier", records,
+                                          MODIFIER, 2),
+            "transferring": variants(crop, f"cell-{slot}-transferring", records,
+                                     MODIFIER, 3),
         }}
 
     collection = [f"stock-{index:03d}" for index in range(70)]
@@ -176,11 +180,14 @@ def main() -> None:
                                            field_image.height - 5), fill=WHITE)
     empty_field = variants(field_image, "search-empty", records)
     filtered_field = variants(field_image, "search-filtered", records, BLUE, 1)
+    for field_states in [empty_field, filtered_field]:
+        field_states["focused"] = field_states["hover"]
     search = control(
         "storage.search", "TextField", field_geometry,
         {"empty": empty_field, "filtered": filtered_field}, ["KeyCommand"],
         [{"gesture": "KeyCommand", "action": "FilterStorage"}],
         ["empty", "filtered"], "empty",
+        interaction_phases=["idle", "hover", "pressed", "focused"],
         value={"initial": "", "maximum_length": 24,
                "accepted_pattern": "^[A-Za-z0-9 ]*$",
                "selection_control_id": "storage.items"},
@@ -201,7 +208,16 @@ def main() -> None:
     up_states = variants(arrow_up, "scroll-up", records)
     down_states = variants(arrow_down, "scroll-down", records)
     thumb_states = variants(thumb, "scroll-thumb", records)
-    semantic_scroll = {state: transparent_variants for state in ["at_start", "between", "at_end"]}
+    muted_up = variants(ImageEnhance.Brightness(arrow_up).enhance(0.58),
+                        "scroll-up-muted", records)
+    muted_down = variants(ImageEnhance.Brightness(arrow_down).enhance(0.58),
+                          "scroll-down-muted", records)
+    scroll_transparent = dict(transparent_variants)
+    scroll_transparent["dragging"] = transparent_path
+    for state_set in [up_states, down_states, muted_up, muted_down, thumb_states]:
+        state_set["dragging"] = state_set["pressed"]
+    semantic_scroll = {state: scroll_transparent
+                       for state in ["at_start", "between", "at_end"]}
     scroll = control(
         "storage.scroll", "ScrollView", {"x": 508, "y": 30, "width": 14, "height": 315},
         semantic_scroll, ["Wheel", "Activate", "Drag"],
@@ -209,16 +225,19 @@ def main() -> None:
          {"gesture": "Activate", "action": "StepStorageScroll"},
          {"gesture": "Drag", "action": "SetStorageScrollOffset"}],
         ["at_start", "between", "at_end"], "at_start",
+        interaction_phases=["idle", "hover", "pressed", "dragging"],
         value={"minimum": 0, "maximum": 5, "initial": 0,
                "wheel_rows": 3, "arrow_rows": 1,
                "selection_control_id": "storage.items"},
         surfaces={
             "decrement": {"geometry": {"x": 0, "y": 0, "width": 14, "height": 16},
-                          "state_set": {state: up_states for state in semantic_scroll}},
+                          "state_set": {"at_start": muted_up, "between": up_states,
+                                        "at_end": up_states}},
             "track": {"geometry": {"x": 0, "y": 16, "width": 14, "height": 283},
                       "asset": track_path},
             "increment": {"geometry": {"x": 0, "y": 299, "width": 14, "height": 16},
-                          "state_set": {state: down_states for state in semantic_scroll}},
+                          "state_set": {"at_start": down_states, "between": down_states,
+                                        "at_end": muted_down}},
             "thumb": {"geometry": {"x": 0, "y": 16, "width": 14, "height": 56},
                       "state_set": {state: thumb_states for state in semantic_scroll}},
         },

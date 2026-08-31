@@ -57,6 +57,7 @@ func configure(spec: Dictionary) -> Dictionary:
 			state.item_version = int(control_spec.value.get("initial_version", 0))
 			state.drag_state = {"active": false, "source": "", "target": "",
 				"motion_samples": 0}
+			state.transfer_state = {"active": false, "item": ""}
 			state.collection_items = control_spec.value.get("collection_items",
 				state.item_values.values()).duplicate()
 			state.filtered_items = state.collection_items.duplicate()
@@ -184,7 +185,12 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 	var semantic := str(state.semantic_state)
 	if str(entry.spec.type) == "SelectionView":
 		var drag: Dictionary = state.get("drag_state", {})
-		if bool(drag.get("active", false)) and str(drag.get("source", "")) == surface_id:
+		var transfer: Dictionary = state.get("transfer_state", {})
+		if surface.state_set.has("transferring") \
+				and bool(transfer.get("active", false)) \
+				and str(transfer.get("item", "")) == surface_id:
+			semantic = "transferring"
+		elif bool(drag.get("active", false)) and str(drag.get("source", "")) == surface_id:
 			semantic = "dragging"
 		elif bool(drag.get("active", false)) and str(drag.get("target", "")) == surface_id:
 			semantic = "drop_target"
@@ -307,6 +313,16 @@ func set_selection_drag_state(control_id: String, active: bool, source: String =
 	state.drag_state = {"active": active, "source": source, "target": target,
 		"motion_samples": motion_samples}
 	return {"ok": true, "drag_state": state.drag_state.duplicate(true)}
+
+
+func set_selection_transfer_state(control_id: String, active: bool,
+		item: String = "") -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "ModifierDoubleActivate", Errors.INVALID_CONTROL_SPEC,
+			"transfer state requires a SelectionView")
+	var state: Dictionary = controls[control_id].state
+	state.transfer_state = {"active": active, "item": item if active else ""}
+	return {"ok": true, "transfer_state": state.transfer_state.duplicate(true)}
 
 
 func filter_selection(control_id: String, query: String) -> Dictionary:
