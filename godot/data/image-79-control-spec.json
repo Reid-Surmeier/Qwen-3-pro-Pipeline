@@ -4423,6 +4423,7 @@
             "Activate",
             "DoubleActivate",
             "ModifierActivate",
+            "ModifierDoubleActivate",
             "DragDrop"
           ],
           "actions": [
@@ -4437,6 +4438,10 @@
             {
               "gesture": "ModifierActivate",
               "action": "ToggleInventorySelection"
+            },
+            {
+              "gesture": "ModifierDoubleActivate",
+              "action": "TransferInventoryItem"
             },
             {
               "gesture": "DragDrop",
@@ -5577,6 +5582,1793 @@
               }
             }
           }
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "geometry": {
+        "x": 492,
+        "y": 609,
+        "width": 539,
+        "height": 393
+      },
+      "drag_geometry": {
+        "x": 24,
+        "y": 0,
+        "width": 470,
+        "height": 24
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/storage/source-plate.png",
+        "minimized": "res://assets/image-79/storage/source-plate.png",
+        "list": "res://assets/image-79/storage/list-plate.png"
+      },
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "controls": [
+        {
+          "id": "storage.close",
+          "type": "Button",
+          "geometry": {
+            "x": 515,
+            "y": 8,
+            "width": 18,
+            "height": 18
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/storage-close-idle.png",
+              "hover": "res://assets/image-79/storage/storage-close-hover.png",
+              "pressed": "res://assets/image-79/storage/storage-close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "storage.categories",
+          "type": "Tabs",
+          "geometry": {
+            "x": 12,
+            "y": 40,
+            "width": 66,
+            "height": 228
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "SelectStorageCategory"
+            }
+          ],
+          "value": {
+            "choices": [
+              "consumable",
+              "equipment",
+              "card",
+              "material",
+              "collectible",
+              "other"
+            ],
+            "initial": "consumable"
+          },
+          "surfaces": {
+            "consumable": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-consumable-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-consumable-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-consumable-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-consumable-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-consumable-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-consumable-selected-pressed.png"
+                }
+              }
+            },
+            "equipment": {
+              "geometry": {
+                "x": 0,
+                "y": 39,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-equipment-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-equipment-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-equipment-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-equipment-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-equipment-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-equipment-selected-pressed.png"
+                }
+              }
+            },
+            "card": {
+              "geometry": {
+                "x": 0,
+                "y": 78,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-card-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-card-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-card-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-card-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-card-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-card-selected-pressed.png"
+                }
+              }
+            },
+            "material": {
+              "geometry": {
+                "x": 0,
+                "y": 117,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-material-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-material-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-material-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-material-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-material-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-material-selected-pressed.png"
+                }
+              }
+            },
+            "collectible": {
+              "geometry": {
+                "x": 0,
+                "y": 156,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-collectible-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-collectible-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-collectible-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-collectible-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-collectible-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-collectible-selected-pressed.png"
+                }
+              }
+            },
+            "other": {
+              "geometry": {
+                "x": 0,
+                "y": 195,
+                "width": 66,
+                "height": 33
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/category-other-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-other-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-other-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/category-other-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/category-other-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/category-other-selected-pressed.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "storage.items",
+          "type": "SelectionView",
+          "geometry": {
+            "x": 88,
+            "y": 30,
+            "width": 420,
+            "height": 315
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "unselected",
+            "selected"
+          ],
+          "initial_semantic_state": "unselected",
+          "state_set": {
+            "unselected": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            },
+            "selected": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ModifierActivate",
+            "ModifierDoubleActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "SelectStorageItem"
+            },
+            {
+              "gesture": "ModifierActivate",
+              "action": "ToggleStorageSelection"
+            },
+            {
+              "gesture": "ModifierDoubleActivate",
+              "action": "TransferStorageItem"
+            }
+          ],
+          "value": {
+            "items": [
+              "r0c0",
+              "r0c1",
+              "r0c2",
+              "r0c3",
+              "r0c4",
+              "r0c5",
+              "r0c6",
+              "r1c0",
+              "r1c1",
+              "r1c2",
+              "r1c3",
+              "r1c4",
+              "r1c5",
+              "r1c6",
+              "r2c0",
+              "r2c1",
+              "r2c2",
+              "r2c3",
+              "r2c4",
+              "r2c5",
+              "r2c6",
+              "r3c0",
+              "r3c1",
+              "r3c2",
+              "r3c3",
+              "r3c4",
+              "r3c5",
+              "r3c6",
+              "r4c0",
+              "r4c1",
+              "r4c2",
+              "r4c3",
+              "r4c4",
+              "r4c5",
+              "r4c6"
+            ],
+            "initial": "r0c0",
+            "details": {
+              "r0c0": "倉庫 1-1\n個数 42",
+              "r0c1": "倉庫 1-2\n個数 18",
+              "r0c2": "倉庫 1-3\n個数 60",
+              "r0c3": "倉庫 1-4\n個数 7",
+              "r0c4": "倉庫 1-5\n個数 3",
+              "r0c5": "倉庫 1-6\n個数 2",
+              "r0c6": "倉庫 1-7\n個数 2",
+              "r1c0": "倉庫 2-1\n個数 10",
+              "r1c1": "倉庫 2-2\n個数 1",
+              "r1c2": "倉庫 2-3\n個数 5",
+              "r1c3": "倉庫 2-4\n個数 24",
+              "r1c4": "倉庫 2-5\n個数 17",
+              "r1c5": "倉庫 2-6\n個数 6",
+              "r1c6": "倉庫 2-7\n個数 2",
+              "r2c0": "倉庫 3-1\n個数 31",
+              "r2c1": "倉庫 3-2\n個数 9",
+              "r2c2": "倉庫 3-3\n個数 4",
+              "r2c3": "倉庫 3-4\n個数 2",
+              "r2c4": "倉庫 3-5\n個数 3",
+              "r2c5": "倉庫 3-6\n個数 12",
+              "r2c6": "倉庫 3-7\n個数 22",
+              "r3c0": "倉庫 4-1\n個数 1",
+              "r3c1": "倉庫 4-2\n個数 1",
+              "r3c2": "倉庫 4-3\n個数 empty",
+              "r3c3": "倉庫 4-4\n個数 empty",
+              "r3c4": "倉庫 4-5\n個数 empty",
+              "r3c5": "倉庫 4-6\n個数 empty",
+              "r3c6": "倉庫 4-7\n個数 empty",
+              "r4c0": "倉庫 5-1\n個数 empty",
+              "r4c1": "倉庫 5-2\n個数 empty",
+              "r4c2": "倉庫 5-3\n個数 empty",
+              "r4c3": "倉庫 5-4\n個数 empty",
+              "r4c4": "倉庫 5-5\n個数 empty",
+              "r4c5": "倉庫 5-6\n個数 empty",
+              "r4c6": "倉庫 5-7\n個数 empty"
+            },
+            "value_control_ids": {},
+            "item_values": {
+              "r0c0": "stock-000",
+              "r0c1": "stock-001",
+              "r0c2": "stock-002",
+              "r0c3": "stock-003",
+              "r0c4": "stock-004",
+              "r0c5": "stock-005",
+              "r0c6": "stock-006",
+              "r1c0": "stock-007",
+              "r1c1": "stock-008",
+              "r1c2": "stock-009",
+              "r1c3": "stock-010",
+              "r1c4": "stock-011",
+              "r1c5": "stock-012",
+              "r1c6": "stock-013",
+              "r2c0": "stock-014",
+              "r2c1": "stock-015",
+              "r2c2": "stock-016",
+              "r2c3": "stock-017",
+              "r2c4": "stock-018",
+              "r2c5": "stock-019",
+              "r2c6": "stock-020",
+              "r3c0": "stock-021",
+              "r3c1": "stock-022",
+              "r3c2": "stock-023",
+              "r3c3": "stock-024",
+              "r3c4": "stock-025",
+              "r3c5": "stock-026",
+              "r3c6": "stock-027",
+              "r4c0": "stock-028",
+              "r4c1": "stock-029",
+              "r4c2": "stock-030",
+              "r4c3": "stock-031",
+              "r4c4": "stock-032",
+              "r4c5": "stock-033",
+              "r4c6": "stock-034"
+            },
+            "allowed_modifiers": [
+              "ctrl"
+            ],
+            "initial_version": 0,
+            "collection_items": [
+              "stock-000",
+              "stock-001",
+              "stock-002",
+              "stock-003",
+              "stock-004",
+              "stock-005",
+              "stock-006",
+              "stock-007",
+              "stock-008",
+              "stock-009",
+              "stock-010",
+              "stock-011",
+              "stock-012",
+              "stock-013",
+              "stock-014",
+              "stock-015",
+              "stock-016",
+              "stock-017",
+              "stock-018",
+              "stock-019",
+              "stock-020",
+              "stock-021",
+              "stock-022",
+              "stock-023",
+              "stock-024",
+              "stock-025",
+              "stock-026",
+              "stock-027",
+              "stock-028",
+              "stock-029",
+              "stock-030",
+              "stock-031",
+              "stock-032",
+              "stock-033",
+              "stock-034",
+              "stock-035",
+              "stock-036",
+              "stock-037",
+              "stock-038",
+              "stock-039",
+              "stock-040",
+              "stock-041",
+              "stock-042",
+              "stock-043",
+              "stock-044",
+              "stock-045",
+              "stock-046",
+              "stock-047",
+              "stock-048",
+              "stock-049",
+              "stock-050",
+              "stock-051",
+              "stock-052",
+              "stock-053",
+              "stock-054",
+              "stock-055",
+              "stock-056",
+              "stock-057",
+              "stock-058",
+              "stock-059",
+              "stock-060",
+              "stock-061",
+              "stock-062",
+              "stock-063",
+              "stock-064",
+              "stock-065",
+              "stock-066",
+              "stock-067",
+              "stock-068",
+              "stock-069"
+            ],
+            "collection_labels": {
+              "stock-000": "Potion 01",
+              "stock-001": "Potion 02",
+              "stock-002": "Potion 03",
+              "stock-003": "Potion 04",
+              "stock-004": "Potion 05",
+              "stock-005": "Potion 06",
+              "stock-006": "Potion 07",
+              "stock-007": "Potion 08",
+              "stock-008": "Potion 09",
+              "stock-009": "Potion 10",
+              "stock-010": "Potion 11",
+              "stock-011": "Potion 12",
+              "stock-012": "Potion 13",
+              "stock-013": "Potion 14",
+              "stock-014": "Potion 15",
+              "stock-015": "Potion 16",
+              "stock-016": "Potion 17",
+              "stock-017": "Potion 18",
+              "stock-018": "Potion 19",
+              "stock-019": "Potion 20",
+              "stock-020": "Potion 21",
+              "stock-021": "Potion 22",
+              "stock-022": "Potion 23",
+              "stock-023": "Potion 24",
+              "stock-024": "Potion 25",
+              "stock-025": "Potion 26",
+              "stock-026": "Potion 27",
+              "stock-027": "Potion 28",
+              "stock-028": "Potion 29",
+              "stock-029": "Potion 30",
+              "stock-030": "Potion 31",
+              "stock-031": "Potion 32",
+              "stock-032": "Potion 33",
+              "stock-033": "Potion 34",
+              "stock-034": "Potion 35",
+              "stock-035": "Potion 36",
+              "stock-036": "Potion 37",
+              "stock-037": "Potion 38",
+              "stock-038": "Potion 39",
+              "stock-039": "Potion 40",
+              "stock-040": "Potion 41",
+              "stock-041": "Potion 42",
+              "stock-042": "Potion 43",
+              "stock-043": "Potion 44",
+              "stock-044": "Potion 45",
+              "stock-045": "Potion 46",
+              "stock-046": "Potion 47",
+              "stock-047": "Potion 48",
+              "stock-048": "Potion 49",
+              "stock-049": "Potion 50",
+              "stock-050": "Potion 51",
+              "stock-051": "Potion 52",
+              "stock-052": "Potion 53",
+              "stock-053": "Potion 54",
+              "stock-054": "Potion 55",
+              "stock-055": "Potion 56",
+              "stock-056": "Potion 57",
+              "stock-057": "Potion 58",
+              "stock-058": "Potion 59",
+              "stock-059": "Potion 60",
+              "stock-060": "Potion 61",
+              "stock-061": "Potion 62",
+              "stock-062": "Potion 63",
+              "stock-063": "Potion 64",
+              "stock-064": "Potion 65",
+              "stock-065": "Potion 66",
+              "stock-066": "Potion 67",
+              "stock-067": "Potion 68",
+              "stock-068": "Potion 69",
+              "stock-069": "Potion 70"
+            },
+            "columns": 7,
+            "visible_rows": 5,
+            "capacity": 300,
+            "list_layout": {
+              "columns": 2,
+              "rows": 12,
+              "row_height": 24,
+              "column_width": 198,
+              "origin": [
+                8,
+                7
+              ]
+            }
+          },
+          "surfaces": {
+            "r0c0": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c0-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c0-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c0-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c0-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c0-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c0-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c0-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c0-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c0-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c1": {
+              "geometry": {
+                "x": 60,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c1-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c1-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c1-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c1-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c1-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c1-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c1-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c1-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c1-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c2": {
+              "geometry": {
+                "x": 120,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c2-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c2-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c2-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c2-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c2-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c2-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c2-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c2-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c2-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c3": {
+              "geometry": {
+                "x": 180,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c3-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c3-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c3-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c3-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c3-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c3-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c3-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c3-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c3-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c4": {
+              "geometry": {
+                "x": 240,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c4-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c4-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c4-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c4-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c4-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c4-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c4-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c4-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c4-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c5": {
+              "geometry": {
+                "x": 300,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c5-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c5-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c5-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c5-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c5-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c5-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c5-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c5-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c5-transfer-pressed.png"
+                }
+              }
+            },
+            "r0c6": {
+              "geometry": {
+                "x": 360,
+                "y": 0,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c6-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c6-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c6-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c6-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c6-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c6-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r0c6-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r0c6-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r0c6-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c0": {
+              "geometry": {
+                "x": 0,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c0-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c0-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c0-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c0-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c0-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c0-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c0-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c0-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c0-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c1": {
+              "geometry": {
+                "x": 60,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c1-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c1-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c1-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c1-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c1-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c1-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c1-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c1-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c1-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c2": {
+              "geometry": {
+                "x": 120,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c2-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c2-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c2-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c2-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c2-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c2-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c2-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c2-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c2-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c3": {
+              "geometry": {
+                "x": 180,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c3-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c3-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c3-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c3-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c3-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c3-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c3-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c3-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c3-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c4": {
+              "geometry": {
+                "x": 240,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c4-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c4-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c4-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c4-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c4-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c4-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c4-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c4-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c4-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c5": {
+              "geometry": {
+                "x": 300,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c5-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c5-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c5-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c5-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c5-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c5-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c5-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c5-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c5-transfer-pressed.png"
+                }
+              }
+            },
+            "r1c6": {
+              "geometry": {
+                "x": 360,
+                "y": 63,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c6-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c6-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c6-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c6-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c6-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c6-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r1c6-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r1c6-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r1c6-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c0": {
+              "geometry": {
+                "x": 0,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c0-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c0-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c0-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c0-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c0-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c0-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c0-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c0-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c0-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c1": {
+              "geometry": {
+                "x": 60,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c1-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c1-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c1-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c1-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c1-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c1-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c1-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c1-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c1-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c2": {
+              "geometry": {
+                "x": 120,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c2-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c2-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c2-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c2-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c2-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c2-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c2-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c2-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c2-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c3": {
+              "geometry": {
+                "x": 180,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c3-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c3-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c3-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c3-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c3-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c3-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c3-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c3-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c3-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c4": {
+              "geometry": {
+                "x": 240,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c4-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c4-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c4-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c4-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c4-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c4-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c4-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c4-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c4-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c5": {
+              "geometry": {
+                "x": 300,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c5-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c5-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c5-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c5-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c5-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c5-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c5-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c5-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c5-transfer-pressed.png"
+                }
+              }
+            },
+            "r2c6": {
+              "geometry": {
+                "x": 360,
+                "y": 126,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c6-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c6-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c6-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c6-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c6-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c6-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r2c6-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r2c6-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r2c6-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c0": {
+              "geometry": {
+                "x": 0,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c0-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c0-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c0-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c0-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c0-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c0-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c0-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c0-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c0-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c1": {
+              "geometry": {
+                "x": 60,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c1-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c1-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c1-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c1-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c1-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c1-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c1-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c1-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c1-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c2": {
+              "geometry": {
+                "x": 120,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c2-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c2-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c2-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c2-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c2-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c2-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c2-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c2-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c2-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c3": {
+              "geometry": {
+                "x": 180,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c3-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c3-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c3-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c3-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c3-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c3-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c3-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c3-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c3-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c4": {
+              "geometry": {
+                "x": 240,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c4-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c4-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c4-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c4-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c4-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c4-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c4-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c4-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c4-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c5": {
+              "geometry": {
+                "x": 300,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c5-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c5-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c5-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c5-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c5-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c5-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c5-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c5-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c5-transfer-pressed.png"
+                }
+              }
+            },
+            "r3c6": {
+              "geometry": {
+                "x": 360,
+                "y": 189,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c6-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c6-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c6-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c6-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c6-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c6-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r3c6-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r3c6-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r3c6-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c0": {
+              "geometry": {
+                "x": 0,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c0-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c0-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c0-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c0-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c0-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c0-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c0-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c0-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c0-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c1": {
+              "geometry": {
+                "x": 60,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c1-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c1-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c1-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c1-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c1-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c1-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c1-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c1-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c1-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c2": {
+              "geometry": {
+                "x": 120,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c2-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c2-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c2-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c2-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c2-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c2-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c2-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c2-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c2-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c3": {
+              "geometry": {
+                "x": 180,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c3-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c3-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c3-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c3-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c3-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c3-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c3-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c3-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c3-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c4": {
+              "geometry": {
+                "x": 240,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c4-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c4-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c4-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c4-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c4-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c4-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c4-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c4-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c4-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c5": {
+              "geometry": {
+                "x": 300,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c5-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c5-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c5-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c5-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c5-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c5-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c5-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c5-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c5-transfer-pressed.png"
+                }
+              }
+            },
+            "r4c6": {
+              "geometry": {
+                "x": 360,
+                "y": 252,
+                "width": 60,
+                "height": 63
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c6-unselected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c6-unselected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c6-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c6-selected-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c6-selected-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c6-selected-pressed.png"
+                },
+                "modifier_selected": {
+                  "idle": "res://assets/image-79/storage/cell-r4c6-transfer-idle.png",
+                  "hover": "res://assets/image-79/storage/cell-r4c6-transfer-hover.png",
+                  "pressed": "res://assets/image-79/storage/cell-r4c6-transfer-pressed.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "storage.scroll",
+          "type": "ScrollView",
+          "geometry": {
+            "x": 508,
+            "y": 30,
+            "width": 14,
+            "height": 315
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "at_start",
+            "between",
+            "at_end"
+          ],
+          "initial_semantic_state": "at_start",
+          "state_set": {
+            "at_start": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            },
+            "between": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            },
+            "at_end": {
+              "idle": "res://assets/image-79/storage/transparent.png",
+              "hover": "res://assets/image-79/storage/transparent.png",
+              "pressed": "res://assets/image-79/storage/transparent.png"
+            }
+          },
+          "gestures": [
+            "Wheel",
+            "Activate",
+            "Drag"
+          ],
+          "actions": [
+            {
+              "gesture": "Wheel",
+              "action": "ScrollStorage"
+            },
+            {
+              "gesture": "Activate",
+              "action": "StepStorageScroll"
+            },
+            {
+              "gesture": "Drag",
+              "action": "SetStorageScrollOffset"
+            }
+          ],
+          "value": {
+            "minimum": 0,
+            "maximum": 5,
+            "initial": 0,
+            "wheel_rows": 3,
+            "arrow_rows": 1,
+            "selection_control_id": "storage.items"
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 14,
+                "height": 16
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/storage/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/storage/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/storage/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-up-pressed.png"
+                }
+              }
+            },
+            "track": {
+              "geometry": {
+                "x": 0,
+                "y": 16,
+                "width": 14,
+                "height": 283
+              },
+              "asset": "res://assets/image-79/storage/scroll-track.png"
+            },
+            "increment": {
+              "geometry": {
+                "x": 0,
+                "y": 299,
+                "width": 14,
+                "height": 16
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/storage/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/storage/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/storage/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-down-pressed.png"
+                }
+              }
+            },
+            "thumb": {
+              "geometry": {
+                "x": 0,
+                "y": 16,
+                "width": 14,
+                "height": 56
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/storage/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/storage/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/storage/scroll-thumb-pressed.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "storage.list",
+          "type": "Button",
+          "geometry": {
+            "x": 129,
+            "y": 355,
+            "width": 23,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/storage-list-idle.png",
+              "hover": "res://assets/image-79/storage/storage-list-hover.png",
+              "pressed": "res://assets/image-79/storage/storage-list-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleStorageView"
+            }
+          ]
+        },
+        {
+          "id": "storage.search_focus",
+          "type": "Button",
+          "geometry": {
+            "x": 160,
+            "y": 355,
+            "width": 47,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/storage-search_focus-idle.png",
+              "hover": "res://assets/image-79/storage/storage-search_focus-hover.png",
+              "pressed": "res://assets/image-79/storage/storage-search_focus-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "FocusStorageSearch"
+            }
+          ]
+        },
+        {
+          "id": "storage.search",
+          "type": "TextField",
+          "geometry": {
+            "x": 244,
+            "y": 355,
+            "width": 86,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "empty",
+            "filtered"
+          ],
+          "initial_semantic_state": "empty",
+          "state_set": {
+            "empty": {
+              "idle": "res://assets/image-79/storage/search-empty-idle.png",
+              "hover": "res://assets/image-79/storage/search-empty-hover.png",
+              "pressed": "res://assets/image-79/storage/search-empty-pressed.png"
+            },
+            "filtered": {
+              "idle": "res://assets/image-79/storage/search-filtered-idle.png",
+              "hover": "res://assets/image-79/storage/search-filtered-hover.png",
+              "pressed": "res://assets/image-79/storage/search-filtered-pressed.png"
+            }
+          },
+          "gestures": [
+            "KeyCommand"
+          ],
+          "actions": [
+            {
+              "gesture": "KeyCommand",
+              "action": "FilterStorage"
+            }
+          ],
+          "value": {
+            "initial": "",
+            "maximum_length": 24,
+            "accepted_pattern": "^[A-Za-z0-9 ]*$",
+            "selection_control_id": "storage.items"
+          },
+          "tokens": {
+            "font": "res://fonts/PixelMplus10-Regular.ttf",
+            "font_size": 13,
+            "font_color": "#2a252a"
+          }
+        },
+        {
+          "id": "storage.sort",
+          "type": "Button",
+          "geometry": {
+            "x": 344,
+            "y": 355,
+            "width": 84,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/storage-sort-idle.png",
+              "hover": "res://assets/image-79/storage/storage-sort-hover.png",
+              "pressed": "res://assets/image-79/storage/storage-sort-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "SortStorage"
+            }
+          ]
+        },
+        {
+          "id": "storage.bottom_close",
+          "type": "Button",
+          "geometry": {
+            "x": 440,
+            "y": 355,
+            "width": 66,
+            "height": 27
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/storage/storage-bottom_close-idle.png",
+              "hover": "res://assets/image-79/storage/storage-bottom_close-hover.png",
+              "pressed": "res://assets/image-79/storage/storage-bottom_close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
         }
       ]
     }

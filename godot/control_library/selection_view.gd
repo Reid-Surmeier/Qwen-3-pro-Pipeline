@@ -9,7 +9,7 @@ const Errors = preload("res://control_library/control_errors.gd")
 static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
 	if gesture not in ["Activate", "ContextActivate", "DoubleActivate",
-			"ModifierActivate", "DragDrop"]:
+			"ModifierActivate", "ModifierDoubleActivate", "DragDrop"]:
 		return _error(Errors.CONTROL_BINDING, "SelectionView gesture is not supported")
 	var action := _action_for_gesture(spec, gesture)
 	if action.is_empty():
@@ -21,7 +21,7 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 	if item not in spec.value.items:
 		return _error(Errors.CONTROL_BINDING,
 			"SelectionView item is not declared: %s" % item)
-	if gesture == "ModifierActivate":
+	if gesture in ["ModifierActivate", "ModifierDoubleActivate"]:
 		if payload.has("modifiers") and not payload.modifiers is Array:
 			return _error(Errors.INVALID_MODIFIER,
 				"modifiers must be an array")
@@ -30,12 +30,16 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 		if modifiers != allowed:
 			return _error(Errors.INVALID_MODIFIER,
 				"expected modifiers %s, received %s" % [str(allowed), str(modifiers)])
-		var selected: Array = state.get("selected_items", []).duplicate()
-		if item in selected:
-			selected.erase(item)
+		if gesture == "ModifierActivate":
+			var selected: Array = state.get("selected_items", []).duplicate()
+			if item in selected:
+				selected.erase(item)
+			else:
+				selected.append(item)
+			state.selected_items = selected
 		else:
-			selected.append(item)
-		state.selected_items = selected
+			state.value = item
+			state.text = item
 	elif gesture == "DoubleActivate":
 		state.opened_item = item
 		state.value = item
@@ -43,7 +47,7 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 		state.value = item
 		if gesture == "Activate" and state.has("selected_items"):
 			state.selected_items = []
-	if gesture != "ModifierActivate":
+	if gesture not in ["ModifierActivate", "ModifierDoubleActivate"]:
 		state.value = item
 		state.text = item
 	state.semantic_state = "selected"

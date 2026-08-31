@@ -25,7 +25,11 @@ var _drag_target := ""
 var _drag_version := 0
 var _motion_samples := 0
 var _double_pending := false
+var _modifier_double_pending := false
 var _single_generation := 0
+var _last_click_item := ""
+var _last_click_modifiers: Array[String] = []
+var _last_click_msec := -1
 
 const DRAG_THRESHOLD := 4.0
 const DOUBLE_INTERVAL_SECONDS := 0.22
@@ -132,12 +136,18 @@ func _add_list_overlay() -> void:
 	list_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	list_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var labels: Dictionary = spec.value.get("labels", {})
+	var layout: Dictionary = spec.value.get("list_layout", {})
+	var rows := maxi(int(layout.get("rows", 14)), 1)
+	var origin: Array = layout.get("origin", [12, 8])
+	var row_height := float(layout.get("row_height", 30))
+	var column_width := float(layout.get("column_width", 270))
 	for index in spec.value.items.size():
 		var item := str(spec.value.items[index])
 		var label := Label.new()
 		label.text = "%s   %s" % [str(labels.get(item, item)), _related_value_text(item)]
-		label.position = Vector2(12 + 270 * int(index / 14), 8 + 30 * (index % 14))
-		label.size = Vector2(255, 26)
+		label.position = Vector2(float(origin[0]) + column_width * int(index / rows),
+			float(origin[1]) + row_height * (index % rows))
+		label.size = Vector2(column_width - 8, row_height - 2)
 		label.add_theme_font_override("font", load("res://fonts/PixelMplus10-Regular.ttf"))
 		label.add_theme_font_size_override("font_size", 14)
 		label.add_theme_color_override("font_color", Color8(42, 37, 42))
@@ -238,17 +248,23 @@ func _exited(item: String) -> void:
 func _item_input(event: InputEvent, item: String) -> void:
 	if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
 		if event.pressed:
+			var press_modifiers := _modifiers(event)
+			var matching_double := _matches_declared_double(event, item, press_modifiers)
 			_held_item = item
 			_held_button = event.button_index
 			_press_global = event.global_position
 			_press_local = event.position
-			_press_modifiers = _modifiers(event)
+			_press_modifiers = press_modifiers
 			_dragging = false
 			_drag_target = ""
 			_motion_samples = 0
 			_drag_version = int(runtime.qa_state().controls[spec.id].get("item_version", 0))
+			_modifier_double_pending = event.button_index == MOUSE_BUTTON_LEFT \
+				and matching_double and not _press_modifiers.is_empty() \
+				and "ModifierDoubleActivate" in spec.gestures
 			_double_pending = event.button_index == MOUSE_BUTTON_LEFT \
-				and event.double_click and "DoubleActivate" in spec.gestures
+				and matching_double and _press_modifiers.is_empty() \
+				and "DoubleActivate" in spec.gestures
 			_single_generation += 1
 			runtime.set_interaction_phase(spec.id, "pressed", item)
 			_refresh()
@@ -293,6 +309,7 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	var button := _held_button
 	var was_dragging := _dragging
 	var was_double := _double_pending
+	var was_modifier_double := _modifier_double_pending
 	var modifiers := _press_modifiers.duplicate()
 	var payload := {
 		"item": item,
@@ -304,11 +321,18 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	_held_item = ""
 	_held_button = 0
 	_double_pending = false
+	_modifier_double_pending = false
 	var schedules_single: bool = not was_dragging and button == MOUSE_BUTTON_LEFT \
 		and modifiers.is_empty() and not was_double \
 		and "DoubleActivate" in spec.gestures
 	if not schedules_single:
 		_single_generation += 1
+	if was_dragging:
+		_forget_click()
+	elif button == MOUSE_BUTTON_LEFT:
+		_remember_click(item, modifiers)
+	else:
+		_forget_click()
 	var result: Dictionary
 	if was_dragging:
 		var target := _item_at_global(event.global_position)
@@ -323,6 +347,8 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 		_drag_target = ""
 	elif button == MOUSE_BUTTON_RIGHT:
 		result = runtime.dispatch(spec.id, "ContextActivate", payload)
+	elif was_modifier_double:
+		result = runtime.dispatch(spec.id, "ModifierDoubleActivate", payload)
 	elif not modifiers.is_empty() and "ModifierActivate" in spec.gestures:
 		result = runtime.dispatch(spec.id, "ModifierActivate", payload)
 	elif was_double:
@@ -339,6 +365,27 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	_refresh()
 	changed.emit(spec.id, result)
 	accept_event()
+
+
+func _matches_declared_double(event: InputEventMouseButton, item: String,
+		modifiers: Array[String]) -> bool:
+	if not event.double_click or _last_click_msec < 0:
+		return false
+	var elapsed_msec := Time.get_ticks_msec() - _last_click_msec
+	return item == _last_click_item and modifiers == _last_click_modifiers \
+		and elapsed_msec <= int(DOUBLE_INTERVAL_SECONDS * 1000.0)
+
+
+func _remember_click(item: String, modifiers: Array[String]) -> void:
+	_last_click_item = item
+	_last_click_modifiers = modifiers.duplicate()
+	_last_click_msec = Time.get_ticks_msec()
+
+
+func _forget_click() -> void:
+	_last_click_item = ""
+	_last_click_modifiers = []
+	_last_click_msec = -1
 
 
 func _schedule_single(payload: Dictionary) -> void:
@@ -383,9 +430,13 @@ func _refresh() -> void:
 		if not path.is_empty():
 			visuals[item].texture = load(path)
 	var labels: Dictionary = spec.value.get("labels", {})
+	var collection_labels: Dictionary = spec.value.get("collection_labels", {})
 	for item in list_labels:
+		var identity := _item_identity(item)
+		list_labels[item].visible = not identity.is_empty()
 		list_labels[item].text = "%s   %s" % [
-			str(labels.get(item, item)), _related_value_text(item)]
+			str(collection_labels.get(identity, labels.get(item, identity))),
+			_related_value_text(item)]
 	var opened_item := str(runtime.qa_state().controls[spec.id].get("opened_item", ""))
 	if detail_panel != null and detail_panel.visible and not opened_item.is_empty():
 		show_detail(opened_item)

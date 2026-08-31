@@ -9,6 +9,8 @@ const ChoiceGroup = preload("res://control_library/choice_group.gd")
 const TabsModule = preload("res://control_library/tabs.gd")
 const SelectionViewModule = preload("res://control_library/selection_view.gd")
 const StepperModule = preload("res://control_library/stepper.gd")
+const ScrollViewModule = preload("res://control_library/scroll_view.gd")
+const TextFieldModule = preload("res://control_library/text_field.gd")
 
 var window_spec: Dictionary = {}
 var controls: Dictionary = {}
@@ -55,6 +57,22 @@ func configure(spec: Dictionary) -> Dictionary:
 			state.item_version = int(control_spec.value.get("initial_version", 0))
 			state.drag_state = {"active": false, "source": "", "target": "",
 				"motion_samples": 0}
+			state.collection_items = control_spec.value.get("collection_items",
+				state.item_values.values()).duplicate()
+			state.filtered_items = state.collection_items.duplicate()
+			state.filter_text = ""
+			state.sort_ascending = true
+			state.scroll_offset = 0
+			state.capacity = int(control_spec.value.get("capacity",
+				state.collection_items.size()))
+		elif str(control_spec.type) == "ScrollView":
+			state.offset = int(control_spec.value.initial)
+			state.value = state.offset
+			state.minimum = int(control_spec.value.minimum)
+			state.maximum = int(control_spec.value.maximum)
+		elif str(control_spec.type) == "TextField":
+			state.value = str(control_spec.value.initial)
+			state.text = state.value
 		elif control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
 			if state.value is String:
@@ -102,6 +120,10 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 			result = _dispatch_selection_view(entry, gesture, payload)
 		"Stepper":
 			result = _dispatch_stepper(entry, gesture, payload)
+		"ScrollView":
+			result = _dispatch_scroll_view(entry, gesture, payload)
+		"TextField":
+			result = _dispatch_text_field(entry, gesture, payload)
 		"Button":
 			result = _dispatch_button(entry, gesture)
 		_:
@@ -287,12 +309,129 @@ func set_selection_drag_state(control_id: String, active: bool, source: String =
 	return {"ok": true, "drag_state": state.drag_state.duplicate(true)}
 
 
+func filter_selection(control_id: String, query: String) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "KeyCommand", Errors.CONTROL_BINDING,
+			"filter target must be a SelectionView")
+	var entry: Dictionary = controls[control_id]
+	var labels: Dictionary = entry.spec.value.get("collection_labels", {})
+	var normalized := query.strip_edges().to_lower()
+	entry.state.filter_text = query
+	entry.state.filtered_items = entry.state.collection_items.filter(func(item):
+		return normalized.is_empty() or normalized in str(labels.get(item, item)).to_lower())
+	entry.state.scroll_offset = 0
+	_refresh_selection_page(entry)
+	return {"ok": true, "query": query, "result_count": entry.state.filtered_items.size()}
+
+
+func sort_selection(control_id: String) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "Activate", Errors.CONTROL_BINDING,
+			"sort target must be a SelectionView")
+	var entry: Dictionary = controls[control_id]
+	entry.state.sort_ascending = not bool(entry.state.sort_ascending)
+	entry.state.collection_items.sort()
+	if not entry.state.sort_ascending:
+		entry.state.collection_items.reverse()
+	filter_selection(control_id, str(entry.state.filter_text))
+	return {"ok": true, "ascending": entry.state.sort_ascending}
+
+
+func set_selection_scroll(control_id: String, offset: int) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "Wheel", Errors.CONTROL_BINDING,
+			"scroll target must be a SelectionView")
+	var entry: Dictionary = controls[control_id]
+	entry.state.scroll_offset = maxi(offset, 0)
+	_refresh_selection_page(entry)
+	return {"ok": true, "offset": entry.state.scroll_offset}
+
+
+func sync_scroll_bounds(scroll_control_id: String, selection_control_id: String) -> Dictionary:
+	if not controls.has(scroll_control_id) or str(controls[scroll_control_id].spec.type) != "ScrollView" \
+			or not controls.has(selection_control_id) \
+			or str(controls[selection_control_id].spec.type) != "SelectionView":
+		return _reject(scroll_control_id, "", Errors.CONTROL_BINDING,
+			"scroll bounds require linked ScrollView and SelectionView controls")
+	var scroll: Dictionary = controls[scroll_control_id]
+	var selection: Dictionary = controls[selection_control_id]
+	var columns := maxi(int(selection.spec.value.get("columns", 1)), 1)
+	var visible_rows := maxi(int(selection.spec.value.get("visible_rows", 1)), 1)
+	var result_count: int = selection.state.filtered_items.size()
+	var total_rows: int = ceili(float(result_count) / float(columns))
+	scroll.state.maximum = maxi(total_rows - visible_rows, 0)
+	scroll.state.offset = clampi(int(scroll.state.offset), 0, int(scroll.state.maximum))
+	scroll.state.value = scroll.state.offset
+	scroll.state.semantic_state = "at_start" if scroll.state.offset == 0 else (
+		"at_end" if scroll.state.offset == scroll.state.maximum else "between")
+	selection.state.scroll_offset = scroll.state.offset
+	_refresh_selection_page(selection)
+	return {"ok": true, "maximum": scroll.state.maximum, "offset": scroll.state.offset}
+
+
+func selection_collection(control_id: String) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return {}
+	var state: Dictionary = controls[control_id].state
+	return {"window_id": str(window_spec.get("id", "")),
+		"items": state.collection_items.duplicate(),
+		"version": int(state.item_version), "capacity": int(state.capacity)}
+
+
+func apply_selection_collection(control_id: String, collection: Dictionary) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "ModifierActivate", Errors.CONTROL_BINDING,
+			"transaction target must be a SelectionView")
+	var entry: Dictionary = controls[control_id]
+	entry.state.collection_items = collection.get("items", []).duplicate()
+	entry.state.item_version = int(collection.get("version", entry.state.item_version))
+	filter_selection(control_id, str(entry.state.filter_text))
+	return {"ok": true, "version": entry.state.item_version,
+		"items": entry.state.collection_items.duplicate()}
+
+
+func selected_logical_item(control_id: String, slot: String) -> String:
+	if not controls.has(control_id):
+		return ""
+	return str(controls[control_id].state.get("item_values", {}).get(slot, ""))
+
+
+func _refresh_selection_page(entry: Dictionary) -> void:
+	var slots: Array = entry.spec.value.items
+	var columns := maxi(int(entry.spec.value.get("columns", slots.size())), 1)
+	var start := int(entry.state.scroll_offset) * columns
+	var values := {}
+	for index in slots.size():
+		var source_index := start + index
+		values[str(slots[index])] = str(entry.state.filtered_items[source_index]) \
+			if source_index < entry.state.filtered_items.size() else ""
+	entry.state.item_values = values
+
+
 func _dispatch_stepper(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
 	var result: Dictionary = StepperModule.step(entry.spec, entry.state, gesture, payload)
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
 	_set_all_stepper_arrows(not _has_pending_stepper())
+	return result
+
+
+func _dispatch_scroll_view(entry: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	var result: Dictionary = ScrollViewModule.interact(entry.spec, entry.state,
+		gesture, payload)
+	if not result.ok:
+		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
+	return result
+
+
+func _dispatch_text_field(entry: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	var result: Dictionary = TextFieldModule.edit(entry.spec, entry.state,
+		gesture, payload)
+	if not result.ok:
+		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
 	return result
 
 
@@ -309,7 +448,8 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 		return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
 			"Button has no Activate Window Action")
 	if action not in ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
-			"CommitSkillChanges", "CancelSkillChanges"]:
+			"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
+			"SortStorage", "FocusStorageSearch"]:
 		return _reject(entry.state.id, gesture, Errors.ACTION_ROUTING,
 			"Button action is not routed: %s" % action)
 	if action == "CommitSkillChanges":

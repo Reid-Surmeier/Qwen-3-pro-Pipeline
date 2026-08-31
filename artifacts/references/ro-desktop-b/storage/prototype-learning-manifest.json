@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "issue": 128,
+  "prototype_disposition": "throwaway",
+  "reference": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024],
+    "window_rect": {"x": 492, "y": 609, "width": 539, "height": 393}
+  },
+  "inventory": {
+    "source": "artifacts/references/ro-desktop-b/control-inventory.json",
+    "title_drag": 1,
+    "close": 1,
+    "tabs": 6,
+    "visible_grid_cells": 35,
+    "scrollbar": 1,
+    "list_mode": 1,
+    "search_icon": 1,
+    "search_field": 1,
+    "sort": 1,
+    "capacity": "269/300"
+  },
+  "behaviour_cards": [
+    {
+      "id": "storage-category-select",
+      "gesture": "Activate",
+      "window_action": "SelectStorageCategory",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance plus the six source-owned category surfaces"
+    },
+    {
+      "id": "storage-item-select",
+      "gesture": "Activate",
+      "window_action": "SelectStorageItem",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and bounded real-pointer prototype"
+    },
+    {
+      "id": "storage-scroll-wheel",
+      "gesture": "Wheel",
+      "window_action": "ScrollStorage",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and bounded real-wheel prototype",
+      "contract": "Each normalized wheel notch moves exactly three rows and clamps at both endpoints."
+    },
+    {
+      "id": "storage-scroll-arrow",
+      "gesture": "Activate",
+      "window_action": "StepStorageScroll",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance",
+      "contract": "Each arrow activation moves exactly one row and clamps at both endpoints."
+    },
+    {
+      "id": "storage-scroll-thumb",
+      "gesture": "Drag",
+      "window_action": "SetStorageScrollOffset",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and bounded real-pointer prototype",
+      "contract": "Thumb motion continuously maps normalized track travel to row offset and reaches exact start and end clamps."
+    },
+    {
+      "id": "storage-search",
+      "gesture": "KeyCommand",
+      "window_action": "FilterStorage",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and bounded real-keyboard prototype",
+      "contract": "Accepted text renders in the TextField, immediately drives the item filter, and resets scroll to the first row."
+    },
+    {
+      "id": "storage-list-mode",
+      "gesture": "Activate",
+      "window_action": "ToggleStorageView",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and source-owned list button"
+    },
+    {
+      "id": "storage-sort",
+      "gesture": "Activate",
+      "window_action": "SortStorage",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and source-owned sort button"
+    },
+    {
+      "id": "storage-transfer",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferStorageItem",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-128 acceptance and bounded real-keyboard/pointer prototype",
+      "contract": "Control is the only declared modifier. Inventory and Storage versions are snapshotted together; a valid transfer commits both collections and versions, while an invalid modifier, missing item, full target, or version drift preserves both sides."
+    }
+  ],
+  "state_set_decisions": {
+    "categories": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["unselected", "selected"],
+      "selected_transform": "source item-tab blue face and border with each source-owned Japanese label retained",
+      "hover_transform": "one-pixel source-skin #739DD1 inner outline",
+      "pressed_transform": "one-pixel darkening of source-owned category pixels"
+    },
+    "storage_items": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["unselected", "selected", "transferring"],
+      "idle_transform": "each source-owned 60x63 cell is overlaid at its original location",
+      "selected_transform": "two-pixel source-skin #3E75B8 inner outline",
+      "transfer_transform": "three-pixel source-skin #8A5DB0 inner outline until the atomic router returns"
+    },
+    "scroll_view": {
+      "interaction_phases": ["idle", "hover", "pressed", "dragging"],
+      "semantic_states": ["at_start", "between", "at_end"],
+      "thumb_transform": "source-skin blue-grey thumb; hover outlined and pressed darkened",
+      "endpoint_transform": "disabled arrow is visibly muted only at its matching exact clamp"
+    },
+    "text_field": {
+      "interaction_phases": ["idle", "hover", "focused"],
+      "semantic_states": ["empty", "filtered"],
+      "focused_transform": "source-skin blue focus outline with accepted input rendered inside the field"
+    }
+  },
+  "gesture_decisions": {
+    "Wheel": {
+      "input": "vertical wheel event over the declared ScrollView",
+      "emits": "normalized direction, three-row delta, prior offset, and clamped offset",
+      "raw_delta_rule": "magnitude is normalized to one notch so hardware delta size cannot multiply the declared three-row step"
+    },
+    "Drag": {
+      "input": "primary-button drag of the declared scrollbar thumb",
+      "emits": "normalized travel and exact clamped row offset"
+    },
+    "KeyCommand": {
+      "input": "focused TextField text and editing keys",
+      "emits": "accepted text and filter result count"
+    },
+    "ModifierDoubleActivate": {
+      "input": "double primary-button activation on an occupied item with exactly Control held",
+      "emits": "source Window, target Window, stable item ID, both expected versions, and normalized modifier list",
+      "invalid_error": "InvalidModifierError",
+      "conflict_error": "GestureConflictError"
+    }
+  },
+  "manifest_decisions": {
+    "window_id": "storage",
+    "stable_category_control_id": "storage.categories",
+    "stable_grid_control_id": "storage.items",
+    "stable_scroll_control_id": "storage.scroll",
+    "stable_search_control_id": "storage.search",
+    "stable_item_ids": "storage.slot.r<row>c<column>",
+    "shared_types_added": ["ScrollView", "TextField"],
+    "shared_gestures_added": ["Wheel", "Drag", "KeyCommand", "ModifierDoubleActivate"],
+    "shared_module_added": "DesktopActionRouter",
+    "window_actions": [
+      "SelectStorageCategory",
+      "SelectStorageItem",
+      "ScrollStorage",
+      "StepStorageScroll",
+      "SetStorageScrollOffset",
+      "FilterStorage",
+      "ToggleStorageView",
+      "SortStorage",
+      "TransferStorageItem"
+    ]
+  },
+  "prototype_result": {
+    "driver": "Playwright Chromium real pointer, wheel, and keyboard input",
+    "checks": 7,
+    "passed": 7,
+    "prototype_code_preserved": false,
+    "findings_promoted_to_tests": [
+      "Wheel delta is normalized to direction so one hardware notch always means exactly three rows.",
+      "Thumb position uses normalized available travel and clamps to exact offset endpoints.",
+      "A transfer snapshots both collection versions before validation and commits or rejects both sides together.",
+      "A changed search query resets the scroll offset to the first row before rendering filtered results.",
+      "Transfer uses ModifierDoubleActivate so Inventory's frozen ModifierActivate multi-selection remains unchanged."
+    ]
+  }
+}

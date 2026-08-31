@@ -4,6 +4,7 @@ extends Control
 ## move/minimize/close state and delegates each Control to the shared library.
 
 signal state_changed(window_id: String)
+signal action_emitted(window_id: String, control_id: String, result: Dictionary)
 
 const BitmapControlScript = preload("res://control_library/bitmap_control.gd")
 const RangeControlScript = preload("res://control_library/range_control.gd")
@@ -12,6 +13,8 @@ const ChoiceGroupControlScript = preload("res://control_library/choice_group.gd"
 const TabsControlScript = preload("res://control_library/tabs_control.gd")
 const SelectionViewControlScript = preload("res://control_library/selection_view_control.gd")
 const StepperControlScript = preload("res://control_library/stepper_control.gd")
+const ScrollViewControlScript = preload("res://control_library/scroll_view_control.gd")
+const TextFieldControlScript = preload("res://control_library/text_field_control.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
@@ -97,6 +100,10 @@ func _ready() -> void:
 				node = SelectionViewControlScript.new()
 			"Stepper":
 				node = StepperControlScript.new()
+			"ScrollView":
+				node = ScrollViewControlScript.new()
+			"TextField":
+				node = TextFieldControlScript.new()
 			_:
 				continue
 		node.configure(control_spec, runtime)
@@ -475,15 +482,38 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 				visible = false
 			"ToggleSkillView":
 				_toggle_skill_view()
+			"ToggleStorageView":
+				_toggle_skill_view()
+			"FocusStorageSearch":
+				var search: Variant = control_nodes.get("storage.search")
+				if search != null and search.has_method("focus_field"):
+					search.focus_field()
+			"SortStorage":
+				runtime.sort_selection("storage.items")
+			"ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset":
+				var linked_scroll := str(runtime.controls[control_id].spec.value.get(
+					"selection_control_id", ""))
+				runtime.set_selection_scroll(linked_scroll, int(result.get("offset", 0)))
+			"FilterStorage":
+				var linked_filter := str(runtime.controls[control_id].spec.value.get(
+					"selection_control_id", ""))
+				runtime.filter_selection(linked_filter, str(result.get("value", "")))
+				if runtime.controls.has("storage.scroll"):
+					runtime.sync_scroll_bounds("storage.scroll", linked_filter)
 			"OpenSkillDetail", "OpenInventoryItem":
 				_show_selection_detail(str(result.get("value", "")))
 			"SelectSkill", "StepSkill", "CommitSkillChanges", "CancelSkillChanges", \
 					"SelectInventoryTab", "SelectInventoryItem", \
-					"ToggleInventorySelection", "MoveInventoryItem":
+					"ToggleInventorySelection", "MoveInventoryItem", \
+					"SelectStorageCategory", "SelectStorageItem", \
+					"ToggleStorageSelection", "TransferStorageItem", \
+					"TransferInventoryItem":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
 	_refresh_all_controls()
+	if result.get("ok", false) and result.has("action"):
+		action_emitted.emit(str(spec.id), control_id, result.duplicate(true))
 	state_changed.emit(str(spec.id))
 
 

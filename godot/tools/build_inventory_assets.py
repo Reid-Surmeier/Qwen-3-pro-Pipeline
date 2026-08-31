@@ -143,10 +143,12 @@ def main() -> None:
     selection = control(
         "inventory.items", "SelectionView", {"x": 42, "y": 30, "width": 378, "height": 244},
         {"unselected": parent_variants, "selected": parent_variants},
-        ["Activate", "DoubleActivate", "ModifierActivate", "DragDrop"],
+        ["Activate", "DoubleActivate", "ModifierActivate", "ModifierDoubleActivate",
+         "DragDrop"],
         [{"gesture": "Activate", "action": "SelectInventoryItem"},
          {"gesture": "DoubleActivate", "action": "OpenInventoryItem"},
          {"gesture": "ModifierActivate", "action": "ToggleInventorySelection"},
+         {"gesture": "ModifierDoubleActivate", "action": "TransferInventoryItem"},
          {"gesture": "DragDrop", "action": "MoveInventoryItem"}],
         ["unselected", "selected"], "unselected",
         value={"items": item_ids, "initial": "r0c0", "details": item_details,

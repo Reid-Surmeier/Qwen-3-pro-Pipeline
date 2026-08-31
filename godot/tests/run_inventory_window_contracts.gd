@@ -18,7 +18,7 @@ func _run() -> void:
 	desktop = current_scene
 	window = desktop.inventory
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
-		and desktop.windows.size() == 3, str(desktop.validation_errors))
+		and desktop.windows.size() == 4, str(desktop.validation_errors))
 	var idle_resize: Dictionary = window.qa_state().window.resize
 	_check("idle-resize-facts", idle_resize.requested == [484.0, 303.0]
 		and idle_resize.clamped == [484.0, 303.0], str(idle_resize))
@@ -30,6 +30,7 @@ func _run() -> void:
 			.ends_with("cell-r0c0-unselected-idle.png"), str(idle_items))
 	await _tabs_reverse()
 	await _single_and_double_activate()
+	await _mixed_modifier_double_is_not_transfer()
 	await _pending_single_cancelled_by_modifier()
 	await _modifier_reverse_and_reject()
 	await _drag_drop_and_rejections()
@@ -79,6 +80,24 @@ func _single_and_double_activate() -> void:
 		and semantic.filter(func(entry): return entry.get("gesture") == "DoubleActivate").size() == 1
 		and semantic.filter(func(entry): return entry.get("gesture") == "Activate").is_empty(),
 		str([opened, semantic]))
+
+
+func _mixed_modifier_double_is_not_transfer() -> void:
+	var point := Vector2(69, 761)
+	var before: Dictionary = window.qa_state().controls["inventory.items"]
+	await _click(point)
+	await _key(KEY_CTRL, true)
+	await _double_click(point, true)
+	await _key(KEY_CTRL, false)
+	await create_timer(0.25).timeout
+	var after: Dictionary = window.qa_state().controls["inventory.items"]
+	_check("mixed-modifier-pair-is-single-modifier-activate",
+		after.last_gesture == "ModifierActivate"
+		and "r0c0" in after.selected_items
+		and after.item_version == before.item_version
+		and after.collection_items == before.collection_items,
+		str([before, after]))
+	await _click(point, true)
 
 
 func _pending_single_cancelled_by_modifier() -> void:
@@ -293,7 +312,7 @@ func _selection_semantics() -> Dictionary:
 		"detail_text": items.detail_text, "detail_visible": items.detail_visible}
 
 
-func _double_click(point: Vector2) -> void:
+func _double_click(point: Vector2, ctrl := false) -> void:
 	await _move(point, false)
 	var event := InputEventMouseButton.new()
 	event.position = point
@@ -301,9 +320,10 @@ func _double_click(point: Vector2) -> void:
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.pressed = true
 	event.double_click = true
+	event.ctrl_pressed = ctrl
 	Input.parse_input_event(event)
 	await process_frame
-	await _release(point)
+	await _release(point, ctrl)
 
 
 func _click(point: Vector2, ctrl := false, alt := false,

@@ -14,20 +14,25 @@ const CONTROL_TYPES := [
 const INTERACTION_PHASES := ["idle", "hover", "pressed"]
 const GESTURES := [
 	"Activate", "ContextActivate", "DoubleActivate", "ModifierActivate",
-	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
+	"ModifierDoubleActivate", "Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
 	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
-		"CommitSkillChanges", "CancelSkillChanges"],
+		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
+		"SortStorage", "FocusStorageSearch"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
 	"ChoiceGroup": ["SelectChoice"],
-	"Tabs": ["SelectInventoryTab"],
+	"Tabs": ["SelectInventoryTab", "SelectStorageCategory"],
 	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
-		"OpenInventoryItem", "ToggleInventorySelection", "MoveInventoryItem"],
+		"OpenInventoryItem", "ToggleInventorySelection", "MoveInventoryItem",
+		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
+		"TransferInventoryItem"],
 	"Stepper": ["StepSkill"],
+	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset"],
+	"TextField": ["FilterStorage"],
 }
 
 
@@ -226,6 +231,10 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 		_validate_selection_view_contract(control, path, errors, asset_exists)
 	elif control_type == "Stepper":
 		_validate_stepper_contract(control, path, errors)
+	elif control_type == "ScrollView":
+		_validate_scroll_view_contract(control, path, errors)
+	elif control_type == "TextField":
+		_validate_text_field_contract(control, path, errors)
 
 
 static func _validate_range_contract(control: Dictionary, path: String,
@@ -334,7 +343,7 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 				errors, asset_exists)
 			_validate_asset(str(detail_view.get("font", "")),
 				path + ".value.detail_view.font", errors, asset_exists)
-	if "ModifierActivate" in gestures:
+	if "ModifierActivate" in gestures or "ModifierDoubleActivate" in gestures:
 		var allowed: Variant = value.get("allowed_modifiers") if value is Dictionary else null
 		if not allowed is Array or allowed != ["ctrl"]:
 			errors.append(_error(Errors.INVALID_MODIFIER,
@@ -363,7 +372,7 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 				"DragDrop requires a non-negative transaction version"))
 	var surfaces: Variant = control.get("surfaces")
 	var required_surface_states := ["selected", "unselected"]
-	if "ModifierActivate" in gestures:
+	if "ModifierActivate" in gestures or "ModifierDoubleActivate" in gestures:
 		required_surface_states.append("modifier_selected")
 	if "DragDrop" in gestures:
 		required_surface_states.append_array(["dragging", "drop_target"])
@@ -543,6 +552,50 @@ static func _validate_stepper_contract(control: Dictionary, path: String,
 			and surfaces[surface].state_set.has("hidden")):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
 			"Stepper requires visible/hidden State Sets for both arrows"))
+
+
+static func _validate_scroll_view_contract(control: Dictionary, path: String,
+		errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var valid := value is Dictionary
+	if valid:
+		for field in ["minimum", "maximum", "initial", "wheel_rows", "arrow_rows"]:
+			valid = valid and _number(value.get(field))
+	if valid:
+		valid = int(value.minimum) == 0 and int(value.maximum) >= int(value.minimum) \
+			and int(value.initial) >= int(value.minimum) \
+			and int(value.initial) <= int(value.maximum) \
+			and int(value.wheel_rows) == 3 and int(value.arrow_rows) == 1 \
+			and not str(value.get("selection_control_id", "")).is_empty()
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"ScrollView requires zero-based bounds, an in-range initial offset, three-row wheel and one-row arrow steps, and a linked SelectionView"))
+	var surfaces: Variant = control.get("surfaces")
+	if not surfaces is Dictionary or not ["track", "thumb", "decrement", "increment"].all(
+		func(surface): return surfaces.has(surface) and surfaces[surface] is Dictionary \
+			and surfaces[surface].has("geometry")):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".surfaces",
+			"ScrollView requires track, thumb, decrement, and increment surfaces"))
+
+
+static func _validate_text_field_contract(control: Dictionary, path: String,
+		errors: Array[Dictionary]) -> void:
+	var value: Variant = control.get("value")
+	var valid := value is Dictionary and value.get("initial") is String \
+		and _positive_number(value.get("maximum_length")) \
+		and not str(value.get("accepted_pattern", "")).is_empty() \
+		and not str(value.get("selection_control_id", "")).is_empty()
+	if valid:
+		var regex := RegEx.new()
+		valid = regex.compile(str(value.accepted_pattern)) == OK
+	if not valid:
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
+			"TextField requires initial text, a positive maximum length, a valid accepted pattern, and a linked SelectionView"))
+	var tokens: Variant = control.get("tokens")
+	if not tokens is Dictionary or not ["font", "font_size", "font_color"].all(
+		func(token): return tokens.has(token) and not str(tokens[token]).is_empty()):
+		errors.append(_error(Errors.INVALID_STATE_SET, path + ".tokens",
+			"TextField requires font, font_size, and font_color tokens"))
 
 
 static func _validate_surfaces(surfaces: Variant, path: String,

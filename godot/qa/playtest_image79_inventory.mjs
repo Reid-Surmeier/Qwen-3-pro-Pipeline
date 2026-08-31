@@ -86,6 +86,13 @@ const click = async (x, y, options = {}) => {
   await page.mouse.click(target.x, target.y, options);
   await page.waitForTimeout(30);
 };
+const ctrlDouble = async (x, y) => {
+  const target = point(x, y);
+  await page.keyboard.down("Control");
+  await page.mouse.dblclick(target.x, target.y, { delay: 35 });
+  await page.keyboard.up("Control");
+  await page.waitForTimeout(80);
+};
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT,
   "godot/data/image-79-control-spec.json"), "utf8"));
@@ -169,6 +176,7 @@ check("pending-single-cancelled-by-modifier",
     && raceLog.filter((entry) => entry.gesture === "ModifierActivate").length === 1
     && raceLog.every((entry) => entry.gesture !== "Activate"),
   { heldRaceLog, raceState, raceLog });
+await page.waitForTimeout(260);
 await page.keyboard.down("Control");
 await click(69, 761);
 await page.keyboard.up("Control");
@@ -183,6 +191,7 @@ record("inventory.items", "ModifierActivate", "ToggleInventorySelection",
     toggled: modifierSelected.selected_items.includes("r0c2"),
     primary_preserved: modifierSelected.value === "r0c1",
   }, { before: openedFrame, after: modifierFrame });
+await page.waitForTimeout(260);
 await page.keyboard.down("Control");
 await click(177, 761);
 await page.keyboard.up("Control");
@@ -413,11 +422,26 @@ await page.waitForFunction(() => window.godotQaState?.windows?.inventory,
   undefined, { timeout: 90000 });
 await page.waitForTimeout(2500);
 await click(200, 710);
-const keyBefore = await shot("10-key-before");
+const transferBefore = await shot("10-transfer-before");
+await ctrlDouble(69, 761);
+const transferred = await qa();
+const transferAfter = await shot("10-transfer-after");
+record("inventory.items", "ModifierDoubleActivate", "TransferInventoryItem",
+  "Control double-click atomically moves one item to Storage",
+  JSON.stringify(transferred.last_transaction), {
+    committed: transferred.last_transaction.ok === true,
+    direction: transferred.last_transaction.source_window === "inventory"
+      && transferred.last_transaction.target_window === "storage",
+    removed_from_source: !transferred.windows.inventory.controls["inventory.items"]
+      .collection_items.includes("r0c0"),
+    added_to_target: transferred.windows.storage.controls["storage.items"]
+      .collection_items.includes("r0c0"),
+  }, { before: transferBefore, after: transferAfter });
+const keyBefore = await shot("11-key-before");
 await page.keyboard.press("Escape");
 await page.waitForTimeout(50);
 const keyClosed = (await inventory()).window;
-const keyAfter = await shot("10-key-after");
+const keyAfter = await shot("11-key-after");
 record("inventory", "KeyCommand", "CloseWindow",
   "Escape closes the frontmost Inventory Window", JSON.stringify(keyClosed), {
     hidden: keyClosed.visible === false,
@@ -452,7 +476,7 @@ const playLog = {
   required_controls: requiredControls,
   required_actions: requiredActions,
   invariant_frames: { before: invariantBefore,
-    after: await invariantShot("11-invariant-after") },
+    after: await invariantShot("12-invariant-after") },
   console_errors: errors,
   actions,
 };

@@ -4,12 +4,15 @@ extends Control
 
 const ControlSpec = preload("res://control_library/control_spec.gd")
 const ControlWindowScript = preload("res://control_library/control_window.gd")
+const DesktopActionRouter = preload("res://desktop_router/desktop_action_router.gd")
 
 var options: ControlWindow
 var skill_tree: ControlWindow
 var inventory: ControlWindow
+var storage: ControlWindow
 var windows := {}
 var validation_errors: Array = []
+var last_transaction: Dictionary = {}
 var _last_json := ""
 
 
@@ -34,11 +37,13 @@ func _ready() -> void:
 		var window: ControlWindow = ControlWindowScript.new()
 		window.configure(window_spec)
 		window.state_changed.connect(_publish)
+		window.action_emitted.connect(_route_desktop_action)
 		add_child(window)
 		windows[str(window_spec.id)] = window
 	options = windows.get("options")
 	skill_tree = windows.get("skill_tree")
 	inventory = windows.get("inventory")
+	storage = windows.get("storage")
 	_publish()
 
 
@@ -52,7 +57,45 @@ func qa_state() -> Dictionary:
 		"viewport": [1536, 1024],
 		"validation_errors": validation_errors,
 		"windows": window_states,
+		"last_transaction": last_transaction.duplicate(true),
 	}
+
+
+func _route_desktop_action(window_id: String, control_id: String,
+		result: Dictionary) -> void:
+	if str(result.get("gesture", "")) != "ModifierDoubleActivate" \
+			or window_id not in ["inventory", "storage"]:
+		return
+	var target_id := "storage" if window_id == "inventory" else "inventory"
+	var source_window: ControlWindow = windows.get(window_id)
+	var target_window: ControlWindow = windows.get(target_id)
+	if source_window == null or target_window == null:
+		return
+	var source_control := window_id + ".items"
+	var target_control := target_id + ".items"
+	var slot := str(result.get("value", ""))
+	var item := source_window.runtime.selected_logical_item(source_control, slot)
+	var source := source_window.runtime.selection_collection(source_control)
+	var target := target_window.runtime.selection_collection(target_control)
+	var transaction: Dictionary = DesktopActionRouter.transfer(source, target, item,
+		int(source.get("version", -1)), int(target.get("version", -1)), ["ctrl"])
+	last_transaction = {"ok": bool(transaction.get("ok", false)),
+		"source_window": window_id, "target_window": target_id, "item": item,
+		"source_version_before": source.get("version"),
+		"target_version_before": target.get("version"),
+		"error": transaction.get("error")}
+	if transaction.get("ok", false):
+		source_window.runtime.apply_selection_collection(source_control, transaction.source)
+		target_window.runtime.apply_selection_collection(target_control, transaction.target)
+		if source_window.runtime.controls.has(window_id + ".scroll"):
+			source_window.runtime.sync_scroll_bounds(window_id + ".scroll", source_control)
+		if target_window.runtime.controls.has(target_id + ".scroll"):
+			target_window.runtime.sync_scroll_bounds(target_id + ".scroll", target_control)
+		source_window._refresh_all_controls()
+		target_window._refresh_all_controls()
+		last_transaction.source_version_after = transaction.source.version
+		last_transaction.target_version_after = transaction.target.version
+	_publish()
 
 
 func _publish(_window_id: String = "") -> void:
@@ -70,8 +113,6 @@ func _process(_delta: float) -> void:
 		if argument.begins_with("--capture-image79=") and not has_meta("capturing"):
 			set_meta("capturing", true)
 			_capture(argument.trim_prefix("--capture-image79="))
-
-
 func _capture(path: String) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
