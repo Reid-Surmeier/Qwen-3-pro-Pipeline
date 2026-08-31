@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "762ec464d0177a81b3c0b2f7ffb7b304f0c6b5d3",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-minimized.png",
+      "sha256": "be7ed3f445635b590a800a1efb6492ba3cd76f2fb04b27fce6433e7a7110113e"
+    },
+    {
+      "path": "01b-restored.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "02-wheel-rejected-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "02-wheel-rejected-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "02-wheel-rejected.png",
+      "sha256": "cfbd8688bd30bc871282e6dea9cc11fdb14531075fb5699a24818642063272a3"
+    },
+    {
+      "path": "03-arrow-rejected-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "03-arrow-rejected-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "03-arrow-rejected.png",
+      "sha256": "cfbd8688bd30bc871282e6dea9cc11fdb14531075fb5699a24818642063272a3"
+    },
+    {
+      "path": "04-drag-rejected-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "04-drag-rejected-mid.png",
+      "sha256": "8870e7ce6e0ed48fcdc569c2acf23781e6d6c3ed83880bc7c11a2841ba3fda8f"
+    },
+    {
+      "path": "04b-drag-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "05-move-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "05-moved.png",
+      "sha256": "8250e760b93c82fd0cfd4a77434ae484f8c3c134d964d161222dc606e14dfba1"
+    },
+    {
+      "path": "05b-move-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "06-close-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "06-closed.png",
+      "sha256": "4e5813d5e51ea0eebb94702c01cc0403eaec0c1ed0dd0637993791eec60aeb08"
+    },
+    {
+      "path": "06b-close-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "07-key-close-before.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "07-key-closed.png",
+      "sha256": "4e5813d5e51ea0eebb94702c01cc0403eaec0c1ed0dd0637993791eec60aeb08"
+    },
+    {
+      "path": "07b-key-reversed.png",
+      "sha256": "60d4b29c3765da2c8bf90e9dff2f90dae7ec211a82d2e9a67e6c4956274bc68b"
+    },
+    {
+      "path": "08-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "3063f573869e6f108f2d4ec0ce774d10c33216f2327604216ba8cd0262aef32a"
+    },
+    {
+      "path": "report.json",
+      "sha256": "5512db14afc87a65d5d0082b517023be5146ae14e7363fee0177a50b8ce7d87e"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "1220edc5dcc91edc263527bc83018720923f89e1e665c746940d5401b33ae59d"
+    }
+  ]
+}

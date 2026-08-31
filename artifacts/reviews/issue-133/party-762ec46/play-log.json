@@ -1,0 +1,953 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 133,
+    "commit_sha": "762ec464d0177a81b3c0b2f7ffb7b304f0c6b5d3",
+    "window_id": "party"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "party.close",
+    "party.members",
+    "party.action.memo",
+    "party.action.info",
+    "party.action.target",
+    "party.action.search",
+    "party.action.leave",
+    "party.mode"
+  ],
+  "required_actions": [
+    {
+      "control_id": "party",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "party",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "party.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "party.members",
+      "gesture": "Activate",
+      "window_action": "SelectPartyMember"
+    },
+    {
+      "control_id": "party.action.memo",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction"
+    },
+    {
+      "control_id": "party.action.info",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction"
+    },
+    {
+      "control_id": "party.action.target",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction"
+    },
+    {
+      "control_id": "party.action.search",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction"
+    },
+    {
+      "control_id": "party.action.leave",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction"
+    },
+    {
+      "control_id": "party.mode",
+      "gesture": "Activate",
+      "window_action": "SelectPartyMode"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "zz-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "party.mode",
+      "gesture": "Activate",
+      "window_action": "SelectPartyMode",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"availability\":{\"party.action.info\":false,\"party.action.leave\":false,\"party.action.memo\":false,\"party.action.search\":false,\"party.action.target\":false},\"membership\":\"member\",\"mode\":\"friends\",\"selected_member\":\"\",\"version\":1,\"visible_members\":[]}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "friends_selected": true,
+        "list_cleared": true,
+        "members_unavailable": true,
+        "atomic_version": true
+      },
+      "frames": {
+        "before": {
+          "path": "mode-friends-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "mode-friends-after.png",
+          "sha256": "75022e08760f20b636f6aa21b9c61b0a0729cd20121bc45aa25fe1215a0ec7e4"
+        },
+        "reversed": {
+          "path": "mode-friends-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 35242,
+        "intended_region_changed_pixels": 35242,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "party.members",
+      "gesture": "Activate",
+      "window_action": "SelectPartyMember",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"availability\":{\"party.action.info\":false,\"party.action.leave\":true,\"party.action.memo\":false,\"party.action.search\":false,\"party.action.target\":false},\"membership\":\"member\",\"mode\":\"party\",\"selected_member\":\"show_a\",\"version\":1,\"visible_members\":[\"sakumariri\",\"sebas\",\"anri\",\"show_a\",\"ayana_ishizuka\"]}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "selected_show_a": true,
+        "atomic_version": true
+      },
+      "frames": {
+        "before": {
+          "path": "member-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "member-after.png",
+          "sha256": "411d3cfdf517e767f385524b4d2a0c190e0098a8f0f0b5eedea21ba623e26611"
+        },
+        "reversed": {
+          "path": "member-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 5960,
+        "intended_region_changed_pixels": 5960,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "party.action.memo",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1122,\"y\":719},\"id\":\"party.action.memo\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "memo-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "memo-mid.png",
+          "sha256": "da3b7176c64e1b93a9f00dbfb65a100eac361910153e958ef3f9d71bec783fc2"
+        },
+        "after": {
+          "path": "memo-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "memo-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 441,
+        "intended_region_changed_pixels": 441,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "party.action.info",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1157,\"y\":719},\"id\":\"party.action.info\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "info-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "info-mid.png",
+          "sha256": "4dfd0d7c6aca8fcccf5f464e75c0d90cf48cdb1b8d3c22c76b67d85c21fcaeb6"
+        },
+        "after": {
+          "path": "info-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "info-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 441,
+        "intended_region_changed_pixels": 441,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "party.action.target",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1192,\"y\":719},\"id\":\"party.action.target\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "target-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "target-mid.png",
+          "sha256": "391cd998014a9e04f928888c6536dec3ac8b9f516b50046ea0508135e697db30"
+        },
+        "after": {
+          "path": "target-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "target-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 441,
+        "intended_region_changed_pixels": 441,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "party.action.search",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1227,\"y\":719},\"id\":\"party.action.search\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Source icon behavior is unattested\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "search-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "search-mid.png",
+          "sha256": "61d79158ba27524834cd144a8d54fd22cdecadc9e37c649bba4914b90873c590"
+        },
+        "after": {
+          "path": "search-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "search-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 441,
+        "intended_region_changed_pixels": 441,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "party.action.leave",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"availability\":{\"party.action.info\":false,\"party.action.leave\":false,\"party.action.memo\":false,\"party.action.search\":false,\"party.action.target\":false},\"membership\":\"none\",\"mode\":\"party\",\"selected_member\":\"\",\"version\":1,\"visible_members\":[]}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "membership_cleared": true,
+        "list_cleared": true,
+        "leave_disabled": true
+      },
+      "frames": {
+        "before": {
+          "path": "leave-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "leave-after.png",
+          "sha256": "ba28d19fb1d87698ee7523f6f64bc80f7d502d03f6d337e55716e7ac036a1b69"
+        },
+        "reversed": {
+          "path": "leave-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 35010,
+        "intended_region_changed_pixels": 35010,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "party.action.leave",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1262,\"y\":719},\"id\":\"party.action.leave\",\"interaction_phase\":\"idle\",\"last_action\":\"LeaveParty\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Leave Party is unavailable without active Party membership\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Leave Party is unavailable without active Party membership\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "membership_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "leave-repeat-before.png",
+          "sha256": "ba28d19fb1d87698ee7523f6f64bc80f7d502d03f6d337e55716e7ac036a1b69"
+        },
+        "mid": {
+          "path": "leave-repeat-mid.png",
+          "sha256": "c2e874c71367e4fa6bfaaf943f1bd423041183b3a73923a9d2ff6ee265f41f06"
+        },
+        "after": {
+          "path": "leave-repeat-after.png",
+          "sha256": "ba28d19fb1d87698ee7523f6f64bc80f7d502d03f6d337e55716e7ac036a1b69"
+        },
+        "reversed": {
+          "path": "leave-repeat-reversed.png",
+          "sha256": "ba28d19fb1d87698ee7523f6f64bc80f7d502d03f6d337e55716e7ac036a1b69"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 441,
+        "intended_region_changed_pixels": 441,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "party.action.leave",
+      "gesture": "Activate",
+      "window_action": "ActivatePartyAction",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"body\",\"geometry\":{\"height\":21,\"width\":21,\"x\":1262,\"y\":719},\"id\":\"party.action.leave\",\"interaction_phase\":\"hover\",\"last_action\":\"LeaveParty\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Leave Party is unavailable without active Party membership\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Leave Party is unavailable without active Party membership\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "first_committed": true,
+        "repeat_rejected": true,
+        "control_settled": true,
+        "rapid_pair": true
+      },
+      "frames": {
+        "before": {
+          "path": "rapid-leave-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "rapid-leave-after.png",
+          "sha256": "ba28d19fb1d87698ee7523f6f64bc80f7d502d03f6d337e55716e7ac036a1b69"
+        },
+        "reversed": {
+          "path": "rapid-leave-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 35010,
+        "intended_region_changed_pixels": 35010,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "rapid_gestures": {
+        "count": 2,
+        "elapsed_ms": 451,
+        "inter_gesture_wait_ms": 0
+      }
+    },
+    {
+      "control_id": "party",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"party\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"position\":[1027,425],\"resize\":{\"active\":false,\"clamped\":[215,269],\"motion_samples\":0,\"requested\":[215,269],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[215,269],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved": true,
+        "continuous_samples": true,
+        "restored_home": true
+      },
+      "frames": {
+        "before": {
+          "path": "drag-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "drag-mid.png",
+          "sha256": "3a4fa5a5fa05f2d2cc155244e08c9660573b3f03fbbdb97d47cb3649cf571ecd"
+        },
+        "after": {
+          "path": "drag-after.png",
+          "sha256": "7a81a99b3c6a1ff76170e9b73d6950ae975bd900fa17dc224e6e30a134acda7a"
+        },
+        "reversed": {
+          "path": "drag-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 88834,
+        "intended_region_changed_pixels": 57511,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1160,
+          515
+        ],
+        [
+          1157.3333333333333,
+          512.3333333333334
+        ],
+        [
+          1154.6666666666667,
+          509.6666666666667
+        ],
+        [
+          1152,
+          507
+        ],
+        [
+          1149.3333333333333,
+          504.3333333333333
+        ],
+        [
+          1146.6666666666667,
+          501.6666666666667
+        ],
+        [
+          1144,
+          499
+        ],
+        [
+          1141.3333333333333,
+          496.3333333333333
+        ],
+        [
+          1138.6666666666667,
+          493.6666666666667
+        ],
+        [
+          1136,
+          491
+        ],
+        [
+          1133.3333333333333,
+          488.3333333333333
+        ],
+        [
+          1130.6666666666667,
+          485.6666666666667
+        ],
+        [
+          1128,
+          483
+        ],
+        [
+          1125.3333333333333,
+          480.3333333333333
+        ],
+        [
+          1122.6666666666667,
+          477.6666666666667
+        ],
+        [
+          1120,
+          475
+        ],
+        [
+          1117.3333333333333,
+          472.3333333333333
+        ],
+        [
+          1114.6666666666667,
+          469.6666666666667
+        ],
+        [
+          1112,
+          467
+        ],
+        [
+          1109.3333333333333,
+          464.3333333333333
+        ],
+        [
+          1106.6666666666667,
+          461.6666666666667
+        ],
+        [
+          1104,
+          459
+        ],
+        [
+          1101.3333333333333,
+          456.3333333333333
+        ],
+        [
+          1098.6666666666667,
+          453.6666666666667
+        ],
+        [
+          1096,
+          451
+        ],
+        [
+          1093.3333333333333,
+          448.3333333333333
+        ],
+        [
+          1090.6666666666667,
+          445.6666666666667
+        ],
+        [
+          1088,
+          443
+        ],
+        [
+          1085.3333333333333,
+          440.3333333333333
+        ],
+        [
+          1082.6666666666667,
+          437.6666666666667
+        ],
+        [
+          1080,
+          435
+        ]
+      ]
+    },
+    {
+      "control_id": "party.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"party\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[1107,505],\"resize\":{\"active\":false,\"clamped\":[215,269],\"motion_samples\":0,\"requested\":[215,269],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[215,269],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "close-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "close-after.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "reversed": {
+          "path": "close-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 57835,
+        "intended_region_changed_pixels": 57835,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "party",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Issue 133 Party Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"party\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[1107,505],\"resize\":{\"active\":false,\"clamped\":[215,269],\"motion_samples\":0,\"requested\":[215,269],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[215,269],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "focused_path": true
+      },
+      "frames": {
+        "before": {
+          "path": "escape-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "escape-after.png",
+          "sha256": "6be55bdcac570bd3e245d052d2767adaf86aa3900db91f961b6fdd7355677bf2"
+        },
+        "reversed": {
+          "path": "escape-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 57835,
+        "intended_region_changed_pixels": 57835,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}
