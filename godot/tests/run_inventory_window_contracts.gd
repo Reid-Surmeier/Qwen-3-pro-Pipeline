@@ -86,12 +86,15 @@ func _pending_single_cancelled_by_modifier() -> void:
 	var third := Vector2(177, 761)
 	var log_before := window.runtime.interaction_log.size()
 	await _click(first)
+	await _key(KEY_CTRL, true)
+	await create_timer(0.25).timeout
 	await _press(third, true)
 	await create_timer(0.25).timeout
 	var during_hold: Array = window.runtime.interaction_log.slice(log_before).filter(func(entry):
 		return entry.get("control_id") == "inventory.items" \
 			and entry.get("gesture") in ["Activate", "ModifierActivate"])
 	await _release(third, true)
+	await _key(KEY_CTRL, false)
 	var state: Dictionary = window.qa_state().controls["inventory.items"]
 	var semantic: Array = window.runtime.interaction_log.slice(log_before).filter(func(entry):
 		return entry.get("control_id") == "inventory.items" \
@@ -345,6 +348,15 @@ func _move(point: Vector2, held: bool) -> void:
 	event.position = point
 	event.global_position = point
 	event.button_mask = MOUSE_BUTTON_MASK_LEFT if held else 0
+	Input.parse_input_event(event)
+	await process_frame
+
+
+func _key(keycode: Key, pressed: bool) -> void:
+	var event := InputEventKey.new()
+	event.keycode = keycode
+	event.physical_keycode = keycode
+	event.pressed = pressed
 	Input.parse_input_event(event)
 	await process_frame
 

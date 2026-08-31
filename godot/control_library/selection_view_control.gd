@@ -259,6 +259,12 @@ func _item_input(event: InputEvent, item: String) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		var keycodes := [event.keycode, event.physical_keycode]
+		if keycodes.any(func(keycode):
+			return keycode in [KEY_CTRL, KEY_ALT, KEY_SHIFT, KEY_META]):
+			_single_generation += 1
+		return
 	if _held_item.is_empty():
 		return
 	if event is InputEventMouseMotion and _held_button == MOUSE_BUTTON_LEFT \
