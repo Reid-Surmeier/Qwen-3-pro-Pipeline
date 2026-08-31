@@ -206,8 +206,10 @@ def evaluate_play_log(
                 else:
                     origin_x, origin_y = samples[0]
                     crossed_threshold = any(
-                        ((sample[0] - origin_x) ** 2
-                         + (sample[1] - origin_y) ** 2) ** 0.5 > 4.0
+                        math.hypot(
+                            sample[0] - origin_x,
+                            sample[1] - origin_y,
+                        ) > 4.0
                         for sample in samples[1:]
                     )
                 if not crossed_threshold:

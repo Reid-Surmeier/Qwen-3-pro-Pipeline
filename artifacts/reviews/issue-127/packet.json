@@ -64,7 +64,7 @@
     ]
   },
   "launch": {
-    "command": "ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --editor --path godot --quit-after 2 && DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79",
-    "clean_state_command": "test ! -f /tmp/issue127-blind-review.pid || kill \"$(cat /tmp/issue127-blind-review.pid)\" 2>/dev/null || true; ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --editor --path godot --quit-after 2 >/tmp/issue127-blind-review-import.log 2>&1 && nohup env DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79 >/tmp/issue127-blind-review.log 2>&1 & echo $! >/tmp/issue127-blind-review.pid"
+    "command": "ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --path godot --import && DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue127-blind-review.pid || kill \"$(cat /tmp/issue127-blind-review.pid)\" 2>/dev/null || true; ISSUE127_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE127_GODOT_BIN\" --headless --path godot --import >/tmp/issue127-blind-review-import.log 2>&1 && nohup env DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE127_GODOT_BIN\" --path godot -- --screen=image79 >/tmp/issue127-blind-review.log 2>&1 & echo $! >/tmp/issue127-blind-review.pid"
   }
 }

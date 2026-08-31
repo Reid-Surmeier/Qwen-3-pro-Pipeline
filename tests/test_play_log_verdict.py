@@ -256,6 +256,15 @@ class PlayLogVerdictTests(unittest.TestCase):
             verdict,
         )
 
+    def test_large_finite_motion_uses_overflow_safe_distance(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 127
+        log["actions"][0]["motion_samples"] = [
+            [index * 1e200, 0.0] for index in range(31)
+        ]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
     def test_pointer_motion_rejects_scalars_and_stationary_points(self) -> None:
         for gesture in ("Resize", "DragDrop"):
             for samples in ([0] * 31, [[0, 0]] * 31):

@@ -75,6 +75,15 @@ class BlindReviewPacketTests(unittest.TestCase):
                 problems,
             )
 
+    def test_issue_127_packet_bootstraps_a_complete_godot_import(self) -> None:
+        packet = json.loads(
+            (ROOT / "artifacts" / "reviews" / "issue-127" / "packet.json").read_text()
+        )
+        launch = packet["launch"]
+        for command in (launch["command"], launch["clean_state_command"]):
+            self.assertIn("--headless --path godot --import", command)
+            self.assertNotIn("--quit-after", command)
+
 
 if __name__ == "__main__":
     unittest.main()
