@@ -248,6 +248,7 @@ const closeReversed = await shot("06b-close-reversed");
 record("equipment_card.close", "Activate", "CloseWindow", {
   hidden: closeState.windows.equipment_card.window.visible === false,
   detail_routed: closeState.last_transaction.action === "CloseDetail",
+  detail_cleared: closeState.windows.equipment_card.window.detail_item === "",
 }, { before: closeBefore, after: closeAfter, reversed: closeReversed },
 closeState.last_transaction);
 
@@ -257,7 +258,8 @@ target = point(1200, 14);
 await page.mouse.click(target.x, target.y);
 await page.keyboard.press("Escape");
 await page.waitForTimeout(80);
-const keyState = await card();
+const keyDesktopState = await qa();
+const keyState = keyDesktopState.windows.equipment_card;
 const keyAfter = await shot("07-key-closed");
 await reload();
 const keyReversed = await shot("07b-key-reversed");
@@ -265,7 +267,11 @@ record("equipment_card", "KeyCommand", "CloseWindow", {
   hidden: keyState.window.visible === false,
   routed: keyState.window.last_gesture === "KeyCommand"
     && keyState.window.last_action === "CloseWindow",
-}, { before: keyBefore, after: keyAfter, reversed: keyReversed }, keyState.window);
+  detail_routed: keyDesktopState.last_transaction.action === "CloseDetail"
+    && keyDesktopState.last_transaction.detail_item === "mistress-card",
+  detail_cleared: keyState.window.detail_item === "",
+}, { before: keyBefore, after: keyAfter, reversed: keyReversed },
+keyDesktopState.last_transaction);
 
 await neutral();
 const invariantAfter = await invariantShot("08-invariant-after");

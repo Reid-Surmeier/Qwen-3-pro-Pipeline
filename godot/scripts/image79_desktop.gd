@@ -73,8 +73,11 @@ func _route_desktop_action(window_id: String, control_id: String,
 	if window_id == "equipment_card" \
 			and str(result.get("action", "")) == "CloseWindow":
 		var card_window: ControlWindow = windows.get(window_id)
+		var detail_id := str(card_window.detail_item) if card_window != null else ""
 		last_transaction = DesktopActionRouter.close_detail(window_id,
-			str(card_window.detail_item) if card_window != null else "")
+			detail_id)
+		if last_transaction.get("ok", false) and card_window != null:
+			card_window.detail_item = ""
 		_publish()
 		return
 	if str(result.get("gesture", "")) != "ModifierDoubleActivate" \

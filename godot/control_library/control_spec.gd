@@ -119,6 +119,8 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 				errors, asset_exists)
 	if window.has("drag_geometry"):
 		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
+	if window.has("detail"):
+		_validate_detail(window.detail, path + ".detail", errors)
 	if "Resize" in (gestures if gestures is Array else []):
 		_validate_resize_contract(window.get("resize"), window.get("geometry"),
 			window.get("controls"),
@@ -149,6 +151,25 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	if window.has("minimized_controls"):
 		_validate_minimized_controls(window.minimized_controls, controls,
 			path + ".minimized_controls", errors)
+
+
+static func _validate_detail(value: Variant, path: String,
+		errors: Array[Dictionary]) -> void:
+	if not value is Dictionary:
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			"detail must be an object"))
+		return
+	if not value.get("id") is String or str(value.get("id", "")).is_empty():
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".id",
+			"detail id must be a non-empty string"))
+	if not value.get("source_attested") is bool \
+			or value.get("source_attested") != true:
+		errors.append(_error(Errors.VISUAL_AUTHORITY, path + ".source_attested",
+			"detail pixels must be explicitly source-attested"))
+	if not value.get("continuation_available") is bool:
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC,
+			path + ".continuation_available",
+			"continuation availability must be explicit"))
 
 
 static func _validate_minimized_controls(value: Variant, controls: Array,

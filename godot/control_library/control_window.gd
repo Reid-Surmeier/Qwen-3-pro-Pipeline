@@ -53,7 +53,7 @@ var _geometry_version := 0
 
 func configure(window_spec: Dictionary) -> void:
 	spec = window_spec
-	detail_item = str(spec.get("detail", {}).get("id", ""))
+	detail_item = ""
 	runtime = ControlRuntime.new()
 	runtime.configure(spec)
 	name = str(spec.id).replace("-", "_").to_pascal_case()
@@ -430,6 +430,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		var result := _route_window_gesture("KeyCommand", "Escape")
 		if result.get("ok", false):
 			get_viewport().set_input_as_handled()
+			action_emitted.emit(str(spec.id), str(spec.id), result.duplicate(true))
 			state_changed.emit(str(spec.id))
 
 

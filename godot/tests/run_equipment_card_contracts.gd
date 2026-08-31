@@ -2,6 +2,7 @@ extends SceneTree
 ## Issue #129 manifest, visual-authority, and unavailable-scroll contracts.
 
 const ControlSpec = preload("res://control_library/control_spec.gd")
+const ControlWindowScript = preload("res://control_library/control_window.gd")
 const ScrollViewModule = preload("res://control_library/scroll_view.gd")
 const DesktopActionRouter = preload("res://desktop_router/desktop_action_router.gd")
 
@@ -26,6 +27,18 @@ func _init() -> void:
 		_check("source-attested-detail", card.detail.id == "mistress-card"
 			and card.detail.source_attested == true
 			and card.detail.continuation_available == false, str(card.detail))
+		var direct_window: ControlWindow = ControlWindowScript.new()
+		direct_window.configure(card)
+		_check("detail-hidden-before-router-approval", direct_window.detail_item.is_empty(),
+			str(direct_window.detail_item))
+		var invalid_manifest: Dictionary = loaded.manifest.duplicate(true)
+		var invalid_card: Dictionary = invalid_manifest.windows.filter(func(window):
+			return window.id == "equipment_card").front()
+		invalid_card.detail.source_attested = false
+		var invalid_errors := ControlSpec.validate(invalid_manifest)
+		_check("unattested-detail-manifest-rejected", _has_error(invalid_errors,
+			"VisualAuthorityError", ".detail.source_attested"),
+			str(invalid_errors))
 		_check("shared-controls", controls.size() == 3
 			and controls["equipment_card.scroll"].type == "ScrollView",
 			str(controls.keys()))
@@ -60,6 +73,14 @@ func _init() -> void:
 
 func _check(name: String, passed: bool, detail: String = "") -> void:
 	results.append({"test": name, "passed": passed, "detail": detail})
+
+
+func _has_error(errors: Array, code: String, path_suffix: String) -> bool:
+	for error in errors:
+		if error.get("code") == code \
+				and str(error.get("path", "")).ends_with(path_suffix):
+			return true
+	return false
 
 
 func _write_report() -> void:

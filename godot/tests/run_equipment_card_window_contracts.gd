@@ -34,8 +34,19 @@ func _run() -> void:
 		_check("unattested-scroll-rejected", state.controls["equipment_card.scroll"].offset == 0
 			and state.controls["equipment_card.scroll"].last_error.code == "VisualAuthorityError",
 			str(state.controls["equipment_card.scroll"]))
+		window.move_to_front()
+		await _escape()
+		_check("escape-routes-detail", window.qa_state().window.visible == false
+			and window.qa_state().window.detail_item.is_empty()
+			and desktop.last_transaction.get("action") == "CloseDetail"
+			and desktop.last_transaction.get("detail_item") == "mistress-card",
+			str(desktop.last_transaction))
+		window.visible = true
+		window.detail_item = "mistress-card"
+		window.move_to_front()
 		await _click(Vector2(1517, 16))
 		_check("close-routes-detail", window.qa_state().window.visible == false
+			and window.qa_state().window.detail_item.is_empty()
 			and desktop.last_transaction.get("action") == "CloseDetail"
 			and desktop.last_transaction.get("detail_item") == "mistress-card",
 			str(desktop.last_transaction))
@@ -68,6 +79,18 @@ func _wheel(point: Vector2, direction: int) -> void:
 	event.pressed = true
 	event.position = point
 	event.global_position = point
+	Input.parse_input_event(event)
+	await process_frame
+	var release := event.duplicate()
+	release.pressed = false
+	Input.parse_input_event(release)
+	await process_frame
+
+
+func _escape() -> void:
+	var event := InputEventKey.new()
+	event.keycode = KEY_ESCAPE
+	event.pressed = true
 	Input.parse_input_event(event)
 	await process_frame
 	var release := event.duplicate()
