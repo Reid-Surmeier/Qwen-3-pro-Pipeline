@@ -84,6 +84,14 @@ class BlindReviewPacketTests(unittest.TestCase):
             self.assertIn("--headless --path godot --import", command)
             self.assertNotIn("--quit-after", command)
 
+    def test_issue_127_clean_state_records_the_godot_process(self) -> None:
+        packet = json.loads(
+            (ROOT / "artifacts" / "reviews" / "issue-127" / "packet.json").read_text()
+        )
+        command = packet["launch"]["clean_state_command"]
+        self.assertIn("&& { nohup env", command)
+        self.assertIn("& echo $! >/tmp/issue127-blind-review.pid; }", command)
+
 
 if __name__ == "__main__":
     unittest.main()
