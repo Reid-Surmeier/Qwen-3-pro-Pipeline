@@ -2,30 +2,54 @@
   "schema_version": 1,
   "issue": 132,
   "pull_request": 82,
-  "candidate_commit": "2933eaa8b5d3260368221472b052400f2d7b97fa",
+  "candidate_commit": "872ad22d727a04110f0e46dbf377dde5241137f0",
   "acceptance_contract": "docs/reviews/issue-132-contract.md",
   "references": [
     {
-      "path": "artifacts/references/ro-hud-fullscreen/reference-native.png",
-      "sha256": "1b7af8b2c3b1be3e5dd7514b689c75a8576651bcb99d6e62536800df8068c8de"
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
     }
   ],
   "candidate": {
     "evidence_manifests": [
-      "artifacts/reviews/issue-132/basic-info-2933eaa/evidence-manifest.json"
+      "artifacts/reviews/issue-132/basic-info-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/options-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/skill-tree-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/inventory-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/storage-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/equipment-card-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/equipment-items-regression-872ad22/evidence-manifest.json",
+      "artifacts/reviews/issue-132/status-regression-872ad22/evidence-manifest.json"
     ],
     "evidence": [
-      "artifacts/reviews/issue-132/basic-info-2933eaa/reference-basic-info-4x.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/candidate-basic-info-4x.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/candidate-basic-info-minimized-4x.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/assembled-desktop-browser.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/destination-status-after.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/unavailable-map-mid.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/drag-mid.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/minimize-after.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/close-button-after.png",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/play-log.json",
-      "artifacts/reviews/issue-132/basic-info-2933eaa/verdict.json"
+      "artifacts/reviews/issue-132/basic-info-872ad22/reference-basic-info-4x.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/candidate-basic-info-4x.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/candidate-basic-info-minimized-4x.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/destination-status-after.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/unavailable-map-mid.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/drag-mid.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/minimize-after.png",
+      "artifacts/reviews/issue-132/basic-info-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/basic-info-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/basic-info-872ad22/image79-contracts.json",
+      "artifacts/reviews/issue-132/basic-info-872ad22/godot-qa-report.json",
+      "artifacts/reviews/issue-132/basic-info-872ad22/python-baseline.log",
+      "artifacts/reviews/issue-132/basic-info-872ad22/node-baseline.log",
+      "artifacts/reviews/issue-132/options-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/options-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/skill-tree-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/skill-tree-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/inventory-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/inventory-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/storage-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/storage-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/equipment-card-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/equipment-card-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/equipment-items-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/equipment-items-regression-872ad22/verdict.json",
+      "artifacts/reviews/issue-132/status-regression-872ad22/play-log.json",
+      "artifacts/reviews/issue-132/status-regression-872ad22/verdict.json"
     ]
   },
   "launch": {

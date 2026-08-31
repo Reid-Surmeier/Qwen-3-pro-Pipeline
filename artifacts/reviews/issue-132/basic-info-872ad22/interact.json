@@ -1,0 +1,17 @@
+{
+  "failed": 0,
+  "results": [
+    {
+      "hits": 59,
+      "passed": true,
+      "test": "hit-matrix",
+      "unreached": []
+    },
+    {
+      "passed": true,
+      "test": "pm-live-send"
+    }
+  ],
+  "suite": "real-input",
+  "total": 2
+}
