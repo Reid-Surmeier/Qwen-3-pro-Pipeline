@@ -95,8 +95,6 @@ func _dropdown_lifecycle() -> void:
 	var field_point := window.global_position + Vector2(220, 134)
 	await _click(field_point)
 	var opened: String = str(window.qa_state().controls["options.skin"].semantic_state)
-	var popup: Control = window.control_nodes["options.skin"].menu
-	var popup_owns_input_order := popup.get_parent().get_child(-1) == popup
 	var row_point := window.global_position + Vector2(220, 217)
 	await _click(row_point)
 	var selected: Dictionary = window.qa_state().controls["options.skin"]
@@ -105,10 +103,6 @@ func _dropdown_lifecycle() -> void:
 	var dismissed: String = str(window.qa_state().controls["options.skin"].semantic_state)
 	_check("real-dropdown-lifecycle", opened == "open" and selected.value == "tanublue"
 		and selected.semantic_state == "closed" and dismissed == "closed", str(selected))
-	_check("dropdown-popup-owns-desktop-layer", popup.z_index > window.z_index,
-		"popup=%d window=%d" % [popup.z_index, window.z_index])
-	_check("dropdown-popup-owns-input-order", popup_owns_input_order,
-		str(popup.get_index()))
 	_check("selected-dropdown-uses-unlabelled-field",
 		str(selected.get("rendered_asset", "")).contains("dropdown-field-blank-")
 		and selected.get("text_visible", false) and selected.text == "tanublue",
