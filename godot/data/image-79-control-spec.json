@@ -9003,8 +9003,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-str-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-str-arrow-pressed.png"
                 }
               }
             }
@@ -9098,8 +9098,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-agi-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-agi-arrow-pressed.png"
                 }
               }
             }
@@ -9193,8 +9193,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-vit-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-vit-arrow-pressed.png"
                 }
               }
             }
@@ -9288,8 +9288,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-int-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-int-arrow-pressed.png"
                 }
               }
             }
@@ -9383,8 +9383,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-dex-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-dex-arrow-pressed.png"
                 }
               }
             }
@@ -9478,8 +9478,8 @@
                 },
                 "disabled": {
                   "idle": "res://assets/image-79/status/transparent.png",
-                  "hover": "res://assets/image-79/status/transparent.png",
-                  "pressed": "res://assets/image-79/status/transparent.png"
+                  "hover": "res://assets/image-79/status/attribute-luk-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-luk-arrow-pressed.png"
                 }
               }
             }

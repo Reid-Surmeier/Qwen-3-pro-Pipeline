@@ -121,9 +121,12 @@ def main() -> None:
         arrow_crop = window.crop((150, y, 172, y + 25))
         arrow = variants(arrow_crop, f"attribute-{name}-arrow", records)
         available = name != "int"
+        disabled = {"idle": transparent,
+                    "hover": arrow["hover"],
+                    "pressed": arrow["pressed"]}
         surface_states = {
             "available": arrow,
-            "disabled": transparent_states,
+            "disabled": disabled,
         }
         controls.append(control(
             control_id, "Stepper", {"x": 91, "y": y, "width": 108, "height": 25},

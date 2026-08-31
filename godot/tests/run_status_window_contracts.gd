@@ -30,6 +30,12 @@ func _run() -> void:
 		and idle.controls["status.attribute.str"].rendered
 		and idle.controls["status.attribute.int"].semantic_state == "disabled",
 		str(idle))
+	var int_controls: Array = matches[0].controls.filter(
+		func(control): return control.get("id") == "status.attribute.int")
+	var int_disabled: Dictionary = int_controls[0].surfaces.increment.state_set.disabled
+	_check("disabled-stepper-has-transient-feedback", str(int_disabled.idle).ends_with(
+		"transparent.png") and not str(int_disabled.hover).ends_with("transparent.png")
+		and not str(int_disabled.pressed).ends_with("transparent.png"), str(int_disabled))
 	var minimized: Dictionary = window.runtime.dispatch("status.minimize", "Activate", {})
 	window._control_changed("status.minimize", minimized)
 	var mini: Dictionary = window.qa_state().window

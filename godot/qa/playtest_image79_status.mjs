@@ -308,7 +308,7 @@ await reload();
 const closeReversed = await shot(`${sequence}b-close-reversed`);
 record("status.close", "Activate", "CloseWindow", {
   hidden: closeState.window.visible === false,
-  routed: closeState.window.last_action === "CloseWindow",
+  routed: closeState.controls["status.close"].last_action === "CloseWindow",
 }, { before: closeBefore, after: closeAfter, reversed: closeReversed }, closeState.window);
 sequence += 1;
 
