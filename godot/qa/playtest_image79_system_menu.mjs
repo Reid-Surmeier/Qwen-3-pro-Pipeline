@@ -124,6 +124,7 @@ const requiredActions = spec.actions.map((binding) => ({ control_id: "system_men
 const approved = new Set(requiredActions.map((entry) =>
   `${entry.control_id}:${entry.gesture}:${entry.window_action}`));
 approved.add("desktop.escape:KeyCommand:OpenWindow");
+approved.add("options:KeyCommand:CloseWindow");
 const actions = [];
 const record = (controlId, gesture, action, assertions, frames, observed,
   { expectedRejection = false, motionSamples = undefined,
@@ -168,12 +169,28 @@ const pressControl = async (id, stem) => {
   const geometry = (await menu()).controls[id].geometry;
   const p = point(geometry.x + geometry.width / 2, geometry.y + geometry.height / 2);
   await page.mouse.move(p.x, p.y);
+  await page.waitForTimeout(80);
+  const hoverState = (await menu()).controls[id];
+  const hover = await shot(`${stem}-hover`, false);
   await page.mouse.down();
+  await page.waitForTimeout(40);
+  const pressedState = (await menu()).controls[id];
   const mid = await shot(`${stem}-mid`, false);
   await page.mouse.up();
   await neutral();
-  return mid;
+  return { hover, mid, hoverState, pressedState };
 };
+const stableWindowFact = (entry) => ({
+  position: entry.window.position,
+  size: entry.window.size,
+  visible: entry.window.visible,
+  minimized: entry.window.minimized,
+  window_state: entry.window_state,
+});
+const stableWindowFactsExcept = (state, excluded) => Object.fromEntries(
+  Object.entries(state.windows)
+    .filter(([id]) => !excluded.includes(id))
+    .map(([id, entry]) => [id, stableWindowFact(entry)]));
 
 const invariantBefore = await invariantShot("00-invariant-before");
 const idle = await shot("00-idle");
@@ -184,7 +201,7 @@ for (const name of ["save_point", "character_select", "environment_settings",
   "shortcuts", "game_exit"]) {
   await reload();
   const before = await shot(`${name}-before`);
-  const mid = await pressControl(`system_menu.${name}`, name);
+  const phases = await pressControl(`system_menu.${name}`, name);
   const state = await qa();
   const after = await shot(`${name}-after`);
   await reload();
@@ -195,8 +212,11 @@ for (const name of ["save_point", "character_select", "environment_settings",
     destination_unavailable: state.windows.system_menu.window_state
       .destinations[`system_menu.${name}`].available === false,
     adapter_state_immutable: state.windows.system_menu.window_state.version === 0,
+    hover_phase: phases.hoverState.interaction_phase === "hover",
+    pressed_phase: phases.pressedState.interaction_phase === "pressed",
     control_settled: control.interaction_phase === "idle",
-  }, { before, mid, after, reversed }, { transaction: state.last_transaction, control },
+  }, { before, hover: phases.hover, mid: phases.mid, after, reversed },
+  { transaction: state.last_transaction, control },
   { expectedRejection: true, intendedChange: false });
 }
 
@@ -210,7 +230,7 @@ point(optionsClose.x + optionsClose.width / 2,
 await page.waitForTimeout(80);
 const optionsBefore = (await qa()).windows.options;
 let before = await shot("sound-before");
-let mid = await pressControl("system_menu.sound_settings", "sound");
+let phases = await pressControl("system_menu.sound_settings", "sound");
 let state = await qa();
 let after = await shot("sound-after");
 const optionsAfter = state.windows.options;
@@ -228,13 +248,17 @@ record("system_menu.sound_settings", "Activate", "OpenWindow", {
   semantic_state_preserved: state.last_transaction.semantic_state_preserved === true,
   routed_to_options: state.last_transaction.target_window === "options",
   one_adapter_version: state.windows.system_menu.window_state.version === 1,
-}, { before, mid, after, reversed }, state.last_transaction,
+  hover_phase: phases.hoverState.interaction_phase === "hover",
+  pressed_phase: phases.pressedState.interaction_phase === "pressed",
+  control_settled: state.windows.system_menu.controls[
+    "system_menu.sound_settings"].interaction_phase === "idle",
+}, { before, hover: phases.hover, mid: phases.mid, after, reversed }, state.last_transaction,
 { region: OPTIONS_REGION });
 
 // Purpose-built minimized top Window and exact restoration.
 await reload();
 before = await shot("minimize-before");
-mid = await pressControl("system_menu.minimize", "minimize");
+phases = await pressControl("system_menu.minimize", "minimize");
 state = await menu();
 after = await shot("minimize-after");
 await clickControl("system_menu.minimize");
@@ -245,7 +269,10 @@ record("system_menu.minimize", "Activate", "ToggleMinimized", {
   source_width_preserved: state.window.size[0] === 204,
   minimized_height: state.window.size[1] === 27,
   restored: (await menu()).window.minimized === false,
-}, { before, mid, after, restored: reversed, reversed }, state.window);
+  hover_phase: phases.hoverState.interaction_phase === "hover",
+  pressed_phase: phases.pressedState.interaction_phase === "pressed",
+}, { before, hover: phases.hover, mid: phases.mid, after,
+  restored: reversed, reversed }, state.window);
 
 // Continuous drag and exact reverse path.
 await reload();
@@ -253,6 +280,7 @@ before = await shot("drag-before");
 const dragStart = point(1400, 517);
 const dragEnd = point(1300, 417);
 const samples = [];
+let mid;
 await page.mouse.move(dragStart.x, dragStart.y);
 await page.mouse.down();
 for (let index = 0; index <= 30; index += 1) {
@@ -284,14 +312,41 @@ record("system_menu", "Drag", "MoveWindow", {
 // Return button and frontmost Escape are separate close paths.
 await reload();
 before = await shot("return-before");
-mid = await pressControl("system_menu.return_to_game", "return");
+phases = await pressControl("system_menu.return_to_game", "return");
 state = await menu();
 after = await shot("return-after");
 await reload();
 reversed = await shot("return-reversed");
 record("system_menu.return_to_game", "Activate", "CloseWindow", {
   hidden: !state.window.visible,
-}, { before, mid, after, reversed }, state.window);
+  hover_phase: phases.hoverState.interaction_phase === "hover",
+  pressed_phase: phases.pressedState.interaction_phase === "pressed",
+}, { before, hover: phases.hover, mid: phases.mid, after, reversed }, state.window);
+
+// A different frontmost closeable Window consumes Escape without touching System Menu.
+await reload();
+await page.mouse.click(point(1180, 309).x, point(1180, 309).y);
+await page.waitForTimeout(80);
+const desktopBefore = await qa();
+const systemBeforeOptionsEscape = stableWindowFact(desktopBefore.windows.system_menu);
+const unrelatedBeforeOptionsEscape = stableWindowFactsExcept(
+  desktopBefore, ["options", "system_menu"]);
+before = await shot("options-escape-before");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(80);
+state = await qa();
+after = await shot("options-escape-after");
+await reload();
+reversed = await shot("options-escape-reversed");
+record("options", "KeyCommand", "CloseWindow", {
+  options_hidden: !state.windows.options.window.visible,
+  options_focused_path: state.windows.options.window.last_gesture === "KeyCommand",
+  system_menu_unchanged: JSON.stringify(stableWindowFact(state.windows.system_menu))
+    === JSON.stringify(systemBeforeOptionsEscape),
+  unrelated_windows_unchanged: JSON.stringify(stableWindowFactsExcept(
+    state, ["options", "system_menu"])) === JSON.stringify(unrelatedBeforeOptionsEscape),
+}, { before, after, reversed }, state.windows.options.window,
+{ region: OPTIONS_REGION });
 
 await reload();
 before = await shot("escape-before");

@@ -85,6 +85,19 @@ static func _state_problem(adapter_spec: Dictionary, state: Dictionary) -> Strin
 	if not initialized.get("ok", false) \
 			or state.destinations != initialized.state.destinations:
 		return "System Menu destination availability changed outside its adapter"
+	var version := int(state.version)
+	var last_action := str(state.last_action)
+	var last_target := str(state.last_target)
+	if version == 0 and (not last_action.is_empty() or not last_target.is_empty()):
+		return "System Menu version zero cannot contain action history"
+	if version > 0:
+		if last_action != "OpenWindow":
+			return "System Menu committed history must name OpenWindow"
+		var matching_routes: Array = adapter_spec.actions.values().filter(func(route):
+			return route is Dictionary and str(route.get("target", "")) == last_target \
+				and str(route.get("disposition", "")) == "route")
+		if matching_routes.size() != 1:
+			return "System Menu committed history must name its available destination"
 	return ""
 
 

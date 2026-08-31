@@ -13,6 +13,7 @@ SOURCE = ROOT / "artifacts/references/ro-desktop-b/reference-native.png"
 INVENTORY = ROOT / "artifacts/references/ro-desktop-b/control-inventory.json"
 OUTPUT = ROOT / "godot/assets/image-79/system-menu"
 CONTROL_SPEC = ROOT / "godot/data/image-79-control-spec.json"
+BEHAVIOUR_CARD = ROOT / "artifacts/references/ro-desktop-b/system-menu/behaviour-card.md"
 SOURCE_RECT = (1328, 505, 1532, 778)
 BLUE = (54, 145, 190, 255)
 
@@ -135,6 +136,10 @@ def main() -> None:
         "source": str(SOURCE.relative_to(ROOT)),
         "source_sha256": digest(SOURCE),
         "inventory": str(INVENTORY.relative_to(ROOT)),
+        "behaviour_card": {
+            "path": str(BEHAVIOUR_CARD.relative_to(ROOT)),
+            "sha256": digest(BEHAVIOUR_CARD),
+        },
         "source_rect": list(SOURCE_RECT),
         "button_copy": [entry[1] for entry in BUTTONS],
         "provider_requests": 0,

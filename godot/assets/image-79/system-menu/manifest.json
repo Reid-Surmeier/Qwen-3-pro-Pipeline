@@ -4,6 +4,10 @@
   "source": "artifacts/references/ro-desktop-b/reference-native.png",
   "source_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
   "inventory": "artifacts/references/ro-desktop-b/control-inventory.json",
+  "behaviour_card": {
+    "path": "artifacts/references/ro-desktop-b/system-menu/behaviour-card.md",
+    "sha256": "46d3ff5c5be5adc55ac42ce5394307f32d97207c620135c05cca91abca1cdd90"
+  },
   "source_rect": [
     1328,
     505,

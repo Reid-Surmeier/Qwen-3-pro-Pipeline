@@ -125,6 +125,18 @@ static func _validate_system_menu(adapter: Dictionary, controls: Array,
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
 			str(initialized.get("error", {}).get("detail", "invalid System Menu adapter"))))
 	var declared := _declared_controls(controls)
+	var policy_ids: Array = adapter.get("actions", {}).keys().map(func(value):
+		return str(value))
+	var open_window_ids: Array = []
+	for control_id in declared:
+		var declared_control: Dictionary = declared[control_id]
+		if _has_action(declared_control, "OpenWindow"):
+			open_window_ids.append(str(control_id))
+	if policy_ids.size() != open_window_ids.size() \
+			or not policy_ids.all(func(control_id): return control_id in open_window_ids) \
+			or not open_window_ids.all(func(control_id): return control_id in policy_ids):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".actions",
+			"System Menu policy must own every same-Window OpenWindow Control exactly once"))
 	for control_id in adapter.get("actions", {}):
 		var control: Variant = declared.get(str(control_id))
 		var route: Dictionary = adapter.actions[control_id]

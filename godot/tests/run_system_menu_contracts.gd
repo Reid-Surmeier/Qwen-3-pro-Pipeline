@@ -3,6 +3,7 @@ extends SceneTree
 
 const ControlSpec = preload("res://control_library/control_spec.gd")
 const ControlRuntime = preload("res://control_library/control_runtime.gd")
+const SystemMenuWindowState = preload("res://window_state/system_menu_window_state.gd")
 
 const BUTTONS := [
 	"system_menu.save_point",
@@ -77,7 +78,56 @@ func _init() -> void:
 		and rejected.expected_rejection
 		and JSON.stringify(runtime.qa_state().window_state) == before_rejection,
 		str([rejected, runtime.qa_state()]))
+	_contract_adapter_owns_every_open_window(spec)
+	_contract_impossible_history_fails_closed(spec)
 	_finish()
+
+
+func _contract_adapter_owns_every_open_window(spec: Dictionary) -> void:
+	var manifest := {
+		"schema_version": 3,
+		"reference": {
+			"path": "res://assets/image-79/system-menu/source-plate.png",
+			"sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+			"size": [1536, 1024],
+		},
+		"windows": [spec.duplicate(true)],
+	}
+	var unowned: Dictionary = spec.controls.filter(func(control):
+		return control.id == "system_menu.sound_settings")[0].duplicate(true)
+	unowned.id = "system_menu.extra"
+	unowned.value.target_window = "inventory"
+	manifest.windows[0].controls.append(unowned)
+	var errors := ControlSpec.validate(manifest, func(_path: String) -> bool: return true)
+	_check("every-open-window-control-is-adapter-owned",
+		errors.any(func(error):
+			return error.code == "ControlBindingError" \
+			and str(error.path).ends_with(".state_adapter.actions")), str(errors))
+
+
+func _contract_impossible_history_fails_closed(spec: Dictionary) -> void:
+	var adapter: Dictionary = spec.state_adapter
+	var zero_version: Dictionary = SystemMenuWindowState.initialize(adapter).state
+	zero_version.last_action = "OpenWindow"
+	zero_version.last_target = "game_exit"
+	var zero_before := JSON.stringify(zero_version)
+	var zero_rejected := SystemMenuWindowState.activate(
+		adapter, zero_version, "system_menu.sound_settings", 0)
+	var forged_commit: Dictionary = SystemMenuWindowState.initialize(adapter).state
+	forged_commit.version = 1
+	forged_commit.last_action = "OpenWindow"
+	forged_commit.last_target = "game_exit"
+	var forged_before := JSON.stringify(forged_commit)
+	var forged_rejected := SystemMenuWindowState.activate(
+		adapter, forged_commit, "system_menu.sound_settings", 1)
+	_check("impossible-public-history-fails-closed",
+		not zero_rejected.get("ok", true)
+		and zero_rejected.error.code == "InvalidControlSpec"
+		and JSON.stringify(zero_rejected.state) == zero_before
+		and not forged_rejected.get("ok", true)
+		and forged_rejected.error.code == "InvalidControlSpec"
+		and JSON.stringify(forged_rejected.state) == forged_before,
+		str([zero_rejected, forged_rejected]))
 
 
 func _check(name: String, passed: bool, detail: String) -> void:

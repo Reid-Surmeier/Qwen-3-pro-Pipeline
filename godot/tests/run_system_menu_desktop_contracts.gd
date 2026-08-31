@@ -22,6 +22,23 @@ func _run() -> void:
 		and desktop.system_menu != null and desktop.system_menu.visible,
 		str(desktop.qa_state()))
 
+	var system_before_options_escape := _window_fact("system_menu")
+	var unrelated_before_options_escape := _facts_except(["options", "system_menu"])
+	desktop.options.visible = true
+	desktop.options.move_to_front()
+	await process_frame
+	await _escape()
+	var after_options_escape: Dictionary = desktop.qa_state()
+	_check("frontmost-options-consumes-escape-without-system-menu-side-effect",
+		not after_options_escape.windows.options.window.visible
+		and after_options_escape.windows.options.window.last_action == "CloseWindow"
+		and _window_fact("system_menu") == system_before_options_escape
+		and _facts_except(["options", "system_menu"]) == unrelated_before_options_escape,
+		str(after_options_escape))
+	desktop.options.reset()
+	desktop.system_menu.move_to_front()
+	await process_frame
+
 	var unrelated_before := _unrelated_facts()
 	await _escape()
 	var after_return: Dictionary = desktop.qa_state()
@@ -123,6 +140,22 @@ func _all_window_facts() -> Dictionary:
 			"size": state.window.size, "visible": state.window.visible,
 			"minimized": state.window.minimized,
 			"window_state": state.window_state}
+	return facts
+
+
+func _window_fact(window_id: String) -> Dictionary:
+	var state: Dictionary = desktop.windows[window_id].qa_state()
+	return {"position": state.window.position,
+		"size": state.window.size, "visible": state.window.visible,
+		"minimized": state.window.minimized,
+		"window_state": state.window_state}
+
+
+func _facts_except(excluded: Array[String]) -> Dictionary:
+	var facts := {}
+	for window_id in desktop.windows:
+		if window_id not in excluded:
+			facts[window_id] = _window_fact(window_id)
 	return facts
 
 
