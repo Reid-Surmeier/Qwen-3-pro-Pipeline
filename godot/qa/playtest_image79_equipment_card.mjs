@@ -197,16 +197,16 @@ for (let index = 0; index < 31; index += 1) {
   motionSamples.push([sample.x, sample.y]);
   await page.mouse.move(sample.x, sample.y);
 }
+const dragMid = await shot("04-drag-rejected-mid", false);
 await page.mouse.up();
 const dragState = await control("equipment_card.scroll");
-const dragAfter = await shot("04-drag-rejected", false);
 await reload();
 const dragReversed = await shot("04b-drag-reversed");
 record("equipment_card.scroll", "Drag", "SetEquipmentCardScrollOffset", {
   rejected: dragState.last_error?.code === "VisualAuthorityError",
   unchanged: dragState.offset === 0 && dragState.available === false,
   continuous: motionSamples.length >= 30,
-}, { before: dragBefore, after: dragAfter, reversed: dragReversed }, dragState,
+}, { before: dragBefore, mid: dragMid, after: dragMid, reversed: dragReversed }, dragState,
 motionSamples);
 
 // Window title Drag with 31 real pointer samples.
