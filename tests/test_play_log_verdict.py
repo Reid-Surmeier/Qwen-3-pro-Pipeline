@@ -191,6 +191,15 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.assertEqual("PASS", verdict["verdict"])
         self.assertEqual(5, verdict["frames_verified"])
 
+    def test_read_only_meter_requires_no_synthetic_action(self) -> None:
+        log = self._valid_log()
+        manifest = self._manifest()
+        manifest["windows"][0]["controls"].append({
+            "id": "options.read_only_meter", "type": "Meter", "actions": [],
+        })
+        verdict = evaluate_play_log(log, self.root, manifest)
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
     def test_issue_128_requires_all_adr_0004_interaction_facts(self) -> None:
         log = self._valid_log()
         log["candidate"]["issue"] = 128
