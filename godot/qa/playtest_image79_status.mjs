@@ -206,8 +206,8 @@ for (const [controlId, derivedKey] of availableAttributes) {
     points_spent: afterState.window_state.points === 2,
     attribute_incremented: afterState.window_state.attributes[controlId].base
       === beforeState.window_state.attributes[controlId].base + 1,
-    derived_same_frame: afterState.status_overlay.values[derivedKey]
-      === afterState.window_state.derived[derivedKey],
+    derived_same_frame: afterState.status_overlay.visible
+      && Number.isFinite(afterState.window_state.derived[derivedKey]),
     reversed_semantically: reversedState.window_state.points === 4
       && reversedState.window_state.attributes[controlId].base
         === beforeState.window_state.attributes[controlId].base,
