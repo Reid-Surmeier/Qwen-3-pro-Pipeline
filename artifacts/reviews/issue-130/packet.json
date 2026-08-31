@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "issue": 130,
+  "pull_request": 82,
+  "candidate_commit": "d1385369e47754f7a75533319b1d165f7237d5ac",
+  "acceptance_contract": "docs/reviews/issue-130-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-130/equipment-items-d138536/evidence-manifest.json",
+      "artifacts/reviews/issue-130/options-regression-d138536/evidence-manifest.json",
+      "artifacts/reviews/issue-130/skill-tree-regression-d138536/evidence-manifest.json",
+      "artifacts/reviews/issue-130/inventory-regression-d138536/evidence-manifest.json",
+      "artifacts/reviews/issue-130/storage-regression-d138536/evidence-manifest.json",
+      "artifacts/reviews/issue-130/equipment-card-regression-d138536/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-130/equipment-items-d138536/reference-equipment-items-4x.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/candidate-equipment-items-4x.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/01-minimized.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/01b-restored.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/02-selected.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/02c-inventory-double-before.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/02c-inventory-double-equipped.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/02d-inventory-double-reversed.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/03-double-unequipped.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/04-drag-mid.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/04-drag-equipped.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/equip-gesture-proof.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/05-rejected-before.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/05-rejected-mid.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/05-rejected-after.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/rejection-proof.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/06-moved.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/07-closed.png",
+      "artifacts/reviews/issue-130/equipment-items-d138536/play-log.json",
+      "artifacts/reviews/issue-130/equipment-items-d138536/report.json",
+      "artifacts/reviews/issue-130/equipment-items-d138536/verdict.json",
+      "artifacts/reviews/issue-130/equipment-items-d138536/artifact-equivalence.json",
+      "artifacts/reviews/issue-130/equipment-items-d138536/image79-contracts.json",
+      "artifacts/reviews/issue-130/equipment-items-d138536/godot-contracts-rerun.log",
+      "artifacts/reviews/issue-130/equipment-items-d138536/python-baseline.log",
+      "artifacts/reviews/issue-130/equipment-items-d138536/node-baseline.log",
+      "artifacts/reviews/issue-130/equipment-items-d138536/compileall.log",
+      "artifacts/reviews/issue-130/equipment-items-d138536/diff-check.log",
+      "artifacts/reviews/issue-130/options-regression-d138536/play-log.json",
+      "artifacts/reviews/issue-130/options-regression-d138536/verdict.json",
+      "artifacts/reviews/issue-130/skill-tree-regression-d138536/play-log.json",
+      "artifacts/reviews/issue-130/skill-tree-regression-d138536/verdict.json",
+      "artifacts/reviews/issue-130/inventory-regression-d138536/play-log.json",
+      "artifacts/reviews/issue-130/inventory-regression-d138536/verdict.json",
+      "artifacts/reviews/issue-130/storage-regression-d138536/play-log.json",
+      "artifacts/reviews/issue-130/storage-regression-d138536/verdict.json",
+      "artifacts/reviews/issue-130/equipment-card-regression-d138536/play-log.json",
+      "artifacts/reviews/issue-130/equipment-card-regression-d138536/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE130_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE130_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE130_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE130_GODOT_BIN\" --headless --path godot --editor --quit-after 2"
+  }
+}

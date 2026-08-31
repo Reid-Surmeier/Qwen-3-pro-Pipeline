@@ -21,7 +21,7 @@ func _run() -> void:
 	desktop = current_scene
 	window = desktop.storage
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
-		and desktop.windows.size() == 5, str(desktop.validation_errors))
+		and desktop.windows.size() == 6, str(desktop.validation_errors))
 	await _click(Vector2(537, 704))
 	_check("public-input-category",
 		window.qa_state().controls["storage.categories"].value == "equipment",

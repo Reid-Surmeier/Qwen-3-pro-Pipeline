@@ -511,12 +511,15 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 					"ToggleInventorySelection", "MoveInventoryItem", \
 					"SelectStorageCategory", "SelectStorageItem", \
 					"ToggleStorageSelection", "TransferStorageItem", \
-					"TransferInventoryItem":
+					"TransferInventoryItem", "SelectEquipmentSlot", \
+					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
 	_refresh_all_controls()
-	if result.get("ok", false) and result.has("action"):
+	if (result.get("ok", false) and result.has("action")) \
+			or result.get("cross_window_drag", false) \
+			or result.get("cross_window_drag_end", false):
 		action_emitted.emit(str(spec.id), control_id, result.duplicate(true))
 	state_changed.emit(str(spec.id))
 

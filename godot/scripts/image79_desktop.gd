@@ -11,11 +11,12 @@ var skill_tree: ControlWindow
 var inventory: ControlWindow
 var storage: ControlWindow
 var equipment_card: ControlWindow
+var equipment_items: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
 var _last_json := ""
-
+var _cross_window_drag := {}
 
 func _ready() -> void:
 	if OS.has_feature("web"):
@@ -46,6 +47,7 @@ func _ready() -> void:
 	inventory = windows.get("inventory")
 	storage = windows.get("storage")
 	equipment_card = windows.get("equipment_card")
+	equipment_items = windows.get("equipment_items")
 	if equipment_card != null:
 		var detail_route: Dictionary = DesktopActionRouter.open_detail(
 			"equipment_card", equipment_card.spec.get("detail", {}))
@@ -70,6 +72,10 @@ func qa_state() -> Dictionary:
 
 func _route_desktop_action(window_id: String, control_id: String,
 		result: Dictionary) -> void:
+	if result.get("cross_window_drag", false) \
+			or result.get("cross_window_drag_end", false):
+		_route_cross_window_drag(window_id, control_id, result)
+		return
 	if window_id == "equipment_card" \
 			and str(result.get("action", "")) == "CloseWindow":
 		var card_window: ControlWindow = windows.get(window_id)
@@ -79,6 +85,23 @@ func _route_desktop_action(window_id: String, control_id: String,
 		if last_transaction.get("ok", false) and card_window != null:
 			card_window.detail_item = ""
 		_publish()
+		return
+	if window_id == "equipment_items" \
+			and str(result.get("gesture", "")) == "DoubleActivate" \
+			and str(result.get("action", "")) == "UnequipEquipmentItem":
+		var inventory_slot := str(inventory.runtime.qa_state().controls[
+			"inventory.items"].get("value", "")) if inventory != null else ""
+		_equipment_transaction("unequip", inventory_slot,
+			str(result.get("value", "")))
+		return
+	if window_id == "inventory" \
+			and str(result.get("action", "")) == "EquipInventoryItem" \
+			and inventory != null and equipment_items != null \
+			and str(inventory.runtime.qa_state().controls["inventory.tabs"].get(
+				"value", "")) == "equip":
+		var equipment_slot := str(equipment_items.runtime.qa_state().controls[
+			"equipment_items.slots"].get("value", ""))
+		_equipment_transaction("equip", str(result.get("value", "")), equipment_slot)
 		return
 	if str(result.get("gesture", "")) != "ModifierDoubleActivate" \
 			or window_id not in ["inventory", "storage"]:
@@ -115,7 +138,125 @@ func _route_desktop_action(window_id: String, control_id: String,
 	_publish()
 
 
+func _equipment_transaction(operation: String, inventory_slot: String,
+		equipment_slot: String, expected_inventory_version: int = -1,
+		expected_equipment_version: int = -1) -> Dictionary:
+	if inventory == null or equipment_items == null:
+		last_transaction = {"ok": false, "error": {"code": "ActionRoutingError",
+			"detail": "Inventory and Equipment Items must both exist"}}
+		_publish()
+		return last_transaction
+	var inventory_control := "inventory.items"
+	var equipment_control := "equipment_items.slots"
+	var inventory_snapshot := inventory.runtime.selection_slots(inventory_control)
+	var equipment_snapshot := equipment_items.runtime.selection_slots(equipment_control)
+	if expected_inventory_version < 0:
+		expected_inventory_version = int(inventory_snapshot.get("version", -1))
+	if expected_equipment_version < 0:
+		expected_equipment_version = int(equipment_snapshot.get("version", -1))
+	var transaction: Dictionary = DesktopActionRouter.equipment_transaction(
+		inventory_snapshot, equipment_snapshot, operation, inventory_slot,
+		equipment_slot, expected_inventory_version, expected_equipment_version)
+	last_transaction = {"ok": bool(transaction.get("ok", false)),
+		"action": transaction.get("action"), "operation": operation,
+		"inventory_slot": inventory_slot, "equipment_slot": equipment_slot,
+		"inventory_version_before": inventory_snapshot.get("version"),
+		"equipment_version_before": equipment_snapshot.get("version"),
+		"error": transaction.get("error")}
+	if transaction.get("ok", false):
+		inventory.runtime.apply_selection_slots(inventory_control, transaction.inventory)
+		equipment_items.runtime.apply_selection_slots(equipment_control, transaction.equipment)
+		inventory.runtime.set_selection_drag_state(inventory_control, false)
+		equipment_items.runtime.set_selection_drag_state(equipment_control, false)
+		inventory._refresh_all_controls()
+		equipment_items._refresh_all_controls()
+		last_transaction.inventory_version_after = transaction.inventory.version
+		last_transaction.equipment_version_after = transaction.equipment.version
+		last_transaction.displaced_item = transaction.displaced_item
+	_publish()
+	return last_transaction
+
+
+func _route_cross_window_drag(window_id: String, control_id: String,
+		result: Dictionary) -> void:
+	if window_id not in ["inventory", "equipment_items"] \
+			or control_id not in ["inventory.items", "equipment_items.slots"]:
+		return
+	if inventory == null or equipment_items == null:
+		return
+	var global_coordinates: Array = result.get("global_position", [])
+	if global_coordinates.size() != 2:
+		return
+	var point := Vector2(float(global_coordinates[0]), float(global_coordinates[1]))
+	if _cross_window_drag.is_empty() or str(_cross_window_drag.get(
+			"source_window", "")) != window_id:
+		var inventory_state: Dictionary = inventory.runtime.qa_state().controls["inventory.items"]
+		var equipment_state: Dictionary = equipment_items.runtime.qa_state().controls["equipment_items.slots"]
+		_cross_window_drag = {
+			"source_window": window_id,
+			"source_control": control_id,
+			"source_slot": str(result.get("source", "")),
+			"target_slot": "",
+			"motion_samples": int(result.get("motion_samples", 0)),
+			"inventory_version": int(result.get("version", -1)) if window_id == "inventory" \
+				else int(inventory_state.get("item_version", -1)),
+			"equipment_version": int(result.get("version", -1)) if window_id == "equipment_items" \
+				else int(equipment_state.get("item_version", -1)),
+		}
+	var source_is_inventory := window_id == "inventory"
+	var target_window := "equipment_items" if source_is_inventory else "inventory"
+	var target_control := "equipment_items.slots" if source_is_inventory else "inventory.items"
+	var target_slot := _slot_at_global(target_window, target_control, point)
+	_cross_window_drag.target_slot = target_slot
+	_cross_window_drag.motion_samples = int(result.get("motion_samples", 0))
+	windows[target_window].runtime.set_selection_drag_state(target_control, true, "",
+		target_slot, int(_cross_window_drag.motion_samples))
+	windows[target_window]._refresh_all_controls()
+	if not result.get("cross_window_drag_end", false):
+		_publish()
+		return
+	var finished := _cross_window_drag.duplicate(true)
+	finished.target_slot = _slot_at_global(target_window, target_control, point)
+	_cross_window_drag = {}
+	call_deferred("_commit_cross_window_drag", finished)
+
+
+func _commit_cross_window_drag(finished: Dictionary) -> void:
+	inventory.runtime.set_selection_drag_state("inventory.items", false)
+	equipment_items.runtime.set_selection_drag_state("equipment_items.slots", false)
+	inventory._refresh_all_controls()
+	equipment_items._refresh_all_controls()
+	var target_slot := str(finished.get("target_slot", ""))
+	var source_is_inventory := str(finished.source_window) == "inventory"
+	var inventory_slot := str(finished.source_slot) if source_is_inventory else target_slot
+	var equipment_slot := target_slot if source_is_inventory else str(finished.source_slot)
+	_equipment_transaction("equip" if source_is_inventory else "unequip",
+		inventory_slot, equipment_slot, int(finished.inventory_version),
+		int(finished.equipment_version))
+
+
+func _slot_at_global(window_id: String, control_id: String, point: Vector2) -> String:
+	var target_window: ControlWindow = windows.get(window_id)
+	if target_window == null:
+		return ""
+	var window_state: Dictionary = target_window.qa_state()
+	if not bool(window_state.window.get("visible", false)) \
+			or bool(window_state.window.get("minimized", false)):
+		return ""
+	var surface_geometry: Dictionary = window_state.controls.get(control_id, {}).get(
+		"surface_geometry", {})
+	for slot in surface_geometry:
+		var geometry: Dictionary = surface_geometry[slot]
+		var rect := Rect2(float(geometry.x), float(geometry.y),
+			float(geometry.width), float(geometry.height))
+		if rect.has_point(point):
+			return str(slot)
+	return ""
+
+
 func _publish(_window_id: String = "") -> void:
+	if has_meta("suppress_publish"):
+		return
 	var json := JSON.stringify(qa_state())
 	if json == _last_json:
 		return

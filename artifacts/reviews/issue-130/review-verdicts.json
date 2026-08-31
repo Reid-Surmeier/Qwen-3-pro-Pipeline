@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "issue": 130,
+  "candidate_commit": "d1385369e47754f7a75533319b1d165f7237d5ac",
+  "evidence_commit": "da490705d53c5de5c700ffbcda9c145bcbb4a0d5",
+  "verdicts": [
+    {
+      "review": "specification",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "All Issue acceptance criteria are met; the exact-SHA packet, 297 evidence hashes, atomic rejection, transient feedback, artifact equivalence, and all six Play Logs were independently verified."
+    },
+    {
+      "review": "engineering",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The forged-mid weakness is closed. Missing, unchanged, forged, and invariant-changing transient evidence now fail closed; all earlier findings remain closed."
+    },
+    {
+      "review": "blind_artifact",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The source-locked Equipment Items artifact, real gestures, atomic invalid-drop restoration, and five prior-window regressions pass blind review for the exact candidate."
+    }
+  ]
+}

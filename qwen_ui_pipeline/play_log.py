@@ -167,6 +167,11 @@ def evaluate_play_log(
             elif action[field] is False:
                 failures.append(f"{label} {field} is false")
 
+        expected_rejection = action.get("expected_rejection", False)
+        if not isinstance(expected_rejection, bool):
+            problems.append(f"{label}.expected_rejection must be boolean")
+            expected_rejection = False
+
         assertions = action.get("assertions")
         if not isinstance(assertions, dict) or not assertions or not all(
             _nonempty_string(name) and isinstance(value, bool)
@@ -183,6 +188,7 @@ def evaluate_play_log(
         frames = action.get("frames")
         required_roles = {"before", "after"}
         pixel_metrics = None
+        mid_metrics = None
         reversal_metrics = None
         if strict_interaction_facts:
             required_roles.add("reversed")
@@ -194,12 +200,23 @@ def evaluate_play_log(
                     value = contract_facts.get(fact)
                     if not isinstance(value, bool):
                         problems.append(f"{label}.contract_facts.{fact} must be boolean")
+                    elif fact == "intended_region_changed" and expected_rejection:
+                        if value is not False:
+                            failures.append(
+                                f"{label} expected rejection must declare unchanged intended region"
+                            )
                     elif value is False:
                         failures.append(f"{label} contract fact is false: {fact}")
 
             pixel_metrics = _pixel_metrics(
                 action.get("pixel_metrics"), f"{label}.pixel_metrics", problems
             )
+            if expected_rejection:
+                mid_metrics = _pixel_metrics(
+                    action.get("mid_pixel_metrics"),
+                    f"{label}.mid_pixel_metrics",
+                    problems,
+                )
             reversal_metrics = _pixel_metrics(
                 action.get("reversal_pixel_metrics"),
                 f"{label}.reversal_pixel_metrics",
@@ -303,10 +320,38 @@ def evaluate_play_log(
                 if actual is not None:
                     _compare_pixel_metrics(pixel_metrics, actual,
                                            f"{label}.pixel_metrics", problems)
-                    if actual["intended_region_changed_pixels"] <= 0:
+                    if expected_rejection and any(
+                        actual[field] != 0 for field in _PIXEL_METRICS
+                    ):
+                        failures.append(
+                            f"{label} expected rejection changed committed pixels"
+                        )
+                    elif not expected_rejection \
+                            and actual["intended_region_changed_pixels"] <= 0:
                         failures.append(f"{label} intended region did not change")
                     if actual["invariant_region_changed_pixels"] != 0:
                         failures.append(f"{label} invariant region changed")
+            if mid_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "mid" in verified_by_role:
+                actual_mid = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["mid"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.mid_pixel_metrics", problems,
+                )
+                if actual_mid is not None:
+                    _compare_pixel_metrics(
+                        mid_metrics, actual_mid,
+                        f"{label}.mid_pixel_metrics", problems,
+                    )
+                    if actual_mid["intended_region_changed_pixels"] <= 0:
+                        failures.append(
+                            f"{label} expected rejection had no transient feedback"
+                        )
+                    if actual_mid["invariant_region_changed_pixels"] != 0:
+                        failures.append(
+                            f"{label} transient feedback changed invariant region"
+                        )
             if reversal_metrics is not None and intended_region is not None \
                     and invariant_region is not None \
                     and "before" in verified_by_role and "reversed" in verified_by_role:
@@ -324,9 +369,12 @@ def evaluate_play_log(
                         failures.append(f"{label} did not reverse exactly")
         before = frames.get("before") if isinstance(frames, dict) else None
         after = frames.get("after") if isinstance(frames, dict) else None
-        if isinstance(before, dict) and isinstance(after, dict) \
-                and before.get("sha256") == after.get("sha256"):
-            failures.append(f"{label} intended region did not change")
+        if isinstance(before, dict) and isinstance(after, dict):
+            committed_unchanged = before.get("sha256") == after.get("sha256")
+            if expected_rejection and not committed_unchanged:
+                failures.append(f"{label} expected rejection changed committed pixels")
+            elif not expected_rejection and committed_unchanged:
+                failures.append(f"{label} intended region did not change")
         if strict_interaction_facts:
             reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
             if isinstance(before, dict) and isinstance(reversed_frame, dict) \

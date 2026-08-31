@@ -1,0 +1,18 @@
+==> image-79 run_control_spec_contracts.gd
+==> image-79 run_control_runtime_contracts.gd
+==> image-79 run_scroll_text_contracts.gd
+==> image-79 run_desktop_router_contracts.gd
+==> image-79 run_inventory_spec_contracts.gd
+==> image-79 run_inventory_contracts.gd
+==> image-79 run_inventory_window_contracts.gd
+==> image-79 run_storage_spec_contracts.gd
+==> image-79 run_storage_contracts.gd
+==> image-79 run_storage_window_contracts.gd
+==> image-79 run_equipment_card_contracts.gd
+==> image-79 run_equipment_card_window_contracts.gd
+==> image-79 run_equipment_items_contracts.gd
+==> image-79 run_equipment_items_window_contracts.gd
+==> image-79 run_options_window_contracts.gd
+==> image-79 run_skill_tree_contracts.gd
+==> image-79 run_skill_tree_window_contracts.gd
+{"pass": true, "total": 190, "failed": 0}

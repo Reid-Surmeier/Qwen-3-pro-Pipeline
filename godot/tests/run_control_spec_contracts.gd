@@ -11,6 +11,7 @@ func _init() -> void:
 	_contract_valid_manifest_is_accepted()
 	_contract_options_manifest_is_complete()
 	_contract_skill_tree_control_types_are_frozen()
+	_contract_selection_foreign_identity_fields_fail_closed()
 	_contract_window_adapter_fields_fail_closed()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
@@ -158,6 +159,51 @@ func _contract_skill_tree_control_types_are_frozen() -> void:
 	_check("selection-value-control-fails-closed",
 		"ControlBindingError" in foreign_value_errors.map(func(error): return error.code),
 		str(foreign_value_errors))
+
+
+func _contract_selection_foreign_identity_fields_fail_closed() -> void:
+	var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(
+		"res://data/image-79-control-spec.json"))
+	var equipment_index: int = fixture.windows.find_custom(func(window):
+		return window.get("id") == "equipment_items")
+	var selection_index: int = fixture.windows[equipment_index].controls.find_custom(func(control):
+		return control.get("id") == "equipment_items.slots")
+
+	var missing_foreign := fixture.duplicate(true)
+	missing_foreign.windows[equipment_index].controls[selection_index].value\
+		.foreign_identity_assets.r0c0 = "res://missing-foreign-identity.png"
+	var missing_errors: Array = ControlSpec.validate(missing_foreign,
+		func(path: String) -> bool: return path != "res://missing-foreign-identity.png")
+	_check("selection-foreign-asset-fails-closed", missing_errors.any(func(error):
+		return error.code == "AssetIntegrityError" \
+			and "foreign_identity_assets.r0c0" in str(error.path)), str(missing_errors))
+
+	var bad_identity_surface := fixture.duplicate(true)
+	bad_identity_surface.windows[equipment_index].controls[selection_index].value\
+		.identity_surfaces.head = "missing-slot"
+	var identity_errors: Array = ControlSpec.validate(bad_identity_surface,
+		_all_assets_exist)
+	_check("selection-identity-surface-fails-closed", identity_errors.any(func(error):
+		return error.code == "ControlBindingError" \
+			and "identity_surfaces.head" in str(error.path)), str(identity_errors))
+
+	var bad_empty_flag := fixture.duplicate(true)
+	bad_empty_flag.windows[equipment_index].controls[selection_index].value\
+		.show_empty_slots = "yes"
+	var empty_flag_errors: Array = ControlSpec.validate(bad_empty_flag,
+		_all_assets_exist)
+	_check("selection-empty-flag-fails-closed", empty_flag_errors.any(func(error):
+		return error.code == "InvalidStateSet" \
+			and "show_empty_slots" in str(error.path)), str(empty_flag_errors))
+
+	var missing_available := fixture.duplicate(true)
+	missing_available.windows[equipment_index].controls[selection_index].surfaces\
+		.head.state_set.erase("available")
+	var available_errors: Array = ControlSpec.validate(missing_available,
+		_all_assets_exist)
+	_check("selection-empty-slot-state-fails-closed", available_errors.any(func(error):
+		return error.code == "InvalidStateSet" and "surfaces.head.state_set.available" \
+			in str(error.path)), str(available_errors))
 
 
 func _contract_window_adapter_fields_fail_closed() -> void:

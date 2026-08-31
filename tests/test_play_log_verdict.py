@@ -236,6 +236,62 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(self._strict_log(), self.root, self._strict_manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
+    def test_strict_expected_rejection_requires_and_accepts_unchanged_commit_frame(self) -> None:
+        log = self._strict_log()
+        rejected = log["actions"][0]
+        rejected["expected_rejection"] = True
+        rejected["frames"]["after"] = self.strict_before
+        rejected["contract_facts"]["intended_region_changed"] = False
+        rejected["pixel_metrics"] = {
+            "full_frame_changed_pixels": 0,
+            "intended_region_changed_pixels": 0,
+            "invariant_region_changed_pixels": 0,
+        }
+        rejected["mid_pixel_metrics"] = {
+            "full_frame_changed_pixels": 1,
+            "intended_region_changed_pixels": 1,
+            "invariant_region_changed_pixels": 0,
+        }
+        verdict = evaluate_play_log(log, self.root, self._strict_manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
+    def test_strict_expected_rejection_requires_transient_mid_frame_feedback(self) -> None:
+        log = self._strict_log()
+        rejected = log["actions"][0]
+        rejected["expected_rejection"] = True
+        rejected["frames"]["mid"] = self.strict_before
+        rejected["frames"]["after"] = self.strict_before
+        rejected["contract_facts"]["intended_region_changed"] = False
+        rejected["pixel_metrics"] = {
+            "full_frame_changed_pixels": 0,
+            "intended_region_changed_pixels": 0,
+            "invariant_region_changed_pixels": 0,
+        }
+        rejected["mid_pixel_metrics"] = {
+            "full_frame_changed_pixels": 0,
+            "intended_region_changed_pixels": 0,
+            "invariant_region_changed_pixels": 0,
+        }
+        verdict = evaluate_play_log(log, self.root, self._strict_manifest())
+        self.assertEqual("FAIL", verdict["verdict"], verdict)
+        self.assertTrue(any("expected rejection had no transient feedback" in failure
+                            for failure in verdict["failures"]), verdict)
+
+    def test_strict_expected_rejection_fails_if_commit_frame_changes(self) -> None:
+        log = self._strict_log()
+        rejected = log["actions"][0]
+        rejected["expected_rejection"] = True
+        rejected["contract_facts"]["intended_region_changed"] = False
+        rejected["mid_pixel_metrics"] = {
+            "full_frame_changed_pixels": 1,
+            "intended_region_changed_pixels": 1,
+            "invariant_region_changed_pixels": 0,
+        }
+        verdict = evaluate_play_log(log, self.root, self._strict_manifest())
+        self.assertEqual("FAIL", verdict["verdict"], verdict)
+        self.assertTrue(any("expected rejection changed committed pixels" in failure
+                            for failure in verdict["failures"]), verdict)
+
     def test_unexercised_control_is_incomplete(self) -> None:
         log = self._valid_log()
         log["actions"] = [action for action in log["actions"]

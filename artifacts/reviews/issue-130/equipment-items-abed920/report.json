@@ -1,0 +1,191 @@
+{
+  "url": "http://127.0.0.1:8894/?screen=image79",
+  "window": {
+    "id": "equipment_items",
+    "geometry": {
+      "x": 0,
+      "y": 423,
+      "width": 484,
+      "height": 271
+    }
+  },
+  "driver": "Playwright Chromium real click, double-click, cross-window drag, title drag, and keyboard input",
+  "checks": [
+    {
+      "name": "idle-factual",
+      "passed": true,
+      "detail": {
+        "detail_item": "",
+        "geometry_version": 0,
+        "id": "equipment_items",
+        "last_action": "",
+        "last_error": null,
+        "last_gesture": "",
+        "minimized": false,
+        "pending": false,
+        "position": [
+          0,
+          423
+        ],
+        "resize": {
+          "active": false,
+          "clamped": [
+            484,
+            271
+          ],
+          "motion_samples": 0,
+          "requested": [
+            484,
+            271
+          ],
+          "stale_footer_covered": false,
+          "stale_footer_grip_covered": false,
+          "stale_right_edge_covered": false,
+          "stale_title_controls_covered": false
+        },
+        "size": [
+          484,
+          271
+        ],
+        "view_mode": "tree",
+        "visible": true,
+        "z_index": 0
+      }
+    },
+    {
+      "name": "equipment_items.minimize:Activate:ToggleMinimized",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "minimized": true,
+          "restored": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items.slots:Activate:SelectEquipmentSlot",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "selected": true,
+          "routed": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items.slots:DoubleActivate:UnequipEquipmentItem",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "routed": true,
+          "inventory_committed": true,
+          "equipment_committed": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items.slots:DragDrop:MoveEquipmentItem",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "continuous": true,
+          "target_feedback": true,
+          "routed": true,
+          "inventory_atomic": true,
+          "equipment_atomic": true,
+          "displaced": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items:Drag:MoveWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "moved": true,
+          "continuous": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items.close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "equipment_items:KeyCommand:CloseWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hidden": true,
+          "routed": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    }
+  ],
+  "console_entries": [
+    "[warning] [.WebGL-0x394c064a9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x394c064a9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x394c064a9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x394c064a9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "summary": {
+    "pass": true,
+    "total": 8,
+    "failed": 0,
+    "console_errors": 0
+  }
+}

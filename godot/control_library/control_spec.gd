@@ -27,9 +27,10 @@ const ACTIONS_BY_TYPE := {
 	"ChoiceGroup": ["SelectChoice"],
 	"Tabs": ["SelectInventoryTab", "SelectStorageCategory"],
 	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
-		"OpenInventoryItem", "ToggleInventorySelection", "MoveInventoryItem",
+		"OpenInventoryItem", "EquipInventoryItem", "ToggleInventorySelection", "MoveInventoryItem",
 		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
-		"TransferInventoryItem"],
+		"TransferInventoryItem", "SelectEquipmentSlot", "UnequipEquipmentItem",
+		"MoveEquipmentItem"],
 	"Stepper": ["StepSkill"],
 	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
 		"ScrollEquipmentCard", "StepEquipmentCardScroll",
@@ -148,6 +149,7 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 			control_ids, errors, asset_exists)
 	_validate_selection_value_controls(controls, window_id, path, errors)
 	_validate_linked_selection_controls(controls, path, errors)
+	_validate_selection_context_actions(controls, path, errors)
 	if window.has("minimized_controls"):
 		_validate_minimized_controls(window.minimized_controls, controls,
 			path + ".minimized_controls", errors)
@@ -222,6 +224,47 @@ static func _validate_linked_selection_controls(controls: Array, path: String,
 			errors.append(_error(Errors.CONTROL_BINDING,
 				"%s.controls[%d].value.selection_control_id" % [path, index],
 				"linked Control must be a SelectionView declared in the same Window"))
+
+
+static func _validate_selection_context_actions(controls: Array, path: String,
+		errors: Array[Dictionary]) -> void:
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	for index in controls.size():
+		var control: Variant = controls[index]
+		if not control is Dictionary or str(control.get("type", "")) != "SelectionView":
+			continue
+		var value: Variant = control.get("value", {})
+		if not value is Dictionary or not value.has("context_actions"):
+			continue
+		var routes: Variant = value.context_actions
+		var route_path := "%s.controls[%d].value.context_actions" % [path, index]
+		if not routes is Array or routes.is_empty():
+			errors.append(_error(Errors.CONTROL_BINDING, route_path,
+				"context_actions must contain explicit conditional Window Actions"))
+			continue
+		for route_index in routes.size():
+			var route: Variant = routes[route_index]
+			var current_path := "%s[%d]" % [route_path, route_index]
+			if not route is Dictionary or route.get("gesture") not in control.get(
+					"gestures", []) or str(route.get("action", "")) not in ACTIONS_BY_TYPE.SelectionView:
+				errors.append(_error(Errors.ACTION_ROUTING, current_path,
+					"context action must bind a declared gesture to a SelectionView Window Action"))
+				continue
+			var condition: Variant = route.get("when")
+			var context_id := str(condition.get("control_id", "")) \
+				if condition is Dictionary else ""
+			var context_value: Variant = condition.get("value") \
+				if condition is Dictionary else null
+			var context_control: Variant = declared.get(context_id)
+			var choices: Array = context_control.get("value", {}).get("choices", []) \
+				if context_control is Dictionary else []
+			if context_id.is_empty() or not context_control is Dictionary \
+					or context_value not in choices:
+				errors.append(_error(Errors.CONTROL_BINDING, current_path + ".when",
+					"context action must reference a declared same-Window choice"))
 
 
 static func _validate_control(control: Variant, window_id: String, control_index: int,
@@ -361,6 +404,48 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
 			"SelectionView requires unique items, an initial item, and detail text for every item"))
+	if value is Dictionary:
+		var show_empty_slots: Variant = value.get("show_empty_slots", false)
+		if value.has("show_empty_slots") and not show_empty_slots is bool:
+			errors.append(_error(Errors.INVALID_STATE_SET,
+				path + ".value.show_empty_slots",
+				"show_empty_slots must be a boolean"))
+		var identity_surfaces: Variant = value.get("identity_surfaces", {})
+		if value.has("identity_surfaces") and not identity_surfaces is Dictionary:
+			errors.append(_error(Errors.CONTROL_BINDING,
+				path + ".value.identity_surfaces",
+				"identity_surfaces must map identities to declared SelectionView items"))
+		elif identity_surfaces is Dictionary:
+			for identity in identity_surfaces:
+				var mapped_surface := str(identity_surfaces[identity])
+				if not identity is String or str(identity).is_empty() \
+						or mapped_surface not in items:
+					errors.append(_error(Errors.CONTROL_BINDING,
+						path + ".value.identity_surfaces." + str(identity),
+						"identity must map to a declared SelectionView item"))
+		var foreign_assets: Variant = value.get("foreign_identity_assets", {})
+		if value.has("foreign_identity_assets") and not foreign_assets is Dictionary:
+			errors.append(_error(Errors.ASSET_INTEGRITY,
+				path + ".value.foreign_identity_assets",
+				"foreign_identity_assets must map identities to assets"))
+		elif foreign_assets is Dictionary:
+			for identity in foreign_assets:
+				var foreign_path := path + ".value.foreign_identity_assets." + str(identity)
+				if not identity is String or str(identity).is_empty() or identity in items:
+					errors.append(_error(Errors.INVALID_STATE_SET, foreign_path,
+						"foreign identity must be non-empty and external to this SelectionView"))
+				else:
+					_validate_asset(str(foreign_assets[identity]), foreign_path,
+						errors, asset_exists)
+		if show_empty_slots is bool and show_empty_slots:
+			var surfaces: Variant = control.get("surfaces", {})
+			for item in items:
+				var state_set: Variant = surfaces.get(item, {}).get("state_set", {}) \
+					if surfaces is Dictionary else {}
+				if not state_set is Dictionary or not state_set.has("available"):
+					errors.append(_error(Errors.INVALID_STATE_SET,
+						path + ".surfaces." + str(item) + ".state_set.available",
+						"visible empty slots require an available State Set"))
 	var gestures: Array = control.get("gestures", []) \
 		if control.get("gestures", []) is Array else []
 	if "DoubleActivate" in gestures:
