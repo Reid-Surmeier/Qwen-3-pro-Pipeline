@@ -188,6 +188,30 @@
         "final-v011-assembly-2x.png",
         "assembly/fidelity-report-v3.json"
       ]
+    },
+    {
+      "version": "v012",
+      "created": "2026-08-31T17:55:43.871515+00:00",
+      "method": "compose_v4 recolour-only, source-frame-native (spec #147, architecture #143) \u2014 no generative model",
+      "gates": {
+        "mechanical": "13/13 assertions (identity self-test 13/13)",
+        "blind_visual_review": "SHIP \u2014 round 8, independent reviewer, packet only",
+        "evidence": "visual-gate/VERDICT-v012-round8-SHIP.md"
+      },
+      "review_rounds": 8,
+      "reviewer_measurements": {
+        "annotation_colour_px": 0,
+        "remnant_dark_ink_px": 18,
+        "label_mask_xor": 0,
+        "adjacency_violations": 0,
+        "distinct_flat_fills": 10
+      },
+      "files": [
+        "final-v012-assembly.png",
+        "final-v012-assembly-2x.png",
+        "assembly/compose_v4.py",
+        "visual-gate/review_gate.py"
+      ]
     }
   ]
 }

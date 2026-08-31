@@ -45,3 +45,11 @@ Verdict on Qwen for this map: of 5 attempts that reached the provider after the 
   navy protected from all sweeps. Vladivostok marks gone.
 - Gates: fidelity outside_changed=0; spot checks 75/75. $0.
 - Deployed to FigJam node 16:67.
+
+## v012 (2026-08-31) — FIRST VERSION TO PASS AN INDEPENDENT VISUAL REVIEW
+- compose_v4 (recolour-only, source-frame): cid votes per patch, never paints; per-landmass
+  local grid re-registration; annotations wiped and reconstructed; pinned palette.
+- Gate: review_gate.py, 13 source-frame assertions + gridded review packet.
+- Eight blind review rounds (fresh reviewer each time, packet only): NO-SHIP x7 -> SHIP.
+- Reviewer measurements at ship: annotation colours 0px, remnant ink 18px, label mask XOR 0,
+  adjacency violations 0, 10 flat fills. $0 spent.
