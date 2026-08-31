@@ -100,8 +100,9 @@ static func _refresh(adapter_spec: Dictionary, state: Dictionary) -> void:
 		and str(state.membership) == "member"
 	state.visible_members = _member_ids(adapter_spec) if party_visible else []
 	if party_visible:
-		if str(state.selected_member) not in state.visible_members:
-			state.selected_member = str(state.visible_members[0])
+		if not str(state.selected_member).is_empty() \
+				and str(state.selected_member) not in state.visible_members:
+			state.selected_member = ""
 	else:
 		state.selected_member = ""
 	var availability := {}

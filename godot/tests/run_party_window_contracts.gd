@@ -33,6 +33,7 @@ func _run() -> void:
 		and idle.controls.size() == 13 and idle.display_facts.size() == 10
 		and not idle.party_overlay.visible
 		and idle.controls["party.members"].visible_item_count == 5
+		and idle.controls["party.members"].selected_item == ""
 		and idle.controls["party.meter.sakumariri"].rendered_texture_size == [88, 5],
 		str(idle))
 

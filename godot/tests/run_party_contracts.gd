@@ -33,7 +33,7 @@ func _init() -> void:
 		and initial.window_state.version == 0
 		and initial.window_state.mode == "party"
 		and initial.controls["party.mode"].value == "party"
-		and initial.controls["party.members"].value == "sakumariri"
+		and initial.controls["party.members"].value == ""
 		and initial.controls["party.action.leave"].semantic_state == "available"
 		and initial.controls["party.action.search"].semantic_state == "disabled",
 		str(initial))

@@ -41,7 +41,7 @@ func _contract_source_state() -> void:
 	var state: Dictionary = result.get("state", {})
 	_check("source-state", result.get("ok", false) and state.version == 0
 		and state.mode == "party" and state.membership == "member"
-		and state.selected_member == "sakumariri"
+		and state.selected_member == ""
 		and state.visible_members.size() == 5
 		and state.availability["party.action.leave"]
 		and not state.availability["party.action.memo"], str(result))
@@ -65,7 +65,7 @@ func _contract_member_selection_is_atomic() -> void:
 	_check("member-selection-one-complete-state", result.get("ok", false)
 		and result.action == "SelectPartyMember" and result.state.version == 1
 		and result.state.selected_member == "show_a"
-		and source.selected_member == "sakumariri" and source.version == 0,
+		and source.selected_member == "" and source.version == 0,
 		str([source, result]))
 
 
