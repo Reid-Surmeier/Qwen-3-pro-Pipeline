@@ -156,8 +156,11 @@ const recordRejection = (controlId, gesture, action, assertions, frames, observe
     },
   };
   actions.push(entry);
+  const contractPass = entry.contract_facts.intended_region_changed === false
+    && Object.entries(entry.contract_facts).filter(([name]) =>
+      name !== "intended_region_changed").every(([, value]) => Boolean(value));
   checks.push({ name: `${controlId}:${gesture}:${action}:named-rejection`,
-    passed: matches && Object.values(entry.contract_facts).every(Boolean),
+    passed: matches && contractPass,
     detail: { assertions, contract_facts: entry.contract_facts } });
 };
 const reload = async () => {
