@@ -184,11 +184,14 @@ def main() -> None:
     sort_button = button(sort_entry, "storage.sort", "SortStorage")
 
     field_geometry = rel(next(entry for entry in entries if entry.get("label") == "search")["rect"])
-    field_image = window.crop(box(field_geometry))
-    ImageDraw.Draw(field_image).rectangle((5, 4, field_image.width - 6,
-                                           field_image.height - 5), fill=WHITE)
-    empty_field = variants(field_image, "search-empty", records)
-    filtered_field = variants(field_image, "search-filtered", records, BLUE, 1)
+    empty_field_image = window.crop(box(field_geometry))
+    filtered_field_image = empty_field_image.copy()
+    ImageDraw.Draw(filtered_field_image).rectangle(
+        (5, 4, filtered_field_image.width - 6, filtered_field_image.height - 5),
+        fill=WHITE,
+    )
+    empty_field = variants(empty_field_image, "search-empty", records)
+    filtered_field = variants(filtered_field_image, "search-filtered", records, BLUE, 1)
     for field_states in [empty_field, filtered_field]:
         field_states["focused"] = field_states["hover"]
     search = control(
@@ -260,6 +263,7 @@ def main() -> None:
     list_path = save(list_plate, "list-plate.png", records)
     storage_window = {
         "id": "storage",
+        "evidence_policy": {"issue": 128},
         "geometry": {"x": WINDOW[0], "y": WINDOW[1],
                      "width": WINDOW[2], "height": WINDOW[3]},
         "drag_geometry": {"x": 24, "y": 0, "width": 470, "height": 24},

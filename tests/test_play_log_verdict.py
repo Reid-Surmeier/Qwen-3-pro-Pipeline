@@ -1,7 +1,9 @@
 import hashlib
 import json
+import struct
 import tempfile
 import unittest
+import zlib
 from pathlib import Path
 
 from qwen_ui_pipeline.play_log import evaluate_play_log
@@ -16,6 +18,14 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.after = self._frame("after.png", b"after")
         self.invariant_before = self._frame("invariant-before.png", b"stable")
         self.invariant_after = self._frame("invariant-after.png", b"stable")
+        self.strict_before = self._png_frame("strict-before.png", [
+            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
+            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
+        ])
+        self.strict_after = self._png_frame("strict-after.png", [
+            (255, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
+            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
+        ])
 
     def tearDown(self) -> None:
         self.tempdir.cleanup()
@@ -24,6 +34,21 @@ class PlayLogVerdictTests(unittest.TestCase):
         path = self.root / name
         path.write_bytes(content)
         return {"path": name, "sha256": hashlib.sha256(content).hexdigest()}
+
+    def _png_frame(self, name: str, pixels: list[tuple[int, int, int, int]]) -> dict[str, str]:
+        def chunk(kind: bytes, content: bytes) -> bytes:
+            return (struct.pack(">I", len(content)) + kind + content
+                    + struct.pack(">I", zlib.crc32(kind + content) & 0xFFFFFFFF))
+
+        raw = b"".join(
+            b"\0" + b"".join(bytes(pixel) for pixel in pixels[row * 3:(row + 1) * 3])
+            for row in range(2)
+        )
+        content = (b"\x89PNG\r\n\x1a\n"
+                   + chunk(b"IHDR", struct.pack(">IIBBBBB", 3, 2, 8, 6, 0, 0, 0))
+                   + chunk(b"IDAT", zlib.compress(raw))
+                   + chunk(b"IEND", b""))
+        return self._frame(name, content)
 
     def _valid_log(self) -> dict:
         return {
@@ -129,7 +154,12 @@ class PlayLogVerdictTests(unittest.TestCase):
         log = self._valid_log()
         log["candidate"]["issue"] = 128
         for action in log["actions"]:
-            action["frames"]["reversed"] = self.before
+            action["frames"] = {
+                "before": self.strict_before,
+                "mid": self.strict_after,
+                "after": self.strict_after,
+                "reversed": self.strict_before,
+            }
             action["contract_facts"] = {
                 "real_gesture_path": True,
                 "intended_region_changed": True,
@@ -138,8 +168,8 @@ class PlayLogVerdictTests(unittest.TestCase):
                 "reversible": True,
             }
             action["pixel_metrics"] = {
-                "full_frame_changed_pixels": 3,
-                "intended_region_changed_pixels": 3,
+                "full_frame_changed_pixels": 1,
+                "intended_region_changed_pixels": 1,
                 "invariant_region_changed_pixels": 0,
             }
             action["reversal_pixel_metrics"] = {
@@ -147,7 +177,14 @@ class PlayLogVerdictTests(unittest.TestCase):
                 "intended_region_changed_pixels": 0,
                 "invariant_region_changed_pixels": 0,
             }
+            action["intended_region"] = {"x": 0, "y": 0, "width": 1, "height": 1}
+            action["invariant_region"] = {"x": 2, "y": 1, "width": 1, "height": 1}
         return log
+
+    def _strict_manifest(self) -> dict:
+        manifest = self._manifest()
+        manifest["windows"][0]["evidence_policy"] = {"issue": 128}
+        return manifest
 
     def test_complete_hash_locked_log_passes(self) -> None:
         verdict = evaluate_play_log(self._valid_log(), self.root, self._manifest())
@@ -162,20 +199,41 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.assertTrue(any("contract_facts" in problem for problem in verdict["problems"]))
         self.assertTrue(any("frames.reversed" in problem for problem in verdict["problems"]))
 
-    def test_issue_128_rejects_nonzero_invariants_and_restoration_delta(self) -> None:
+    def test_issue_128_rejects_forged_pixel_metrics(self) -> None:
         log = self._strict_log()
         action = log["actions"][0]
         action["pixel_metrics"]["invariant_region_changed_pixels"] = 1
         action["reversal_pixel_metrics"]["full_frame_changed_pixels"] = 1
         verdict = evaluate_play_log(log, self.root, self._manifest())
-        self.assertEqual("FAIL", verdict["verdict"], verdict)
-        self.assertTrue(any("invariant region changed" in failure
-                            for failure in verdict["failures"]))
-        self.assertTrue(any("did not reverse exactly" in failure
-                            for failure in verdict["failures"]))
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(any("does not match hash-verified frames" in problem
+                            for problem in verdict["problems"]))
+
+    def test_trusted_issue_cannot_be_downgraded_by_candidate(self) -> None:
+        log = self._strict_log()
+        log["candidate"]["issue"] = 127
+        verdict = evaluate_play_log(
+            log, self.root, self._strict_manifest(), trusted_issue=128
+        )
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertIn(
+            "candidate.issue must match the frozen manifest evidence policy",
+            verdict["problems"],
+        )
+
+    def test_issue_128_rejects_forged_or_out_of_bounds_regions(self) -> None:
+        for region in (
+            {"x": -999, "y": -999, "width": 0, "height": 0},
+            {"x": 2, "y": 1, "width": 2, "height": 1},
+        ):
+            with self.subTest(region=region):
+                log = self._strict_log()
+                log["actions"][0]["intended_region"] = region
+                verdict = evaluate_play_log(log, self.root, self._manifest())
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
 
     def test_issue_128_complete_adr_0004_evidence_passes(self) -> None:
-        verdict = evaluate_play_log(self._strict_log(), self.root, self._manifest())
+        verdict = evaluate_play_log(self._strict_log(), self.root, self._strict_manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
     def test_unexercised_control_is_incomplete(self) -> None:

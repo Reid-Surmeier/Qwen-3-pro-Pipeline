@@ -100,6 +100,7 @@ const pixelMetrics = (before, after, crop = { x: 492, y: 569, width: 600, height
   invariant_region_changed_pixels: ae(before, after,
     { x: 1400, y: 800, width: 100, height: 100 }),
 });
+const INVARIANT_REGION = { x: 1400, y: 800, width: 100, height: 100 };
 const record = (controlId, gesture, action, assertions, actionFrames, observed,
   motionSamples = undefined, intendedCrop = undefined) => {
   const matches = Object.values(assertions).every(Boolean);
@@ -107,7 +108,8 @@ const record = (controlId, gesture, action, assertions, actionFrames, observed,
     expected: "manifest and Behaviour Card", observed: typeof observed === "string"
       ? observed : JSON.stringify(observed), responsive: matches,
     matches_expected: matches, assertions, frames: actionFrames,
-    intended_region: intendedCrop ?? { x: 492, y: 569, width: 600, height: 433 } };
+    intended_region: intendedCrop ?? { x: 492, y: 569, width: 600, height: 433 },
+    invariant_region: INVARIANT_REGION };
   if (actionFrames.before && actionFrames.after) {
     entry.pixel_metrics = pixelMetrics(actionFrames.before, actionFrames.after,
       entry.intended_region);

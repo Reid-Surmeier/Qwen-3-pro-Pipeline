@@ -3792,7 +3792,7 @@
     },
     {
       "path": "godot/assets/image-79/storage/search-empty-idle.png",
-      "sha256": "0ce09c54f8bf86db69dd7f9b61ab853d60093112604152678b4e085bd89df3e5",
+      "sha256": "4c60b4a29aa19f6a48d66b78b696bbefb3bc97fa1e32e9199581997abca7160f",
       "size": [
         86,
         27
@@ -3800,7 +3800,7 @@
     },
     {
       "path": "godot/assets/image-79/storage/search-empty-hover.png",
-      "sha256": "15a3b9a6c4c80747a7b18fd9d6d82e339bfce7a3e92b30a89a9a52b3b07cc333",
+      "sha256": "79989c5ef682456393a12781959ecddc25fc1d6aa64d9bfb5a66655b068443f0",
       "size": [
         86,
         27
@@ -3808,7 +3808,7 @@
     },
     {
       "path": "godot/assets/image-79/storage/search-empty-pressed.png",
-      "sha256": "16748878add77a4e4c4f26048fe6f5ce3e14e5547ccdcb6b33b3af2041ea80b7",
+      "sha256": "dff29a35c533f8b67d19d4c9b2c5d789aac191f08645bc9c151c7558276a2f2f",
       "size": [
         86,
         27

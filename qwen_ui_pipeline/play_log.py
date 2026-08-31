@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import math
 import re
+import struct
+import zlib
 from pathlib import Path
 from typing import Any
 
@@ -64,7 +66,7 @@ def evaluate_play_log(
     ):
         problems.append("trusted_issue must be a positive integer")
 
-    expected_controls, expected_actions, range_specs = _manifest_requirements(
+    expected_controls, expected_actions, range_specs, manifest_policy_issue = _manifest_requirements(
         manifest, candidate, problems, include_window_actions=schema_version == SCHEMA_VERSION
     )
     source_sha = log.get("source_reference_sha256")
@@ -125,11 +127,18 @@ def evaluate_play_log(
     seen_actions: set[tuple[str, str, str]] = set()
     range_endpoints: dict[str, set[str]] = {control_id: set() for control_id in range_specs}
     verified_frames: set[Path] = set()
+    decoded_frames: dict[Path, tuple[int, int, bytes]] = {}
     candidate_issue = candidate.get("issue") if isinstance(candidate, dict) else None
+    if manifest_policy_issue is not None:
+        if candidate_issue != manifest_policy_issue:
+            problems.append("candidate.issue must match the frozen manifest evidence policy")
+        if trusted_issue is not None and trusted_issue < manifest_policy_issue:
+            problems.append("trusted_issue cannot downgrade the frozen manifest evidence policy")
+    policy_issue = manifest_policy_issue if manifest_policy_issue is not None else candidate_issue
     strict_interaction_facts = (
-        isinstance(candidate_issue, int)
-        and not isinstance(candidate_issue, bool)
-        and candidate_issue >= STRICT_INTERACTION_FACTS_ISSUE
+        isinstance(policy_issue, int)
+        and not isinstance(policy_issue, bool)
+        and policy_issue >= STRICT_INTERACTION_FACTS_ISSUE
     )
     for index, action in enumerate(actions):
         label = f"actions[{index}]"
@@ -173,6 +182,8 @@ def evaluate_play_log(
 
         frames = action.get("frames")
         required_roles = {"before", "after"}
+        pixel_metrics = None
+        reversal_metrics = None
         if strict_interaction_facts:
             required_roles.add("reversed")
             contract_facts = action.get("contract_facts")
@@ -189,21 +200,11 @@ def evaluate_play_log(
             pixel_metrics = _pixel_metrics(
                 action.get("pixel_metrics"), f"{label}.pixel_metrics", problems
             )
-            if pixel_metrics is not None:
-                if pixel_metrics["intended_region_changed_pixels"] <= 0:
-                    failures.append(f"{label} intended region did not change")
-                if pixel_metrics["invariant_region_changed_pixels"] != 0:
-                    failures.append(f"{label} invariant region changed")
-
             reversal_metrics = _pixel_metrics(
                 action.get("reversal_pixel_metrics"),
                 f"{label}.reversal_pixel_metrics",
                 problems,
             )
-            if reversal_metrics is not None and any(
-                reversal_metrics[field] != 0 for field in _PIXEL_METRICS
-            ):
-                failures.append(f"{label} did not reverse exactly")
         if gesture in {"Drag", "Resize", "DragDrop"}:
             required_roles.add("mid")
             samples = action.get("motion_samples")
@@ -277,11 +278,50 @@ def evaluate_play_log(
         for role in sorted(required_roles):
             if role not in frames:
                 problems.append(f"{label}.frames.{role} is required")
+        verified_by_role: dict[str, Path] = {}
         for role, frame in frames.items():
             frame_label = f"{label}.frames.{role}"
             verified = _verify_frame(frame, root, frame_label, problems)
             if verified is not None:
                 verified_frames.add(verified)
+                verified_by_role[role] = verified
+        if strict_interaction_facts:
+            intended_region = _pixel_region(
+                action.get("intended_region"), f"{label}.intended_region", problems
+            )
+            invariant_region = _pixel_region(
+                action.get("invariant_region"), f"{label}.invariant_region", problems
+            )
+            if pixel_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "after" in verified_by_role:
+                actual = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["after"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.pixel_metrics", problems,
+                )
+                if actual is not None:
+                    _compare_pixel_metrics(pixel_metrics, actual,
+                                           f"{label}.pixel_metrics", problems)
+                    if actual["intended_region_changed_pixels"] <= 0:
+                        failures.append(f"{label} intended region did not change")
+                    if actual["invariant_region_changed_pixels"] != 0:
+                        failures.append(f"{label} invariant region changed")
+            if reversal_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "reversed" in verified_by_role:
+                actual_reversal = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["reversed"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.reversal_pixel_metrics", problems,
+                )
+                if actual_reversal is not None:
+                    _compare_pixel_metrics(
+                        reversal_metrics, actual_reversal,
+                        f"{label}.reversal_pixel_metrics", problems,
+                    )
+                    if any(actual_reversal[field] != 0 for field in _PIXEL_METRICS):
+                        failures.append(f"{label} did not reverse exactly")
         before = frames.get("before") if isinstance(frames, dict) else None
         after = frames.get("after") if isinstance(frames, dict) else None
         if isinstance(before, dict) and isinstance(after, dict) \
@@ -382,6 +422,196 @@ def _pixel_metrics(
     return metrics if len(metrics) == len(_PIXEL_METRICS) else None
 
 
+def _pixel_region(
+    value: Any, label: str, problems: list[str]
+) -> tuple[int, int, int, int] | None:
+    if not isinstance(value, dict):
+        problems.append(f"{label} must be an object")
+        return None
+    fields: list[int] = []
+    for field in ("x", "y", "width", "height"):
+        number = value.get(field)
+        if not isinstance(number, int) or isinstance(number, bool):
+            problems.append(f"{label}.{field} must be an integer")
+            return None
+        fields.append(number)
+    x, y, width, height = fields
+    if x < 0 or y < 0 or width <= 0 or height <= 0:
+        problems.append(f"{label} must have a non-negative origin and positive size")
+        return None
+    return x, y, width, height
+
+
+def _compare_pixel_metrics(
+    claimed: dict[str, float], actual: dict[str, int], label: str,
+    problems: list[str],
+) -> None:
+    for field in _PIXEL_METRICS:
+        if claimed[field] != actual[field]:
+            problems.append(
+                f"{label}.{field} does not match hash-verified frames "
+                f"(claimed {claimed[field]:g}, actual {actual[field]})"
+            )
+
+
+def _recompute_pixel_metrics(
+    before_path: Path,
+    after_path: Path,
+    intended_region: tuple[int, int, int, int],
+    invariant_region: tuple[int, int, int, int],
+    cache: dict[Path, tuple[int, int, bytes]],
+    label: str,
+    problems: list[str],
+) -> dict[str, int] | None:
+    before = _decode_png_rgba(before_path, cache, f"{label}.before", problems)
+    after = _decode_png_rgba(after_path, cache, f"{label}.after", problems)
+    if before is None or after is None:
+        return None
+    before_width, before_height, before_pixels = before
+    after_width, after_height, after_pixels = after
+    if (before_width, before_height) != (after_width, after_height):
+        problems.append(f"{label} frame dimensions do not match")
+        return None
+    for region_label, (x, y, width, height) in (
+        ("intended_region", intended_region),
+        ("invariant_region", invariant_region),
+    ):
+        if x + width > before_width or y + height > before_height:
+            problems.append(f"{label}.{region_label} leaves the frame")
+            return None
+
+    def changed(region: tuple[int, int, int, int] | None = None) -> int:
+        if region is None:
+            return sum(
+                before_pixels[offset:offset + 4] != after_pixels[offset:offset + 4]
+                for offset in range(0, len(before_pixels), 4)
+            )
+        x, y, width, height = region
+        total = 0
+        for row in range(y, y + height):
+            start = (row * before_width + x) * 4
+            for offset in range(start, start + width * 4, 4):
+                total += before_pixels[offset:offset + 4] != after_pixels[offset:offset + 4]
+        return total
+
+    return {
+        "full_frame_changed_pixels": changed(),
+        "intended_region_changed_pixels": changed(intended_region),
+        "invariant_region_changed_pixels": changed(invariant_region),
+    }
+
+
+def _decode_png_rgba(
+    path: Path,
+    cache: dict[Path, tuple[int, int, bytes]],
+    label: str,
+    problems: list[str],
+) -> tuple[int, int, bytes] | None:
+    cached = cache.get(path)
+    if cached is not None:
+        return cached
+    try:
+        from PIL import Image
+    except ImportError:
+        Image = None  # type: ignore[assignment]
+    if Image is not None:
+        try:
+            with Image.open(path) as image:
+                converted = image.convert("RGBA")
+                decoded = (converted.width, converted.height, converted.tobytes())
+            cache[path] = decoded
+            return decoded
+        except (OSError, ValueError) as error:
+            problems.append(f"{label} cannot be independently decoded: {error}")
+            return None
+    try:
+        data = path.read_bytes()
+        if data[:8] != b"\x89PNG\r\n\x1a\n":
+            raise ValueError("not a PNG")
+        offset = 8
+        width = height = bit_depth = color_type = interlace = None
+        compressed = bytearray()
+        while offset < len(data):
+            if offset + 12 > len(data):
+                raise ValueError("truncated chunk")
+            length = struct.unpack(">I", data[offset:offset + 4])[0]
+            chunk_type = data[offset + 4:offset + 8]
+            chunk_data = data[offset + 8:offset + 8 + length]
+            crc_bytes = data[offset + 8 + length:offset + 12 + length]
+            if len(chunk_data) != length or len(crc_bytes) != 4:
+                raise ValueError("truncated chunk data")
+            expected_crc = struct.unpack(">I", crc_bytes)[0]
+            if zlib.crc32(chunk_type + chunk_data) & 0xFFFFFFFF != expected_crc:
+                raise ValueError("chunk CRC mismatch")
+            offset += 12 + length
+            if chunk_type == b"IHDR":
+                if length != 13:
+                    raise ValueError("invalid IHDR")
+                width, height, bit_depth, color_type, compression, filtering, interlace = \
+                    struct.unpack(">IIBBBBB", chunk_data)
+                if width <= 0 or height <= 0 or compression != 0 or filtering != 0:
+                    raise ValueError("unsupported IHDR")
+            elif chunk_type == b"IDAT":
+                compressed.extend(chunk_data)
+            elif chunk_type == b"IEND":
+                break
+        channels = {0: 1, 2: 3, 4: 2, 6: 4}.get(color_type)
+        if bit_depth != 8 or channels is None or interlace != 0:
+            raise ValueError("only non-interlaced 8-bit grayscale/RGB/RGBA PNGs are supported")
+        raw = zlib.decompress(bytes(compressed))
+        stride = width * channels
+        if len(raw) != height * (stride + 1):
+            raise ValueError("unexpected decompressed size")
+        rows: list[bytearray] = []
+        source_offset = 0
+        previous = bytearray(stride)
+        for _ in range(height):
+            filter_type = raw[source_offset]
+            scanline = raw[source_offset + 1:source_offset + 1 + stride]
+            source_offset += stride + 1
+            reconstructed = bytearray(stride)
+            for index, value in enumerate(scanline):
+                left = reconstructed[index - channels] if index >= channels else 0
+                above = previous[index]
+                upper_left = previous[index - channels] if index >= channels else 0
+                if filter_type == 0:
+                    predictor = 0
+                elif filter_type == 1:
+                    predictor = left
+                elif filter_type == 2:
+                    predictor = above
+                elif filter_type == 3:
+                    predictor = (left + above) // 2
+                elif filter_type == 4:
+                    p = left + above - upper_left
+                    distances = (abs(p - left), abs(p - above), abs(p - upper_left))
+                    predictor = (left, above, upper_left)[distances.index(min(distances))]
+                else:
+                    raise ValueError(f"unsupported filter {filter_type}")
+                reconstructed[index] = (value + predictor) & 0xFF
+            rows.append(reconstructed)
+            previous = reconstructed
+        rgba = bytearray()
+        for row in rows:
+            for index in range(0, len(row), channels):
+                if color_type == 0:
+                    gray = row[index]
+                    rgba.extend((gray, gray, gray, 255))
+                elif color_type == 2:
+                    rgba.extend((*row[index:index + 3], 255))
+                elif color_type == 4:
+                    gray, alpha = row[index:index + 2]
+                    rgba.extend((gray, gray, gray, alpha))
+                else:
+                    rgba.extend(row[index:index + 4])
+        decoded = (width, height, bytes(rgba))
+        cache[path] = decoded
+        return decoded
+    except (OSError, ValueError, struct.error, zlib.error) as error:
+        problems.append(f"{label} cannot be independently decoded: {error}")
+        return None
+
+
 def _verify_frame(
     frame: Any, root: Path, label: str, problems: list[str]
 ) -> Path | None:
@@ -416,22 +646,32 @@ def _nonempty_string(value: Any) -> bool:
 
 def _manifest_requirements(
     manifest: Any, candidate: Any, problems: list[str], *, include_window_actions: bool
-) -> tuple[set[str], set[tuple[str, str, str]], dict[str, tuple[float, float]]]:
+) -> tuple[set[str], set[tuple[str, str, str]], dict[str, tuple[float, float]], int | None]:
     if not isinstance(manifest, dict):
         problems.append("a frozen ControlSpec manifest is required")
-        return set(), set(), {}
+        return set(), set(), {}, None
     window_id = candidate.get("window_id") if isinstance(candidate, dict) else None
     windows = manifest.get("windows")
     if not isinstance(windows, list):
         problems.append("manifest.windows must be an array")
-        return set(), set(), {}
+        return set(), set(), {}, None
     window = next(
         (entry for entry in windows if isinstance(entry, dict) and entry.get("id") == window_id),
         None,
     )
     if window is None or not isinstance(window.get("controls"), list):
         problems.append("candidate window is absent from the frozen manifest")
-        return set(), set(), {}
+        return set(), set(), {}, None
+    manifest_policy_issue = None
+    evidence_policy = window.get("evidence_policy")
+    if evidence_policy is not None:
+        if not isinstance(evidence_policy, dict) \
+                or not isinstance(evidence_policy.get("issue"), int) \
+                or isinstance(evidence_policy.get("issue"), bool) \
+                or evidence_policy["issue"] <= 0:
+            problems.append(f"manifest evidence policy for {window_id} is malformed")
+        else:
+            manifest_policy_issue = evidence_policy["issue"]
     controls: set[str] = set()
     actions: set[tuple[str, str, str]] = set()
     range_specs: dict[str, tuple[float, float]] = {}
@@ -467,7 +707,7 @@ def _manifest_requirements(
                 problems.append(f"manifest action for {control_id} is malformed")
                 continue
             actions.add(key)  # type: ignore[arg-type]
-    return controls, actions, range_specs
+    return controls, actions, range_specs, manifest_policy_issue
 
 
 def _invalid(problem: str) -> dict[str, Any]:

@@ -5587,6 +5587,9 @@
     },
     {
       "id": "storage",
+      "evidence_policy": {
+        "issue": 128
+      },
       "geometry": {
         "x": 492,
         "y": 609,
