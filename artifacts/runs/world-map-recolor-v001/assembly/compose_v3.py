@@ -582,6 +582,7 @@ label_edits = np.zeros((H, W), bool)
 nav = NAVY & pmask
 out[nav] = (0x04, 0x02, 0x34)
 cp_g = ndimage.grey_dilation(country_px, size=9)
+diff_d = ndimage.binary_dilation(diff, iterations=1) if copies else np.zeros((H, W), bool)
 lab_b, n_b = ndimage.label(BLACK, structure=np.ones((3, 3)))
 total_b = ndimage.sum(BLACK, lab_b, range(1, n_b + 1))
 inside_b = ndimage.sum(pmask, lab_b, range(1, n_b + 1))
@@ -593,26 +594,42 @@ for j in range(n_b):
     bh, bw = bs[0].stop - bs[0].start, bs[1].stop - bs[1].start
     letter[j + 1] = total_b[j] <= 60 and bh <= 14 and bw <= 14
 letters_mask = letter[lab_b] | NAVY
-wlab, wn = ndimage.label(ndimage.binary_dilation(letters_mask, structure=np.ones((3, 9))))
-for wi, wsl in enumerate(ndimage.find_objects(wlab), start=1):
-    wm = wlab[wsl] == wi
-    ids = np.unique(lab_b[wsl][wm & BLACK[wsl]])
-    ids = ids[ids > 0]
-    if len(ids) and (frac_b[ids - 1] >= 0.45).any():
-        gone = wm & letters_mask[wsl] & np.isin(lab_b[wsl], ids) & ~R1[wsl] & ~R2[wsl]
-        sub = out[wsl]
-        onl = gone & (cp_g[wsl] >= 0) & (cid[wsl] >= 0)
+# letters inside wiped regions: plate/tag digits vanish, city-name letters are re-stamped.
+# ground truth: plate digits change between the two live fetches; labels do not.
+diffbox = np.zeros((H, W), bool)
+for (bx0, by0, bx1, by1) in badge_boxes:
+    slb2 = (slice(max(0, by0), min(H, by1)), slice(max(0, bx0), min(W, bx1)))
+    if diff_d[slb2].any():
+        diffbox[slb2] = True
+diffbox |= ndimage.binary_dilation(R2, iterations=1)
+n_wipe_l = n_stamp_l = 0
+for j in range(1, n_b + 1):
+    if not letter[j]:
+        continue
+    if frac_b[j - 1] <= 0.0:
+        continue
+    bs = objs_b[j - 1]
+    m_c = lab_b[bs] == j
+    infrac = float(diffbox[bs][m_c].mean())
+    inter_diff = bool((m_c & diff_d[bs]).any())
+    in_r5 = bool((m_c & R5[bs]).any())
+    sub = out[bs]
+    if inter_diff or infrac >= 0.6 or in_r5:
+        gone = m_c & ~R1[bs] & ~R2[bs]
+        onl = gone & (cp_g[bs] >= 0) & (cid[bs] >= 0)
         yi, xi = np.where(onl)
-        sub[yi, xi] = PALETTE[colour_idx[cp_g[wsl][yi, xi]]]
+        sub[yi, xi] = PALETTE[colour_idx[cp_g[bs][yi, xi]]]
         offl = gone & ~onl
         sub[offl] = (0xFC, 0xFE, 0xFC)
-        sub[offl & gridmask[wsl]] = (0xCC, 0xCE, 0xFC)
-        label_edits[wsl] |= gone
-        continue
-    rest = wm & letters_mask[wsl] & pmask[wsl]
-    sub = out[wsl]
-    sub[rest & BLACK[wsl]] = (0x04, 0x02, 0x04)
-    sub[rest & NAVY[wsl]] = (0x04, 0x02, 0x34)
+        sub[offl & gridmask[bs]] = (0xCC, 0xCE, 0xFC)
+        label_edits[bs] |= gone
+        n_wipe_l += 1
+    else:
+        st = m_c & pmask[bs]
+        sub[st] = (0x04, 0x02, 0x04)
+        label_edits[bs] |= st
+        n_stamp_l += 1
+print("letters wiped:", n_wipe_l, "re-stamped:", n_stamp_l)
 
 # anti-alias & marker cleanup: blend pixels keep the OLD fill tint after repainting.
 OUTSET = [tuple(int(v) for v in c) for c in PALETTE] + [
@@ -762,6 +779,28 @@ for kcol, ccol in enumerate(PALETTE):
         artifact_edits[sl2] |= m
         n_fix2 += 1
 print("final sweep recoloured:", n_fix2)
+
+# corridor sweep: leftover ink in the Greenwich corridor over open sea
+if len(gwcols):
+    xlo2, xhi2 = int(gwcols.min()) - 8, int(gwcols.max()) + 8
+    corr2 = np.zeros((H, W), bool)
+    corr2[:, max(0, xlo2):min(W, xhi2)] = True
+    navy_out = (out == np.array((0x04, 0x02, 0x34), np.int16)).all(axis=2)
+    pale_out = (out == np.array((0xB8, 0xB8, 0xB8), np.int16)).all(axis=2)
+    inkish = (out.sum(axis=2) < 560) & corr2 & ~credit & ~navy_out & ~pale_out
+    labC2, nC2 = ndimage.label(inkish, structure=np.ones((3, 3)))
+    land_near2 = ndimage.binary_dilation(landgif0 | R6, iterations=2)
+    n_cs = 0
+    for i, slc in enumerate(ndimage.find_objects(labC2), start=1):
+        m = labC2[slc] == i
+        if int(m.sum()) > 320 or land_near2[slc][m].any():
+            continue
+        sub = out[slc]
+        sub[m] = (0xFC, 0xFE, 0xFC)
+        sub[m & gridmask[slc]] = (0xCC, 0xCE, 0xFC)
+        artifact_edits[slc] |= m
+        n_cs += 1
+    print("corridor sweep wiped comps:", n_cs)
 
 declared = R1 | R2 | R3 | R4 | R5 | R6 | R7 | wiped | label_edits | artifact_edits
 

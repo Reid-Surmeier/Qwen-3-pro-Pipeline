@@ -149,6 +149,26 @@
         "final-v009-assembly-2x.png",
         "assembly/fidelity-report-v3.json"
       ]
+    },
+    {
+      "version": "v010",
+      "created": "2026-08-31T01:26:05.307362+00:00",
+      "method": "deterministic assembly rev31 (compose_v3.py) \u2014 no generative model",
+      "gates": {
+        "fidelity_outside_changed": 0,
+        "spot_checks": "75/75 ok"
+      },
+      "fixes_since_v009": [
+        "per-letter label logic driven by the two-fetch diff: plate digits (which change between live fetches) vanish, city-name letters are re-stamped (Perth restored)",
+        "letters overlapping R5 annotation ink always wiped (Greenwich caption cannot resurrect)",
+        "corridor sweep clears residual caption ink over open sea; navy labels and land protected",
+        "label audit sheets (label-audit*.png) document every dropped cluster vs source"
+      ],
+      "files": [
+        "final-v010-assembly.png",
+        "final-v010-assembly-2x.png",
+        "assembly/fidelity-report-v3.json"
+      ]
     }
   ]
 }

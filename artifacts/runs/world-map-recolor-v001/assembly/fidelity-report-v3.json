@@ -8,8 +8,8 @@
     ]
   },
   "country_layer": "Natural Earth 110m admin-0 via fitted Mercator (projection.json); no generative model used",
-  "declared_pixels": 210949,
-  "changed_pixels": 169522,
+  "declared_pixels": 210747,
+  "changed_pixels": 169277,
   "outside_changed": 0,
   "passed": true,
   "regions": {

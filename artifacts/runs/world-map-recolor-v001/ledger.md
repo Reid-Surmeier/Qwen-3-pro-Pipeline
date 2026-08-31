@@ -32,3 +32,10 @@ Verdict on Qwen for this map: of 5 attempts that reached the provider after the 
   NE-coast-only reconstruction outlines, zone-stub dissolve, strip AA wipe.
 - Gates: fidelity outside_changed=0; spot checks 75/75. $0.
 - Deployed to FigJam node 16:67.
+
+## v010 (2026-08-31, third review loop — labels)
+- compose_v3 rev27→rev31: label audit found Perth/INDIA/Paris damage; per-letter keep/drop now uses
+  the two-live-fetch diff as ground truth (digits change, names don't); R5-ink letters always wiped;
+  Greenwich caption fully removed via corridor sweep.
+- Gates: fidelity outside_changed=0; spot checks 75/75. $0.
+- Deployed to FigJam node 16:67.
