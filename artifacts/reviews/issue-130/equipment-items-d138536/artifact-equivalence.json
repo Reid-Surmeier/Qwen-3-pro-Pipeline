@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "capture_commit": "9dadca2845be0048b08ae9fe767afd16028cbd3d",
+  "review_candidate": "d1385369e47754f7a75533319b1d165f7237d5ac",
+  "godot_tree_capture": "83708c32e669fc7ea0938b06b5f55152d4b29695",
+  "godot_tree_candidate": "83708c32e669fc7ea0938b06b5f55152d4b29695",
+  "equivalent": true,
+  "candidate_only_change": [
+    "qwen_ui_pipeline/play_log.py",
+    "tests/test_play_log_verdict.py"
+  ],
+  "reason": "The replacement candidate changes only the deterministic Play Log verifier and its adversarial test. The executable Godot tree is byte-identical, so the real browser frames are retained and every Play Log is re-evaluated under the replacement verifier."
+}
