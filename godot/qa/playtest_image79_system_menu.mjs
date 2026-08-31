@@ -18,6 +18,7 @@ const CANDIDATE = process.env.CANDIDATE_SHA
   ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const DESIGN = { width: 1536, height: 1024 };
 const INTENDED = { x: 1328, y: 505, width: 204, height: 273 };
+const OPTIONS_REGION = { x: 1108, y: 297, width: 424, height: 202 };
 const INVARIANT = { x: 1400, y: 800, width: 100, height: 100 };
 mkdirSync(OUT, { recursive: true });
 
@@ -91,9 +92,9 @@ const cropMetric = (left, right, crop = undefined) => {
   if (!Number.isFinite(value)) throw new Error("ImageMagick AE failed");
   return value;
 };
-const metrics = (before, after) => ({
+const metrics = (before, after, intendedRegion = INTENDED) => ({
   full_frame_changed_pixels: cropMetric(before, after),
-  intended_region_changed_pixels: cropMetric(before, after, INTENDED),
+  intended_region_changed_pixels: cropMetric(before, after, intendedRegion),
   invariant_region_changed_pixels: cropMetric(before, after, INVARIANT),
 });
 const sourceMetric = (frame) => {
@@ -126,9 +127,9 @@ approved.add("desktop.escape:KeyCommand:OpenWindow");
 const actions = [];
 const record = (controlId, gesture, action, assertions, frames, observed,
   { expectedRejection = false, motionSamples = undefined,
-    intendedChange = true } = {}) => {
-  const pixelMetrics = metrics(frames.before, frames.after);
-  const reversalMetrics = metrics(frames.before, frames.reversed);
+    intendedChange = true, region = INTENDED } = {}) => {
+  const pixelMetrics = metrics(frames.before, frames.after, region);
+  const reversalMetrics = metrics(frames.before, frames.reversed, region);
   const entry = {
     control_id: controlId, gesture, window_action: action,
     expected: "Issue 134 System Menu Behaviour Card and frozen manifest",
@@ -136,19 +137,19 @@ const record = (controlId, gesture, action, assertions, frames, observed,
     responsive: Object.values(assertions).every(Boolean),
     matches_expected: Object.values(assertions).every(Boolean),
     expected_rejection: expectedRejection,
-    assertions, frames, intended_region: INTENDED, invariant_region: INVARIANT,
+    assertions, frames, intended_region: region, invariant_region: INVARIANT,
     pixel_metrics: pixelMetrics, reversal_pixel_metrics: reversalMetrics,
     contract_facts: {
       real_gesture_path: true,
-      intended_region_changed: intendedChange
-        ? pixelMetrics.intended_region_changed_pixels > 0
-        : pixelMetrics.intended_region_changed_pixels === 0,
+      intended_region_changed: expectedRejection ? false
+        : intendedChange ? pixelMetrics.intended_region_changed_pixels > 0
+          : pixelMetrics.intended_region_changed_pixels === 0,
       invariants_stable: pixelMetrics.invariant_region_changed_pixels === 0,
       source_approved: approved.has(`${controlId}:${gesture}:${action}`),
       reversible: Object.values(reversalMetrics).every((value) => value === 0),
     },
   };
-  if (expectedRejection) entry.mid_pixel_metrics = metrics(frames.before, frames.mid);
+  if (expectedRejection) entry.mid_pixel_metrics = metrics(frames.before, frames.mid, region);
   if (motionSamples) entry.motion_samples = motionSamples;
   actions.push(entry);
 };
@@ -227,7 +228,8 @@ record("system_menu.sound_settings", "Activate", "OpenWindow", {
   semantic_state_preserved: state.last_transaction.semantic_state_preserved === true,
   routed_to_options: state.last_transaction.target_window === "options",
   one_adapter_version: state.windows.system_menu.window_state.version === 1,
-}, { before, mid, after, reversed }, state.last_transaction);
+}, { before, mid, after, reversed }, state.last_transaction,
+{ region: OPTIONS_REGION });
 
 // Purpose-built minimized top Window and exact restoration.
 await reload();
@@ -243,7 +245,7 @@ record("system_menu.minimize", "Activate", "ToggleMinimized", {
   source_width_preserved: state.window.size[0] === 204,
   minimized_height: state.window.size[1] === 27,
   restored: (await menu()).window.minimized === false,
-}, { before, mid, after, reversed }, state.window);
+}, { before, mid, after, restored: reversed, reversed }, state.window);
 
 // Continuous drag and exact reverse path.
 await reload();
