@@ -538,7 +538,12 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
-	_refresh_all_controls()
+	# The emitting adapter already refreshed its own interaction phase. A full
+	# Window refresh is reserved for semantic actions that can affect peers.
+	# Closing hides the complete Window, so refreshing every child first only
+	# delays the visible response.
+	if not result.has("phase") and str(result.get("action", "")) != "CloseWindow":
+		_refresh_all_controls()
 	if (result.get("ok", false) and result.has("action")) \
 			or result.get("cross_window_drag", false) \
 			or result.get("cross_window_drag_end", false):

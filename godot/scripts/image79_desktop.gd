@@ -20,6 +20,7 @@ var validation_errors: Array = []
 var last_transaction: Dictionary = {}
 var _last_json := ""
 var _cross_window_drag := {}
+var _published_window_states := {}
 
 func _ready() -> void:
 	var background := ColorRect.new()
@@ -310,13 +311,34 @@ func _slot_at_global(window_id: String, control_id: String, point: Vector2) -> S
 func _publish(_window_id: String = "") -> void:
 	if has_meta("suppress_publish"):
 		return
-	var json := JSON.stringify(qa_state())
+	var snapshot := qa_state() if not OS.has_feature("web") \
+		else _web_qa_state(_window_id)
+	var json := JSON.stringify(snapshot)
 	if json == _last_json:
 		return
 	_last_json = json
-	print(json)
 	if OS.has_feature("web"):
 		JavaScriptBridge.eval("window.godotQaState = " + json + ";", true)
+	else:
+		print(json)
+
+
+func _web_qa_state(changed_window_id: String) -> Dictionary:
+	if _published_window_states.is_empty() or changed_window_id.is_empty():
+		_published_window_states.clear()
+		for window_id in windows:
+			_published_window_states[window_id] = windows[window_id].qa_state()
+	elif windows.has(changed_window_id):
+		_published_window_states[changed_window_id] = \
+			windows[changed_window_id].qa_state()
+	return {
+		"schema_version": 3,
+		"reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+		"viewport": [1536, 1024],
+		"validation_errors": validation_errors,
+		"windows": _published_window_states,
+		"last_transaction": last_transaction.duplicate(true),
+	}
 
 
 func _process(_delta: float) -> void:
