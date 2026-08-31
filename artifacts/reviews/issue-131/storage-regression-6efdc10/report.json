@@ -1,0 +1,683 @@
+{
+  "url": "http://127.0.0.1:4180/?screen=image79",
+  "window": {
+    "id": "storage",
+    "geometry": {
+      "x": 492,
+      "y": 609,
+      "width": 539,
+      "height": 393
+    }
+  },
+  "driver": "Playwright Chromium real pointer, wheel, and keyboard input",
+  "checks": [
+    {
+      "name": "idle-factual",
+      "passed": true,
+      "detail": {
+        "detail_item": "",
+        "geometry_version": 0,
+        "id": "storage",
+        "last_action": "",
+        "last_error": null,
+        "last_gesture": "",
+        "minimized": false,
+        "pending": false,
+        "position": [
+          492,
+          609
+        ],
+        "resize": {
+          "active": false,
+          "clamped": [
+            539,
+            393
+          ],
+          "motion_samples": 0,
+          "requested": [
+            539,
+            393
+          ],
+          "stale_footer_covered": false,
+          "stale_footer_grip_covered": false,
+          "stale_right_edge_covered": false,
+          "stale_title_controls_covered": false
+        },
+        "size": [
+          539,
+          393
+        ],
+        "view_mode": "tree",
+        "visible": true,
+        "z_index": 0
+      }
+    },
+    {
+      "name": "storage.items:Activate:SelectStorageItem",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:ToggleStorageSelection",
+      "passed": true,
+      "detail": {
+        "toggled": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:FocusStorageSearch",
+      "passed": true,
+      "detail": {
+        "focused": true
+      }
+    },
+    {
+      "name": "storage.items:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_idle": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_single_selection": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_modifier_selection": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:SelectStorageCategory",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_initial_category": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:ScrollStorage",
+      "passed": true,
+      "detail": {
+        "exact_three_rows": true,
+        "one_frame_state": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:reversal",
+      "passed": true,
+      "detail": {
+        "exact_start": true
+      }
+    },
+    {
+      "name": "storage.scroll:Activate:StepStorageScroll",
+      "passed": true,
+      "detail": {
+        "clamps_exact_end": true,
+        "clamps_exact_start": true
+      }
+    },
+    {
+      "name": "storage.scroll:Drag:SetStorageScrollOffset",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "dragging_state_visible": true,
+        "clamps_exact_end": true,
+        "clamps_exact_start": true,
+        "offset_changed": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:FilterStorage",
+      "passed": true,
+      "detail": {
+        "accepted_text_rendered": true,
+        "filtered_one": true,
+        "scroll_reset": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:reversal",
+      "passed": true,
+      "detail": {
+        "restored_empty_filter": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:ToggleStorageView",
+      "passed": true,
+      "detail": {
+        "list_mode": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_tree": true
+      }
+    },
+    {
+      "name": "storage.sort:Activate:SortStorage",
+      "passed": true,
+      "detail": {
+        "reversed_order": true,
+        "restored_order": true,
+        "reordered_pixels": true,
+        "restored_pixels": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "rejected_full": true,
+        "source_preserved": true,
+        "target_preserved": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "transaction_was_atomic": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:TransferInventoryItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true,
+        "both_versions": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_both_collections": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_outbound_state": true
+      }
+    },
+    {
+      "name": "storage:Drag:MoveWindow",
+      "passed": true,
+      "detail": {
+        "moved": true,
+        "continuous": true,
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.items:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Drag:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.sort:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage:Drag:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ],
+  "frames": {
+    "00-idle": {
+      "path": "00-idle.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "00a-item-selected": {
+      "path": "00a-item-selected.png",
+      "sha256": "dddf05a5b12b0e1ec5c42d9d50450cc344680a7c33821ddde0a1cab1aff9b64f"
+    },
+    "00b-item-modifier-selected": {
+      "path": "00b-item-modifier-selected.png",
+      "sha256": "ace9a32fcca8d442a1558a298f5bbd08eb5f07fd4f1c3d758e67676c2cee7783"
+    },
+    "00c-search-focused": {
+      "path": "00c-search-focused.png",
+      "sha256": "c641bce87e4ce0001b6ee85c2e7e365f111bc65486009308aa217d836e6a7228"
+    },
+    "00d-item-selection-reversed": {
+      "path": "00d-item-selection-reversed.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "00e-modifier-selection-reversed": {
+      "path": "00e-modifier-selection-reversed.png",
+      "sha256": "dddf05a5b12b0e1ec5c42d9d50450cc344680a7c33821ddde0a1cab1aff9b64f"
+    },
+    "00f-search-focus-reversed": {
+      "path": "00f-search-focus-reversed.png",
+      "sha256": "ace9a32fcca8d442a1558a298f5bbd08eb5f07fd4f1c3d758e67676c2cee7783"
+    },
+    "01-category-equipment": {
+      "path": "01-category-equipment.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "01b-category-reversed": {
+      "path": "01b-category-reversed.png",
+      "sha256": "c641bce87e4ce0001b6ee85c2e7e365f111bc65486009308aa217d836e6a7228"
+    },
+    "02-wheel-three-rows": {
+      "path": "02-wheel-three-rows.png",
+      "sha256": "d105f0bda1c3cec423d1f2cc451a7e763264ddde979d6012196e264c9ec1b4fa"
+    },
+    "02b-wheel-reversed": {
+      "path": "02b-wheel-reversed.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "03-arrow-endpoint": {
+      "path": "03-arrow-endpoint.png",
+      "sha256": "c38eedbd855c89446907f45b9d238ec55ba0820f83f7daff932f57aabbd57c3d"
+    },
+    "03b-arrow-start-endpoint": {
+      "path": "03b-arrow-start-endpoint.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "04-thumb-drag-mid": {
+      "path": "04-thumb-drag-mid.png",
+      "sha256": "5878be4e4215c70ba9cf7af5c29b519c6faa695f08b13e406983896fc7d79011"
+    },
+    "04-thumb-end": {
+      "path": "04-thumb-end.png",
+      "sha256": "c38eedbd855c89446907f45b9d238ec55ba0820f83f7daff932f57aabbd57c3d"
+    },
+    "04b-thumb-reversed": {
+      "path": "04b-thumb-reversed.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "05-search-before": {
+      "path": "05-search-before.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "05-search-filtered": {
+      "path": "05-search-filtered.png",
+      "sha256": "0f7b418842f62177ed296eba8983cf6f690a2e979ae54e2d674e449cf327805e"
+    },
+    "05b-search-cleared": {
+      "path": "05b-search-cleared.png",
+      "sha256": "d01c5a2dc3b42226ea1c100213c3fce505ab498627ed08d42341479c59e0a26d"
+    },
+    "06-list-before": {
+      "path": "06-list-before.png",
+      "sha256": "636292f80c797300ae2790ae717061e49e486ffe63dd50f9f867e259ee93a35f"
+    },
+    "06-list-mode": {
+      "path": "06-list-mode.png",
+      "sha256": "7a7999bf76fad8938257a8c444b54f8aaf759b973ce83f5fd875bc22eb4e04b0"
+    },
+    "06b-list-reversed": {
+      "path": "06b-list-reversed.png",
+      "sha256": "636292f80c797300ae2790ae717061e49e486ffe63dd50f9f867e259ee93a35f"
+    },
+    "06c-list-restored": {
+      "path": "06c-list-restored.png",
+      "sha256": "7a7999bf76fad8938257a8c444b54f8aaf759b973ce83f5fd875bc22eb4e04b0"
+    },
+    "07-sorted": {
+      "path": "07-sorted.png",
+      "sha256": "7aafe9216bced0bee9a5b60e534631449e407341d697adf582591d70cdc7fe43"
+    },
+    "07b-sort-reversed": {
+      "path": "07b-sort-reversed.png",
+      "sha256": "7a7999bf76fad8938257a8c444b54f8aaf759b973ce83f5fd875bc22eb4e04b0"
+    },
+    "07c-tree-restored": {
+      "path": "07c-tree-restored.png",
+      "sha256": "636292f80c797300ae2790ae717061e49e486ffe63dd50f9f867e259ee93a35f"
+    },
+    "08-transfer-rejected-before": {
+      "path": "08-transfer-rejected-before.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "08-transfer-rejected": {
+      "path": "08-transfer-rejected.png",
+      "sha256": "57edc556b9ebdfc2fcb7f02de0fa29d8b8f9f669ba1c73e0ba8ac313b5c268ca"
+    },
+    "08b-transfer-rejected-reversed": {
+      "path": "08b-transfer-rejected-reversed.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "09-transfer-outbound-before": {
+      "path": "09-transfer-outbound-before.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "09-transfer-outbound": {
+      "path": "09-transfer-outbound.png",
+      "sha256": "2d57ba5063ea400bb12bbaccf646e75d1e5d73cbb3ecaed43c590b3a99d333df"
+    },
+    "09b-transfer-outbound-reversed": {
+      "path": "09b-transfer-outbound-reversed.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "10-transfer-returned-before": {
+      "path": "10-transfer-returned-before.png",
+      "sha256": "762e18d227535ce6d9000eebc8db9033894b1a2f8d4ca23780fa7f77214f269c"
+    },
+    "10-transfer-returned": {
+      "path": "10-transfer-returned.png",
+      "sha256": "2965fdd5b01c3fd2c60216b98755ce0c69808396a60e5695f4fc5106d6b67dfe"
+    },
+    "10b-transfer-returned-reversed": {
+      "path": "10b-transfer-returned-reversed.png",
+      "sha256": "762e18d227535ce6d9000eebc8db9033894b1a2f8d4ca23780fa7f77214f269c"
+    },
+    "11-window-drag-before": {
+      "path": "11-window-drag-before.png",
+      "sha256": "762e18d227535ce6d9000eebc8db9033894b1a2f8d4ca23780fa7f77214f269c"
+    },
+    "11-window-drag-mid": {
+      "path": "11-window-drag-mid.png",
+      "sha256": "bf6629cf37694930e44db1141d7abd7c786120e166a0344e9b339bd491fd1c76"
+    },
+    "11-window-moved": {
+      "path": "11-window-moved.png",
+      "sha256": "bc90f0ca0d54d6f3ea6cab177d1de72fd0fb1802c38b7f0aa29922d82eb5eb15"
+    },
+    "11b-window-restored": {
+      "path": "11b-window-restored.png",
+      "sha256": "762e18d227535ce6d9000eebc8db9033894b1a2f8d4ca23780fa7f77214f269c"
+    },
+    "12-title-close-before": {
+      "path": "12-title-close-before.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "12-title-close-after": {
+      "path": "12-title-close-after.png",
+      "sha256": "749c6e8e5a861ce11afc5982ffcfc40118c81401473af9c695c25ff97a872b98"
+    },
+    "12b-title-close-restored": {
+      "path": "12b-title-close-restored.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "13-bottom-close-before": {
+      "path": "13-bottom-close-before.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "13-bottom-close-after": {
+      "path": "13-bottom-close-after.png",
+      "sha256": "749c6e8e5a861ce11afc5982ffcfc40118c81401473af9c695c25ff97a872b98"
+    },
+    "13b-bottom-close-restored": {
+      "path": "13b-bottom-close-restored.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "14-key-close-before": {
+      "path": "14-key-close-before.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    },
+    "14-key-close-after": {
+      "path": "14-key-close-after.png",
+      "sha256": "749c6e8e5a861ce11afc5982ffcfc40118c81401473af9c695c25ff97a872b98"
+    },
+    "14b-key-close-reversed": {
+      "path": "14b-key-close-reversed.png",
+      "sha256": "5f078b9f2ffaa0abc128766ad6cab72a58c7ee84b89c3d859d2a9d8a6aa74101"
+    }
+  },
+  "console_entries": [
+    "[warning] [.WebGL-0x337401879600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x337401879600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x337401879600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x337401879600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "summary": {
+    "pass": true,
+    "total": 48,
+    "failed": 0,
+    "console_errors": 0
+  }
+}

@@ -1,0 +1,7 @@
+==> import
+==> engine contracts
+==> image-79 registered contracts
+==> frame capture (DISPLAY=:99)
+==> fidelity
+==> real-input interaction
+{"pass": true, "import_errors": 0, "contracts_failed": 0, "image79_failed": 0, "capture": "qa/out/capture.png", "fidelity_pass": true, "interact_failed": 0}

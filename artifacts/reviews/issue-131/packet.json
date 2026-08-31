@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "issue": 131,
+  "pull_request": 82,
+  "candidate_commit": "6efdc10bb46c81b1b4a8da0699228b812d3beddf",
+  "acceptance_contract": "docs/reviews/issue-131-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-131/status-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/options-regression-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/skill-tree-regression-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/inventory-regression-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/storage-regression-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/equipment-card-regression-6efdc10/evidence-manifest.json",
+      "artifacts/reviews/issue-131/equipment-items-regression-6efdc10/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-131/status-6efdc10/reference-status-4x.png",
+      "artifacts/reviews/issue-131/status-6efdc10/candidate-status-idle-4x.png",
+      "artifacts/reviews/issue-131/status-6efdc10/candidate-status-allocated-4x.png",
+      "artifacts/reviews/issue-131/status-6efdc10/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-131/status-6efdc10/01-minimized.png",
+      "artifacts/reviews/issue-131/status-6efdc10/01b-restored.png",
+      "artifacts/reviews/issue-131/status-6efdc10/2-str-activated.png",
+      "artifacts/reviews/issue-131/status-6efdc10/2b-str-activate-reversed.png",
+      "artifacts/reviews/issue-131/status-6efdc10/7-int-activate-before.png",
+      "artifacts/reviews/issue-131/status-6efdc10/7a-int-activate-mid.png",
+      "artifacts/reviews/issue-131/status-6efdc10/7b-int-activate-after.png",
+      "artifacts/reviews/issue-131/status-6efdc10/9a-move-mid.png",
+      "artifacts/reviews/issue-131/status-6efdc10/10a-closed.png",
+      "artifacts/reviews/issue-131/status-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/status-6efdc10/report.json",
+      "artifacts/reviews/issue-131/status-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/status-6efdc10/artifact-equivalence.json",
+      "artifacts/reviews/issue-131/status-6efdc10/image79-contracts.json",
+      "artifacts/reviews/issue-131/status-6efdc10/godot-qa-report.json",
+      "artifacts/reviews/issue-131/status-6efdc10/fidelity.json",
+      "artifacts/reviews/issue-131/status-6efdc10/interact.json",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-image79.log",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-godot-qa.log",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-python-baseline.log",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-node-baseline.log",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-compileall.log",
+      "artifacts/reviews/issue-131/status-6efdc10/issue131-diff-check.log",
+      "artifacts/reviews/issue-131/options-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/options-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/options-regression-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/skill-tree-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/skill-tree-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/skill-tree-regression-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/inventory-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/inventory-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/inventory-regression-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/storage-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/storage-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/storage-regression-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/equipment-card-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/equipment-card-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/equipment-card-regression-6efdc10/verdict.json",
+      "artifacts/reviews/issue-131/equipment-items-regression-6efdc10/play-log.json",
+      "artifacts/reviews/issue-131/equipment-items-regression-6efdc10/report.json",
+      "artifacts/reviews/issue-131/equipment-items-regression-6efdc10/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE131_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE131_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE131_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE131_GODOT_BIN\" --headless --path godot --editor --quit-after 2"
+  }
+}
