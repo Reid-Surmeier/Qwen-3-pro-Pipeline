@@ -129,6 +129,7 @@ def main() -> None:
         "geometry": {"x": 0, "y": 0, "width": 656, "height": 286},
         "drag_geometry": {"x": 48, "y": 6, "width": 558, "height": 40},
         "plates": {"expanded": expanded, "minimized": minimized},
+        "backing_color": "#00000000",
         "minimized_height": 48,
         "minimized_controls": ["basic_info.minimize", "basic_info.close"],
         "display_facts": display_facts,

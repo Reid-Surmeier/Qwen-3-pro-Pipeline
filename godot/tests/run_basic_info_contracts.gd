@@ -15,6 +15,7 @@ func _init() -> void:
 	_check("basic-info-manifest-is-complete", loaded.errors.is_empty()
 		and matches.size() == 1 and matches[0].controls.filter(func(control):
 			return control.get("type") == "Meter").size() == 4
+		and matches[0].get("backing_color") == "#00000000"
 		and matches[0].get("display_facts", []).size() == 10,
 		str([loaded.errors, matches]))
 	if not matches.is_empty():

@@ -74,7 +74,8 @@ func configure(window_spec: Dictionary) -> void:
 func _ready() -> void:
 	var backing := ColorRect.new()
 	backing.name = "Backing"
-	backing.color = Color8(247, 247, 247)
+	backing.color = Color.from_string(str(spec.get("backing_color", "#f7f7f7")),
+		Color8(247, 247, 247))
 	backing.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(backing)

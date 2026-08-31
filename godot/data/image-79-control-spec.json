@@ -9508,6 +9508,7 @@
         "expanded": "res://assets/image-79/basic-info/source-plate.png",
         "minimized": "res://assets/image-79/basic-info/minimized-plate.png"
       },
+      "backing_color": "#00000000",
       "minimized_height": 48,
       "minimized_controls": [
         "basic_info.minimize",
