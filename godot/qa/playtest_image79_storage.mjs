@@ -278,25 +278,40 @@ record("storage.search", "KeyCommand", "FilterStorage", {
 }, { before: thumbReversedFrame, after: searchFrame },
 searched.controls["storage.search"].rendered_text);
 
+await click(779, 977);
+await page.keyboard.press("Control+A");
+await page.keyboard.press("Backspace");
+await page.waitForFunction(() => window.godotQaState.windows.storage.controls[
+  "storage.items"].filtered_items.length > 1);
+await page.mouse.move(...Object.values(point(1200, 700)));
+const searchClearedFrame = await shot("05b-search-cleared");
 await click(632, 977);
-const treeRestoredFrame = await shot("07c-tree-restored");
 const listed = await storage();
+await page.mouse.move(...Object.values(point(1200, 700)));
 const listFrame = await shot("06-list-mode");
 record("storage.list", "Activate", "ToggleStorageView", {
   list_mode: listed.window.view_mode === "list" && listed.controls["storage.items"].list_mode,
-}, { before: searchFrame, after: listFrame }, listed.window.view_mode);
+}, { before: searchClearedFrame, after: listFrame }, listed.window.view_mode);
 await click(878, 977);
 const sorted = await control("storage.items");
+await page.mouse.move(...Object.values(point(1200, 700)));
 const sortedFrame = await shot("07-sorted");
 await click(878, 977);
 const sortReversed = await control("storage.items");
+await page.mouse.move(...Object.values(point(1200, 700)));
 const sortReversedFrame = await shot("07b-sort-reversed");
+const sortedPixels = pixelMetrics(listFrame, sortedFrame);
+const reversedPixels = pixelMetrics(listFrame, sortReversedFrame);
 record("storage.sort", "Activate", "SortStorage", {
   reversed_order: sorted.sort_ascending === false,
   restored_order: sortReversed.sort_ascending === true,
+  reordered_pixels: sortedPixels.intended_region_changed_pixels > 0,
+  restored_pixels: reversedPixels.intended_region_changed_pixels === 0,
 }, { before: listFrame, after: sortedFrame, reversed: sortReversedFrame },
 JSON.stringify({ sorted: sorted.sort_ascending, restored: sortReversed.sort_ascending }));
 await click(632, 977);
+await page.mouse.move(...Object.values(point(1200, 700)));
+const treeRestoredFrame = await shot("07c-tree-restored");
 
 await click(779, 977);
 await page.keyboard.press("Control+A");
