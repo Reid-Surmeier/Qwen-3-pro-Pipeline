@@ -2,6 +2,7 @@
 // keyboard input produce the Storage Play Log and evidence frames.
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -219,6 +220,10 @@ const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
 const report = {
   schema_version: 2,
   issue: 128,
+  candidate: { issue: 128,
+    commit_sha: execFileSync("git", ["rev-parse", "HEAD"],
+      { cwd: ROOT, encoding: "utf8" }).trim(),
+    window_id: "storage" },
   url: URL,
   reference: manifest.reference,
   window: { id: "storage", geometry: windowSpec.geometry },
