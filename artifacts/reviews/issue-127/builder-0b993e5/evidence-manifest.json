@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "0b993e59c54ce90ff0ff06da76a54d617b4e43e2",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-tab-equip.png",
+      "sha256": "e1b68eb730a9cd78d7571c3515d5d23bb0cc6378db8f5d04e35acea1e97292c4"
+    },
+    {
+      "path": "02-single-selected.png",
+      "sha256": "92197f3a63e9f2851cc49fb4ea1205fb15bf925238b3795a5d0b29d5f0a217ab"
+    },
+    {
+      "path": "03-double-opened.png",
+      "sha256": "e3f21d57daca9f79dacbaf9d5bbb8eb3f72284e27ad60f633f824ab19fd86bc3"
+    },
+    {
+      "path": "04-modifier-selected.png",
+      "sha256": "cfe8a29df6505453988fa7c674a366a66911b74c920bbe5397ed926ffeefa48b"
+    },
+    {
+      "path": "05-drag-after.png",
+      "sha256": "e1c39d01432fa52a5e31671d56add8f4acbcf4975963059c16966712d4b386e8"
+    },
+    {
+      "path": "05-drag-before.png",
+      "sha256": "03e11543a7573e9d66246de27ec8fbbde906df5be3fc3794622ba60feed36696"
+    },
+    {
+      "path": "05-drag-mid.png",
+      "sha256": "25eb2047d237afa88f43837035c197f9af6bd634912be7c0bd5e470e0635992a"
+    },
+    {
+      "path": "06-window-drag-after.png",
+      "sha256": "fd882fb037cb125e54cdb005ba44fa888ed33246a84e8d6397aeb580a7bb0cf0"
+    },
+    {
+      "path": "06-window-drag-before.png",
+      "sha256": "3e970d720972b15c919c97fd460e78bf0707a1dca40a37b4583a517aa5501dbb"
+    },
+    {
+      "path": "06-window-drag-mid.png",
+      "sha256": "bd4b62441e8a1b906d0eb248f34b2fae49af7a931108e7a49fdf8ce911a718c5"
+    },
+    {
+      "path": "07-resize-after.png",
+      "sha256": "7becfb8e1da3d0f7c32916e583b62d7a6eca416f82559b461487630baea2945b"
+    },
+    {
+      "path": "07-resize-before.png",
+      "sha256": "fd882fb037cb125e54cdb005ba44fa888ed33246a84e8d6397aeb580a7bb0cf0"
+    },
+    {
+      "path": "07-resize-mid.png",
+      "sha256": "a0ea4ebb5d627a6a4e466739def190c37e28d6b7e64e39de55b17f3fd8e6d6a0"
+    },
+    {
+      "path": "08-minimize-before.png",
+      "sha256": "85350e2c37d10599470f6c027d78ff051bd22164e30568b057ce01bea182252a"
+    },
+    {
+      "path": "08-minimize-restored.png",
+      "sha256": "85350e2c37d10599470f6c027d78ff051bd22164e30568b057ce01bea182252a"
+    },
+    {
+      "path": "08-minimized.png",
+      "sha256": "a5a24c7bfa0aa0657c808de7021038aec140773dfa12f2bf65465cf3190a2f83"
+    },
+    {
+      "path": "09-close-after.png",
+      "sha256": "f1f2ba0042126dc7f7525192a4e845ed9115ff4a553996730a639848c9b23950"
+    },
+    {
+      "path": "09-close-before.png",
+      "sha256": "85350e2c37d10599470f6c027d78ff051bd22164e30568b057ce01bea182252a"
+    },
+    {
+      "path": "10-key-after.png",
+      "sha256": "f1f2ba0042126dc7f7525192a4e845ed9115ff4a553996730a639848c9b23950"
+    },
+    {
+      "path": "10-key-before.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    {
+      "path": "11-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "control-runtime-contracts.json",
+      "sha256": "a2bc4522674824f9ccd697583359cbabdc1bdce997aed4806be4c28e64bd1e5b"
+    },
+    {
+      "path": "control-spec-contracts.json",
+      "sha256": "5556e899d933a53591366f24dcf106fa99f3a836ade89a4addc1d64a8e7a1b97"
+    },
+    {
+      "path": "idle-inventory-4x.png",
+      "sha256": "e75212f7f92c850f37df3c02def8bc5283152b3d9ad70430afcb1add6e9bde52"
+    },
+    {
+      "path": "image79-contracts.json",
+      "sha256": "f2ffd14f3117e53d8c80fa01a6200b5369f8e29f44ef9a2928fb0bc813bf20a3"
+    },
+    {
+      "path": "inventory-contracts.json",
+      "sha256": "548500495945e1771023fc9622f9d99af6cc6c60fe6f509d6d5c7c27524e8037"
+    },
+    {
+      "path": "inventory-spec-contracts.json",
+      "sha256": "204ea50aa1faaba06bc0e13da514358439dd40c400ec54e274f0125546b5094f"
+    },
+    {
+      "path": "inventory-window-contracts.json",
+      "sha256": "cba119293326c6280e0f2c7fc339dc9c67ca31081a140cd1e78ec0769601b8f4"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "42589905126b3ffea1c5c935519473a0886c4855998a60df4bed32b5a5bf6854"
+    },
+    {
+      "path": "reference-inventory-4x.png",
+      "sha256": "e896c46f568243289643177319a465341cb2067008a62070a7c82f490af784bb"
+    },
+    {
+      "path": "report.json",
+      "sha256": "c115ea2c91d198b5f68230699dcdc1dd6c89d23453bab099107c759be0de965e"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "bf49e3eeeaf715e72f562f4dd6704cf5daff64a8104e4e2449074de5f5cee677"
+    }
+  ]
+}
