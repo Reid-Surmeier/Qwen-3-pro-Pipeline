@@ -22,8 +22,10 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 		return _error(Errors.CONTROL_BINDING,
 			"SelectionView item is not declared: %s" % item)
 	if gesture == "ModifierActivate":
-		var modifiers: Array = payload.get("modifiers", []) \
-			if payload.get("modifiers", []) is Array else []
+		if payload.has("modifiers") and not payload.modifiers is Array:
+			return _error(Errors.INVALID_MODIFIER,
+				"modifiers must be an array")
+		var modifiers: Array = payload.get("modifiers", [])
 		var allowed: Array = spec.value.get("allowed_modifiers", [])
 		if modifiers != allowed:
 			return _error(Errors.INVALID_MODIFIER,
@@ -55,8 +57,10 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 
 static func _drag_drop(spec: Dictionary, state: Dictionary, action: String,
 		payload: Dictionary) -> Dictionary:
-	var modifiers: Array = payload.get("modifiers", []) \
-		if payload.get("modifiers", []) is Array else []
+	if payload.has("modifiers") and not payload.modifiers is Array:
+		return _error(Errors.INVALID_MODIFIER,
+			"DragDrop modifiers must be an array")
+	var modifiers: Array = payload.get("modifiers", [])
 	if not modifiers.is_empty():
 		return _error(Errors.INVALID_MODIFIER,
 			"DragDrop does not accept modifiers: %s" % str(modifiers))

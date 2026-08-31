@@ -21,6 +21,8 @@ def main() -> int:
     parser.add_argument("--evidence-root", type=Path)
     parser.add_argument("--manifest", type=Path,
                         default=ROOT / "godot/data/image-79-control-spec.json")
+    parser.add_argument("--review-issue", type=int,
+                        help="trusted review Issue that selects verifier policy")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
@@ -42,7 +44,19 @@ def main() -> int:
         except (OSError, json.JSONDecodeError) as error:
             manifest = None
             log.setdefault("manifest_error", str(error))
-        verdict = evaluate_play_log(log, evidence_root, manifest)
+        try:
+            verdict = evaluate_play_log(
+                log, evidence_root, manifest, trusted_issue=args.review_issue
+            )
+        except Exception as error:  # Fail closed at the untrusted artifact seam.
+            verdict = {
+                "verdict": "INVALID",
+                "actions": 0,
+                "frames_verified": 0,
+                "unexercised": [],
+                "failures": [],
+                "problems": [f"Play Log verifier failed closed: {error}"],
+            }
 
     rendered = json.dumps(verdict, indent=2, sort_keys=True) + "\n"
     if args.output:

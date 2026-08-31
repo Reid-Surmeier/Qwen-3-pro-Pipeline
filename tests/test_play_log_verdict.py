@@ -218,6 +218,19 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.assertEqual("INVALID", verdict["verdict"], verdict)
         self.assertTrue(any("threshold" in problem for problem in verdict["problems"]), verdict)
 
+    def test_trusted_review_issue_prevents_scalar_policy_downgrade(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 125
+        log["actions"][0]["motion_samples"] = list(range(31))
+        verdict = evaluate_play_log(
+            log, self.root, self._manifest(), trusted_issue=127
+        )
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(
+            any("two-dimensional" in problem for problem in verdict["problems"]),
+            verdict,
+        )
+
     def test_motion_samples_must_be_finite(self) -> None:
         for samples in (
             [[index, float("nan")] for index in range(31)],
@@ -229,6 +242,19 @@ class PlayLogVerdictTests(unittest.TestCase):
                 log["actions"][0]["motion_samples"] = samples
                 verdict = evaluate_play_log(log, self.root, self._manifest())
                 self.assertEqual("INVALID", verdict["verdict"], verdict)
+
+    def test_oversized_integer_motion_sample_is_invalid_not_an_exception(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 127
+        log["actions"][0]["motion_samples"] = [
+            [index, 10 ** 400] for index in range(31)
+        ]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(
+            any("30 motion samples" in problem for problem in verdict["problems"]),
+            verdict,
+        )
 
     def test_pointer_motion_rejects_scalars_and_stationary_points(self) -> None:
         for gesture in ("Resize", "DragDrop"):

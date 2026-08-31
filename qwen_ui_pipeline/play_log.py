@@ -17,7 +17,11 @@ STRICT_POINTER_EVIDENCE_ISSUE = 127
 
 
 def evaluate_play_log(
-    log: Any, evidence_root: Path | str, manifest: Any | None = None
+    log: Any,
+    evidence_root: Path | str,
+    manifest: Any | None = None,
+    *,
+    trusted_issue: int | None = None,
 ) -> dict[str, Any]:
     """Return PASS, FAIL, INCOMPLETE, or INVALID without trusting log claims."""
     problems: list[str] = []
@@ -40,6 +44,12 @@ def evaluate_play_log(
             problems.append("candidate.commit_sha must be a 40-character lowercase SHA")
         if not _nonempty_string(candidate.get("window_id")):
             problems.append("candidate.window_id must be a non-empty string")
+    if trusted_issue is not None and (
+        not isinstance(trusted_issue, int)
+        or isinstance(trusted_issue, bool)
+        or trusted_issue <= 0
+    ):
+        problems.append("trusted_issue must be a positive integer")
 
     expected_controls, expected_actions, range_specs = _manifest_requirements(
         manifest, candidate, problems, include_window_actions=schema_version == SCHEMA_VERSION
@@ -148,7 +158,9 @@ def evaluate_play_log(
             required_roles.add("mid")
             samples = action.get("motion_samples")
 
-            candidate_issue = candidate.get("issue") if isinstance(candidate, dict) else None
+            candidate_issue = trusted_issue if trusted_issue is not None else (
+                candidate.get("issue") if isinstance(candidate, dict) else None
+            )
             legacy_scalar_move = (
                 gesture == "Drag"
                 and window_action == "MoveWindow"
@@ -157,11 +169,12 @@ def evaluate_play_log(
             )
 
             def finite_number(value: object) -> bool:
-                return (
-                    isinstance(value, (int, float))
-                    and not isinstance(value, bool)
-                    and math.isfinite(float(value))
-                )
+                if not isinstance(value, (int, float)) or isinstance(value, bool):
+                    return False
+                try:
+                    return math.isfinite(float(value))
+                except (OverflowError, ValueError):
+                    return False
 
             def valid_motion_sample(sample: object) -> bool:
                 if window_action == "SetRange":

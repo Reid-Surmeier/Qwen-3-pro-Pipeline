@@ -269,7 +269,7 @@ for (let step = 0; step < 31; step += 1) {
   await page.mouse.move(title.x - 80 * t, title.y + 90 * t);
   await page.waitForTimeout(15);
   const position = (await options()).window.position;
-  windowPositions.push(position[0]);
+  windowPositions.push([...position]);
   if (step === 15) dragMid = await shot("17-options-window-drag-mid");
 }
 await page.mouse.up();

@@ -280,7 +280,7 @@ for (let index = 0; index < 31; index += 1) {
   const t = index / 30;
   await page.mouse.move(title.x + 50 * t, title.y + 65 * t);
   await page.waitForTimeout(15);
-  positionSamples.push((await skillTree()).window.position[0]);
+  positionSamples.push([...(await skillTree()).window.position]);
   if (index === 15) dragMid = await shot("11-drag-mid");
 }
 await page.mouse.up();
