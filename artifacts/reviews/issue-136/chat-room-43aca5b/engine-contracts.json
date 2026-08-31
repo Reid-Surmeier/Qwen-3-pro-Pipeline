@@ -1,0 +1,197 @@
+{
+  "failed": 0,
+  "results": [
+    {
+      "contract": "main-scene-loads",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "desktop-plate-loaded",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "window-basic-info",
+      "detail": "plate=true geom=true hits=11/11",
+      "passed": true
+    },
+    {
+      "contract": "window-guild",
+      "detail": "plate=true geom=true hits=10/10",
+      "passed": true
+    },
+    {
+      "contract": "window-party",
+      "detail": "plate=true geom=true hits=9/9",
+      "passed": true
+    },
+    {
+      "contract": "window-minimap",
+      "detail": "plate=true geom=true hits=5/5",
+      "passed": true
+    },
+    {
+      "contract": "window-create-room",
+      "detail": "plate=true geom=true hits=7/7",
+      "passed": true
+    },
+    {
+      "contract": "window-chat-room",
+      "detail": "plate=true geom=true hits=6/6",
+      "passed": true
+    },
+    {
+      "contract": "window-trade",
+      "detail": "plate=true geom=true hits=6/6",
+      "passed": true
+    },
+    {
+      "contract": "window-pm",
+      "detail": "plate=true geom=true hits=4/4",
+      "passed": true
+    },
+    {
+      "contract": "window-bottom-bar",
+      "detail": "plate=true geom=true hits=1/1",
+      "passed": true
+    },
+    {
+      "contract": "inventory-window-count",
+      "detail": "9",
+      "passed": true
+    },
+    {
+      "contract": "inventory-hit-count",
+      "detail": "59/59",
+      "passed": true
+    },
+    {
+      "contract": "checkbox-source-state",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "checkbox-toggles",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "checkbox-visible-off",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "checkbox-restores",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "tab-exclusive",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "tab-visible-active",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "tab-visible-moves",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "radio-exclusive",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "radio-visible-swap",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "minimize-folds",
+      "detail": "(656.0, 47.0)",
+      "passed": true
+    },
+    {
+      "contract": "minimize-real-asset",
+      "detail": "collapsed state must be the composited plate, not a clipped frame",
+      "passed": true
+    },
+    {
+      "contract": "minimize-restores",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "close-hides",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "close-reopens-by-key",
+      "detail": "Alt+V must restore the window",
+      "passed": true
+    },
+    {
+      "contract": "disabled-hit-inert",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "cancel-closes-trade",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "cancel-reopen-by-key",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "live-inputs-mounted",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "live-input-transparent-initially",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "live-send-appends",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "clean-plate-patch",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "log-scroll-up-moves",
+      "detail": "80.000000 -> 0.000000",
+      "passed": true
+    },
+    {
+      "contract": "log-scroll-send-refollows",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "dynamic-text-live",
+      "detail": "",
+      "passed": true
+    },
+    {
+      "contract": "dynamic-text-updates",
+      "detail": "",
+      "passed": true
+    }
+  ],
+  "suite": "engine-contracts",
+  "total": 38
+}

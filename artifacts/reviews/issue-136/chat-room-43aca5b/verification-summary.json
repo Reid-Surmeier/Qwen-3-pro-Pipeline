@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "issue": 136,
+  "candidate_commit": "43aca5b11bca910c6b4b3935abc0eddad65ad3de",
+  "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "generation_requests": 0,
+  "results": {
+    "assembly_audit": {
+      "pass": true,
+      "source_controls": 239,
+      "production_windows": 11
+    },
+    "godot_qa": {
+      "command": "DISPLAY=:99 bash godot/qa/qa.sh",
+      "pass": true,
+      "import_errors": 0,
+      "engine_contract_failures": 0,
+      "image79_contracts": 314,
+      "image79_failures": 0,
+      "fidelity_pass": true,
+      "real_input_failures": 0
+    },
+    "repository_baseline": {
+      "python": { "tests": 254, "failures": 0 },
+      "node": { "tests": 19, "failures": 0 },
+      "compileall": true,
+      "diff_check": true
+    },
+    "browser_play_logs": {
+      "windows": 11,
+      "pass": 11,
+      "fail": 0,
+      "unexercised_controls": 0,
+      "unexercised_actions": 0
+    },
+    "continuous_drag": {
+      "runs": [
+        {
+          "idle_p95_ms": 33.4,
+          "drag_p95_ms": 66.7,
+          "maximum_ms": 66.8,
+          "patch_publications": 23,
+          "geometry_publications": 22,
+          "geometry_skips": 38
+        },
+        {
+          "idle_p95_ms": 33.4,
+          "drag_p95_ms": 66.7,
+          "maximum_ms": 83.3,
+          "patch_publications": 22,
+          "geometry_publications": 21,
+          "geometry_skips": 39
+        },
+        {
+          "idle_p95_ms": 33.4,
+          "drag_p95_ms": 66.8,
+          "maximum_ms": 83.4,
+          "patch_publications": 29,
+          "geometry_publications": 28,
+          "geometry_skips": 32
+        }
+      ],
+      "motion_samples_per_run": 60,
+      "full_state_bytes": 97443,
+      "maximum_patch_bytes": 30097,
+      "limitation": "Headless software rendering remains approximately 15 frames per second during continuous drag; this is a measured limitation, not a 60 fps claim."
+    },
+    "direct_input_latency_ms": [6.6, 7.0, 7.1, 7.0, 6.8],
+    "direct_input_ceiling_ms": 34,
+    "responsive_viewports": [
+      { "width": 1280, "height": 720, "pass": true },
+      { "width": 1920, "height": 1080, "pass": true },
+      { "width": 1024, "height": 768, "pass": true }
+    ],
+    "console_errors": 0
+  }
+}

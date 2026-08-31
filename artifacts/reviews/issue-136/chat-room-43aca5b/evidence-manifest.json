@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "43aca5b11bca910c6b4b3935abc0eddad65ad3de",
+  "files": [
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "0795e49bfea0d687305bfc9f5e9f13b189384ff8d8188f0d6729421355c73f94"
+    },
+    {
+      "path": "00-source-idle.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "01-draft-after.png",
+      "sha256": "878672207b7fd09c2274ff97f012444fc6ce85ce8e7317a8cccc74ef7d195f4e"
+    },
+    {
+      "path": "01-draft-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "02-submit-after.png",
+      "sha256": "fc031ee67e05f96f4e28f836feb2526ea3cd9aa9c48d6607d9b7059df4e8463f"
+    },
+    {
+      "path": "02-submit-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "02-submit-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "03-rows-after.png",
+      "sha256": "d053097a9594348dad0193a523b7b474626794f624a3f1a841ac5d369fa0bd4d"
+    },
+    {
+      "path": "03-rows-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "03-rows-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "04-wheel-after.png",
+      "sha256": "296fdeca7ef90d3e26da1ec638e9b5e75d9864767678fc15bd4c2058a9142eaa"
+    },
+    {
+      "path": "04-wheel-before.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "04-wheel-reversed.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "05-arrow-after.png",
+      "sha256": "60ff01d4c026b82569860781cea13b71d379c1764f79c8328b67ba65de07ad99"
+    },
+    {
+      "path": "05-arrow-before.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "05-arrow-reversed.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "06-thumb-after.png",
+      "sha256": "0d34fb26a378c965ca9e813100f95d324babc5c8d60595a7af075ca62bf87b99"
+    },
+    {
+      "path": "06-thumb-before.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "06-thumb-mid.png",
+      "sha256": "9382de953b73821f25a75b66866e00b1fa76f8a126e4ffcc086f82bfc87649dc"
+    },
+    {
+      "path": "06-thumb-reversed.png",
+      "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+    },
+    {
+      "path": "07-drag-after.png",
+      "sha256": "6bc1cc93be5d6215a5e932ce2dc292613b9053b5589394cedac4ebdb75225f19"
+    },
+    {
+      "path": "07-drag-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "07-drag-mid.png",
+      "sha256": "c1f2c643d04202a9ca655e0c4388dffe8fb65dccf075543ece729f9ce11e8b45"
+    },
+    {
+      "path": "07-drag-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "08-close-after.png",
+      "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+    },
+    {
+      "path": "08-close-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "08-close-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "09-escape-after.png",
+      "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+    },
+    {
+      "path": "09-escape-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "09-escape-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "10-toggle-after.png",
+      "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+    },
+    {
+      "path": "10-toggle-before.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "10-toggle-reversed.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "assembled-desktop-reset.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "assembled-desktop-restored.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    {
+      "path": "assembly-browser-report.json",
+      "sha256": "92ec0f77aafa4d39b6c75bfd650d774e390c6980d187536856d265bb4f62c344"
+    },
+    {
+      "path": "candidate-chat-room-4x.png",
+      "sha256": "04b2224aca2b240ce87bb8013f9d35f79eadb7cd1e9436304b8d3f9136ca77f7"
+    },
+    {
+      "path": "engine-contracts.json",
+      "sha256": "cf54c4e6dd81af78526e2f3ebe23d0eec7f7f7ae2d0133880f1804e3967bcde7"
+    },
+    {
+      "path": "godot-qa-report.json",
+      "sha256": "058af05a874848e56ace034269a598d82e1bc5aef2357c4369e4869c541576d8"
+    },
+    {
+      "path": "image79-contracts.json",
+      "sha256": "69b7207ef8630353bb0a61e76edea98ab83aed8a8f9f9d231811baaf728cd48a"
+    },
+    {
+      "path": "native-capture.png",
+      "sha256": "a6be6579d47cbe9d8a698bb77a6beb0b44becc20e1f2691915782ffbd3eb7f1e"
+    },
+    {
+      "path": "native-fidelity.json",
+      "sha256": "de33325c4dd6a42092f62ea6f8a5152f138d789c856eb8c0ef863bbb706d9eb9"
+    },
+    {
+      "path": "native-interact.json",
+      "sha256": "5d16bfb70a6585e67b2ecd5ba7fcb61ec66dfed6be3b7263b1903007969d474e"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "ac375cabc7d15dee037ee265888fa66d8ace1de77f8eba0cae1e8f413cd6eb8d"
+    },
+    {
+      "path": "reference-chat-room-4x.png",
+      "sha256": "bb2a12aed36edf1bae2f26a9ce89937f25ec173ec1b1eb494acdaccf60e2b172"
+    },
+    {
+      "path": "skill-tree-drag-mid.png",
+      "sha256": "90a46479f99fba6ee3e4fc31235f77fd92f12a99803d389ac1a5e5daa8252ea4"
+    },
+    {
+      "path": "skill-tree-raised-moved.png",
+      "sha256": "27e88123f9f40885e77db87d1859b43832e91b285e5361bffc499a1b442cb11c"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "d240bd4952ab81c520336536916956851aa3a536bdae77b1343cbc0ae7979924"
+    },
+    {
+      "path": "verification-summary.json",
+      "sha256": "e9cb94b4206c61da293ef1e182eec3290a4ea291e396290e6b42e345c2c68409"
+    },
+    {
+      "path": "zz-invariant-after.png",
+      "sha256": "0795e49bfea0d687305bfc9f5e9f13b189384ff8d8188f0d6729421355c73f94"
+    }
+  ]
+}

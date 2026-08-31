@@ -1,0 +1,1214 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 131,
+    "commit_sha": "43aca5b11bca910c6b4b3935abc0eddad65ad3de",
+    "window_id": "status"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "status.minimize",
+    "status.close",
+    "status.attribute.str",
+    "status.attribute.agi",
+    "status.attribute.vit",
+    "status.attribute.int",
+    "status.attribute.dex",
+    "status.attribute.luk"
+  ],
+  "required_actions": [
+    {
+      "control_id": "status",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "status",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "status.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "status.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "18578245ad825b10d15956065f4a13bc64ca9eb346390ee50e41ba2f6f37e3f4"
+    },
+    "after": {
+      "path": "12-invariant-after.png",
+      "sha256": "18578245ad825b10d15956065f4a13bc64ca9eb346390ee50e41ba2f6f37e3f4"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "status.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"drag\":{\"active\":false,\"motion_samples\":0,\"position_samples\":[]},\"drag_active\":false,\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"process_active\":false,\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"stack_index\":10,\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "minimized": true,
+        "restored": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "01-minimized.png",
+          "sha256": "cccb72fc37e18df41dc740d44956af9c6d8baf28ab3d6a67808dbbd091ec0adb"
+        },
+        "reversed": {
+          "path": "01b-restored.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "restored": {
+          "path": "01b-restored.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 89023,
+        "intended_region_changed_pixels": 89023,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":2,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":64,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":true,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "2-str-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "2-str-activated.png",
+          "sha256": "261ab8a2bf4a21f6222da020b1c396411357d28193daf02dca5b77e99dc69727"
+        },
+        "reversed": {
+          "path": "2b-str-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22597,
+        "intended_region_changed_pixels": 22597,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "2c-str-context-before.png",
+          "sha256": "261ab8a2bf4a21f6222da020b1c396411357d28193daf02dca5b77e99dc69727"
+        },
+        "after": {
+          "path": "2d-str-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "2e-str-context-reversed.png",
+          "sha256": "261ab8a2bf4a21f6222da020b1c396411357d28193daf02dca5b77e99dc69727"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22597,
+        "intended_region_changed_pixels": 22597,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":2,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":141,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":65,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "3-agi-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "3-agi-activated.png",
+          "sha256": "da305155cd77012bf4919359200f196f1e44ebfa38e7a3e453b198a8f90e5611"
+        },
+        "reversed": {
+          "path": "3b-agi-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22591,
+        "intended_region_changed_pixels": 22591,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "3c-agi-context-before.png",
+          "sha256": "da305155cd77012bf4919359200f196f1e44ebfa38e7a3e453b198a8f90e5611"
+        },
+        "after": {
+          "path": "3d-agi-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "3e-agi-context-reversed.png",
+          "sha256": "da305155cd77012bf4919359200f196f1e44ebfa38e7a3e453b198a8f90e5611"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22591,
+        "intended_region_changed_pixels": 22591,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":2,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":21,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":true},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "4-vit-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "4-vit-activated.png",
+          "sha256": "99d9f9a524770cd936d54ce6aa52798563216efb4b0f987721a7834c06eb23f0"
+        },
+        "reversed": {
+          "path": "4b-vit-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22598,
+        "intended_region_changed_pixels": 22598,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "4c-vit-context-before.png",
+          "sha256": "99d9f9a524770cd936d54ce6aa52798563216efb4b0f987721a7834c06eb23f0"
+        },
+        "after": {
+          "path": "4d-vit-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "4e-vit-context-reversed.png",
+          "sha256": "99d9f9a524770cd936d54ce6aa52798563216efb4b0f987721a7834c06eb23f0"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22598,
+        "intended_region_changed_pixels": 22598,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":2,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":64,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":65,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "5-dex-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "5-dex-activated.png",
+          "sha256": "40da1980a1c2df39e64044b22397b6f9970af2a0296a11c5340e0c08838a3850"
+        },
+        "reversed": {
+          "path": "5b-dex-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22599,
+        "intended_region_changed_pixels": 22599,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "5c-dex-context-before.png",
+          "sha256": "40da1980a1c2df39e64044b22397b6f9970af2a0296a11c5340e0c08838a3850"
+        },
+        "after": {
+          "path": "5d-dex-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "5e-dex-context-reversed.png",
+          "sha256": "40da1980a1c2df39e64044b22397b6f9970af2a0296a11c5340e0c08838a3850"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22599,
+        "intended_region_changed_pixels": 22599,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":2,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":4,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "6-luk-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "6-luk-activated.png",
+          "sha256": "f5fccd378e0f85d1d0948b23e716ca93058a1eb58c2ed7c6e971e754417812d2"
+        },
+        "reversed": {
+          "path": "6b-luk-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22596,
+        "intended_region_changed_pixels": 22596,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "6c-luk-context-before.png",
+          "sha256": "f5fccd378e0f85d1d0948b23e716ca93058a1eb58c2ed7c6e971e754417812d2"
+        },
+        "after": {
+          "path": "6d-luk-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "6e-luk-context-reversed.png",
+          "sha256": "f5fccd378e0f85d1d0948b23e716ca93058a1eb58c2ed7c6e971e754417812d2"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22596,
+        "intended_region_changed_pixels": 22596,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "rejected_named": true,
+        "state_atomic": true,
+        "unavailable": true,
+        "transient_feedback": true
+      },
+      "frames": {
+        "before": {
+          "path": "7-int-activate-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "mid": {
+          "path": "7a-int-activate-mid.png",
+          "sha256": "5680ba27e30b1641318dadd2e7a369a040b06e7b033e6a3f0d81c7d785a1d9b5"
+        },
+        "after": {
+          "path": "7b-int-activate-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "7c-int-activate-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1010,
+        "intended_region_changed_pixels": 550,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "rejected_named": true,
+        "state_atomic": true,
+        "unavailable": true,
+        "transient_feedback": true
+      },
+      "frames": {
+        "before": {
+          "path": "8-int-context-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "mid": {
+          "path": "8a-int-context-mid.png",
+          "sha256": "5680ba27e30b1641318dadd2e7a369a040b06e7b033e6a3f0d81c7d785a1d9b5"
+        },
+        "after": {
+          "path": "8b-int-context-after.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "reversed": {
+          "path": "8c-int-context-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1010,
+        "intended_region_changed_pixels": 550,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "status",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"drag\":{\"active\":false,\"motion_samples\":31,\"position_samples\":[[0,211],[2,212.33332824707],[4,213.66667175293],[6,215],[8,216.33332824707],[10,217.66667175293],[12,219],[14,220.33332824707],[16,221.66667175293],[18,223],[20,224.33332824707],[22,225.66667175293],[24,227],[26,228.33332824707],[28,229.66667175293],[30,231],[32,232.33332824707],[34,233.66667175293],[36,235],[38,236.33332824707],[40,237.66667175293],[42,239],[44,240.33332824707],[46,241.66667175293],[48,243],[50,244.33332824707],[52,245.66667175293],[54,247],[56,248.333343505859],[58,249.666656494141],[60,251]]},\"drag_active\":false,\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[60,251],\"process_active\":false,\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"stack_index\":10,\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved_x": true,
+        "moved_y": true,
+        "continuous": true
+      },
+      "frames": {
+        "before": {
+          "path": "9-move-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "mid": {
+          "path": "9a-move-mid.png",
+          "sha256": "eaad00539550cac952799d80e3491194ec6b482806b7ac10299f908b4ddbc2f4"
+        },
+        "after": {
+          "path": "9b-moved.png",
+          "sha256": "623fc244209d43bb8d3df7f69b2d3a767fd566514a53a05e311941ed6fc7383b"
+        },
+        "reversed": {
+          "path": "9c-move-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 126330,
+        "intended_region_changed_pixels": 97748,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          250,
+          220
+        ],
+        [
+          252,
+          221.33333333333334
+        ],
+        [
+          254,
+          222.66666666666666
+        ],
+        [
+          256,
+          224
+        ],
+        [
+          258,
+          225.33333333333334
+        ],
+        [
+          260,
+          226.66666666666666
+        ],
+        [
+          262,
+          228
+        ],
+        [
+          264,
+          229.33333333333334
+        ],
+        [
+          266,
+          230.66666666666666
+        ],
+        [
+          268,
+          232
+        ],
+        [
+          270,
+          233.33333333333334
+        ],
+        [
+          272,
+          234.66666666666666
+        ],
+        [
+          274,
+          236
+        ],
+        [
+          276,
+          237.33333333333334
+        ],
+        [
+          278,
+          238.66666666666666
+        ],
+        [
+          280,
+          240
+        ],
+        [
+          282,
+          241.33333333333334
+        ],
+        [
+          284,
+          242.66666666666666
+        ],
+        [
+          286,
+          244
+        ],
+        [
+          288,
+          245.33333333333334
+        ],
+        [
+          290,
+          246.66666666666666
+        ],
+        [
+          292,
+          248
+        ],
+        [
+          294,
+          249.33333333333334
+        ],
+        [
+          296,
+          250.66666666666666
+        ],
+        [
+          298,
+          252
+        ],
+        [
+          300,
+          253.33333333333334
+        ],
+        [
+          302,
+          254.66666666666669
+        ],
+        [
+          304,
+          256
+        ],
+        [
+          306,
+          257.3333333333333
+        ],
+        [
+          308,
+          258.6666666666667
+        ],
+        [
+          310,
+          260
+        ]
+      ]
+    },
+    {
+      "control_id": "status.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"drag\":{\"active\":false,\"motion_samples\":0,\"position_samples\":[]},\"drag_active\":false,\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"process_active\":false,\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"stack_index\":10,\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-close-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "10a-closed.png",
+          "sha256": "6c4ae3cb592c88efb062a9108e64822cb2c2433160bfca8f4c96c0524d3a3466"
+        },
+        "reversed": {
+          "path": "10b-close-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 100672,
+        "intended_region_changed_pixels": 100672,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"drag\":{\"active\":false,\"motion_samples\":0,\"position_samples\":[]},\"drag_active\":false,\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"process_active\":false,\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"stack_index\":10,\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-key-before.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        },
+        "after": {
+          "path": "11a-key-closed.png",
+          "sha256": "6c4ae3cb592c88efb062a9108e64822cb2c2433160bfca8f4c96c0524d3a3466"
+        },
+        "reversed": {
+          "path": "11b-key-reversed.png",
+          "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 100672,
+        "intended_region_changed_pixels": 100672,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}

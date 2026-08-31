@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "issue": 136,
+  "candidate_commit": "43aca5b11bca910c6b4b3935abc0eddad65ad3de",
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "pass": true,
+  "console_errors": [],
+  "frames": {
+    "reset": {
+      "path": "assembled-desktop-reset.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    },
+    "moved": {
+      "path": "skill-tree-raised-moved.png",
+      "sha256": "27e88123f9f40885e77db87d1859b43832e91b285e5361bffc499a1b442cb11c"
+    },
+    "restored": {
+      "path": "assembled-desktop-restored.png",
+      "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+    }
+  },
+  "reset": {
+    "window_count": 11,
+    "stack": {
+      "basic_info": 0,
+      "chat_room": 10,
+      "equipment_card": 5,
+      "equipment_items": 6,
+      "inventory": 3,
+      "options": 1,
+      "party": 8,
+      "skill_tree": 2,
+      "status": 7,
+      "storage": 4,
+      "system_menu": 9
+    }
+  },
+  "moved": {
+    "position": [
+      672,
+      120
+    ],
+    "stack_index": 10,
+    "motion_samples": 60
+  },
+  "restored": {
+    "position": [
+      492,
+      0
+    ],
+    "stack": {
+      "basic_info": 0,
+      "chat_room": 10,
+      "equipment_card": 5,
+      "equipment_items": 6,
+      "inventory": 3,
+      "options": 1,
+      "party": 8,
+      "skill_tree": 2,
+      "status": 7,
+      "storage": 4,
+      "system_menu": 9
+    }
+  }
+}

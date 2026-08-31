@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "issue": 136,
+  "pull_request": 82,
+  "candidate_commit": "43aca5b11bca910c6b4b3935abc0eddad65ad3de",
+  "acceptance_contract": "docs/reviews/issue-136-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    },
+    {
+      "path": "artifacts/references/ro-desktop-b/control-inventory.json",
+      "sha256": "0518b72c486a338a753b923ba9578275c434961a059cf08dafaf4c807e3301af"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-136/options-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/skill-tree-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/inventory-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/storage-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/equipment-card-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/equipment-items-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/status-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/basic-info-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/party-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/system-menu-43aca5b/evidence-manifest.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-136/chat-room-43aca5b/assembled-desktop-reset.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/skill-tree-drag-mid.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/skill-tree-raised-moved.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/assembled-desktop-restored.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/assembly-browser-report.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/verification-summary.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/godot-qa-report.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/native-capture.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/reference-chat-room-4x.png",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/candidate-chat-room-4x.png",
+      "artifacts/reviews/issue-136/skill-tree-43aca5b/reference-skill-tree-4x.png",
+      "artifacts/reviews/issue-136/skill-tree-43aca5b/candidate-skill-tree-4x.png",
+      "artifacts/reviews/issue-136/system-menu-43aca5b/reference-system-menu-4x.png",
+      "artifacts/reviews/issue-136/system-menu-43aca5b/candidate-system-menu-4x.png",
+      "artifacts/reviews/issue-136/options-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/options-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/skill-tree-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/skill-tree-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/inventory-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/inventory-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/storage-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/storage-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/equipment-card-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/equipment-card-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/equipment-items-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/equipment-items-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/status-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/status-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/basic-info-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/basic-info-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/party-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/party-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/system-menu-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/system-menu-43aca5b/verdict.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/play-log.json",
+      "artifacts/reviews/issue-136/chat-room-43aca5b/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE136_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:99 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE136_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE136_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE136_GODOT_BIN\" --headless --path godot --import"
+  }
+}
