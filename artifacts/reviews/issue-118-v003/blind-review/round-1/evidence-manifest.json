@@ -1,0 +1,33 @@
+{
+  "round": 1,
+  "candidate_commit": "9c36e3712964a9a59b1fbfb08805de7037f9db8e",
+  "baseline_commit": "b2e4f594f6fb23e0dcc4e2a3395d492585a35c9b",
+  "reviewer": "fresh-context Codex subagent; packet-only static artifact review",
+  "evidence": [
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/contact-sheet.png",
+      "sha256": "fffc04e64089aedd610d7af7bd04977be970e3ca096df6724fcbf68edf6c1464"
+    },
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/assembly-v003.png",
+      "sha256": "541e9cecae7faf688dbb911a8a75b57e566f342d838e8918f1ac6915c585e93f"
+    },
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/assembly-v003-native.png",
+      "sha256": "568da35241215734d7964d8b2e520740ae11e3d19e47d96ce9c3bccc29d5e0d6"
+    },
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/edit-mask.png",
+      "sha256": "45a886a46153b5c87ee0018a8202d2bf1d0710a3c805679e4fb66011d6ca569e"
+    },
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/verification.json",
+      "sha256": "03c769582c04e0feea58bb24d525446970da858f43fd8673b8e758868c4cd3bf"
+    },
+    {
+      "file": "artifacts/runs/museum-filter-assembly-v003/run.json",
+      "sha256": "ccf72c26fd755ef02a21911c9b2157cb47078d05a1e5c3a9eb2c8a2b96b424d1"
+    }
+  ],
+  "note": "Every packet reference and evidence SHA was rechecked; the reviewer did not modify the candidate."
+}

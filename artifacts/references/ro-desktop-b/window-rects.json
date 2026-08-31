@@ -1,0 +1,121 @@
+{
+ "image": "reference-native.png",
+ "size": [
+  1536,
+  1024
+ ],
+ "scale_from_source": 1,
+ "coordinate_space": "native pixels, origin top-left",
+ "windows": [
+  {
+   "key": "basic-info",
+   "title": "基本情報",
+   "rect": [
+    0,
+    0,
+    484,
+    205
+   ]
+  },
+  {
+   "key": "skill-tree",
+   "title": "スキルツリー",
+   "rect": [
+    492,
+    0,
+    611,
+    595
+   ]
+  },
+  {
+   "key": "equipment-card",
+   "title": "装備カード",
+   "rect": [
+    1108,
+    0,
+    424,
+    290
+   ]
+  },
+  {
+   "key": "status",
+   "title": "ステータス",
+   "rect": [
+    0,
+    211,
+    484,
+    208
+   ]
+  },
+  {
+   "key": "options",
+   "title": "オプション",
+   "rect": [
+    1108,
+    297,
+    424,
+    202
+   ]
+  },
+  {
+   "key": "equipment-items",
+   "title": "装備アイテム",
+   "rect": [
+    0,
+    423,
+    484,
+    271
+   ]
+  },
+  {
+   "key": "party",
+   "title": "パーティー",
+   "rect": [
+    1107,
+    505,
+    215,
+    269
+   ]
+  },
+  {
+   "key": "system-menu",
+   "title": "システムメニュー",
+   "rect": [
+    1328,
+    505,
+    204,
+    273
+   ]
+  },
+  {
+   "key": "storage",
+   "title": "倉庫",
+   "rect": [
+    492,
+    609,
+    539,
+    399
+   ]
+  },
+  {
+   "key": "inventory",
+   "title": "所持アイテム",
+   "rect": [
+    0,
+    701,
+    484,
+    303
+   ]
+  },
+  {
+   "key": "chat-room",
+   "title": "チャットルーム",
+   "rect": [
+    1037,
+    782,
+    495,
+    226
+   ]
+  }
+ ]
+}

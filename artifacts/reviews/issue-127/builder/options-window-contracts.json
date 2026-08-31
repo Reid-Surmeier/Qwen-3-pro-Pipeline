@@ -1,0 +1,52 @@
+{
+  "failed": 0,
+  "results": [
+    {
+      "detail": "[]",
+      "passed": true,
+      "test": "scene-valid"
+    },
+    {
+      "detail": "state changes=14",
+      "passed": true,
+      "test": "pressed-phase-publication"
+    },
+    {
+      "detail": "[\"off\", \"on\", \"off\"]",
+      "passed": true,
+      "test": "real-toggle-reversal"
+    },
+    {
+      "detail": "[0.0, 0.0, 3.31739215759569, 6.88996383447966, 10.4625355113636, 14.0351071882476, 17.6076788651316, 21.1802505420155, 24.7528222188995, 28.3253354889354, 31.8979071658194, 35.4704788427034, 39.0430505195873, 42.6156221964713, 46.1881938733553, 49.7607655502392, 53.3333372271232, 56.9059089040072, 60.4784805808911, 64.0510522577751, 67.6236239346591, 71.1961956115431, 74.7687088815789, 78.341338965311, 81.9138522353469, 85.4864239122309, 89.0589955891148, 92.6315672659988, 96.2041389428828, 99.7767106197667, 100.0]",
+      "passed": true,
+      "test": "real-range-31-frames"
+    },
+    {
+      "detail": "{ \"id\": \"options.skin\", \"type\": \"Dropdown\", \"interaction_phase\": \"idle\", \"active_surface\": \"\", \"semantic_state\": \"closed\", \"last_action\": \"SelectChoice\", \"last_gesture\": \"Activate\", \"last_error\": <null>, \"geometry\": { \"x\": 1222.0, \"y\": 415.0, \"width\": 300.0, \"height\": 32.0 }, \"visible\": true, \"z_index\": 50, \"rendered\": true, \"text\": \"tanublue\", \"last_result\": { \"accepted\": true, \"action\": \"SelectChoice\", \"error\": <null> }, &\"value\": \"tanublue\", \"rendered_asset\": \"res://assets/image-79/options/dropdown-field-blank-idle.png\", \"text_visible\": true }",
+      "passed": true,
+      "test": "real-dropdown-lifecycle"
+    },
+    {
+      "detail": "{ \"id\": \"options.skin\", \"type\": \"Dropdown\", \"interaction_phase\": \"idle\", \"active_surface\": \"\", \"semantic_state\": \"closed\", \"last_action\": \"SelectChoice\", \"last_gesture\": \"Activate\", \"last_error\": <null>, \"geometry\": { \"x\": 1222.0, \"y\": 415.0, \"width\": 300.0, \"height\": 32.0 }, \"visible\": true, \"z_index\": 50, \"rendered\": true, \"text\": \"tanublue\", \"last_result\": { \"accepted\": true, \"action\": \"SelectChoice\", \"error\": <null> }, &\"value\": \"tanublue\", \"rendered_asset\": \"res://assets/image-79/options/dropdown-field-blank-idle.png\", \"text_visible\": true }",
+      "passed": true,
+      "test": "selected-dropdown-uses-unlabelled-field"
+    },
+    {
+      "detail": "{ \"id\": \"options\", \"position\": [1108.0, 297.0], \"size\": [424.0, 202.0], \"visible\": false, \"minimized\": false, \"view_mode\": \"tree\", \"detail_item\": \"\", \"pending\": false, \"z_index\": 0, \"last_gesture\": \"KeyCommand\", \"last_action\": \"CloseWindow\", \"last_error\": <null>, \"geometry_version\": 0, \"resize\": { \"active\": false, \"requested\": [0.0, 0.0], \"clamped\": [0.0, 0.0], \"motion_samples\": 0 } }",
+      "passed": true,
+      "test": "window-key-command-closes"
+    },
+    {
+      "detail": "{ \"id\": \"options\", \"position\": [1108.0, 297.0], \"size\": [424.0, 202.0], \"visible\": true, \"minimized\": false, \"view_mode\": \"tree\", \"detail_item\": \"\", \"pending\": false, \"z_index\": 0, \"last_gesture\": \"\", \"last_action\": \"\", \"last_error\": <null>, \"geometry_version\": 0, \"resize\": { \"active\": false, \"requested\": [424.0, 202.0], \"clamped\": [424.0, 202.0], \"motion_samples\": 0 } }",
+      "passed": true,
+      "test": "real-distinct-minimize-restore"
+    },
+    {
+      "detail": "[[1108.0, 297.0], [1028.0, 387.0]]",
+      "passed": true,
+      "test": "real-window-drag"
+    }
+  ],
+  "suite": "options-real-input",
+  "total": 9
+}

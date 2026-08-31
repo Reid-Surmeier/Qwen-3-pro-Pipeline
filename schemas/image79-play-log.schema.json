@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/schemas/image79-play-log.schema.json",
+  "title": "Image 79 Play Log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "candidate", "source_reference_sha256", "required_controls", "required_actions", "invariant_frames", "console_errors", "actions"],
+  "properties": {
+    "schema_version": {"const": "image79-play-log-v1"},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["issue", "commit_sha", "window_id"],
+      "properties": {
+        "issue": {"type": "integer", "minimum": 1},
+        "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "window_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "source_reference_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "required_controls": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_actions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/requiredAction"}
+    },
+    "console_errors": {"type": "array", "items": {"type": "string"}},
+    "invariant_frames": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["before", "after"],
+      "properties": {
+        "before": {"$ref": "#/$defs/frame"},
+        "after": {"$ref": "#/$defs/frame"}
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/action"}
+    }
+  },
+  "$defs": {
+    "requiredAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control_id", "gesture", "window_action"],
+      "properties": {
+        "control_id": {"type": "string", "minLength": 1},
+        "gesture": {"type": "string", "minLength": 1},
+        "window_action": {"type": "string", "minLength": 1}
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control_id", "gesture", "window_action", "expected", "observed", "responsive", "matches_expected", "assertions", "frames"],
+      "properties": {
+        "control_id": {"type": "string", "minLength": 1},
+        "gesture": {"type": "string", "minLength": 1},
+        "window_action": {"type": "string", "minLength": 1},
+        "expected": {"type": "string", "minLength": 1},
+        "observed": {"type": "string", "minLength": 1},
+        "responsive": {"type": "boolean"},
+        "matches_expected": {"type": "boolean"},
+        "assertions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "boolean"}
+        },
+        "motion_samples": {
+          "type": "array",
+          "minItems": 30,
+          "items": {"type": "number"}
+        },
+        "frames": {
+          "type": "object",
+          "minProperties": 2,
+          "additionalProperties": {"$ref": "#/$defs/frame"}
+        }
+      }
+    }
+  }
+}

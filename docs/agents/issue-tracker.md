@@ -41,17 +41,21 @@ Do not prescribe implementation details unless they are already constrained by a
 
 ## Readiness
 
-An Issue can receive `ready-for-agent` only when:
+An Issue is ready for implementation when:
 
 - the outcome is unambiguous,
 - acceptance criteria are observable,
 - scope boundaries are stated,
-- dependencies are available,
+- dependencies are available (no open `blocked` dependency),
 - verification is possible,
-- paid operations, credentials, and human approvals are identified,
-- the human has approved the final work packet.
+- paid operations and credentials are identified.
 
-Use `needs-info` when an unanswered question could materially change the solution. Use `needs-human-decision` after an agent has proposed a complete triage brief and a human must approve, revise, split, or reject it. Use `ready-for-human` when direct human judgment or execution—not approval of an agent plan—is required.
+Human approval is not part of Issue readiness; it happens at the pull request
+([ADR 0004](../adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+Use `needs-info` when an unanswered question could materially change the
+solution. Use `blocked` with `Blocked by #N` and a stated unblocking event
+when a named dependency must finish first. Use `ready-for-human` when direct
+human judgment or execution—not approval of an agent plan—is required.
 
 ## Conversational triage gate
 
@@ -71,11 +75,13 @@ While an Issue has `needs-triage`, an agent may investigate and comment but must
 ### 5. Recommendation
 ```
 
-The recommendation is one of: proceed, revise, split, investigate first, or do not pursue. After commenting, the agent replaces `needs-triage` with `needs-human-decision` and stops.
-
-The human then approves, revises, splits, or rejects the proposal. Silence, an unaddressed comment, or the absence of objections is not approval. Only the human may authorize `ready-for-agent`.
-
-After approval, update the Issue body with the final outcome, scope, acceptance criteria, verification, dependencies, and approvals. Comments remain the decision history; the Issue body becomes the canonical implementation specification.
+The recommendation is one of: proceed, revise, split, investigate first, or
+do not pursue. After commenting, the agent removes `needs-triage`, updates the
+Issue body with the final outcome, scope, acceptance criteria, verification,
+and dependencies, and proceeds unless `needs-info` or `blocked` applies.
+Comments remain the decision history; the Issue body is the canonical
+implementation specification, and the human vetoes or redirects at the pull
+request.
 
 ## Linking work
 

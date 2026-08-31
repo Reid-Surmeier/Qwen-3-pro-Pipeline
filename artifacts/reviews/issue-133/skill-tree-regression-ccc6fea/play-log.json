@@ -1,0 +1,1287 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 126,
+    "commit_sha": "ccc6feaa65427132e6ac8ac538ee784531f5124c",
+    "window_id": "skill_tree"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "skill_tree.minimize",
+    "skill_tree.descriptions",
+    "skill_tree.view",
+    "skill_tree.close",
+    "skill_tree.skills",
+    "skill_tree.stepper.r1c1",
+    "skill_tree.stepper.r1c3",
+    "skill_tree.stepper.r1c4",
+    "skill_tree.stepper.r1c5",
+    "skill_tree.stepper.r1c6",
+    "skill_tree.stepper.r2c1",
+    "skill_tree.stepper.r2c2",
+    "skill_tree.stepper.r2c3",
+    "skill_tree.stepper.r2c4",
+    "skill_tree.stepper.r2c5",
+    "skill_tree.stepper.r3c1",
+    "skill_tree.stepper.r3c2",
+    "skill_tree.stepper.r3c3",
+    "skill_tree.stepper.r3c4",
+    "skill_tree.stepper.r3c5",
+    "skill_tree.stepper.r3c6",
+    "skill_tree.stepper.r4c1",
+    "skill_tree.stepper.r4c2",
+    "skill_tree.stepper.r4c3",
+    "skill_tree.stepper.r4c4",
+    "skill_tree.stepper.r4c5",
+    "skill_tree.stepper.r4c6",
+    "skill_tree.stepper.r5c1",
+    "skill_tree.stepper.r5c3",
+    "skill_tree.stepper.r5c4",
+    "skill_tree.stepper.r5c5",
+    "skill_tree.use",
+    "skill_tree.cancel"
+  ],
+  "required_actions": [
+    {
+      "control_id": "skill_tree",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "skill_tree",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "skill_tree.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "skill_tree.descriptions",
+      "gesture": "Activate",
+      "window_action": "ToggleValue"
+    },
+    {
+      "control_id": "skill_tree.view",
+      "gesture": "Activate",
+      "window_action": "ToggleSkillView"
+    },
+    {
+      "control_id": "skill_tree.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "skill_tree.skills",
+      "gesture": "Activate",
+      "window_action": "SelectSkill"
+    },
+    {
+      "control_id": "skill_tree.skills",
+      "gesture": "ContextActivate",
+      "window_action": "OpenSkillDetail"
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill"
+    },
+    {
+      "control_id": "skill_tree.use",
+      "gesture": "Activate",
+      "window_action": "CommitSkillChanges"
+    },
+    {
+      "control_id": "skill_tree.cancel",
+      "gesture": "Activate",
+      "window_action": "CancelSkillChanges"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "a07bf59a588cbd634d2eae0810c66fa5e320ad33ed87f1fa7ecb70f6e8ed7e1f"
+    },
+    "after": {
+      "path": "14-invariant-after.png",
+      "sha256": "a07bf59a588cbd634d2eae0810c66fa5e320ad33ed87f1fa7ecb70f6e8ed7e1f"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "skill_tree.skills",
+      "gesture": "Activate",
+      "window_action": "SelectSkill",
+      "expected": "left click changes selection from r1c3 to r1c1",
+      "observed": "{\"active_surface\":\"r1c1\",\"capacity\":0,\"collection_items\":[],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[],\"geometry\":{\"height\":470,\"width\":550,\"x\":522,\"y\":60},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"skill_tree.skills\",\"interaction_phase\":\"hover\",\"item_values\":{},\"item_version\":0,\"last_action\":\"SelectSkill\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectSkill\",\"error\":null},\"list_labels\":{\"r1c1\":\"ホーリー..   5 / 5\",\"r1c2\":\"リザレク..   \",\"r1c3\":\"ヒール   10 / 10\",\"r1c4\":\"アクア..   10 / 10\",\"r1c5\":\"ディバイ..   5 / 5\",\"r1c6\":\"ブレッシ..   10 / 10\",\"r2c1\":\"プロテク..   5 / 5\",\"r2c2\":\"キリエエ..   1 / 1\",\"r2c3\":\"サンクチ..   5 / 5\",\"r2c4\":\"デーモン..   0 / 5\",\"r2c5\":\"魔法反射   0 / 3\",\"r3c1\":\"速度増加   5 / 5\",\"r3c2\":\"天使の恵み   3 / 3\",\"r3c3\":\"エンジェ..   1 / 1\"},\"list_mode\":false,\"list_values\":{\"r1c1\":\"5 / 5\",\"r1c2\":\"\",\"r1c3\":\"10 / 10\",\"r1c4\":\"10 / 10\",\"r1c5\":\"5 / 5\",\"r1c6\":\"10 / 10\",\"r2c1\":\"5 / 5\",\"r2c2\":\"1 / 1\",\"r2c3\":\"5 / 5\",\"r2c4\":\"0 / 5\",\"r2c5\":\"0 / 3\",\"r3c1\":\"5 / 5\",\"r3c2\":\"3 / 3\",\"r3c3\":\"1 / 1\"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r1c1\":\"res://assets/image-79/skill-tree/skill-r1c1-selected-hover.png\",\"r1c2\":\"res://assets/image-79/skill-tree/skill-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/skill-tree/skill-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/skill-tree/skill-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/skill-tree/skill-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/skill-tree/skill-r1c6-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/skill-tree/skill-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/skill-tree/skill-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/skill-tree/skill-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/skill-tree/skill-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/skill-tree/skill-r2c5-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/skill-tree/skill-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/skill-tree/skill-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/skill-tree/skill-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/skill-tree/skill-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/skill-tree/skill-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/skill-tree/skill-r3c6-unselected-idle.png\",\"r4c1\":\"res://assets/image-79/skill-tree/skill-r4c1-unselected-idle.png\",\"r4c2\":\"res://assets/image-79/skill-tree/skill-r4c2-unselected-idle.png\",\"r4c3\":\"res://assets/image-79/skill-tree/skill-r4c3-unselected-idle.png\",\"r4c4\":\"res://assets/image-79/skill-tree/skill-r4c4-unselected-idle.png\",\"r4c5\":\"res://assets/image-79/skill-tree/skill-r4c5-unselected-idle.png\",\"r4c6\":\"res://assets/image-79/skill-tree/skill-r4c6-unselected-idle.png\",\"r5c1\":\"res://assets/image-79/skill-tree/skill-r5c1-unselected-idle.png\",\"r5c3\":\"res://assets/image-79/skill-tree/skill-r5c3-unselected-idle.png\",\"r5c4\":\"res://assets/image-79/skill-tree/skill-r5c4-unselected-idle.png\",\"r5c5\":\"res://assets/image-79/skill-tree/skill-r5c5-unselected-idle.png\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false,\"r5c1\":false,\"r5c3\":false,\"r5c4\":false,\"r5c5\":false},\"rendered_item_values\":{\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\",\"r4c1\":\"r4c1\",\"r4c2\":\"r4c2\",\"r4c3\":\"r4c3\",\"r4c4\":\"r4c4\",\"r4c5\":\"r4c5\",\"r4c6\":\"r4c6\",\"r5c1\":\"r5c1\",\"r5c3\":\"r5c3\",\"r5c4\":\"r5c4\",\"r5c5\":\"r5c5\"},\"rendered_surface_visibility\":{\"r1c1\":true,\"r1c2\":true,\"r1c3\":true,\"r1c4\":true,\"r1c5\":true,\"r1c6\":true,\"r2c1\":true,\"r2c2\":true,\"r2c3\":true,\"r2c4\":true,\"r2c5\":true,\"r3c1\":true,\"r3c2\":true,\"r3c3\":true,\"r3c4\":true,\"r3c5\":true,\"r3c6\":true,\"r4c1\":true,\"r4c2\":true,\"r4c3\":true,\"r4c4\":true,\"r4c5\":true,\"r4c6\":true,\"r5c1\":true,\"r5c3\":true,\"r5c4\":true,\"r5c5\":true},\"scroll_offset\":0,\"selected_item\":\"r1c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r1c1\":{\"height\":41,\"width\":41,\"x\":538,\"y\":67},\"r1c2\":{\"height\":42,\"width\":42,\"x\":637,\"y\":67},\"r1c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":67},\"r1c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":67},\"r1c5\":{\"height\":40,\"width\":41,\"x\":929,\"y\":67},\"r1c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":67},\"r2c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":170},\"r2c2\":{\"height\":40,\"width\":41,\"x\":638,\"y\":170},\"r2c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":170},\"r2c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":170},\"r2c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":170},\"r3c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":271},\"r3c2\":{\"height\":40,\"width\":41,\"x\":638,\"y\":271},\"r3c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":271},\"r3c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":271},\"r3c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":271},\"r3c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":271},\"r4c1\":{\"height\":40,\"width\":41,\"x\":537,\"y\":372},\"r4c2\":{\"height\":40,\"width\":42,\"x\":637,\"y\":372},\"r4c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":372},\"r4c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":372},\"r4c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":372},\"r4c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":372},\"r5c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":473},\"r5c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":473},\"r5c4\":{\"height\":39,\"width\":36,\"x\":837,\"y\":474},\"r5c5\":{\"height\":40,\"width\":40,\"x\":926,\"y\":473}},\"text\":\"r1c1\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r1c1\",\"visible\":true,\"visible_item_count\":27,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "gesture_distinct": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "01-selected.png",
+          "sha256": "9add1cf92562b977a4165b4c3eeea705530c14fae772db8b1f5ee5ed995fa828"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.skills",
+      "gesture": "ContextActivate",
+      "window_action": "OpenSkillDetail",
+      "expected": "right click opens the selected skill detail",
+      "observed": "{\"active_surface\":\"r1c1\",\"capacity\":0,\"collection_items\":[],\"detail_text\":\"ホーリー..\\n5 / 5\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[],\"geometry\":{\"height\":470,\"width\":550,\"x\":522,\"y\":60},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"skill_tree.skills\",\"interaction_phase\":\"hover\",\"item_values\":{},\"item_version\":0,\"last_action\":\"OpenSkillDetail\",\"last_error\":null,\"last_gesture\":\"ContextActivate\",\"last_result\":{\"accepted\":true,\"action\":\"OpenSkillDetail\",\"error\":null},\"list_labels\":{\"r1c1\":\"ホーリー..   5 / 5\",\"r1c2\":\"リザレク..   \",\"r1c3\":\"ヒール   10 / 10\",\"r1c4\":\"アクア..   10 / 10\",\"r1c5\":\"ディバイ..   5 / 5\",\"r1c6\":\"ブレッシ..   10 / 10\",\"r2c1\":\"プロテク..   5 / 5\",\"r2c2\":\"キリエエ..   1 / 1\",\"r2c3\":\"サンクチ..   5 / 5\",\"r2c4\":\"デーモン..   0 / 5\",\"r2c5\":\"魔法反射   0 / 3\",\"r3c1\":\"速度増加   5 / 5\",\"r3c2\":\"天使の恵み   3 / 3\",\"r3c3\":\"エンジェ..   1 / 1\"},\"list_mode\":false,\"list_values\":{\"r1c1\":\"5 / 5\",\"r1c2\":\"\",\"r1c3\":\"10 / 10\",\"r1c4\":\"10 / 10\",\"r1c5\":\"5 / 5\",\"r1c6\":\"10 / 10\",\"r2c1\":\"5 / 5\",\"r2c2\":\"1 / 1\",\"r2c3\":\"5 / 5\",\"r2c4\":\"0 / 5\",\"r2c5\":\"0 / 3\",\"r3c1\":\"5 / 5\",\"r3c2\":\"3 / 3\",\"r3c3\":\"1 / 1\"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r1c1\":\"res://assets/image-79/skill-tree/skill-r1c1-selected-hover.png\",\"r1c2\":\"res://assets/image-79/skill-tree/skill-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/skill-tree/skill-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/skill-tree/skill-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/skill-tree/skill-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/skill-tree/skill-r1c6-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/skill-tree/skill-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/skill-tree/skill-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/skill-tree/skill-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/skill-tree/skill-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/skill-tree/skill-r2c5-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/skill-tree/skill-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/skill-tree/skill-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/skill-tree/skill-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/skill-tree/skill-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/skill-tree/skill-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/skill-tree/skill-r3c6-unselected-idle.png\",\"r4c1\":\"res://assets/image-79/skill-tree/skill-r4c1-unselected-idle.png\",\"r4c2\":\"res://assets/image-79/skill-tree/skill-r4c2-unselected-idle.png\",\"r4c3\":\"res://assets/image-79/skill-tree/skill-r4c3-unselected-idle.png\",\"r4c4\":\"res://assets/image-79/skill-tree/skill-r4c4-unselected-idle.png\",\"r4c5\":\"res://assets/image-79/skill-tree/skill-r4c5-unselected-idle.png\",\"r4c6\":\"res://assets/image-79/skill-tree/skill-r4c6-unselected-idle.png\",\"r5c1\":\"res://assets/image-79/skill-tree/skill-r5c1-unselected-idle.png\",\"r5c3\":\"res://assets/image-79/skill-tree/skill-r5c3-unselected-idle.png\",\"r5c4\":\"res://assets/image-79/skill-tree/skill-r5c4-unselected-idle.png\",\"r5c5\":\"res://assets/image-79/skill-tree/skill-r5c5-unselected-idle.png\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false,\"r5c1\":false,\"r5c3\":false,\"r5c4\":false,\"r5c5\":false},\"rendered_item_values\":{\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\",\"r4c1\":\"r4c1\",\"r4c2\":\"r4c2\",\"r4c3\":\"r4c3\",\"r4c4\":\"r4c4\",\"r4c5\":\"r4c5\",\"r4c6\":\"r4c6\",\"r5c1\":\"r5c1\",\"r5c3\":\"r5c3\",\"r5c4\":\"r5c4\",\"r5c5\":\"r5c5\"},\"rendered_surface_visibility\":{\"r1c1\":true,\"r1c2\":true,\"r1c3\":true,\"r1c4\":true,\"r1c5\":true,\"r1c6\":true,\"r2c1\":true,\"r2c2\":true,\"r2c3\":true,\"r2c4\":true,\"r2c5\":true,\"r3c1\":true,\"r3c2\":true,\"r3c3\":true,\"r3c4\":true,\"r3c5\":true,\"r3c6\":true,\"r4c1\":true,\"r4c2\":true,\"r4c3\":true,\"r4c4\":true,\"r4c5\":true,\"r4c6\":true,\"r5c1\":true,\"r5c3\":true,\"r5c4\":true,\"r5c5\":true},\"scroll_offset\":0,\"selected_item\":\"r1c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r1c1\":{\"height\":41,\"width\":41,\"x\":538,\"y\":67},\"r1c2\":{\"height\":42,\"width\":42,\"x\":637,\"y\":67},\"r1c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":67},\"r1c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":67},\"r1c5\":{\"height\":40,\"width\":41,\"x\":929,\"y\":67},\"r1c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":67},\"r2c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":170},\"r2c2\":{\"height\":40,\"width\":41,\"x\":638,\"y\":170},\"r2c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":170},\"r2c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":170},\"r2c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":170},\"r3c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":271},\"r3c2\":{\"height\":40,\"width\":41,\"x\":638,\"y\":271},\"r3c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":271},\"r3c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":271},\"r3c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":271},\"r3c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":271},\"r4c1\":{\"height\":40,\"width\":41,\"x\":537,\"y\":372},\"r4c2\":{\"height\":40,\"width\":42,\"x\":637,\"y\":372},\"r4c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":372},\"r4c4\":{\"height\":40,\"width\":36,\"x\":837,\"y\":372},\"r4c5\":{\"height\":40,\"width\":39,\"x\":931,\"y\":372},\"r4c6\":{\"height\":40,\"width\":41,\"x\":1022,\"y\":372},\"r5c1\":{\"height\":40,\"width\":41,\"x\":538,\"y\":473},\"r5c3\":{\"height\":40,\"width\":38,\"x\":738,\"y\":473},\"r5c4\":{\"height\":39,\"width\":36,\"x\":837,\"y\":474},\"r5c5\":{\"height\":40,\"width\":40,\"x\":926,\"y\":473}},\"text\":\"r1c1\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r1c1\",\"visible\":true,\"visible_item_count\":27,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "context_gesture": true,
+        "action_routed": true,
+        "detail_visible": true,
+        "detail_manifest_backed": true
+      },
+      "frames": {
+        "before": {
+          "path": "01-selected.png",
+          "sha256": "9add1cf92562b977a4165b4c3eeea705530c14fae772db8b1f5ee5ed995fa828"
+        },
+        "after": {
+          "path": "02-context-detail.png",
+          "sha256": "719f6f6521fba2927f14bc87443771fc5af7f5970b02d6a0a1676ca646c37002"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "a beyond-bound click rejects without opening a Window transaction",
+      "observed": "{\"active_surface\":\"\",\"arrows_visible\":true,\"current\":10,\"geometry\":{\"height\":17,\"width\":84,\"x\":716,\"y\":111},\"id\":\"skill_tree.stepper.r1c3\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Stepper is already at the requested bound\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"Stepper is already at the requested bound\"}},\"maximum\":10,\"minimum\":0,\"pending\":false,\"rendered\":true,\"rendered_arrow_pixels\":{\"decrement\":81,\"increment\":56},\"rendered_arrow_visibility\":{\"decrement\":true,\"increment\":true},\"semantic_state\":\"ready\",\"step\":1,\"surface_geometry\":{\"decrement\":{\"height\":17,\"width\":18,\"x\":716,\"y\":111},\"increment\":{\"height\":17,\"width\":18,\"x\":782,\"y\":111}},\"target\":10,\"text\":\"10 / 10\",\"text_visible\":true,\"type\":\"Stepper\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "rejected": true,
+        "typed_error": true,
+        "target_unchanged": true,
+        "transaction_not_opened": true
+      },
+      "frames": {
+        "before": {
+          "path": "02b-bound-before.png",
+          "sha256": "463252f8ed400a40bf366c0c6d6a88ea979838964e5ac569054e77ca4ac1b34c"
+        },
+        "after": {
+          "path": "02b-bound-rejected.png",
+          "sha256": "9add1cf92562b977a4165b4c3eeea705530c14fae772db8b1f5ee5ed995fa828"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-00-skill_tree.stepper.r1c1-before.png",
+          "sha256": "9add1cf92562b977a4165b4c3eeea705530c14fae772db8b1f5ee5ed995fa828"
+        },
+        "after": {
+          "path": "03-00-skill_tree.stepper.r1c1-after.png",
+          "sha256": "8dfec046032621de6f08ddc6ff2aef2646edacf5c655e901c11d7a8598828778"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "10 / 10 -> 10 / 9",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-01-skill_tree.stepper.r1c3-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-01-skill_tree.stepper.r1c3-after.png",
+          "sha256": "9e7c4cbf0b46daa2011ba86167ad723fba3d4ad3a3bbc285f04c70798e44f11e"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "10 / 10 -> 10 / 9",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-02-skill_tree.stepper.r1c4-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-02-skill_tree.stepper.r1c4-after.png",
+          "sha256": "b328e4756ddba36f7f2bae241a841d0bde2e885cf8b1e11da9c48c6d47c54022"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-03-skill_tree.stepper.r1c5-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-03-skill_tree.stepper.r1c5-after.png",
+          "sha256": "1cd5bf6932b8533b28e7cc21c3b3ff2251cc8e0c777a4cb41733b302af8f20ee"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r1c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "10 / 10 -> 10 / 9",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-04-skill_tree.stepper.r1c6-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-04-skill_tree.stepper.r1c6-after.png",
+          "sha256": "cfa70fdca7c0a4cb06d09a7b8b901c3d9b1393876c39c3f109a41d0d1acedd97"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-05-skill_tree.stepper.r2c1-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-05-skill_tree.stepper.r2c1-after.png",
+          "sha256": "a27f8c0d4f4a54bc465241bb00425a2aa33e0c96c99baa98e9ebcce435ada2b4"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "1 / 1 -> 1 / 2",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-06-skill_tree.stepper.r2c2-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-06-skill_tree.stepper.r2c2-after.png",
+          "sha256": "8621294788d74c8ba828ad6179e1071988038a3bcb52cf7a571ed17c8b0724f1"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-07-skill_tree.stepper.r2c3-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-07-skill_tree.stepper.r2c3-after.png",
+          "sha256": "bd9187b183729008b16d26eb7512cc926d79d1d55f706a85b6231ae578a720e5"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-08-skill_tree.stepper.r2c4-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-08-skill_tree.stepper.r2c4-after.png",
+          "sha256": "613299312246a3984ffd811ce9c28774cdb7b983603dcce38909a17813cfe90c"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r2c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-09-skill_tree.stepper.r2c5-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-09-skill_tree.stepper.r2c5-after.png",
+          "sha256": "42722735025c6faf1f92d9c4bc62a1a40079cd40f9c29d8b0829cda32c5a6142"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-10-skill_tree.stepper.r3c1-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-10-skill_tree.stepper.r3c1-after.png",
+          "sha256": "615061e808616fe26e0779de84824af8a52e7bdb94ca46ffea4fbd0798279611"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "3 / 3 -> 3 / 4",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-11-skill_tree.stepper.r3c2-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-11-skill_tree.stepper.r3c2-after.png",
+          "sha256": "dea6e42959e7b21474e94d8c4ddd3cabb70729e994c042007bf4e735e2c09b23"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "1 / 1 -> 1 / 2",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-12-skill_tree.stepper.r3c3-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-12-skill_tree.stepper.r3c3-after.png",
+          "sha256": "e307362ab7b628b2586b9126aec1961884a604d6a1fdb1131a2f4f56eaba2c55"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-13-skill_tree.stepper.r3c4-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-13-skill_tree.stepper.r3c4-after.png",
+          "sha256": "91b54c53dcf08288fcd7bb0e80a8e49d05c4563d8149cdf4616e7c031ebdaff8"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-14-skill_tree.stepper.r3c5-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-14-skill_tree.stepper.r3c5-after.png",
+          "sha256": "273cb150585576e88ccaaa08f300de292b5f1f75ce5e0cfe841ba382250d7108"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r3c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "3 / 3 -> 3 / 4",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-15-skill_tree.stepper.r3c6-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-15-skill_tree.stepper.r3c6-after.png",
+          "sha256": "454e72faff6708567fbd82a9bcfaeb66acdc38d9e8b81d6cc92e841db41a74eb"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "1 / 1 -> 1 / 2",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-16-skill_tree.stepper.r4c1-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-16-skill_tree.stepper.r4c1-after.png",
+          "sha256": "394a50c047b1b1ce3209857d46ea2c380d589df7d7500479116a678d6517d795"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c2",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "10 / 10 -> 10 / 9",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-17-skill_tree.stepper.r4c2-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-17-skill_tree.stepper.r4c2-after.png",
+          "sha256": "c79e7cb46a2298ba5d9bf4bf73201bc9e09c9aa96b2dd3a5d8263640ed3031b8"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "1 / 1 -> 1 / 2",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-18-skill_tree.stepper.r4c3-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-18-skill_tree.stepper.r4c3-after.png",
+          "sha256": "423c49606a5d00f66116714af1e6e39ec8efdc1d72e84f7d87d8a6c4a9f5c210"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "1 / 1 -> 1 / 2",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-19-skill_tree.stepper.r4c4-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-19-skill_tree.stepper.r4c4-after.png",
+          "sha256": "24a6dd85b456df5ff95c9fac145898146d678da5ea51f699182dc0f63734f947"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-20-skill_tree.stepper.r4c5-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-20-skill_tree.stepper.r4c5-after.png",
+          "sha256": "3ed7b096c6a920f1bd7ffa44876d06e637316614332ce6eb070582ef12d22e99"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r4c6",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-21-skill_tree.stepper.r4c6-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-21-skill_tree.stepper.r4c6-after.png",
+          "sha256": "c11deb5b17555fa02c998ee846f574711346a3360fb837d9513bf28fae05e056"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c1",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "5 / 5 -> 5 / 6",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-22-skill_tree.stepper.r5c1-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-22-skill_tree.stepper.r5c1-after.png",
+          "sha256": "ab73b3135de902ce1e178ac5bd612f045f66eb622adf34aab7979a5262f69483"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c3",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-23-skill_tree.stepper.r5c3-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-23-skill_tree.stepper.r5c3-after.png",
+          "sha256": "2eb3d9745b26aa993687137b602dd30a84c6a7ab75474ef5523865f211b1a135"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c4",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-24-skill_tree.stepper.r5c4-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-24-skill_tree.stepper.r5c4-after.png",
+          "sha256": "a609f99a8cfec5cddc7bf213c519487ed2dc33c99d5a0b1dfc891d0c42049c4a"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.stepper.r5c5",
+      "gesture": "Activate",
+      "window_action": "StepSkill",
+      "expected": "one arrow step starts one Window transaction",
+      "observed": "0 / 0 -> 0 / 1",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_changed": true,
+        "pending_same_frame": true,
+        "all_arrows_hidden": true,
+        "live_current_target_text": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-25-skill_tree.stepper.r5c5-before.png",
+          "sha256": "89d3b7f4cdd18bf62372a4bf661a0aa1fbfe3fd682637ec1faee2b89523acd3d"
+        },
+        "after": {
+          "path": "03-25-skill_tree.stepper.r5c5-after.png",
+          "sha256": "251cc309cb27b8ea815a993acc7265170cdd4a0b24a6ff28e886cf2381d5ea25"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.use",
+      "gesture": "Activate",
+      "window_action": "CommitSkillChanges",
+      "expected": "Use commits every pending target and restores all arrows",
+      "observed": "{\"active_surface\":\"\",\"arrows_visible\":true,\"current\":1,\"geometry\":{\"height\":17,\"width\":84,\"x\":813,\"y\":212},\"id\":\"skill_tree.stepper.r2c4\",\"interaction_phase\":\"idle\",\"last_action\":\"StepSkill\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"StepSkill\",\"error\":null},\"maximum\":10,\"minimum\":0,\"pending\":false,\"rendered\":true,\"rendered_arrow_pixels\":{\"decrement\":81,\"increment\":56},\"rendered_arrow_visibility\":{\"decrement\":true,\"increment\":true},\"semantic_state\":\"ready\",\"step\":1,\"surface_geometry\":{\"decrement\":{\"height\":17,\"width\":18,\"x\":813,\"y\":212},\"increment\":{\"height\":17,\"width\":18,\"x\":879,\"y\":212}},\"target\":1,\"text\":\"1 / 1\",\"text_visible\":true,\"type\":\"Stepper\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "committed": true,
+        "transaction_cleared": true,
+        "arrows_restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "04-commit-before.png",
+          "sha256": "613299312246a3984ffd811ce9c28774cdb7b983603dcce38909a17813cfe90c"
+        },
+        "after": {
+          "path": "04-committed.png",
+          "sha256": "25a82c41dcc620c6fef2c086f6e9c512ccb758e2de7e413f1d4f7ed1440c6ff0"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.cancel",
+      "gesture": "Activate",
+      "window_action": "CancelSkillChanges",
+      "expected": "Cancel discards every pending target and restores all arrows",
+      "observed": "{\"active_surface\":\"\",\"arrows_visible\":true,\"current\":1,\"geometry\":{\"height\":17,\"width\":84,\"x\":813,\"y\":212},\"id\":\"skill_tree.stepper.r2c4\",\"interaction_phase\":\"idle\",\"last_action\":\"StepSkill\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"StepSkill\",\"error\":null},\"maximum\":10,\"minimum\":0,\"pending\":false,\"rendered\":true,\"rendered_arrow_pixels\":{\"decrement\":81,\"increment\":56},\"rendered_arrow_visibility\":{\"decrement\":true,\"increment\":true},\"semantic_state\":\"ready\",\"step\":1,\"surface_geometry\":{\"decrement\":{\"height\":17,\"width\":18,\"x\":813,\"y\":212},\"increment\":{\"height\":17,\"width\":18,\"x\":879,\"y\":212}},\"target\":1,\"text\":\"1 / 1\",\"text_visible\":true,\"type\":\"Stepper\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "target_restored": true,
+        "transaction_cleared": true,
+        "arrows_restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-cancel-before.png",
+          "sha256": "63df79668ca64e710a54195d884873ee5c49235dfbd01c9f3f68e3c7e22c673b"
+        },
+        "after": {
+          "path": "05-cancelled.png",
+          "sha256": "56b75fb3676fefd8f403ad25bdf86cd6c4d00951280978761be4054b1e41209a"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.view",
+      "gesture": "Activate",
+      "window_action": "ToggleSkillView",
+      "expected": "View changes the reversible tree/list presentation",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"skill_tree\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[492,0],\"resize\":{\"active\":false,\"clamped\":[611,595],\"motion_samples\":0,\"requested\":[611,595],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[611,595],\"view_mode\":\"list\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "list_mode": true,
+        "committed_values_live": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-cancelled.png",
+          "sha256": "56b75fb3676fefd8f403ad25bdf86cd6c4d00951280978761be4054b1e41209a"
+        },
+        "after": {
+          "path": "06-list-view.png",
+          "sha256": "4f185f465ceb3f3f7714efee8ecc3feff7e8e1862f557ead954e5e52d77fc93c"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.descriptions",
+      "gesture": "Activate",
+      "window_action": "ToggleValue",
+      "expected": "description checkbox toggles and is reversible",
+      "observed": "{\"active_surface\":\"body\",\"geometry\":{\"height\":14,\"width\":16,\"x\":750,\"y\":12},\"id\":\"skill_tree.descriptions\",\"interaction_phase\":\"hover\",\"last_action\":\"ToggleValue\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"ToggleValue\",\"error\":null},\"rendered\":true,\"semantic_state\":\"on\",\"text\":\"\",\"type\":\"Toggle\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "toggled": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-descriptions-before.png",
+          "sha256": "74567d74e46a0d01e992cba362c8fef249cf6ddb9e380797135185d9da41661a"
+        },
+        "after": {
+          "path": "08-descriptions-on.png",
+          "sha256": "3e39a699e6327e3ab807ac09c381b419c81c736410379bb12300838bcc18bb21"
+        },
+        "reversed": {
+          "path": "08-descriptions-reversed.png",
+          "sha256": "74567d74e46a0d01e992cba362c8fef249cf6ddb9e380797135185d9da41661a"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "swap to a purpose-built title strip and restore the full Window",
+      "observed": "{\"minimized\":{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"skill_tree\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":true,\"pending\":false,\"position\":[492,0],\"resize\":{\"active\":false,\"clamped\":[611,595],\"motion_samples\":0,\"requested\":[611,595],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[611,28],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0},\"restored\":{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"skill_tree\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[492,0],\"resize\":{\"active\":false,\"clamped\":[611,595],\"motion_samples\":0,\"requested\":[611,595],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[611,595],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "distinct_plate": true,
+        "restored": true,
+        "position_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-minimize-before.png",
+          "sha256": "74567d74e46a0d01e992cba362c8fef249cf6ddb9e380797135185d9da41661a"
+        },
+        "after": {
+          "path": "09-minimized.png",
+          "sha256": "a18f597f411cc81b95d7584873fb38888456c9106fdfd256f5311e53dba44c0e"
+        },
+        "restored": {
+          "path": "10-minimize-restored.png",
+          "sha256": "74567d74e46a0d01e992cba362c8fef249cf6ddb9e380797135185d9da41661a"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Window follows continuous pointer motion",
+      "observed": "[542,65]",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous_samples": true,
+        "pointer_delta_applied": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-drag-before.png",
+          "sha256": "74567d74e46a0d01e992cba362c8fef249cf6ddb9e380797135185d9da41661a"
+        },
+        "mid": {
+          "path": "11-drag-mid.png",
+          "sha256": "326536bc1f2cd2a85bbfb39128a9dcb5a546ab63243af407dd5f77211e2d04d4"
+        },
+        "after": {
+          "path": "11-drag-after.png",
+          "sha256": "6bb3951232a86b18f366d8cd94c8d9b5853e5693ca929c7c5ce39bbab94ca999"
+        }
+      },
+      "motion_samples": [
+        [
+          492,
+          0
+        ],
+        [
+          493.666687011719,
+          2.16666603088379
+        ],
+        [
+          495.333312988281,
+          4.33333396911621
+        ],
+        [
+          497,
+          6.5
+        ],
+        [
+          498.666687011719,
+          8.66666603088379
+        ],
+        [
+          500.333312988281,
+          10.8333339691162
+        ],
+        [
+          502,
+          13
+        ],
+        [
+          503.666687011719,
+          15.1666660308838
+        ],
+        [
+          505.333312988281,
+          17.3333339691162
+        ],
+        [
+          507,
+          19.5
+        ],
+        [
+          508.666687011719,
+          21.6666679382324
+        ],
+        [
+          510.333312988281,
+          23.8333320617676
+        ],
+        [
+          512,
+          26
+        ],
+        [
+          513.666687011719,
+          28.1666679382324
+        ],
+        [
+          515.333312988281,
+          30.3333320617676
+        ],
+        [
+          517,
+          32.5
+        ],
+        [
+          518.666687011719,
+          34.6666679382324
+        ],
+        [
+          520.333312988281,
+          36.8333320617676
+        ],
+        [
+          522,
+          39
+        ],
+        [
+          523.666687011719,
+          41.1666679382324
+        ],
+        [
+          525.333312988281,
+          43.3333320617676
+        ],
+        [
+          527,
+          45.5
+        ],
+        [
+          528.666687011719,
+          47.6666679382324
+        ],
+        [
+          530.333312988281,
+          49.8333320617676
+        ],
+        [
+          532,
+          52
+        ],
+        [
+          533.666687011719,
+          54.1666641235352
+        ],
+        [
+          535.333312988281,
+          56.3333358764648
+        ],
+        [
+          537,
+          58.5
+        ],
+        [
+          538.666687011719,
+          60.6666641235352
+        ],
+        [
+          540.333312988281,
+          62.8333358764648
+        ],
+        [
+          542,
+          65
+        ]
+      ]
+    },
+    {
+      "control_id": "skill_tree.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "close hides in one frame",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"skill_tree\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"position\":[542,65],\"resize\":{\"active\":false,\"clamped\":[611,595],\"motion_samples\":0,\"requested\":[611,595],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[611,595],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-drag-after.png",
+          "sha256": "6bb3951232a86b18f366d8cd94c8d9b5853e5693ca929c7c5ce39bbab94ca999"
+        },
+        "after": {
+          "path": "12-button-closed.png",
+          "sha256": "192fb7fc767617718ba64d3b3eb1a9a908385e8ee1a50c47f17366add6792805"
+        }
+      }
+    },
+    {
+      "control_id": "skill_tree",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Escape routes through the Window binding and hides the frontmost Window",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"skill_tree\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[492,0],\"resize\":{\"active\":false,\"clamped\":[611,595],\"motion_samples\":0,\"requested\":[611,595],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[611,595],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "gesture_routed": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "13-key-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "13-key-closed.png",
+          "sha256": "192fb7fc767617718ba64d3b3eb1a9a908385e8ee1a50c47f17366add6792805"
+        }
+      }
+    }
+  ]
+}

@@ -9,7 +9,43 @@ from .capacity import (
     plan_capacity_scenarios,
     plan_worker_capacity,
 )
-from .comfyui_workflow import build_comfyui_api_workflow, build_comfyui_assembly_workflow
+from .fidelity import (
+    FidelityContract,
+    PaletteComparison,
+    compare_palettes,
+    describe_palettes,
+    FidelityContractError,
+    FidelityEvidenceError,
+    FidelityResult,
+    MutableRegion,
+    RegionChange,
+    corrections_for,
+    describe_result,
+    load_correction_prompts,
+    load_fidelity_contract,
+    parse_fidelity_contract,
+    verify_against_baseline,
+)
+from .verifier import (
+    DEFECT_ROUTES,
+    RegionReview,
+    RegionVerdict,
+    VerificationError,
+    VerificationResult,
+    VisionClient,
+    build_region_reviews,
+    describe_verification,
+    parse_region_verdict,
+    route_findings,
+    run_verification,
+)
+from .comfyui_workflow import (
+    build_comfyui_api_workflow,
+    build_comfyui_assembly_workflow,
+    build_comfyui_component_extraction_workflow,
+    build_partner_edit_workflow,
+    build_partner_text_workflow,
+)
 from .providers.alibaba import AlibabaImageClient, build_alibaba_request
 from .providers.router import ProviderResult, generate_with_provider
 from .prompt_manifest import (
@@ -25,6 +61,32 @@ from .providers.openrouter import (
 )
 
 __all__ = [
+    "PaletteComparison",
+    "compare_palettes",
+    "describe_palettes",
+    "DEFECT_ROUTES",
+    "RegionReview",
+    "RegionVerdict",
+    "VerificationError",
+    "VerificationResult",
+    "VisionClient",
+    "build_region_reviews",
+    "describe_verification",
+    "parse_region_verdict",
+    "route_findings",
+    "run_verification",
+    "FidelityContract",
+    "FidelityContractError",
+    "FidelityEvidenceError",
+    "FidelityResult",
+    "MutableRegion",
+    "RegionChange",
+    "corrections_for",
+    "describe_result",
+    "load_correction_prompts",
+    "load_fidelity_contract",
+    "parse_fidelity_contract",
+    "verify_against_baseline",
     "CapacityPlanningError",
     "CapacityPolicy",
     "CapacityRecommendation",
@@ -40,6 +102,8 @@ __all__ = [
     "ProviderResult",
     "build_comfyui_api_workflow",
     "build_comfyui_assembly_workflow",
+    "build_partner_edit_workflow",
+    "build_partner_text_workflow",
     "compile_edit_brief",
     "write_run_artifacts",
     "generate_with_provider",

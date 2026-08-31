@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "issue": 129,
+  "provider_requests": 0,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "window_rect": [
+      1108,
+      0,
+      424,
+      290
+    ]
+  },
+  "assembly": "deterministic source-pixel crops; unattested continuation unavailable",
+  "files": [
+    {
+      "path": "godot/assets/image-79/equipment-card/source-plate.png",
+      "sha256": "a2890cab86cbf1e5c2ad0dcddd6a5106a8f4cb5e92587c41eec8005308ad45f3",
+      "size": [
+        424,
+        290
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/minimized-plate.png",
+      "sha256": "4b1638231181f7f0e3d88236e601acb5c55e9458f6037b76aeefa7547bc92c7a",
+      "size": [
+        424,
+        28
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/transparent.png",
+      "sha256": "c2153f77e11087fcb078ae38527fa83bef29791e3700e30cc87fec4405a66d0f",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/minimize-idle.png",
+      "sha256": "bb5da2c4def9bbdbfaf1251ff7fc6fa8c4ddb11554a235fba04301e9536b1dc7",
+      "size": [
+        22,
+        22
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/minimize-hover.png",
+      "sha256": "c6a6fcfffb3cb1ab49c9737d3a1e553073df312a86567bd8861ff0fc1262d55c",
+      "size": [
+        22,
+        22
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/minimize-pressed.png",
+      "sha256": "aa968cba98576d4dcf66456ee4c9ce4bcfdf8ba53158e8ef6af3e8377485586c",
+      "size": [
+        22,
+        22
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/close-idle.png",
+      "sha256": "0c7c19979145cae0ea45712b44b1b83f1f8200819a0d1603d094b33baf0e9ba1",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/close-hover.png",
+      "sha256": "be3206a7da6807ed40a8c06584c7ae5ba7a3778d812d29542c41890b5add636a",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/close-pressed.png",
+      "sha256": "54c0c301df9cbe724f9f4b65389d428b8e1fa915d692f515dc1103080c909be9",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-decrement-idle.png",
+      "sha256": "56e68d3860d1edd862533937ea836b6429f853d3ad035a7882ad3a55de3b7a6c",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-decrement-hover.png",
+      "sha256": "eb7d7daf0007da8aa8d09ccc9aff5935fb54511886cfe8fbc31ee5002fad5397",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-decrement-pressed.png",
+      "sha256": "c62174404f350a6a2cf3ad53e827906767c9c411c154d7892ef469fb2d5a8d7c",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-increment-idle.png",
+      "sha256": "404a2f418882debd445540dc02c8b0a740cf5d7e91148b016b684931cfed4271",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-increment-hover.png",
+      "sha256": "f1782f409b6bf0575bedf886228aabcf9e5552fbc1e42e84588e7da7e18f4134",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-increment-pressed.png",
+      "sha256": "d5b8acb9d7db4a5d7f809836af4aff41f4f0559a09d527c0678cbbae27635454",
+      "size": [
+        28,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-track-idle.png",
+      "sha256": "352475bd00a348c4b1905628aa27c315522acc4c21ba3a47e538b2e592f74a9f",
+      "size": [
+        28,
+        138
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-track-hover.png",
+      "sha256": "e6dcdff519977a52a2f98a99e89831eba30c9c5d4a51dbb513b79bce97fb1dcb",
+      "size": [
+        28,
+        138
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-track-pressed.png",
+      "sha256": "e4802f7debdc1d5b9891167b6dd97540abe36c48604ca75edfed42229191c981",
+      "size": [
+        28,
+        138
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-thumb-hover.png",
+      "sha256": "4ec2a1ca38286b9165f09f8570ab7742630ff758c6f0f6e343a6895f0dfd3117",
+      "size": [
+        28,
+        78
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-thumb-pressed.png",
+      "sha256": "88b70e639b32159fe950995546b9ed4b0dddf8882ac29dfb4185774ceece3ab1",
+      "size": [
+        28,
+        78
+      ]
+    }
+  ]
+}

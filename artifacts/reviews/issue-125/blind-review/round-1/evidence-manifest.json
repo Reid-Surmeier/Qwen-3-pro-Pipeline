@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
+  "evidence_bundle_commit": "9d6978ac0ddbfe2934b0e532b39bfdc0d9cb6274",
+  "reviewer": "fresh-context Codex gpt-5.6-sol xhigh",
+  "files": [
+    {"path": "artifacts/reviews/issue-125/packet.json", "sha256": "6fd5bea53d7e13071282f95f2701354d8364e8e2f192915f632a456f4d502279"},
+    {"path": "docs/reviews/issue-125-contract.md", "sha256": "8f5fa83a5080fdb22e30062cee6d221895c970a0209072f0341e7c1bca89b0ac"},
+    {"path": "artifacts/references/ro-desktop-b/reference-native.png", "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"},
+    {"path": "artifacts/reviews/issue-125/builder/00-idle.png", "sha256": "8ae817197ef6e4faa4dc3313d4c52893ee6a165df1be77b0f570ef3817be93e4"},
+    {"path": "artifacts/reviews/issue-125/builder/01-bgm-drag-mid.png", "sha256": "dc64a83f5c9ce5d413afb4b6eee10750da72de3910ee20c259686d3b4ee7e04f"},
+    {"path": "artifacts/reviews/issue-125/builder/02-bgm-left-endpoint.png", "sha256": "99d172505116dabef9d7688b00a20cfd9c6437670b57dc69543a34a1bad20438"},
+    {"path": "artifacts/reviews/issue-125/builder/03-bgm-right-endpoint.png", "sha256": "ab37dc5bd13e2cb322bf458adc952655150de228aee4d34998de152bd6618f02"},
+    {"path": "artifacts/reviews/issue-125/builder/04-skin-open.png", "sha256": "f71176e24e9cc3ac208f2e4e53aadad9b141a623b80751b6df17ed69dbbde622"},
+    {"path": "artifacts/reviews/issue-125/builder/15-options-skin-select-after.png", "sha256": "fbf3a756ecb8ced50df6a4261f2ac2a9741ade50cc6a494853122c46efc423f2"},
+    {"path": "artifacts/reviews/issue-125/builder/05-minimized.png", "sha256": "443dfc1bc1c839fac96a4de6a62f094db912e776ab7ac15f89642111532cb103"},
+    {"path": "artifacts/reviews/issue-125/builder/06-restored.png", "sha256": "fbf3a756ecb8ced50df6a4261f2ac2a9741ade50cc6a494853122c46efc423f2"},
+    {"path": "artifacts/reviews/issue-125/builder/play-log.json", "sha256": "e25c438c0e1cd61f6bf4f173369c41a65b16624d03b2091c799fb5a2b9d6ce60"},
+    {"path": "artifacts/reviews/issue-125/builder/verdict.json", "sha256": "94c255f3e85f6d0c51a7f8845344ddf1bbd2986bb19df4c066eb2bc0872aa91c"}
+  ]
+}

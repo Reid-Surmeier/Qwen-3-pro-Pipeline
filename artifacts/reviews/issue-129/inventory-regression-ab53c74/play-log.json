@@ -1,0 +1,777 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 127,
+    "commit_sha": "ab53c74bb78ffa9a61db24863d67507c5a89c527",
+    "window_id": "inventory"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "inventory.minimize",
+    "inventory.close",
+    "inventory.tabs",
+    "inventory.items"
+  ],
+  "required_actions": [
+    {
+      "control_id": "inventory",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Resize",
+      "window_action": "ResizeWindow"
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "inventory.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "inventory.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "inventory.tabs",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryTab"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryItem"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DoubleActivate",
+      "window_action": "OpenInventoryItem"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleInventorySelection"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferInventoryItem"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "12-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "inventory.tabs",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryTab",
+      "expected": "each source tab routes once and Item reverses the selection",
+      "observed": "{\"active_surface\":\"equip\",\"geometry\":{\"height\":192,\"width\":26,\"x\":10,\"y\":731},\"id\":\"inventory.tabs\",\"interaction_phase\":\"hover\",\"last_action\":\"SelectInventoryTab\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectInventoryTab\",\"error\":null},\"rendered\":true,\"selected_tab\":\"equip\",\"semantic_state\":\"ready\",\"text\":\"equip\",\"type\":\"Tabs\",\"value\":\"equip\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "all_five_routed": true,
+        "selected": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "01-tab-equip.png",
+          "sha256": "32670d01259525657d81fa7084a079f44a00156f12e22db50317e093247e626b"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryItem",
+      "expected": "one click selects after the double-click interval",
+      "observed": "{\"active_surface\":\"r0c0\",\"capacity\":28,\"collection_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"SelectInventoryItem\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/inventory/cell-r0c0-selected-hover.png\",\"r0c1\":\"res://assets/image-79/inventory/cell-r0c1-unselected-idle.png\",\"r0c2\":\"res://assets/image-79/inventory/cell-r0c2-unselected-idle.png\",\"r0c3\":\"res://assets/image-79/inventory/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/inventory/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/inventory/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/inventory/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/inventory/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/inventory/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/inventory/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/inventory/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/inventory/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/inventory/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/inventory/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/inventory/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/inventory/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/inventory/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/inventory/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/inventory/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/inventory/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/inventory/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/inventory/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/inventory/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/inventory/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/inventory/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/inventory/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/inventory/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/inventory/cell-r3c6-unselected-idle.png\"},\"rendered_item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"scroll_offset\":0,\"selected_item\":\"r0c0\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c0\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":true,\"visible_item_count\":28,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "gesture_distinct": true
+      },
+      "frames": {
+        "before": {
+          "path": "01-tab-equip.png",
+          "sha256": "32670d01259525657d81fa7084a079f44a00156f12e22db50317e093247e626b"
+        },
+        "after": {
+          "path": "02-single-selected.png",
+          "sha256": "d824d0a720a36683411aac882779091f409c758c203468eb8a7d24a1f7eec8ad"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DoubleActivate",
+      "window_action": "OpenInventoryItem",
+      "expected": "double click opens once without a trailing single click",
+      "observed": "{\"active_surface\":\"r0c1\",\"capacity\":28,\"collection_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"detail_text\":\"所持品 1-2\\n個数 15\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"OpenInventoryItem\",\"last_error\":null,\"last_gesture\":\"DoubleActivate\",\"last_result\":{\"accepted\":true,\"action\":\"OpenInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\"},\"opened_item\":\"r0c1\",\"opened_item_value\":\"r0c1\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/inventory/cell-r0c0-unselected-idle.png\",\"r0c1\":\"res://assets/image-79/inventory/cell-r0c1-selected-hover.png\",\"r0c2\":\"res://assets/image-79/inventory/cell-r0c2-unselected-idle.png\",\"r0c3\":\"res://assets/image-79/inventory/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/inventory/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/inventory/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/inventory/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/inventory/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/inventory/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/inventory/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/inventory/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/inventory/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/inventory/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/inventory/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/inventory/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/inventory/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/inventory/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/inventory/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/inventory/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/inventory/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/inventory/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/inventory/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/inventory/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/inventory/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/inventory/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/inventory/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/inventory/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/inventory/cell-r3c6-unselected-idle.png\"},\"rendered_item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"scroll_offset\":0,\"selected_item\":\"r0c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"visible_item_count\":28,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "opened_once": true,
+        "no_single": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-single-selected.png",
+          "sha256": "d824d0a720a36683411aac882779091f409c758c203468eb8a7d24a1f7eec8ad"
+        },
+        "after": {
+          "path": "03-double-opened.png",
+          "sha256": "01cb2b8a08f889d96169258812f4641bd3b6fa8691576ef3c37b1f5a666edb2e"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleInventorySelection",
+      "expected": "Control click toggles independent multi-selection",
+      "observed": "{\"active_surface\":\"r0c2\",\"capacity\":28,\"collection_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"detail_text\":\"所持品 1-2\\n個数 15\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"ToggleInventorySelection\",\"last_error\":null,\"last_gesture\":\"ModifierActivate\",\"last_result\":{\"accepted\":true,\"action\":\"ToggleInventorySelection\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\"},\"opened_item\":\"r0c1\",\"opened_item_value\":\"r0c1\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/inventory/cell-r0c0-unselected-idle.png\",\"r0c1\":\"res://assets/image-79/inventory/cell-r0c1-selected-idle.png\",\"r0c2\":\"res://assets/image-79/inventory/cell-r0c2-modifier-hover.png\",\"r0c3\":\"res://assets/image-79/inventory/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/inventory/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/inventory/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/inventory/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/inventory/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/inventory/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/inventory/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/inventory/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/inventory/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/inventory/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/inventory/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/inventory/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/inventory/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/inventory/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/inventory/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/inventory/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/inventory/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/inventory/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/inventory/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/inventory/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/inventory/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/inventory/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/inventory/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/inventory/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/inventory/cell-r3c6-unselected-idle.png\"},\"rendered_item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"scroll_offset\":0,\"selected_item\":\"r0c1\",\"selected_items\":[\"r0c2\"],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"visible_item_count\":28,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "toggled": true,
+        "primary_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-double-opened.png",
+          "sha256": "01cb2b8a08f889d96169258812f4641bd3b6fa8691576ef3c37b1f5a666edb2e"
+        },
+        "after": {
+          "path": "04-modifier-selected.png",
+          "sha256": "cd1297c3f22ffc4db994c438ec8a322c54e301e05df18c602d2de29cdd450971"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem",
+      "expected": "31-sample drag swaps one pair atomically and suppresses click",
+      "observed": "{\"active_surface\":\"r0c0\",\"capacity\":28,\"collection_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"detail_text\":\"所持品 1-1\\n個数 2\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"r0c0\",\"r0c1\",\"r0c2\",\"r0c3\",\"r0c4\",\"r0c5\",\"r0c6\",\"r1c0\",\"r1c1\",\"r1c2\",\"r1c3\",\"r1c4\",\"r1c5\",\"r1c6\",\"r2c0\",\"r2c1\",\"r2c2\",\"r2c3\",\"r2c4\",\"r2c5\",\"r2c6\",\"r3c0\",\"r3c1\",\"r3c2\",\"r3c3\",\"r3c4\",\"r3c5\",\"r3c6\"],\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c1\",\"r0c1\":\"r0c0\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":1,\"last_action\":\"MoveInventoryItem\",\"last_error\":null,\"last_gesture\":\"DragDrop\",\"last_result\":{\"accepted\":true,\"action\":\"MoveInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c1   \",\"r0c1\":\"r0c0   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"r0c1   \",\"r0c1\":\"r0c0   \",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\"},\"opened_item\":\"r0c1\",\"opened_item_value\":\"r0c0\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/inventory/cell-r0c1-unselected-hover.png\",\"r0c1\":\"res://assets/image-79/inventory/cell-r0c0-selected-idle.png\",\"r0c2\":\"res://assets/image-79/inventory/cell-r0c2-unselected-idle.png\",\"r0c3\":\"res://assets/image-79/inventory/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/inventory/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/inventory/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/inventory/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/inventory/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/inventory/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/inventory/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/inventory/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/inventory/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/inventory/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/inventory/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/inventory/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/inventory/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/inventory/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/inventory/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/inventory/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/inventory/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/inventory/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/inventory/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/inventory/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/inventory/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/inventory/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/inventory/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/inventory/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/inventory/cell-r3c6-unselected-idle.png\"},\"rendered_item_values\":{\"r0c0\":\"r0c1\",\"r0c1\":\"r0c0\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"scroll_offset\":0,\"selected_item\":\"r0c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"visible_item_count\":28,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "swapped_once": true,
+        "motion_factual": true,
+        "no_trailing_click": true,
+        "detail_follows_item": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-drag-before.png",
+          "sha256": "d0655276b9b3a1cf60f919891286f763126178373019304ab2ba928f6aa31820"
+        },
+        "mid": {
+          "path": "05-drag-mid.png",
+          "sha256": "a2db820b1727eebf1fdca9ff6fc8399dbf5516b467347c21c9fd320fcfbb273d"
+        },
+        "after": {
+          "path": "05-drag-after.png",
+          "sha256": "b2eafd9b67df57732f4a79875c3a51fa58214821c831b2d3782a9807ba3f037f"
+        }
+      },
+      "motion_samples": [
+        [
+          69,
+          761
+        ],
+        [
+          70.38461538461539,
+          761
+        ],
+        [
+          71.76923076923077,
+          761
+        ],
+        [
+          73.15384615384616,
+          761
+        ],
+        [
+          74.53846153846153,
+          761
+        ],
+        [
+          75.92307692307692,
+          761
+        ],
+        [
+          77.3076923076923,
+          761
+        ],
+        [
+          78.6923076923077,
+          761
+        ],
+        [
+          80.07692307692308,
+          761
+        ],
+        [
+          81.46153846153847,
+          761
+        ],
+        [
+          82.84615384615384,
+          761
+        ],
+        [
+          84.23076923076923,
+          761
+        ],
+        [
+          85.61538461538461,
+          761
+        ],
+        [
+          87,
+          761
+        ],
+        [
+          88.38461538461539,
+          761
+        ],
+        [
+          89.76923076923077,
+          761
+        ],
+        [
+          91.15384615384616,
+          761
+        ],
+        [
+          92.53846153846155,
+          761
+        ],
+        [
+          93.92307692307692,
+          761
+        ],
+        [
+          95.3076923076923,
+          761
+        ],
+        [
+          96.6923076923077,
+          761
+        ],
+        [
+          98.07692307692308,
+          761
+        ],
+        [
+          99.46153846153845,
+          761
+        ],
+        [
+          100.84615384615384,
+          761
+        ],
+        [
+          102.23076923076923,
+          761
+        ],
+        [
+          103.61538461538461,
+          761
+        ],
+        [
+          105,
+          761
+        ],
+        [
+          106.38461538461539,
+          761
+        ],
+        [
+          107.76923076923077,
+          761
+        ],
+        [
+          109.15384615384616,
+          761
+        ],
+        [
+          110.53846153846155,
+          761
+        ],
+        [
+          111.92307692307692,
+          761
+        ],
+        [
+          113.3076923076923,
+          761
+        ],
+        [
+          114.6923076923077,
+          761
+        ],
+        [
+          116.07692307692308,
+          761
+        ],
+        [
+          117.46153846153845,
+          761
+        ],
+        [
+          118.84615384615384,
+          761
+        ],
+        [
+          120.23076923076923,
+          761
+        ],
+        [
+          121.61538461538461,
+          761
+        ],
+        [
+          123,
+          761
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Window follows 31 pointer samples",
+      "observed": "[50,401]",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "delta_applied": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-window-drag-before.png",
+          "sha256": "fb584398e27de04ff9224f71a6dc9e32e0d8d18754113f784ffc9735b6c7814f"
+        },
+        "mid": {
+          "path": "06-window-drag-mid.png",
+          "sha256": "e7ac323f9ea5daff701b97057e2ce097f0f99747d97e18fbbaed4e35f4467609"
+        },
+        "after": {
+          "path": "06-window-drag-after.png",
+          "sha256": "232de1d18c310343cb58dd25c48fcf7e4cc101701e2b429a26ca0e276d917629"
+        }
+      },
+      "motion_samples": [
+        [
+          0,
+          701
+        ],
+        [
+          1.66667175292969,
+          691
+        ],
+        [
+          3.33332824707031,
+          681
+        ],
+        [
+          5,
+          671
+        ],
+        [
+          6.66667175292969,
+          661
+        ],
+        [
+          8.33332824707031,
+          651
+        ],
+        [
+          10,
+          641
+        ],
+        [
+          11.6666717529297,
+          631
+        ],
+        [
+          13.3333282470703,
+          621
+        ],
+        [
+          15,
+          611
+        ],
+        [
+          16.6666717529297,
+          601
+        ],
+        [
+          18.3333282470703,
+          591
+        ],
+        [
+          20,
+          581
+        ],
+        [
+          21.6666717529297,
+          571
+        ],
+        [
+          23.3333282470703,
+          561
+        ],
+        [
+          25,
+          551
+        ],
+        [
+          26.6666717529297,
+          541
+        ],
+        [
+          28.3333282470703,
+          531
+        ],
+        [
+          30,
+          521
+        ],
+        [
+          31.6666717529297,
+          511
+        ],
+        [
+          33.3333282470703,
+          501
+        ],
+        [
+          35,
+          491
+        ],
+        [
+          36.6666717529297,
+          481
+        ],
+        [
+          38.3333282470703,
+          471
+        ],
+        [
+          40,
+          461
+        ],
+        [
+          41.6666717529297,
+          451
+        ],
+        [
+          43.3333282470703,
+          441
+        ],
+        [
+          45,
+          431
+        ],
+        [
+          46.6666717529297,
+          421
+        ],
+        [
+          48.3333282470703,
+          411
+        ],
+        [
+          50,
+          401
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Resize",
+      "window_action": "ResizeWindow",
+      "expected": "resize clamps at the declared maximum and preserves local hit alignment",
+      "observed": "{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512],\"stale_footer_covered\":true,\"stale_footer_grip_covered\":true,\"stale_right_edge_covered\":true,\"stale_title_controls_covered\":true},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "maximum": true,
+        "continuous": true,
+        "aligned": true,
+        "stale_chrome_covered": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-resize-before.png",
+          "sha256": "232de1d18c310343cb58dd25c48fcf7e4cc101701e2b429a26ca0e276d917629"
+        },
+        "mid": {
+          "path": "07-resize-mid.png",
+          "sha256": "667d0d11979cf4b62d92f2d7c4b9b69e15572504702d9714b4cc3480e39520c4"
+        },
+        "after": {
+          "path": "07-resize-after.png",
+          "sha256": "11d3ef29512dabee1c9cb0efd78933e5df3ea3907f5e072644e1c9405cec885a"
+        }
+      },
+      "motion_samples": [
+        [
+          484,
+          303
+        ],
+        [
+          492.333312988281,
+          309.966674804688
+        ],
+        [
+          500.666687011719,
+          316.933349609375
+        ],
+        [
+          509,
+          323.900024414062
+        ],
+        [
+          517.333251953125,
+          330.866638183594
+        ],
+        [
+          525.666748046875,
+          337.833251953125
+        ],
+        [
+          534,
+          344.800048828125
+        ],
+        [
+          542.333251953125,
+          351.7666015625
+        ],
+        [
+          550.666748046875,
+          358.7333984375
+        ],
+        [
+          559,
+          365.699951171875
+        ],
+        [
+          567.333251953125,
+          372.666748046875
+        ],
+        [
+          575.666748046875,
+          379.63330078125
+        ],
+        [
+          584,
+          386.599975585938
+        ],
+        [
+          592.333251953125,
+          393.566650390625
+        ],
+        [
+          600.666748046875,
+          400.533325195312
+        ],
+        [
+          609,
+          407.5
+        ],
+        [
+          617.333251953125,
+          414.466674804688
+        ],
+        [
+          625.666748046875,
+          421.433349609375
+        ],
+        [
+          634,
+          428.400024414062
+        ],
+        [
+          642.333251953125,
+          435.36669921875
+        ],
+        [
+          650.666748046875,
+          442.333251953125
+        ],
+        [
+          659,
+          449.300048828125
+        ],
+        [
+          667.333251953125,
+          456.2666015625
+        ],
+        [
+          675.666748046875,
+          463.2333984375
+        ],
+        [
+          684,
+          470.199951171875
+        ],
+        [
+          692.333251953125,
+          477.166748046875
+        ],
+        [
+          700.666748046875,
+          484.13330078125
+        ],
+        [
+          709,
+          491.099975585938
+        ],
+        [
+          717.333251953125,
+          498.066650390625
+        ],
+        [
+          725.666748046875,
+          505.033325195312
+        ],
+        [
+          734,
+          512
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "purpose-built title Window preserves the resized geometry on restore",
+      "observed": "{\"minimized\":{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":true,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,28],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0},\"restored\":{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512],\"stale_footer_covered\":true,\"stale_footer_grip_covered\":true,\"stale_right_edge_covered\":true,\"stale_title_controls_covered\":true},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "minimized": true,
+        "restored": true,
+        "position_preserved": true,
+        "detail_restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-minimize-before.png",
+          "sha256": "8ff95137b336d82f0455c2f1e8682fdddd1dfb3125444c1c901fd5b800ec9557"
+        },
+        "after": {
+          "path": "08-minimized.png",
+          "sha256": "d402cdbf30944647f1dac2a37dc0f92276dbd724d4ad6ba609bb2264140b9ee5"
+        },
+        "restored": {
+          "path": "08-minimize-restored.png",
+          "sha256": "8ff95137b336d82f0455c2f1e8682fdddd1dfb3125444c1c901fd5b800ec9557"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "close hides in one frame",
+      "observed": "{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512],\"stale_footer_covered\":true,\"stale_footer_grip_covered\":true,\"stale_right_edge_covered\":true,\"stale_title_controls_covered\":true},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-close-before.png",
+          "sha256": "8ff95137b336d82f0455c2f1e8682fdddd1dfb3125444c1c901fd5b800ec9557"
+        },
+        "after": {
+          "path": "09-close-after.png",
+          "sha256": "ead6a972023a4051267e82901da42a69bee9b21c164042e62d0f0bd018de4c25"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferInventoryItem",
+      "expected": "Control double-click atomically moves one item to Storage",
+      "observed": "{\"error\":null,\"item\":\"r0c0\",\"ok\":true,\"source_version_after\":1,\"source_version_before\":0,\"source_window\":\"inventory\",\"target_version_after\":1,\"target_version_before\":0,\"target_window\":\"storage\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "committed": true,
+        "direction": true,
+        "removed_from_source": true,
+        "added_to_target": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-transfer-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "10-transfer-after.png",
+          "sha256": "e5a58ba73444aa5cefdf653b16b510e1c381f4a50542ec6e37033ce13e7b5880"
+        }
+      }
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Escape closes the frontmost Inventory Window",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"inventory\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[0,701],\"resize\":{\"active\":false,\"clamped\":[484,303],\"motion_samples\":0,\"requested\":[484,303],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,303],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "gesture_routed": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-key-before.png",
+          "sha256": "e5a58ba73444aa5cefdf653b16b510e1c381f4a50542ec6e37033ce13e7b5880"
+        },
+        "after": {
+          "path": "11-key-after.png",
+          "sha256": "ead6a972023a4051267e82901da42a69bee9b21c164042e62d0f0bd018de4c25"
+        }
+      }
+    }
+  ]
+}

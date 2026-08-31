@@ -1,0 +1,957 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 132,
+    "commit_sha": "ccc6feaa65427132e6ac8ac538ee784531f5124c",
+    "window_id": "basic_info"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "basic_info.close",
+    "basic_info.minimize",
+    "basic_info.destination.status",
+    "basic_info.destination.option",
+    "basic_info.destination.items",
+    "basic_info.destination.equip",
+    "basic_info.destination.skill",
+    "basic_info.destination.map",
+    "basic_info.destination.chat",
+    "basic_info.destination.friend"
+  ],
+  "required_actions": [
+    {
+      "control_id": "basic_info",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "basic_info",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "basic_info.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "basic_info.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "basic_info.destination.status",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.option",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.items",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.equip",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.skill",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.map",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.chat",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "basic_info.destination.friend",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "zz-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "basic_info.destination.status",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"basic_info.destination.status\",\"ok\":true,\"position_after\":[0,211],\"position_before\":[0,211],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"basic_info\",\"target_window\":\"status\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "target_visible": true,
+        "routed_target": true,
+        "target_position_preserved": true,
+        "target_semantic_state_preserved": true,
+        "raised": true
+      },
+      "frames": {
+        "before": {
+          "path": "destination-status-before.png",
+          "sha256": "808414178929bc98cc009ce954040913373f5307a990e8f6610dd51625717936"
+        },
+        "after": {
+          "path": "destination-status-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "destination-status-reversed.png",
+          "sha256": "808414178929bc98cc009ce954040913373f5307a990e8f6610dd51625717936"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 100672,
+        "intended_region_changed_pixels": 100672,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info.destination.option",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"basic_info.destination.option\",\"ok\":true,\"position_after\":[1108,297],\"position_before\":[1108,297],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"basic_info\",\"target_window\":\"options\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "target_visible": true,
+        "routed_target": true,
+        "target_position_preserved": true,
+        "target_semantic_state_preserved": true,
+        "raised": true
+      },
+      "frames": {
+        "before": {
+          "path": "destination-option-before.png",
+          "sha256": "7665ab21d31ef48ae3e495579981df7fd2ffcb4544838fbb0347ac8ef2cc30c5"
+        },
+        "after": {
+          "path": "destination-option-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "destination-option-reversed.png",
+          "sha256": "7665ab21d31ef48ae3e495579981df7fd2ffcb4544838fbb0347ac8ef2cc30c5"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 85648,
+        "intended_region_changed_pixels": 85648,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info.destination.items",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"basic_info.destination.items\",\"ok\":true,\"position_after\":[0,701],\"position_before\":[0,701],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"basic_info\",\"target_window\":\"inventory\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "target_visible": true,
+        "routed_target": true,
+        "target_position_preserved": true,
+        "target_semantic_state_preserved": true,
+        "raised": true
+      },
+      "frames": {
+        "before": {
+          "path": "destination-items-before.png",
+          "sha256": "1442fc611577bd8543d4d6fc1ee1a7b8f7e565667c6d185128bc8d4b48e2efb4"
+        },
+        "after": {
+          "path": "destination-items-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "destination-items-reversed.png",
+          "sha256": "1442fc611577bd8543d4d6fc1ee1a7b8f7e565667c6d185128bc8d4b48e2efb4"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 146652,
+        "intended_region_changed_pixels": 146652,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info.destination.equip",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"basic_info.destination.equip\",\"ok\":true,\"position_after\":[0,423],\"position_before\":[0,423],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"basic_info\",\"target_window\":\"equipment_items\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "target_visible": true,
+        "routed_target": true,
+        "target_position_preserved": true,
+        "target_semantic_state_preserved": true,
+        "raised": true
+      },
+      "frames": {
+        "before": {
+          "path": "destination-equip-before.png",
+          "sha256": "6d2a663831365e0f291c48a57ed856e128bababe8883f88dbc8ad19678968c0c"
+        },
+        "after": {
+          "path": "destination-equip-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "destination-equip-reversed.png",
+          "sha256": "6d2a663831365e0f291c48a57ed856e128bababe8883f88dbc8ad19678968c0c"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 131164,
+        "intended_region_changed_pixels": 131164,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info.destination.skill",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"basic_info.destination.skill\",\"ok\":true,\"position_after\":[492,0],\"position_before\":[492,0],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"basic_info\",\"target_window\":\"skill_tree\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "target_visible": true,
+        "routed_target": true,
+        "target_position_preserved": true,
+        "target_semantic_state_preserved": true,
+        "raised": true
+      },
+      "frames": {
+        "before": {
+          "path": "destination-skill-before.png",
+          "sha256": "192fb7fc767617718ba64d3b3eb1a9a908385e8ee1a50c47f17366add6792805"
+        },
+        "after": {
+          "path": "destination-skill-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "destination-skill-reversed.png",
+          "sha256": "192fb7fc767617718ba64d3b3eb1a9a908385e8ee1a50c47f17366add6792805"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 363545,
+        "intended_region_changed_pixels": 363545,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info.destination.map",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":26,\"width\":48,\"x\":418,\"y\":124},\"id\":\"basic_info.destination.map\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: map\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: map\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "unavailable-map-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "unavailable-map-mid.png",
+          "sha256": "0a657ea95196dd80de0ce467ddb98f31fcf0fe6e06b613609d6f428b61889fc6"
+        },
+        "after": {
+          "path": "unavailable-map-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "unavailable-map-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1248,
+        "intended_region_changed_pixels": 1248,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "basic_info.destination.chat",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":26,\"width\":48,\"x\":356,\"y\":165},\"id\":\"basic_info.destination.chat\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: chat_room\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: chat_room\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "unavailable-chat-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "unavailable-chat-mid.png",
+          "sha256": "23491be04c37e2675e489df96dd096f873c89ec2e4ba26e212c734fd79fa98a7"
+        },
+        "after": {
+          "path": "unavailable-chat-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "unavailable-chat-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1248,
+        "intended_region_changed_pixels": 1248,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "basic_info.destination.friend",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"\",\"geometry\":{\"height\":26,\"width\":48,\"x\":418,\"y\":165},\"id\":\"basic_info.destination.friend\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: friends\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: friends\"}},\"rendered\":true,\"semantic_state\":\"disabled\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "unavailable-friend-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "unavailable-friend-mid.png",
+          "sha256": "b79a16ccd6083e57eb9ed08bf5f9eb3b1aeb3d3842aa2feeb49aea12e1983fb6"
+        },
+        "after": {
+          "path": "unavailable-friend-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "unavailable-friend-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1247,
+        "intended_region_changed_pixels": 1247,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "basic_info.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"basic_info\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[0,0],\"resize\":{\"active\":false,\"clamped\":[484,205],\"motion_samples\":0,\"requested\":[484,205],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,205],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "purpose_built_height": true,
+        "restored_size": true,
+        "meter_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "minimize-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "minimize-after.png",
+          "sha256": "bb7e4d73c707f0ee9e6ec2ed08ca07b9b1fda28fbb0d8732271c7579eb87468b"
+        },
+        "reversed": {
+          "path": "minimize-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "restored": {
+          "path": "minimize-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 87604,
+        "intended_region_changed_pixels": 87604,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"basic_info\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"position\":[100,75],\"resize\":{\"active\":false,\"clamped\":[484,205],\"motion_samples\":0,\"requested\":[484,205],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,205],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved": true,
+        "continuous_samples": true,
+        "restored_home": true
+      },
+      "frames": {
+        "before": {
+          "path": "drag-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "mid": {
+          "path": "drag-mid.png",
+          "sha256": "0959913f0c85aa9d929fe00b1a041cb424cfaa147f8c481d5996a0c90974bc18"
+        },
+        "after": {
+          "path": "drag-after.png",
+          "sha256": "4347908b62fc352c35d1e2b62196212f0c4d142f171f509410e2f0d8762fe563"
+        },
+        "reversed": {
+          "path": "drag-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 146637,
+        "intended_region_changed_pixels": 146637,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          100,
+          12
+        ],
+        [
+          103.33333333333333,
+          14.5
+        ],
+        [
+          106.66666666666667,
+          17
+        ],
+        [
+          110,
+          19.5
+        ],
+        [
+          113.33333333333333,
+          22
+        ],
+        [
+          116.66666666666667,
+          24.5
+        ],
+        [
+          120,
+          27
+        ],
+        [
+          123.33333333333333,
+          29.5
+        ],
+        [
+          126.66666666666667,
+          32
+        ],
+        [
+          130,
+          34.5
+        ],
+        [
+          133.33333333333334,
+          37
+        ],
+        [
+          136.66666666666666,
+          39.5
+        ],
+        [
+          140,
+          42
+        ],
+        [
+          143.33333333333334,
+          44.5
+        ],
+        [
+          146.66666666666666,
+          47
+        ],
+        [
+          150,
+          49.5
+        ],
+        [
+          153.33333333333334,
+          52
+        ],
+        [
+          156.66666666666666,
+          54.5
+        ],
+        [
+          160,
+          57
+        ],
+        [
+          163.33333333333334,
+          59.5
+        ],
+        [
+          166.66666666666669,
+          62
+        ],
+        [
+          170,
+          64.5
+        ],
+        [
+          173.33333333333331,
+          67
+        ],
+        [
+          176.66666666666669,
+          69.5
+        ],
+        [
+          180,
+          72
+        ],
+        [
+          183.33333333333331,
+          74.5
+        ],
+        [
+          186.66666666666669,
+          77
+        ],
+        [
+          190,
+          79.5
+        ],
+        [
+          193.33333333333331,
+          82
+        ],
+        [
+          196.66666666666669,
+          84.5
+        ],
+        [
+          200,
+          87
+        ]
+      ]
+    },
+    {
+      "control_id": "basic_info.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"basic_info\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[0,0],\"resize\":{\"active\":false,\"clamped\":[484,205],\"motion_samples\":0,\"requested\":[484,205],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,205],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "close-button-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "close-button-after.png",
+          "sha256": "576289b2fb8b430429e35149f56c4a7b50f11bbc52d61daeb5fddf82531f0a6b"
+        },
+        "reversed": {
+          "path": "close-button-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 99220,
+        "intended_region_changed_pixels": 99220,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "basic_info",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Issue 132 Basic Info Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"basic_info\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[0,0],\"resize\":{\"active\":false,\"clamped\":[484,205],\"motion_samples\":0,\"requested\":[484,205],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,205],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "focused_path": true
+      },
+      "frames": {
+        "before": {
+          "path": "escape-before.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "after": {
+          "path": "escape-after.png",
+          "sha256": "576289b2fb8b430429e35149f56c4a7b50f11bbc52d61daeb5fddf82531f0a6b"
+        },
+        "reversed": {
+          "path": "escape-reversed.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 99220,
+        "intended_region_changed_pixels": 99220,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,775 @@
+"""Deterministic, fail-closed verdicts for image-79 Play Logs."""
+
+from __future__ import annotations
+
+import hashlib
+import math
+import re
+import struct
+import zlib
+from pathlib import Path
+from typing import Any
+
+
+SCHEMA_VERSION = "image79-play-log-v2"
+LEGACY_SCHEMA_VERSION = "image79-play-log-v1"
+_SHA256 = re.compile(r"^[0-9a-f]{64}$")
+_COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
+STRICT_POINTER_EVIDENCE_ISSUE = 127
+STRICT_INTERACTION_FACTS_ISSUE = 128
+_CONTRACT_FACTS = (
+    "real_gesture_path",
+    "intended_region_changed",
+    "invariants_stable",
+    "source_approved",
+    "reversible",
+)
+_PIXEL_METRICS = (
+    "full_frame_changed_pixels",
+    "intended_region_changed_pixels",
+    "invariant_region_changed_pixels",
+)
+
+
+def evaluate_play_log(
+    log: Any,
+    evidence_root: Path | str,
+    manifest: Any | None = None,
+    *,
+    trusted_issue: int | None = None,
+) -> dict[str, Any]:
+    """Return PASS, FAIL, INCOMPLETE, or INVALID without trusting log claims."""
+    problems: list[str] = []
+    failures: list[str] = []
+    root = Path(evidence_root).resolve()
+
+    if not isinstance(log, dict):
+        return _invalid("play log root must be an object")
+    schema_version = log.get("schema_version")
+    if schema_version not in (LEGACY_SCHEMA_VERSION, SCHEMA_VERSION):
+        problems.append(f"schema_version must be {LEGACY_SCHEMA_VERSION} or {SCHEMA_VERSION}")
+
+    candidate = log.get("candidate")
+    if not isinstance(candidate, dict):
+        problems.append("candidate must be an object")
+    else:
+        if not isinstance(candidate.get("issue"), int) or candidate["issue"] <= 0:
+            problems.append("candidate.issue must be a positive integer")
+        if not _COMMIT_SHA.fullmatch(str(candidate.get("commit_sha", ""))):
+            problems.append("candidate.commit_sha must be a 40-character lowercase SHA")
+        if not _nonempty_string(candidate.get("window_id")):
+            problems.append("candidate.window_id must be a non-empty string")
+    if trusted_issue is not None and (
+        not isinstance(trusted_issue, int)
+        or isinstance(trusted_issue, bool)
+        or trusted_issue <= 0
+    ):
+        problems.append("trusted_issue must be a positive integer")
+
+    expected_controls, expected_actions, range_specs, manifest_policy_issue = _manifest_requirements(
+        manifest, candidate, problems, include_window_actions=schema_version == SCHEMA_VERSION
+    )
+    source_sha = log.get("source_reference_sha256")
+    manifest_sha = manifest.get("reference", {}).get("sha256") if isinstance(manifest, dict) else None
+    if not _SHA256.fullmatch(str(source_sha or "")) or source_sha != manifest_sha:
+        problems.append("source_reference_sha256 must match the frozen manifest reference")
+
+    required = log.get("required_controls")
+    if not isinstance(required, list) or not required or not all(
+        _nonempty_string(control_id) for control_id in required
+    ):
+        problems.append("required_controls must contain non-empty control IDs")
+        required = []
+    elif len(set(required)) != len(required):
+        problems.append("required_controls must not contain duplicates")
+    if expected_controls and set(required) != expected_controls:
+        problems.append("required_controls do not exactly match the frozen manifest")
+
+    required_actions = log.get("required_actions")
+    required_action_keys: list[tuple[str, str, str]] = []
+    if not isinstance(required_actions, list) or not required_actions:
+        problems.append("required_actions must be a non-empty array")
+    else:
+        for index, required_action in enumerate(required_actions):
+            label = f"required_actions[{index}]"
+            if not isinstance(required_action, dict):
+                problems.append(f"{label} must be an object")
+                continue
+            fields = tuple(required_action.get(field) for field in (
+                "control_id", "gesture", "window_action"
+            ))
+            if not all(_nonempty_string(value) for value in fields):
+                problems.append(
+                    f"{label} must name a control_id, gesture, and window_action"
+                )
+                continue
+            required_action_keys.append(fields)  # type: ignore[arg-type]
+        if len(set(required_action_keys)) != len(required_action_keys):
+            problems.append("required_actions must not contain duplicates")
+    if expected_actions and set(required_action_keys) != expected_actions:
+        problems.append("required_actions do not exactly match the frozen manifest")
+
+    console_errors = log.get("console_errors")
+    if not isinstance(console_errors, list) or not all(
+        isinstance(entry, str) for entry in console_errors
+    ):
+        problems.append("console_errors must be an array of strings")
+        console_errors = []
+    elif console_errors:
+        failures.extend(f"console error: {entry}" for entry in console_errors)
+
+    actions = log.get("actions")
+    if not isinstance(actions, list) or not actions:
+        problems.append("actions must be a non-empty array")
+        actions = []
+
+    seen: set[str] = set()
+    seen_actions: set[tuple[str, str, str]] = set()
+    range_endpoints: dict[str, set[str]] = {control_id: set() for control_id in range_specs}
+    verified_frames: set[Path] = set()
+    decoded_frames: dict[Path, tuple[int, int, bytes]] = {}
+    candidate_issue = candidate.get("issue") if isinstance(candidate, dict) else None
+    if manifest_policy_issue is not None:
+        if candidate_issue != manifest_policy_issue:
+            problems.append("candidate.issue must match the frozen manifest evidence policy")
+        if trusted_issue is not None and trusted_issue < manifest_policy_issue:
+            problems.append("trusted_issue cannot downgrade the frozen manifest evidence policy")
+    policy_issue = manifest_policy_issue if manifest_policy_issue is not None else candidate_issue
+    strict_interaction_facts = (
+        isinstance(policy_issue, int)
+        and not isinstance(policy_issue, bool)
+        and policy_issue >= STRICT_INTERACTION_FACTS_ISSUE
+    )
+    for index, action in enumerate(actions):
+        label = f"actions[{index}]"
+        if not isinstance(action, dict):
+            problems.append(f"{label} must be an object")
+            continue
+        control_id = action.get("control_id")
+        gesture = action.get("gesture")
+        window_action = action.get("window_action")
+        if not _nonempty_string(control_id):
+            problems.append(f"{label}.control_id must be non-empty")
+        else:
+            seen.add(control_id)
+        if not _nonempty_string(gesture):
+            problems.append(f"{label}.gesture must be non-empty")
+        if not _nonempty_string(window_action):
+            problems.append(f"{label}.window_action must be non-empty")
+        if all(_nonempty_string(value) for value in (control_id, gesture, window_action)):
+            seen_actions.add((control_id, gesture, window_action))
+        for field in ("expected", "observed"):
+            if not _nonempty_string(action.get(field)):
+                problems.append(f"{label}.{field} must be non-empty")
+        for field in ("responsive", "matches_expected"):
+            if not isinstance(action.get(field), bool):
+                problems.append(f"{label}.{field} must be boolean")
+            elif action[field] is False:
+                failures.append(f"{label} {field} is false")
+
+        expected_rejection = action.get("expected_rejection", False)
+        if not isinstance(expected_rejection, bool):
+            problems.append(f"{label}.expected_rejection must be boolean")
+            expected_rejection = False
+
+        assertions = action.get("assertions")
+        if not isinstance(assertions, dict) or not assertions or not all(
+            _nonempty_string(name) and isinstance(value, bool)
+            for name, value in assertions.items()
+        ):
+            problems.append(f"{label}.assertions must contain named boolean checks")
+        else:
+            failures.extend(
+                f"{label} assertion failed: {name}"
+                for name, value in assertions.items()
+                if not value
+            )
+
+        frames = action.get("frames")
+        required_roles = {"before", "after"}
+        pixel_metrics = None
+        mid_metrics = None
+        reversal_metrics = None
+        if strict_interaction_facts:
+            required_roles.add("reversed")
+            contract_facts = action.get("contract_facts")
+            if not isinstance(contract_facts, dict):
+                problems.append(f"{label}.contract_facts must be an object")
+            else:
+                for fact in _CONTRACT_FACTS:
+                    value = contract_facts.get(fact)
+                    if not isinstance(value, bool):
+                        problems.append(f"{label}.contract_facts.{fact} must be boolean")
+                    elif fact == "intended_region_changed" and expected_rejection:
+                        if value is not False:
+                            failures.append(
+                                f"{label} expected rejection must declare unchanged intended region"
+                            )
+                    elif value is False:
+                        failures.append(f"{label} contract fact is false: {fact}")
+
+            pixel_metrics = _pixel_metrics(
+                action.get("pixel_metrics"), f"{label}.pixel_metrics", problems
+            )
+            if expected_rejection:
+                mid_metrics = _pixel_metrics(
+                    action.get("mid_pixel_metrics"),
+                    f"{label}.mid_pixel_metrics",
+                    problems,
+                )
+            reversal_metrics = _pixel_metrics(
+                action.get("reversal_pixel_metrics"),
+                f"{label}.reversal_pixel_metrics",
+                problems,
+            )
+        if gesture in {"Drag", "Resize", "DragDrop"}:
+            required_roles.add("mid")
+            samples = action.get("motion_samples")
+
+            pointer_policy_issue = trusted_issue if trusted_issue is not None else (
+                candidate.get("issue") if isinstance(candidate, dict) else None
+            )
+            legacy_scalar_move = (
+                gesture == "Drag"
+                and window_action == "MoveWindow"
+                and isinstance(pointer_policy_issue, int)
+                and pointer_policy_issue < STRICT_POINTER_EVIDENCE_ISSUE
+            )
+
+            def finite_number(value: object) -> bool:
+                if not isinstance(value, (int, float)) or isinstance(value, bool):
+                    return False
+                try:
+                    return math.isfinite(float(value))
+                except (OverflowError, ValueError):
+                    return False
+
+            def valid_motion_sample(sample: object) -> bool:
+                if window_action == "SetRange":
+                    return finite_number(sample)
+                if legacy_scalar_move and finite_number(sample):
+                    return True
+                return isinstance(sample, list) \
+                    and len(sample) == 2 and all(
+                        finite_number(axis)
+                        for axis in sample
+                    )
+
+            if not isinstance(samples, list) or len(samples) < 30 \
+                    or not all(valid_motion_sample(sample) for sample in samples):
+                problems.append(
+                    f"{label} {gesture} requires at least 30 motion samples"
+                    + ("" if window_action == "SetRange" or legacy_scalar_move
+                       else "; pointer samples must be two-dimensional")
+                )
+            elif window_action != "SetRange":
+                scalar_legacy_samples = legacy_scalar_move and all(
+                    finite_number(sample) for sample in samples
+                )
+                if scalar_legacy_samples:
+                    origin = float(samples[0])
+                    crossed_threshold = any(
+                        abs(float(sample) - origin) > 4.0 for sample in samples[1:]
+                    )
+                else:
+                    origin_x, origin_y = samples[0]
+                    crossed_threshold = any(
+                        math.hypot(
+                            sample[0] - origin_x,
+                            sample[1] - origin_y,
+                        ) > 4.0
+                        for sample in samples[1:]
+                    )
+                if not crossed_threshold:
+                    problems.append(f"{label} {gesture} motion never crosses the pointer threshold")
+                if gesture == "Resize" and not (
+                    isinstance(assertions, dict) and any(
+                        assertions.get(name) is True
+                        for name in ("maximum", "minimum", "clamped", "endpoint_clamped")
+                    )
+                ):
+                    problems.append(f"{label} Resize requires a named clamp assertion")
+        if not isinstance(frames, dict):
+            problems.append(f"{label}.frames must be an object")
+            continue
+        for role in sorted(required_roles):
+            if role not in frames:
+                problems.append(f"{label}.frames.{role} is required")
+        verified_by_role: dict[str, Path] = {}
+        for role, frame in frames.items():
+            frame_label = f"{label}.frames.{role}"
+            verified = _verify_frame(frame, root, frame_label, problems)
+            if verified is not None:
+                verified_frames.add(verified)
+                verified_by_role[role] = verified
+        if strict_interaction_facts:
+            intended_region = _pixel_region(
+                action.get("intended_region"), f"{label}.intended_region", problems
+            )
+            invariant_region = _pixel_region(
+                action.get("invariant_region"), f"{label}.invariant_region", problems
+            )
+            if pixel_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "after" in verified_by_role:
+                actual = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["after"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.pixel_metrics", problems,
+                )
+                if actual is not None:
+                    _compare_pixel_metrics(pixel_metrics, actual,
+                                           f"{label}.pixel_metrics", problems)
+                    if expected_rejection and any(
+                        actual[field] != 0 for field in _PIXEL_METRICS
+                    ):
+                        failures.append(
+                            f"{label} expected rejection changed committed pixels"
+                        )
+                    elif not expected_rejection \
+                            and actual["intended_region_changed_pixels"] <= 0:
+                        failures.append(f"{label} intended region did not change")
+                    if actual["invariant_region_changed_pixels"] != 0:
+                        failures.append(f"{label} invariant region changed")
+            if mid_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "mid" in verified_by_role:
+                actual_mid = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["mid"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.mid_pixel_metrics", problems,
+                )
+                if actual_mid is not None:
+                    _compare_pixel_metrics(
+                        mid_metrics, actual_mid,
+                        f"{label}.mid_pixel_metrics", problems,
+                    )
+                    if actual_mid["intended_region_changed_pixels"] <= 0:
+                        failures.append(
+                            f"{label} expected rejection had no transient feedback"
+                        )
+                    if actual_mid["invariant_region_changed_pixels"] != 0:
+                        failures.append(
+                            f"{label} transient feedback changed invariant region"
+                        )
+            if reversal_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "reversed" in verified_by_role:
+                actual_reversal = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["reversed"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.reversal_pixel_metrics", problems,
+                )
+                if actual_reversal is not None:
+                    _compare_pixel_metrics(
+                        reversal_metrics, actual_reversal,
+                        f"{label}.reversal_pixel_metrics", problems,
+                    )
+                    if any(actual_reversal[field] != 0 for field in _PIXEL_METRICS):
+                        failures.append(f"{label} did not reverse exactly")
+        before = frames.get("before") if isinstance(frames, dict) else None
+        after = frames.get("after") if isinstance(frames, dict) else None
+        if isinstance(before, dict) and isinstance(after, dict):
+            committed_unchanged = before.get("sha256") == after.get("sha256")
+            if expected_rejection and not committed_unchanged:
+                failures.append(f"{label} expected rejection changed committed pixels")
+            elif not expected_rejection and committed_unchanged:
+                failures.append(f"{label} intended region did not change")
+        if strict_interaction_facts:
+            reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
+            if isinstance(before, dict) and isinstance(reversed_frame, dict) \
+                    and before.get("sha256") != reversed_frame.get("sha256"):
+                failures.append(f"{label} did not reverse exactly")
+        if window_action == "ToggleValue":
+            reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
+            if not isinstance(reversed_frame, dict):
+                problems.append(f"{label}.frames.reversed is required for reversible ToggleValue")
+            elif isinstance(before, dict) and reversed_frame.get("sha256") != before.get("sha256"):
+                failures.append(f"{label} did not reverse to its before frame")
+        if window_action == "ToggleMinimized":
+            restored = frames.get("restored") if isinstance(frames, dict) else None
+            if not isinstance(restored, dict):
+                problems.append(f"{label}.frames.restored is required for reversible minimize")
+            elif isinstance(before, dict) and restored.get("sha256") != before.get("sha256"):
+                failures.append(f"{label} restore did not reproduce its before frame")
+        if window_action == "SetRange" and control_id in range_specs \
+                and isinstance(action.get("motion_samples"), list):
+            samples = [float(value) for value in action["motion_samples"]]
+            if samples:
+                minimum, maximum = range_specs[control_id]
+                if min(samples) <= minimum:
+                    range_endpoints[control_id].add("minimum")
+                if max(samples) >= maximum:
+                    range_endpoints[control_id].add("maximum")
+                increasing = all(b >= a for a, b in zip(samples, samples[1:]))
+                decreasing = all(b <= a for a, b in zip(samples, samples[1:]))
+                if not (increasing or decreasing):
+                    failures.append(f"{label} Range samples are not monotonic")
+
+    invariant_frames = log.get("invariant_frames")
+    if not isinstance(invariant_frames, dict):
+        problems.append("invariant_frames must contain before and after crops")
+    else:
+        invariant_paths = [
+            _verify_frame(invariant_frames.get(role), root,
+                          f"invariant_frames.{role}", problems)
+            for role in ("before", "after")
+        ]
+        verified_frames.update(path for path in invariant_paths if path is not None)
+        if all(path is not None for path in invariant_paths) \
+                and invariant_paths[0].read_bytes() != invariant_paths[1].read_bytes():
+            failures.append("declared invariant region changed")
+    for control_id, endpoints in range_endpoints.items():
+        if endpoints != {"minimum", "maximum"}:
+            failures.append(f"{control_id} did not prove both Range endpoints")
+
+    unexercised = [control_id for control_id in required if control_id not in seen]
+    unexercised_actions = [
+        ":".join(action) for action in required_action_keys if action not in seen_actions
+    ]
+    if problems:
+        verdict = "INVALID"
+    elif failures:
+        verdict = "FAIL"
+    elif unexercised or unexercised_actions:
+        verdict = "INCOMPLETE"
+    else:
+        verdict = "PASS"
+    return {
+        "verdict": verdict,
+        "actions": len(actions),
+        "frames_verified": len(verified_frames),
+        "unexercised": unexercised,
+        "unexercised_actions": unexercised_actions,
+        "failures": failures,
+        "problems": problems,
+    }
+
+
+def _pixel_metrics(
+    value: Any, label: str, problems: list[str]
+) -> dict[str, float] | None:
+    if not isinstance(value, dict):
+        problems.append(f"{label} must be an object")
+        return None
+    metrics: dict[str, float] = {}
+    for field in _PIXEL_METRICS:
+        number = value.get(field)
+        if not isinstance(number, (int, float)) or isinstance(number, bool):
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        try:
+            numeric = float(number)
+        except (OverflowError, ValueError):
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        if not math.isfinite(numeric) or numeric < 0:
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        metrics[field] = numeric
+    return metrics if len(metrics) == len(_PIXEL_METRICS) else None
+
+
+def _pixel_region(
+    value: Any, label: str, problems: list[str]
+) -> tuple[int, int, int, int] | None:
+    if not isinstance(value, dict):
+        problems.append(f"{label} must be an object")
+        return None
+    fields: list[int] = []
+    for field in ("x", "y", "width", "height"):
+        number = value.get(field)
+        if not isinstance(number, int) or isinstance(number, bool):
+            problems.append(f"{label}.{field} must be an integer")
+            return None
+        fields.append(number)
+    x, y, width, height = fields
+    if x < 0 or y < 0 or width <= 0 or height <= 0:
+        problems.append(f"{label} must have a non-negative origin and positive size")
+        return None
+    return x, y, width, height
+
+
+def _compare_pixel_metrics(
+    claimed: dict[str, float], actual: dict[str, int], label: str,
+    problems: list[str],
+) -> None:
+    for field in _PIXEL_METRICS:
+        if claimed[field] != actual[field]:
+            problems.append(
+                f"{label}.{field} does not match hash-verified frames "
+                f"(claimed {claimed[field]:g}, actual {actual[field]})"
+            )
+
+
+def _recompute_pixel_metrics(
+    before_path: Path,
+    after_path: Path,
+    intended_region: tuple[int, int, int, int],
+    invariant_region: tuple[int, int, int, int],
+    cache: dict[Path, tuple[int, int, bytes]],
+    label: str,
+    problems: list[str],
+) -> dict[str, int] | None:
+    before = _decode_png_rgba(before_path, cache, f"{label}.before", problems)
+    after = _decode_png_rgba(after_path, cache, f"{label}.after", problems)
+    if before is None or after is None:
+        return None
+    before_width, before_height, before_pixels = before
+    after_width, after_height, after_pixels = after
+    if (before_width, before_height) != (after_width, after_height):
+        problems.append(f"{label} frame dimensions do not match")
+        return None
+    for region_label, (x, y, width, height) in (
+        ("intended_region", intended_region),
+        ("invariant_region", invariant_region),
+    ):
+        if x + width > before_width or y + height > before_height:
+            problems.append(f"{label}.{region_label} leaves the frame")
+            return None
+
+    def changed(region: tuple[int, int, int, int] | None = None) -> int:
+        if region is None:
+            return sum(
+                before_pixels[offset:offset + 4] != after_pixels[offset:offset + 4]
+                for offset in range(0, len(before_pixels), 4)
+            )
+        x, y, width, height = region
+        total = 0
+        for row in range(y, y + height):
+            start = (row * before_width + x) * 4
+            for offset in range(start, start + width * 4, 4):
+                total += before_pixels[offset:offset + 4] != after_pixels[offset:offset + 4]
+        return total
+
+    return {
+        "full_frame_changed_pixels": changed(),
+        "intended_region_changed_pixels": changed(intended_region),
+        "invariant_region_changed_pixels": changed(invariant_region),
+    }
+
+
+def _decode_png_rgba(
+    path: Path,
+    cache: dict[Path, tuple[int, int, bytes]],
+    label: str,
+    problems: list[str],
+) -> tuple[int, int, bytes] | None:
+    cached = cache.get(path)
+    if cached is not None:
+        return cached
+    try:
+        from PIL import Image
+    except ImportError:
+        Image = None  # type: ignore[assignment]
+    if Image is not None:
+        try:
+            with Image.open(path) as image:
+                converted = image.convert("RGBA")
+                decoded = (converted.width, converted.height, converted.tobytes())
+            cache[path] = decoded
+            return decoded
+        except (OSError, ValueError) as error:
+            problems.append(f"{label} cannot be independently decoded: {error}")
+            return None
+    try:
+        data = path.read_bytes()
+        if data[:8] != b"\x89PNG\r\n\x1a\n":
+            raise ValueError("not a PNG")
+        offset = 8
+        width = height = bit_depth = color_type = interlace = None
+        compressed = bytearray()
+        while offset < len(data):
+            if offset + 12 > len(data):
+                raise ValueError("truncated chunk")
+            length = struct.unpack(">I", data[offset:offset + 4])[0]
+            chunk_type = data[offset + 4:offset + 8]
+            chunk_data = data[offset + 8:offset + 8 + length]
+            crc_bytes = data[offset + 8 + length:offset + 12 + length]
+            if len(chunk_data) != length or len(crc_bytes) != 4:
+                raise ValueError("truncated chunk data")
+            expected_crc = struct.unpack(">I", crc_bytes)[0]
+            if zlib.crc32(chunk_type + chunk_data) & 0xFFFFFFFF != expected_crc:
+                raise ValueError("chunk CRC mismatch")
+            offset += 12 + length
+            if chunk_type == b"IHDR":
+                if length != 13:
+                    raise ValueError("invalid IHDR")
+                width, height, bit_depth, color_type, compression, filtering, interlace = \
+                    struct.unpack(">IIBBBBB", chunk_data)
+                if width <= 0 or height <= 0 or compression != 0 or filtering != 0:
+                    raise ValueError("unsupported IHDR")
+            elif chunk_type == b"IDAT":
+                compressed.extend(chunk_data)
+            elif chunk_type == b"IEND":
+                break
+        channels = {0: 1, 2: 3, 4: 2, 6: 4}.get(color_type)
+        if bit_depth != 8 or channels is None or interlace != 0:
+            raise ValueError("only non-interlaced 8-bit grayscale/RGB/RGBA PNGs are supported")
+        raw = zlib.decompress(bytes(compressed))
+        stride = width * channels
+        if len(raw) != height * (stride + 1):
+            raise ValueError("unexpected decompressed size")
+        rows: list[bytearray] = []
+        source_offset = 0
+        previous = bytearray(stride)
+        for _ in range(height):
+            filter_type = raw[source_offset]
+            scanline = raw[source_offset + 1:source_offset + 1 + stride]
+            source_offset += stride + 1
+            reconstructed = bytearray(stride)
+            for index, value in enumerate(scanline):
+                left = reconstructed[index - channels] if index >= channels else 0
+                above = previous[index]
+                upper_left = previous[index - channels] if index >= channels else 0
+                if filter_type == 0:
+                    predictor = 0
+                elif filter_type == 1:
+                    predictor = left
+                elif filter_type == 2:
+                    predictor = above
+                elif filter_type == 3:
+                    predictor = (left + above) // 2
+                elif filter_type == 4:
+                    p = left + above - upper_left
+                    distances = (abs(p - left), abs(p - above), abs(p - upper_left))
+                    predictor = (left, above, upper_left)[distances.index(min(distances))]
+                else:
+                    raise ValueError(f"unsupported filter {filter_type}")
+                reconstructed[index] = (value + predictor) & 0xFF
+            rows.append(reconstructed)
+            previous = reconstructed
+        rgba = bytearray()
+        for row in rows:
+            for index in range(0, len(row), channels):
+                if color_type == 0:
+                    gray = row[index]
+                    rgba.extend((gray, gray, gray, 255))
+                elif color_type == 2:
+                    rgba.extend((*row[index:index + 3], 255))
+                elif color_type == 4:
+                    gray, alpha = row[index:index + 2]
+                    rgba.extend((gray, gray, gray, alpha))
+                else:
+                    rgba.extend(row[index:index + 4])
+        decoded = (width, height, bytes(rgba))
+        cache[path] = decoded
+        return decoded
+    except (OSError, ValueError, struct.error, zlib.error) as error:
+        problems.append(f"{label} cannot be independently decoded: {error}")
+        return None
+
+
+def _verify_frame(
+    frame: Any, root: Path, label: str, problems: list[str]
+) -> Path | None:
+    if not isinstance(frame, dict):
+        problems.append(f"{label} must be an object")
+        return None
+    relative = frame.get("path")
+    expected_sha = str(frame.get("sha256", ""))
+    if not _nonempty_string(relative):
+        problems.append(f"{label}.path must be non-empty")
+        return None
+    if not _SHA256.fullmatch(expected_sha):
+        problems.append(f"{label}.sha256 must be a lowercase SHA-256")
+        return None
+    path = (root / relative).resolve()
+    if not path.is_relative_to(root):
+        problems.append(f"{label}.path leaves the evidence root")
+        return None
+    if not path.is_file():
+        problems.append(f"{label}.path does not exist: {relative}")
+        return None
+    actual_sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    if actual_sha != expected_sha:
+        problems.append(f"{label}.sha256 does not match {relative}")
+        return None
+    return path
+
+
+def _nonempty_string(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _manifest_requirements(
+    manifest: Any, candidate: Any, problems: list[str], *, include_window_actions: bool
+) -> tuple[set[str], set[tuple[str, str, str]], dict[str, tuple[float, float]], int | None]:
+    if not isinstance(manifest, dict):
+        problems.append("a frozen ControlSpec manifest is required")
+        return set(), set(), {}, None
+    window_id = candidate.get("window_id") if isinstance(candidate, dict) else None
+    windows = manifest.get("windows")
+    if not isinstance(windows, list):
+        problems.append("manifest.windows must be an array")
+        return set(), set(), {}, None
+    window = next(
+        (entry for entry in windows if isinstance(entry, dict) and entry.get("id") == window_id),
+        None,
+    )
+    if window is None or not isinstance(window.get("controls"), list):
+        problems.append("candidate window is absent from the frozen manifest")
+        return set(), set(), {}, None
+    manifest_policy_issue = None
+    evidence_policy = window.get("evidence_policy")
+    if evidence_policy is not None:
+        if not isinstance(evidence_policy, dict) \
+                or not isinstance(evidence_policy.get("issue"), int) \
+                or isinstance(evidence_policy.get("issue"), bool) \
+                or evidence_policy["issue"] <= 0:
+            problems.append(f"manifest evidence policy for {window_id} is malformed")
+        else:
+            manifest_policy_issue = evidence_policy["issue"]
+    controls: set[str] = set()
+    actions: set[tuple[str, str, str]] = set()
+    range_specs: dict[str, tuple[float, float]] = {}
+    # Window gestures are public bindings too. They use the Window id as the
+    # Play Log action owner but are not added to required_controls.
+    if include_window_actions:
+        for binding in window.get("actions", []):
+            if not isinstance(binding, dict):
+                problems.append(f"manifest action for {window_id} is malformed")
+                continue
+            key = (window_id, binding.get("gesture"), binding.get("action"))
+            if not all(_nonempty_string(value) for value in key):
+                problems.append(f"manifest action for {window_id} is malformed")
+                continue
+            actions.add(key)  # type: ignore[arg-type]
+    for control in window["controls"]:
+        if not isinstance(control, dict) or not _nonempty_string(control.get("id")):
+            problems.append("manifest contains a malformed control")
+            continue
+        control_id = control["id"]
+        bindings = control.get("actions", [])
+        # Read-only Controls such as Meter publish factual QA state but have no
+        # gesture to exercise. Coverage is action-complete, so inventing a
+        # synthetic action would make the Play Log less truthful.
+        if isinstance(bindings, list) and bindings:
+            controls.add(control_id)
+        value = control.get("value")
+        if control.get("type") == "Range" and isinstance(value, dict) \
+                and isinstance(value.get("minimum"), (int, float)) \
+                and isinstance(value.get("maximum"), (int, float)):
+            range_specs[control_id] = (float(value["minimum"]), float(value["maximum"]))
+        for binding in bindings:
+            if not isinstance(binding, dict):
+                problems.append(f"manifest action for {control_id} is malformed")
+                continue
+            key = (control_id, binding.get("gesture"), binding.get("action"))
+            if not all(_nonempty_string(value) for value in key):
+                problems.append(f"manifest action for {control_id} is malformed")
+                continue
+            actions.add(key)  # type: ignore[arg-type]
+    return controls, actions, range_specs, manifest_policy_issue
+
+
+def _invalid(problem: str) -> dict[str, Any]:
+    return {
+        "verdict": "INVALID",
+        "actions": 0,
+        "frames_verified": 0,
+        "unexercised": [],
+        "unexercised_actions": [],
+        "failures": [],
+        "problems": [problem],
+    }

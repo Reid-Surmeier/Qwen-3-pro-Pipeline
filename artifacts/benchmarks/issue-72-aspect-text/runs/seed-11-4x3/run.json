@@ -1,0 +1,40 @@
+{
+  "outputs": [
+    {
+      "bytes": 784816,
+      "file": "image-01.png",
+      "media_type": "image/png",
+      "sha256": "738b3e663f287a80f9f7672b6a4ffac54d7825ffef8c322a632dbba984817f55"
+    }
+  ],
+  "provenance": {
+    "arm": "4:3",
+    "client_request_id": "issue-72-seed-11-4x3-4003ce72deb7cfa6",
+    "issue": 72,
+    "model": "qwen/qwen-image-3-pro",
+    "provider": "openrouter",
+    "request_id": null,
+    "request_sha256": "4003ce72deb7cfa6269212fef7e519f16da99cef90b63ee7dbeaa9a002c9f208",
+    "seed": 11,
+    "source_sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d"
+  },
+  "usage": {
+    "completion_tokens": 4175,
+    "completion_tokens_details": {
+      "image_tokens": 4175,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.043,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.04,
+      "upstream_inference_cost": 0.043,
+      "upstream_inference_prompt_cost": 0.003
+    },
+    "is_byok": false,
+    "prompt_tokens": 372,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 4547
+  }
+}

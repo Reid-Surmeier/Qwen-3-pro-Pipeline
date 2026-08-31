@@ -1,0 +1,147 @@
+{
+  "pass": true,
+  "capture_size": [
+    1973,
+    1319
+  ],
+  "channel_tolerance": 2,
+  "max_changed_fraction": 0.002,
+  "regions": [
+    {
+      "window": "basic-info",
+      "rect": [
+        0,
+        0,
+        656,
+        286
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "bottom-bar",
+      "rect": [
+        0,
+        1252,
+        1973,
+        67
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "chat-room",
+      "rect": [
+        1256,
+        684,
+        694,
+        446
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "create-room",
+      "rect": [
+        1372,
+        226,
+        524,
+        448
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "guild",
+      "rect": [
+        10,
+        291,
+        695,
+        723
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "minimap",
+      "rect": [
+        1396,
+        0,
+        470,
+        214
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "party",
+      "rect": [
+        714,
+        316,
+        536,
+        490
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "pm",
+      "rect": [
+        86,
+        1014,
+        494,
+        266
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "trade",
+      "rect": [
+        656,
+        844,
+        592,
+        408
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "speech-bubble",
+      "rect": [
+        852,
+        42,
+        222,
+        120
+      ],
+      "changed_fraction": 0.0,
+      "max_delta": 0,
+      "passed": true
+    },
+    {
+      "window": "magenta-gutter",
+      "rect": [
+        704,
+        500,
+        12,
+        200
+      ],
+      "matching_fraction": 0.8333,
+      "passed": true
+    },
+    {
+      "window": "game-backdrop (informational)",
+      "changed_fraction": 0.02294,
+      "passed": true
+    }
+  ]
+}

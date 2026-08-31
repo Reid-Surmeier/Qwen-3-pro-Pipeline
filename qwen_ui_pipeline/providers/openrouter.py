@@ -5,6 +5,10 @@ from __future__ import annotations
 import json
 import base64
 import hashlib
+import http.client
+import math
+import os
+import socket
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -15,6 +19,62 @@ from ..prompt_manifest import compile_edit_brief
 
 DEFAULT_MODEL = "qwen/qwen-image-3-pro"
 DEFAULT_ENDPOINT = "https://openrouter.ai/api/v1/images"
+DEFAULT_TIMEOUT_SECONDS = 180
+
+
+class _KeepAliveHTTPSConnection(http.client.HTTPSConnection):
+    """HTTPS connection that sends TCP keepalive probes while idle.
+
+    An image edit can sit idle for minutes between the request and the
+    first response byte. Without keepalives a NAT or proxy in the path can
+    drop the idle mapping, and the finished (billed) response never reaches
+    the client, which then waits out the whole read timeout. curl enables
+    keepalives by default; urllib does not. Measured 2026-08-30: the same
+    224 s request completed via curl and hung for 900 s via plain urllib.
+    """
+
+    def connect(self):
+        super().connect()
+        sock = self.sock
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+        for name, value in (("TCP_KEEPIDLE", 30), ("TCP_KEEPINTVL", 15), ("TCP_KEEPCNT", 8)):
+            option = getattr(socket, name, None)
+            if option is not None:
+                sock.setsockopt(socket.IPPROTO_TCP, option, value)
+
+
+class _KeepAliveHTTPSHandler(urllib.request.HTTPSHandler):
+    def https_open(self, req):
+        return self.do_open(_KeepAliveHTTPSConnection, req, context=self._context)
+
+
+def keepalive_urlopen(request, *, timeout):
+    """urlopen equivalent whose HTTPS sockets send TCP keepalive probes."""
+    return urllib.request.build_opener(_KeepAliveHTTPSHandler()).open(request, timeout=timeout)
+
+
+def resolve_timeout_seconds() -> float:
+    """``QWEN_OPENROUTER_TIMEOUT_SECONDS`` overrides the client's default.
+
+    Unset, unparseable, non-positive or infinite values keep the default, so the
+    override can never disable the timeout.
+
+    This lives here, beside the default it overrides, because both entry points need
+    it. The ComfyUI node had it and the CLI did not, and the CLI is the path the icon
+    batches use: every call took the hard 180 s default, every generation slower than
+    that timed out client-side, and OpenRouter billed the finished image anyway.
+    Measured 2026-08-30 — $3.36 billed for images that were never delivered.
+    """
+    raw = os.environ.get("QWEN_OPENROUTER_TIMEOUT_SECONDS", "").strip()
+    if not raw:
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    try:
+        value = float(raw)
+    except ValueError:
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    if value <= 0 or not math.isfinite(value):
+        return float(DEFAULT_TIMEOUT_SECONDS)
+    return value
 
 
 class OpenRouterImageClient:
@@ -25,13 +85,22 @@ class OpenRouterImageClient:
         api_key: str,
         *,
         endpoint: str = DEFAULT_ENDPOINT,
-        opener: Callable[..., Any] = urllib.request.urlopen,
+        opener: Callable[..., Any] = keepalive_urlopen,
+        timeout: float = DEFAULT_TIMEOUT_SECONDS,
     ):
         if not api_key:
             raise ValueError("OpenRouter API key is required")
+        if (
+            isinstance(timeout, bool)
+            or not isinstance(timeout, (int, float))
+            or not math.isfinite(timeout)
+            or timeout <= 0
+        ):
+            raise ValueError("timeout must be a finite positive number of seconds")
         self._api_key = api_key
         self._endpoint = endpoint
         self._opener = opener
+        self._timeout = timeout
 
     def generate(self, request_body: Mapping[str, Any]) -> dict[str, Any]:
         body = json.dumps(dict(request_body)).encode("utf-8")
@@ -46,7 +115,7 @@ class OpenRouterImageClient:
             },
         )
         try:
-            with self._opener(request, timeout=180) as response:
+            with self._opener(request, timeout=self._timeout) as response:
                 payload = json.loads(response.read())
         except urllib.error.HTTPError as error:
             detail = ""

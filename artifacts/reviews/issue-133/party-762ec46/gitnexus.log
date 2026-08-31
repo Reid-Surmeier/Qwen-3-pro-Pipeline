@@ -1,0 +1,23 @@
+
+  GitNexus Analyzer
+
+[2K  Skipped 3 large files (>512KB, likely generated/vendored)
+[2K  - artifacts/reviews/issue-132/basic-info-872ad22/godot-qa-report.json
+[2K  - artifacts/reviews/issue-133/party-3bf128a/image79-contracts.json
+[2K  - godot/web/index.pck
+[2K  Set GITNEXUS_MAX_FILE_SIZE=<KB> to include files above the default cap.
+{"level":40,"time":1788168803979,"name":"gitnexus","msg":"[scope-resolution] 117 property read/write site(s) name a field that IS defined in this workspace, but only in another language, so per-language inference declined to link them. Queries for these fields return an empty result that does NOT mean \"unused\" — it means the definition anchor is in a different language. Affected: root (javascript), background (python), controls (python), details (python), item_values (python), output (python), parameters (python), passed (python), prompt (python), reason (python), …"}
+{"level":40,"time":1788168804050,"name":"gitnexus","truncation":{"truncated":true,"entryPointCandidatesDropped":301,"entryPointsUnexplored":0,"walksCutByBudget":6,"tracesDepthCapped":0,"calleesDropped":212,"processesDropped":0},"msg":"[processes] 284 flows reported, but whole flows are MISSING: 301 of 501 candidate entry point(s) never ranked in, 0 ranked entry point(s) never traced, 0 deduplicated flow(s) dropped at maxProcesses, 0 trace(s) cut at maxTraceDepth, 212 callee(s) skipped at maxBranching, 6 walk(s) cut by the per-entry trace budget. An absent flow does NOT mean the code path does not exist."}
+[2KIncremental: changed=17, added=30, deleted=0 (skipping wipe + 3259 unchanged file rows preserved)
+[2KFTS index build failed (missing indexes after build: File.file_fts) — keyword search degraded this run. Graph and embeddings analysis completed successfully. Run `gitnexus analyze --repair-fts` to retry.
+[2KParse cache: pruned 1 stale chunk entries
+
+  Repository indexed successfully (31.6s)
+
+  9,261 nodes | 15,488 edges | 208 clusters | 284 flows
+  /home/reidsurmeier/orca/workspaces/Qwen-3-pro-Pipeline/issue-133-party
+
+  Warning: full-text/BM25 search is disabled — the search index build failed this run.
+  The FTS extension is available; rerun `gitnexus analyze --repair-fts`. If it persists,
+  check the disk for space or corruption. Run `gitnexus doctor` for details.
+

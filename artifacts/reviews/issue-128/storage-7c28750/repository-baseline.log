@@ -1,0 +1,161 @@
+==> python unit tests
+..................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 242 tests in 3.012s
+
+OK
+/tmp/tmpjm4yjn84/workflow.json
+{
+  "output_directory": "/tmp/tmpi4tjcan8/run",
+  "outputs": [
+    {
+      "file": "image-01.png",
+      "media_type": "image/png",
+      "bytes": 6,
+      "sha256": "f6a214f7a5fcda0c2cee9660b7fc29f5649e3c68aad48e20e950137c98913a68"
+    }
+  ],
+  "usage": {},
+  "provenance": {
+    "provider": "alibaba",
+    "prompt_id": "prompt-123",
+    "source_url": "https://example.com/reference.png",
+    "figma_file_key": "figma-key",
+    "reference_sha256": "52367a6622b19f08825e915fad80c542ad4f4c34dbcebad9f5007994b3e39208"
+  }
+}
+completed seed 11 at 4:3; cost $0.043000
+prepared Issue #72: four inherited outputs, four new requests maximum
+prepared Issue #72: four inherited outputs, four new requests maximum
+==> python unit tests: ok
+==> node tests
+TAP version 13
+# Subtest: SSE parser returns the JSON-RPC payload
+ok 1 - SSE parser returns the JSON-RPC payload
+  ---
+  duration_ms: 0.931087
+  type: 'test'
+  ...
+# Subtest: resultText joins only text content blocks
+ok 2 - resultText joins only text content blocks
+  ---
+  duration_ms: 0.147228
+  type: 'test'
+  ...
+# Subtest: upload URL extraction ignores commit URLs and deduplicates
+ok 3 - upload URL extraction ignores commit URLs and deduplicates
+  ---
+  duration_ms: 0.32824
+  type: 'test'
+  ...
+# Subtest: upload URL extraction accepts current Figma MCP submit URLs
+ok 4 - upload URL extraction accepts current Figma MCP submit URLs
+  ---
+  duration_ms: 0.136708
+  type: 'test'
+  ...
+# Subtest: content types cover supported UI asset formats
+ok 5 - content types cover supported UI asset formats
+  ---
+  duration_ms: 0.349169
+  type: 'test'
+  ...
+# Subtest: upload commit parsing keeps only non-secret placement details
+ok 6 - upload commit parsing keeps only non-secret placement details
+  ---
+  duration_ms: 0.194807
+  type: 'test'
+  ...
+# Subtest: session grid is deterministic row-major with a white grouping boundary
+ok 7 - session grid is deterministic row-major with a white grouping boundary
+  ---
+  duration_ms: 0.385728
+  type: 'test'
+  ...
+# Subtest: session grid preserves native dimensions and sizes rows and columns to fit
+ok 8 - session grid preserves native dimensions and sizes rows and columns to fit
+  ---
+  duration_ms: 0.112472
+  type: 'test'
+  ...
+# Subtest: large sessions retain one native-size placement per source image
+ok 9 - large sessions retain one native-size placement per source image
+  ---
+  duration_ms: 0.414332
+  type: 'test'
+  ...
+# Subtest: delivery geometry options reject overlap and invalid screenshot bounds
+ok 10 - delivery geometry options reject overlap and invalid screenshot bounds
+  ---
+  duration_ms: 0.273787
+  type: 'test'
+  ...
+# Subtest: PNG dimensions are read without rewriting the image
+ok 11 - PNG dimensions are read without rewriting the image
+  ---
+  duration_ms: 0.184268
+  type: 'test'
+  ...
+# Subtest: run outputs remain ordered and cannot escape their run directory
+ok 12 - run outputs remain ordered and cannot escape their run directory
+  ---
+  duration_ms: 0.176112
+  type: 'test'
+  ...
+# Subtest: FigJam frame discovery recovers upload order from live geometry
+ok 13 - FigJam frame discovery recovers upload order from live geometry
+  ---
+  duration_ms: 0.239332
+  type: 'test'
+  ...
+# Subtest: Figma public-client exchange honors the registered none auth method
+ok 14 - Figma public-client exchange honors the registered none auth method
+  ---
+  duration_ms: 0.559376
+  type: 'test'
+  ...
+# Subtest: known-working legacy exchange uses Basic auth and omits resource
+ok 15 - known-working legacy exchange uses Basic auth and omits resource
+  ---
+  duration_ms: 0.167676
+  type: 'test'
+  ...
+# Subtest: authorization URL binds Figma MCP, PKCE, callback, and state
+ok 16 - authorization URL binds Figma MCP, PKCE, callback, and state
+  ---
+  duration_ms: 0.219484
+  type: 'test'
+  ...
+# Subtest: Codex credentials are merged without persisting the registration secret
+ok 17 - Codex credentials are merged without persisting the registration secret
+  ---
+  duration_ms: 5.839562
+  type: 'test'
+  ...
+# Subtest: Figma registration returns and preserves the server-declared auth method
+ok 18 - Figma registration returns and preserves the server-declared auth method
+  ---
+  duration_ms: 1.732219
+  type: 'test'
+  ...
+# Subtest: callback identity matches Codex for the hosted Figma MCP URL
+ok 19 - callback identity matches Codex for the hosted Figma MCP URL
+  ---
+  duration_ms: 0.158509
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 60.933773
+==> node tests: ok
+==> python compilation
+==> python compilation: ok
+==> git diff --check
+==> git diff --check: ok
+verification passed

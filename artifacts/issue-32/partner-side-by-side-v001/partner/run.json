@@ -1,0 +1,42 @@
+{
+  "outputs": [
+    {
+      "bytes": 895937,
+      "file": "image-01.png",
+      "media_type": "image/png",
+      "sha256": "8490e9e0a94a0df986057215b4b64d8ec48480d73d37d7f24ac5d21bdf542e8b"
+    }
+  ],
+  "provenance": {
+    "attempt_id": "issue32-partner-20260827T022035Z-e5572fa9",
+    "code_base_commit": "1b600571a36dc4671efaafabe374216b1afc3357",
+    "full_request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+    "interface": "Partner request-construction path",
+    "issue": 32,
+    "model": "qwen/qwen-image-3-pro",
+    "provider": "openrouter",
+    "reference_node_encoding_sha256": "ff7e892704714317cc365c0e96acf0355a14b29eb0ebf2f9beb254539a59f59f",
+    "source_path": "artifacts/references/plantstudio-main-window.png",
+    "source_sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d",
+    "submission_method": "direct OpenRouter client using the proven Partner-path request"
+  },
+  "usage": {
+    "completion_tokens": 4175,
+    "completion_tokens_details": {
+      "image_tokens": 4175,
+      "reasoning_tokens": 0
+    },
+    "cost": 0.043,
+    "cost_details": {
+      "upstream_inference_completions_cost": 0.04,
+      "upstream_inference_cost": 0.043,
+      "upstream_inference_prompt_cost": 0.003
+    },
+    "is_byok": false,
+    "prompt_tokens": 86,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 4261
+  }
+}

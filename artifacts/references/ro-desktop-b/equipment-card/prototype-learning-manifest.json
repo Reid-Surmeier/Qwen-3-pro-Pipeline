@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "issue": 129,
+  "prototype_disposition": "throwaway",
+  "reference": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024],
+    "window_rect": {"x": 1108, "y": 0, "width": 424, "height": 290}
+  },
+  "behaviour_cards": [
+    {
+      "id": "equipment-card-window",
+      "gestures": ["Drag", "KeyCommand"],
+      "actions": ["MoveWindow", "CloseWindow"],
+      "response_frames": 1,
+      "reversible": true
+    },
+    {
+      "id": "equipment-card-minimize",
+      "gesture": "Activate",
+      "action": "ToggleMinimized",
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Use a purpose-built 424x28 title form; restore the prior position and detail state."
+    },
+    {
+      "id": "equipment-card-unattested-scroll",
+      "gestures": ["Wheel", "Activate", "Drag"],
+      "actions": ["ScrollEquipmentCard", "StepEquipmentCardScroll", "SetEquipmentCardScrollOffset"],
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Image 79 shows the first card detail and scrollbar but no continuation pixels. Every continuation gesture returns VisualAuthorityError and changes no state or pixels."
+    }
+  ],
+  "state_set_decisions": {
+    "window": ["expanded", "minimized"],
+    "chrome": ["idle", "hover", "pressed"],
+    "scroll": ["at_start", "between", "at_end", "dragging"],
+    "detail": {"id": "mistress-card", "source_attested": true,
+               "continuation_available": false}
+  },
+  "gesture_capabilities": ["Activate", "Drag", "Wheel", "KeyCommand"],
+  "implementation_rule": "Retain this packet and source-owned State Sets; discard prototype code before production implementation.",
+  "provider_requests": 0
+}

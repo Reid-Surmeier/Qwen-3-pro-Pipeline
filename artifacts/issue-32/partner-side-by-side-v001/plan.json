@@ -1,0 +1,39 @@
+{
+  "arms": [
+    {
+      "name": "legacy Edit Brief JSON node",
+      "requested_outputs": 1
+    },
+    {
+      "name": "Partner-compatible visible-control node",
+      "requested_outputs": 1
+    }
+  ],
+  "aspect_ratio": "1:1",
+  "estimated_cost_usd": 0.083,
+  "full_request_sha256": "e5572fa96ce00b7dc65a8c2dcdb33470ee7f600252e994a1cf6191dd9b3bc072",
+  "human_visual_approval": "required",
+  "issue": 32,
+  "model": "qwen/qwen-image-3-pro",
+  "paid_ci": false,
+  "prompt": "Using Image 1, keep the complete PlantStudio interface and all existing pixel-art controls unchanged. Change only the blue title bar text from PlantStudio - Library of wildflowers (11 plants) to Partner Compatibility Test. Center the complete unchanged window on a plain light-gray square canvas without cropping or adding elements.",
+  "provider": "openrouter",
+  "reference_node_encoding_sha256": "ff7e892704714317cc365c0e96acf0355a14b29eb0ebf2f9beb254539a59f59f",
+  "reference_node_encodings_identical": true,
+  "requested_outputs": 2,
+  "resolution": "1K",
+  "sanitized_requests_identical": true,
+  "seed": 2026082632,
+  "source": {
+    "bytes": 12853,
+    "mode": "P",
+    "path": "artifacts/references/plantstudio-main-window.png",
+    "role": "immutable PlantStudio reference",
+    "sha256": "c9ddeaa3cd27d0d5b502710ad12bc8f810529339c87b97a289b6d6932df8f45d",
+    "size": [
+      474,
+      403
+    ]
+  },
+  "stop_rule": "Stop after one output per arm; never retry an ambiguous call."
+}

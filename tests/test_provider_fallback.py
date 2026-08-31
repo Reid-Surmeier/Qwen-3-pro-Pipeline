@@ -20,6 +20,11 @@ class _WorkingAlibaba:
         return {"data": [{"b64_json": "aW1hZ2U=", "media_type": "image/png"}]}
 
 
+class _UnexpectedAlibaba:
+    def generate(self, _request):
+        raise AssertionError("explicit OpenRouter requests must not fall back")
+
+
 class ProviderFallbackTests(unittest.TestCase):
     def test_auto_falls_back_only_for_openrouter_privacy_guardrail_block(self):
         alibaba = _WorkingAlibaba()
@@ -38,6 +43,21 @@ class ProviderFallbackTests(unittest.TestCase):
 
         self.assertEqual(result.provider, "alibaba")
         self.assertEqual(alibaba.request["model"], "qwen-image-3.0-pro")
+
+    def test_explicit_openrouter_never_falls_back_after_a_provider_error(self):
+        brief = {
+            "provider": "openrouter",
+            "objective": "Render a monochrome interface.",
+            "output": {"resolution": "1K", "aspect_ratio": "1:1", "count": 1},
+        }
+
+        with self.assertRaisesRegex(RuntimeError, "guardrail restrictions"):
+            generate_with_provider(
+                brief,
+                reference_urls=[],
+                openrouter_client=_BlockedOpenRouter(),
+                alibaba_client=_UnexpectedAlibaba(),
+            )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/schemas/fidelity-contract.schema.json",
+  "title": "Fidelity contract",
+  "description": "Declares the approved canvas and every rectangle a Render Pass is licensed to change. Any pixel outside every declared region must remain byte identical to the approved baseline.",
+  "type": "object",
+  "required": ["width", "height", "approvedBaseline", "mutableRegions"],
+  "additionalProperties": false,
+  "properties": {
+    "width": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "Canvas width in pixels. Candidate and baseline must both match it."
+    },
+    "height": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "Canvas height in pixels."
+    },
+    "approvedBaseline": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to the approved baseline image this contract judges against."
+    },
+    "mutableRegions": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Rectangles licensed to change. Regions must not overlap, so every changed pixel is attributable to exactly one region.",
+      "items": {
+        "type": "object",
+        "required": ["name", "x", "y", "width", "height"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Unique, human-readable name for the licensed change."
+          },
+          "x": { "type": "integer", "minimum": 0 },
+          "y": { "type": "integer", "minimum": 0 },
+          "width": { "type": "integer", "exclusiveMinimum": 0 },
+          "height": { "type": "integer", "exclusiveMinimum": 0 }
+        }
+      }
+    }
+  }
+}

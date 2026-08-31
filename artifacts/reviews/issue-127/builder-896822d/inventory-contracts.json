@@ -1,0 +1,97 @@
+{
+  "failed": 0,
+  "results": [
+    {
+      "detail": "[{ \"ok\": true, \"action\": \"SelectInventoryTab\", \"value\": \"equip\", \"semantic_state\": \"ready\", \"gesture\": \"Activate\" }, { \"id\": \"inventory.tabs\", \"type\": \"Tabs\", \"interaction_phase\": \"idle\", \"active_surface\": \"equip\", \"semantic_state\": \"ready\", \"last_action\": \"SelectInventoryTab\", \"last_gesture\": \"Activate\", \"last_error\": <null>, \"geometry\": {  }, \"visible\": true, \"z_index\": 0, \"rendered\": false, \"text\": \"equip\", \"last_result\": { \"accepted\": true, \"action\": \"SelectInventoryTab\", \"error\": <null> }, &\"value\": \"equip\" }]",
+      "passed": true,
+      "test": "tabs-route-declared-action"
+    },
+    {
+      "detail": "[{ \"id\": \"inventory.items\", \"type\": \"SelectionView\", \"interaction_phase\": \"idle\", \"active_surface\": \"\", \"semantic_state\": \"unselected\", \"last_action\": \"\", \"last_gesture\": \"\", \"last_error\": <null>, \"geometry\": {  }, \"visible\": true, \"z_index\": 0, \"rendered\": false, \"text\": \"r0c0\", \"last_result\": { \"accepted\": false, \"action\": \"\", \"error\": <null> }, &\"value\": \"r0c0\", &\"selected_items\": [], &\"opened_item\": \"\", &\"item_values\": { \"r0c0\": \"r0c0\", \"r0c1\": \"r0c1\", \"r0c2\": \"r0c2\" }, &\"item_version\": 0, &\"drag_state\": { \"active\": false, \"source\": \"\", \"target\": \"\", \"motion_samples\": 0 } }, \"unselected-idle\"]",
+      "passed": true,
+      "test": "idle-selection-surface-is-unselected"
+    },
+    {
+      "detail": "[{ \"ok\": true, \"action\": \"SelectInventoryItem\", \"value\": \"r0c1\", \"semantic_state\": \"selected\", \"gesture\": \"Activate\" }, { \"ok\": true, \"action\": \"OpenInventoryItem\", \"value\": \"r0c2\", \"semantic_state\": \"selected\", \"gesture\": \"DoubleActivate\" }, { \"id\": \"inventory.items\", \"type\": \"SelectionView\", \"interaction_phase\": \"idle\", \"active_surface\": \"r0c2\", \"semantic_state\": \"selected\", \"last_action\": \"OpenInventoryItem\", \"last_gesture\": \"DoubleActivate\", \"last_error\": <null>, \"geometry\": {  }, \"visible\": true, \"z_index\": 0, \"rendered\": false, \"text\": \"r0c2\", \"last_result\": { \"accepted\": true, \"action\": \"OpenInventoryItem\", \"error\": <null> }, &\"value\": \"r0c2\", &\"selected_items\": [], &\"opened_item\": \"r0c2\", &\"item_values\": { \"r0c0\": \"r0c0\", \"r0c1\": \"r0c1\", \"r0c2\": \"r0c2\" }, &\"item_version\": 0, &\"drag_state\": { \"active\": false, \"source\": \"\", \"target\": \"\", \"motion_samples\": 0 } }]",
+      "passed": true,
+      "test": "selection-and-double-open"
+    },
+    {
+      "detail": "[{ \"ok\": true, \"action\": \"ToggleInventorySelection\", \"value\": \"r0c1\", \"semantic_state\": \"selected\", \"gesture\": \"ModifierActivate\" }, [\"r0c1\"], { \"ok\": true, \"action\": \"ToggleInventorySelection\", \"value\": \"r0c1\", \"semantic_state\": \"selected\", \"gesture\": \"ModifierActivate\" }, []]",
+      "passed": true,
+      "test": "modifier-selection-reverses"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"expected modifiers [\\\"ctrl\\\"], received [\\\"alt\\\"]\" } }",
+      "passed": true,
+      "test": "invalid-modifier-preserves-state"
+    },
+    {
+      "detail": "[{ \"ok\": true, \"action\": \"MoveInventoryItem\", \"value\": \"r0c1\", \"source\": \"r0c0\", \"target\": \"r0c1\", \"item_version\": 1, \"semantic_state\": \"selected\", \"gesture\": \"DragDrop\" }, { \"id\": \"inventory.items\", \"type\": \"SelectionView\", \"interaction_phase\": \"idle\", \"active_surface\": \"r0c1\", \"semantic_state\": \"selected\", \"last_action\": \"MoveInventoryItem\", \"last_gesture\": \"DragDrop\", \"last_error\": <null>, \"geometry\": {  }, \"visible\": true, \"z_index\": 0, \"rendered\": false, \"text\": \"r0c1\", \"last_result\": { \"accepted\": true, \"action\": \"MoveInventoryItem\", \"error\": <null> }, &\"value\": \"r0c1\", &\"selected_items\": [], &\"opened_item\": \"\", &\"item_values\": { \"r0c0\": \"r0c1\", \"r0c1\": \"r0c0\", \"r0c2\": \"r0c2\" }, &\"item_version\": 1, &\"drag_state\": { \"active\": false, \"source\": \"\", \"target\": \"\", \"motion_samples\": 0 } }]",
+      "passed": true,
+      "test": "drag-drop-swaps-once"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop does not accept modifiers: [\\\"alt\\\"]\" } }",
+      "passed": true,
+      "test": "modified-drag-drop-alt-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop does not accept modifiers: [\\\"shift\\\"]\" } }",
+      "passed": true,
+      "test": "modified-drag-drop-shift-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop does not accept modifiers: [\\\"meta\\\"]\" } }",
+      "passed": true,
+      "test": "modified-drag-drop-meta-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop does not accept modifiers: [\\\"ctrl\\\"]\" } }",
+      "passed": true,
+      "test": "modified-drag-drop-ctrl-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop does not accept modifiers: [\\\"ctrl\\\", \\\"shift\\\"]\" } }",
+      "passed": true,
+      "test": "modified-drag-drop-ctrl-shift-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop modifiers must be an array\" } }",
+      "passed": true,
+      "test": "malformed-drag-drop-modifier-alt-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop modifiers must be an array\" } }",
+      "passed": true,
+      "test": "malformed-drag-drop-modifier-{ \"alt\": true }-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidModifierError\", \"detail\": \"DragDrop modifiers must be an array\" } }",
+      "passed": true,
+      "test": "malformed-drag-drop-modifier-<null>-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidDropTargetError\", \"detail\": \"source and target must be distinct SelectionView items\" } }",
+      "passed": true,
+      "test": "same-item-drop-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"InvalidDropTargetError\", \"detail\": \"source and target must be declared SelectionView items\" } }",
+      "passed": true,
+      "test": "invalid-drop-preserves-state"
+    },
+    {
+      "detail": "{ \"ok\": false, \"error\": { \"code\": \"GestureConflictError\", \"detail\": \"item version changed during DragDrop\" } }",
+      "passed": true,
+      "test": "gesture-conflict-preserves-state"
+    },
+    {
+      "detail": "{ \"id\": \"inventory.items\", \"type\": \"SelectionView\", \"interaction_phase\": \"idle\", \"active_surface\": \"r0c1\", \"semantic_state\": \"selected\", \"last_action\": \"ToggleInventorySelection\", \"last_gesture\": \"ModifierActivate\", \"last_error\": <null>, \"geometry\": {  }, \"visible\": true, \"z_index\": 0, \"rendered\": false, \"text\": \"r0c2\", \"last_result\": { \"accepted\": true, \"action\": \"ToggleInventorySelection\", \"error\": <null> }, &\"value\": \"r0c2\", &\"selected_items\": [\"r0c1\"], &\"opened_item\": \"\", &\"item_values\": { \"r0c0\": \"r0c0\", \"r0c1\": \"r0c1\", \"r0c2\": \"r0c2\" }, &\"item_version\": 0, &\"drag_state\": { \"active\": false, \"source\": \"\", \"target\": \"\", \"motion_samples\": 0 } }",
+      "passed": true,
+      "test": "inventory-qa-state"
+    }
+  ],
+  "suite": "inventory-runtime",
+  "total": 18
+}

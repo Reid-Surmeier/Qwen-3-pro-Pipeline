@@ -1,0 +1,1036 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 134,
+    "commit_sha": "ac212a1d955d8a1e0daec5284903530f734246f3",
+    "window_id": "system_menu"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "source_pixel_metric": {
+    "changed_pixels": 0,
+    "candidate_frame": {
+      "path": "00-idle.png",
+      "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+    },
+    "source_plate": "res://assets/image-79/system-menu/source-plate.png"
+  },
+  "required_controls": [
+    "system_menu.minimize",
+    "system_menu.save_point",
+    "system_menu.character_select",
+    "system_menu.sound_settings",
+    "system_menu.environment_settings",
+    "system_menu.shortcuts",
+    "system_menu.game_exit",
+    "system_menu.return_to_game"
+  ],
+  "required_actions": [
+    {
+      "control_id": "system_menu",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "system_menu",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "system_menu.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "system_menu.save_point",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.character_select",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.sound_settings",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.environment_settings",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.shortcuts",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.game_exit",
+      "gesture": "Activate",
+      "window_action": "OpenWindow"
+    },
+    {
+      "control_id": "system_menu.return_to_game",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "zz-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "system_menu.save_point",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"transaction\":{\"control_id\":\"system_menu.save_point\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: save_point\"},\"ok\":false,\"source_window\":\"system_menu\"},\"control\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":188,\"x\":1336,\"y\":536},\"id\":\"system_menu.save_point\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: save_point\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: save_point\"}},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "destination_unavailable": true,
+        "adapter_state_immutable": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "save_point-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "save_point-hover.png",
+          "sha256": "ce069a1f1854ff3bb9ea92ecc487b9fea77990e88af9753a84c1d91ebf81b8df"
+        },
+        "mid": {
+          "path": "save_point-mid.png",
+          "sha256": "1f1b36d504a535ac5ef9ba4dff97c0d278e1aef91ed682b7ce2c9351730ab602"
+        },
+        "after": {
+          "path": "save_point-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "save_point-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 5076,
+        "intended_region_changed_pixels": 5076,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "system_menu.character_select",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"transaction\":{\"control_id\":\"system_menu.character_select\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: character_select\"},\"ok\":false,\"source_window\":\"system_menu\"},\"control\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":188,\"x\":1336,\"y\":570},\"id\":\"system_menu.character_select\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: character_select\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: character_select\"}},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "destination_unavailable": true,
+        "adapter_state_immutable": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "character_select-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "character_select-hover.png",
+          "sha256": "224fce47c1863c5644d77d403254ff2cc924315751a0ac7abba77c164d411f6b"
+        },
+        "mid": {
+          "path": "character_select-mid.png",
+          "sha256": "f04f181897c57c871a4960f8763044dd9153777e13bd2dd0d9950858084c2e94"
+        },
+        "after": {
+          "path": "character_select-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "character_select-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 5073,
+        "intended_region_changed_pixels": 5073,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "system_menu.environment_settings",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"transaction\":{\"control_id\":\"system_menu.environment_settings\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: environment_settings\"},\"ok\":false,\"source_window\":\"system_menu\"},\"control\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":188,\"x\":1336,\"y\":638},\"id\":\"system_menu.environment_settings\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: environment_settings\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: environment_settings\"}},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "destination_unavailable": true,
+        "adapter_state_immutable": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "environment_settings-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "environment_settings-hover.png",
+          "sha256": "bc1a74cd57e4b354c46ccc10b75bbed67b24d660e2c87dc9362bcc6edc99edc5"
+        },
+        "mid": {
+          "path": "environment_settings-mid.png",
+          "sha256": "886e61d9c3ca114fe04dad38b6730f77976f298f9ba092083480133dc44dd1d6"
+        },
+        "after": {
+          "path": "environment_settings-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "environment_settings-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 5075,
+        "intended_region_changed_pixels": 5075,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "system_menu.shortcuts",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"transaction\":{\"control_id\":\"system_menu.shortcuts\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: shortcut_settings\"},\"ok\":false,\"source_window\":\"system_menu\"},\"control\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":188,\"x\":1336,\"y\":672},\"id\":\"system_menu.shortcuts\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: shortcut_settings\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: shortcut_settings\"}},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "destination_unavailable": true,
+        "adapter_state_immutable": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "shortcuts-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "shortcuts-hover.png",
+          "sha256": "aced9aa45dcccb4977a41c8874e66b4cab7c6a39c17878e8e8ea7b2fc5025d6d"
+        },
+        "mid": {
+          "path": "shortcuts-mid.png",
+          "sha256": "ebb9449174f5d3dd23812946ba943c7078f86dac4b14f8e38568e98de296faa0"
+        },
+        "after": {
+          "path": "shortcuts-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "shortcuts-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 5075,
+        "intended_region_changed_pixels": 5075,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "system_menu.game_exit",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"transaction\":{\"control_id\":\"system_menu.game_exit\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: game_exit\"},\"ok\":false,\"source_window\":\"system_menu\"},\"control\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":188,\"x\":1336,\"y\":706},\"id\":\"system_menu.game_exit\",\"interaction_phase\":\"idle\",\"last_action\":\"OpenWindow\",\"last_error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: game_exit\"},\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"ActionRoutingError\",\"detail\":\"destination Window is not declared: game_exit\"}},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"value\":null,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "named_rejection": true,
+        "destination_unavailable": true,
+        "adapter_state_immutable": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "game_exit-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "game_exit-hover.png",
+          "sha256": "ae835c8220d4043f53cdef909fc1ab1654343114b4b732d8a9f774cacfbc16b8"
+        },
+        "mid": {
+          "path": "game_exit-mid.png",
+          "sha256": "55a59237c831a2f5942f056ad04cc641b202ee4147661d7b7194ff635546a02c"
+        },
+        "after": {
+          "path": "game_exit-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "game_exit-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 5071,
+        "intended_region_changed_pixels": 5071,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "system_menu.sound_settings",
+      "gesture": "Activate",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"control_id\":\"system_menu.sound_settings\",\"ok\":true,\"position_after\":[1108,297],\"position_before\":[1108,297],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"system_menu\",\"target_window\":\"options\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "options_visible": true,
+        "position_preserved": true,
+        "semantic_state_preserved": true,
+        "routed_to_options": true,
+        "one_adapter_version": true,
+        "hover_phase": true,
+        "pressed_phase": true,
+        "control_settled": true
+      },
+      "frames": {
+        "before": {
+          "path": "sound-before.png",
+          "sha256": "2931c99142154b6aa2526e9b9166c68d4f6e65a64df05101593d9eb330178094"
+        },
+        "hover": {
+          "path": "sound-hover.png",
+          "sha256": "3dc7a5f786865e2745e9ee14fd33f3be56b3406cf0f2f3c1fc318c4098c66065"
+        },
+        "mid": {
+          "path": "sound-mid.png",
+          "sha256": "bd769e200e18f757ab63d4bc9a58e5b68309ba1d8cb433f8dc526251b68e3f72"
+        },
+        "after": {
+          "path": "sound-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "sound-reversed.png",
+          "sha256": "2931c99142154b6aa2526e9b9166c68d4f6e65a64df05101593d9eb330178094"
+        }
+      },
+      "intended_region": {
+        "x": 1108,
+        "y": 297,
+        "width": 424,
+        "height": 202
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 85648,
+        "intended_region_changed_pixels": 85648,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "system_menu.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"system_menu\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":true,\"pending\":false,\"plate_asset\":\"res://assets/image-79/system-menu/minimized-plate.png\",\"position\":[1328,505],\"resize\":{\"active\":false,\"clamped\":[204,273],\"motion_samples\":0,\"requested\":[204,273],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[204,27],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "minimized": true,
+        "distinct_top_window": true,
+        "source_width_preserved": true,
+        "minimized_height": true,
+        "restored": true,
+        "hover_phase": true,
+        "pressed_phase": true
+      },
+      "frames": {
+        "before": {
+          "path": "minimize-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "minimize-hover.png",
+          "sha256": "72b9893665e2ff68b47a24709e429ef9f69abba20f6192a0cca8b8134d705f81"
+        },
+        "mid": {
+          "path": "minimize-mid.png",
+          "sha256": "3e3078b5c64c65b3eb31585dff3f54d06f4b2ae3e98a92dd9a4523d255cffd01"
+        },
+        "after": {
+          "path": "minimize-after.png",
+          "sha256": "ac620034469727169dc87c280c17b3c823009d04b02279eb68eb641add03c06d"
+        },
+        "restored": {
+          "path": "minimize-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "minimize-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 50184,
+        "intended_region_changed_pixels": 50184,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "system_menu",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"system_menu\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/system-menu/source-plate.png\",\"position\":[1228,405],\"resize\":{\"active\":false,\"clamped\":[204,273],\"motion_samples\":0,\"requested\":[204,273],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[204,273],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved": true,
+        "continuous_samples": true,
+        "restored_home": true
+      },
+      "frames": {
+        "before": {
+          "path": "drag-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "mid": {
+          "path": "drag-mid.png",
+          "sha256": "3492f28b62c0d8328476d42584fd0876bff5ccd4135c7d7435451e4edac4380f"
+        },
+        "after": {
+          "path": "drag-after.png",
+          "sha256": "73f5bb534e135ca2181ba3ad38f943b7ba870ca3fd5bfc61871e61514dd84200"
+        },
+        "reversed": {
+          "path": "drag-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 86585,
+        "intended_region_changed_pixels": 55490,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1400,
+          517
+        ],
+        [
+          1396.6666666666667,
+          513.6666666666666
+        ],
+        [
+          1393.3333333333333,
+          510.3333333333333
+        ],
+        [
+          1390,
+          507
+        ],
+        [
+          1386.6666666666667,
+          503.6666666666667
+        ],
+        [
+          1383.3333333333333,
+          500.3333333333333
+        ],
+        [
+          1380,
+          497
+        ],
+        [
+          1376.6666666666667,
+          493.6666666666667
+        ],
+        [
+          1373.3333333333333,
+          490.3333333333333
+        ],
+        [
+          1370,
+          487
+        ],
+        [
+          1366.6666666666667,
+          483.6666666666667
+        ],
+        [
+          1363.3333333333333,
+          480.3333333333333
+        ],
+        [
+          1360,
+          477
+        ],
+        [
+          1356.6666666666667,
+          473.6666666666667
+        ],
+        [
+          1353.3333333333333,
+          470.3333333333333
+        ],
+        [
+          1350,
+          467
+        ],
+        [
+          1346.6666666666667,
+          463.6666666666667
+        ],
+        [
+          1343.3333333333333,
+          460.3333333333333
+        ],
+        [
+          1340,
+          457
+        ],
+        [
+          1336.6666666666667,
+          453.6666666666667
+        ],
+        [
+          1333.3333333333333,
+          450.3333333333333
+        ],
+        [
+          1330,
+          447
+        ],
+        [
+          1326.6666666666667,
+          443.6666666666667
+        ],
+        [
+          1323.3333333333333,
+          440.3333333333333
+        ],
+        [
+          1320,
+          437
+        ],
+        [
+          1316.6666666666667,
+          433.6666666666667
+        ],
+        [
+          1313.3333333333333,
+          430.3333333333333
+        ],
+        [
+          1310,
+          427
+        ],
+        [
+          1306.6666666666667,
+          423.6666666666667
+        ],
+        [
+          1303.3333333333333,
+          420.3333333333333
+        ],
+        [
+          1300,
+          417
+        ]
+      ]
+    },
+    {
+      "control_id": "system_menu.return_to_game",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"system_menu\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/system-menu/source-plate.png\",\"position\":[1328,505],\"resize\":{\"active\":false,\"clamped\":[204,273],\"motion_samples\":0,\"requested\":[204,273],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[204,273],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "hover_phase": true,
+        "pressed_phase": true
+      },
+      "frames": {
+        "before": {
+          "path": "return-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "hover": {
+          "path": "return-hover.png",
+          "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+        },
+        "mid": {
+          "path": "return-mid.png",
+          "sha256": "ff1823a5e84e0a0d02829522f02f0c8713469cfcc1f406dbf14edc4dabe48c4f"
+        },
+        "after": {
+          "path": "return-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "return-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 55692,
+        "intended_region_changed_pixels": 55692,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "options",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"options\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/options/clean-plate.png\",\"position\":[1108,297],\"resize\":{\"active\":false,\"clamped\":[424,202],\"motion_samples\":0,\"requested\":[424,202],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[424,202],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "options_hidden": true,
+        "options_focused_path": true,
+        "system_menu_unchanged": true,
+        "unrelated_windows_unchanged": true
+      },
+      "frames": {
+        "before": {
+          "path": "options-escape-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "after": {
+          "path": "options-escape-after.png",
+          "sha256": "2931c99142154b6aa2526e9b9166c68d4f6e65a64df05101593d9eb330178094"
+        },
+        "reversed": {
+          "path": "options-escape-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1108,
+        "y": 297,
+        "width": 424,
+        "height": 202
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 85648,
+        "intended_region_changed_pixels": 85648,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "system_menu",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"system_menu\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/system-menu/source-plate.png\",\"position\":[1328,505],\"resize\":{\"active\":false,\"clamped\":[204,273],\"motion_samples\":0,\"requested\":[204,273],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[204,273],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "focused_path": true
+      },
+      "frames": {
+        "before": {
+          "path": "escape-before.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "after": {
+          "path": "escape-after.png",
+          "sha256": "503029eb5b303c6b0df6c89875389e3ab85115cb05aa4cfe9a7c1d36040539d7"
+        },
+        "reversed": {
+          "path": "escape-reversed.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 55692,
+        "intended_region_changed_pixels": 55692,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "desktop.escape",
+      "gesture": "KeyCommand",
+      "window_action": "OpenWindow",
+      "expected": "Issue 134 System Menu Behaviour Card and frozen manifest",
+      "observed": "{\"action\":\"OpenWindow\",\"context\":\"no_frontmost_closeable_window\",\"control_id\":\"desktop.escape\",\"ok\":true,\"position_after\":[1328,505],\"position_before\":[1328,505],\"raised\":true,\"semantic_state_preserved\":true,\"source_window\":\"desktop\",\"target_window\":\"system_menu\",\"visible\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "only_system_visible": true,
+        "desktop_context": true,
+        "position_preserved": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "context-before.png",
+          "sha256": "fd6e70063bfcba6c18ccb8dd5f0d1f26a0c1e09252dfb442753b50032389ca21"
+        },
+        "after": {
+          "path": "context-after.png",
+          "sha256": "7eaf45e71ef8d81524bcf1c97d2dcd53424766b901cde49b89647c78e33beb9e"
+        },
+        "reversed": {
+          "path": "context-reversed.png",
+          "sha256": "fd6e70063bfcba6c18ccb8dd5f0d1f26a0c1e09252dfb442753b50032389ca21"
+        }
+      },
+      "intended_region": {
+        "x": 1328,
+        "y": 505,
+        "width": 204,
+        "height": 273
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 55692,
+        "intended_region_changed_pixels": 55692,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}

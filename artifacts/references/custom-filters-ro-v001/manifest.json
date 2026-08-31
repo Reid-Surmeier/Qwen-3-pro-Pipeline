@@ -1,0 +1,19 @@
+{
+  "issue": 138,
+  "sources": [
+    {
+      "path": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+      "role": "sole style, geometry, palette, chrome, control and spacing authority",
+      "sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+      "width": 1088,
+      "height": 504
+    },
+    {
+      "path": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+      "role": "data strings and option order only; no style or pixel authority",
+      "sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
+      "width": 1304,
+      "height": 1194
+    }
+  ]
+}

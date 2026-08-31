@@ -1,0 +1,2765 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+  },
+  "window_rect": {
+    "x": 492,
+    "y": 0,
+    "width": 611,
+    "height": 595
+  },
+  "method": "deterministic source crop plus declared outline, brightness, fill, and live-text transforms",
+  "paid_generation": {
+    "requested": 0,
+    "completed": 0,
+    "cost_usd": 0.0
+  },
+  "assets": [
+    {
+      "path": "godot/assets/image-79/skill-tree/clean-plate.png",
+      "sha256": "577fa04a7620059b440f4144dc1051861f871a428b7cc8b9587e022771e986c8",
+      "size": [
+        611,
+        595
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/list-plate.png",
+      "sha256": "6ffeef6a5b6b37fa06ecf8efad980af077af7a361b7402661d9a6a5904186a39",
+      "size": [
+        611,
+        595
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/minimized-plate.png",
+      "sha256": "4928881165e5b0db4b2e7b0db8584c7f6c1d8741aa7e3939e0492156c018a9bf",
+      "size": [
+        611,
+        28
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-selected-hover.png",
+      "sha256": "a616b2781571671c59f5c4f513f15c3e9f61e81b7f58a80ec38d0d12b5f5be6f",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-selected-idle.png",
+      "sha256": "a616b2781571671c59f5c4f513f15c3e9f61e81b7f58a80ec38d0d12b5f5be6f",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-selected-pressed.png",
+      "sha256": "a748f27678d50e2c862d881ffc70e19fada7d35be1f8f2b30395c431a7252998",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-unselected-hover.png",
+      "sha256": "2b4b700804cc35f5a340707189b51643b2278ab2883b33b78f0ebf92405a3c27",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-unselected-idle.png",
+      "sha256": "5c2e2fae8f05a718fb468c0ca2162b077e8ad91d461e34d99a9523b19f5b2627",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c1-unselected-pressed.png",
+      "sha256": "948db0606ada05bd80fd787081c14a2c4f3abbfd32016990feb29218f5f9c459",
+      "size": [
+        41,
+        41
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-selected-hover.png",
+      "sha256": "9b51fb69bc42cf8d7eecac68381faf151e005013bf8ce8dda961672efd18bab7",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-selected-idle.png",
+      "sha256": "9b51fb69bc42cf8d7eecac68381faf151e005013bf8ce8dda961672efd18bab7",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-selected-pressed.png",
+      "sha256": "cf667ae666399de2b1c5279ff6152d1de0b8bcc855e92ce5a0910c4c364895bb",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-unselected-hover.png",
+      "sha256": "27424535c62f7606e917f44a3bfaf42e3e2b74653c3b9d390d48ed7772919f50",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-unselected-idle.png",
+      "sha256": "43488facb2d0f8f201f7be130852a1b84b39f84ecf342da2fb31a6a7f8642c53",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c2-unselected-pressed.png",
+      "sha256": "71ea78c9d4da8dac5fa4fd8670bcd6a173cb1bf8941bd1baf6e8f1ba640a6a30",
+      "size": [
+        42,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-selected-hover.png",
+      "sha256": "6c74ce86585a02e9d6501b9998460d19574c2c06edcc87c8fa0026caab8120c3",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-selected-idle.png",
+      "sha256": "6c74ce86585a02e9d6501b9998460d19574c2c06edcc87c8fa0026caab8120c3",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-selected-pressed.png",
+      "sha256": "aebe91265dc89fb3621ec7d77ca9155c1edfcb0bd477ed1dc5e54c3fdcdd863a",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-unselected-hover.png",
+      "sha256": "4e23f09ce0b8625be682effeb3351d63d3a35aa3b1f5bd3ccf792b57886e5add",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-unselected-idle.png",
+      "sha256": "eb5846176687072b7fc72a0f432594977befa248bb40f002809aba02623494a3",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c3-unselected-pressed.png",
+      "sha256": "4ea3673f2562871c276dbb3a558db10abee32f61847b54bc3e85cb8c477e2daf",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-selected-hover.png",
+      "sha256": "8b258442960472bad20ebdb363ff7e6dcc5a857df582d7148d910db63379d972",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-selected-idle.png",
+      "sha256": "8b258442960472bad20ebdb363ff7e6dcc5a857df582d7148d910db63379d972",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-selected-pressed.png",
+      "sha256": "52c091a49c03afcf693f0a920c46919b86491848ae169a79502e9c401d33bc98",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-unselected-hover.png",
+      "sha256": "39e642f56c41a40cd68250b635cb5c67fd2c8a1d7e093d336f21c507cf822a0a",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-unselected-idle.png",
+      "sha256": "e7cb05705a8e068fc2e2c39f0191c168ce0410bcbf76792a086e27a316c64e27",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c4-unselected-pressed.png",
+      "sha256": "df086b5de1ce33ed80bbf1f1bc36158d286ad6c45196723a8ac9cfc1c8c5df78",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-selected-hover.png",
+      "sha256": "4b6a5755a0147aba73b3e932738208d3fb2c6ab82d1dd5362e94eceae2f697c0",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-selected-idle.png",
+      "sha256": "4b6a5755a0147aba73b3e932738208d3fb2c6ab82d1dd5362e94eceae2f697c0",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-selected-pressed.png",
+      "sha256": "05bc74d9d64dcb068a5556453e49f9d017b2104c1ee3e70c0ca3dc13ee0ff56a",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-unselected-hover.png",
+      "sha256": "ee6085f5a023d6e33135529d11c2f96cd0343314c6bb1831463773fae13e597a",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-unselected-idle.png",
+      "sha256": "aa61f51e424654f15aec28ec768e1c3bab2eaf69a768e554854a7c444818f137",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c5-unselected-pressed.png",
+      "sha256": "441b815ed6d85ee9e552bdec4cadfe19b4ea3ac423052424039723ea5baec5d5",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-selected-hover.png",
+      "sha256": "b906620b7a0f6a7f584e276207ca7b1bf15c0b361b29126afc16404d43c43679",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-selected-idle.png",
+      "sha256": "b906620b7a0f6a7f584e276207ca7b1bf15c0b361b29126afc16404d43c43679",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-selected-pressed.png",
+      "sha256": "b604e4daf0c860e21a1da50efa1ced47d9a6dc7f02771a290dc2fa1de7eba214",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-unselected-hover.png",
+      "sha256": "547b47489ec1f6318286e93a8039a6dd98fa0a265a8896bf76c01545c03f8bf6",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-unselected-idle.png",
+      "sha256": "b9e4613383d009be8a3cc314ef1d21cf4c032e5a09ee893191c37a8979255839",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r1c6-unselected-pressed.png",
+      "sha256": "e2229349f3d5998b272df05db0afb0261bf68939144e9f48cb51241706b6fbfe",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-selected-hover.png",
+      "sha256": "c3f2abe07aaaeeb5e84f658a250231dbed221c200e7fff79da4a28dd1d1f1872",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-selected-idle.png",
+      "sha256": "c3f2abe07aaaeeb5e84f658a250231dbed221c200e7fff79da4a28dd1d1f1872",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-selected-pressed.png",
+      "sha256": "0a88b4071e50a615d9990038f92fbf2e5ba46c41f17ac65a0813ff346ce5e578",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-unselected-hover.png",
+      "sha256": "e24ecf5077a33d6c55303e4d9d680e486bb788b581349e7657f23cddaaafdb8f",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-unselected-idle.png",
+      "sha256": "7f5a9c46072a743c2214a71157a8282074118ab72e6d7ce22a4d3bbdf351211d",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c1-unselected-pressed.png",
+      "sha256": "9a2f25b14444970a706d46678f1ad3dabde039fefd0ecb38299346529e1b8448",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-selected-hover.png",
+      "sha256": "22a7d7afaa08c5c8718a1818db2870bc760acbb28acf77899d7069f59665b247",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-selected-idle.png",
+      "sha256": "22a7d7afaa08c5c8718a1818db2870bc760acbb28acf77899d7069f59665b247",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-selected-pressed.png",
+      "sha256": "2cb2c1037daad72e41ab93989bb4996bcbf4d4f8604bf3f6881aea45e3e032af",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-unselected-hover.png",
+      "sha256": "208594c968d411332326e03c958ff9888c9e3a98cb64c08586062342cbd40269",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-unselected-idle.png",
+      "sha256": "5e19c45e8edc08c98661a3d69639b2ddc4c2b0bb7cbf0c8400c6aeace91844d5",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c2-unselected-pressed.png",
+      "sha256": "2cf1e8d7be2074733dde911d6df69b3f0cced533d43457a800131e08ef941654",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-selected-hover.png",
+      "sha256": "e78713a4384904a0a32b4b1672f25c442834ecdbc6e3f07311aebf0fc73a3880",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-selected-idle.png",
+      "sha256": "e78713a4384904a0a32b4b1672f25c442834ecdbc6e3f07311aebf0fc73a3880",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-selected-pressed.png",
+      "sha256": "55e58483983cf45563a547550318b29027f3a0782706bb2202bc73063dd530c1",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-unselected-hover.png",
+      "sha256": "a1daae6e246020394171752419520ba12800ce3f5a5873a047203d4d6b4c5bf9",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-unselected-idle.png",
+      "sha256": "e9ae3f42e34b2e2df82856b78b78ffea38418fcdb8b2e4fe5477e4d8488a1981",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c3-unselected-pressed.png",
+      "sha256": "4527bc4dd4b16ace1454a288ef425859bb5b53732f79e7ea8d70998cd811c216",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-selected-hover.png",
+      "sha256": "5da8ec6721236c82dbb71db30ea3793160efabde7953e1042ddb67476b67eee8",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-selected-idle.png",
+      "sha256": "5da8ec6721236c82dbb71db30ea3793160efabde7953e1042ddb67476b67eee8",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-selected-pressed.png",
+      "sha256": "0937d3a72155eb20a4611909e5195479d852e547a31ecd306069753d9969da99",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-unselected-hover.png",
+      "sha256": "079763e2bfad446111b4b45ac73e7bf557229970b3e24edd7ce46d2722e97c35",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-unselected-idle.png",
+      "sha256": "4af0593f0052d0153e6e6b46be18fce2ffe6508409ef31f53fb69c54bfcf3444",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c4-unselected-pressed.png",
+      "sha256": "8a418075f9802e2fbe8dd2d3ccc4084e52c0d099f9f75dfd0c07b4b0207f75c9",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-selected-hover.png",
+      "sha256": "ca32eab9a3c7315cc0f0b22480af9385b9577fd02db540f5300067493c315383",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-selected-idle.png",
+      "sha256": "ca32eab9a3c7315cc0f0b22480af9385b9577fd02db540f5300067493c315383",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-selected-pressed.png",
+      "sha256": "84ca6b1970ae7536068ec5ea06c0bb598945e721c77025e61b98e6865b0bc2eb",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-unselected-hover.png",
+      "sha256": "cbd03433d1f3215bc181f4a80dc384d22e22aa3a3998d1d9227d30dab206858e",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-unselected-idle.png",
+      "sha256": "72aa0b8d5ca93cf093162548cdd444fc7eaf9fc1ccbffea20c475ff1e36be89e",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r2c5-unselected-pressed.png",
+      "sha256": "875a0da2013a5a2b0e010d6b6aa89ab1e062f753c26af70e88e791a35ba1e516",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-selected-hover.png",
+      "sha256": "bc957a0aa81b1416b75a0d33e2a0ab990579ae67e856111a06df8fa5c50ea3d6",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-selected-idle.png",
+      "sha256": "bc957a0aa81b1416b75a0d33e2a0ab990579ae67e856111a06df8fa5c50ea3d6",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-selected-pressed.png",
+      "sha256": "9e2c40e63a4b7b9833c75ee87acb21fac6c506c096cc5f96644b8810b9095e89",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-unselected-hover.png",
+      "sha256": "107b17a512df3f9b4e4226debfffa786fc00a732a9722ce92e9c0fa3d29a8e71",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-unselected-idle.png",
+      "sha256": "1c56122fcf17a2478d0a63851ab4fcb41e3bea824c22c983514641de69d0011b",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c1-unselected-pressed.png",
+      "sha256": "3fb5eb5e8dd1ea3bf84d715cbe999f2f570179ba4b475b3e003bf1b909da6314",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-selected-hover.png",
+      "sha256": "c5da1701222a2df01d613cb0c6796f739c82af329adf01e92584b514abd81f95",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-selected-idle.png",
+      "sha256": "c5da1701222a2df01d613cb0c6796f739c82af329adf01e92584b514abd81f95",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-selected-pressed.png",
+      "sha256": "6cb4178710ac1b7f547a0fe87baf861769f9b5e2e644fe321f5738f20bce8058",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-unselected-hover.png",
+      "sha256": "6ba6dc245d10d2e4dc901e5fa9548b634ef18d353b86506cc8adf2a2cf5f715e",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-unselected-idle.png",
+      "sha256": "6d7cbedc6da3148a92bf9cfe8c2703aa172358abf2aec1d2be6e50fc88b9cac6",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c2-unselected-pressed.png",
+      "sha256": "858f7b8457668c68f325d5b89666e1d2dbba30218282f0d43a68fdda7e848fca",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-selected-hover.png",
+      "sha256": "ce3412f1ef7e337d9480d3b98dde5dbe8f45adc0019f78b0ce655c956d837202",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-selected-idle.png",
+      "sha256": "ce3412f1ef7e337d9480d3b98dde5dbe8f45adc0019f78b0ce655c956d837202",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-selected-pressed.png",
+      "sha256": "3b171301acc9eafbb97e7e649f3433c0152258f36041df1b65ea705131dd0cf1",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-unselected-hover.png",
+      "sha256": "8a11341426494d1c73f8f6ed65938ba91f6a9d17e40afed950de93efaf11f16b",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-unselected-idle.png",
+      "sha256": "1941dea486b811910126b57bafc1accca5dca1b0230ed7ac4c60380d35564715",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c3-unselected-pressed.png",
+      "sha256": "57cb6946d0397e5133f08b2ded185693770f42d0ad5e8b24356eb51b82565270",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-selected-hover.png",
+      "sha256": "953a982ff75ba5261ad98452cc356e726a47b7b05347e9271b3df4c6e04bb552",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-selected-idle.png",
+      "sha256": "953a982ff75ba5261ad98452cc356e726a47b7b05347e9271b3df4c6e04bb552",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-selected-pressed.png",
+      "sha256": "5d33e96fac742f34bf5e4171e6a8982e5686a59813419a24e74e8101fb7ac655",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-unselected-hover.png",
+      "sha256": "d53f3b9cac62ef3ab6731aeaf0e3e8663b45f2ae980ee478a22bfa2be5209947",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-unselected-idle.png",
+      "sha256": "c11bca5af23394b778261d37a8336e828c62c6d73602e7295c20b53a45ca7999",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c4-unselected-pressed.png",
+      "sha256": "f2114e0c0c590e75cf9371c04b137536576b82dd9c5e78de17aa9e20ed3c867c",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-selected-hover.png",
+      "sha256": "d2bab8ea4ba01e297e3456ec81a141fa1cc95ac8bd996feaa20e8af9df67892d",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-selected-idle.png",
+      "sha256": "d2bab8ea4ba01e297e3456ec81a141fa1cc95ac8bd996feaa20e8af9df67892d",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-selected-pressed.png",
+      "sha256": "8203eb73a03dccfb3a85547d2b7c51d33737a3f4f9b641c428c514e33a7939ed",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-unselected-hover.png",
+      "sha256": "b5b58062302c01e17d312c897bc8f36985bab8d64406f49ce522c650765b7ae3",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-unselected-idle.png",
+      "sha256": "0fffa33075ccf6c2957a62026eca925cdef210fdbf53a44ea76f0549dd799559",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c5-unselected-pressed.png",
+      "sha256": "168aa74affae688cad64f7c415f334f494866fe784749fb96442c1e831a1877d",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-selected-hover.png",
+      "sha256": "8263ce3c6dadd19e006a34e6a7fd0d1147ad87cdf6398be091340727eb7e7fa3",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-selected-idle.png",
+      "sha256": "8263ce3c6dadd19e006a34e6a7fd0d1147ad87cdf6398be091340727eb7e7fa3",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-selected-pressed.png",
+      "sha256": "631cb8f686c14b1ac7f6c2cb0b452828deaa9ba8994ba57549723a0f95678074",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-unselected-hover.png",
+      "sha256": "649d56b586e5e578acc42c790afe3ea79b67838e6166f8a012fd7bb4b0a22d6c",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-unselected-idle.png",
+      "sha256": "f3433e9d21a53c77ed38ae7905eecb945cba31237eaa45eb07227f0702e687e1",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r3c6-unselected-pressed.png",
+      "sha256": "42109f2e705d24f5236a12481f8f88f0105ffb9c2f4256651dc66f1bc0468eaa",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-selected-hover.png",
+      "sha256": "c3fee1b5cf80c8f998ff84967e8c4aadd385895fd23b5740cad6b6ddd1878db2",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-selected-idle.png",
+      "sha256": "c3fee1b5cf80c8f998ff84967e8c4aadd385895fd23b5740cad6b6ddd1878db2",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-selected-pressed.png",
+      "sha256": "9b9a0755e9a6ced0fa7369fb9b17034e626c65d13345f22b04827f08e35d84eb",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-unselected-hover.png",
+      "sha256": "f63dc621f0896be7c61b64ce682a3443799c931e6c60a5fddd078888e2298e8c",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-unselected-idle.png",
+      "sha256": "cef4a9ec2b92f919856b5b354387890b8a489a3bc1d2134b5887ca3c90e4a4a7",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c1-unselected-pressed.png",
+      "sha256": "96b0f541a83128604c8ee6838288cdb5f7f19511351a3c4e8fc168388634b95f",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-selected-hover.png",
+      "sha256": "92d7cd11605831b69a04fe1784bf807e7f7212b270ccffe7581843fc02e7c923",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-selected-idle.png",
+      "sha256": "92d7cd11605831b69a04fe1784bf807e7f7212b270ccffe7581843fc02e7c923",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-selected-pressed.png",
+      "sha256": "e5db09bf6981e34328c9eb49acbc297b0888040138c6454a0d2ae5dfe85e7460",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-unselected-hover.png",
+      "sha256": "4c7361cd17f97afad4c2b64e76bd49b125c24619cced2ac79dd39a47c820f496",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-unselected-idle.png",
+      "sha256": "fd848163fc62c6fe6ccaeba55f2376fcb9bdfc6a78345cc25d65a186590d4a29",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c2-unselected-pressed.png",
+      "sha256": "ab44db20c044f9f097ec03592c6cc348b7a50123605a1f7dfe99b2a5e745315a",
+      "size": [
+        42,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-selected-hover.png",
+      "sha256": "563eccc87891268dcb8e076975072629e22cb04f14cecfd4f64105c11c5d511a",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-selected-idle.png",
+      "sha256": "563eccc87891268dcb8e076975072629e22cb04f14cecfd4f64105c11c5d511a",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-selected-pressed.png",
+      "sha256": "e03a9d533ce1dbb041943fb1c2ae44bb7dd3bb371cd71a98c367ab5791ca9f27",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-unselected-hover.png",
+      "sha256": "4891ecdc21eccb1c1786d601e8d93dddddb9397f2f7d706315ddf4a68e2ea145",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-unselected-idle.png",
+      "sha256": "7076d11567f0f1ac6b0b5799693cbb7ad9c5e48c64543dfc652b2aba2845c20f",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c3-unselected-pressed.png",
+      "sha256": "4fd211e57c4a927df2bf0a9a5987d6ab37c6484739b2fc28702a78f7c333d56c",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-selected-hover.png",
+      "sha256": "cf93610609d0fd5f217a3146f7bae6dac2c93838d68e3f176805753f5669b07f",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-selected-idle.png",
+      "sha256": "cf93610609d0fd5f217a3146f7bae6dac2c93838d68e3f176805753f5669b07f",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-selected-pressed.png",
+      "sha256": "e50dd9699c0758f6c6267a6e9359a8b7e940a3fb37e76313a72eb4c6d76de35a",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-unselected-hover.png",
+      "sha256": "f7a0109cff599ad5aa49d6757ac01a40000e374a0aab32103fb959443443d15d",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-unselected-idle.png",
+      "sha256": "ae595ccf40b42a2c55bbd4cf7646d18459d29b29ea7359cf2a53398ae8503e82",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c4-unselected-pressed.png",
+      "sha256": "abee6715edf9153b346f4cbdf39b1061dd21c08e1d0e09e455a3d548166252db",
+      "size": [
+        36,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-selected-hover.png",
+      "sha256": "772c8ad68c7cc74104a03c844c1eeac2d213b5f5b9c91b3e7732bfedd324752a",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-selected-idle.png",
+      "sha256": "772c8ad68c7cc74104a03c844c1eeac2d213b5f5b9c91b3e7732bfedd324752a",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-selected-pressed.png",
+      "sha256": "478902be391e45b6971a60036379fd94e6992525fa930da2ef76861107bc2c20",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-unselected-hover.png",
+      "sha256": "d4f8ea06ff8fc413be1aec092eeff2d61fa049be965a80279e5b73cdf27c382a",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-unselected-idle.png",
+      "sha256": "c5efaacc2342796788ed5d3889d68f996817cf4061889335c973ab4a66ab032a",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c5-unselected-pressed.png",
+      "sha256": "a5b82d1b24d93e6aaa9fd543cda7b3abdf581beac5c2d75b2907aa283d552a4e",
+      "size": [
+        39,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-selected-hover.png",
+      "sha256": "335d3c7fb859be8215d7003468d5b3cd04a936c3d1f19e5dc9c61999cf8bbbca",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-selected-idle.png",
+      "sha256": "335d3c7fb859be8215d7003468d5b3cd04a936c3d1f19e5dc9c61999cf8bbbca",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-selected-pressed.png",
+      "sha256": "787ddb90daf682842645239128e3be155b20c963064ecabd36f4474378873fd7",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-unselected-hover.png",
+      "sha256": "c76703b8836b64d16e4551145213b611ec6e72745f04832309fdab2d139655b0",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-unselected-idle.png",
+      "sha256": "7e42bb06f4302e60b5bb36323b9b03b0c8820203dcca3baec501b829c8e80021",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r4c6-unselected-pressed.png",
+      "sha256": "f4678871d2b9b31b9f0b1c8b34a8fb6ee798029d18e7be22c649976a5f6e8b48",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-selected-hover.png",
+      "sha256": "464e229e481856e7df94380dfe7e8683dbc54eaafc1ab8430be72be576bfe20e",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-selected-idle.png",
+      "sha256": "464e229e481856e7df94380dfe7e8683dbc54eaafc1ab8430be72be576bfe20e",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-selected-pressed.png",
+      "sha256": "d67cb3ee6c99280c595fc854868e9dbd9817d49832dd3137818f797dd89f8d41",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-unselected-hover.png",
+      "sha256": "0aa5615924e2133b94ff5d0e5721bc346558b4c6eaf3de6b23ec51ba146a81e7",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-unselected-idle.png",
+      "sha256": "662c650199bd3c14bdd452b027b127b77ead32514d1f0cc8748bff8103ac71c6",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c1-unselected-pressed.png",
+      "sha256": "100202cb72bdde1426ab4c0812f17451f26148aa7f410d6d326f9d51096edcad",
+      "size": [
+        41,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-selected-hover.png",
+      "sha256": "4d8cc990aacf992ff15c08f592cb35f6b500b25621454ad2916bf22d12c7c521",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-selected-idle.png",
+      "sha256": "4d8cc990aacf992ff15c08f592cb35f6b500b25621454ad2916bf22d12c7c521",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-selected-pressed.png",
+      "sha256": "091ee6586a8d602043bec519158e02e2744ab17d051b7b8575fbc9ec7eae5374",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-unselected-hover.png",
+      "sha256": "da83491c79f1f1e04b7f5591f5cb3c52e8977bee831fc4c4d8160bbc2243dda6",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-unselected-idle.png",
+      "sha256": "acd9d40584effd0aa0f50b1417a65753f5fbeff1b7e8729c19631f5320f2c06f",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c3-unselected-pressed.png",
+      "sha256": "2f46a43e69eda2ec44eb0395d8bc5a1c79c1503ba8ceb0975af5b9041bcc3fb7",
+      "size": [
+        38,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-selected-hover.png",
+      "sha256": "c34103d0200aad2dbff576a604377cbb5d6a1d23563929f3e24fbe87b5c33395",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-selected-idle.png",
+      "sha256": "c34103d0200aad2dbff576a604377cbb5d6a1d23563929f3e24fbe87b5c33395",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-selected-pressed.png",
+      "sha256": "4d5d5ddd6f43c477938826e27cdd7a5fa9f6333a32f68784bba249b2848435be",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-unselected-hover.png",
+      "sha256": "e3c61f915b729d73fb332eb35f289f8be8edef5ca103fa609dbd20ca679f5a5c",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-unselected-idle.png",
+      "sha256": "ebd6358d2b71a444c50847aea1f035cb6f7e4e94043d7689f62cfeac2e577b89",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c4-unselected-pressed.png",
+      "sha256": "fde44cc10606662e67a604d156bb7b72915d97af4c0d0068b4f38c8ab4ac348b",
+      "size": [
+        36,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-selected-hover.png",
+      "sha256": "1af84623c08192377a0347f0321861159f453c7218474b14a90fd269c62ef3d0",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-selected-idle.png",
+      "sha256": "1af84623c08192377a0347f0321861159f453c7218474b14a90fd269c62ef3d0",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-selected-pressed.png",
+      "sha256": "99e6559fb9f7ccde17a7712e81c48bed5a349cd6dd36cb1412eb336a3e90a2d5",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-unselected-hover.png",
+      "sha256": "92c795a3cd5fac5e90dea7ed3c003d539dd09a7fcca7fab6ebe2f979232ed941",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-unselected-idle.png",
+      "sha256": "3425e1f387e09223a62b9a2199d3c67153eaf894d73ca638c15e33306e96a660",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-r5c5-unselected-pressed.png",
+      "sha256": "ee330ff57cb431f4f00703ea5ebd6ca3b49e0f3e3f319e2e1d6ac6d7dbc0b06f",
+      "size": [
+        40,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-off-hover.png",
+      "sha256": "a1489c28d3b544790e98e10ff46e3f5c83f0fa0ea0a32ba8169124557f2450e1",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-off-idle.png",
+      "sha256": "f398d34ddc394d308ca72688ef418a7d9afb038aab68f5b2cbdadbf494950c7e",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-off-pressed.png",
+      "sha256": "ed8a40da721385c51b4d329bce24ef532bec009b7b6ed9dd375c93f153235a5c",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-on-hover.png",
+      "sha256": "e458238aa27de8a6b2e544cf0ec050837f81615f1f3f4f25cd292eff08bba903",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-on-idle.png",
+      "sha256": "49fd210bd5b9f1ad81ca51608242783547939681f9a5f728b9c4f2c3bdf4bc4c",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill-tree-descriptions-on-pressed.png",
+      "sha256": "4cadcd934f79697b55aef2683504f508be4e3df261e12e674b78052bdfeeab27",
+      "size": [
+        16,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-cancel-hover.png",
+      "sha256": "1bfd7930f53ffce18c64c2cfefc6a2270a16b8abb8d5505afce37a6a1883ea4f",
+      "size": [
+        75,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-cancel-idle.png",
+      "sha256": "92613b614c5edd5cd0f0f2da69cd9cd1daaa1efbe5e62258dd5915ba9c97596f",
+      "size": [
+        75,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-cancel-pressed.png",
+      "sha256": "1f5763024ab147acb164afdd8e0c461aaaa33a2fdedfcf2faef927d3a8b1308f",
+      "size": [
+        75,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-close-hover.png",
+      "sha256": "53ece411488d392c4ebf7222ecf8eec86ac48a762cdf68c52b5263d3fb762971",
+      "size": [
+        17,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-close-idle.png",
+      "sha256": "155c6e354ad44b642d63fa8e998fe5c85c300cee5c5dceddb52b8c29f7b58aff",
+      "size": [
+        17,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-close-pressed.png",
+      "sha256": "b58bf8350f73060d2ddd886ddee43427d328edc7ceaae70ab3fe7c2c7741763c",
+      "size": [
+        17,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-minimize-hover.png",
+      "sha256": "9d96f1d0aef53007a2ec05990887660c4f4c4a5d176758b6eb29bcdfd2fd2aa9",
+      "size": [
+        19,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-minimize-idle.png",
+      "sha256": "03dfde5f802f49038f643d0bdb646bf82638ca5ddb514bccab631ae4a7014454",
+      "size": [
+        19,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-minimize-pressed.png",
+      "sha256": "2d2a5b2761e169dd197ed23ef967c363e0b0482c77529a24cc77e9326b7a4750",
+      "size": [
+        19,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-use-hover.png",
+      "sha256": "138b99f1626ab13d1d1f9a3617ae824a1dcd97aea761f29d90729fa6407b78f5",
+      "size": [
+        70,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-use-idle.png",
+      "sha256": "dd91487ba7ebc9f4522830fdf926864bb9e136758330af8e605ef124c19e4914",
+      "size": [
+        70,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-use-pressed.png",
+      "sha256": "0e8a5498317622a4ebf2fa1dfbeaa2870ee2f7824dcba47a361163e8fd603b13",
+      "size": [
+        70,
+        26
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-view-hover.png",
+      "sha256": "b9089b6d318e250cef41ece56299a982a7af815f0e20484d5244957c060d5e11",
+      "size": [
+        53,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-view-idle.png",
+      "sha256": "c884c88c47092982db784a9370b558ef069a16d137eaf96c57aba227f8757230",
+      "size": [
+        53,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/skill_tree-view-pressed.png",
+      "sha256": "84f50d0ce099aff58bb40ef86f192a5fb9ee80dad81619a216c6b1e4bcf9c871",
+      "size": [
+        53,
+        19
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c1-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c3-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c4-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c5-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r1c6-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c1-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c2-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c3-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c4-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r2c5-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c1-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c2-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c3-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c4-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c5-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r3c6-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c1-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c2-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c3-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c4-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c5-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r4c6-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c1-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c3-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c4-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-hover.png",
+      "sha256": "4013bbb2dd5fc9e27ad7f9d48a716c1e6068ac3ff0a731eca0cc3334113f8b52",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-idle.png",
+      "sha256": "696603cf51178fd61e4309aef8bc557d1d029c3e484c2280e9180d86fe6225e3",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-left-pressed.png",
+      "sha256": "81324d0738175929b2cbd14836990efcbc2ebe54884a40e7b3eccde4b1a45732",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-hover.png",
+      "sha256": "1c0263b8f9c70e848c2a42a97aca92f813bb3333e6ea148edb7a72e3cd7688b4",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-idle.png",
+      "sha256": "dbfd0ef0c55eb4a0300cfe95f45636ccc6b49de232eada5e37861c15792e8346",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/stepper-r5c5-right-pressed.png",
+      "sha256": "e7359ff599278bda71586b55743a7f8149a2771583bb1a5022f409503d4d4655",
+      "size": [
+        18,
+        17
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/skill-tree/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    }
+  ]
+}

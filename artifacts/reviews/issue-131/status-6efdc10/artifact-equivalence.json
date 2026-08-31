@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "6efdc10bb46c81b1b4a8da0699228b812d3beddf",
+  "reference": "reference-status-4x.png",
+  "candidate": "candidate-status-idle-4x.png",
+  "metric": "ImageMagick AE over the complete 484x208 Status crop at 4x nearest-neighbour scale",
+  "changed_pixels": 0,
+  "equivalent": true
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Reid-Surmeier/Qwen-3-pro-Pipeline/schemas/run-manifest-v1.schema.json",
+  "title": "Generation run manifest (v1)",
+  "description": "Minimum trustworthy record of one generation or assembly run. The authoritative validator is qwen_ui_pipeline/run_manifest.py, which additionally enforces semantic invariants (approval/hash coupling, count consistency, ADR 0003 request ceiling, credential and private-path rejection) that JSON Schema alone cannot express.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifest_version", "run_id", "kind", "repository_commit", "created_at", "status", "sources", "outputs", "approvals"],
+  "properties": {
+    "manifest_version": {"const": "run-manifest-v1"},
+    "run_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,80}$"},
+    "kind": {"enum": ["render", "assembly"]},
+    "repository_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["complete", "incomplete", "rejected"]},
+    "provider": {
+      "type": "object",
+      "description": "Required for kind=render; forbidden for kind=assembly.",
+      "required": ["name", "model", "prompt_id", "requested_outputs", "completed_outputs"],
+      "properties": {
+        "name": {"enum": ["openrouter", "alibaba"]},
+        "model": {"type": "string"},
+        "prompt_id": {"type": "string"},
+        "requested_outputs": {"type": "integer", "minimum": 1, "maximum": 10},
+        "completed_outputs": {"type": "integer", "minimum": 0},
+        "estimated_cost_usd": {"type": ["number", "null"]},
+        "actual_cost_usd": {"type": ["number", "null"]}
+      }
+    },
+    "generation": {
+      "type": "object",
+      "description": "Required for kind=render; forbidden for kind=assembly.",
+      "required": ["seed"],
+      "properties": {"seed": {"type": "integer"}}
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "path", "sha256"],
+        "properties": {
+          "role": {"type": "string"},
+          "path": {"type": "string", "description": "Repo-relative; absolute or escaping paths are rejected."},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "sha256", "width", "height", "bytes"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "width": {"type": "integer", "exclusiveMinimum": 0},
+          "height": {"type": "integer", "exclusiveMinimum": 0},
+          "bytes": {"type": "integer", "exclusiveMinimum": 0}
+        }
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["decision", "actor", "timestamp"],
+        "properties": {
+          "decision": {"enum": ["approved", "rejected", "pending"]},
+          "actor": {"type": "string", "description": "Role or login; never a credential."},
+          "timestamp": {"type": "string", "format": "date-time"},
+          "approved_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "Required when decision=approved; must match an output sha256."},
+          "evidence_url": {"type": "string"}
+        }
+      }
+    },
+    "region": {
+      "type": "object",
+      "description": "Required for kind=assembly: the declared edit rectangle on the Reference Screen.",
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "integer"},
+        "y": {"type": "integer"},
+        "width": {"type": "integer", "exclusiveMinimum": 0},
+        "height": {"type": "integer", "exclusiveMinimum": 0}
+      }
+    },
+    "fidelity": {
+      "type": "object",
+      "description": "Required for kind=assembly; forbidden for kind=render (deterministic evidence must not decorate model-generation records).",
+      "required": ["outside_region_changed_pixels"],
+      "properties": {
+        "outside_region_changed_pixels": {"type": "integer", "minimum": 0}
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Forward-compatible extra data. Credential-like keys or values are still rejected."
+    }
+  }
+}

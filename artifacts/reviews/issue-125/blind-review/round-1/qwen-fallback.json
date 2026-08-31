@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
+  "reviewer": "OpenCode 1.18.25 via OpenRouter",
+  "model": "qwen/qwen3.8-max",
+  "variant": "xhigh",
+  "verdict": "blocked",
+  "reason": "The final OpenCode session reached the provider and inspected the packet, reference, and evidence, but its local tool runner aborted before a verdict and the wrapper terminated with exit 143. The possibly billed request was not retried.",
+  "attempts": [
+    {
+      "session_id": "ses_fabb2139bffe2xn19b82yi3fSO",
+      "candidate_commit": "7dcc651993319b5cfbb1aee1049bc7b9c82d0caf",
+      "status": "invalidated by later code correction",
+      "requests": 1,
+      "actual_cost_usd": 0.168586
+    },
+    {
+      "session_id": "ses_fabab1337ffenMhLPGZAstzbkG",
+      "candidate_commit": "36d746224ac15040d16cda4f30507fd644bbe133",
+      "status": "invalidated by later code correction",
+      "requests": 1,
+      "actual_cost_usd": 0.071002
+    },
+    {
+      "session_id": "ses_faba6d215ffeYKWNEHPhjzlutz",
+      "candidate_commit": "e395a3413a4d6bfc05582eaf17340662cc6420c2",
+      "status": "ambiguous blocked attempt; no verdict returned",
+      "requests": 1,
+      "actual_cost_usd": 0.092288,
+      "tokens": {"input": 16373, "output": 158, "reasoning": 8699, "cache_read": 25600}
+    }
+  ],
+  "total_actual_cost_usd": 0.331876,
+  "retry_policy": "No blind retry after ambiguous possibly billed failure."
+}

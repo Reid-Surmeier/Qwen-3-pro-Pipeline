@@ -1,0 +1,59 @@
+{
+  "issue": 138,
+  "status": "planned-not-submitted",
+  "planned_at": "2026-08-30T16:11:22-04:00",
+  "question": "Can Qwen transfer Image #1's RO dialog system to the approved Custom filters structure while treating Image #2 as option data only?",
+  "provider": "openrouter",
+  "model": "qwen/qwen-image-3-pro",
+  "endpoint": "http://10.255.255.254:8188/prompt",
+  "client_id": "954cbbd7-d55b-46e0-bdee-87c262b7470a",
+  "requested_outputs": 2,
+  "resolution": "2K",
+  "aspect_ratio": "16:9",
+  "seed": 20260903,
+  "estimated_cost_usd": 0.10,
+  "actual_cost_usd": null,
+  "issue_allowance": {
+    "maximum_outputs": 10,
+    "prior_requested_outputs": 0,
+    "remaining_before_this_request": 10,
+    "remaining_after_this_request_if_ambiguous": 8
+  },
+  "milestone_ledger": {
+    "cap": 200,
+    "prior_requested_outputs": 23,
+    "requested_outputs_after_submission": 25
+  },
+  "references": [
+    {
+      "role": "sole style and geometry authority",
+      "path": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+      "sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d"
+    },
+    {
+      "role": "data strings and order only; no style pixels",
+      "path": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+      "sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085"
+    }
+  ],
+  "brief": {
+    "path": "examples/custom-filters-ro-v001.json",
+    "sha256": "a8cc299f3a3b71864cec73b462ef40a2f6dfb096e9d5f68f9350801533ac3493",
+    "approximate_tokens": 2074,
+    "budget_tokens": 4500
+  },
+  "workflow": {
+    "path": "workflows/custom-filters-ro-v001.api.json",
+    "sha256": "13a03dc1fb7c13ba1d4b60fbc1b7365ef21dbed233a633245a54e57d6fd536ee"
+  },
+  "submission_request": {
+    "path": "artifacts/runs/custom-filters-ro-render-v001/submission-request.json",
+    "sha256": "6e95742ccfa74d183d5c901e9e87f9d803d42d1dca29cf3b6f456cece3b55e9e"
+  },
+  "queue_preflight": {
+    "checked_at": "2026-08-30T16:11:22-04:00",
+    "running": 0,
+    "pending": 0
+  },
+  "stop_rule": "Submit this exact request exactly once. Treat an enqueue timeout, provider timeout, missing history, or partial output as possibly billed. Count both requested outputs against the allowance and reconcile persisted router, worker and output state before considering any retry. Do not automatically broaden the batch."
+}

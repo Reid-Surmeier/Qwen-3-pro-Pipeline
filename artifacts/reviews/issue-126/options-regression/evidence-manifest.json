@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "82ae10483fd41d365f1ca54fe691e894c9727303",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "e1c7759c14fbb22643acdb98424ddfeb5617f3bce8036b0f93eb27551c3892e8"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-options-bgm-activate-after.png",
+      "sha256": "743624d38f8edba687a68410cb285015b279a01efc2c4223b5b9f26a75e9bb07"
+    },
+    {
+      "path": "01-options-bgm-activate-before.png",
+      "sha256": "e1c7759c14fbb22643acdb98424ddfeb5617f3bce8036b0f93eb27551c3892e8"
+    },
+    {
+      "path": "02-options-bgm-wheel-after.png",
+      "sha256": "267a584ce86dfe0142f62728c54b7ebf2a326df528cb7c66826998f4a05ed0ad"
+    },
+    {
+      "path": "02-options-bgm-wheel-before.png",
+      "sha256": "743624d38f8edba687a68410cb285015b279a01efc2c4223b5b9f26a75e9bb07"
+    },
+    {
+      "path": "03-options-bgm-drag-after.png",
+      "sha256": "7d615a65a44982b680eaf86ea638b5a35b8476e23918f740c3ceac0c6a029e91"
+    },
+    {
+      "path": "03-options-bgm-drag-before.png",
+      "sha256": "267a584ce86dfe0142f62728c54b7ebf2a326df528cb7c66826998f4a05ed0ad"
+    },
+    {
+      "path": "03-options-bgm-drag-mid.png",
+      "sha256": "3e4efe0473f516b65fe5274f1349d43457a0f4662db4d31a3d970545c61bbfc0"
+    },
+    {
+      "path": "04-options-bgm-drag-after.png",
+      "sha256": "81edb9c68f627efebc90d103e3686aee5e3fa86a7dbc7a7f22bd8ceb48d17664"
+    },
+    {
+      "path": "04-options-bgm-drag-before.png",
+      "sha256": "7d615a65a44982b680eaf86ea638b5a35b8476e23918f740c3ceac0c6a029e91"
+    },
+    {
+      "path": "04-options-bgm-drag-mid.png",
+      "sha256": "eaefbf066df36a8b37cffe05de4a089eb04187e3c83f46d3daf0b86973e6cb45"
+    },
+    {
+      "path": "05-options-effect-activate-after.png",
+      "sha256": "44d9093ab4a78073a082b83086cce9f4e71cf6564e80c131e28ffc7f869a3f3e"
+    },
+    {
+      "path": "05-options-effect-activate-before.png",
+      "sha256": "81edb9c68f627efebc90d103e3686aee5e3fa86a7dbc7a7f22bd8ceb48d17664"
+    },
+    {
+      "path": "06-options-effect-wheel-after.png",
+      "sha256": "547db163bcf454f16f19bd6acd0d87af8e0f46fa22aedff04ef58289caf95f63"
+    },
+    {
+      "path": "06-options-effect-wheel-before.png",
+      "sha256": "44d9093ab4a78073a082b83086cce9f4e71cf6564e80c131e28ffc7f869a3f3e"
+    },
+    {
+      "path": "07-options-effect-drag-after.png",
+      "sha256": "714d619c5ffddb0123544baf654a7682edafa56991adf2cd5c89f9d3b2097a71"
+    },
+    {
+      "path": "07-options-effect-drag-before.png",
+      "sha256": "547db163bcf454f16f19bd6acd0d87af8e0f46fa22aedff04ef58289caf95f63"
+    },
+    {
+      "path": "07-options-effect-drag-mid.png",
+      "sha256": "92eb780388417d82cba3774a65bdf275c64fbcad1d49317bbb19ba199a202760"
+    },
+    {
+      "path": "07b-options-effect-drag-after.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "07b-options-effect-drag-before.png",
+      "sha256": "714d619c5ffddb0123544baf654a7682edafa56991adf2cd5c89f9d3b2097a71"
+    },
+    {
+      "path": "07b-options-effect-drag-mid.png",
+      "sha256": "9145336e98236e63bf0394c293dc6d5caa80cb4d9a648a040a71aeb5427605d8"
+    },
+    {
+      "path": "08-options-bgm_on-after.png",
+      "sha256": "58ed168dddf1faf95bfc8e4b1ebc2dee38defff1b842c3a40cd4dc86c738c414"
+    },
+    {
+      "path": "08-options-bgm_on-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "08-options-bgm_on-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "09-options-effect_on-after.png",
+      "sha256": "25d3cadfb85708d8dfaf860fa81b1297a421c187d2b5bca435d7f1873c7789e0"
+    },
+    {
+      "path": "09-options-effect_on-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "09-options-effect_on-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "10-options-attack-after.png",
+      "sha256": "190a038e5ec20bdf0b70a20df46d43b554af56a7a6b59bdbbd1abfcb7f77efd8"
+    },
+    {
+      "path": "10-options-attack-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "10-options-attack-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "11-options-skill-after.png",
+      "sha256": "4a3fa91bc6c3f5ee2cb4e77cfb3013e3f4dd92eaea5ad6effeec308eb592bf59"
+    },
+    {
+      "path": "11-options-skill-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "11-options-skill-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "12-options-item-after.png",
+      "sha256": "b45a16b603afdb491d77d9a92b696e0e55f83970413e822948ab083750305469"
+    },
+    {
+      "path": "12-options-item-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "12-options-item-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "13-options-option-after.png",
+      "sha256": "398768840a601227fc7a31706f00779c0741496a92e3cfe8d40fa185d8abab6a"
+    },
+    {
+      "path": "13-options-option-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "13-options-option-reversed.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "14-options-skin-activate-after.png",
+      "sha256": "3c69ad59d32e90d87276e7d8d1c0d6d7f62134f3e10d2b69adb8fe31c28babda"
+    },
+    {
+      "path": "14-options-skin-activate-before.png",
+      "sha256": "5009bd8d3a25f7536b6e3cf2bb36cea5e25b43c31dc592eb69973d207a015ab3"
+    },
+    {
+      "path": "15-options-skin-key-after.png",
+      "sha256": "457954e6235f4000adb3f480335d8127ffb142a60baa66eed5163a0eb3439fd6"
+    },
+    {
+      "path": "15-options-skin-key-before.png",
+      "sha256": "65f415f5aece4faa6bff197e0d402f0227eef038b051a0754528c1407e136801"
+    },
+    {
+      "path": "15-options-skin-select-after.png",
+      "sha256": "457954e6235f4000adb3f480335d8127ffb142a60baa66eed5163a0eb3439fd6"
+    },
+    {
+      "path": "15-options-skin-select-before.png",
+      "sha256": "3c69ad59d32e90d87276e7d8d1c0d6d7f62134f3e10d2b69adb8fe31c28babda"
+    },
+    {
+      "path": "16-options-minimize-after.png",
+      "sha256": "21ba33daf507e30615a23c05ed9580806155caef93512770306fbf22518c2525"
+    },
+    {
+      "path": "16-options-minimize-before.png",
+      "sha256": "457954e6235f4000adb3f480335d8127ffb142a60baa66eed5163a0eb3439fd6"
+    },
+    {
+      "path": "16-options-minimize-restored.png",
+      "sha256": "457954e6235f4000adb3f480335d8127ffb142a60baa66eed5163a0eb3439fd6"
+    },
+    {
+      "path": "17-options-window-drag-after.png",
+      "sha256": "bacf3f7da99a38e1c07e98b19dc6389527d6ec14e901cafbe9f0dd604675b691"
+    },
+    {
+      "path": "17-options-window-drag-before.png",
+      "sha256": "457954e6235f4000adb3f480335d8127ffb142a60baa66eed5163a0eb3439fd6"
+    },
+    {
+      "path": "17-options-window-drag-mid.png",
+      "sha256": "84d8e0ea9b254208c3fe5be6aea1cfa83ac10bb7bb928314e59d7ac3b9d05cfa"
+    },
+    {
+      "path": "18-options-close-after.png",
+      "sha256": "6be0bbfd469a32e784d3b73654a5654041d9c57917c3b37c843a803df1e18ce9"
+    },
+    {
+      "path": "18-options-close-before.png",
+      "sha256": "bacf3f7da99a38e1c07e98b19dc6389527d6ec14e901cafbe9f0dd604675b691"
+    },
+    {
+      "path": "19-options-key-before.png",
+      "sha256": "e1c7759c14fbb22643acdb98424ddfeb5617f3bce8036b0f93eb27551c3892e8"
+    },
+    {
+      "path": "19-options-key-closed.png",
+      "sha256": "6be0bbfd469a32e784d3b73654a5654041d9c57917c3b37c843a803df1e18ce9"
+    },
+    {
+      "path": "20-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "c7be94e61eb3ee71d87a30226e3fc44461de5974ed1811b6c021ddade6b86e7b"
+    },
+    {
+      "path": "report.json",
+      "sha256": "96bcdfe60b6fb374c02a7ed12c03a6739ca2da683df6a58f363e685a0e14a0f6"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "0641c553f12cde711fc07fb9e8539b6225226a306c53f2288d9ab32d6008f8c4"
+    }
+  ]
+}

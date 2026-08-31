@@ -1,0 +1,724 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 129,
+    "commit_sha": "ab53c74bb78ffa9a61db24863d67507c5a89c527",
+    "window_id": "equipment_card"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "equipment_card.minimize",
+    "equipment_card.close",
+    "equipment_card.scroll"
+  ],
+  "required_actions": [
+    {
+      "control_id": "equipment_card",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "equipment_card",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "equipment_card.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "equipment_card.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollEquipmentCard"
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Activate",
+      "window_action": "StepEquipmentCardScroll"
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Drag",
+      "window_action": "SetEquipmentCardScrollOffset"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "08-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "equipment_card.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"detail_item\":\"mistress-card\",\"geometry_version\":0,\"id\":\"equipment_card\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"position\":[1108,0],\"resize\":{\"active\":false,\"clamped\":[424,290],\"motion_samples\":0,\"requested\":[424,290],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[424,290],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "minimized": true,
+        "restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "01-minimized.png",
+          "sha256": "840cae141db7b59b5ad27bfd7cfab853195c6d49f39fc64e51256fdf67ca1374"
+        },
+        "reversed": {
+          "path": "01b-restored.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "restored": {
+          "path": "01b-restored.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 111088,
+        "intended_region_changed_pixels": 111088,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollEquipmentCard",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"active_surface\":\"decrement\",\"at_end\":false,\"at_start\":true,\"available\":false,\"geometry\":{\"height\":190,\"width\":28,\"x\":1498,\"y\":80},\"id\":\"equipment_card.scroll\",\"interaction_phase\":\"hover\",\"last_action\":\"\",\"last_error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"}},\"maximum\":0,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":26,\"type\":\"ScrollView\",\"unavailable_reason\":\"image 79 does not attest continuation pixels\",\"value\":0,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "rejected": true,
+        "unchanged": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-wheel-rejected-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "02-wheel-rejected.png",
+          "sha256": "0d054abbbce51d2e94d84d1fdacf9431cb7b7e986f347ab7c000f6d0d8af0c70"
+        },
+        "reversed": {
+          "path": "02-wheel-rejected-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 704,
+        "intended_region_changed_pixels": 704,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Activate",
+      "window_action": "StepEquipmentCardScroll",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"active_surface\":\"decrement\",\"at_end\":false,\"at_start\":true,\"available\":false,\"geometry\":{\"height\":190,\"width\":28,\"x\":1498,\"y\":80},\"id\":\"equipment_card.scroll\",\"interaction_phase\":\"hover\",\"last_action\":\"\",\"last_error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"}},\"maximum\":0,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":26,\"type\":\"ScrollView\",\"unavailable_reason\":\"image 79 does not attest continuation pixels\",\"value\":0,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "rejected": true,
+        "unchanged": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-arrow-rejected-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "03-arrow-rejected.png",
+          "sha256": "0d054abbbce51d2e94d84d1fdacf9431cb7b7e986f347ab7c000f6d0d8af0c70"
+        },
+        "reversed": {
+          "path": "03-arrow-rejected-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 704,
+        "intended_region_changed_pixels": 704,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_card.scroll",
+      "gesture": "Drag",
+      "window_action": "SetEquipmentCardScrollOffset",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"active_surface\":\"thumb\",\"at_end\":false,\"at_start\":true,\"available\":false,\"geometry\":{\"height\":190,\"width\":28,\"x\":1498,\"y\":80},\"id\":\"equipment_card.scroll\",\"interaction_phase\":\"dragging\",\"last_action\":\"\",\"last_error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"},\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":{\"code\":\"VisualAuthorityError\",\"detail\":\"image 79 does not attest continuation pixels\"}},\"maximum\":0,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":26,\"type\":\"ScrollView\",\"unavailable_reason\":\"image 79 does not attest continuation pixels\",\"value\":0,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "rejected": true,
+        "unchanged": true,
+        "continuous": true
+      },
+      "frames": {
+        "before": {
+          "path": "04-drag-rejected-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "mid": {
+          "path": "04-drag-rejected-mid.png",
+          "sha256": "3f4fbdd894bf6e6ebb452959e9e0bde64c7566e1f80fea6d6b31a75edcd7c464"
+        },
+        "after": {
+          "path": "04-drag-rejected-mid.png",
+          "sha256": "3f4fbdd894bf6e6ebb452959e9e0bde64c7566e1f80fea6d6b31a75edcd7c464"
+        },
+        "reversed": {
+          "path": "04b-drag-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 2184,
+        "intended_region_changed_pixels": 2184,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1512,
+          125
+        ],
+        [
+          1512,
+          128
+        ],
+        [
+          1512,
+          131
+        ],
+        [
+          1512,
+          134
+        ],
+        [
+          1512,
+          137
+        ],
+        [
+          1512,
+          140
+        ],
+        [
+          1512,
+          143
+        ],
+        [
+          1512,
+          146
+        ],
+        [
+          1512,
+          149
+        ],
+        [
+          1512,
+          152
+        ],
+        [
+          1512,
+          155
+        ],
+        [
+          1512,
+          158
+        ],
+        [
+          1512,
+          161
+        ],
+        [
+          1512,
+          164
+        ],
+        [
+          1512,
+          167
+        ],
+        [
+          1512,
+          170
+        ],
+        [
+          1512,
+          173
+        ],
+        [
+          1512,
+          176
+        ],
+        [
+          1512,
+          179
+        ],
+        [
+          1512,
+          182
+        ],
+        [
+          1512,
+          185
+        ],
+        [
+          1512,
+          188
+        ],
+        [
+          1512,
+          191
+        ],
+        [
+          1512,
+          194
+        ],
+        [
+          1512,
+          197
+        ],
+        [
+          1512,
+          200
+        ],
+        [
+          1512,
+          203
+        ],
+        [
+          1512,
+          206
+        ],
+        [
+          1512,
+          209
+        ],
+        [
+          1512,
+          212
+        ],
+        [
+          1512,
+          215
+        ]
+      ]
+    },
+    {
+      "control_id": "equipment_card",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"detail_item\":\"mistress-card\",\"geometry_version\":0,\"id\":\"equipment_card\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"position\":[1068,40],\"resize\":{\"active\":false,\"clamped\":[424,290],\"motion_samples\":0,\"requested\":[424,290],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[424,290],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "moved": true,
+        "continuous": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-move-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "mid": {
+          "path": "05-moved.png",
+          "sha256": "a436c990212425a1bc9e76224e27a4dcf4b801658dcb08b52b4fee84d968eb1e"
+        },
+        "after": {
+          "path": "05-moved.png",
+          "sha256": "a436c990212425a1bc9e76224e27a4dcf4b801658dcb08b52b4fee84d968eb1e"
+        },
+        "reversed": {
+          "path": "05b-move-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 143726,
+        "intended_region_changed_pixels": 143726,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1200,
+          14
+        ],
+        [
+          1198.6666666666667,
+          15.333333333333334
+        ],
+        [
+          1197.3333333333333,
+          16.666666666666668
+        ],
+        [
+          1196,
+          18
+        ],
+        [
+          1194.6666666666667,
+          19.333333333333332
+        ],
+        [
+          1193.3333333333333,
+          20.666666666666664
+        ],
+        [
+          1192,
+          22
+        ],
+        [
+          1190.6666666666667,
+          23.333333333333336
+        ],
+        [
+          1189.3333333333333,
+          24.666666666666664
+        ],
+        [
+          1188,
+          26
+        ],
+        [
+          1186.6666666666667,
+          27.333333333333332
+        ],
+        [
+          1185.3333333333333,
+          28.666666666666664
+        ],
+        [
+          1184,
+          30
+        ],
+        [
+          1182.6666666666667,
+          31.333333333333336
+        ],
+        [
+          1181.3333333333333,
+          32.66666666666667
+        ],
+        [
+          1180,
+          34
+        ],
+        [
+          1178.6666666666667,
+          35.33333333333333
+        ],
+        [
+          1177.3333333333333,
+          36.666666666666664
+        ],
+        [
+          1176,
+          38
+        ],
+        [
+          1174.6666666666667,
+          39.33333333333333
+        ],
+        [
+          1173.3333333333333,
+          40.666666666666664
+        ],
+        [
+          1172,
+          42
+        ],
+        [
+          1170.6666666666667,
+          43.33333333333333
+        ],
+        [
+          1169.3333333333333,
+          44.66666666666667
+        ],
+        [
+          1168,
+          46
+        ],
+        [
+          1166.6666666666667,
+          47.333333333333336
+        ],
+        [
+          1165.3333333333333,
+          48.66666666666667
+        ],
+        [
+          1164,
+          50
+        ],
+        [
+          1162.6666666666667,
+          51.333333333333336
+        ],
+        [
+          1161.3333333333333,
+          52.666666666666664
+        ],
+        [
+          1160,
+          54
+        ]
+      ]
+    },
+    {
+      "control_id": "equipment_card.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"action\":\"CloseDetail\",\"detail_item\":\"mistress-card\",\"ok\":true,\"visible\":false,\"window_id\":\"equipment_card\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "detail_routed": true,
+        "detail_cleared": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-close-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "06-closed.png",
+          "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+        },
+        "reversed": {
+          "path": "06b-close-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 122960,
+        "intended_region_changed_pixels": 122960,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "equipment_card",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Equipment Card Behaviour Card",
+      "observed": "{\"action\":\"CloseDetail\",\"detail_item\":\"mistress-card\",\"ok\":true,\"visible\":false,\"window_id\":\"equipment_card\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "routed": true,
+        "detail_routed": true,
+        "detail_cleared": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-key-close-before.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        },
+        "after": {
+          "path": "07-key-closed.png",
+          "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+        },
+        "reversed": {
+          "path": "07b-key-reversed.png",
+          "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+        }
+      },
+      "intended_region": {
+        "x": 1050,
+        "y": 0,
+        "width": 486,
+        "height": 380
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 122960,
+        "intended_region_changed_pixels": 122960,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}

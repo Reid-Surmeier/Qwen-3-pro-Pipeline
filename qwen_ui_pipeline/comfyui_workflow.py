@@ -70,3 +70,140 @@ def build_comfyui_assembly_workflow(
             },
         },
     }
+
+
+def build_partner_text_workflow(
+    *,
+    filename_prefix: str,
+    provider: str,
+    prompt: str,
+) -> dict[str, Any]:
+    """Build a portable text-to-image graph with visible preview and save nodes."""
+
+    if provider not in {"openrouter", "alibaba"}:
+        raise ValueError("Partner text workflow provider must be openrouter or alibaba")
+    return {
+        "1": {
+            "class_type": "QwenImage3TextToImage",
+            "inputs": {
+                "provider": provider,
+                "model": "qwen-image-3.0-pro",
+                "prompt": prompt,
+                "negative_prompt": "",
+                "width": 1024,
+                "height": 1024,
+                "count": 1,
+                "seed": 42,
+                "prompt_extend": False,
+                "watermark": False,
+            },
+        },
+        "2": {
+            "class_type": "PreviewImage",
+            "inputs": {"images": ["1", 0]},
+        },
+        "3": {
+            "class_type": "SaveImage",
+            "inputs": {
+                "filename_prefix": filename_prefix,
+                "images": ["1", 0],
+            },
+        },
+    }
+
+
+def build_partner_edit_workflow(
+    *,
+    reference_filenames: list[str],
+    filename_prefix: str,
+    provider: str,
+    prompt: str,
+) -> dict[str, Any]:
+    """Build a portable three-reference graph with visible source previews."""
+
+    if len(reference_filenames) != 3:
+        raise ValueError("Partner edit workflow evidence requires exactly three references")
+    if provider not in {"openrouter", "alibaba"}:
+        raise ValueError("Partner edit workflow provider must be openrouter or alibaba")
+
+    workflow: dict[str, Any] = {
+        str(index): {
+            "class_type": "LoadImage",
+            "inputs": {"image": filename},
+        }
+        for index, filename in enumerate(reference_filenames, start=1)
+    }
+    workflow["4"] = {
+        "class_type": "QwenImage3Edit",
+        "inputs": {
+            "provider": provider,
+            "model": "qwen-image-3.0-pro",
+            "prompt": prompt,
+            "negative_prompt": "",
+            "size_mode": "custom",
+            "width": 1024,
+            "height": 1024,
+            "count": 1,
+            "seed": 42,
+            "prompt_extend": False,
+            "watermark": False,
+            "image_1": ["1", 0],
+            "image_2": ["2", 0],
+            "image_3": ["3", 0],
+        },
+    }
+    for node_id, load_id in zip(("5", "6", "7"), ("1", "2", "3")):
+        workflow[node_id] = {
+            "class_type": "PreviewImage",
+            "inputs": {"images": [load_id, 0]},
+        }
+    workflow["8"] = {
+        "class_type": "PreviewImage",
+        "inputs": {"images": ["4", 0]},
+    }
+    workflow["9"] = {
+        "class_type": "SaveImage",
+        "inputs": {
+            "filename_prefix": filename_prefix,
+            "images": ["4", 0],
+        },
+    }
+    return workflow
+
+
+def build_comfyui_component_extraction_workflow(
+    *,
+    reference_filename: str,
+    components: Mapping[str, tuple[int, int, int, int]],
+    filename_prefix: str,
+) -> dict[str, Any]:
+    """Crop exact reference components without asking an image model to redraw them."""
+
+    workflow: dict[str, Any] = {
+        "1": {"class_type": "LoadImage", "inputs": {"image": reference_filename}}
+    }
+    next_node_id = 2
+    for name, (x, y, width, height) in components.items():
+        if min(x, y, width, height) < 0 or width == 0 or height == 0:
+            raise ValueError(f"Invalid component rectangle for {name}")
+        crop_id = str(next_node_id)
+        save_id = str(next_node_id + 1)
+        workflow[crop_id] = {
+            "class_type": "ImageCrop",
+            "inputs": {
+                "image": ["1", 0],
+                "x": x,
+                "y": y,
+                "width": width,
+                "height": height,
+            },
+        }
+        workflow[save_id] = {
+            "class_type": "SaveImage",
+            "inputs": {
+                "images": [crop_id, 0],
+                "filename_prefix": f"{filename_prefix}/{name}",
+            },
+        }
+        next_node_id += 2
+    return workflow

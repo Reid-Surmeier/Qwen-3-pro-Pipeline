@@ -1,0 +1,148 @@
+{
+  "advisory_only": true,
+  "conclusion": {
+    "clean_separation": false,
+    "summary": "Both aspect-ratio arms preserve readable wording, but neither preserves Exact Copy typography. T01 is present at mild severity in every bounded title-bar and species-list observation.",
+    "taxonomy_change_supported": false
+  },
+  "incidence": {
+    "4x3": {
+      "species-list": {
+        "present": 4,
+        "reviewed": 4
+      },
+      "title-bar": {
+        "present": 4,
+        "reviewed": 4
+      }
+    },
+    "5x4": {
+      "species-list": {
+        "present": 4,
+        "reviewed": 4
+      },
+      "title-bar": {
+        "present": 4,
+        "reviewed": 4
+      }
+    }
+  },
+  "manifest": {
+    "declared_identities_verified": 27,
+    "file": "artifacts/benchmarks/issue-72-aspect-text/review-crops/manifest.json",
+    "sha256": "afcc82145b0dbd2279c9552082621bb5cb4d0f00fa7408bc7496aecc8762781c"
+  },
+  "method": {
+    "excluded": [
+      "whole screenshots",
+      "prior candidate labels",
+      "global visual impressions"
+    ],
+    "scope": "Compare only the normalized title-bar and species-list crop pairs against their matching Reference Screen crops.",
+    "t01_interpretation": "Visible glyph regeneration or re-kerning counts as T01 even when wording remains readable and correctly spelled."
+  },
+  "observations": {
+    "seed-11-4x3": {
+      "species-list": {
+        "finding": "present",
+        "note": "Visible rerasterization and re-kerning, especially in Solomon's seal and black-eyed Susan.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "The title and count suffix are readable but re-kerned.",
+        "severity": "mild"
+      }
+    },
+    "seed-11-5x4": {
+      "species-list": {
+        "finding": "present",
+        "note": "Names remain readable, with visible rerasterization and re-kerning.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "Wording is intact, but glyph widths and spacing differ from the source.",
+        "severity": "mild"
+      }
+    },
+    "seed-733-4x3": {
+      "species-list": {
+        "finding": "present",
+        "note": "The list is readable but pervasively rerasterized.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "Wording is intact, but glyph spacing has been reset.",
+        "severity": "mild"
+      }
+    },
+    "seed-733-5x4": {
+      "species-list": {
+        "finding": "present",
+        "note": "Strokes and spacing differ from the source.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "PlantStudio and wildflowers use visibly changed letterforms.",
+        "severity": "mild"
+      }
+    },
+    "seed-4242-4x3": {
+      "species-list": {
+        "finding": "present",
+        "note": "Typography is readable but visibly re-kerned, especially in longer species names.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "The phrase is intact, with changed strokes and spacing.",
+        "severity": "mild"
+      }
+    },
+    "seed-4242-5x4": {
+      "species-list": {
+        "finding": "present",
+        "note": "The list is readable but visibly re-kerned.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "Glyph widths differ throughout the title.",
+        "severity": "mild"
+      }
+    },
+    "seed-20260826-4x3": {
+      "species-list": {
+        "finding": "present",
+        "note": "Names remain readable, but the typography is regenerated.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "The title and count are visibly re-kerned.",
+        "severity": "mild"
+      }
+    },
+    "seed-20260826-5x4": {
+      "species-list": {
+        "finding": "present",
+        "note": "Fleabane glyphs and longer-name spacing differ from the source.",
+        "severity": "mild"
+      },
+      "title-bar": {
+        "finding": "present",
+        "note": "The phrase is intact, but glyph geometry differs.",
+        "severity": "mild"
+      }
+    }
+  },
+  "reviewer": {
+    "family": "OpenAI Codex",
+    "model": "GPT-5",
+    "relationship": "independent different-family advisory review"
+  },
+  "schema_version": "issue-72-bounded-advisory-review-v1"
+}

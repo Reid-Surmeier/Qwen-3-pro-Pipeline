@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "issue": 130,
+  "prototype_disposition": "throwaway",
+  "reference": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024],
+    "window_rect": {"x": 0, "y": 423, "width": 484, "height": 271}
+  },
+  "behaviour_cards": [
+    {"id": "equipment-slot-select", "gesture": "Activate", "action": "SelectEquipmentSlot", "response_frames": 1, "reversible": true},
+    {"id": "equipment-double-activation", "gesture": "DoubleActivate", "actions": ["EquipItem", "UnequipItem"], "response_frames": 1, "reversible": true},
+    {"id": "inventory-equipment-drag", "gesture": "DragDrop", "actions": ["EquipItem", "UnequipItem"], "threshold_pixels": 4, "contract": "The Router commits both slot maps and versions together; a named rejection preserves both byte-for-byte."}
+  ],
+  "state_set_decisions": {"slot": ["available", "unselected", "selected", "dragging", "drop_target"], "interaction_phases": ["idle", "hover", "pressed"], "window": ["expanded", "minimized"]},
+  "gesture_capabilities": ["Activate", "DoubleActivate", "DragDrop", "Drag", "KeyCommand"],
+  "findings_promoted_to_tests": ["Displacement is a two-sided swap, never remove-then-add.", "Stale version, empty source, or unknown destination changes neither Window.", "Cross-Window drag suppresses the source View invalid local drop and publishes one Router transaction."],
+  "implementation_rule": "Retain this packet and discard all prototype code before production implementation.",
+  "provider_requests": 0
+}

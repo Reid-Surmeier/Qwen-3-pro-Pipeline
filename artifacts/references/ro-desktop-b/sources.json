@@ -1,0 +1,101 @@
+{
+ "board": {
+  "file_key": "wbOhmbJkG83vj2NMgfnQr2",
+  "type": "FigJam board"
+ },
+ "retrieved_at": "2026-08-29T23:00:00Z",
+ "assets": [
+  {
+   "file": "reference-source.png",
+   "node_id": "1:5",
+   "node_name": "image 79",
+   "node_type": "RECTANGLE",
+   "node_box_px": [
+    3000,
+    2000
+   ],
+   "image_fill_hash": "7d00a2c0da1e7bd3a0f46c07e34c881c06e07a45",
+   "original_upload": {
+    "size": [
+     1536,
+     1024
+    ],
+    "format": "png",
+    "color_type": 2,
+    "bytes": 2062041,
+    "sha256_file": "73d0b347d723d6f93d7db37804dad123043b6cea933b70cb419ae3feff29ef4a",
+    "sha256_rgba_pixels": "df2d8752b3ab2fda9caea44def3a453c66b9588f9d1ad57dca2f8b7ebca24758"
+   },
+   "stored": {
+    "size": [
+     1536,
+     1024
+    ],
+    "bytes": 2059708,
+    "sha256_file": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+   },
+   "retrieval_method": "Figma MCP get_figjam(includeImagesOfNodes) inline image, saved as PNG",
+   "byte_exact_to_original": false,
+   "pixel_exact_to_original": false,
+   "measured_difference": {
+    "sample": "64x32 crop at (8,4), 2047 pixels compared",
+    "pixels_identical_pct": 91.4,
+    "max_channel_delta": 6,
+    "mean_abs_channel_delta": 0.081
+   }
+  },
+  {
+   "file": "skilltree-close-up.png",
+   "node_id": "1:3",
+   "node_name": "image 86",
+   "node_type": "RECTANGLE",
+   "node_box_px": [
+    1588.12,
+    1548.32
+   ],
+   "image_fill_hash": "a1df72ce372f386163ceed727e6561390bfd3a0c",
+   "original_upload": {
+    "size": [
+     1596,
+     1556
+    ],
+    "format": "png",
+    "color_type": 6,
+    "bytes": 1439278,
+    "sha256_file": "d7d331db0d89189241661eb832dad34b75b168d117fc33d9451e3ebe0d8efdb6",
+    "sha256_rgba_pixels": "5d2053358309f32b670e61f54772491ce6e1db1c133e4eebb51164d9bc76fbbe"
+   },
+   "stored": {
+    "size": [
+     1596,
+     1556
+    ],
+    "bytes": 1159808,
+    "sha256_file": "8de673082cd8bf0c553f0157def82d74bd05d266a3f877744454f56c64e95b79"
+   },
+   "retrieval_method": "Figma MCP get_figjam(includeImagesOfNodes) inline image, saved as PNG",
+   "byte_exact_to_original": false,
+   "pixel_exact_to_original": false
+  },
+  {
+   "file": "reference-native.png",
+   "derivation": "byte copy of reference-source.png; measured scale is 1, so no resampling is applied",
+   "size": [
+    1536,
+    1024
+   ],
+   "sha256_file": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+  },
+  {
+   "file": "native-crispness-4x.png",
+   "classification": "comparison evidence",
+   "derivation": "4x nearest-neighbor enlargement of a 160x24 native title-strip crop used to judge crispness; not an authoritative source",
+   "size": [
+    640,
+    96
+   ],
+   "sha256_file": "687109f32979e9f185eef8b87648f81058bbecf16bee37cc3ca676e5fbdd2192"
+  }
+ ],
+ "limitation": "The byte-exact original upload could not be exported. The only endpoint that returns the original S3 object, GET /v1/files/:key/images, needs the files:read OAuth scope; the local Figma credential is scoped mcp:connect only and returns 403 on every REST v1 call including /v1/me. download_assets (which returns rawImages) refuses FigJam files. The originals were read in-process through the Figma Plugin API (getImageByHash().getBytesAsync()) and hashed there, but use_figma truncates its response at 20KB so 2.06MB of bytes cannot be ferried out. The stored copies are the highest-fidelity obtainable form: correct native dimensions, 91.4% of pixels byte-identical to the original, max channel error 6/255."
+}

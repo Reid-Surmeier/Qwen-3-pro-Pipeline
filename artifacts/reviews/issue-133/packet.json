@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "issue": 133,
+  "pull_request": 82,
+  "candidate_commit": "ccc6feaa65427132e6ac8ac538ee784531f5124c",
+  "acceptance_contract": "docs/reviews/issue-133-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-133/party-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/options-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/skill-tree-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/inventory-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/storage-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/equipment-card-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/equipment-items-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/status-regression-ccc6fea/evidence-manifest.json",
+      "artifacts/reviews/issue-133/basic-info-regression-ccc6fea/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-133/party-ccc6fea/reference-party-4x.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/candidate-party-4x.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/mode-friends-after.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/member-after.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/info-mid.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/rapid-leave-after.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/drag-mid.png",
+      "artifacts/reviews/issue-133/party-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/party-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/party-ccc6fea/image79-contracts.json",
+      "artifacts/reviews/issue-133/party-ccc6fea/python-baseline.log",
+      "artifacts/reviews/issue-133/party-ccc6fea/node-baseline.log",
+      "artifacts/reviews/issue-133/options-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/options-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/skill-tree-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/skill-tree-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/inventory-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/inventory-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/storage-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/storage-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/equipment-card-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/equipment-card-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/equipment-items-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/equipment-items-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/status-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/status-regression-ccc6fea/verdict.json",
+      "artifacts/reviews/issue-133/basic-info-regression-ccc6fea/play-log.json",
+      "artifacts/reviews/issue-133/basic-info-regression-ccc6fea/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE133_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE133_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE133_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE133_GODOT_BIN\" --headless --path godot --editor --quit-after 2"
+  }
+}

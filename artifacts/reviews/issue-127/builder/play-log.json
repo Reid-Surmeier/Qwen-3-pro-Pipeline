@@ -1,0 +1,624 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 127,
+    "commit_sha": "237c2fa8b157ce254bdd6247fb34872267be998b",
+    "window_id": "inventory"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "inventory.minimize",
+    "inventory.close",
+    "inventory.tabs",
+    "inventory.items"
+  ],
+  "required_actions": [
+    {
+      "control_id": "inventory",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Resize",
+      "window_action": "ResizeWindow"
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "inventory.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "inventory.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "inventory.tabs",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryTab"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryItem"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DoubleActivate",
+      "window_action": "OpenInventoryItem"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleInventorySelection"
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "11-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "inventory.tabs",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryTab",
+      "expected": "clicking Equip selects exactly that tab",
+      "observed": "{\"active_surface\":\"equip\",\"geometry\":{\"height\":192,\"width\":26,\"x\":10,\"y\":731},\"id\":\"inventory.tabs\",\"interaction_phase\":\"hover\",\"last_action\":\"SelectInventoryTab\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectInventoryTab\",\"error\":null},\"rendered\":true,\"selected_tab\":\"equip\",\"semantic_state\":\"ready\",\"text\":\"equip\",\"type\":\"Tabs\",\"value\":\"equip\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "0ff6dbf9b02c459c2b909a040e6d6a838c6fae8b9f0d238aa8f97fbb30c78f91"
+        },
+        "after": {
+          "path": "01-tab-equip.png",
+          "sha256": "92e0bccb2e0f1a243b960e5415bdf5d6311fbcc6f07b1759d3e503a4e3fc3f8a"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryItem",
+      "expected": "one click selects after the double-click interval",
+      "observed": "{\"active_surface\":\"r0c0\",\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"SelectInventoryItem\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \",\"r2c0\":\"r2c0   \",\"r2c1\":\"r2c1   \",\"r2c2\":\"r2c2   \",\"r2c3\":\"r2c3   \",\"r2c4\":\"r2c4   \",\"r2c5\":\"r2c5   \",\"r2c6\":\"r2c6   \",\"r3c0\":\"r3c0   \",\"r3c1\":\"r3c1   \",\"r3c2\":\"r3c2   \",\"r3c3\":\"r3c3   \",\"r3c4\":\"r3c4   \",\"r3c5\":\"r3c5   \",\"r3c6\":\"r3c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\"},\"opened_item\":\"\",\"rendered\":true,\"selected_item\":\"r0c0\",\"selected_items\":[],\"semantic_state\":\"selected\",\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c0\",\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "gesture_distinct": true
+      },
+      "frames": {
+        "before": {
+          "path": "01-tab-equip.png",
+          "sha256": "92e0bccb2e0f1a243b960e5415bdf5d6311fbcc6f07b1759d3e503a4e3fc3f8a"
+        },
+        "after": {
+          "path": "02-single-selected.png",
+          "sha256": "5cf5b42402b85e00ec9be82724c4d4b7f54fe16f92d0f4b3dffdc95d0872e0f8"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DoubleActivate",
+      "window_action": "OpenInventoryItem",
+      "expected": "double click opens once without a trailing single click",
+      "observed": "{\"active_surface\":\"r0c1\",\"detail_text\":\"所持品 1-2\\n個数 15\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"OpenInventoryItem\",\"last_error\":null,\"last_gesture\":\"DoubleActivate\",\"last_result\":{\"accepted\":true,\"action\":\"OpenInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \",\"r2c0\":\"r2c0   \",\"r2c1\":\"r2c1   \",\"r2c2\":\"r2c2   \",\"r2c3\":\"r2c3   \",\"r2c4\":\"r2c4   \",\"r2c5\":\"r2c5   \",\"r2c6\":\"r2c6   \",\"r3c0\":\"r3c0   \",\"r3c1\":\"r3c1   \",\"r3c2\":\"r3c2   \",\"r3c3\":\"r3c3   \",\"r3c4\":\"r3c4   \",\"r3c5\":\"r3c5   \",\"r3c6\":\"r3c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\"},\"opened_item\":\"r0c1\",\"rendered\":true,\"selected_item\":\"r0c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "opened_once": true,
+        "no_single": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-single-selected.png",
+          "sha256": "5cf5b42402b85e00ec9be82724c4d4b7f54fe16f92d0f4b3dffdc95d0872e0f8"
+        },
+        "after": {
+          "path": "03-double-opened.png",
+          "sha256": "e3eaced5fa79cbf4e5db1de1da6af3499696cd6a558168833c3d4c4d700d145e"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleInventorySelection",
+      "expected": "Control click toggles independent multi-selection",
+      "observed": "{\"active_surface\":\"r0c2\",\"detail_text\":\"所持品 1-2\\n個数 15\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c0\",\"r0c1\":\"r0c1\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":0,\"last_action\":\"ToggleInventorySelection\",\"last_error\":null,\"last_gesture\":\"ModifierActivate\",\"last_result\":{\"accepted\":true,\"action\":\"ToggleInventorySelection\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \",\"r2c0\":\"r2c0   \",\"r2c1\":\"r2c1   \",\"r2c2\":\"r2c2   \",\"r2c3\":\"r2c3   \",\"r2c4\":\"r2c4   \",\"r2c5\":\"r2c5   \",\"r2c6\":\"r2c6   \",\"r3c0\":\"r3c0   \",\"r3c1\":\"r3c1   \",\"r3c2\":\"r3c2   \",\"r3c3\":\"r3c3   \",\"r3c4\":\"r3c4   \",\"r3c5\":\"r3c5   \",\"r3c6\":\"r3c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\"},\"opened_item\":\"r0c1\",\"rendered\":true,\"selected_item\":\"r0c1\",\"selected_items\":[\"r0c2\"],\"semantic_state\":\"selected\",\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "toggled": true,
+        "primary_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-double-opened.png",
+          "sha256": "e3eaced5fa79cbf4e5db1de1da6af3499696cd6a558168833c3d4c4d700d145e"
+        },
+        "after": {
+          "path": "04-modifier-selected.png",
+          "sha256": "3f5672fbb8827996027490b489735a9d45b7271efe1d3a5c416d5325fd28ee20"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem",
+      "expected": "31-sample drag swaps one pair atomically and suppresses click",
+      "observed": "{\"active_surface\":\"r0c0\",\"detail_text\":\"所持品 1-2\\n個数 15\",\"detail_visible\":true,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"geometry\":{\"height\":244,\"width\":378,\"x\":42,\"y\":731},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"inventory.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"r0c1\",\"r0c1\":\"r0c0\",\"r0c2\":\"r0c2\",\"r0c3\":\"r0c3\",\"r0c4\":\"r0c4\",\"r0c5\":\"r0c5\",\"r0c6\":\"r0c6\",\"r1c0\":\"r1c0\",\"r1c1\":\"r1c1\",\"r1c2\":\"r1c2\",\"r1c3\":\"r1c3\",\"r1c4\":\"r1c4\",\"r1c5\":\"r1c5\",\"r1c6\":\"r1c6\",\"r2c0\":\"r2c0\",\"r2c1\":\"r2c1\",\"r2c2\":\"r2c2\",\"r2c3\":\"r2c3\",\"r2c4\":\"r2c4\",\"r2c5\":\"r2c5\",\"r2c6\":\"r2c6\",\"r3c0\":\"r3c0\",\"r3c1\":\"r3c1\",\"r3c2\":\"r3c2\",\"r3c3\":\"r3c3\",\"r3c4\":\"r3c4\",\"r3c5\":\"r3c5\",\"r3c6\":\"r3c6\"},\"item_version\":1,\"last_action\":\"MoveInventoryItem\",\"last_error\":null,\"last_gesture\":\"DragDrop\",\"last_result\":{\"accepted\":true,\"action\":\"MoveInventoryItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"r0c0   \",\"r0c1\":\"r0c1   \",\"r0c2\":\"r0c2   \",\"r0c3\":\"r0c3   \",\"r0c4\":\"r0c4   \",\"r0c5\":\"r0c5   \",\"r0c6\":\"r0c6   \",\"r1c0\":\"r1c0   \",\"r1c1\":\"r1c1   \",\"r1c2\":\"r1c2   \",\"r1c3\":\"r1c3   \",\"r1c4\":\"r1c4   \",\"r1c5\":\"r1c5   \",\"r1c6\":\"r1c6   \",\"r2c0\":\"r2c0   \",\"r2c1\":\"r2c1   \",\"r2c2\":\"r2c2   \",\"r2c3\":\"r2c3   \",\"r2c4\":\"r2c4   \",\"r2c5\":\"r2c5   \",\"r2c6\":\"r2c6   \",\"r3c0\":\"r3c0   \",\"r3c1\":\"r3c1   \",\"r3c2\":\"r3c2   \",\"r3c3\":\"r3c3   \",\"r3c4\":\"r3c4   \",\"r3c5\":\"r3c5   \",\"r3c6\":\"r3c6   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\"},\"opened_item\":\"r0c1\",\"rendered\":true,\"selected_item\":\"r0c1\",\"selected_items\":[],\"semantic_state\":\"selected\",\"surface_geometry\":{\"r0c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":731},\"r0c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":731},\"r0c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":731},\"r0c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":731},\"r0c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":731},\"r0c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":731},\"r0c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":731},\"r1c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":792},\"r1c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":792},\"r1c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":792},\"r1c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":792},\"r1c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":792},\"r1c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":792},\"r1c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":792},\"r2c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":853},\"r2c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":853},\"r2c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":853},\"r2c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":853},\"r2c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":853},\"r2c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":853},\"r2c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":853},\"r3c0\":{\"height\":61,\"width\":54,\"x\":42,\"y\":914},\"r3c1\":{\"height\":61,\"width\":54,\"x\":96,\"y\":914},\"r3c2\":{\"height\":61,\"width\":54,\"x\":150,\"y\":914},\"r3c3\":{\"height\":61,\"width\":54,\"x\":204,\"y\":914},\"r3c4\":{\"height\":61,\"width\":54,\"x\":258,\"y\":914},\"r3c5\":{\"height\":61,\"width\":54,\"x\":312,\"y\":914},\"r3c6\":{\"height\":61,\"width\":54,\"x\":366,\"y\":914}},\"text\":\"r0c1\",\"type\":\"SelectionView\",\"value\":\"r0c1\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "swapped_once": true,
+        "motion_factual": true,
+        "no_trailing_click": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-drag-before.png",
+          "sha256": "9c551742dfb00bfee00b08d1121c4fa6fda4625889cd0bd37d77744c56a2d72f"
+        },
+        "mid": {
+          "path": "05-drag-mid.png",
+          "sha256": "78e7ca3038c394e47642a12a56e97e42dc9935bf42353a207f265ed98c1b8bbc"
+        },
+        "after": {
+          "path": "05-drag-after.png",
+          "sha256": "492447c1fbfd1018d2b597a80ebbbee98bd60c334e99e60babbe7fd0d4f59a13"
+        }
+      },
+      "motion_samples": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Window follows 31 pointer samples",
+      "observed": "[50,401]",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "delta_applied": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-window-drag-before.png",
+          "sha256": "eacebbcc9f054ba369def358426a13f679d52a16c27c36eb9242b72df5c9df7b"
+        },
+        "mid": {
+          "path": "06-window-drag-mid.png",
+          "sha256": "6b326ff0c4c6dfa3bb9269b514157b95f70df2513ce215bd63b3245e46667243"
+        },
+        "after": {
+          "path": "06-window-drag-after.png",
+          "sha256": "49715e43fdc3ded34366d57327af3734031e18576b6d3e0557cbf3ee131f3330"
+        }
+      },
+      "motion_samples": [
+        [
+          0,
+          701
+        ],
+        [
+          1.66667175292969,
+          691
+        ],
+        [
+          3.33332824707031,
+          681
+        ],
+        [
+          5,
+          671
+        ],
+        [
+          6.66667175292969,
+          661
+        ],
+        [
+          8.33332824707031,
+          651
+        ],
+        [
+          10,
+          641
+        ],
+        [
+          11.6666717529297,
+          631
+        ],
+        [
+          13.3333282470703,
+          621
+        ],
+        [
+          15,
+          611
+        ],
+        [
+          16.6666717529297,
+          601
+        ],
+        [
+          18.3333282470703,
+          591
+        ],
+        [
+          20,
+          581
+        ],
+        [
+          21.6666717529297,
+          571
+        ],
+        [
+          23.3333282470703,
+          561
+        ],
+        [
+          25,
+          551
+        ],
+        [
+          26.6666717529297,
+          541
+        ],
+        [
+          28.3333282470703,
+          531
+        ],
+        [
+          30,
+          521
+        ],
+        [
+          31.6666717529297,
+          511
+        ],
+        [
+          33.3333282470703,
+          501
+        ],
+        [
+          35,
+          491
+        ],
+        [
+          36.6666717529297,
+          481
+        ],
+        [
+          38.3333282470703,
+          471
+        ],
+        [
+          40,
+          461
+        ],
+        [
+          41.6666717529297,
+          451
+        ],
+        [
+          43.3333282470703,
+          441
+        ],
+        [
+          45,
+          431
+        ],
+        [
+          46.6666717529297,
+          421
+        ],
+        [
+          48.3333282470703,
+          411
+        ],
+        [
+          50,
+          401
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "Resize",
+      "window_action": "ResizeWindow",
+      "expected": "resize clamps at the declared maximum and preserves local hit alignment",
+      "observed": "{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512]},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "maximum": true,
+        "continuous": true,
+        "aligned": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-resize-before.png",
+          "sha256": "49715e43fdc3ded34366d57327af3734031e18576b6d3e0557cbf3ee131f3330"
+        },
+        "mid": {
+          "path": "07-resize-mid.png",
+          "sha256": "0838f5ebadc9ba2dfa68a78788fa24d695f5b3d225c06156b38b6138c6bf2fc2"
+        },
+        "after": {
+          "path": "07-resize-after.png",
+          "sha256": "b307e7dd6c10d758152f8350edf42cb0ed9748f96e7d4b9fff62351ca9cfdecd"
+        }
+      },
+      "motion_samples": [
+        [
+          484,
+          303
+        ],
+        [
+          492.333312988281,
+          309.966674804688
+        ],
+        [
+          500.666687011719,
+          316.933349609375
+        ],
+        [
+          509,
+          323.900024414062
+        ],
+        [
+          517.333251953125,
+          330.866638183594
+        ],
+        [
+          525.666748046875,
+          337.833251953125
+        ],
+        [
+          534,
+          344.800048828125
+        ],
+        [
+          542.333251953125,
+          351.7666015625
+        ],
+        [
+          550.666748046875,
+          358.7333984375
+        ],
+        [
+          559,
+          365.699951171875
+        ],
+        [
+          567.333251953125,
+          372.666748046875
+        ],
+        [
+          575.666748046875,
+          379.63330078125
+        ],
+        [
+          584,
+          386.599975585938
+        ],
+        [
+          592.333251953125,
+          393.566650390625
+        ],
+        [
+          600.666748046875,
+          400.533325195312
+        ],
+        [
+          609,
+          407.5
+        ],
+        [
+          617.333251953125,
+          414.466674804688
+        ],
+        [
+          625.666748046875,
+          421.433349609375
+        ],
+        [
+          634,
+          428.400024414062
+        ],
+        [
+          642.333251953125,
+          435.36669921875
+        ],
+        [
+          650.666748046875,
+          442.333251953125
+        ],
+        [
+          659,
+          449.300048828125
+        ],
+        [
+          667.333251953125,
+          456.2666015625
+        ],
+        [
+          675.666748046875,
+          463.2333984375
+        ],
+        [
+          684,
+          470.199951171875
+        ],
+        [
+          692.333251953125,
+          477.166748046875
+        ],
+        [
+          700.666748046875,
+          484.13330078125
+        ],
+        [
+          709,
+          491.099975585938
+        ],
+        [
+          717.333251953125,
+          498.066650390625
+        ],
+        [
+          725.666748046875,
+          505.033325195312
+        ],
+        [
+          734,
+          512
+        ]
+      ]
+    },
+    {
+      "control_id": "inventory.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "purpose-built title Window preserves the resized geometry on restore",
+      "observed": "{\"minimized\":{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":true,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512]},\"size\":[484,28],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0},\"restored\":{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512]},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "minimized": true,
+        "restored": true,
+        "position_preserved": true,
+        "detail_restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-minimize-before.png",
+          "sha256": "240d49bea7d6e88bbb4a27f6a7fcd896b347c36ab71d6276e83ace00d7f18623"
+        },
+        "after": {
+          "path": "08-minimized.png",
+          "sha256": "266c41cefc529a64248a1f0494e523b23a97f4dc8c41388a919aadbaf2ea3e0d"
+        },
+        "restored": {
+          "path": "08-minimize-restored.png",
+          "sha256": "240d49bea7d6e88bbb4a27f6a7fcd896b347c36ab71d6276e83ace00d7f18623"
+        }
+      }
+    },
+    {
+      "control_id": "inventory.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "close hides in one frame",
+      "observed": "{\"detail_item\":\"r0c1\",\"geometry_version\":1,\"id\":\"inventory\",\"last_action\":\"ResizeWindow\",\"last_error\":null,\"last_gesture\":\"Resize\",\"minimized\":false,\"pending\":false,\"position\":[50,401],\"resize\":{\"active\":false,\"clamped\":[734,512],\"motion_samples\":31,\"requested\":[734,512]},\"size\":[734,512],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-close-before.png",
+          "sha256": "240d49bea7d6e88bbb4a27f6a7fcd896b347c36ab71d6276e83ace00d7f18623"
+        },
+        "after": {
+          "path": "09-close-after.png",
+          "sha256": "a072207cdd282e3b5b56cf71599c46054abbc88e9ee051131b3d959fcd5fa371"
+        }
+      }
+    },
+    {
+      "control_id": "inventory",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Escape closes the frontmost Inventory Window",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"inventory\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"position\":[0,701],\"resize\":{\"active\":false,\"clamped\":[0,0],\"motion_samples\":0,\"requested\":[0,0]},\"size\":[484,303],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "gesture_routed": true,
+        "action_routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-key-before.png",
+          "sha256": "0ff6dbf9b02c459c2b909a040e6d6a838c6fae8b9f0d238aa8f97fbb30c78f91"
+        },
+        "after": {
+          "path": "10-key-after.png",
+          "sha256": "a072207cdd282e3b5b56cf71599c46054abbc88e9ee051131b3d959fcd5fa371"
+        }
+      }
+    }
+  ]
+}

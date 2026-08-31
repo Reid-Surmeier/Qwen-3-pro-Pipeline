@@ -1,0 +1,12 @@
+{
+  "schema_version": "annotation-v1",
+  "artifact_path": "artifacts/runs/truth-social-inside-sticker-v001/truth-social-inside-sticker-v001.png",
+  "sha256": "d9366592ef73be79aa3a2e202df895a82eea14026bbd551da3e680a38afbe1ab",
+  "role": "approved_output",
+  "source_ref": null,
+  "annotator": "claude-fable-5-vision/2026-08-26",
+  "annotation_basis": "model-vision advisory; regions approximate",
+  "defects": [],
+  "disposition": "accepted",
+  "note": "Intel-Inside parody control: clean script, oval gap matches donor convention, silhouette alpha present (RGBA), print grain plausible."
+}

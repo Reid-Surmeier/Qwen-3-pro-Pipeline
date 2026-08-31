@@ -1,0 +1,1214 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 131,
+    "commit_sha": "ef168834d6bb936528a0ba564754177dda7d5efe",
+    "window_id": "status"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "status.minimize",
+    "status.close",
+    "status.attribute.str",
+    "status.attribute.agi",
+    "status.attribute.vit",
+    "status.attribute.int",
+    "status.attribute.dex",
+    "status.attribute.luk"
+  ],
+  "required_actions": [
+    {
+      "control_id": "status",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "status",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "status.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized"
+    },
+    {
+      "control_id": "status.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute"
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "12-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "status.minimize",
+      "gesture": "Activate",
+      "window_action": "ToggleMinimized",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "minimized": true,
+        "restored": true,
+        "semantic_state_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "01-minimized.png",
+          "sha256": "098de003419d3e7eae2110bf77486286fa58b3cfd2dd66646553784ef4c862e7"
+        },
+        "reversed": {
+          "path": "01b-restored.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "restored": {
+          "path": "01b-restored.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 89023,
+        "intended_region_changed_pixels": 89023,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":2,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":64,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":true,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "2-str-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "2-str-activated.png",
+          "sha256": "6987d3f4df8bd0aaef675a8c8464423929eccaa3a89790e2b24080cb22489dce"
+        },
+        "reversed": {
+          "path": "2b-str-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22597,
+        "intended_region_changed_pixels": 22597,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.str",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "2c-str-context-before.png",
+          "sha256": "6987d3f4df8bd0aaef675a8c8464423929eccaa3a89790e2b24080cb22489dce"
+        },
+        "after": {
+          "path": "2d-str-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "2e-str-context-reversed.png",
+          "sha256": "6987d3f4df8bd0aaef675a8c8464423929eccaa3a89790e2b24080cb22489dce"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22597,
+        "intended_region_changed_pixels": 22597,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":2,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":141,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":65,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "3-agi-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "3-agi-activated.png",
+          "sha256": "09e12914b97ed4d7043ac62e000ffef6ec5ed6ec7880041a5c82cc1d3bb9e989"
+        },
+        "reversed": {
+          "path": "3b-agi-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22591,
+        "intended_region_changed_pixels": 22591,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.agi",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "3c-agi-context-before.png",
+          "sha256": "09e12914b97ed4d7043ac62e000ffef6ec5ed6ec7880041a5c82cc1d3bb9e989"
+        },
+        "after": {
+          "path": "3d-agi-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "3e-agi-context-reversed.png",
+          "sha256": "09e12914b97ed4d7043ac62e000ffef6ec5ed6ec7880041a5c82cc1d3bb9e989"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22591,
+        "intended_region_changed_pixels": 22591,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":2,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":21,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":true},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "4-vit-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "4-vit-activated.png",
+          "sha256": "3ee5a0cf959afe677e25ee6904fa3f04edceaaef3d6c5861033d92c9b73c1910"
+        },
+        "reversed": {
+          "path": "4b-vit-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22598,
+        "intended_region_changed_pixels": 22598,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.vit",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "4c-vit-context-before.png",
+          "sha256": "3ee5a0cf959afe677e25ee6904fa3f04edceaaef3d6c5861033d92c9b73c1910"
+        },
+        "after": {
+          "path": "4d-vit-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "4e-vit-context-reversed.png",
+          "sha256": "3ee5a0cf959afe677e25ee6904fa3f04edceaaef3d6c5861033d92c9b73c1910"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22598,
+        "intended_region_changed_pixels": 22598,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":2,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":64,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":65,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "5-dex-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "5-dex-activated.png",
+          "sha256": "62c1482ee8446ec3b7ed267ff4bbd7c543a93ea0db1a02ab4cfb90ac017f5a93"
+        },
+        "reversed": {
+          "path": "5b-dex-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22599,
+        "intended_region_changed_pixels": 22599,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.dex",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "5c-dex-context-before.png",
+          "sha256": "62c1482ee8446ec3b7ed267ff4bbd7c543a93ea0db1a02ab4cfb90ac017f5a93"
+        },
+        "after": {
+          "path": "5d-dex-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "5e-dex-context-reversed.png",
+          "sha256": "62c1482ee8446ec3b7ed267ff4bbd7c543a93ea0db1a02ab4cfb90ac017f5a93"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22599,
+        "intended_region_changed_pixels": 22599,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":2,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":4,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":2,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":1}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hover_exposed": true,
+        "pressed_exposed": true,
+        "one_version": true,
+        "points_spent": true,
+        "attribute_incremented": true,
+        "derived_same_frame": true,
+        "reversed_semantically": true
+      },
+      "frames": {
+        "before": {
+          "path": "6-luk-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "6-luk-activated.png",
+          "sha256": "921c1521ff764dfe293cd0efad2c7099fb8c203bab5dad42e02c3b2a42ba1888"
+        },
+        "reversed": {
+          "path": "6b-luk-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22596,
+        "intended_region_changed_pixels": 22596,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.luk",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":2}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "refunded": true,
+        "source_value": true,
+        "source_overlay_hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "6c-luk-context-before.png",
+          "sha256": "921c1521ff764dfe293cd0efad2c7099fb8c203bab5dad42e02c3b2a42ba1888"
+        },
+        "after": {
+          "path": "6d-luk-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "6e-luk-context-reversed.png",
+          "sha256": "921c1521ff764dfe293cd0efad2c7099fb8c203bab5dad42e02c3b2a42ba1888"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 22596,
+        "intended_region_changed_pixels": 22596,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "Activate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "rejected_named": true,
+        "state_atomic": true,
+        "unavailable": true,
+        "transient_feedback": true
+      },
+      "frames": {
+        "before": {
+          "path": "7-int-activate-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "mid": {
+          "path": "7a-int-activate-mid.png",
+          "sha256": "6f1459c4b60706f6462d6b77d031527610c8ab12e46b7aed787752ddc36ac1ed"
+        },
+        "after": {
+          "path": "7b-int-activate-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "7c-int-activate-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1010,
+        "intended_region_changed_pixels": 550,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "status.attribute.int",
+      "gesture": "ContextActivate",
+      "window_action": "StepStatusAttribute",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"attributes\":{\"status.attribute.agi\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Agi\"},\"status.attribute.dex\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Dex\"},\"status.attribute.int\":{\"base\":92,\"bonus\":10,\"cost\":11,\"initial_base\":92,\"key\":\"Int\"},\"status.attribute.luk\":{\"base\":1,\"bonus\":5,\"cost\":2,\"initial_base\":1,\"key\":\"Luk\"},\"status.attribute.str\":{\"base\":1,\"bonus\":2,\"cost\":2,\"initial_base\":1,\"key\":\"Str\"},\"status.attribute.vit\":{\"base\":1,\"bonus\":3,\"cost\":2,\"initial_base\":1,\"key\":\"Vit\"}},\"availability\":{\"status.attribute.agi\":true,\"status.attribute.dex\":true,\"status.attribute.int\":false,\"status.attribute.luk\":true,\"status.attribute.str\":true,\"status.attribute.vit\":true},\"derived\":{\"Aspd\":140,\"Atk\":63,\"Critical\":3,\"Def\":20,\"Flee\":64,\"Hit\":64,\"MatkMax\":502,\"MatkMin\":298,\"Mdef\":107},\"points\":4,\"reverse_availability\":{\"status.attribute.agi\":false,\"status.attribute.dex\":false,\"status.attribute.int\":false,\"status.attribute.luk\":false,\"status.attribute.str\":false,\"status.attribute.vit\":false},\"version\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": true,
+      "assertions": {
+        "rejected_named": true,
+        "state_atomic": true,
+        "unavailable": true,
+        "transient_feedback": true
+      },
+      "frames": {
+        "before": {
+          "path": "8-int-context-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "mid": {
+          "path": "8a-int-context-mid.png",
+          "sha256": "6f1459c4b60706f6462d6b77d031527610c8ab12e46b7aed787752ddc36ac1ed"
+        },
+        "after": {
+          "path": "8b-int-context-after.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "reversed": {
+          "path": "8c-int-context-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": false,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "mid_pixel_metrics": {
+        "full_frame_changed_pixels": 1010,
+        "intended_region_changed_pixels": 550,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "status",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[60,251],\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved_x": true,
+        "moved_y": true,
+        "continuous": true
+      },
+      "frames": {
+        "before": {
+          "path": "9-move-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "mid": {
+          "path": "9a-move-mid.png",
+          "sha256": "b631a0b2f32e2bb3951e23727b9bd56865920f2712a345cfb194736af0f399ab"
+        },
+        "after": {
+          "path": "9b-moved.png",
+          "sha256": "ce237209057dc3fe4484977d12c62c5f8ae0fe8c3bd19a2413d8d7034452453f"
+        },
+        "reversed": {
+          "path": "9c-move-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 126330,
+        "intended_region_changed_pixels": 97748,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          250,
+          220
+        ],
+        [
+          252,
+          221.33333333333334
+        ],
+        [
+          254,
+          222.66666666666666
+        ],
+        [
+          256,
+          224
+        ],
+        [
+          258,
+          225.33333333333334
+        ],
+        [
+          260,
+          226.66666666666666
+        ],
+        [
+          262,
+          228
+        ],
+        [
+          264,
+          229.33333333333334
+        ],
+        [
+          266,
+          230.66666666666666
+        ],
+        [
+          268,
+          232
+        ],
+        [
+          270,
+          233.33333333333334
+        ],
+        [
+          272,
+          234.66666666666666
+        ],
+        [
+          274,
+          236
+        ],
+        [
+          276,
+          237.33333333333334
+        ],
+        [
+          278,
+          238.66666666666666
+        ],
+        [
+          280,
+          240
+        ],
+        [
+          282,
+          241.33333333333334
+        ],
+        [
+          284,
+          242.66666666666666
+        ],
+        [
+          286,
+          244
+        ],
+        [
+          288,
+          245.33333333333334
+        ],
+        [
+          290,
+          246.66666666666666
+        ],
+        [
+          292,
+          248
+        ],
+        [
+          294,
+          249.33333333333334
+        ],
+        [
+          296,
+          250.66666666666666
+        ],
+        [
+          298,
+          252
+        ],
+        [
+          300,
+          253.33333333333334
+        ],
+        [
+          302,
+          254.66666666666669
+        ],
+        [
+          304,
+          256
+        ],
+        [
+          306,
+          257.3333333333333
+        ],
+        [
+          308,
+          258.6666666666667
+        ],
+        [
+          310,
+          260
+        ]
+      ]
+    },
+    {
+      "control_id": "status.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-close-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "10a-closed.png",
+          "sha256": "b0d029b6366e7569ca62c3fc4e9f1974711c9cc02b0a178ba5c480a5ddae2c57"
+        },
+        "reversed": {
+          "path": "10b-close-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 100672,
+        "intended_region_changed_pixels": 100672,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "status",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "manifest and retained Status Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"status\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/status/source-plate.png\",\"position\":[0,211],\"resize\":{\"active\":false,\"clamped\":[484,208],\"motion_samples\":0,\"requested\":[484,208],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[484,208],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-key-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "11a-key-closed.png",
+          "sha256": "b0d029b6366e7569ca62c3fc4e9f1974711c9cc02b0a178ba5c480a5ddae2c57"
+        },
+        "reversed": {
+          "path": "11b-key-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 100672,
+        "intended_region_changed_pixels": 100672,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}
