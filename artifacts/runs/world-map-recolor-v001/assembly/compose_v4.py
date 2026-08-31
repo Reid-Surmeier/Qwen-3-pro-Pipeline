@@ -180,8 +180,13 @@ if copies:
     labD, nD = ndimage.label(ndimage.binary_dilation(dd, iterations=3))
     for i, sl in enumerate(ndimage.find_objects(labD), start=1):
         h_, w_ = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
-        if h_ <= 26 and w_ <= 110 and float(diff[sl].mean()) >= 0.08 and int(SHADOW[sl].sum()) >= 6:
-            badge_boxes.append((sl[1].start, sl[0].start, sl[1].stop, sl[0].stop))
+        if h_ <= 26 and w_ <= 110 and float(diff[sl].mean()) >= 0.08:
+            f_top = any(dark_bs[yy_, sl[1].start:sl[1].stop].mean() >= 0.55
+                        for yy_ in range(max(0, sl[0].start - 3), min(H, sl[0].start + 3)))
+            f_bot = any(dark_bs[yy_, sl[1].start:sl[1].stop].mean() >= 0.55
+                        for yy_ in range(max(0, sl[0].stop - 3), min(H, sl[0].stop + 3)))
+            if int(SHADOW[sl].sum()) >= 6 or (f_top and f_bot):
+                badge_boxes.append((sl[1].start, sl[0].start, sl[1].stop, sl[0].stop))
 badge_boxes += pair_boxes(BLACK) + pair_boxes(BLACK, transpose=True)
 dedup = []
 for b in badge_boxes:
@@ -254,8 +259,10 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
     if not (20 <= cnt <= 400) or cnt < 0.8 * hh * ww2:
         continue
-    if m[0, :].sum() < 0.9 * ww2 or m[-1, :].sum() < 0.9 * ww2:
-        continue          # true marker boxes have dead-straight top and bottom edges
+    tall = hh >= 2.5 * ww2 and m[:, 0].sum() >= 0.9 * hh and m[:, -1].sum() >= 0.9 * hh
+    flatb = m[0, :].sum() >= 0.9 * ww2 and m[-1, :].sum() >= 0.9 * ww2
+    if not (tall or flatb):
+        continue          # true marker boxes have dead-straight edges
     sl2 = tuple(slice(max(0, a.start - 3), a.stop + 3) for a in sl)
     m2 = np.zeros((sl2[0].stop - sl2[0].start, sl2[1].stop - sl2[1].start), bool)
     m2[sl[0].start - sl2[0].start:sl[0].stop - sl2[0].start,
@@ -264,11 +271,11 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
     ring3 = ndimage.binary_dilation(m2, iterations=3) & ~ndimage.binary_dilation(m2, iterations=2)
     frame_frac = float((BLACK | SHADOW)[sl2][ring1].mean())
     sea_frac = float((WHITE | GRID)[sl2][ring3].mean())
-    if frame_frac >= 0.5 and sea_frac >= 0.6:
+    if frame_frac >= 0.5 and sea_frac >= (0.35 if tall else 0.6):
         R1[sl2[0].start:sl2[0].stop, sl2[1].start:sl2[1].stop] |= ndimage.binary_dilation(m2, iterations=2)
 
 wiped = (R1 | R2 | R3 | R4 | R5) & ~credit
-wiped |= ndimage.binary_dilation(R1 | R2, iterations=2) & SHADOW & ~credit
+wiped |= SHADOW & ~credit
 # a glyph that lives mostly OUTSIDE the boxes is a map label clipped by padding: spare it
 labG, nG = ndimage.label((BLACK | NAVY) & ~R3, structure=np.ones((3, 3)))
 szG = ndimage.sum((BLACK | NAVY) & ~R3, labG, range(1, nG + 1))
@@ -276,6 +283,20 @@ inG = ndimage.mean(wiped.astype(np.float32), labG, range(1, nG + 1))
 spare = np.zeros(nG + 1, bool)
 spare[1:] = (szG <= 80) & (inG > 0) & (inG < 0.8)
 wiped &= ~spare[labG]
+labN, nN = ndimage.label(NAVY, structure=np.ones((3, 3)))
+szN = ndimage.sum(NAVY, labN, range(1, nN + 1))
+spareN = np.zeros(nN + 1, bool)
+spareN[1:] = szN <= 120
+wiped &= ~(spareN[labN] & NAVY)      # city labels are navy; annotations never are
+diff_d3 = ndimage.binary_dilation(diff, iterations=3) if copies else np.zeros((H, W), bool)
+annotish = R2 | R3 | R5 | ndimage.binary_dilation(SHADOW, iterations=2)
+labB3, nB3 = ndimage.label(BLACK, structure=np.ones((3, 3)))
+szB3 = ndimage.sum(BLACK, labB3, range(1, nB3 + 1))
+difB3 = ndimage.mean(diff_d3.astype(np.float32), labB3, range(1, nB3 + 1))
+annB3 = ndimage.mean(annotish.astype(np.float32), labB3, range(1, nB3 + 1))
+spareB = np.zeros(nB3 + 1, bool)
+spareB[1:] = (szB3 <= 80) & (difB3 == 0.0) & (annB3 < 0.3)
+wiped &= ~(spareB[labB3] & BLACK)    # black glyphs with no changing digits nearby are labels
 
 # ---------------------------------------------------------------- recolour
 labp, npatch = ndimage.label(fills)
@@ -346,16 +367,23 @@ O[GREY & ~credit & ~strip] = (0xB8, 0xB8, 0xB8)
 
 # ---------------------------------------------------------------- context fill
 donor_land = fills & ~wiped                     # post-recolour palette pixels, source frame
+donor_bg = (WHITE | GRID) & ~wiped
 dl = ndimage.distance_transform_edt(~donor_land, return_distances=True, return_indices=True)
+db = ndimage.distance_transform_edt(~donor_bg)
 wy, wx = np.where(wiped)
-is_land = (regcid[wy, wx] >= 0) & (dl[0][wy, wx] <= 25)
+dz = dl[0][wy, wx] - db[wy, wx]
+is_land = np.where(np.abs(dz) > 8, dz < 0, regcid[wy, wx] >= 0)   # grid votes only in ambiguity (#143)
 ly, lx = wy[is_land], wx[is_land]
 O[ly, lx] = O[dl[1][0][ly, lx], dl[1][1][ly, lx]]
 sy, sx = wy[~is_land], wx[~is_land]
 O[sy, sx] = (0xFC, 0xFE, 0xFC)
-# yellow texture dots stranded on recoloured land take the neighbour patch colour
-dot = YELLOW & ~wiped & ~credit
-dy2, dx2 = np.where(dot & (dl[0] <= 3))
+# stranded texture/blend pixels on recoloured land take the neighbour patch colour
+known = fills | WHITE | GRID | BLACK | NAVY | GREY | SHADOW | GWLINE | ORANGE
+odd = (~known | YELLOW) & ~wiped & ~credit & ~ndimage.binary_dilation(GREY, iterations=1)
+# grey-line anti-aliasing lightens with its line instead
+grey_aa = (~known) & ~wiped & ~credit & ndimage.binary_dilation(GREY, iterations=1)
+O[grey_aa] = (0xB8, 0xB8, 0xB8)
+dy2, dx2 = np.where(odd & (dl[0] <= 3))
 O[dy2, dx2] = O[dl[1][0][dy2, dx2], dl[1][1][dy2, dx2]]
 
 # restore lat/long grid through wiped areas where the fill came out white

@@ -3,8 +3,8 @@
   "patches_recoloured": 1461,
   "per_pixel_splits": 21,
   "white_cells_recoloured": 0,
-  "plates_detected": 35,
-  "wiped_px": 50693,
+  "plates_detected": 60,
+  "wiped_px": 67795,
   "inputs": [
     "countries-registered.npy (#146)",
     "pinned-country-colours.json (#145)"
