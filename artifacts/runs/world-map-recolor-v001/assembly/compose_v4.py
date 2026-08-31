@@ -143,9 +143,9 @@ def find_runs(mask, lo=28, hi=140):
                 runs.setdefault(y, []).append((int(a), int(b)))
     return runs
 
-def pair_boxes(mask, transpose=False, hi=140):
+def pair_boxes(mask, transpose=False, hi=140, lo=28):
     m = mask.T if transpose else mask
-    runs = find_runs(m, hi=hi)
+    runs = find_runs(m, lo=lo, hi=hi)
     boxes = []
     taken = np.zeros(m.shape, bool)
     for y in sorted(runs):
@@ -198,17 +198,32 @@ for b in badge_boxes:
         dedup.append(b)
 grown = []
 for (x0, y0, x1, y1) in dedup:
-    for _ in range(6):
+    for _ in range(16):
         g = False
         if y0 > 0 and dark_bs[y0 - 1, max(0, x0):x1].mean() > 0.75:
             y0 -= 1; g = True
         if y1 < H and dark_bs[min(H - 1, y1), max(0, x0):x1].mean() > 0.75:
             y1 += 1; g = True
-        if x0 > 0 and dark_bs[max(0, y0):y1, x0 - 1].mean() > 0.75:
+        if x0 > 2 and dark_bs[max(0, y0):y1, x0 - 3:x0].mean() > 0.25:
+            x0 -= 3; g = True
+        elif x0 > 0 and dark_bs[max(0, y0):y1, x0 - 1].mean() > 0.35:
             x0 -= 1; g = True
-        if x1 < W and dark_bs[max(0, y0):y1, min(W - 1, x1)].mean() > 0.75:
+        if x1 < W - 3 and dark_bs[max(0, y0):y1, x1:x1 + 3].mean() > 0.25:
+            x1 += 3; g = True
+        elif x1 < W and dark_bs[max(0, y0):y1, min(W - 1, x1)].mean() > 0.35:
             x1 += 1; g = True
         if not g:
+            break
+    for _ in range(3):      # roll overshoot back off near-empty edge columns/rows
+        if x1 - x0 > 8 and dark_bs[max(0, y0):y1, x0].mean() < 0.05:
+            x0 += 1
+        elif x1 - x0 > 8 and dark_bs[max(0, y0):y1, x1 - 1].mean() < 0.05:
+            x1 -= 1
+        elif y1 - y0 > 8 and dark_bs[y0, max(0, x0):x1].mean() < 0.05:
+            y0 += 1
+        elif y1 - y0 > 8 and dark_bs[y1 - 1, max(0, x0):x1].mean() < 0.05:
+            y1 -= 1
+        else:
             break
     grown.append((int(x0), int(y0), int(x1), int(y1)))
 R1 = np.zeros((H, W), bool)
@@ -262,7 +277,7 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
     m = labf[sl] == i
     cnt = int(m.sum())
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
-    if not (20 <= cnt <= 400):
+    if not (12 <= cnt <= 400):
         continue
     tall = hh >= 1.6 * ww2
     straight4 = (m[0, :].sum() >= 0.75 * ww2 and m[-1, :].sum() >= 0.75 * ww2
@@ -410,7 +425,10 @@ sy, sx = wy[~is_land], wx[~is_land]
 O[sy, sx] = (0xFC, 0xFE, 0xFC)
 gridland = regcid >= 0
 coast = gridland & ~ndimage.binary_erosion(gridland, iterations=1)
-stroke = coast & wiped & ~ndimage.binary_dilation((DARK | GWLINE) & ~wiped, iterations=2)
+landmap = np.zeros((H, W), bool)
+landmap[wy[is_land], wx[is_land]] = True
+stroke = (coast & wiped & ~ndimage.binary_dilation((DARK | GWLINE) & ~wiped, iterations=2)
+          & ndimage.binary_dilation(landmap, iterations=2))
 O[stroke] = (0x04, 0x02, 0x04)
 # stranded texture/blend pixels on recoloured land take the neighbour patch colour
 known = fills | WHITE | GRID | BLACK | NAVY | GREY | SHADOW | GWLINE | ORANGE
@@ -427,11 +445,52 @@ wnow = (O == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2)
 gg = wiped & gridmask & wnow
 O[gg] = (0xCC, 0xCE, 0xFC)
 
+# residual self-clean: run plate detection on the OUTPUT; anything found is a leftover
+for _it in range(3):
+    darkO = (O == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2) & ~credit
+    resid = [b for b in pair_boxes(darkO, lo=14)]
+    resid += [b for b in pair_boxes(darkO, transpose=True, hi=220)
+              if b[2] - b[0] <= 18 and float(fills[b[1]:b[3], b[0]:b[2]].mean()) < 0.25]
+    resid = [b for b in resid if not credit[max(0, b[1]):b[3], max(0, b[0]):b[2]].any()]
+    if not resid:
+        break
+    w2 = np.zeros((H, W), bool)
+    for (x0, y0, x1, y1) in resid:
+        w2[max(0, y0 - 2):y1 + 3, max(0, x0 - 2):x1 + 3] = True
+    w2 &= ~ndimage.binary_dilation(NAVY, iterations=1)      # never touch labels
+    wy2, wx2 = np.where(w2)
+    agree2 = (regcid[wy2, wx2] >= 0) & ((np.load("countries-raw.npy").astype(np.int32)[wy2, wx2] >= 0) | (dl[0][wy2, wx2] <= 10))
+    isl2 = agree2 & anyNear[wy2, wx2]
+    l2 = np.where(isl2)[0]
+    hc2 = regcid[wy2[l2], wx2[l2]] >= 0
+    O[wy2[l2[hc2]], wx2[l2[hc2]]] = colour_of[regcid[wy2[l2[hc2]], wx2[l2[hc2]]]]
+    O[wy2[l2[~hc2]], wx2[l2[~hc2]]] = O[dl[1][0][wy2[l2[~hc2]], wx2[l2[~hc2]]], dl[1][1][wy2[l2[~hc2]], wx2[l2[~hc2]]]]
+    s2 = np.where(~isl2)[0]
+    O[wy2[s2], wx2[s2]] = (0xFC, 0xFE, 0xFC)
+    gg2 = w2 & gridmask & (O == np.array((0xFC, 0xFE, 0xFC), np.int16)).all(axis=2)
+    O[gg2] = (0xCC, 0xCE, 0xFC)
+    wiped |= w2
+    print("residual boxes re-wiped:", len(resid))
+
 # plate crumbs: small isolated dark clusters hugging wipe boxes, ring free of dark
 pal_set0 = {tuple(int(v) for v in c) for c in colour_of}
+# source-black structures >80px containing no fetch-diff are map ink (borders/coasts):
+# their orphaned fragments are never debris
+labMI, nMI = ndimage.label(BLACK, structure=np.ones((3, 3)))
+szMI = ndimage.sum(BLACK, labMI, range(1, nMI + 1))
+difMI = ndimage.sum(ndimage.binary_dilation(diff, iterations=1).astype(np.float32), labMI, range(1, nMI + 1))
+objsMI = ndimage.find_objects(labMI)
+lineMI = np.zeros(nMI + 1, bool)
+for j in range(1, nMI + 1):
+    slm = objsMI[j - 1]
+    md = max(slm[0].stop - slm[0].start, slm[1].stop - slm[1].start)
+    lineMI[j] = md >= 8 and szMI[j - 1] <= 2.2 * md
+keepMI = np.zeros(nMI + 1, bool)
+keepMI[1:] = (difMI == 0) & ((szMI > 80) | lineMI[1:])
+map_ink = keepMI[labMI]
 darkC = ((O == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2)
          | (O == np.array((0x34, 0x32, 0x34), np.int16)).all(axis=2)) & ~credit
-nearW = ndimage.binary_dilation(R1 | R2, iterations=6)
+nearW = ndimage.binary_dilation(R1 | R2, iterations=2)
 labK, nK = ndimage.label(ndimage.binary_dilation(darkC, iterations=1), structure=np.ones((3, 3)))
 n_crumb = 0
 for i, slk in enumerate(ndimage.find_objects(labK), start=1):
@@ -441,8 +500,10 @@ for i, slk in enumerate(ndimage.find_objects(labK), start=1):
     cnt = int(actual.sum())
     if cnt == 0 or cnt > 26:
         continue
-    if float(nearW[sl2][actual].mean()) < 0.7:
-        continue
+    if not nearW[sl2][actual].all():
+        continue          # every debris pixel hugs a wipe box; map ink extends away
+    if map_ink[sl2][actual].any():
+        continue          # orphaned piece of the source border network, not debris
     ring = ndimage.binary_dilation(blob, iterations=2) & ~blob
     if darkC[sl2][ring].any():
         continue

@@ -161,17 +161,32 @@ if second.exists():
 for (bx0, by0, bx1, by1) in _boxes:
     # grow to the true border like the composer does
     x0, y0, x1, y1 = bx0, by0, bx1, by1
-    for _ in range(6):
+    for _ in range(16):
         g = False
         if y0 > 0 and dark_bs2[y0 - 1, max(0, x0):x1].mean() > 0.75:
             y0 -= 1; g = True
         if y1 < H and dark_bs2[min(H - 1, y1), max(0, x0):x1].mean() > 0.75:
             y1 += 1; g = True
-        if x0 > 0 and dark_bs2[max(0, y0):y1, x0 - 1].mean() > 0.75:
+        if x0 > 2 and dark_bs2[max(0, y0):y1, x0 - 3:x0].mean() > 0.25:
+            x0 -= 3; g = True
+        elif x0 > 0 and dark_bs2[max(0, y0):y1, x0 - 1].mean() > 0.35:
             x0 -= 1; g = True
-        if x1 < W and dark_bs2[max(0, y0):y1, min(W - 1, x1)].mean() > 0.75:
+        if x1 < W - 3 and dark_bs2[max(0, y0):y1, x1:x1 + 3].mean() > 0.25:
+            x1 += 3; g = True
+        elif x1 < W and dark_bs2[max(0, y0):y1, min(W - 1, x1)].mean() > 0.35:
             x1 += 1; g = True
         if not g:
+            break
+    for _ in range(3):      # roll overshoot back off near-empty edge columns/rows
+        if x1 - x0 > 8 and dark_bs2[max(0, y0):y1, x0].mean() < 0.05:
+            x0 += 1
+        elif x1 - x0 > 8 and dark_bs2[max(0, y0):y1, x1 - 1].mean() < 0.05:
+            x1 -= 1
+        elif y1 - y0 > 8 and dark_bs2[y0, max(0, x0):x1].mean() < 0.05:
+            y0 += 1
+        elif y1 - y0 > 8 and dark_bs2[y1 - 1, max(0, x0):x1].mean() < 0.05:
+            y1 -= 1
+        else:
             break
     plate_annot[max(0, y0 - 5):y1 + 5, max(0, x0 - 5):x1 + 5] = True
 # marker rectangles (straight-edged fill boxes framed dark, ringed by sea)
@@ -181,7 +196,7 @@ for i, sl in enumerate(ndimage.find_objects(labF2), start=1):
     m = labF2[sl] == i
     cnt = int(m.sum())
     hh, ww2 = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
-    if not (20 <= cnt <= 400):
+    if not (12 <= cnt <= 400):
         continue
     tall = hh >= 1.6 * ww2
     straight4 = (m[0, :].sum() >= 0.75 * ww2 and m[-1, :].sum() >= 0.75 * ww2
