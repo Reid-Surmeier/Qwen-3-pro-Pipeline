@@ -188,6 +188,7 @@ def evaluate_play_log(
         frames = action.get("frames")
         required_roles = {"before", "after"}
         pixel_metrics = None
+        mid_metrics = None
         reversal_metrics = None
         if strict_interaction_facts:
             required_roles.add("reversed")
@@ -210,6 +211,12 @@ def evaluate_play_log(
             pixel_metrics = _pixel_metrics(
                 action.get("pixel_metrics"), f"{label}.pixel_metrics", problems
             )
+            if expected_rejection:
+                mid_metrics = _pixel_metrics(
+                    action.get("mid_pixel_metrics"),
+                    f"{label}.mid_pixel_metrics",
+                    problems,
+                )
             reversal_metrics = _pixel_metrics(
                 action.get("reversal_pixel_metrics"),
                 f"{label}.reversal_pixel_metrics",
@@ -324,6 +331,27 @@ def evaluate_play_log(
                         failures.append(f"{label} intended region did not change")
                     if actual["invariant_region_changed_pixels"] != 0:
                         failures.append(f"{label} invariant region changed")
+            if mid_metrics is not None and intended_region is not None \
+                    and invariant_region is not None \
+                    and "before" in verified_by_role and "mid" in verified_by_role:
+                actual_mid = _recompute_pixel_metrics(
+                    verified_by_role["before"], verified_by_role["mid"],
+                    intended_region, invariant_region, decoded_frames,
+                    f"{label}.mid_pixel_metrics", problems,
+                )
+                if actual_mid is not None:
+                    _compare_pixel_metrics(
+                        mid_metrics, actual_mid,
+                        f"{label}.mid_pixel_metrics", problems,
+                    )
+                    if actual_mid["intended_region_changed_pixels"] <= 0:
+                        failures.append(
+                            f"{label} expected rejection had no transient feedback"
+                        )
+                    if actual_mid["invariant_region_changed_pixels"] != 0:
+                        failures.append(
+                            f"{label} transient feedback changed invariant region"
+                        )
             if reversal_metrics is not None and intended_region is not None \
                     and invariant_region is not None \
                     and "before" in verified_by_role and "reversed" in verified_by_role:
