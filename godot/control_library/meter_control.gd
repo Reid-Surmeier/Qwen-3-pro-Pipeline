@@ -29,7 +29,5 @@ func _ready() -> void:
 
 
 func rendered_facts() -> Dictionary:
-	var state: Dictionary = runtime.qa_state().controls[spec.id]
-	return {"minimum": state.minimum, "maximum": state.maximum,
-		"current": state.current, "ratio": state.ratio,
-		"visible_fill_pixels": state.visible_fill_pixels}
+	return {"rendered_asset": str(visual.texture.resource_path),
+		"rendered_texture_size": [visual.texture.get_width(), visual.texture.get_height()]}

@@ -184,6 +184,7 @@ for (const [name, target] of [["status", "status"], ["option", "options"],
     routed_target: state.last_transaction.target_window === target,
     target_position_preserved: JSON.stringify(state.last_transaction.position_before)
       === JSON.stringify(state.last_transaction.position_after),
+    target_semantic_state_preserved: state.last_transaction.semantic_state_preserved === true,
     raised: state.last_transaction.raised === true,
   }, { before, after, reversed }, state.last_transaction);
 }
@@ -203,9 +204,9 @@ for (const name of ["map", "chat", "friend"]) {
   const rejected = await basic();
   const after = await shot(`unavailable-${name}-after`);
   const reversed = await shot(`unavailable-${name}-reversed`);
-  record(`basic_info.destination.${name}`, "Activate", "UnavailableDestination", {
+  record(`basic_info.destination.${name}`, "Activate", "OpenWindow", {
     named_rejection: rejected.controls[`basic_info.destination.${name}`]
-      .last_error?.code === "TransactionRejectedError",
+      .last_error?.code === "ActionRoutingError",
     semantic_state_preserved: rejected.controls[`basic_info.destination.${name}`]
       .semantic_state === "disabled",
   }, { before, mid, after, reversed }, rejected.controls[`basic_info.destination.${name}`],
@@ -223,24 +224,24 @@ await clickControl("basic_info.minimize");
 let restored = await basic();
 let reversed = await shot("minimize-reversed");
 record("basic_info.minimize", "Activate", "ToggleMinimized", {
-  purpose_built_height: minimized.window.size[1] === 48,
-  restored_size: restored.window.size[1] === 286,
-  meter_state_preserved: restored.controls["basic_info.meter.hp"].current === 1092,
+  purpose_built_height: minimized.window.size[1] === 28,
+  restored_size: restored.window.size[1] === 205,
+  meter_state_preserved: restored.controls["basic_info.meter.hp"].current === 1109,
 }, { before, after, reversed }, restored.window);
 
 // Continuous title drag with 31 pointer samples and exact reversal.
 await reload();
 await bringBasic();
 before = await shot("drag-before");
-const dragStart = point(100, 25);
-const dragEnd = point(200, 100);
+const dragStart = point(100, 12);
+const dragEnd = point(200, 87);
 const samples = [];
 await page.mouse.move(dragStart.x, dragStart.y);
 await page.mouse.down();
 let mid;
 for (let index = 0; index <= 30; index += 1) {
   const x = 100 + (100 * index / 30);
-  const y = 25 + (75 * index / 30);
+  const y = 12 + (75 * index / 30);
   samples.push([x, y]);
   await page.mouse.move(point(x, y).x, point(x, y).y);
   if (index === 15) mid = await shot("drag-mid", false);
@@ -248,7 +249,7 @@ for (let index = 0; index <= 30; index += 1) {
 await page.mouse.up();
 const moved = await basic();
 after = await shot("drag-after");
-const reverseStart = point(moved.window.position[0] + 100, moved.window.position[1] + 25);
+const reverseStart = point(moved.window.position[0] + 100, moved.window.position[1] + 12);
 await page.mouse.move(reverseStart.x, reverseStart.y);
 await page.mouse.down();
 for (let index = 0; index <= 30; index += 1) {

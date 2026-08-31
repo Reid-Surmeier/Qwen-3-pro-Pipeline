@@ -15,14 +15,20 @@ func _init() -> void:
 	_check("basic-info-manifest-is-complete", loaded.errors.is_empty()
 		and matches.size() == 1 and matches[0].controls.filter(func(control):
 			return control.get("type") == "Meter").size() == 4
+		and int(matches[0].geometry.width) == 484
+		and int(matches[0].geometry.height) == 205
+		and int(matches[0].get("minimized_height")) == 28
 		and matches[0].get("backing_color") == "#00000000"
 		and matches[0].get("display_facts", []).size() == 10,
 		str([loaded.errors, matches]))
 	if not matches.is_empty():
 		var window: Dictionary = matches[0]
-		var destinations: Array = window.controls.filter(func(control):
-			return control.get("actions", []).any(func(binding):
-				return binding.get("action") == "OpenWindow"))
+		var destinations: Array = []
+		for control in window.controls:
+			if control.get("initial_semantic_state") == "ready" \
+					and control.get("actions", []).any(func(binding):
+						return binding.get("action") == "OpenWindow"):
+				destinations.append(control)
 		_check("five-live-destinations-are-declared", destinations.size() == 5
 			and destinations.all(func(control):
 				return not str(control.get("value", {}).get("target_window", "")).is_empty()),

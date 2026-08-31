@@ -13,6 +13,7 @@ func _init() -> void:
 	_contract_skill_tree_control_types_are_frozen()
 	_contract_selection_foreign_identity_fields_fail_closed()
 	_contract_window_adapter_fields_fail_closed()
+	_contract_basic_info_fields_fail_closed()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
@@ -272,6 +273,44 @@ func _contract_window_adapter_fields_fail_closed() -> void:
 	_check("window-key-command-fails-closed",
 		"ControlBindingError" in missing_key_errors.map(func(error): return error.code),
 		str(missing_key_errors))
+
+
+func _contract_basic_info_fields_fail_closed() -> void:
+	var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(
+		"res://data/image-79-control-spec.json"))
+	var window_index: int = fixture.windows.find_custom(func(window):
+		return window.get("id") == "basic_info")
+	var destination_index: int = fixture.windows[window_index].controls.find_custom(
+		func(control): return control.get("id") == "basic_info.destination.status")
+
+	var bad_backing := fixture.duplicate(true)
+	bad_backing.windows[window_index].backing_color = "transparent-ish"
+	var backing_errors: Array = ControlSpec.validate(bad_backing, _all_assets_exist)
+	_check("invalid-backing-color-fails-closed", backing_errors.any(func(error):
+		return error.code == "InvalidControlSpec" and "backing_color" in str(error.path)),
+		str(backing_errors))
+
+	var bad_facts := fixture.duplicate(true)
+	bad_facts.windows[window_index].display_facts[0].geometry[2] = 0
+	var fact_errors: Array = ControlSpec.validate(bad_facts, _all_assets_exist)
+	_check("invalid-display-fact-fails-closed", fact_errors.any(func(error):
+		return error.code == "InvalidGeometry" and "display_facts" in str(error.path)),
+		str(fact_errors))
+
+	var bad_minimized := fixture.duplicate(true)
+	bad_minimized.windows[window_index].minimized_height = 206
+	var minimized_errors: Array = ControlSpec.validate(bad_minimized, _all_assets_exist)
+	_check("invalid-minimized-height-fails-closed", minimized_errors.any(func(error):
+		return error.code == "InvalidGeometry" and "minimized_height" in str(error.path)),
+		str(minimized_errors))
+
+	var missing_target := fixture.duplicate(true)
+	missing_target.windows[window_index].controls[destination_index].value.erase(
+		"target_window")
+	var target_errors: Array = ControlSpec.validate(missing_target, _all_assets_exist)
+	_check("missing-open-window-target-fails-closed", target_errors.any(func(error):
+		return error.code == "ControlBindingError" and "target_window" in str(error.path)),
+		str(target_errors))
 
 
 func _contract_failures_are_named_and_fail_closed() -> void:

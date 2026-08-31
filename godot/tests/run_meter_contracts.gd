@@ -14,7 +14,7 @@ func _init() -> void:
 	var projected: Dictionary = Meter.project(hp)
 	_check("meter-projects-bounded-value", projected.get("ok", false)
 		and is_equal_approx(float(projected.ratio), 1092.0 / 1109.0)
-		and int(projected.visible_fill_pixels) == 98, str(projected))
+		and int(projected.projected_fill_pixels) == 98, str(projected))
 	for invalid in [
 		{"minimum": 10, "maximum": 10, "current": 10, "fill_axis": "horizontal", "fill_pixels": 10},
 		{"minimum": 0, "maximum": 10, "current": 11, "fill_axis": "horizontal", "fill_pixels": 10},

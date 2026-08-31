@@ -9495,21 +9495,21 @@
       "geometry": {
         "x": 0,
         "y": 0,
-        "width": 656,
-        "height": 286
+        "width": 484,
+        "height": 205
       },
       "drag_geometry": {
-        "x": 48,
-        "y": 6,
-        "width": 558,
-        "height": 40
+        "x": 24,
+        "y": 0,
+        "width": 434,
+        "height": 24
       },
       "plates": {
         "expanded": "res://assets/image-79/basic-info/source-plate.png",
         "minimized": "res://assets/image-79/basic-info/minimized-plate.png"
       },
       "backing_color": "#00000000",
-      "minimized_height": 48,
+      "minimized_height": 28,
       "minimized_controls": [
         "basic_info.minimize",
         "basic_info.close"
@@ -9519,100 +9519,100 @@
           "id": "name",
           "text": "SakumaRiri",
           "geometry": [
-            30,
-            59,
-            176,
-            32
+            16,
+            37,
+            132,
+            23
           ]
         },
         {
           "id": "class",
           "text": "Acolyte",
           "geometry": [
-            30,
+            16,
+            61,
             92,
-            140,
-            30
+            22
           ]
         },
         {
           "id": "hp-label",
           "text": "HP",
           "geometry": [
-            228,
-            77,
-            39,
-            31
+            163,
+            55,
+            24,
+            20
           ]
         },
         {
           "id": "hp-value",
-          "text": "1092 / 1109",
+          "text": "1109 / 1109",
           "geometry": [
-            298,
-            86,
-            166,
-            34
+            216,
+            55,
+            124,
+            22
           ]
         },
         {
           "id": "sp-label",
           "text": "SP",
           "geometry": [
-            228,
-            127,
-            39,
-            31
+            163,
+            89,
+            24,
+            20
           ]
         },
         {
           "id": "sp-value",
           "text": "601 / 613",
           "geometry": [
-            294,
-            128,
-            146,
-            32
+            216,
+            89,
+            112,
+            22
           ]
         },
         {
           "id": "base-level",
           "text": "Base Lv. 60",
           "geometry": [
-            48,
-            176,
-            145,
-            28
+            28,
+            126,
+            112,
+            20
           ]
         },
         {
           "id": "job-level",
           "text": "Job Lv. 47",
           "geometry": [
-            48,
-            204,
+            28,
             145,
-            28
+            112,
+            20
           ]
         },
         {
           "id": "weight",
-          "text": "Weight : 987 / 2430",
+          "text": "Weight : 874 / 2430",
           "geometry": [
-            28,
-            248,
-            238,
-            32
+            8,
+            177,
+            171,
+            22
           ]
         },
         {
           "id": "zeny",
-          "text": "Zeny : 318,430",
+          "text": "Zeny : 321,584,092",
           "geometry": [
-            276,
-            248,
-            188,
-            32
+            178,
+            177,
+            169,
+            22
           ]
         }
       ],
@@ -9633,48 +9633,13 @@
       ],
       "controls": [
         {
-          "id": "basic_info.minimize",
-          "type": "Button",
-          "geometry": {
-            "x": 14,
-            "y": 12,
-            "width": 30,
-            "height": 30
-          },
-          "interaction_phases": [
-            "idle",
-            "hover",
-            "pressed"
-          ],
-          "semantic_states": [
-            "ready"
-          ],
-          "initial_semantic_state": "ready",
-          "state_set": {
-            "ready": {
-              "idle": "res://assets/image-79/basic-info/basic_info-minimize-idle.png",
-              "hover": "res://assets/image-79/basic-info/basic_info-minimize-hover.png",
-              "pressed": "res://assets/image-79/basic-info/basic_info-minimize-pressed.png"
-            }
-          },
-          "gestures": [
-            "Activate"
-          ],
-          "actions": [
-            {
-              "gesture": "Activate",
-              "action": "ToggleMinimized"
-            }
-          ]
-        },
-        {
           "id": "basic_info.close",
           "type": "Button",
           "geometry": {
-            "x": 612,
-            "y": 12,
-            "width": 30,
-            "height": 30
+            "x": 5,
+            "y": 5,
+            "width": 18,
+            "height": 18
           },
           "interaction_phases": [
             "idle",
@@ -9703,13 +9668,48 @@
           ]
         },
         {
+          "id": "basic_info.minimize",
+          "type": "Button",
+          "geometry": {
+            "x": 460,
+            "y": 6,
+            "width": 16,
+            "height": 16
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/basic-info/basic_info-minimize-idle.png",
+              "hover": "res://assets/image-79/basic-info/basic_info-minimize-hover.png",
+              "pressed": "res://assets/image-79/basic-info/basic_info-minimize-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleMinimized"
+            }
+          ]
+        },
+        {
           "id": "basic_info.destination.status",
           "type": "Button",
           "geometry": {
-            "x": 484,
-            "y": 56,
-            "width": 78,
-            "height": 46
+            "x": 356,
+            "y": 42,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9744,10 +9744,10 @@
           "id": "basic_info.destination.option",
           "type": "Button",
           "geometry": {
-            "x": 572,
-            "y": 56,
-            "width": 84,
-            "height": 46
+            "x": 418,
+            "y": 42,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9782,10 +9782,10 @@
           "id": "basic_info.destination.items",
           "type": "Button",
           "geometry": {
-            "x": 484,
-            "y": 111,
-            "width": 78,
-            "height": 46
+            "x": 356,
+            "y": 83,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9820,10 +9820,10 @@
           "id": "basic_info.destination.equip",
           "type": "Button",
           "geometry": {
-            "x": 572,
-            "y": 111,
-            "width": 84,
-            "height": 46
+            "x": 418,
+            "y": 83,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9858,10 +9858,10 @@
           "id": "basic_info.destination.skill",
           "type": "Button",
           "geometry": {
-            "x": 484,
-            "y": 166,
-            "width": 78,
-            "height": 46
+            "x": 356,
+            "y": 124,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9896,10 +9896,10 @@
           "id": "basic_info.destination.map",
           "type": "Button",
           "geometry": {
-            "x": 572,
-            "y": 166,
-            "width": 84,
-            "height": 46
+            "x": 418,
+            "y": 124,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9923,7 +9923,7 @@
           "actions": [
             {
               "gesture": "Activate",
-              "action": "UnavailableDestination"
+              "action": "OpenWindow"
             }
           ],
           "value": {
@@ -9934,10 +9934,10 @@
           "id": "basic_info.destination.chat",
           "type": "Button",
           "geometry": {
-            "x": 484,
-            "y": 221,
-            "width": 78,
-            "height": 46
+            "x": 356,
+            "y": 165,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9961,7 +9961,7 @@
           "actions": [
             {
               "gesture": "Activate",
-              "action": "UnavailableDestination"
+              "action": "OpenWindow"
             }
           ],
           "value": {
@@ -9972,10 +9972,10 @@
           "id": "basic_info.destination.friend",
           "type": "Button",
           "geometry": {
-            "x": 572,
-            "y": 221,
-            "width": 84,
-            "height": 46
+            "x": 418,
+            "y": 165,
+            "width": 48,
+            "height": 26
           },
           "interaction_phases": [
             "idle",
@@ -9999,7 +9999,7 @@
           "actions": [
             {
               "gesture": "Activate",
-              "action": "UnavailableDestination"
+              "action": "OpenWindow"
             }
           ],
           "value": {
@@ -10010,10 +10010,10 @@
           "id": "basic_info.meter.hp",
           "type": "Meter",
           "geometry": {
-            "x": 266,
-            "y": 59,
-            "width": 194,
-            "height": 23
+            "x": 189,
+            "y": 37,
+            "width": 151,
+            "height": 15
           },
           "interaction_phases": [
             "idle",
@@ -10036,19 +10036,19 @@
           "value": {
             "minimum": 0,
             "maximum": 1109,
-            "current": 1092,
+            "current": 1109,
             "fill_axis": "horizontal",
-            "fill_pixels": 194
+            "fill_pixels": 151
           }
         },
         {
           "id": "basic_info.meter.sp",
           "type": "Meter",
           "geometry": {
-            "x": 265,
-            "y": 106,
-            "width": 195,
-            "height": 23
+            "x": 189,
+            "y": 74,
+            "width": 151,
+            "height": 14
           },
           "interaction_phases": [
             "idle",
@@ -10073,17 +10073,17 @@
             "maximum": 613,
             "current": 601,
             "fill_axis": "horizontal",
-            "fill_pixels": 195
+            "fill_pixels": 151
           }
         },
         {
           "id": "basic_info.meter.base",
           "type": "Meter",
           "geometry": {
-            "x": 208,
-            "y": 187,
-            "width": 232,
-            "height": 21
+            "x": 146,
+            "y": 131,
+            "width": 184,
+            "height": 11
           },
           "interaction_phases": [
             "idle",
@@ -10108,17 +10108,17 @@
             "maximum": 99,
             "current": 60,
             "fill_axis": "horizontal",
-            "fill_pixels": 232
+            "fill_pixels": 184
           }
         },
         {
           "id": "basic_info.meter.job",
           "type": "Meter",
           "geometry": {
-            "x": 208,
-            "y": 214,
-            "width": 232,
-            "height": 20
+            "x": 146,
+            "y": 148,
+            "width": 184,
+            "height": 11
           },
           "interaction_phases": [
             "idle",
@@ -10143,7 +10143,7 @@
             "maximum": 50,
             "current": 47,
             "fill_axis": "horizontal",
-            "fill_pixels": 232
+            "fill_pixels": 184
           }
         }
       ]

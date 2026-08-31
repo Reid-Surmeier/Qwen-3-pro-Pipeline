@@ -104,7 +104,7 @@ func configure(spec: Dictionary) -> Dictionary:
 			state.current = projected.current
 			state.value = projected.current
 			state.ratio = projected.ratio
-			state.visible_fill_pixels = projected.visible_fill_pixels
+			state.projected_fill_pixels = projected.projected_fill_pixels
 		elif control_spec.has("value"):
 			state.value = control_spec.value.get("initial")
 			if state.value is String:
@@ -187,9 +187,11 @@ func qa_state() -> Dictionary:
 	}
 
 
-func reject_action(control_id: String, action: String) -> Dictionary:
-	return _reject(control_id, "", Errors.ACTION_ROUTING,
-		"Window cannot route action: %s" % action)
+func reject_action(control_id: String, action: String,
+		code: String = Errors.ACTION_ROUTING, detail: String = "") -> Dictionary:
+	var message := detail if not detail.is_empty() \
+		else "Window cannot route action: %s" % action
+	return _reject(control_id, "", code, message)
 
 
 func visual_asset(control_id: String) -> String:
@@ -579,12 +581,9 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	if action not in ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 			"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
 			"SortStorage", "FocusStorageSearch", "OpenWindow",
-			"UnavailableDestination"]:
+			]:
 		return _reject(entry.state.id, gesture, Errors.ACTION_ROUTING,
 			"Button action is not routed: %s" % action)
-	if action == "UnavailableDestination":
-		return _reject(entry.state.id, gesture, Errors.TRANSACTION_REJECTED,
-			"Destination Window is not yet available")
 	if action == "CommitSkillChanges":
 		_commit_steppers()
 	elif action == "CancelSkillChanges":

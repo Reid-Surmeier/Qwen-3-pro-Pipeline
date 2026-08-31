@@ -25,11 +25,15 @@ func _run() -> void:
 	get_root().add_child(window)
 	await process_frame
 	var idle := window.qa_state()
-	_check("basic-info-window-constructs", idle.window.size == [656.0, 286.0]
+	_check("basic-info-window-constructs", idle.window.size == [484.0, 205.0]
 		and idle.display_facts.size() == 10
 		and idle.controls["basic_info.meter.hp"].rendered
+		and str(idle.controls["basic_info.meter.hp"].rendered_asset).ends_with(
+			"meter-hp-idle.png")
+		and int(idle.controls["basic_info.meter.hp"].rendered_texture_size[0]) == 151
+		and int(idle.controls["basic_info.meter.hp"].rendered_texture_size[1]) == 15
 		and is_equal_approx(float(idle.controls["basic_info.meter.hp"].ratio),
-			1092.0 / 1109.0), str(idle))
+			1.0), str(idle))
 	window._control_changed("basic_info.minimize",
 		window.runtime.dispatch("basic_info.minimize", "Activate", {}))
 	var mini := window.qa_state()
@@ -37,9 +41,9 @@ func _run() -> void:
 		window.runtime.dispatch("basic_info.minimize", "Activate", {}))
 	var restored := window.qa_state()
 	_check("purpose-built-minimize-restores", mini.window.minimized
-		and mini.window.size == [656.0, 48.0]
-		and not restored.window.minimized and restored.window.size == [656.0, 286.0]
-		and restored.controls["basic_info.meter.hp"].current == 1092.0,
+		and mini.window.size == [484.0, 28.0]
+		and not restored.window.minimized and restored.window.size == [484.0, 205.0]
+		and restored.controls["basic_info.meter.hp"].current == 1109.0,
 		str([mini.window, restored.window]))
 	window.queue_free()
 	await process_frame
@@ -59,6 +63,7 @@ func _run() -> void:
 		return
 	desktop.basic_info.move_to_front()
 	desktop.status.visible = false
+	var target_semantic_before: Dictionary = desktop.status.runtime.qa_state()
 	var destination_result: Dictionary = desktop.basic_info.runtime.dispatch(
 		"basic_info.destination.status", "Activate", {})
 	desktop.basic_info._control_changed("basic_info.destination.status", destination_result)
@@ -67,7 +72,8 @@ func _run() -> void:
 		and desktop.last_transaction.get("ok", false)
 		and desktop.last_transaction.target_window == "status"
 		and desktop.last_transaction.position_before \
-			== desktop.last_transaction.position_after,
+			== desktop.last_transaction.position_after
+		and desktop.status.runtime.qa_state() == target_semantic_before,
 		str(desktop.last_transaction))
 	var before: Dictionary = desktop.qa_state().windows.duplicate(true)
 	var unavailable_result: Dictionary = desktop.basic_info.runtime.dispatch(
@@ -76,7 +82,8 @@ func _run() -> void:
 	var after := desktop.qa_state()
 	_check("unavailable-destination-rejects-atomically",
 		after.windows.basic_info.controls["basic_info.destination.map"].last_error.code \
-			== "TransactionRejectedError"
+			== "ActionRoutingError"
+		and desktop.last_transaction.error.code == "ActionRoutingError"
 		and after.windows.status.window.position == before.status.window.position,
 		str(after.windows.basic_info.controls["basic_info.destination.map"]))
 	desktop.queue_free()

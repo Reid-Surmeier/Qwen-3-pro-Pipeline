@@ -22,7 +22,7 @@ static func project(value: Variant) -> Dictionary:
 	var ratio := (current - minimum) / (maximum - minimum)
 	return {"ok": true, "minimum": minimum, "maximum": maximum,
 		"current": current, "ratio": ratio,
-		"visible_fill_pixels": int(round(ratio * fill_pixels))}
+		"projected_fill_pixels": int(round(ratio * fill_pixels))}
 
 
 static func _number(value: Variant) -> bool:

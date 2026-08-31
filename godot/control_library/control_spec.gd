@@ -22,8 +22,7 @@ const ACTIONS_BY_TYPE := {
 	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
-		"SortStorage", "FocusStorageSearch", "OpenWindow",
-		"UnavailableDestination"],
+		"SortStorage", "FocusStorageSearch", "OpenWindow"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
@@ -123,6 +122,18 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 				errors, asset_exists)
 	if window.has("drag_geometry"):
 		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
+	if window.has("backing_color") and not _is_hex_color(window.backing_color):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".backing_color",
+			"backing color must be #RRGGBB or #RRGGBBAA"))
+	if window.has("minimized_height"):
+		var minimized_height: Variant = window.minimized_height
+		var expanded_height := float(window.get("geometry", {}).get("height", 0))
+		if not _positive_number(minimized_height) \
+				or float(minimized_height) > expanded_height:
+			errors.append(_error(Errors.INVALID_GEOMETRY, path + ".minimized_height",
+				"minimized height must be positive and no taller than the Window"))
+	if window.has("display_facts"):
+		_validate_display_facts(window.display_facts, path + ".display_facts", errors)
 	if window.has("detail"):
 		_validate_detail(window.detail, path + ".detail", errors)
 	if "Resize" in (gestures if gestures is Array else []):
@@ -315,6 +326,48 @@ static func _validate_control(control: Variant, window_id: String, control_index
 		_validate_gestures(gestures, path + ".gestures", errors)
 	_validate_actions(control.get("actions"), gestures, control_type,
 		path + ".actions", errors)
+	var actions: Variant = control.get("actions", [])
+	if actions is Array and actions.any(func(binding): return binding is Dictionary \
+			and binding.get("action") == "OpenWindow"):
+		var value: Variant = control.get("value")
+		if not value is Dictionary or not value.get("target_window") is String \
+				or str(value.get("target_window", "")).is_empty():
+			errors.append(_error(Errors.CONTROL_BINDING,
+				path + ".value.target_window",
+				"OpenWindow requires a non-empty target Window id"))
+
+
+static func _validate_display_facts(value: Variant, path: String,
+		errors: Array[Dictionary]) -> void:
+	if not value is Array or value.is_empty():
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			"display facts must be a non-empty array"))
+		return
+	var seen := {}
+	for index in value.size():
+		var fact: Variant = value[index]
+		var fact_path := "%s[%d]" % [path, index]
+		if not fact is Dictionary:
+			errors.append(_error(Errors.INVALID_CONTROL_SPEC, fact_path,
+				"display fact must be an object"))
+			continue
+		var fact_id := str(fact.get("id", ""))
+		if fact_id.is_empty() or seen.has(fact_id):
+			errors.append(_error(Errors.INVALID_CONTROL_SPEC, fact_path + ".id",
+				"display fact id must be non-empty and unique"))
+		else:
+			seen[fact_id] = true
+		if not fact.get("text") is String:
+			errors.append(_error(Errors.INVALID_CONTROL_SPEC, fact_path + ".text",
+				"display fact text must be a string"))
+		var geometry: Variant = fact.get("geometry")
+		if not geometry is Array or geometry.size() != 4:
+			errors.append(_error(Errors.INVALID_GEOMETRY, fact_path + ".geometry",
+				"display fact geometry must contain x, y, width, height"))
+		else:
+			_validate_geometry({"x": geometry[0], "y": geometry[1],
+				"width": geometry[2], "height": geometry[3]},
+				fact_path + ".geometry", errors)
 
 
 static func _validate_type_contract(control: Dictionary, control_type: String,
@@ -974,6 +1027,15 @@ static func _is_sha256(value: String) -> bool:
 		return false
 	for character in value:
 		if character not in "0123456789abcdef":
+			return false
+	return true
+
+
+static func _is_hex_color(value: Variant) -> bool:
+	if not value is String or value.length() not in [7, 9] or not value.begins_with("#"):
+		return false
+	for character in value.substr(1):
+		if character.to_lower() not in "0123456789abcdef":
 			return false
 	return true
 

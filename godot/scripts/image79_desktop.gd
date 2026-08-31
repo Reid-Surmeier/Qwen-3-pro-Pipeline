@@ -82,16 +82,27 @@ func _route_desktop_action(window_id: String, control_id: String,
 		result: Dictionary) -> void:
 	if str(result.get("action", "")) == "OpenWindow":
 		var target_id := str(result.get("target_window", ""))
+		var target: ControlWindow = windows.get(target_id)
+		var target_semantic_before: Dictionary = target.runtime.qa_state() \
+			if target != null else {}
 		last_transaction = DesktopActionRouter.open_window(windows.keys(), target_id)
 		last_transaction.source_window = window_id
 		last_transaction.control_id = control_id
 		if last_transaction.get("ok", false):
-			var target: ControlWindow = windows.get(target_id)
 			last_transaction.position_before = target.qa_state().window.position
 			target.visible = true
 			target.move_to_front()
 			last_transaction.position_after = target.qa_state().window.position
-			last_transaction.semantic_state_preserved = true
+			last_transaction.semantic_state_preserved = \
+				target.runtime.qa_state() == target_semantic_before
+		else:
+			var source: ControlWindow = windows.get(window_id)
+			if source != null:
+				var error: Dictionary = last_transaction.get("error", {})
+				source.runtime.reject_action(control_id, "OpenWindow",
+					str(error.get("code", "ActionRoutingError")),
+					str(error.get("detail", "destination Window rejected")))
+				source._refresh_all_controls()
 		_publish()
 		return
 	if result.get("cross_window_drag", false) \

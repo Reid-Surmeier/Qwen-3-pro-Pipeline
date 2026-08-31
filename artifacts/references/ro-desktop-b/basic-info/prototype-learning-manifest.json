@@ -5,7 +5,7 @@
   "prototype": "discarded after source-window and destination walkthrough",
   "question": "Can source meters remain exact while destination buttons atomically open or raise only real production Windows?",
   "source_facts": {
-    "window_rect": [0, 0, 656, 286],
+    "window_rect": [0, 0, 484, 205],
     "meters": ["hp", "sp", "base", "job"],
     "live_destinations": ["status", "options", "inventory", "equipment_items", "skill_tree"],
     "unavailable_destinations": ["map", "chat_room", "friends"]
@@ -21,9 +21,9 @@
     {
       "id": "basic-info-unavailable-destination",
       "gesture": "Activate",
-      "action": "UnavailableDestination",
+      "action": "OpenWindow",
       "response_frames": 1,
-      "contract": "Map, Chat, and Friend remain visible source controls but return a named rejection until complete target Windows exist."
+      "contract": "Map, Chat, and Friend remain visible source controls; the shared Desktop Action Router returns and publishes a named rejection until complete target Windows exist."
     },
     {
       "id": "basic-info-minimize",
@@ -31,7 +31,7 @@
       "action": "ToggleMinimized",
       "response_frames": 1,
       "reversible": true,
-      "contract": "Use a separate 656x48 source-pixel title form; restore position and all meter and destination state."
+      "contract": "Use a separate 484x28 title form assembled from the source title chrome and bottom rule; restore position and all meter and destination state."
     }
   ],
   "state_sets": {
