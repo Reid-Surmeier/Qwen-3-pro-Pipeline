@@ -110,6 +110,7 @@ const record = (controlId, gesture, action, assertions, frames, observed,
   const matches = Object.values(assertions).every(Boolean);
   const entry = {
     control_id: controlId, gesture, window_action: action,
+    expected_rejection: true,
     expected: "manifest and retained Equipment Items Behaviour Card",
     observed: JSON.stringify(observed), responsive: matches, matches_expected: matches,
     assertions, frames, intended_region: WINDOW_REGION,
@@ -146,6 +147,7 @@ const recordRejection = (controlId, gesture, action, assertions, frames, observe
     motion_samples: motionSamples,
     contract_facts: {
       real_gesture_path: motionSamples.length >= 30,
+      intended_region_changed: false,
       transient_feedback_rendered: midMetrics.full_frame_changed_pixels > 0,
       committed_frame_preserved: pixelMetrics.full_frame_changed_pixels === 0,
       invariants_stable: pixelMetrics.invariant_region_changed_pixels === 0,
