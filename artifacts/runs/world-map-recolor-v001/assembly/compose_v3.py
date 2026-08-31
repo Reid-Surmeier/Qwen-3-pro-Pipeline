@@ -213,7 +213,8 @@ strip = np.zeros((H, W), bool)
 strip[H - 70:, :360] = True
 strip[:80, :200] = True
 strip[:80, W - 200:] = True
-R3 = strip & (DARK | ORANGE | YELLOW) & ~credit & ~fills
+ink3 = ~eq(0xFC, 0xFE, 0xFC) & ~GRID
+R3 = strip & ink3 & ~credit & ~fills
 R3 = ndimage.binary_dilation(R3, iterations=1) & strip & ~credit & ~fills
 
 # ------------------------------------------------------------------ R4: orange
@@ -363,7 +364,7 @@ for i, sl in enumerate(ndimage.find_objects(labz), start=1):
     m2 = labz[sl] == i
     near_land = float(ndimage.binary_dilation(fills, iterations=2)[sl][m2].mean())
     keepz[i] = (max(h, w) >= 40 and cnt <= 0.08 * h * w + 3 * max(h, w)) or (cnt <= 60 and near_land >= 0.6)
-R7 = keepz[labz] & ~R1 & ~R3 & ~credit
+R7 = (keepz[labz] | (GREY & (cid >= 0))) & ~R1 & ~R3 & ~credit
 
 # ---------------------------------------------------------------- compose
 out = g.copy()
@@ -428,11 +429,14 @@ ocean_line = on_line & ~between_countries & ~inside_country
 out[between_countries] = (0x04, 0x02, 0x04)
 ic = np.where(inside_country)
 out[ic[0], ic[1]] = PALETTE[colour_idx[cp_d[ic]]]
-out[ocean_line] = (0xB8, 0xB8, 0xB8)
+oc_sea = ocean_line & (cid < 0)
+out[oc_sea] = (0xB8, 0xB8, 0xB8)
+oc_land = np.where(ocean_line & (cid >= 0))
+out[oc_land[0], oc_land[1]] = PALETTE[colour_idx[cid[oc_land]]]
 
 # plates whose surrounding ring is land get reconstructed across their full box
 plate_full = np.zeros((H, W), bool)
-landgif0 = fills | white_land
+landgif0 = (fills | white_land) & ~wiped
 for (x0, y0, x1, y1) in badge_boxes:
     ys0, ys1 = max(0, y0 - 4), min(H, y1 + 6)
     xs0, xs1 = max(0, x0 - 4), min(W, x1 + 6)
@@ -440,35 +444,35 @@ for (x0, y0, x1, y1) in badge_boxes:
     if ring.shape[0] > 4 and ring.shape[1] > 4:
         ring[2:-2, 2:-2] = False
     denom = max(1, int(ring.size - max(0, ring.shape[0] - 4) * max(0, ring.shape[1] - 4)))
-    if ring.sum() / denom >= 0.55:
+    inner = (cid[max(0, y0 - 2):y1 + 4, max(0, x0 - 2):x1 + 4] >= 0) | landgif0[max(0, y0 - 2):y1 + 4, max(0, x0 - 2):x1 + 4]
+    if ring.sum() / denom >= 0.55 and inner.size and inner.mean() >= 0.55:
         plate_full[max(0, y0 - 2):y1 + 4, max(0, x0 - 2):x1 + 4] = True
+# sea truth: pre-smear NE says water and no GIF land within 4 px -> stays sea
+cid_raw = np.load("countries-raw.npy")
+gifdist = ndimage.distance_transform_edt(~landgif0)
+sea_truth = (cid_raw < 0) & (gifdist > 2)
 # under-plate reconstruction: country colour where NE says land, else white+grid
-under = wiped & (cid >= 0) & ~bandall
+under = wiped & (cid >= 0) & ~bandall & ~sea_truth
 uc = np.where(under)
 out[uc[0], uc[1]] = PALETTE[colour_idx[cid[uc]]]
 # clip the reconstruction to plausible land: drop reconstructed pixels not near GIF land
 sandL = np.zeros((H, W), bool); sandR = np.zeros((H, W), bool)
-sandU = np.zeros((H, W), bool); sandD = np.zeros((H, W), bool)
 for k in range(1, 41):
     sandL |= np.roll(landgif0, k, axis=1)
     sandR |= np.roll(landgif0, -k, axis=1)
-    if k <= 12:
-        sandU |= np.roll(landgif0, k, axis=0)
-        sandD |= np.roll(landgif0, -k, axis=0)
-sandP = (sandL & sandR) | (sandU & sandD)
+sandP = sandL & sandR
 near_gif_land = ndimage.binary_dilation(landgif0, iterations=5) | plate_full | (sandP & ~bandall)
-bad = under & ~near_gif_land
-out[bad] = (0xFC, 0xFE, 0xFC)
-out[bad & gridmask] = (0xCC, 0xCE, 0xFC)
 # misregistered land under plates: NE says water but GIF land is near -> nearest country
-under2 = wiped & (cid < 0) & near_gif_land & (cid_dist <= 6) & ~bandall
-under2 |= (plate_full | sandP) & wiped & (cid < 0) & (cid_dist <= 14) & ~bandall
+under2 = wiped & (cid < 0) & near_gif_land & (cid_dist <= 6) & ~bandall & ~sea_truth
 u2 = np.where(under2)
 out[u2[0], u2[1]] = PALETTE[colour_idx[cid_near[u2]]]
 # outline reconstructed land inside plates
-filled = (under & near_gif_land) | under2
+filled = under | under2
 edge_base = filled & ~bandall
 edge_px = edge_base & ~ndimage.binary_erosion(filled | fills | BLACK, iterations=1)
+rawland_e = cid_raw >= 0
+ne_coast = rawland_e & ~ndimage.binary_erosion(rawland_e, iterations=1)
+edge_px &= ndimage.binary_dilation(ne_coast, iterations=1)
 out[edge_px] = (0x04, 0x02, 0x04)
 # Greenwich corridor: repaint only pixels sandwiched by real GIF land on both sides
 landgif = fills | white_land
@@ -478,10 +482,10 @@ for k in range(1, 8):
     land_l |= np.roll(landgif, k, axis=1)
     land_r |= np.roll(landgif, -k, axis=1)
 sandw = bandall & land_l & land_r
-sc = sandw & (cid >= 0)
+sc = sandw & (cid >= 0) & ~sea_truth
 si = np.where(sc)
 out[si[0], si[1]] = PALETTE[colour_idx[cid[si]]]
-sn = sandw & (cid < 0) & (cid_dist <= 8)
+sn = sandw & (cid < 0) & (cid_dist <= 8) & ~sea_truth
 sj = np.where(sn)
 out[sj[0], sj[1]] = PALETTE[colour_idx[cid_near[sj]]]
 rest_b = bandall & ~(sc | sn)
@@ -540,6 +544,37 @@ for i in np.where(sz_a < 10)[0] + 1:
         if cts.max() / palr.sum() >= 0.7:
             out[sl2][m] = vals[cts.argmax()]
             artifact_edits[sl2] |= m
+
+# floating plate-border remnants: thin straight black bits near wiped plates, not near land
+darkrem = (out == np.array((0x04, 0x02, 0x04), np.int16)).all(axis=2) & ~credit & ~edge_px
+nearR1b = ndimage.binary_dilation(R1 | R2, iterations=3)
+land_nearb = ndimage.binary_dilation(landgif0, iterations=2)
+labB2, nB2 = ndimage.label(darkrem, structure=np.ones((3, 3)))
+objsB2 = ndimage.find_objects(labB2)
+n_br = 0
+for i in range(1, nB2 + 1):
+    slb = objsB2[i - 1]
+    hb, wb = slb[0].stop - slb[0].start, slb[1].stop - slb[1].start
+    if max(hb, wb) < 10 or hb * wb > 900:
+        continue
+    m = labB2[slb] == i
+    cnt = int(m.sum())
+    if cnt > 40 or cnt / max(hb, wb) > 2.6:
+        continue
+    sl2b = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in slb)
+    m2b = labB2[sl2b] == i
+    ringb = ndimage.binary_dilation(m2b, iterations=2) & ~m2b
+    rcb = out[sl2b][ringb]
+    sea_like = ((rcb == (0xFC, 0xFE, 0xFC)).all(axis=1) | (rcb == (0xCC, 0xCE, 0xFC)).all(axis=1)
+                | (rcb == (0xB8, 0xB8, 0xB8)).all(axis=1))
+    if not len(rcb) or sea_like.mean() < 0.7:
+        continue
+    sub = out[slb]
+    sub[m] = (0xFC, 0xFE, 0xFC)
+    sub[m & gridmask[slb]] = (0xCC, 0xCE, 0xFC)
+    artifact_edits[slb] |= m
+    n_br += 1
+print("plate border remnants wiped:", n_br)
 
 # restore labels the plate boxes overlapped: navy always; black letter-words all-or-nothing
 pmask = (R1 | R2) & ~credit
@@ -699,6 +734,34 @@ out[ozw] = (0xFC, 0xFE, 0xFC)
 out[ozw & gridmask] = (0xCC, 0xCE, 0xFC)
 artifact_edits |= oz
 print("orange residue cleared:", int(oz.sum()))
+
+# final consistency sweep: tiny palette islands created by earlier passes
+n_fix2 = 0
+for kcol, ccol in enumerate(PALETTE):
+    mask_c = (out == ccol).all(axis=2) & ~credit
+    lab_f2, n_f2 = ndimage.label(mask_c)
+    if not n_f2:
+        continue
+    objs_f2 = ndimage.find_objects(lab_f2)
+    sz_f2 = ndimage.sum(mask_c, lab_f2, range(1, n_f2 + 1))
+    for i in np.where(sz_f2 <= 200)[0] + 1:
+        sl = objs_f2[i - 1]
+        sl2 = tuple(slice(max(0, a.start - 2), a.stop + 2) for a in sl)
+        m = lab_f2[sl2] == i
+        cc2 = cid[sl2][m]
+        cc2 = cc2[cc2 >= 0]
+        if len(cc2) < 6 or len(cc2) < 0.4 * int(m.sum()):
+            continue
+        vals6, cts6 = np.unique(cc2, return_counts=True)
+        if cts6.max() / len(cc2) < 0.7:
+            continue
+        want = PALETTE[colour_idx[int(vals6[cts6.argmax()])]]
+        if (np.array(ccol) == want).all():
+            continue
+        out[sl2][m] = want
+        artifact_edits[sl2] |= m
+        n_fix2 += 1
+print("final sweep recoloured:", n_fix2)
 
 declared = R1 | R2 | R3 | R4 | R5 | R6 | R7 | wiped | label_edits | artifact_edits
 

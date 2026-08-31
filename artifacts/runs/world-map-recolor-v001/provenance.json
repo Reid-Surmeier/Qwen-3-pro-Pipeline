@@ -127,6 +127,28 @@
         "final-v008-assembly-2x.png",
         "assembly/fidelity-report-v3.json"
       ]
+    },
+    {
+      "version": "v009",
+      "created": "2026-08-31T01:16:24.346862+00:00",
+      "method": "deterministic assembly rev26 (compose_v3.py) \u2014 no generative model",
+      "gates": {
+        "fidelity_outside_changed": 0,
+        "spot_checks": "75/75 ok"
+      },
+      "fixes_since_v008": [
+        "sea-truth from pre-smear NE raster (countries-raw.npy): wiped plates over sea stay sea (Singapore box, Dakar bars)",
+        "land-truth excludes wiped plate pixels (plate backgrounds are fill colours)",
+        "zone-joint stubs on land dissolve into the country colour (Yekaterinburg)",
+        "per-colour cid-disagreement sweep repaints mis-coloured small patches (Baikonur-area dashes, 23 patches)",
+        "reconstruction outlines drawn only along NE coastline (no more rectangular bracket remnants)",
+        "corner strips wipe all ink incl. anti-aliased text remains"
+      ],
+      "files": [
+        "final-v009-assembly.png",
+        "final-v009-assembly-2x.png",
+        "assembly/fidelity-report-v3.json"
+      ]
     }
   ]
 }

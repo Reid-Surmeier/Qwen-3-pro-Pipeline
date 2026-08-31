@@ -26,3 +26,9 @@ Verdict on Qwen for this map: of 5 attempts that reached the provider after the 
   Greenwich #64669C removal, AA/marker/dash cleanups, plate-interior reconstruction.
 - Gates: fidelity outside_changed=0; spot checks 75/75 ok. No paid calls this round ($0).
 - Deployed to FigJam node 16:67; commit 9a131d5.
+
+## v009 (2026-08-30, second review loop)
+- compose_v3 rev19→rev26: sea-truth (raw NE grid), wiped-plate land exclusion, per-colour cid sweep,
+  NE-coast-only reconstruction outlines, zone-stub dissolve, strip AA wipe.
+- Gates: fidelity outside_changed=0; spot checks 75/75. $0.
+- Deployed to FigJam node 16:67.

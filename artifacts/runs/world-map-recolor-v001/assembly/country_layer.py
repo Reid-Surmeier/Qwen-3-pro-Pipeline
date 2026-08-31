@@ -53,6 +53,7 @@ lat = np.degrees(2*np.arctan(np.exp((prm['y0'] - ys_)/prm['k'])) - np.pi/2)
 li = np.clip(((lon + 180)/0.1).astype(int), 0, len(LON)-1)
 la = np.clip(((lat + 90)/0.1).astype(int), 0, len(LAT)-1)
 cid = cid_grid[la, li]
+np.save('countries-raw.npy', cid)
 # fill small ocean gaps near coasts so slight misalignment still lands on a country
 for _ in range(3):
     empty = cid < 0
