@@ -110,7 +110,6 @@ const record = (controlId, gesture, action, assertions, frames, observed,
   const matches = Object.values(assertions).every(Boolean);
   const entry = {
     control_id: controlId, gesture, window_action: action,
-    expected_rejection: true,
     expected: "manifest and retained Equipment Items Behaviour Card",
     observed: JSON.stringify(observed), responsive: matches, matches_expected: matches,
     assertions, frames, intended_region: WINDOW_REGION,
@@ -139,6 +138,7 @@ const recordRejection = (controlId, gesture, action, assertions, frames, observe
   const matches = Object.values(assertions).every(Boolean);
   const entry = {
     control_id: controlId, gesture, window_action: action,
+    expected_rejection: true,
     expected: "named atomic rejection preserves Inventory and Equipment Items",
     observed: JSON.stringify(observed), responsive: matches, matches_expected: matches,
     assertions, frames, intended_region: WINDOW_REGION,
