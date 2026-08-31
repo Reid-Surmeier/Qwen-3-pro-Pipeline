@@ -10147,6 +10147,896 @@
           }
         }
       ]
+    },
+    {
+      "id": "party",
+      "evidence_policy": {
+        "issue": 133
+      },
+      "geometry": {
+        "x": 1107,
+        "y": 505,
+        "width": 215,
+        "height": 269
+      },
+      "drag_geometry": {
+        "x": 0,
+        "y": 0,
+        "width": 194,
+        "height": 22
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/party/source-plate.png",
+        "minimized": "res://assets/image-79/party/source-plate.png"
+      },
+      "backing_color": "#00000000",
+      "display_facts": [
+        {
+          "id": "member-1-label",
+          "text": "SakumaRiri（フェイヨン..",
+          "geometry": [
+            34,
+            33,
+            170,
+            16
+          ]
+        },
+        {
+          "id": "member-1-hp",
+          "text": "1109/1109",
+          "geometry": [
+            128,
+            49,
+            76,
+            16
+          ]
+        },
+        {
+          "id": "member-2-label",
+          "text": "Sebas*（フェイヨン...",
+          "geometry": [
+            34,
+            67,
+            170,
+            16
+          ]
+        },
+        {
+          "id": "member-2-hp",
+          "text": "1340/1340",
+          "geometry": [
+            128,
+            83,
+            76,
+            16
+          ]
+        },
+        {
+          "id": "member-3-label",
+          "text": "ANRI（フェイヨン森）",
+          "geometry": [
+            34,
+            101,
+            170,
+            16
+          ]
+        },
+        {
+          "id": "member-3-hp",
+          "text": "1762/1762",
+          "geometry": [
+            128,
+            117,
+            76,
+            16
+          ]
+        },
+        {
+          "id": "member-4-label",
+          "text": "Show_A（フェイヨン森..",
+          "geometry": [
+            34,
+            135,
+            170,
+            16
+          ]
+        },
+        {
+          "id": "member-4-hp",
+          "text": "1235/1235",
+          "geometry": [
+            128,
+            151,
+            76,
+            16
+          ]
+        },
+        {
+          "id": "member-5-label",
+          "text": "AyanaIshizuka（フェイヨン...",
+          "geometry": [
+            34,
+            169,
+            170,
+            16
+          ]
+        },
+        {
+          "id": "member-5-hp",
+          "text": "1028/1028",
+          "geometry": [
+            128,
+            185,
+            76,
+            16
+          ]
+        }
+      ],
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "state_adapter": {
+        "type": "party",
+        "initial_mode": "party",
+        "initial_membership": "member",
+        "members": [
+          {
+            "id": "sakumariri",
+            "name": "SakumaRiri",
+            "location": "フェイヨン..",
+            "current_hp": 1109,
+            "maximum_hp": 1109
+          },
+          {
+            "id": "sebas",
+            "name": "Sebas*",
+            "location": "フェイヨン...",
+            "current_hp": 1340,
+            "maximum_hp": 1340
+          },
+          {
+            "id": "anri",
+            "name": "ANRI",
+            "location": "フェイヨン森）",
+            "current_hp": 1762,
+            "maximum_hp": 1762
+          },
+          {
+            "id": "show_a",
+            "name": "Show_A",
+            "location": "フェイヨン森..",
+            "current_hp": 1235,
+            "maximum_hp": 1235
+          },
+          {
+            "id": "ayana_ishizuka",
+            "name": "AyanaIshizuka",
+            "location": "フェイヨン...",
+            "current_hp": 1028,
+            "maximum_hp": 1028
+          }
+        ],
+        "actions": {
+          "party.action.memo": {
+            "permission": "unavailable",
+            "reason": "Source icon behavior is unattested"
+          },
+          "party.action.info": {
+            "permission": "unavailable",
+            "reason": "Source icon behavior is unattested"
+          },
+          "party.action.target": {
+            "permission": "unavailable",
+            "reason": "Source icon behavior is unattested"
+          },
+          "party.action.search": {
+            "permission": "unavailable",
+            "reason": "Source icon behavior is unattested"
+          },
+          "party.action.leave": {
+            "permission": "party_member"
+          }
+        },
+        "controls": {
+          "mode": "party.mode",
+          "members": "party.members",
+          "actions": [
+            "party.action.memo",
+            "party.action.info",
+            "party.action.target",
+            "party.action.search",
+            "party.action.leave"
+          ]
+        },
+        "presentation": {
+          "blank_list": "res://assets/image-79/party/blank-list.png",
+          "geometry": {
+            "x": 5,
+            "y": 27,
+            "width": 205,
+            "height": 180
+          }
+        }
+      },
+      "controls": [
+        {
+          "id": "party.close",
+          "type": "Button",
+          "geometry": {
+            "x": 194,
+            "y": 5,
+            "width": 13,
+            "height": 13
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/close-ready-idle.png",
+              "hover": "res://assets/image-79/party/close-ready-hover.png",
+              "pressed": "res://assets/image-79/party/close-ready-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "party.members",
+          "type": "SelectionView",
+          "geometry": {
+            "x": 6,
+            "y": 33,
+            "width": 200,
+            "height": 168
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "unselected",
+            "selected"
+          ],
+          "initial_semantic_state": "unselected",
+          "state_set": {
+            "unselected": {
+              "idle": "res://assets/image-79/party/transparent.png",
+              "hover": "res://assets/image-79/party/transparent.png",
+              "pressed": "res://assets/image-79/party/transparent.png"
+            },
+            "selected": {
+              "idle": "res://assets/image-79/party/transparent.png",
+              "hover": "res://assets/image-79/party/transparent.png",
+              "pressed": "res://assets/image-79/party/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "SelectPartyMember"
+            }
+          ],
+          "value": {
+            "items": [
+              "sakumariri",
+              "sebas",
+              "anri",
+              "show_a",
+              "ayana_ishizuka"
+            ],
+            "initial": "sakumariri",
+            "details": {
+              "sakumariri": "SakumaRiri（フェイヨン..\n1109/1109",
+              "sebas": "Sebas*（フェイヨン...\n1340/1340",
+              "anri": "ANRI（フェイヨン森）\n1762/1762",
+              "show_a": "Show_A（フェイヨン森..\n1235/1235",
+              "ayana_ishizuka": "AyanaIshizuka（フェイヨン...\n1028/1028"
+            },
+            "item_values": {
+              "sakumariri": "sakumariri",
+              "sebas": "sebas",
+              "anri": "anri",
+              "show_a": "show_a",
+              "ayana_ishizuka": "ayana_ishizuka"
+            },
+            "value_control_ids": {},
+            "show_empty_slots": false
+          },
+          "surfaces": {
+            "sakumariri": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 200,
+                "height": 32
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/member-sakumariri-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/member-sakumariri-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sakumariri-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/member-sakumariri-selected-idle.png",
+                  "hover": "res://assets/image-79/party/member-sakumariri-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sakumariri-selected-pressed.png"
+                }
+              }
+            },
+            "sebas": {
+              "geometry": {
+                "x": 0,
+                "y": 34,
+                "width": 200,
+                "height": 32
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/member-sebas-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/member-sebas-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sebas-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/member-sebas-selected-idle.png",
+                  "hover": "res://assets/image-79/party/member-sebas-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sebas-selected-pressed.png"
+                }
+              }
+            },
+            "anri": {
+              "geometry": {
+                "x": 0,
+                "y": 68,
+                "width": 200,
+                "height": 32
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/member-anri-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/member-anri-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-anri-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/member-anri-selected-idle.png",
+                  "hover": "res://assets/image-79/party/member-anri-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-anri-selected-pressed.png"
+                }
+              }
+            },
+            "show_a": {
+              "geometry": {
+                "x": 0,
+                "y": 102,
+                "width": 200,
+                "height": 32
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/member-show_a-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/member-show_a-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-show_a-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/member-show_a-selected-idle.png",
+                  "hover": "res://assets/image-79/party/member-show_a-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-show_a-selected-pressed.png"
+                }
+              }
+            },
+            "ayana_ishizuka": {
+              "geometry": {
+                "x": 0,
+                "y": 136,
+                "width": 200,
+                "height": 32
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/member-ayana_ishizuka-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/member-ayana_ishizuka-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-ayana_ishizuka-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/member-ayana_ishizuka-selected-idle.png",
+                  "hover": "res://assets/image-79/party/member-ayana_ishizuka-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/member-ayana_ishizuka-selected-pressed.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "party.meter.sakumariri",
+          "type": "Meter",
+          "geometry": {
+            "x": 38,
+            "y": 52,
+            "width": 88,
+            "height": 5
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/meter-sakumariri-idle.png",
+              "hover": "res://assets/image-79/party/meter-sakumariri-hover.png",
+              "pressed": "res://assets/image-79/party/meter-sakumariri-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1109,
+            "current": 1109,
+            "fill_axis": "horizontal",
+            "fill_pixels": 88
+          }
+        },
+        {
+          "id": "party.meter.sebas",
+          "type": "Meter",
+          "geometry": {
+            "x": 38,
+            "y": 86,
+            "width": 88,
+            "height": 5
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/meter-sebas-idle.png",
+              "hover": "res://assets/image-79/party/meter-sebas-hover.png",
+              "pressed": "res://assets/image-79/party/meter-sebas-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1340,
+            "current": 1340,
+            "fill_axis": "horizontal",
+            "fill_pixels": 88
+          }
+        },
+        {
+          "id": "party.meter.anri",
+          "type": "Meter",
+          "geometry": {
+            "x": 38,
+            "y": 120,
+            "width": 88,
+            "height": 5
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/meter-anri-idle.png",
+              "hover": "res://assets/image-79/party/meter-anri-hover.png",
+              "pressed": "res://assets/image-79/party/meter-anri-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1762,
+            "current": 1762,
+            "fill_axis": "horizontal",
+            "fill_pixels": 88
+          }
+        },
+        {
+          "id": "party.meter.show_a",
+          "type": "Meter",
+          "geometry": {
+            "x": 38,
+            "y": 154,
+            "width": 88,
+            "height": 5
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/meter-show_a-idle.png",
+              "hover": "res://assets/image-79/party/meter-show_a-hover.png",
+              "pressed": "res://assets/image-79/party/meter-show_a-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1235,
+            "current": 1235,
+            "fill_axis": "horizontal",
+            "fill_pixels": 88
+          }
+        },
+        {
+          "id": "party.meter.ayana_ishizuka",
+          "type": "Meter",
+          "geometry": {
+            "x": 38,
+            "y": 188,
+            "width": 88,
+            "height": 5
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/party/meter-ayana_ishizuka-idle.png",
+              "hover": "res://assets/image-79/party/meter-ayana_ishizuka-hover.png",
+              "pressed": "res://assets/image-79/party/meter-ayana_ishizuka-pressed.png"
+            }
+          },
+          "gestures": [],
+          "actions": [],
+          "value": {
+            "minimum": 0,
+            "maximum": 1028,
+            "current": 1028,
+            "fill_axis": "horizontal",
+            "fill_pixels": 88
+          }
+        },
+        {
+          "id": "party.action.memo",
+          "type": "Button",
+          "geometry": {
+            "x": 15,
+            "y": 214,
+            "width": 21,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/party/action-memo-disabled-idle.png",
+              "hover": "res://assets/image-79/party/action-memo-disabled-hover.png",
+              "pressed": "res://assets/image-79/party/action-memo-disabled-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ActivatePartyAction"
+            }
+          ],
+          "value": {
+            "action_id": "party.action.memo"
+          }
+        },
+        {
+          "id": "party.action.info",
+          "type": "Button",
+          "geometry": {
+            "x": 50,
+            "y": 214,
+            "width": 21,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/party/action-info-disabled-idle.png",
+              "hover": "res://assets/image-79/party/action-info-disabled-hover.png",
+              "pressed": "res://assets/image-79/party/action-info-disabled-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ActivatePartyAction"
+            }
+          ],
+          "value": {
+            "action_id": "party.action.info"
+          }
+        },
+        {
+          "id": "party.action.target",
+          "type": "Button",
+          "geometry": {
+            "x": 85,
+            "y": 214,
+            "width": 21,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/party/action-target-disabled-idle.png",
+              "hover": "res://assets/image-79/party/action-target-disabled-hover.png",
+              "pressed": "res://assets/image-79/party/action-target-disabled-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ActivatePartyAction"
+            }
+          ],
+          "value": {
+            "action_id": "party.action.target"
+          }
+        },
+        {
+          "id": "party.action.search",
+          "type": "Button",
+          "geometry": {
+            "x": 120,
+            "y": 214,
+            "width": 21,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "disabled": {
+              "idle": "res://assets/image-79/party/action-search-disabled-idle.png",
+              "hover": "res://assets/image-79/party/action-search-disabled-hover.png",
+              "pressed": "res://assets/image-79/party/action-search-disabled-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ActivatePartyAction"
+            }
+          ],
+          "value": {
+            "action_id": "party.action.search"
+          }
+        },
+        {
+          "id": "party.action.leave",
+          "type": "Button",
+          "geometry": {
+            "x": 155,
+            "y": 214,
+            "width": 21,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/party/action-leave-available-idle.png",
+              "hover": "res://assets/image-79/party/action-leave-available-hover.png",
+              "pressed": "res://assets/image-79/party/action-leave-available-pressed.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/party/action-leave-disabled-idle.png",
+              "hover": "res://assets/image-79/party/action-leave-disabled-hover.png",
+              "pressed": "res://assets/image-79/party/action-leave-disabled-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ActivatePartyAction"
+            }
+          ],
+          "value": {
+            "action_id": "party.action.leave"
+          }
+        },
+        {
+          "id": "party.mode",
+          "type": "ChoiceGroup",
+          "geometry": {
+            "x": 5,
+            "y": 244,
+            "width": 176,
+            "height": 23
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "selected",
+            "unselected"
+          ],
+          "initial_semantic_state": "selected",
+          "state_set": {
+            "selected": {
+              "idle": "res://assets/image-79/party/transparent.png",
+              "hover": "res://assets/image-79/party/transparent.png",
+              "pressed": "res://assets/image-79/party/transparent.png"
+            },
+            "unselected": {
+              "idle": "res://assets/image-79/party/transparent.png",
+              "hover": "res://assets/image-79/party/transparent.png",
+              "pressed": "res://assets/image-79/party/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "SelectPartyMode"
+            }
+          ],
+          "value": {
+            "choices": [
+              "friends",
+              "party"
+            ],
+            "initial": "party"
+          },
+          "surfaces": {
+            "friends": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 71,
+                "height": 23
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/mode-friends-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/mode-friends-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/mode-friends-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/mode-friends-selected-idle.png",
+                  "hover": "res://assets/image-79/party/mode-friends-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/mode-friends-selected-pressed.png"
+                }
+              }
+            },
+            "party": {
+              "geometry": {
+                "x": 81,
+                "y": 0,
+                "width": 95,
+                "height": 23
+              },
+              "state_set": {
+                "unselected": {
+                  "idle": "res://assets/image-79/party/mode-party-unselected-idle.png",
+                  "hover": "res://assets/image-79/party/mode-party-unselected-hover.png",
+                  "pressed": "res://assets/image-79/party/mode-party-unselected-pressed.png"
+                },
+                "selected": {
+                  "idle": "res://assets/image-79/party/mode-party-selected-idle.png",
+                  "hover": "res://assets/image-79/party/mode-party-selected-hover.png",
+                  "pressed": "res://assets/image-79/party/mode-party-selected-pressed.png"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }

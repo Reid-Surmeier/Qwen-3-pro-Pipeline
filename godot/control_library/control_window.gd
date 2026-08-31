@@ -17,6 +17,7 @@ const ScrollViewControlScript = preload("res://control_library/scroll_view_contr
 const TextFieldControlScript = preload("res://control_library/text_field_control.gd")
 const MeterControlScript = preload("res://control_library/meter_control.gd")
 const StatusWindowOverlayScript = preload("res://window_state/status_window_overlay.gd")
+const PartyWindowOverlayScript = preload("res://window_state/party_window_overlay.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
@@ -52,6 +53,7 @@ var _resize_clamped := Vector2.ZERO
 var _resize_motion_samples := 0
 var _geometry_version := 0
 var status_overlay: StatusWindowOverlay
+var party_overlay: PartyWindowOverlay
 
 
 func configure(window_spec: Dictionary) -> void:
@@ -87,6 +89,10 @@ func _ready() -> void:
 	plate.stretch_mode = TextureRect.STRETCH_KEEP
 	plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(plate)
+	if str(spec.get("state_adapter", {}).get("type", "")) == "party":
+		party_overlay = PartyWindowOverlayScript.new()
+		party_overlay.configure(spec.state_adapter, runtime)
+		add_child(party_overlay)
 	_add_resize_frame()
 	for control_spec in spec.controls:
 		var node: Control
@@ -171,6 +177,8 @@ func qa_state() -> Dictionary:
 	state.display_facts = spec.get("display_facts", []).duplicate(true)
 	state.status_overlay = status_overlay.rendered_facts() \
 		if status_overlay != null else {"visible": false, "version": 0, "text": {}}
+	state.party_overlay = party_overlay.rendered_facts() \
+		if party_overlay != null else {"visible": false, "asset": ""}
 	return state
 
 
@@ -527,7 +535,7 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 					"ToggleStorageSelection", "TransferStorageItem", \
 					"TransferInventoryItem", "SelectEquipmentSlot", \
 					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem", \
-					"OpenWindow":
+					"OpenWindow", "SelectPartyMode", "SelectPartyMember", "LeaveParty":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))
@@ -607,3 +615,5 @@ func _refresh_all_controls() -> void:
 			node.refresh()
 	if status_overlay != null:
 		status_overlay.refresh()
+	if party_overlay != null:
+		party_overlay.refresh()

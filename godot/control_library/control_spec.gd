@@ -6,6 +6,7 @@ extends RefCounted
 
 const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
+const PartyWindowState = preload("res://window_state/party_window_state.gd")
 const MeterModule = preload("res://control_library/meter.gd")
 
 const SCHEMA_VERSION := 3
@@ -22,17 +23,17 @@ const ACTIONS_BY_TYPE := {
 	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
-		"SortStorage", "FocusStorageSearch", "OpenWindow"],
+		"SortStorage", "FocusStorageSearch", "OpenWindow", "ActivatePartyAction"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
-	"ChoiceGroup": ["SelectChoice"],
+	"ChoiceGroup": ["SelectChoice", "SelectPartyMode"],
 	"Tabs": ["SelectInventoryTab", "SelectStorageCategory"],
 	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
 		"OpenInventoryItem", "EquipInventoryItem", "ToggleInventorySelection", "MoveInventoryItem",
 		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
 		"TransferInventoryItem", "SelectEquipmentSlot", "UnequipEquipmentItem",
-		"MoveEquipmentItem"],
+		"MoveEquipmentItem", "SelectPartyMember"],
 	"Stepper": ["StepSkill", "StepStatusAttribute"],
 	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
 		"ScrollEquipmentCard", "StepEquipmentCardScroll",
@@ -768,9 +769,12 @@ static func _validate_stepper_contract(control: Dictionary, path: String,
 
 static func _validate_window_state_adapter(adapter: Variant, controls: Array,
 		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
-	if not adapter is Dictionary or str(adapter.get("type", "")) != "status":
+	if not adapter is Dictionary or str(adapter.get("type", "")) not in ["status", "party"]:
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
-			"Window state adapter must declare the supported status type"))
+			"Window state adapter must declare a supported type"))
+		return
+	if str(adapter.type) == "party":
+		_validate_party_state_adapter(adapter, controls, path, errors, asset_exists)
 		return
 	var initialized: Dictionary = StatusWindowState.initialize(adapter)
 	if not initialized.get("ok", false):
@@ -802,6 +806,56 @@ static func _validate_window_state_adapter(adapter: Variant, controls: Array,
 					"Every Status Stepper must belong to the adapter"))
 	_validate_status_presentation(adapter.get("presentation"), attributes,
 		adapter.get("derived", {}), path + ".presentation", errors, asset_exists)
+
+
+static func _validate_party_state_adapter(adapter: Dictionary, controls: Array,
+		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
+	var initialized: Dictionary = PartyWindowState.initialize(adapter)
+	if not initialized.get("ok", false):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			str(initialized.get("error", {}).get("detail", "invalid Party adapter"))))
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	var mappings: Variant = adapter.get("controls")
+	if not mappings is Dictionary:
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls",
+			"Party adapter requires manifest-owned Control mappings"))
+		return
+	var mode_id := str(mappings.get("mode", ""))
+	var member_id := str(mappings.get("members", ""))
+	if not declared.get(mode_id) is Dictionary \
+			or str(declared[mode_id].get("type", "")) != "ChoiceGroup" \
+			or not declared[mode_id].get("actions", []).any(func(binding):
+				return binding is Dictionary and binding.get("action") == "SelectPartyMode"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls.mode",
+			"Party mode must map a ChoiceGroup bound to SelectPartyMode"))
+	if not declared.get(member_id) is Dictionary \
+			or str(declared[member_id].get("type", "")) != "SelectionView" \
+			or not declared[member_id].get("actions", []).any(func(binding):
+				return binding is Dictionary and binding.get("action") == "SelectPartyMember"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls.members",
+			"Party members must map a SelectionView bound to SelectPartyMember"))
+	var action_ids: Variant = mappings.get("actions")
+	if not action_ids is Array or action_ids.size() != 5 \
+			or not action_ids.all(func(control_id):
+				return declared.get(str(control_id)) is Dictionary \
+					and str(declared[str(control_id)].get("type", "")) == "Button" \
+					and declared[str(control_id)].get("actions", []).any(func(binding):
+						return binding is Dictionary \
+							and binding.get("action") == "ActivatePartyAction")):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls.actions",
+			"Party actions must map all five source Buttons"))
+	var presentation: Variant = adapter.get("presentation")
+	if not presentation is Dictionary:
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".presentation",
+			"Party presentation must be manifest-owned"))
+		return
+	_validate_asset(str(presentation.get("blank_list", "")),
+		path + ".presentation.blank_list", errors, asset_exists)
+	_validate_geometry(presentation.get("geometry"),
+		path + ".presentation.geometry", errors)
 
 
 static func _validate_status_presentation(presentation: Variant,

@@ -1,0 +1,664 @@
+{
+  "kind": "deterministic-assembly",
+  "issue": 133,
+  "source": "artifacts/references/ro-desktop-b/reference-native.png",
+  "source_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "inventory": "artifacts/references/ro-desktop-b/control-inventory.json",
+  "source_rect": [
+    1107,
+    505,
+    1322,
+    774
+  ],
+  "provider_requests": 0,
+  "outputs": [
+    {
+      "path": "godot/assets/image-79/party/source-plate.png",
+      "sha256": "75578e9d46e90d84452ff97c367091484b42f00a3318804715060c49a54a0ec6",
+      "size": [
+        215,
+        269
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/blank-list.png",
+      "sha256": "3c59ca6bd85543b3634d87ca3f9fcc1ce5ba845ac9502e53b0275e35ac91375e",
+      "size": [
+        205,
+        180
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/close-ready-idle.png",
+      "sha256": "6726d873ccdcb4a3607bdd83a7d3bbc0f6defe827f9a502561ca111285a52d21",
+      "size": [
+        13,
+        13
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/close-ready-hover.png",
+      "sha256": "cc8d28a3f05a2bb180bc7acb23533d99e48f422caa741dacec3093c5b1fc093d",
+      "size": [
+        13,
+        13
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/close-ready-pressed.png",
+      "sha256": "46a86c4276197c8f4c966cd5dde1b246f177a92b11e6ffb88bcc026b76bca132",
+      "size": [
+        13,
+        13
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-unselected-idle.png",
+      "sha256": "5ff59cb3611c40b572ee25fe51cfa18eaabdf4b941c25e7bb26febf2b06a7277",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-unselected-hover.png",
+      "sha256": "05dbeee1ec16140709d247641edbf9be76f1cbeaace3810e09fbb377cd31a958",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-unselected-pressed.png",
+      "sha256": "c960e8fb17d2fffce2238ecd8b3710a05829c6a62246e203d7b8ac4b3f804b56",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-selected-idle.png",
+      "sha256": "b760c7b613da203cbfae71664b69daa72ba3a81d81037d0e10376089bc5087ab",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-selected-hover.png",
+      "sha256": "b760c7b613da203cbfae71664b69daa72ba3a81d81037d0e10376089bc5087ab",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-selected-pressed.png",
+      "sha256": "6e9ffcc0e000068690674aad46fa78f7c7b6c6e9ea858b3cdf03999aaddf8033",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unselected-idle.png",
+      "sha256": "62ddbe569b895c83b719720664faf5a885430616c5f073756862e1848f56ae0f",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unselected-hover.png",
+      "sha256": "76dc2d74ee4b393ced4ff34e73c5c1e4f3b9827d165cdf64907a1a85d883ceda",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unselected-pressed.png",
+      "sha256": "6dc80492e61abc8660c751f44e464be9bd41e9053dbadd5669538b11164389a2",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-selected-idle.png",
+      "sha256": "f4fcbf3cecbf4fac75173a56950daecb92b3bc1f1099d76812b3f4a2fea3eabd",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-selected-hover.png",
+      "sha256": "f4fcbf3cecbf4fac75173a56950daecb92b3bc1f1099d76812b3f4a2fea3eabd",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-selected-pressed.png",
+      "sha256": "4609b80034764776b39c2b3406759c9a8809bbd614bfd42c6046174f57ccbd1a",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-unselected-idle.png",
+      "sha256": "db1d233e0fafbc8ae32bda800249557735ace0157ccd1b2e9c4f17147d5a2de1",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-unselected-hover.png",
+      "sha256": "7492c21bd27dc5ff744e3feb650f41fa6033555c0d913c5c00081b8fb13ccc69",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-unselected-pressed.png",
+      "sha256": "38430961068c31784ab3b5b0b03d7b4a567c63c7245559217d1cd1d6b4788bb8",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-selected-idle.png",
+      "sha256": "271e24842e3699b357f32b8528ffdcb0cac0d5be8164d37f71aa6fc2b71ae355",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-selected-hover.png",
+      "sha256": "271e24842e3699b357f32b8528ffdcb0cac0d5be8164d37f71aa6fc2b71ae355",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-selected-pressed.png",
+      "sha256": "e6cbdb7d48f09421dcab963b31fcc18aad4d4821304199d37cf2c07ff3f1aa4c",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-unselected-idle.png",
+      "sha256": "0afb7abab74ffc74a07fff17fdf37de01e4c3edbf05a50a6581e32a61cdbe7c7",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-unselected-hover.png",
+      "sha256": "223770169a036c4a5cb2268e08660e66ed0a81f26c143adf3d5e5eaf8324f9e0",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-unselected-pressed.png",
+      "sha256": "aee4ef48e040e9da4e4c5d749413d7c0532d7f5679376ca5574802e44dc7d9a6",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-selected-idle.png",
+      "sha256": "cd447001a0aa79e527d441bde8afd685fb18e580d3e36d1d5eee7eb4b8912d09",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-selected-hover.png",
+      "sha256": "cd447001a0aa79e527d441bde8afd685fb18e580d3e36d1d5eee7eb4b8912d09",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-selected-pressed.png",
+      "sha256": "4687f3be46dc898ac3e44381d92bdbd779b30efc024ff308a1b2fca33b132490",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unselected-idle.png",
+      "sha256": "7d6bdcd18adc9b9ca1257650543f7a0c67b58393009e727df7d29800114c8cb8",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unselected-hover.png",
+      "sha256": "e1b852d25ff5c1bd2af7498cee440e8ebbe568dfff97d83f90768160128a6328",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unselected-pressed.png",
+      "sha256": "8f8352341baefc1b5e5f20ad3db0b04dfe9ef06fb77ede7c32203a7527b111fa",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-selected-idle.png",
+      "sha256": "89c45fe4ab615f202f2cf2eb1e33e9fb6fb05127633218c0c2e1f10faa743195",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-selected-hover.png",
+      "sha256": "89c45fe4ab615f202f2cf2eb1e33e9fb6fb05127633218c0c2e1f10faa743195",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-selected-pressed.png",
+      "sha256": "4a51324698aa309cacdfd57c53acc9c2e6e5364c9b9773740908dfff38ac8cfb",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sakumariri-idle.png",
+      "sha256": "63b77b7a843e684775322eb914cdf043937822c1327e6a7a605850641c666549",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sakumariri-hover.png",
+      "sha256": "57f5445fdb4d312f93b8fd9f2c12ecb9295b14eac17e106dde45af1582e552d7",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sakumariri-pressed.png",
+      "sha256": "b74ea553e55a3c78d9e15176a25295ef412883789b1b414961a024a5dab04493",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sebas-idle.png",
+      "sha256": "f7c5c1720e17624c3d71308cf48e603816afff942b7ff664ec29282f58fa61bd",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sebas-hover.png",
+      "sha256": "37d99ccdfa3c1f8a7e455dcf4099fec9a9d8dccd89c75edd8a3cdb2ae499214f",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-sebas-pressed.png",
+      "sha256": "3ffc2de28d65b3b9927da864d24cbce03b1875855d09c8046722a4da9f1b151a",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-anri-idle.png",
+      "sha256": "d96bb0fe256b2384dff3903b2d6de6f04258c885e5dfe0860cb41e578cce6dc8",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-anri-hover.png",
+      "sha256": "d2bf3ed387304cb647b96e059fa5b39f61981c825831f9092a64b0b1ee09fe9d",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-anri-pressed.png",
+      "sha256": "c4affb6a948c6b488a2860c576ea9031d735e7a1eec4ec3748a8f864f95f1ddb",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-show_a-idle.png",
+      "sha256": "74d2ccbb4ae85e32ae9c90d37b7787375f4817ebe31eca981a6d4b5359ddb784",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-show_a-hover.png",
+      "sha256": "755ede6b73c3859a36f354a7e337f44e5d4adaf38f23a720c77248597c960f8a",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-show_a-pressed.png",
+      "sha256": "76c40d8bf0838bd5c919bf008dc210a288de0e2491024672ceb56939c9590d2d",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-ayana_ishizuka-idle.png",
+      "sha256": "f199931fde6dbd0f36f9c8705ee6b4f37846743e54cb222d0638fa2c3a4dff3d",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-ayana_ishizuka-hover.png",
+      "sha256": "510389e434ebfaa1ace0b49ba8599d7974ebea78f0c3f35e56167f339de81e8a",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/meter-ayana_ishizuka-pressed.png",
+      "sha256": "59f689b635a49012b001a68a72e9a48b79b4279867b23b89bacd001248174831",
+      "size": [
+        88,
+        5
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-memo-disabled-idle.png",
+      "sha256": "b92402268dc3a01adee24ab89fba4c78bd52a6b318e3acea646f0e326b2a418f",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-memo-disabled-hover.png",
+      "sha256": "b92402268dc3a01adee24ab89fba4c78bd52a6b318e3acea646f0e326b2a418f",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-memo-disabled-pressed.png",
+      "sha256": "336e45417890398f3efc4e3f75aa8a876d96bff6a344ef31dc881a6b47f8feaa",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-info-disabled-idle.png",
+      "sha256": "00d137460e066030566b84081a9f5db103190cf4972c2b8536fbf84e27577d18",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-info-disabled-hover.png",
+      "sha256": "00d137460e066030566b84081a9f5db103190cf4972c2b8536fbf84e27577d18",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-info-disabled-pressed.png",
+      "sha256": "298166d71471d61c0788010c438e3df267b244fc21e87bdd3b3303296aac1997",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-target-disabled-idle.png",
+      "sha256": "3b516fac5163f6cdab678e198fb341f5e9114430a01dfe92500016325fc89a63",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-target-disabled-hover.png",
+      "sha256": "3b516fac5163f6cdab678e198fb341f5e9114430a01dfe92500016325fc89a63",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-target-disabled-pressed.png",
+      "sha256": "e35bee690530378dcedbf410e8588c795cf63bf84d87676f73b32df898215a7e",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-search-disabled-idle.png",
+      "sha256": "f7817c86feac1aff0cc0c39bd94de6e6eb4c7a265c9ed4949d145ad6d359b992",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-search-disabled-hover.png",
+      "sha256": "f7817c86feac1aff0cc0c39bd94de6e6eb4c7a265c9ed4949d145ad6d359b992",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-search-disabled-pressed.png",
+      "sha256": "15f7c7825b1cfa08fe9ccb279a79dec4347d56c62e5e54d82a0f4c68db83ae43",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-disabled-idle.png",
+      "sha256": "6c526cb95878075ca751a579c24ce3051c657f0956f6a60c5013182a1c00e065",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-disabled-hover.png",
+      "sha256": "6c526cb95878075ca751a579c24ce3051c657f0956f6a60c5013182a1c00e065",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-disabled-pressed.png",
+      "sha256": "3f9167fde2deb3da6b4d94d5bcafa29187e322b70b59365226dffb50a9cdd530",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-available-idle.png",
+      "sha256": "e71d1c85bfc969cdd80abbfb1bdcde2d5855dc950717bb7c0ab9f078d522ca09",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-available-hover.png",
+      "sha256": "5aad63f03b7bba311626cd162aa2f1f24693834d573f158619db84dfd4fbb590",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/action-leave-available-pressed.png",
+      "sha256": "33dc55082cce96bc76201fd055012d27b05812827d2adb2538c60c3ac7e54414",
+      "size": [
+        21,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-unselected-idle.png",
+      "sha256": "260a5390014548902b48f79c8986454b451ca78e3d7584f056074c39de38eb91",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-unselected-hover.png",
+      "sha256": "95a895c5b53ca591230d5df8476f2082e5f95b568ea8fcce738a63e0c256bed3",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-unselected-pressed.png",
+      "sha256": "b8209c46d1f280cd0a9e2359391fb6aa3e5728e47e32a6a05aeb7df37d8d5d3a",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-selected-idle.png",
+      "sha256": "a0ce564f92c4149c0b6907db6812295b95c5a7f22d6f6915551210f572d69340",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-selected-hover.png",
+      "sha256": "64c5ccb7cb9fcc51253502a8d9293e9c774fddfd9ee8a16a6f96650b1fc4d80f",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-friends-selected-pressed.png",
+      "sha256": "91e04f08a9dec922d50d2d0f9e39f050183cfe3b5fde329ca3fa71f6c7791260",
+      "size": [
+        71,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-unselected-idle.png",
+      "sha256": "2c8e3860b0f17afe0a8f592f17d48670ee9fc85ac8574390d279a1f42be50d11",
+      "size": [
+        95,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-unselected-hover.png",
+      "sha256": "3e2b41e0e6fb8c9a387e8fcc4cd42b7adc92a7f69ebf75342127a1640a7bd046",
+      "size": [
+        95,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-unselected-pressed.png",
+      "sha256": "cde67835e151ec711032c35b9da1fde5688c19219b9e246319fc4baeb5f52b86",
+      "size": [
+        95,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-selected-idle.png",
+      "sha256": "ffee329ebda6cd6707188cac8d696afa8afbc52de29b5bb52ba5d9752bf33a73",
+      "size": [
+        95,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-selected-hover.png",
+      "sha256": "06235c3f2601cf26791ffe8f2464036ab4dd03b9176376146e74400e07d498c5",
+      "size": [
+        95,
+        23
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/mode-party-selected-pressed.png",
+      "sha256": "cd1902ab0a4be878f9906628d78a49ce6af3e75f41466e87283dc7d14113d777",
+      "size": [
+        95,
+        23
+      ]
+    }
+  ]
+}
