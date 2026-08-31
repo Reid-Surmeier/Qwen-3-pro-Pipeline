@@ -13,6 +13,7 @@ func _init() -> void:
 	_contract_skill_tree_control_types_are_frozen()
 	_contract_selection_foreign_identity_fields_fail_closed()
 	_contract_window_adapter_fields_fail_closed()
+	_contract_party_adapter_fields_fail_closed()
 	_contract_basic_info_fields_fail_closed()
 	_contract_failures_are_named_and_fail_closed()
 	_write_report()
@@ -273,6 +274,33 @@ func _contract_window_adapter_fields_fail_closed() -> void:
 	_check("window-key-command-fails-closed",
 		"ControlBindingError" in missing_key_errors.map(func(error): return error.code),
 		str(missing_key_errors))
+
+
+func _contract_party_adapter_fields_fail_closed() -> void:
+	var fixture: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(
+		"res://data/image-79-control-spec.json"))
+	var window_index: int = fixture.windows.find_custom(func(window):
+		return window.get("id") == "party")
+	var party: Dictionary = fixture.windows[window_index]
+
+	var duplicate_actions := fixture.duplicate(true)
+	var first_action := str(party.state_adapter.controls.actions[0])
+	duplicate_actions.windows[window_index].state_adapter.controls.actions = [
+		first_action, first_action, first_action, first_action, first_action]
+	var duplicate_errors: Array = ControlSpec.validate(duplicate_actions, _all_assets_exist)
+	_check("party-action-mapping-permutation-fails-closed", duplicate_errors.any(func(error):
+		return error.code == "ControlBindingError" \
+			and "controls.actions" in str(error.path)), str(duplicate_errors))
+
+	var mismatched_action := fixture.duplicate(true)
+	var action_index: int = party.controls.find_custom(func(control):
+		return control.get("id") == first_action)
+	mismatched_action.windows[window_index].controls[action_index].value.action_id = \
+		"party.action.leave"
+	var mismatch_errors: Array = ControlSpec.validate(mismatched_action, _all_assets_exist)
+	_check("party-action-identity-fails-closed", mismatch_errors.any(func(error):
+		return error.code == "ControlBindingError" \
+			and "controls.actions" in str(error.path)), str(mismatch_errors))
 
 
 func _contract_basic_info_fields_fail_closed() -> void:

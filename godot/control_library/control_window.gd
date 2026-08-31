@@ -16,7 +16,7 @@ const StepperControlScript = preload("res://control_library/stepper_control.gd")
 const ScrollViewControlScript = preload("res://control_library/scroll_view_control.gd")
 const TextFieldControlScript = preload("res://control_library/text_field_control.gd")
 const MeterControlScript = preload("res://control_library/meter_control.gd")
-const StatusWindowOverlayScript = preload("res://window_state/status_window_overlay.gd")
+const WindowStateOverlayScript = preload("res://window_state/window_state_overlay.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
@@ -51,7 +51,7 @@ var _resize_requested := Vector2.ZERO
 var _resize_clamped := Vector2.ZERO
 var _resize_motion_samples := 0
 var _geometry_version := 0
-var status_overlay: StatusWindowOverlay
+var state_overlay: WindowStateOverlay
 
 
 func configure(window_spec: Dictionary) -> void:
@@ -117,10 +117,10 @@ func _ready() -> void:
 		node.changed.connect(_control_changed)
 		add_child(node)
 		control_nodes[str(control_spec.id)] = node
-	if str(spec.get("state_adapter", {}).get("type", "")) == "status":
-		status_overlay = StatusWindowOverlayScript.new()
-		status_overlay.configure(spec.state_adapter, runtime, size)
-		add_child(status_overlay)
+	if not spec.get("state_adapter", {}).is_empty():
+		state_overlay = WindowStateOverlayScript.new()
+		state_overlay.configure(spec.state_adapter, runtime, size)
+		add_child(state_overlay)
 	_add_title_drag()
 	_add_resize_grip()
 	gui_input.connect(_window_input)
@@ -169,8 +169,9 @@ func qa_state() -> Dictionary:
 				and _resize_old_right_edge_cover.visible},
 	}
 	state.display_facts = spec.get("display_facts", []).duplicate(true)
-	state.status_overlay = status_overlay.rendered_facts() \
-		if status_overlay != null else {"visible": false, "version": 0, "text": {}}
+	var overlay_facts := state_overlay.rendered_facts() \
+		if state_overlay != null else WindowStateOverlayScript.empty_facts()
+	state.merge(overlay_facts, true)
 	return state
 
 
@@ -490,7 +491,12 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 	if not result.has("phase") and is_inside_tree() \
 			and not is_queued_for_deletion() and get_parent() != null:
 		move_to_front()
-	if result.get("ok", false) and result.has("action"):
+		var changed_node: Variant = control_nodes.get(control_id)
+		if changed_node is DropdownControl \
+				and runtime.qa_state().controls[control_id].semantic_state == "open":
+			changed_node.menu.move_to_front()
+	if result.get("ok", false) and result.has("action") \
+			and not runtime.adapter_owns(control_id):
 		match str(result.action):
 			"ToggleMinimized":
 				_toggle_minimized()
@@ -563,8 +569,8 @@ func _toggle_minimized() -> void:
 	for control_id in control_nodes:
 		var node: Control = control_nodes[control_id]
 		node.visible = not minimized or control_id in keep_visible
-	if status_overlay != null:
-		status_overlay.set_minimized(minimized)
+	if state_overlay != null:
+		state_overlay.set_minimized(minimized)
 	if not minimized:
 		_apply_view_mode()
 		if not detail_item.is_empty():
@@ -605,5 +611,5 @@ func _refresh_all_controls() -> void:
 		var node: Control = control_nodes[control_id]
 		if node.has_method("refresh"):
 			node.refresh()
-	if status_overlay != null:
-		status_overlay.refresh()
+	if state_overlay != null:
+		state_overlay.refresh()

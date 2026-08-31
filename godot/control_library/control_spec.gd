@@ -5,7 +5,7 @@ extends RefCounted
 ## partially interactive Window.
 
 const Errors = preload("res://control_library/control_errors.gd")
-const StatusWindowState = preload("res://window_state/status_window_state.gd")
+const WindowStateSpec = preload("res://window_state/window_state_spec.gd")
 const MeterModule = preload("res://control_library/meter.gd")
 
 const SCHEMA_VERSION := 3
@@ -22,17 +22,17 @@ const ACTIONS_BY_TYPE := {
 	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
-		"SortStorage", "FocusStorageSearch", "OpenWindow"],
+		"SortStorage", "FocusStorageSearch", "OpenWindow", "ActivatePartyAction"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
-	"ChoiceGroup": ["SelectChoice"],
+	"ChoiceGroup": ["SelectChoice", "SelectPartyMode"],
 	"Tabs": ["SelectInventoryTab", "SelectStorageCategory"],
 	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
 		"OpenInventoryItem", "EquipInventoryItem", "ToggleInventorySelection", "MoveInventoryItem",
 		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
 		"TransferInventoryItem", "SelectEquipmentSlot", "UnequipEquipmentItem",
-		"MoveEquipmentItem"],
+		"MoveEquipmentItem", "SelectPartyMember"],
 	"Stepper": ["StepSkill", "StepStatusAttribute"],
 	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
 		"ScrollEquipmentCard", "StepEquipmentCardScroll",
@@ -768,80 +768,7 @@ static func _validate_stepper_contract(control: Dictionary, path: String,
 
 static func _validate_window_state_adapter(adapter: Variant, controls: Array,
 		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
-	if not adapter is Dictionary or str(adapter.get("type", "")) != "status":
-		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
-			"Window state adapter must declare the supported status type"))
-		return
-	var initialized: Dictionary = StatusWindowState.initialize(adapter)
-	if not initialized.get("ok", false):
-		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
-			str(initialized.get("error", {}).get("detail", "invalid Status adapter"))))
-	var declared := {}
-	for control in controls:
-		if control is Dictionary:
-			declared[str(control.get("id", ""))] = control
-	var attributes: Variant = adapter.get("attributes", {})
-	if attributes is Dictionary:
-		for control_id in attributes:
-			var control: Variant = declared.get(str(control_id))
-			if not control is Dictionary or str(control.get("type", "")) != "Stepper" \
-					or not control.get("actions", []).any(func(binding):
-						return binding is Dictionary \
-							and binding.get("action") == "StepStatusAttribute"):
-				errors.append(_error(Errors.CONTROL_BINDING,
-					path + ".attributes." + str(control_id),
-					"Status attribute must reference a same-Window Stepper bound to StepStatusAttribute"))
-		for control_id in declared:
-			var control: Dictionary = declared[control_id]
-			if str(control.get("type", "")) == "Stepper" \
-					and control.get("actions", []).any(func(binding):
-						return binding is Dictionary \
-							and binding.get("action") == "StepStatusAttribute") \
-					and not attributes.has(control_id):
-				errors.append(_error(Errors.CONTROL_BINDING, path + ".attributes",
-					"Every Status Stepper must belong to the adapter"))
-	_validate_status_presentation(adapter.get("presentation"), attributes,
-		adapter.get("derived", {}), path + ".presentation", errors, asset_exists)
-
-
-static func _validate_status_presentation(presentation: Variant,
-		attributes: Variant, derived: Variant, path: String,
-		errors: Array[Dictionary], asset_exists: Callable) -> void:
-	if not presentation is Dictionary:
-		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
-			"Status presentation must be a manifest-owned object"))
-		return
-	_validate_asset(str(presentation.get("font", "")), path + ".font",
-		errors, asset_exists)
-	if not _positive_number(presentation.get("font_size")) \
-			or str(presentation.get("font_color", "")).is_empty() \
-			or str(presentation.get("background", "")).is_empty():
-		errors.append(_error(Errors.INVALID_STATE_SET, path,
-			"Status presentation requires font size, font color, and background"))
-	_validate_geometry(presentation.get("points"), path + ".points", errors)
-	for field in ["attribute_values", "attribute_costs"]:
-		var geometries: Variant = presentation.get(field)
-		if not geometries is Dictionary or not attributes is Dictionary \
-				or geometries.keys().size() != attributes.keys().size() \
-				or not attributes.keys().all(func(control_id):
-					return geometries.has(control_id)):
-			errors.append(_error(Errors.CONTROL_BINDING, path + "." + field,
-				"Status attribute presentation must map every adapter Control"))
-			continue
-		for control_id in geometries:
-			_validate_geometry(geometries[control_id],
-				path + "." + field + "." + str(control_id), errors)
-	var derived_values: Variant = presentation.get("derived_values")
-	if not derived_values is Dictionary or not derived is Dictionary \
-			or derived_values.keys().size() != derived.keys().size() \
-			or not derived.keys().all(func(derived_id):
-				return derived_values.has(derived_id)):
-		errors.append(_error(Errors.CONTROL_BINDING, path + ".derived_values",
-			"Status derived presentation must map every derived rule"))
-		return
-	for derived_id in derived_values:
-		_validate_geometry(derived_values[derived_id],
-			path + ".derived_values." + str(derived_id), errors)
+	WindowStateSpec.validate(adapter, controls, path, errors, asset_exists)
 
 
 static func _validate_scroll_view_contract(control: Dictionary, path: String,

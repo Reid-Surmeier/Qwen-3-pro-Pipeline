@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: SSE parser returns the JSON-RPC payload
+ok 1 - SSE parser returns the JSON-RPC payload
+  ---
+  duration_ms: 0.911917
+  type: 'test'
+  ...
+# Subtest: resultText joins only text content blocks
+ok 2 - resultText joins only text content blocks
+  ---
+  duration_ms: 0.14841
+  type: 'test'
+  ...
+# Subtest: upload URL extraction ignores commit URLs and deduplicates
+ok 3 - upload URL extraction ignores commit URLs and deduplicates
+  ---
+  duration_ms: 0.393922
+  type: 'test'
+  ...
+# Subtest: upload URL extraction accepts current Figma MCP submit URLs
+ok 4 - upload URL extraction accepts current Figma MCP submit URLs
+  ---
+  duration_ms: 0.142599
+  type: 'test'
+  ...
+# Subtest: content types cover supported UI asset formats
+ok 5 - content types cover supported UI asset formats
+  ---
+  duration_ms: 0.370498
+  type: 'test'
+  ...
+# Subtest: upload commit parsing keeps only non-secret placement details
+ok 6 - upload commit parsing keeps only non-secret placement details
+  ---
+  duration_ms: 0.207741
+  type: 'test'
+  ...
+# Subtest: session grid is deterministic row-major with a white grouping boundary
+ok 7 - session grid is deterministic row-major with a white grouping boundary
+  ---
+  duration_ms: 0.359507
+  type: 'test'
+  ...
+# Subtest: session grid preserves native dimensions and sizes rows and columns to fit
+ok 8 - session grid preserves native dimensions and sizes rows and columns to fit
+  ---
+  duration_ms: 0.126498
+  type: 'test'
+  ...
+# Subtest: large sessions retain one native-size placement per source image
+ok 9 - large sessions retain one native-size placement per source image
+  ---
+  duration_ms: 0.416925
+  type: 'test'
+  ...
+# Subtest: delivery geometry options reject overlap and invalid screenshot bounds
+ok 10 - delivery geometry options reject overlap and invalid screenshot bounds
+  ---
+  duration_ms: 0.311847
+  type: 'test'
+  ...
+# Subtest: PNG dimensions are read without rewriting the image
+ok 11 - PNG dimensions are read without rewriting the image
+  ---
+  duration_ms: 0.190198
+  type: 'test'
+  ...
+# Subtest: run outputs remain ordered and cannot escape their run directory
+ok 12 - run outputs remain ordered and cannot escape their run directory
+  ---
+  duration_ms: 0.149972
+  type: 'test'
+  ...
+# Subtest: FigJam frame discovery recovers upload order from live geometry
+ok 13 - FigJam frame discovery recovers upload order from live geometry
+  ---
+  duration_ms: 0.242066
+  type: 'test'
+  ...
+# Subtest: Figma public-client exchange honors the registered none auth method
+ok 14 - Figma public-client exchange honors the registered none auth method
+  ---
+  duration_ms: 0.541839
+  type: 'test'
+  ...
+# Subtest: known-working legacy exchange uses Basic auth and omits resource
+ok 15 - known-working legacy exchange uses Basic auth and omits resource
+  ---
+  duration_ms: 0.154992
+  type: 'test'
+  ...
+# Subtest: authorization URL binds Figma MCP, PKCE, callback, and state
+ok 16 - authorization URL binds Figma MCP, PKCE, callback, and state
+  ---
+  duration_ms: 0.201259
+  type: 'test'
+  ...
+# Subtest: Codex credentials are merged without persisting the registration secret
+ok 17 - Codex credentials are merged without persisting the registration secret
+  ---
+  duration_ms: 5.415357
+  type: 'test'
+  ...
+# Subtest: Figma registration returns and preserves the server-declared auth method
+ok 18 - Figma registration returns and preserves the server-declared auth method
+  ---
+  duration_ms: 2.020847
+  type: 'test'
+  ...
+# Subtest: callback identity matches Codex for the hosted Figma MCP URL
+ok 19 - callback identity matches Codex for the hosted Figma MCP URL
+  ---
+  duration_ms: 0.192593
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 65.49873
