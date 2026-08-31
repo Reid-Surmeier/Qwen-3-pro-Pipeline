@@ -169,7 +169,8 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 		elif surface_id in state.get("selected_items", []):
 			semantic = "modifier_selected"
 		else:
-			semantic = "selected" if str(state.get("value", "")) == surface_id else "unselected"
+			semantic = "selected" if state.get("semantic_state") == "selected" \
+				and str(state.get("value", "")) == surface_id else "unselected"
 	elif str(entry.spec.type) == "Stepper":
 		semantic = "visible" if bool(state.get("arrows_visible", true)) else "hidden"
 	var phase := str(state.interaction_phase) \

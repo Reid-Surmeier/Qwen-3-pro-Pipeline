@@ -22,6 +22,12 @@ func _run() -> void:
 	var idle_resize: Dictionary = window.qa_state().window.resize
 	_check("idle-resize-facts", idle_resize.requested == [484.0, 303.0]
 		and idle_resize.clamped == [484.0, 303.0], str(idle_resize))
+	var idle_items: Dictionary = window.qa_state().controls["inventory.items"]
+	_check("real-idle-selection-is-unselected",
+		idle_items.semantic_state == "unselected"
+		and idle_items.selected_items.is_empty()
+		and window.runtime.visual_surface_asset("inventory.items", "r0c0") \
+			.ends_with("cell-r0c0-unselected-idle.png"), str(idle_items))
 	await _tabs_reverse()
 	await _single_and_double_activate()
 	await _pending_single_cancelled_by_modifier()

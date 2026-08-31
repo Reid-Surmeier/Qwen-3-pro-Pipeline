@@ -93,6 +93,8 @@ check("idle-factual-state", initial.window.size[0] === 484
   && JSON.stringify(initial.window.resize.requested) === JSON.stringify([484, 303])
   && JSON.stringify(initial.window.resize.clamped) === JSON.stringify([484, 303])
   && initial.controls["inventory.tabs"].value === "item"
+  && initial.controls["inventory.items"].semantic_state === "unselected"
+  && initial.controls["inventory.items"].selected_items.length === 0
   && Object.keys(initial.controls["inventory.items"].surface_geometry).length === 28,
   initial.window);
 

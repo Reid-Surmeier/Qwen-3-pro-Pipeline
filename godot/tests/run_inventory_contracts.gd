@@ -9,6 +9,7 @@ var results: Array[Dictionary] = []
 
 func _init() -> void:
 	_contract_tabs_route_declared_action()
+	_contract_idle_selection_surface_is_unselected()
 	_contract_selection_and_double_open()
 	_contract_modifier_selection_reverses()
 	_contract_invalid_modifier_preserves_state()
@@ -35,6 +36,16 @@ func _contract_tabs_route_declared_action() -> void:
 	_check("tabs-route-declared-action", result.get("ok", false)
 		and result.get("action") == "SelectInventoryTab" and state.get("value") == "equip",
 		str([result, state]))
+
+
+func _contract_idle_selection_surface_is_unselected() -> void:
+	var runtime = _runtime()
+	var state: Dictionary = runtime.qa_state().controls["inventory.items"]
+	var asset: String = runtime.visual_surface_asset("inventory.items", "r0c0")
+	_check("idle-selection-surface-is-unselected",
+		state.get("semantic_state") == "unselected"
+		and state.get("selected_items", []).is_empty()
+		and asset == "unselected-idle", str([state, asset]))
 
 
 func _contract_selection_and_double_open() -> void:
@@ -155,7 +166,11 @@ func _contract_qa_state_is_factual() -> void:
 
 func _fixture() -> Dictionary:
 	var variants := {"idle": "fixture", "hover": "fixture", "pressed": "fixture"}
-	var item_states := {"unselected": variants, "selected": variants,
+	var item_states := {
+		"unselected": {"idle": "unselected-idle", "hover": "unselected-hover",
+			"pressed": "unselected-pressed"},
+		"selected": {"idle": "selected-idle", "hover": "selected-hover",
+			"pressed": "selected-pressed"},
 		"modifier_selected": variants, "dragging": variants, "drop_target": variants}
 	var surfaces := {}
 	for index in 3:
