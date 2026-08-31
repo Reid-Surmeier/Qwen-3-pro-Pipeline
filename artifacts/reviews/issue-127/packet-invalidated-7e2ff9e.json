@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "issue": 127,
+  "pull_request": 82,
+  "candidate_commit": "7e2ff9ee5b8d55ef9d7cfe077de46975a53f9daf",
+  "acceptance_contract": "docs/reviews/issue-127-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-127/builder-7e2ff9e/evidence-manifest.json",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/evidence-manifest.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-127/builder-7e2ff9e/00-idle.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/01-tab-equip.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/02-single-selected.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/03-double-opened.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/04-modifier-selected.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/05-drag-mid.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/05-drag-after.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/06-window-drag-mid.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/07-resize-mid.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/07-resize-after.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/08-minimized.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/08-minimize-restored.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/09-close-after.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/10-key-after.png",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/play-log.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/report.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/verdict.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/control-spec-contracts.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/control-runtime-contracts.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/inventory-spec-contracts.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/inventory-contracts.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/inventory-window-contracts.json",
+      "artifacts/reviews/issue-127/builder-7e2ff9e/image79-contracts.json",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/00-idle.png",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/14-options-skin-activate-after.png",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/16-options-minimize-after.png",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/17-options-window-drag-mid.png",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/19-options-key-closed.png",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/play-log.json",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/verdict.json",
+      "artifacts/reviews/issue-127/options-regression-7e2ff9e/options-window-contracts.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/00-idle.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/02-context-detail.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/04-committed.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/05-cancelled.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/09-minimized.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/11-drag-mid.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/13-key-closed.png",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/play-log.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/verdict.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/skill-tree-contracts.json",
+      "artifacts/reviews/issue-127/skill-tree-regression-7e2ff9e/skill-tree-window-contracts.json"
+    ]
+  },
+  "launch": {
+    "command": "DISPLAY=:99 $HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue127-blind-review.pid || kill \"$(cat /tmp/issue127-blind-review.pid)\" 2>/dev/null || true; nohup env DISPLAY=:99 $HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --path godot -- --screen=image79 >/tmp/issue127-blind-review.log 2>&1 & echo $! >/tmp/issue127-blind-review.pid"
+  }
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import tempfile
 import unittest
@@ -42,6 +43,54 @@ class BlindReviewPacketTests(unittest.TestCase):
             MODULE.validate_packet(packet_path, ROOT,
                                    "82ae10483fd41d365f1ca54fe691e894c9727303"),
         )
+
+    def test_play_log_commit_must_match_trusted_packet_candidate(self) -> None:
+        candidate = "7e2ff9ee5b8d55ef9d7cfe077de46975a53f9daf"
+        source = (
+            ROOT / "artifacts" / "reviews" / "issue-127"
+            / "builder-7e2ff9e" / "play-log.json"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            evidence_root = Path(directory)
+            locked = evidence_root / "locked.txt"
+            locked.write_text("locked")
+            manifest = evidence_root / "evidence-manifest.json"
+            manifest.write_text(json.dumps({
+                "candidate_commit": candidate,
+                "files": [{
+                    "path": locked.name,
+                    "sha256": hashlib.sha256(locked.read_bytes()).hexdigest(),
+                }],
+            }))
+            play_log = json.loads(source.read_text())
+            play_log["candidate"]["commit_sha"] = "0" * 40
+            (evidence_root / "play-log.json").write_text(json.dumps(play_log))
+            problems: list[str] = []
+            MODULE._validate_evidence_manifest(
+                manifest, ROOT, candidate, 127, problems
+            )
+            self.assertTrue(
+                any("Play Log candidate commit does not match packet candidate" in problem
+                    for problem in problems),
+                problems,
+            )
+
+    def test_issue_127_packet_bootstraps_a_complete_godot_import(self) -> None:
+        packet = json.loads(
+            (ROOT / "artifacts" / "reviews" / "issue-127" / "packet.json").read_text()
+        )
+        launch = packet["launch"]
+        for command in (launch["command"], launch["clean_state_command"]):
+            self.assertIn("--headless --path godot --import", command)
+            self.assertNotIn("--quit-after", command)
+
+    def test_issue_127_clean_state_records_the_godot_process(self) -> None:
+        packet = json.loads(
+            (ROOT / "artifacts" / "reviews" / "issue-127" / "packet.json").read_text()
+        )
+        command = packet["launch"]["clean_state_command"]
+        self.assertIn("&& { nohup env", command)
+        self.assertIn("& echo $! >/tmp/issue127-blind-review.pid; }", command)
 
 
 if __name__ == "__main__":

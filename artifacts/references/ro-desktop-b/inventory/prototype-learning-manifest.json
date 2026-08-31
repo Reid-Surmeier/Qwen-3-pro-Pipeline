@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "issue": 127,
+  "prototype_disposition": "throwaway",
+  "reference": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "size": [1536, 1024],
+    "window_rect": {"x": 0, "y": 701, "width": 484, "height": 303}
+  },
+  "inventory": {
+    "source": "artifacts/references/ro-desktop-b/control-inventory.json",
+    "title_drag": 1,
+    "minimize": 1,
+    "close": 1,
+    "tabs": 5,
+    "visible_grid_cells": 28,
+    "scrollbar": 1,
+    "search_button": 1,
+    "resize_grip": 1
+  },
+  "behaviour_cards": [
+    {
+      "id": "inventory-tab-select",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryTab",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-127 acceptance plus the five source-owned vertical tab surfaces"
+    },
+    {
+      "id": "inventory-item-select",
+      "gesture": "Activate",
+      "window_action": "SelectInventoryItem",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-127 acceptance and bounded real-pointer prototype"
+    },
+    {
+      "id": "inventory-item-open",
+      "gesture": "DoubleActivate",
+      "window_action": "OpenInventoryItem",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-127 acceptance and bounded real-pointer prototype",
+      "contract": "DoubleActivate is exclusive: neither pointer-down nor either constituent click emits a duplicate Activate action."
+    },
+    {
+      "id": "inventory-modifier-selection",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleInventorySelection",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-127 acceptance and bounded real-pointer prototype",
+      "contract": "Control is the only declared modifier. Alt, Shift, Meta, or mixed modifiers return InvalidModifierError and preserve semantic state."
+    },
+    {
+      "id": "inventory-drag-drop",
+      "gesture": "DragDrop",
+      "window_action": "MoveInventoryItem",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "issue-127 acceptance and bounded real-pointer prototype",
+      "contract": "Recognition begins only after four pixels of pointer motion. A completed drag suppresses its trailing Click. Invalid targets return InvalidDropTargetError; version drift returns GestureConflictError; neither rejection mutates items or selection."
+    },
+    {
+      "id": "inventory-resize",
+      "gesture": "Resize",
+      "window_action": "ResizeWindow",
+      "response_frames": 1,
+      "reversible": true,
+      "authority": "source-owned resize grip, issue-127 acceptance, and bounded real-pointer prototype",
+      "contract": "Size clamps to 332x220 through 734x512. Grid hit geometry remains fixed in Window-local coordinates and rendered cells remain aligned."
+    }
+  ],
+  "state_set_decisions": {
+    "tabs": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["unselected", "selected"],
+      "selected_transform": "source item-tab blue face and border with each source-owned vertical label retained",
+      "hover_transform": "one-pixel source-skin #739DD1 inner outline",
+      "pressed_transform": "one-pixel darkening of source-owned tab pixels"
+    },
+    "inventory_grid": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "item_semantic_states": ["unselected", "selected", "modifier_selected", "dragging", "drop_target"],
+      "idle_transform": "each full 54x61 source cell is overlaid byte-exact at its original location",
+      "selected_transform": "two-pixel source-skin #3E75B8 inner outline",
+      "modifier_transform": "three-pixel source-skin #8A5DB0 inner outline",
+      "drag_transform": "source cell at 55 percent opacity with a dashed #3E75B8 outline",
+      "drop_target_transform": "three-pixel source-skin #4AAF6C inner outline"
+    },
+    "resize_grip": {
+      "interaction_phases": ["idle", "hover", "pressed"],
+      "semantic_states": ["ready"],
+      "idle_transform": "source-owned grip",
+      "hover_transform": "one-pixel source-skin outline",
+      "pressed_transform": "one-pixel darkening"
+    }
+  },
+  "gesture_decisions": {
+    "DoubleActivate": {
+      "input": "two primary-button activations on one declared item within the shared interval and movement tolerance",
+      "emits": "stable item ID, factual count, interval, local/global pointer position, and modifiers",
+      "must_not_duplicate": "Activate"
+    },
+    "ModifierActivate": {
+      "input": "primary-button release with exactly Control held",
+      "emits": "stable item ID and normalized modifier list",
+      "invalid_error": "InvalidModifierError"
+    },
+    "DragDrop": {
+      "input": "primary-button hold crossing the four-pixel threshold and releasing over a declared item surface",
+      "emits": "source ID, target ID, start/end positions, motion samples, and item-version snapshot",
+      "invalid_target_error": "InvalidDropTargetError",
+      "conflict_error": "GestureConflictError"
+    },
+    "Resize": {
+      "input": "primary-button drag from the declared bottom-right resize grip",
+      "emits": "start size, requested size, clamped size, and motion samples",
+      "minimum": [332, 220],
+      "maximum": [734, 512]
+    }
+  },
+  "manifest_decisions": {
+    "window_id": "inventory",
+    "stable_tab_control_id": "inventory.tabs",
+    "stable_grid_control_id": "inventory.items",
+    "stable_item_ids": "inventory.slot.r<row>c<column>",
+    "shared_types_added": ["Tabs"],
+    "shared_gestures_added": ["DoubleActivate", "ModifierActivate", "DragDrop", "Resize"],
+    "window_actions": [
+      "SelectInventoryTab",
+      "SelectInventoryItem",
+      "OpenInventoryItem",
+      "ToggleInventorySelection",
+      "MoveInventoryItem",
+      "ResizeWindow"
+    ],
+    "deferred_to_issue_128": ["ScrollView", "search TextField", "inventory-storage transfer"]
+  },
+  "prototype_result": {
+    "driver": "Playwright Chromium real pointer and keyboard input",
+    "checks": 10,
+    "passed": 10,
+    "prototype_code_preserved": false,
+    "findings_promoted_to_tests": [
+      "A completed DragDrop must suppress the trailing Click or selection can overwrite the drop result.",
+      "DoubleActivate must be resolved exclusively from Activate; pointer-down is factual drag state, not a semantic action.",
+      "Resize hit alignment is evaluated in Window-local coordinates so decorative borders cannot shift the grid."
+    ]
+  }
+}

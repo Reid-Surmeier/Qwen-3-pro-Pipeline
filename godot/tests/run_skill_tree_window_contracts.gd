@@ -31,7 +31,8 @@ func _run() -> void:
 	desktop = current_scene
 	window = desktop.skill_tree
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
-		and desktop.windows.size() == 2, str(desktop.validation_errors))
+		and ["options", "skill_tree", "inventory"].all(func(window_id):
+			return desktop.windows.has(window_id)), str(desktop.validation_errors))
 	await _selection_and_context_activate()
 	await _step_commit_cancel()
 	await _view_reversal()

@@ -21,7 +21,12 @@ const OUT = resolve(process.env.IMAGE79_PLAYTEST_OUT ?? resolve(SCRIPT_DIR, "out
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
-const browser = await chromium.launch({ headless: true });
+const headedMesa = process.env.IMAGE79_HEADED_MESA === "1";
+const browser = await chromium.launch(headedMesa ? {
+  headless: false,
+  executablePath: process.env.IMAGE79_CHROME_BIN ?? "/usr/bin/google-chrome-stable",
+  args: ["--use-gl=desktop", "--disable-gpu-sandbox"],
+} : { headless: true });
 const page = await browser.newPage({ viewport: DESIGN });
 const consoleEntries = [];
 page.on("console", (message) => {
@@ -269,7 +274,7 @@ for (let step = 0; step < 31; step += 1) {
   await page.mouse.move(title.x - 80 * t, title.y + 90 * t);
   await page.waitForTimeout(15);
   const position = (await options()).window.position;
-  windowPositions.push(position[0]);
+  windowPositions.push([...position]);
   if (step === 15) dragMid = await shot("17-options-window-drag-mid");
 }
 await page.mouse.up();

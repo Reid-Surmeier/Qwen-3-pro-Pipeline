@@ -56,7 +56,7 @@ class PlayLogVerdictTests(unittest.TestCase):
                     "responsive": True,
                     "matches_expected": True,
                     "assertions": {"moved": True},
-                    "motion_samples": list(range(31)),
+                    "motion_samples": [[index, index * 2] for index in range(31)],
                     "frames": {"before": self.before, "mid": self.mid, "after": self.after},
                 },
                 {
@@ -184,6 +184,124 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])
         self.assertTrue(any("30 motion samples" in problem for problem in verdict["problems"]))
+
+    def test_window_drag_accepts_two_dimensional_motion_samples(self) -> None:
+        log = self._valid_log()
+        drag = next(action for action in log["actions"]
+                    if action["control_id"] == "options")
+        drag["motion_samples"] = [[index, index * 2] for index in range(31)]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
+    def test_current_window_drag_rejects_scalar_and_stationary_motion(self) -> None:
+        for samples in (list(range(31)), [0] * 31, [[0, 0]] * 31):
+            with self.subTest(samples=samples[0]):
+                log = self._valid_log()
+                log["candidate"]["issue"] = 127
+                log["actions"][0]["motion_samples"] = samples
+                verdict = evaluate_play_log(log, self.root, self._manifest())
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+                self.assertTrue(any(
+                    "two-dimensional" in problem or "threshold" in problem
+                    for problem in verdict["problems"]
+                ), verdict)
+
+    def test_legacy_window_drag_accepts_only_moving_scalar_motion(self) -> None:
+        moving = self._valid_log()
+        moving["actions"][0]["motion_samples"] = list(range(31))
+        self.assertEqual(
+            "PASS", evaluate_play_log(moving, self.root, self._manifest())["verdict"]
+        )
+        stationary = self._valid_log()
+        stationary["actions"][0]["motion_samples"] = [0] * 31
+        verdict = evaluate_play_log(stationary, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(any("threshold" in problem for problem in verdict["problems"]), verdict)
+
+    def test_trusted_review_issue_prevents_scalar_policy_downgrade(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 125
+        log["actions"][0]["motion_samples"] = list(range(31))
+        verdict = evaluate_play_log(
+            log, self.root, self._manifest(), trusted_issue=127
+        )
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(
+            any("two-dimensional" in problem for problem in verdict["problems"]),
+            verdict,
+        )
+
+    def test_motion_samples_must_be_finite(self) -> None:
+        for samples in (
+            [[index, float("nan")] for index in range(31)],
+            [[index, float("inf")] for index in range(31)],
+        ):
+            with self.subTest(samples=samples[0]):
+                log = self._valid_log()
+                log["candidate"]["issue"] = 127
+                log["actions"][0]["motion_samples"] = samples
+                verdict = evaluate_play_log(log, self.root, self._manifest())
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+
+    def test_oversized_integer_motion_sample_is_invalid_not_an_exception(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 127
+        log["actions"][0]["motion_samples"] = [
+            [index, 10 ** 400] for index in range(31)
+        ]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(
+            any("30 motion samples" in problem for problem in verdict["problems"]),
+            verdict,
+        )
+
+    def test_large_finite_motion_uses_overflow_safe_distance(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 127
+        log["actions"][0]["motion_samples"] = [
+            [index * 1e200, 0.0] for index in range(31)
+        ]
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
+
+    def test_pointer_motion_rejects_scalars_and_stationary_points(self) -> None:
+        for gesture in ("Resize", "DragDrop"):
+            for samples in ([0] * 31, [[0, 0]] * 31):
+                with self.subTest(gesture=gesture, samples=samples[0]):
+                    log = self._valid_log()
+                    action = log["actions"][0]
+                    action["gesture"] = gesture
+                    action["motion_samples"] = samples
+                    if gesture == "Resize":
+                        action["assertions"]["maximum"] = True
+                    log["required_actions"][0]["gesture"] = gesture
+                    manifest = self._manifest()
+                    manifest["windows"][0]["actions"][0]["gesture"] = gesture
+                    verdict = evaluate_play_log(log, self.root, manifest)
+                    self.assertEqual("INVALID", verdict["verdict"], verdict)
+                    self.assertTrue(any(
+                        "two-dimensional" in problem or "threshold" in problem
+                        for problem in verdict["problems"]
+                    ), verdict)
+
+    def test_resize_and_drag_drop_require_motion_evidence(self) -> None:
+        for gesture in ("Resize", "DragDrop"):
+            with self.subTest(gesture=gesture):
+                log = self._valid_log()
+                action = log["actions"][0]
+                action["gesture"] = gesture
+                del action["frames"]["mid"]
+                del action["motion_samples"]
+                log["required_actions"][0]["gesture"] = gesture
+                manifest = self._manifest()
+                manifest["windows"][0]["actions"][0]["gesture"] = gesture
+                verdict = evaluate_play_log(log, self.root, manifest)
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+                self.assertTrue(any(
+                    f"{gesture} requires at least 30 motion samples" in problem
+                    for problem in verdict["problems"]
+                ), verdict)
 
     def test_malformed_root_is_invalid_without_throwing(self) -> None:
         verdict = evaluate_play_log({"schema_version": "wrong"}, self.root, self._manifest())

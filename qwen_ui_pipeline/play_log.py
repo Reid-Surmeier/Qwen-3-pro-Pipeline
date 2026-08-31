@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 from pathlib import Path
 from typing import Any
@@ -12,10 +13,15 @@ SCHEMA_VERSION = "image79-play-log-v2"
 LEGACY_SCHEMA_VERSION = "image79-play-log-v1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
+STRICT_POINTER_EVIDENCE_ISSUE = 127
 
 
 def evaluate_play_log(
-    log: Any, evidence_root: Path | str, manifest: Any | None = None
+    log: Any,
+    evidence_root: Path | str,
+    manifest: Any | None = None,
+    *,
+    trusted_issue: int | None = None,
 ) -> dict[str, Any]:
     """Return PASS, FAIL, INCOMPLETE, or INVALID without trusting log claims."""
     problems: list[str] = []
@@ -38,6 +44,12 @@ def evaluate_play_log(
             problems.append("candidate.commit_sha must be a 40-character lowercase SHA")
         if not _nonempty_string(candidate.get("window_id")):
             problems.append("candidate.window_id must be a non-empty string")
+    if trusted_issue is not None and (
+        not isinstance(trusted_issue, int)
+        or isinstance(trusted_issue, bool)
+        or trusted_issue <= 0
+    ):
+        problems.append("trusted_issue must be a positive integer")
 
     expected_controls, expected_actions, range_specs = _manifest_requirements(
         manifest, candidate, problems, include_window_actions=schema_version == SCHEMA_VERSION
@@ -142,14 +154,73 @@ def evaluate_play_log(
 
         frames = action.get("frames")
         required_roles = {"before", "after"}
-        if gesture == "Drag":
+        if gesture in {"Drag", "Resize", "DragDrop"}:
             required_roles.add("mid")
             samples = action.get("motion_samples")
-            if not isinstance(samples, list) or len(samples) < 30 or not all(
-                isinstance(sample, (int, float)) and not isinstance(sample, bool)
-                for sample in samples
-            ):
-                problems.append(f"{label} Drag requires at least 30 motion samples")
+
+            candidate_issue = trusted_issue if trusted_issue is not None else (
+                candidate.get("issue") if isinstance(candidate, dict) else None
+            )
+            legacy_scalar_move = (
+                gesture == "Drag"
+                and window_action == "MoveWindow"
+                and isinstance(candidate_issue, int)
+                and candidate_issue < STRICT_POINTER_EVIDENCE_ISSUE
+            )
+
+            def finite_number(value: object) -> bool:
+                if not isinstance(value, (int, float)) or isinstance(value, bool):
+                    return False
+                try:
+                    return math.isfinite(float(value))
+                except (OverflowError, ValueError):
+                    return False
+
+            def valid_motion_sample(sample: object) -> bool:
+                if window_action == "SetRange":
+                    return finite_number(sample)
+                if legacy_scalar_move and finite_number(sample):
+                    return True
+                return isinstance(sample, list) \
+                    and len(sample) == 2 and all(
+                        finite_number(axis)
+                        for axis in sample
+                    )
+
+            if not isinstance(samples, list) or len(samples) < 30 \
+                    or not all(valid_motion_sample(sample) for sample in samples):
+                problems.append(
+                    f"{label} {gesture} requires at least 30 motion samples"
+                    + ("" if window_action == "SetRange" or legacy_scalar_move
+                       else "; pointer samples must be two-dimensional")
+                )
+            elif window_action != "SetRange":
+                scalar_legacy_samples = legacy_scalar_move and all(
+                    finite_number(sample) for sample in samples
+                )
+                if scalar_legacy_samples:
+                    origin = float(samples[0])
+                    crossed_threshold = any(
+                        abs(float(sample) - origin) > 4.0 for sample in samples[1:]
+                    )
+                else:
+                    origin_x, origin_y = samples[0]
+                    crossed_threshold = any(
+                        math.hypot(
+                            sample[0] - origin_x,
+                            sample[1] - origin_y,
+                        ) > 4.0
+                        for sample in samples[1:]
+                    )
+                if not crossed_threshold:
+                    problems.append(f"{label} {gesture} motion never crosses the pointer threshold")
+                if gesture == "Resize" and not (
+                    isinstance(assertions, dict) and any(
+                        assertions.get(name) is True
+                        for name in ("maximum", "minimum", "clamped", "endpoint_clamped")
+                    )
+                ):
+                    problems.append(f"{label} Resize requires a named clamp assertion")
         if not isinstance(frames, dict):
             problems.append(f"{label}.frames must be an object")
             continue

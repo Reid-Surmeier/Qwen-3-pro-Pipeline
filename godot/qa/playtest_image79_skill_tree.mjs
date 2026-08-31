@@ -21,7 +21,12 @@ const OUT = resolve(process.env.IMAGE79_PLAYTEST_OUT
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
-const browser = await chromium.launch({ headless: true });
+const headedMesa = process.env.IMAGE79_HEADED_MESA === "1";
+const browser = await chromium.launch(headedMesa ? {
+  headless: false,
+  executablePath: process.env.IMAGE79_CHROME_BIN ?? "/usr/bin/google-chrome-stable",
+  args: ["--use-gl=desktop", "--disable-gpu-sandbox"],
+} : { headless: true });
 const page = await browser.newPage({ viewport: DESIGN });
 const consoleEntries = [];
 page.on("console", (message) => {
@@ -280,7 +285,7 @@ for (let index = 0; index < 31; index += 1) {
   const t = index / 30;
   await page.mouse.move(title.x + 50 * t, title.y + 65 * t);
   await page.waitForTimeout(15);
-  positionSamples.push((await skillTree()).window.position[0]);
+  positionSamples.push([...(await skillTree()).window.position]);
   if (index === 15) dragMid = await shot("11-drag-mid");
 }
 await page.mouse.up();
@@ -304,6 +309,7 @@ await page.reload({ waitUntil: "networkidle", timeout: 90000 });
 await page.waitForFunction(() => window.godotQaState?.windows?.skill_tree,
   undefined, { timeout: 90000 });
 await page.waitForTimeout(2500);
+await click(600, 15);
 const keyBefore = await shot("13-key-before");
 await page.keyboard.press("Escape");
 await page.waitForTimeout(50);

@@ -22,6 +22,9 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
         return ["packet root must be an object"]
     if packet.get("candidate_commit") != candidate:
         problems.append("packet candidate_commit does not match requested candidate")
+    packet_issue = packet.get("issue")
+    if not isinstance(packet_issue, int) or isinstance(packet_issue, bool):
+        problems.append("packet issue must be an integer")
     commit = subprocess.run(
         ["git", "cat-file", "-e", f"{candidate}^{{commit}}"],
         cwd=repository,
@@ -69,7 +72,9 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
         )
         if manifest_path is not None:
             locked_paths.update(
-                _validate_evidence_manifest(manifest_path, repository, candidate, problems)
+                _validate_evidence_manifest(
+                    manifest_path, repository, candidate, packet_issue, problems
+                )
             )
     for index, relative in enumerate(evidence if isinstance(evidence, list) else []):
         evidence_path = _require_file(
@@ -81,7 +86,11 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
 
 
 def _validate_evidence_manifest(
-    manifest_path: Path, repository: Path, candidate: str, problems: list[str]
+    manifest_path: Path,
+    repository: Path,
+    candidate: str,
+    packet_issue: object,
+    problems: list[str],
 ) -> set[Path]:
     locked_paths: set[Path] = set()
     try:
@@ -105,6 +114,13 @@ def _validate_evidence_manifest(
         play_log_path = root / "play-log.json"
         try:
             play_log = json.loads(play_log_path.read_text())
+            play_candidate = play_log.get("candidate") \
+                if isinstance(play_log, dict) else None
+            if not isinstance(play_candidate, dict):
+                problems.append("Play Log candidate must be an object")
+            else:
+                if play_candidate.get("commit_sha") != candidate:
+                    problems.append("Play Log candidate commit does not match packet candidate")
             manifest_bytes = subprocess.run(
                 ["git", "show", f"{candidate}:godot/data/image-79-control-spec.json"],
                 cwd=repository, capture_output=True, check=True,
@@ -113,11 +129,18 @@ def _validate_evidence_manifest(
             if str(repository) not in sys.path:
                 sys.path.insert(0, str(repository))
             from qwen_ui_pipeline.play_log import evaluate_play_log
-            verdict = evaluate_play_log(play_log, root, control_manifest)
+            verdict = evaluate_play_log(
+                play_log,
+                root,
+                control_manifest,
+                trusted_issue=packet_issue if isinstance(packet_issue, int) else None,
+            )
             if verdict.get("verdict") != "PASS":
                 problems.append(f"committed Play Log is not reproducible: {verdict}")
         except (OSError, json.JSONDecodeError, subprocess.CalledProcessError) as error:
             problems.append(f"committed Play Log cannot be verified: {error}")
+        except Exception as error:  # Fail closed at the untrusted artifact seam.
+            problems.append(f"committed Play Log verifier failed closed: {error}")
     return locked_paths
 
 

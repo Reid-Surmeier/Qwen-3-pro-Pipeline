@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "896822d20751196f853d9cd0f42ff08ee9a1e0d9",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-selected.png",
+      "sha256": "88547a2cb09f5337d97e964f8b3b6fbe83df47a3fa8bf314df628ad4c397d640"
+    },
+    {
+      "path": "02-context-detail.png",
+      "sha256": "d2cf291fe99dc0030666ee97c0c76c7bcd1ad72df175112e9b1861d9d80ad547"
+    },
+    {
+      "path": "02b-bound-before.png",
+      "sha256": "a65e4152d97894bd83981a9e652a71faaf91faf61e876662fb43f2b8c1a0e9e5"
+    },
+    {
+      "path": "02b-bound-rejected.png",
+      "sha256": "88547a2cb09f5337d97e964f8b3b6fbe83df47a3fa8bf314df628ad4c397d640"
+    },
+    {
+      "path": "03-00-skill_tree.stepper.r1c1-after.png",
+      "sha256": "50b17e2808b4b6e1957a40c38cd2604a5d6cdf99cdd9fcae6af4e01d25f6cc18"
+    },
+    {
+      "path": "03-00-skill_tree.stepper.r1c1-before.png",
+      "sha256": "88547a2cb09f5337d97e964f8b3b6fbe83df47a3fa8bf314df628ad4c397d640"
+    },
+    {
+      "path": "03-01-skill_tree.stepper.r1c3-after.png",
+      "sha256": "8015803bef1fff67fcd373e589d4add87b400c48e587e3595b380419a274f511"
+    },
+    {
+      "path": "03-01-skill_tree.stepper.r1c3-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-02-skill_tree.stepper.r1c4-after.png",
+      "sha256": "500c886d5dfd3474a9c19ff07af44bcba06b7a516d96863255f8d452b76a9af5"
+    },
+    {
+      "path": "03-02-skill_tree.stepper.r1c4-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-03-skill_tree.stepper.r1c5-after.png",
+      "sha256": "1fe296c1954f53fa1fda5d762bf4192fd675f9a839fad2f12d3992606ee3c4be"
+    },
+    {
+      "path": "03-03-skill_tree.stepper.r1c5-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-04-skill_tree.stepper.r1c6-after.png",
+      "sha256": "8ed7deac673b73af69f541934c4238e81c24f98016d64c331442c272268ba8ee"
+    },
+    {
+      "path": "03-04-skill_tree.stepper.r1c6-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-05-skill_tree.stepper.r2c1-after.png",
+      "sha256": "8ddff74a3c9f9667f39a282e15fe410929e03fdda4212c1b9133084734ff2614"
+    },
+    {
+      "path": "03-05-skill_tree.stepper.r2c1-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-06-skill_tree.stepper.r2c2-after.png",
+      "sha256": "7ef095ec3c6a57fe926cbe996466d0c9c79e299e0ea6e8736a7d96fdbf010a1c"
+    },
+    {
+      "path": "03-06-skill_tree.stepper.r2c2-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-07-skill_tree.stepper.r2c3-after.png",
+      "sha256": "0f45805fc335a2a4a182c79dc422239d13c7f248acfc88432f41b02d56ad1be6"
+    },
+    {
+      "path": "03-07-skill_tree.stepper.r2c3-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-08-skill_tree.stepper.r2c4-after.png",
+      "sha256": "f39ac9a9e4db78bad896f6e57f0a31369c94760315c64d19b58f7e1be96a0b09"
+    },
+    {
+      "path": "03-08-skill_tree.stepper.r2c4-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-09-skill_tree.stepper.r2c5-after.png",
+      "sha256": "0aa1e8dd71f7c724c53fe6567072715ca9ab39819579c30d1843060b1a5e2afe"
+    },
+    {
+      "path": "03-09-skill_tree.stepper.r2c5-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-10-skill_tree.stepper.r3c1-after.png",
+      "sha256": "8a73162f7e721f306acc0188b66b14c044716da1695b2572bbf349865e6c1440"
+    },
+    {
+      "path": "03-10-skill_tree.stepper.r3c1-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-11-skill_tree.stepper.r3c2-after.png",
+      "sha256": "6da8e0fe2c19b8cefe1ffee71dff6b503350ecfca677677f64a1aff8cc66dc86"
+    },
+    {
+      "path": "03-11-skill_tree.stepper.r3c2-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-12-skill_tree.stepper.r3c3-after.png",
+      "sha256": "3886b3eb44169b062f01b458bccfc75be528d6de731ec491166155d21512d758"
+    },
+    {
+      "path": "03-12-skill_tree.stepper.r3c3-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-13-skill_tree.stepper.r3c4-after.png",
+      "sha256": "261a5a2a6698a1f46c89e71898ec4be362c06bc3c937610af02c048a7b89c378"
+    },
+    {
+      "path": "03-13-skill_tree.stepper.r3c4-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-14-skill_tree.stepper.r3c5-after.png",
+      "sha256": "dea4f542e9646594bd55108a8e6ebb0029bb6bccfe5be457a5dbb9ade25b7541"
+    },
+    {
+      "path": "03-14-skill_tree.stepper.r3c5-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-15-skill_tree.stepper.r3c6-after.png",
+      "sha256": "14819b646523c4192e18ead18bd2385c57ea51287bfa30880ac612de8c3b4d50"
+    },
+    {
+      "path": "03-15-skill_tree.stepper.r3c6-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-16-skill_tree.stepper.r4c1-after.png",
+      "sha256": "033e42979d9942cf33782795b414770c6641dda4bab8141d5f79a0837bfbece3"
+    },
+    {
+      "path": "03-16-skill_tree.stepper.r4c1-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-17-skill_tree.stepper.r4c2-after.png",
+      "sha256": "665cbb79560949412cb0beabb483d8800e34b7f6010936fdcc1f130d77fb7aad"
+    },
+    {
+      "path": "03-17-skill_tree.stepper.r4c2-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-18-skill_tree.stepper.r4c3-after.png",
+      "sha256": "2b48ac82537c59c4d18a2ba9931a27c0680702f13861e85ef2082ec2d1008f37"
+    },
+    {
+      "path": "03-18-skill_tree.stepper.r4c3-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-19-skill_tree.stepper.r4c4-after.png",
+      "sha256": "d0ab308fddfe7fbe7595fd9e086f7c089b4c74d42846082348c62f42c8f97c00"
+    },
+    {
+      "path": "03-19-skill_tree.stepper.r4c4-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-20-skill_tree.stepper.r4c5-after.png",
+      "sha256": "30d9f6cb20088868c4916eb3f3be2e6bad309a96f4a71320ea0858d8b36dbe80"
+    },
+    {
+      "path": "03-20-skill_tree.stepper.r4c5-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-21-skill_tree.stepper.r4c6-after.png",
+      "sha256": "858a11a9c3980157ec23986bd97c8a9287b8bc8925234f3ab40247575dc603f2"
+    },
+    {
+      "path": "03-21-skill_tree.stepper.r4c6-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-22-skill_tree.stepper.r5c1-after.png",
+      "sha256": "a4be89a913bd2ec7ce2d2b9e6204b65a50e2231e0229564f001db0fb326e6c68"
+    },
+    {
+      "path": "03-22-skill_tree.stepper.r5c1-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-23-skill_tree.stepper.r5c3-after.png",
+      "sha256": "784abe441a584a32bc3588c6fd4c8aaa50dbaafac40fda2e92f8ef6bb419b2e8"
+    },
+    {
+      "path": "03-23-skill_tree.stepper.r5c3-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-24-skill_tree.stepper.r5c4-after.png",
+      "sha256": "2b2294284677005606b168412d902ac05fe9f0b5bf1b6c413474bad641e72d4b"
+    },
+    {
+      "path": "03-24-skill_tree.stepper.r5c4-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "03-25-skill_tree.stepper.r5c5-after.png",
+      "sha256": "eaab063b139462a756e1793330fbd1478412758a6a89e989b0738156652f39e2"
+    },
+    {
+      "path": "03-25-skill_tree.stepper.r5c5-before.png",
+      "sha256": "1a05ffba55b11e806a5974191949980f8074d49d9172114dba3ad782b2351480"
+    },
+    {
+      "path": "04-commit-before.png",
+      "sha256": "f39ac9a9e4db78bad896f6e57f0a31369c94760315c64d19b58f7e1be96a0b09"
+    },
+    {
+      "path": "04-committed.png",
+      "sha256": "ae07b7ef35f888bc3eb6acde024f042e303fca96ee9486c8abc3a38bbd0f1241"
+    },
+    {
+      "path": "05-cancel-before.png",
+      "sha256": "6ad33f43d92480f5a84a94af1baaa9bb16c89badc13cc5e38f7ac51baadad648"
+    },
+    {
+      "path": "05-cancelled.png",
+      "sha256": "6ba2ebfc3f4da16d4fc7b7b468a7a4e0aa3bab503e57b20ac41d61c83a762740"
+    },
+    {
+      "path": "06-list-view.png",
+      "sha256": "4f793a39cec50c6542f5fc42cb9ebd22e02f2a05fb0aa84f90eab9f742f7a2b4"
+    },
+    {
+      "path": "07-tree-restored.png",
+      "sha256": "5bbc693c5e30c777fd29dd03eb328129c6144252c4fc1ec76cfc2e8e7887ab80"
+    },
+    {
+      "path": "08-descriptions-before.png",
+      "sha256": "d924188a95005a9dfaee8893dcac16c0e86d6faa67e5b4dbccee7fcc835d2b86"
+    },
+    {
+      "path": "08-descriptions-on.png",
+      "sha256": "b0275adf02b1c709ab9bd3df48ea5349a62d4e1c2b9c8a7d086fb7b525e6a562"
+    },
+    {
+      "path": "08-descriptions-reversed.png",
+      "sha256": "d924188a95005a9dfaee8893dcac16c0e86d6faa67e5b4dbccee7fcc835d2b86"
+    },
+    {
+      "path": "09-minimize-before.png",
+      "sha256": "d924188a95005a9dfaee8893dcac16c0e86d6faa67e5b4dbccee7fcc835d2b86"
+    },
+    {
+      "path": "09-minimized.png",
+      "sha256": "06cd77c5637aa9018c427df2277863c3041735814f079dd22860297072546ab1"
+    },
+    {
+      "path": "10-minimize-restored.png",
+      "sha256": "d924188a95005a9dfaee8893dcac16c0e86d6faa67e5b4dbccee7fcc835d2b86"
+    },
+    {
+      "path": "11-drag-after.png",
+      "sha256": "b48907968219917b524c3417ad3ef4362ddac042038a32bd73c68c4d6df9fe06"
+    },
+    {
+      "path": "11-drag-before.png",
+      "sha256": "d924188a95005a9dfaee8893dcac16c0e86d6faa67e5b4dbccee7fcc835d2b86"
+    },
+    {
+      "path": "11-drag-mid.png",
+      "sha256": "d685bb66174f92d789a481e672c4985ec0916d959ca677dae154310121051659"
+    },
+    {
+      "path": "12-button-closed.png",
+      "sha256": "2e9882bc4abbcfac9593a47341e79a59770bee953158615564569a4e75643890"
+    },
+    {
+      "path": "13-key-before.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    {
+      "path": "13-key-closed.png",
+      "sha256": "2e9882bc4abbcfac9593a47341e79a59770bee953158615564569a4e75643890"
+    },
+    {
+      "path": "14-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "dea1ad3ac9fca61d9e577c104cfe563ed99a7d8fa00486e055c6a304523dff71"
+    },
+    {
+      "path": "report.json",
+      "sha256": "16203ec197dadffdf8ee3607780c796ab5d0d77367e9b3b66b00949470069a80"
+    },
+    {
+      "path": "skill-tree-contracts.json",
+      "sha256": "7ea7e85b4a4cc41d5da3594dfa02ba1118d159ecab60b82d86a1d2ce63a7a6f5"
+    },
+    {
+      "path": "skill-tree-window-contracts.json",
+      "sha256": "fab1d01105df815787af418f9d616c2f5331cb60341c5c1ab7677848f66d79fb"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "bef9b039ba4a4c91c939445c786674745212170d0963677dd9f0b79bc0898823"
+    }
+  ]
+}

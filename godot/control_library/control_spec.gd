@@ -17,14 +17,16 @@ const GESTURES := [
 	"Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
-	"Window": ["MoveWindow", "CloseWindow"],
+	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges"],
 	"Toggle": ["ToggleValue"],
 	"Range": ["StepRange", "SetRange"],
 	"Dropdown": ["ToggleDropdown", "SelectChoice", "DismissDropdown"],
 	"ChoiceGroup": ["SelectChoice"],
-	"SelectionView": ["SelectSkill", "OpenSkillDetail"],
+	"Tabs": ["SelectInventoryTab"],
+	"SelectionView": ["SelectSkill", "OpenSkillDetail", "SelectInventoryItem",
+		"OpenInventoryItem", "ToggleInventorySelection", "MoveInventoryItem"],
 	"Stepper": ["StepSkill"],
 }
 
@@ -110,6 +112,13 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 				errors, asset_exists)
 	if window.has("drag_geometry"):
 		_validate_geometry(window.drag_geometry, path + ".drag_geometry", errors)
+	if "Resize" in (gestures if gestures is Array else []):
+		_validate_resize_contract(window.get("resize"), window.get("geometry"),
+			window.get("controls"),
+			path + ".resize", errors, asset_exists)
+	elif window.has("resize"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".resize",
+			"resize geometry requires the shared Resize Gesture Capability"))
 	var controls: Variant = window.get("controls")
 	if not controls is Array or controls.is_empty():
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path + ".controls",
@@ -193,7 +202,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 			path + ".state_set", errors, asset_exists)
 	if control.has("surfaces"):
 		_validate_surfaces(control.surfaces, path + ".surfaces", errors, asset_exists)
-	_validate_type_contract(control, control_type, path, errors)
+	_validate_type_contract(control, control_type, path, errors, asset_exists)
 	var gestures: Variant = control.get("gestures")
 	_validate_gestures(gestures, path + ".gestures", errors)
 	_validate_actions(control.get("actions"), gestures, control_type,
@@ -201,7 +210,7 @@ static func _validate_control(control: Variant, window_id: String, control_index
 
 
 static func _validate_type_contract(control: Dictionary, control_type: String,
-		path: String, errors: Array[Dictionary]) -> void:
+		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
 	if control_type == "Toggle":
 		var states: Variant = control.get("semantic_states")
 		if not states is Array or states.size() != 2 or states[0] == states[1]:
@@ -211,8 +220,10 @@ static func _validate_type_contract(control: Dictionary, control_type: String,
 		_validate_range_contract(control, path, errors)
 	elif control_type == "Dropdown" or control_type == "ChoiceGroup":
 		_validate_choice_contract(control, control_type, path, errors)
+	elif control_type == "Tabs":
+		_validate_choice_contract(control, control_type, path, errors)
 	elif control_type == "SelectionView":
-		_validate_selection_view_contract(control, path, errors)
+		_validate_selection_view_contract(control, path, errors, asset_exists)
 	elif control_type == "Stepper":
 		_validate_stepper_contract(control, path, errors)
 
@@ -271,11 +282,11 @@ static func _validate_choice_contract(control: Dictionary, control_type: String,
 				and surfaces[str(choice)].state_set.has("selected") \
 				and surfaces[str(choice)].state_set.has("unselected")):
 			errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
-				"ChoiceGroup requires selected/unselected State Sets for every choice"))
+				"%s requires selected/unselected State Sets for every choice" % control_type))
 
 
 static func _validate_selection_view_contract(control: Dictionary, path: String,
-		errors: Array[Dictionary]) -> void:
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
 	var value: Variant = control.get("value")
 	var items: Array = value.get("items", []) if value is Dictionary else []
 	var initial: Variant = value.get("initial") if value is Dictionary else null
@@ -292,15 +303,78 @@ static func _validate_selection_view_contract(control: Dictionary, path: String,
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
 			"SelectionView requires unique items, an initial item, and detail text for every item"))
+	var gestures: Array = control.get("gestures", []) \
+		if control.get("gestures", []) is Array else []
+	if "DoubleActivate" in gestures:
+		var detail_view: Variant = value.get("detail_view") if value is Dictionary else null
+		var detail_size: Variant = detail_view.get("size") \
+			if detail_view is Dictionary else null
+		var detail_offset: Variant = detail_view.get("offset") \
+			if detail_view is Dictionary else null
+		var detail_padding: Variant = detail_view.get("padding") \
+			if detail_view is Dictionary else null
+		var detail_valid: bool = detail_view is Dictionary \
+			and detail_size is Array and detail_size.size() == 2 \
+			and _positive_number(detail_size[0]) and _positive_number(detail_size[1]) \
+			and detail_offset is Array and detail_offset.size() == 2 \
+			and _number(detail_offset[0]) and _number(detail_offset[1]) \
+			and detail_padding is Array and detail_padding.size() == 2 \
+			and _number(detail_padding[0]) and float(detail_padding[0]) >= 0.0 \
+			and _number(detail_padding[1]) and float(detail_padding[1]) >= 0.0 \
+			and float(detail_padding[0]) * 2.0 < float(detail_size[0]) \
+			and float(detail_padding[1]) * 2.0 < float(detail_size[1]) \
+			and _positive_number(detail_view.get("font_size")) \
+			and not str(detail_view.get("font_color", "")).is_empty()
+		if not detail_valid:
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value.detail_view",
+				"DoubleActivate requires a complete manifest-owned detail view"))
+		else:
+			_validate_state_set(detail_view.get("state_set"), ["ready"],
+				INTERACTION_PHASES, path + ".value.detail_view.state_set",
+				errors, asset_exists)
+			_validate_asset(str(detail_view.get("font", "")),
+				path + ".value.detail_view.font", errors, asset_exists)
+	if "ModifierActivate" in gestures:
+		var allowed: Variant = value.get("allowed_modifiers") if value is Dictionary else null
+		if not allowed is Array or allowed != ["ctrl"]:
+			errors.append(_error(Errors.INVALID_MODIFIER,
+				path + ".value.allowed_modifiers",
+				"ModifierActivate requires exactly the Control modifier"))
+	if "DragDrop" in gestures:
+		var item_values: Variant = value.get("item_values") if value is Dictionary else null
+		var item_identities: Array = item_values.values() if item_values is Dictionary else []
+		var unique_identities := {}
+		for identity in item_identities:
+			unique_identities[str(identity)] = true
+		if not item_values is Dictionary or item_values.keys().size() != items.size() \
+				or not items.all(func(item): return item_values.has(str(item)) \
+					and item_values[item] is String and str(item_values[item]) in items) \
+				or unique_identities.size() != items.size():
+			errors.append(_error(Errors.INVALID_STATE_SET, path + ".value.item_values",
+				"DragDrop item values must be a permutation of declared item identities"))
+		var targets: Variant = value.get("drop_targets") if value is Dictionary else null
+		if not targets is Array or targets.is_empty() or not targets.all(func(target):
+			return target in items):
+			errors.append(_error(Errors.INVALID_DROP_TARGET, path + ".value.drop_targets",
+				"every DragDrop target must be a declared SelectionView item"))
+		var version: Variant = value.get("initial_version") if value is Dictionary else null
+		if not _number(version) or float(version) < 0.0 or float(version) != floorf(float(version)):
+			errors.append(_error(Errors.GESTURE_CONFLICT, path + ".value.initial_version",
+				"DragDrop requires a non-negative transaction version"))
 	var surfaces: Variant = control.get("surfaces")
+	var required_surface_states := ["selected", "unselected"]
+	if "ModifierActivate" in gestures:
+		required_surface_states.append("modifier_selected")
+	if "DragDrop" in gestures:
+		required_surface_states.append_array(["dragging", "drop_target"])
 	if not surfaces is Dictionary or not items.all(func(item):
 		return surfaces.has(str(item)) and surfaces[str(item)] is Dictionary \
 			and surfaces[str(item)].has("geometry") \
 			and surfaces[str(item)].has("state_set") \
-			and surfaces[str(item)].state_set.has("selected") \
-			and surfaces[str(item)].state_set.has("unselected")):
+			and required_surface_states.all(func(state):
+				return surfaces[str(item)].state_set.has(state))):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
-			"SelectionView requires selected/unselected State Sets for every item"))
+			"SelectionView requires every declared item visual State Set"))
 	var value_control_ids: Variant = value.get("value_control_ids", {}) \
 		if value is Dictionary else null
 	if not value_control_ids is Dictionary or not value_control_ids.keys().all(func(item):
@@ -343,6 +417,105 @@ static func _validate_gestures(gestures: Variant, path: String,
 		if gesture not in GESTURES:
 			errors.append(_error(Errors.UNSUPPORTED_GESTURE, path,
 				"unsupported gesture: %s" % str(gesture)))
+
+
+static func _validate_resize_contract(resize: Variant, window_geometry: Variant,
+		controls: Variant, path: String,
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
+	if not resize is Dictionary:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path,
+			"Resize requires grip geometry and minimum/maximum sizes"))
+		return
+	_validate_geometry(resize.get("grip_geometry"), path + ".grip_geometry", errors)
+	var minimum: Variant = resize.get("minimum")
+	var maximum: Variant = resize.get("maximum")
+	var valid: bool = minimum is Array and maximum is Array \
+		and minimum.size() == 2 and maximum.size() == 2 \
+		and _positive_number(minimum[0]) and _positive_number(minimum[1]) \
+		and _positive_number(maximum[0]) and _positive_number(maximum[1])
+	if valid:
+		valid = float(minimum[0]) <= float(maximum[0]) \
+			and float(minimum[1]) <= float(maximum[1])
+	if not valid:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path,
+			"Resize minimum must be positive and no larger than maximum"))
+	_validate_state_set(resize.get("state_set"), ["ready"], INTERACTION_PHASES,
+		path + ".state_set", errors, asset_exists)
+	var frame: Variant = resize.get("frame") if resize is Dictionary else null
+	if not frame is Dictionary:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
+			"Resize requires a complete manifest-owned frame Assembly"))
+		return
+	for field in ["title_fill", "footer", "footer_fill", "right_edge"]:
+		_validate_asset(str(frame.get(field, "")), path + ".frame." + field,
+			errors, asset_exists)
+	var home_size: Variant = frame.get("home_size")
+	var dimensions_valid: bool = home_size is Array and home_size.size() == 2 \
+		and _positive_number(home_size[0]) and _positive_number(home_size[1]) \
+		and _positive_number(frame.get("title_height")) \
+		and _positive_number(frame.get("footer_height")) \
+		and _positive_number(frame.get("right_edge_width"))
+	if not dimensions_valid:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
+			"Resize frame sizes must be present and positive"))
+	for field in ["stale_title_controls_geometry", "stale_footer_geometry",
+			"stale_footer_grip_geometry", "stale_right_edge_geometry"]:
+		_validate_geometry(frame.get(field), path + ".frame." + field, errors)
+	var grip: Variant = resize.get("grip_geometry")
+	var title_cover: Variant = frame.get("stale_title_controls_geometry")
+	var footer_cover: Variant = frame.get("stale_footer_geometry")
+	var grip_cover: Variant = frame.get("stale_footer_grip_geometry")
+	var right_cover: Variant = frame.get("stale_right_edge_geometry")
+	var relationships_valid: bool = valid and dimensions_valid \
+		and window_geometry is Dictionary and grip is Dictionary \
+		and title_cover is Dictionary and footer_cover is Dictionary \
+		and grip_cover is Dictionary and right_cover is Dictionary
+	if relationships_valid:
+		var home_width := float(home_size[0])
+		var home_height := float(home_size[1])
+		var title_height := float(frame.title_height)
+		var footer_height := float(frame.footer_height)
+		var edge_width := float(frame.right_edge_width)
+		relationships_valid = float(window_geometry.get("width", -1)) == home_width \
+			and float(window_geometry.get("height", -1)) == home_height \
+			and float(minimum[0]) <= home_width and home_width <= float(maximum[0]) \
+			and float(minimum[1]) <= home_height and home_height <= float(maximum[1]) \
+			and float(grip.get("x", -1)) + float(grip.get("width", -1)) == home_width \
+			and float(grip.get("y", -1)) + float(grip.get("height", -1)) == home_height \
+			and grip == grip_cover \
+			and float(title_cover.get("y", -1)) == 0.0 \
+			and float(title_cover.get("height", -1)) == title_height \
+			and float(title_cover.get("x", -1)) + float(title_cover.get("width", -1)) == home_width \
+			and float(footer_cover.get("x", -1)) == 0.0 \
+			and float(footer_cover.get("width", -1)) == home_width \
+			and float(footer_cover.get("y", -1)) == home_height - footer_height - 1.0 \
+			and float(footer_cover.get("height", -1)) == footer_height + 1.0 \
+			and float(right_cover.get("x", -1)) + float(right_cover.get("width", -1)) == home_width \
+			and float(right_cover.get("width", -1)) == edge_width \
+			and float(right_cover.get("y", -1)) == title_height \
+			and float(right_cover.get("y", -1)) + float(right_cover.get("height", -1)) \
+				== home_height - footer_height
+	if not relationships_valid:
+		errors.append(_error(Errors.INVALID_GEOMETRY, path + ".frame",
+			"Resize frame, home Window, grip, and stale-cover geometry must agree"))
+	var anchored: Variant = frame.get("anchored_right_controls")
+	var declared := {}
+	if controls is Array:
+		for control in controls:
+			if control is Dictionary:
+				declared[str(control.get("id", ""))] = true
+	var anchored_valid: bool = anchored is Array and not anchored.is_empty()
+	var seen := {}
+	if anchored_valid:
+		for control_id in anchored:
+			var normalized := str(control_id)
+			anchored_valid = anchored_valid and not normalized.is_empty() \
+				and declared.has(normalized) and not seen.has(normalized)
+			seen[normalized] = true
+	if not anchored_valid:
+		errors.append(_error(Errors.CONTROL_BINDING,
+			path + ".frame.anchored_right_controls",
+			"anchored right Controls must be unique declared Controls"))
 
 
 static func _validate_stepper_contract(control: Dictionary, path: String,
