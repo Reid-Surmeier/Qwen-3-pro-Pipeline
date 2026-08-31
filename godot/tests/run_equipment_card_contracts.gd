@@ -31,6 +31,7 @@ func _init() -> void:
 		direct_window.configure(card)
 		_check("detail-hidden-before-router-approval", direct_window.detail_item.is_empty(),
 			str(direct_window.detail_item))
+		direct_window.free()
 		var invalid_manifest: Dictionary = loaded.manifest.duplicate(true)
 		var invalid_card: Dictionary = invalid_manifest.windows.filter(func(window):
 			return window.id == "equipment_card").front()
