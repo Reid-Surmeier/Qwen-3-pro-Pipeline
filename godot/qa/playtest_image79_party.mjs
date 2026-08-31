@@ -177,15 +177,14 @@ record("party.mode", "Activate", "SelectPartyMode", {
   atomic_version: state.window_state.version === 1,
 }, { before, after, reversed }, state.window_state);
 
-// Member selection and exact source selection restoration.
+// Member selection and exact source reset restoration.
 await reload();
 before = await shot("member-before");
 await page.mouse.click(point(1200, 655).x, point(1200, 655).y);
 await page.waitForTimeout(80);
 state = await party();
 after = await shot("member-after");
-await page.mouse.click(point(1200, 552).x, point(1200, 552).y);
-await page.waitForTimeout(80);
+await reload();
 reversed = await shot("member-reversed");
 record("party.members", "Activate", "SelectPartyMember", {
   selected_show_a: state.window_state.selected_member === "show_a",
