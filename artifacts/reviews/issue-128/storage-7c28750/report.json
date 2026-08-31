@@ -1,0 +1,303 @@
+{
+  "url": "http://127.0.0.1:8890/?screen=image79",
+  "window": {
+    "id": "storage",
+    "geometry": {
+      "x": 492,
+      "y": 609,
+      "width": 539,
+      "height": 393
+    }
+  },
+  "driver": "Playwright Chromium real pointer, wheel, and keyboard input",
+  "checks": [
+    {
+      "name": "idle-factual",
+      "passed": true,
+      "detail": {
+        "detail_item": "",
+        "geometry_version": 0,
+        "id": "storage",
+        "last_action": "",
+        "last_error": null,
+        "last_gesture": "",
+        "minimized": false,
+        "pending": false,
+        "position": [
+          492,
+          609
+        ],
+        "resize": {
+          "active": false,
+          "clamped": [
+            539,
+            393
+          ],
+          "motion_samples": 0,
+          "requested": [
+            539,
+            393
+          ],
+          "stale_footer_covered": false,
+          "stale_footer_grip_covered": false,
+          "stale_right_edge_covered": false,
+          "stale_title_controls_covered": false
+        },
+        "size": [
+          539,
+          393
+        ],
+        "view_mode": "tree",
+        "visible": true,
+        "z_index": 0
+      }
+    },
+    {
+      "name": "storage.items:Activate:SelectStorageItem",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:ToggleStorageSelection",
+      "passed": true,
+      "detail": {
+        "toggled": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:FocusStorageSearch",
+      "passed": true,
+      "detail": {
+        "focused": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:SelectStorageCategory",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:ScrollStorage",
+      "passed": true,
+      "detail": {
+        "exact_three_rows": true,
+        "one_frame_state": true
+      }
+    },
+    {
+      "name": "storage.scroll:Activate:StepStorageScroll",
+      "passed": true,
+      "detail": {
+        "exact_one_row": true
+      }
+    },
+    {
+      "name": "storage.scroll:Drag:SetStorageScrollOffset",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "moved_toward_start": true,
+        "clamped": true,
+        "offset_changed": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:FilterStorage",
+      "passed": true,
+      "detail": {
+        "accepted_text_rendered": true,
+        "filtered_one": true,
+        "scroll_reset": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:ToggleStorageView",
+      "passed": true,
+      "detail": {
+        "list_mode": true
+      }
+    },
+    {
+      "name": "storage.sort:Activate:SortStorage",
+      "passed": true,
+      "detail": {
+        "reversed_order": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "rejected_full": true,
+        "source_preserved": true,
+        "target_preserved": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:TransferInventoryItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true,
+        "both_versions": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true
+      }
+    },
+    {
+      "name": "storage:Drag:MoveWindow",
+      "passed": true,
+      "detail": {
+        "moved": true,
+        "continuous": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    }
+  ],
+  "frames": {
+    "00-idle": {
+      "path": "00-idle.png",
+      "sha256": "96f2d6587438664b77843df7b3caf4cdd847dd711043cbd88e46d806f2c37a1f"
+    },
+    "00a-item-selected": {
+      "path": "00a-item-selected.png",
+      "sha256": "89d9e48687bbc9fc090ddf4c042b247456cbf9407446f4ea3d7d680c2063c65f"
+    },
+    "00b-item-modifier-selected": {
+      "path": "00b-item-modifier-selected.png",
+      "sha256": "176a86592efc082d4fa00049b093f0dc91645ec938b06170467fe40479e4298e"
+    },
+    "00c-search-focused": {
+      "path": "00c-search-focused.png",
+      "sha256": "134c24dcf4a0be34be2ed8fe3d0dc758d0478a77a5aa06ffc3edc321e2232603"
+    },
+    "01-category-equipment": {
+      "path": "01-category-equipment.png",
+      "sha256": "c67d18c5e9c0f2caa9a9ace28d1c8f1217583fe7a0ecf78d80cbf4f3e82dfa92"
+    },
+    "02-wheel-three-rows": {
+      "path": "02-wheel-three-rows.png",
+      "sha256": "143f9c203f75ffdc3d492463abe50161576a5dbf93030c788192d3f1c6a807e2"
+    },
+    "03-arrow-one-row": {
+      "path": "03-arrow-one-row.png",
+      "sha256": "752e0dfe53d50af1ecc508f29e76e365877a1ba53fdbd71c80378efe71b31b48"
+    },
+    "04-thumb-drag-mid": {
+      "path": "04-thumb-drag-mid.png",
+      "sha256": "bdf0918e99f6f948b51a0be2c6e9959802d52f75beea06bf454b35058db19ff0"
+    },
+    "04-thumb-drag": {
+      "path": "04-thumb-drag.png",
+      "sha256": "687a36b1611f3a4c5dc53f85272089befda5dd22389544f62dc75f18ebe3025b"
+    },
+    "05-search-filtered": {
+      "path": "05-search-filtered.png",
+      "sha256": "7ac3afa26f0f07f984eef7e18d06a20d766f1d5e6fa7a1a1ed68407fa5bb35d5"
+    },
+    "06-list-mode": {
+      "path": "06-list-mode.png",
+      "sha256": "9e29e0ec64e597d5b453d092d4db05d2a2338388d76139f27718fa159def0fb8"
+    },
+    "07-sorted": {
+      "path": "07-sorted.png",
+      "sha256": "e7bb1d883477854004e8761f446a9fa06f4bf454b90397d890bd7a8b89baa33b"
+    },
+    "08-transfer-rejected": {
+      "path": "08-transfer-rejected.png",
+      "sha256": "1565beb9ca710955ddb4b6c04497c5770898d542262cb70b24416e396e5ad0fb"
+    },
+    "09-transfer-outbound": {
+      "path": "09-transfer-outbound.png",
+      "sha256": "51ec225e4ee9cd813120a3e42f6026b51bc7ab7296d6fbf4ab53bc48bece16f3"
+    },
+    "10-transfer-returned": {
+      "path": "10-transfer-returned.png",
+      "sha256": "f13dcfa529418ca8f849e0a0962b0f877d06e3645c6d755b79822f51282b64a2"
+    },
+    "11-window-drag-before": {
+      "path": "11-window-drag-before.png",
+      "sha256": "f13dcfa529418ca8f849e0a0962b0f877d06e3645c6d755b79822f51282b64a2"
+    },
+    "11-window-drag-mid": {
+      "path": "11-window-drag-mid.png",
+      "sha256": "f6803b1b05a146ac6dd1e7d471b1c2532b079ad85745d66014f078c51f5afe89"
+    },
+    "11-window-moved": {
+      "path": "11-window-moved.png",
+      "sha256": "6aaabcb1fc42c8974d9b50d72f96c7941ea75bd6548a4fc198e908c8a16fa5b3"
+    },
+    "12-title-close-before": {
+      "path": "12-title-close-before.png",
+      "sha256": "96f2d6587438664b77843df7b3caf4cdd847dd711043cbd88e46d806f2c37a1f"
+    },
+    "12-title-close-after": {
+      "path": "12-title-close-after.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    "13-bottom-close-before": {
+      "path": "13-bottom-close-before.png",
+      "sha256": "96f2d6587438664b77843df7b3caf4cdd847dd711043cbd88e46d806f2c37a1f"
+    },
+    "13-bottom-close-after": {
+      "path": "13-bottom-close-after.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    },
+    "14-key-close-before": {
+      "path": "14-key-close-before.png",
+      "sha256": "96f2d6587438664b77843df7b3caf4cdd847dd711043cbd88e46d806f2c37a1f"
+    },
+    "14-key-close-after": {
+      "path": "14-key-close-after.png",
+      "sha256": "eb09ff25a681ec0185a422abc71aa7c2ce52336f116d149489c800438ce32198"
+    }
+  },
+  "console_entries": [
+    "[warning] [.WebGL-0x3a8c06ad5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x3a8c06ad5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x3a8c06ad5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x3a8c06ad5c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "summary": {
+    "pass": true,
+    "total": 18,
+    "failed": 0,
+    "console_errors": 0
+  }
+}

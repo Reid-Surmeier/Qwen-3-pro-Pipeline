@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "issue": 128,
+  "pull_request": 82,
+  "candidate_commit": "7c28750da4896d2ec8a091638192d0e869f730a6",
+  "acceptance_contract": "docs/reviews/issue-128-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-128/storage-7c28750/evidence-manifest.json",
+      "artifacts/reviews/issue-128/options-regression-7c28750/evidence-manifest.json",
+      "artifacts/reviews/issue-128/skill-tree-regression-7c28750/evidence-manifest.json",
+      "artifacts/reviews/issue-128/inventory-regression-7c28750/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-128/storage-7c28750/reference-storage-4x.png",
+      "artifacts/reviews/issue-128/storage-7c28750/candidate-storage-4x.png",
+      "artifacts/reviews/issue-128/storage-7c28750/assembled-desktop-native.png",
+      "artifacts/reviews/issue-128/storage-7c28750/00-idle.png",
+      "artifacts/reviews/issue-128/storage-7c28750/01-category-equipment.png",
+      "artifacts/reviews/issue-128/storage-7c28750/02-wheel-three-rows.png",
+      "artifacts/reviews/issue-128/storage-7c28750/03-arrow-one-row.png",
+      "artifacts/reviews/issue-128/storage-7c28750/04-thumb-drag.png",
+      "artifacts/reviews/issue-128/storage-7c28750/05-search-filtered.png",
+      "artifacts/reviews/issue-128/storage-7c28750/06-list-mode.png",
+      "artifacts/reviews/issue-128/storage-7c28750/07-sorted.png",
+      "artifacts/reviews/issue-128/storage-7c28750/08-transfer-rejected.png",
+      "artifacts/reviews/issue-128/storage-7c28750/09-transfer-outbound.png",
+      "artifacts/reviews/issue-128/storage-7c28750/10-transfer-returned.png",
+      "artifacts/reviews/issue-128/storage-7c28750/11-window-moved.png",
+      "artifacts/reviews/issue-128/storage-7c28750/play-log.json",
+      "artifacts/reviews/issue-128/storage-7c28750/image79-contracts.json",
+      "artifacts/reviews/issue-128/storage-7c28750/repository-baseline.log",
+      "artifacts/reviews/issue-128/options-regression-7c28750/00-idle.png",
+      "artifacts/reviews/issue-128/options-regression-7c28750/14-options-skin-activate-after.png",
+      "artifacts/reviews/issue-128/options-regression-7c28750/16-options-minimize-after.png",
+      "artifacts/reviews/issue-128/options-regression-7c28750/play-log.json",
+      "artifacts/reviews/issue-128/skill-tree-regression-7c28750/00-idle.png",
+      "artifacts/reviews/issue-128/skill-tree-regression-7c28750/02-context-detail.png",
+      "artifacts/reviews/issue-128/skill-tree-regression-7c28750/09-minimized.png",
+      "artifacts/reviews/issue-128/skill-tree-regression-7c28750/play-log.json",
+      "artifacts/reviews/issue-128/inventory-regression-7c28750/00-idle.png",
+      "artifacts/reviews/issue-128/inventory-regression-7c28750/10-transfer-after.png",
+      "artifacts/reviews/issue-128/inventory-regression-7c28750/08-minimized.png",
+      "artifacts/reviews/issue-128/inventory-regression-7c28750/play-log.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE128_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE128_GODOT_BIN\" --headless --path godot --import && DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE128_GODOT_BIN\" --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue128-blind-review.pid || kill \"$(cat /tmp/issue128-blind-review.pid)\" 2>/dev/null || true; ISSUE128_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE128_GODOT_BIN\" --headless --path godot --import >/tmp/issue128-blind-review-import.log 2>&1 && { nohup env DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE128_GODOT_BIN\" --path godot -- --screen=image79 >/tmp/issue128-blind-review.log 2>&1 & echo $! >/tmp/issue128-blind-review.pid; }"
+  }
+}
