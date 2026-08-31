@@ -61,6 +61,11 @@ const shot = async (name, settle = true) => {
   await page.screenshot({ path });
   return { path: `${name}.png`, sha256: sha256(path) };
 };
+const invariantShot = async (name) => {
+  const path = resolve(OUT, `${name}.png`);
+  await page.screenshot({ path, clip: INVARIANT });
+  return { path: `${name}.png`, sha256: sha256(path) };
+};
 const cropMetric = (left, right, crop = undefined) => {
   let a = resolve(OUT, left.path);
   let b = resolve(OUT, right.path);
@@ -150,6 +155,8 @@ const pressControl = async (id, stem) => {
   await neutral();
   return mid;
 };
+
+const invariantBefore = await invariantShot("00-invariant-before");
 
 // Mode changes and reverses through the same real radio grammar.
 let before = await shot("mode-before");
@@ -290,11 +297,13 @@ record("party", "KeyCommand", "CloseWindow", {
   hidden: !state.window.visible, focused_path: state.window.last_gesture === "KeyCommand",
 }, { before, after, reversed }, state.window);
 
+const invariantAfter = await invariantShot("zz-invariant-after");
 const playLog = {
   schema_version: "image79-play-log-v2",
   candidate: { issue: 133, commit_sha: CANDIDATE, window_id: "party" },
   source_reference_sha256: manifest.reference.sha256,
   required_controls: requiredControls, required_actions: requiredActions,
+  invariant_frames: { before: invariantBefore, after: invariantAfter },
   console_errors: consoleErrors, actions,
 };
 writeFileSync(resolve(OUT, "play-log.json"), `${JSON.stringify(playLog, null, 2)}\n`);
