@@ -157,6 +157,22 @@
         28,
         138
       ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-thumb-hover.png",
+      "sha256": "4ec2a1ca38286b9165f09f8570ab7742630ff758c6f0f6e343a6895f0dfd3117",
+      "size": [
+        28,
+        78
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-card/scroll-thumb-pressed.png",
+      "sha256": "88b70e639b32159fe950995546b9ed4b0dddf8882ac29dfb4185774ceece3ab1",
+      "size": [
+        28,
+        78
+      ]
     }
   ]
 }

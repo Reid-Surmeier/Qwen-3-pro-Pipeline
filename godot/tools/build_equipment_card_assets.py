@@ -90,6 +90,13 @@ def main() -> None:
     increment_states = variants(increment, "scroll-increment", records)
     track_states = variants(track, "scroll-track", records)
     track_states["dragging"] = track_states["pressed"]
+    thumb = window.crop((390, 106, 418, 184))
+    thumb_hover = save(ImageEnhance.Brightness(thumb).enhance(1.08),
+                       "scroll-thumb-hover.png", records)
+    thumb_pressed = save(ImageEnhance.Brightness(thumb).enhance(0.88),
+                         "scroll-thumb-pressed.png", records)
+    thumb_states = {"idle": transparent, "hover": thumb_hover,
+                    "pressed": thumb_pressed, "dragging": thumb_pressed}
     scroll = control(
         "equipment_card.scroll", "ScrollView",
         {"x": 390, "y": 80, "width": 28, "height": 190}, scroll_states,
@@ -110,8 +117,7 @@ def main() -> None:
             "increment": {"geometry": {"x": 0, "y": 164, "width": 28, "height": 26},
                           "state_set": {state: increment_states for state in scroll_states}},
             "thumb": {"geometry": {"x": 0, "y": 26, "width": 28, "height": 78},
-                      "state_set": {state: {**transparent_states, "dragging": transparent}
-                                    for state in scroll_states}},
+                      "state_set": {state: thumb_states for state in scroll_states}},
         },
     )
 
