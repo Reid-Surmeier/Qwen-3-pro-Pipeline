@@ -125,10 +125,58 @@ class PlayLogVerdictTests(unittest.TestCase):
                                   "action": "CloseWindow"},
                              ], "controls": controls}]}
 
+    def _strict_log(self) -> dict:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 128
+        for action in log["actions"]:
+            action["frames"]["reversed"] = self.before
+            action["contract_facts"] = {
+                "real_gesture_path": True,
+                "intended_region_changed": True,
+                "invariants_stable": True,
+                "source_approved": True,
+                "reversible": True,
+            }
+            action["pixel_metrics"] = {
+                "full_frame_changed_pixels": 3,
+                "intended_region_changed_pixels": 3,
+                "invariant_region_changed_pixels": 0,
+            }
+            action["reversal_pixel_metrics"] = {
+                "full_frame_changed_pixels": 0,
+                "intended_region_changed_pixels": 0,
+                "invariant_region_changed_pixels": 0,
+            }
+        return log
+
     def test_complete_hash_locked_log_passes(self) -> None:
         verdict = evaluate_play_log(self._valid_log(), self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"])
         self.assertEqual(5, verdict["frames_verified"])
+
+    def test_issue_128_requires_all_adr_0004_interaction_facts(self) -> None:
+        log = self._valid_log()
+        log["candidate"]["issue"] = 128
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(any("contract_facts" in problem for problem in verdict["problems"]))
+        self.assertTrue(any("frames.reversed" in problem for problem in verdict["problems"]))
+
+    def test_issue_128_rejects_nonzero_invariants_and_restoration_delta(self) -> None:
+        log = self._strict_log()
+        action = log["actions"][0]
+        action["pixel_metrics"]["invariant_region_changed_pixels"] = 1
+        action["reversal_pixel_metrics"]["full_frame_changed_pixels"] = 1
+        verdict = evaluate_play_log(log, self.root, self._manifest())
+        self.assertEqual("FAIL", verdict["verdict"], verdict)
+        self.assertTrue(any("invariant region changed" in failure
+                            for failure in verdict["failures"]))
+        self.assertTrue(any("did not reverse exactly" in failure
+                            for failure in verdict["failures"]))
+
+    def test_issue_128_complete_adr_0004_evidence_passes(self) -> None:
+        verdict = evaluate_play_log(self._strict_log(), self.root, self._manifest())
+        self.assertEqual("PASS", verdict["verdict"], verdict)
 
     def test_unexercised_control_is_incomplete(self) -> None:
         log = self._valid_log()

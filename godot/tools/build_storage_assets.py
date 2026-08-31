@@ -89,6 +89,7 @@ def main() -> None:
 
     grids = [entry for entry in entries if entry["type"] == "grid cell"]
     slots: list[str] = []
+    occupied_slots: list[str] = []
     surfaces: dict[str, object] = {}
     details: dict[str, str] = {}
     for entry in grids:
@@ -97,6 +98,8 @@ def main() -> None:
         column = (geometry["x"] - 88) // 60
         slot = f"r{row}c{column}"
         slots.append(slot)
+        if str(entry["state"]).startswith("occupied x"):
+            occupied_slots.append(slot)
         quantity = str(entry["state"]).removeprefix("occupied x")
         details[slot] = f"倉庫 {row + 1}-{column + 1}\n個数 {quantity}"
         crop = window.crop(box(geometry))
@@ -116,6 +119,11 @@ def main() -> None:
     labels = {item: f"Potion {index + 1:02d}"
               for index, item in enumerate(collection)}
     item_values = {slot: collection[index] for index, slot in enumerate(slots)}
+    # Image 79 attests 23 occupied item-art/count cells plus 12 empty home slots.
+    # Off-page identities reuse only occupied source cells; the runtime preserves
+    # empty slots when a home identity is still on its original source surface.
+    identity_surfaces = {item: occupied_slots[index % len(occupied_slots)]
+                         for index, item in enumerate(collection)}
     selection = control(
         "storage.items", "SelectionView", {"x": 88, "y": 30, "width": 420, "height": 315},
         {"unselected": transparent_variants, "selected": transparent_variants},
@@ -128,6 +136,7 @@ def main() -> None:
                "value_control_ids": {}, "item_values": item_values,
                "allowed_modifiers": ["ctrl"], "initial_version": 0,
                "collection_items": collection, "collection_labels": labels,
+               "identity_surfaces": identity_surfaces,
                "columns": 7, "visible_rows": 5, "capacity": 300,
                "list_layout": {"columns": 2, "rows": 12, "row_height": 24,
                                "column_width": 198, "origin": [8, 7]}},

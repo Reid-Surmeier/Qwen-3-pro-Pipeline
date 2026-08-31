@@ -34,6 +34,7 @@ func _ready() -> void:
 	field.position = Vector2(5, 1)
 	field.size = size - Vector2(10, 2)
 	field.max_length = int(spec.value.maximum_length)
+	field.caret_blink = false
 	field.text = str(runtime.qa_state().controls[spec.id].text)
 	field.add_theme_font_override("font", load(str(spec.tokens.font)))
 	field.add_theme_font_size_override("font_size", int(spec.tokens.font_size))

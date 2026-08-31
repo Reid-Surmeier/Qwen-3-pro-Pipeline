@@ -26,19 +26,32 @@ func _run() -> void:
 	_check("public-input-category",
 		window.qa_state().controls["storage.categories"].value == "equipment",
 		str(window.qa_state().controls["storage.categories"]))
-	await _wheel(Vector2(1007, 800), 1)
+	await _click(Vector2(632, 977))
 	var state: Dictionary = window.qa_state()
+	_check("list-layout-uses-declared-two-columns", state.window.view_mode == "list"
+		and state.controls["storage.items"].list_labels.size() == 24,
+		str(state.controls["storage.items"]))
+	await _click(Vector2(632, 977))
+	await _wheel(Vector2(1007, 800), 1)
+	state = window.qa_state()
 	_check("public-input-wheel-three", state.controls["storage.scroll"].offset == 3,
 		str(state.controls["storage.scroll"]))
 	_check("wheel-redraws-logical-items",
 		state.controls["storage.items"].item_values["r0c0"] == "stock-021"
-		and state.controls["storage.items"].rendered_item_values["r0c0"] == "stock-021",
+		and state.controls["storage.items"].rendered_item_values["r0c0"] == "stock-021"
+		and str(state.controls["storage.items"].rendered_asset_paths["r0c0"])
+			.ends_with("cell-r3c0-unselected-idle.png"),
 		str(state.controls["storage.items"]))
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
 
 
 func _click(point: Vector2) -> void:
+	var motion := InputEventMouseMotion.new()
+	motion.position = point
+	motion.global_position = point
+	Input.parse_input_event(motion)
+	await process_frame
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
 	press.pressed = true

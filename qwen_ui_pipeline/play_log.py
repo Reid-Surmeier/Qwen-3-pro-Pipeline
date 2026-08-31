@@ -14,6 +14,19 @@ LEGACY_SCHEMA_VERSION = "image79-play-log-v1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 STRICT_POINTER_EVIDENCE_ISSUE = 127
+STRICT_INTERACTION_FACTS_ISSUE = 128
+_CONTRACT_FACTS = (
+    "real_gesture_path",
+    "intended_region_changed",
+    "invariants_stable",
+    "source_approved",
+    "reversible",
+)
+_PIXEL_METRICS = (
+    "full_frame_changed_pixels",
+    "intended_region_changed_pixels",
+    "invariant_region_changed_pixels",
+)
 
 
 def evaluate_play_log(
@@ -112,6 +125,12 @@ def evaluate_play_log(
     seen_actions: set[tuple[str, str, str]] = set()
     range_endpoints: dict[str, set[str]] = {control_id: set() for control_id in range_specs}
     verified_frames: set[Path] = set()
+    candidate_issue = candidate.get("issue") if isinstance(candidate, dict) else None
+    strict_interaction_facts = (
+        isinstance(candidate_issue, int)
+        and not isinstance(candidate_issue, bool)
+        and candidate_issue >= STRICT_INTERACTION_FACTS_ISSUE
+    )
     for index, action in enumerate(actions):
         label = f"actions[{index}]"
         if not isinstance(action, dict):
@@ -154,18 +173,49 @@ def evaluate_play_log(
 
         frames = action.get("frames")
         required_roles = {"before", "after"}
+        if strict_interaction_facts:
+            required_roles.add("reversed")
+            contract_facts = action.get("contract_facts")
+            if not isinstance(contract_facts, dict):
+                problems.append(f"{label}.contract_facts must be an object")
+            else:
+                for fact in _CONTRACT_FACTS:
+                    value = contract_facts.get(fact)
+                    if not isinstance(value, bool):
+                        problems.append(f"{label}.contract_facts.{fact} must be boolean")
+                    elif value is False:
+                        failures.append(f"{label} contract fact is false: {fact}")
+
+            pixel_metrics = _pixel_metrics(
+                action.get("pixel_metrics"), f"{label}.pixel_metrics", problems
+            )
+            if pixel_metrics is not None:
+                if pixel_metrics["intended_region_changed_pixels"] <= 0:
+                    failures.append(f"{label} intended region did not change")
+                if pixel_metrics["invariant_region_changed_pixels"] != 0:
+                    failures.append(f"{label} invariant region changed")
+
+            reversal_metrics = _pixel_metrics(
+                action.get("reversal_pixel_metrics"),
+                f"{label}.reversal_pixel_metrics",
+                problems,
+            )
+            if reversal_metrics is not None and any(
+                reversal_metrics[field] != 0 for field in _PIXEL_METRICS
+            ):
+                failures.append(f"{label} did not reverse exactly")
         if gesture in {"Drag", "Resize", "DragDrop"}:
             required_roles.add("mid")
             samples = action.get("motion_samples")
 
-            candidate_issue = trusted_issue if trusted_issue is not None else (
+            pointer_policy_issue = trusted_issue if trusted_issue is not None else (
                 candidate.get("issue") if isinstance(candidate, dict) else None
             )
             legacy_scalar_move = (
                 gesture == "Drag"
                 and window_action == "MoveWindow"
-                and isinstance(candidate_issue, int)
-                and candidate_issue < STRICT_POINTER_EVIDENCE_ISSUE
+                and isinstance(pointer_policy_issue, int)
+                and pointer_policy_issue < STRICT_POINTER_EVIDENCE_ISSUE
             )
 
             def finite_number(value: object) -> bool:
@@ -237,6 +287,11 @@ def evaluate_play_log(
         if isinstance(before, dict) and isinstance(after, dict) \
                 and before.get("sha256") == after.get("sha256"):
             failures.append(f"{label} intended region did not change")
+        if strict_interaction_facts:
+            reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
+            if isinstance(before, dict) and isinstance(reversed_frame, dict) \
+                    and before.get("sha256") != reversed_frame.get("sha256"):
+                failures.append(f"{label} did not reverse exactly")
         if window_action == "ToggleValue":
             reversed_frame = frames.get("reversed") if isinstance(frames, dict) else None
             if not isinstance(reversed_frame, dict):
@@ -301,6 +356,30 @@ def evaluate_play_log(
         "failures": failures,
         "problems": problems,
     }
+
+
+def _pixel_metrics(
+    value: Any, label: str, problems: list[str]
+) -> dict[str, float] | None:
+    if not isinstance(value, dict):
+        problems.append(f"{label} must be an object")
+        return None
+    metrics: dict[str, float] = {}
+    for field in _PIXEL_METRICS:
+        number = value.get(field)
+        if not isinstance(number, (int, float)) or isinstance(number, bool):
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        try:
+            numeric = float(number)
+        except (OverflowError, ValueError):
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        if not math.isfinite(numeric) or numeric < 0:
+            problems.append(f"{label}.{field} must be a finite non-negative number")
+            continue
+        metrics[field] = numeric
+    return metrics if len(metrics) == len(_PIXEL_METRICS) else None
 
 
 def _verify_frame(

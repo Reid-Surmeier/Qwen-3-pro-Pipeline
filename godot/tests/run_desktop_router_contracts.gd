@@ -35,6 +35,17 @@ func _init() -> void:
 	_check("capacity-rejection-is-atomic", not rejected.ok
 		and rejected.error.code == "TransactionRejectedError"
 		and inventory == source_before and full == full_before, str(rejected))
+	var missing := Router.transfer(inventory, storage, "missing", 4, 9, ["ctrl"])
+	_check("missing-item-rejection-is-atomic", not missing.ok
+		and missing.error.code == "TransactionRejectedError"
+		and inventory == source_before and storage == target_before, str(missing))
+	var duplicate_target := {"window_id": "storage", "items": ["apple"],
+		"version": 9, "capacity": 300}
+	var duplicate_before := duplicate_target.duplicate(true)
+	var duplicate := Router.transfer(inventory, duplicate_target, "apple", 4, 9, ["ctrl"])
+	_check("duplicate-item-rejection-is-atomic", not duplicate.ok
+		and duplicate.error.code == "TransactionRejectedError"
+		and inventory == source_before and duplicate_target == duplicate_before, str(duplicate))
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
 

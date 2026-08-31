@@ -10,8 +10,6 @@ var spec: Dictionary
 var runtime: ControlRuntime
 var visuals := {}
 var hits := {}
-var grid_backgrounds := {}
-var grid_labels := {}
 var list_labels := {}
 var list_overlay: Control
 var detail_panel: Control
@@ -83,10 +81,13 @@ func show_detail(item: String) -> void:
 func rendered_facts() -> Dictionary:
 	var opened_item := str(runtime.qa_state().controls[spec.id].get("opened_item", ""))
 	var rendered_values := {}
+	var rendered_assets := {}
 	var visible_count := 0
 	for item in hits:
 		var identity := _item_identity(item)
 		rendered_values[str(item)] = identity
+		rendered_assets[str(item)] = runtime.visual_surface_asset(spec.id, str(item)) \
+			if not identity.is_empty() else ""
 		if not identity.is_empty():
 			visible_count += 1
 	return {
@@ -100,6 +101,7 @@ func rendered_facts() -> Dictionary:
 		"gesture_drag": runtime.qa_state().controls[spec.id].get("drag_state", {}),
 		"surface_geometry": _surface_geometry(),
 		"rendered_item_values": rendered_values,
+		"rendered_asset_paths": rendered_assets,
 		"visible_item_count": visible_count,
 	}
 
@@ -127,24 +129,6 @@ func _add_item(item: String, surface: Dictionary) -> void:
 	visual.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(visual)
 	visuals[item] = visual
-	var background := ColorRect.new()
-	background.position = visual.position
-	background.size = visual.size
-	background.color = Color8(247, 247, 247)
-	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	background.visible = false
-	add_child(background)
-	grid_backgrounds[item] = background
-	var identity_label := Label.new()
-	identity_label.position = visual.position + Vector2(3, 20)
-	identity_label.size = visual.size - Vector2(6, 22)
-	identity_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	identity_label.add_theme_font_override("font", load("res://fonts/PixelMplus10-Regular.ttf"))
-	identity_label.add_theme_font_size_override("font_size", 10)
-	identity_label.add_theme_color_override("font_color", Color8(42, 37, 42))
-	identity_label.visible = false
-	add_child(identity_label)
-	grid_labels[item] = identity_label
 
 	var hit := Control.new()
 	hit.name = item + "-hit"
@@ -167,10 +151,12 @@ func _add_list_overlay() -> void:
 	var labels: Dictionary = spec.value.get("labels", {})
 	var layout: Dictionary = spec.value.get("list_layout", {})
 	var rows := maxi(int(layout.get("rows", 14)), 1)
+	var columns := maxi(int(layout.get("columns", 1)), 1)
 	var origin: Array = layout.get("origin", [12, 8])
 	var row_height := float(layout.get("row_height", 30))
 	var column_width := float(layout.get("column_width", 270))
-	for index in spec.value.items.size():
+	var visible_items := mini(spec.value.items.size(), rows * columns)
+	for index in visible_items:
 		var item := str(spec.value.items[index])
 		var label := Label.new()
 		label.text = "%s   %s" % [str(labels.get(item, item)), _related_value_text(item)]
@@ -463,24 +449,18 @@ func _modifiers(event: InputEventWithModifiers) -> Array[String]:
 
 func _refresh() -> void:
 	var state: Dictionary = runtime.qa_state().controls[spec.id]
-	var initial_values: Dictionary = spec.value.get("item_values", {})
 	var current_values: Dictionary = state.get("item_values", {})
-	var identity_labels: Dictionary = spec.value.get("collection_labels", {})
-	var identity_backed := not initial_values.is_empty() or not current_values.is_empty()
+	var declared_values: Dictionary = spec.value.get("item_values", {})
+	var identity_backed: bool = not declared_values.is_empty() \
+		or not current_values.is_empty()
 	for item in visuals:
 		var identity := str(current_values.get(item, item if not identity_backed else ""))
-		var dynamic := identity_backed \
-			and identity != str(initial_values.get(item, ""))
-		visuals[item].visible = not dynamic and not _list_mode
-		grid_backgrounds[item].visible = dynamic and not _list_mode
-		grid_labels[item].visible = dynamic and not identity.is_empty() and not _list_mode
-		grid_labels[item].text = str(identity_labels.get(identity, identity))
+		visuals[item].visible = not identity.is_empty() and not _list_mode
 		hits[item].visible = (not identity_backed or not identity.is_empty()) \
 			and not _list_mode
-		if not dynamic:
-			var path := runtime.visual_surface_asset(spec.id, item)
-			if not path.is_empty():
-				visuals[item].texture = load(path)
+		var path := runtime.visual_surface_asset(spec.id, item)
+		if not path.is_empty():
+			visuals[item].texture = load(path)
 	var labels: Dictionary = spec.value.get("labels", {})
 	var collection_labels: Dictionary = spec.value.get("collection_labels", {})
 	for item in list_labels:

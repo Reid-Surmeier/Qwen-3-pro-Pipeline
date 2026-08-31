@@ -179,7 +179,14 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 	var asset_surface_id := surface_id
 	if str(entry.spec.type) == "SelectionView":
 		var mapped := str(state.get("item_values", {}).get(surface_id, surface_id))
-		if entry.spec.surfaces.has(mapped):
+		var home_values: Dictionary = entry.spec.value.get("item_values", {})
+		var identity_surfaces: Dictionary = entry.spec.value.get("identity_surfaces", {})
+		var mapped_surface := str(identity_surfaces.get(mapped, ""))
+		if str(home_values.get(surface_id, "")) == mapped:
+			asset_surface_id = surface_id
+		elif not mapped_surface.is_empty() and entry.spec.surfaces.has(mapped_surface):
+			asset_surface_id = mapped_surface
+		elif entry.spec.surfaces.has(mapped):
 			asset_surface_id = mapped
 	var surface: Dictionary = entry.spec.surfaces[asset_surface_id]
 	var semantic := str(state.semantic_state)
