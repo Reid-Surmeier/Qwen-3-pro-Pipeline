@@ -59,11 +59,20 @@ const shot = async (name) => {
   frames[name] = { path: `${name}.png`, sha256: sha256(path) };
   return frames[name];
 };
-const record = (controlId, gesture, action, assertions, actionFrames, observed) => {
+const invariantShot = async (name) => {
+  const path = resolve(OUT, `${name}.png`);
+  await page.screenshot({ path, clip: { x: 1400, y: 800, width: 100, height: 100 } });
+  return { path: `${name}.png`, sha256: sha256(path) };
+};
+const record = (controlId, gesture, action, assertions, actionFrames, observed,
+  motionSamples = undefined) => {
   const matches = Object.values(assertions).every(Boolean);
-  actions.push({ control_id: controlId, gesture, window_action: action,
-    expected: "manifest and Behaviour Card", observed, responsive: matches,
-    matches_expected: matches, assertions, frames: actionFrames });
+  const entry = { control_id: controlId, gesture, window_action: action,
+    expected: "manifest and Behaviour Card", observed: typeof observed === "string"
+      ? observed : JSON.stringify(observed), responsive: matches,
+    matches_expected: matches, assertions, frames: actionFrames };
+  if (motionSamples !== undefined) entry.motion_samples = motionSamples;
+  actions.push(entry);
   check(`${controlId}:${gesture}:${action}`, matches, assertions);
 };
 const click = async (x, y) => {
@@ -78,16 +87,49 @@ const ctrlDouble = async (x, y) => {
   await page.keyboard.up("Control");
   await page.waitForTimeout(80);
 };
+const reloadStorage = async () => {
+  await page.reload({ waitUntil: "networkidle", timeout: 90000 });
+  await page.waitForFunction(() => window.godotQaState?.windows?.storage,
+    undefined, { timeout: 90000 });
+  await page.waitForTimeout(1000);
+};
 
 const manifest = JSON.parse(readFileSync(resolve(ROOT,
   "godot/data/image-79-control-spec.json"), "utf8"));
 const windowSpec = manifest.windows.find((entry) => entry.id === "storage");
 const idle = await shot("00-idle");
+const invariantBefore = await invariantShot("00-invariant-before");
 const initial = await storage();
 check("idle-factual", initial.window.size[0] === 539 && initial.window.size[1] === 393
   && initial.controls["storage.items"].surface_geometry
   && Object.keys(initial.controls["storage.items"].surface_geometry).length === 35,
   initial.window);
+
+await click(610, 670);
+await page.waitForTimeout(260);
+const selected = await control("storage.items");
+const selectedFrame = await shot("00a-item-selected");
+record("storage.items", "Activate", "SelectStorageItem", {
+  selected: selected.value === "r0c0",
+  routed: selected.last_action === "SelectStorageItem",
+}, { before: idle, after: selectedFrame }, selected);
+
+await page.keyboard.down("Control");
+await click(670, 670);
+await page.keyboard.up("Control");
+const modifierSelected = await control("storage.items");
+const modifierFrame = await shot("00b-item-modifier-selected");
+record("storage.items", "ModifierActivate", "ToggleStorageSelection", {
+  toggled: modifierSelected.selected_items.includes("r0c1"),
+  routed: modifierSelected.last_action === "ToggleStorageSelection",
+}, { before: selectedFrame, after: modifierFrame }, modifierSelected);
+
+await click(675, 977);
+const searchFocused = await control("storage.search");
+const focusFrame = await shot("00c-search-focused");
+record("storage.search_focus", "Activate", "FocusStorageSearch", {
+  focused: searchFocused.focused === true,
+}, { before: modifierFrame, after: focusFrame }, searchFocused);
 
 await click(537, 704);
 const category = await control("storage.categories");
@@ -95,7 +137,7 @@ const categoryFrame = await shot("01-category-equipment");
 record("storage.categories", "Activate", "SelectStorageCategory", {
   selected: category.value === "equipment",
   routed: category.last_action === "SelectStorageCategory",
-}, { before: idle, after: categoryFrame }, category.value);
+}, { before: focusFrame, after: categoryFrame }, category.value);
 
 const scrollPoint = point(1007, 800);
 await page.mouse.move(scrollPoint.x, scrollPoint.y);
@@ -118,20 +160,27 @@ const thumbStart = point(1007, 862);
 const thumbEnd = point(1007, 680);
 await page.mouse.move(thumbStart.x, thumbStart.y);
 await page.mouse.down();
-const samples = [];
+const thumbMotionSamples = [];
+const offsetSamples = [];
+let thumbMid;
 for (let index = 0; index < 31; index += 1) {
   const t = index / 30;
-  await page.mouse.move(thumbStart.x, thumbStart.y + (thumbEnd.y - thumbStart.y) * t);
+  const sample = [thumbStart.x, thumbStart.y + (thumbEnd.y - thumbStart.y) * t];
+  await page.mouse.move(sample[0], sample[1]);
   await page.waitForTimeout(12);
-  samples.push((await control("storage.scroll")).offset);
+  thumbMotionSamples.push(sample);
+  offsetSamples.push((await control("storage.scroll")).offset);
+  if (index === 15) thumbMid = await shot("04-thumb-drag-mid");
 }
 await page.mouse.up();
 const dragged = await control("storage.scroll");
 record("storage.scroll", "Drag", "SetStorageScrollOffset", {
-  continuous: samples.length === 31,
+  continuous: thumbMotionSamples.length === 31,
   moved_toward_start: dragged.offset < arrow.offset,
   clamped: dragged.offset >= 0 && dragged.offset <= dragged.maximum,
-}, { before: wheelFrame, after: await shot("04-thumb-drag") }, samples);
+  offset_changed: new Set(offsetSamples).size > 1,
+}, { before: wheelFrame, mid: thumbMid, after: await shot("04-thumb-drag") },
+JSON.stringify({ state: dragged, offsets: offsetSamples }), thumbMotionSamples);
 
 await click(779, 977);
 await page.keyboard.type("Potion 70", { delay: 25 });
@@ -205,41 +254,92 @@ returned.last_transaction);
 
 const dragStart = point(700, 620);
 const dragEnd = point(760, 580);
+const windowDragBefore = await shot("11-window-drag-before");
 await page.mouse.move(dragStart.x, dragStart.y);
 await page.mouse.down();
-for (let index = 1; index <= 20; index += 1) {
-  await page.mouse.move(dragStart.x + (dragEnd.x - dragStart.x) * index / 20,
-    dragStart.y + (dragEnd.y - dragStart.y) * index / 20);
+const windowMotionSamples = [];
+let windowDragMid;
+for (let index = 0; index < 31; index += 1) {
+  const t = index / 30;
+  const sample = [dragStart.x + (dragEnd.x - dragStart.x) * t,
+    dragStart.y + (dragEnd.y - dragStart.y) * t];
+  await page.mouse.move(sample[0], sample[1]);
+  windowMotionSamples.push(sample);
+  if (index === 15) windowDragMid = await shot("11-window-drag-mid");
 }
 await page.mouse.up();
 const moved = await storage();
+const windowDragAfter = await shot("11-window-moved");
 record("storage", "Drag", "MoveWindow", {
   moved: moved.window.position[0] === 552 && moved.window.position[1] === 569,
-}, { before: frames["10-transfer-returned"], after: await shot("11-window-moved") },
-moved.window.position);
+  continuous: windowMotionSamples.length === 31,
+}, { before: windowDragBefore, mid: windowDragMid, after: windowDragAfter },
+moved.window.position, windowMotionSamples);
 
-await browser.close();
+const invariantAfter = await invariantShot("11-invariant-after");
+
+await reloadStorage();
+const titleCloseBefore = await shot("12-title-close-before");
+await click(1016, 626);
+const titleClosed = (await storage()).window;
+record("storage.close", "Activate", "CloseWindow", {
+  hidden: titleClosed.visible === false,
+  routed: titleClosed.last_action === "CloseWindow",
+}, { before: titleCloseBefore, after: await shot("12-title-close-after") }, titleClosed);
+
+await reloadStorage();
+const bottomCloseBefore = await shot("13-bottom-close-before");
+await click(965, 977);
+const bottomClosed = (await storage()).window;
+record("storage.bottom_close", "Activate", "CloseWindow", {
+  hidden: bottomClosed.visible === false,
+  routed: bottomClosed.last_action === "CloseWindow",
+}, { before: bottomCloseBefore, after: await shot("13-bottom-close-after") }, bottomClosed);
+
+await reloadStorage();
+await click(700, 620);
+const keyCloseBefore = await shot("14-key-close-before");
+await page.keyboard.press("Escape");
+const keyClosed = (await storage()).window;
+record("storage", "KeyCommand", "CloseWindow", {
+  hidden: keyClosed.visible === false,
+  routed: keyClosed.last_action === "CloseWindow" && keyClosed.last_gesture === "KeyCommand",
+}, { before: keyCloseBefore, after: await shot("14-key-close-after") }, keyClosed);
+
 const failed = checks.filter((entry) => !entry.passed);
 const errors = consoleEntries.filter((entry) => entry.startsWith("[error]")
   || entry.startsWith("[pageerror]"));
-const report = {
-  schema_version: 2,
-  issue: 128,
+const requiredControls = windowSpec.controls.map((entry) => entry.id);
+const requiredActions = windowSpec.actions.map((binding) => ({
+  control_id: windowSpec.id, gesture: binding.gesture, window_action: binding.action,
+})).concat(windowSpec.controls.flatMap((entry) => entry.actions.map((binding) => ({
+  control_id: entry.id, gesture: binding.gesture, window_action: binding.action,
+}))));
+const playLog = {
+  schema_version: "image79-play-log-v2",
   candidate: { issue: 128,
     commit_sha: execFileSync("git", ["rev-parse", "HEAD"],
       { cwd: ROOT, encoding: "utf8" }).trim(),
     window_id: "storage" },
+  source_reference_sha256: manifest.reference.sha256,
+  required_controls: requiredControls,
+  required_actions: requiredActions,
+  invariant_frames: { before: invariantBefore, after: invariantAfter },
+  console_errors: errors,
+  actions,
+};
+writeFileSync(resolve(OUT, "play-log.json"), `${JSON.stringify(playLog, null, 2)}\n`);
+const report = {
   url: URL,
-  reference: manifest.reference,
   window: { id: "storage", geometry: windowSpec.geometry },
   driver: "Playwright Chromium real pointer, wheel, and keyboard input",
-  actions,
   checks,
   frames,
   console_entries: consoleEntries,
   summary: { pass: failed.length === 0 && errors.length === 0,
     total: checks.length, failed: failed.length, console_errors: errors.length },
 };
-writeFileSync(resolve(OUT, "play-log.json"), `${JSON.stringify(report, null, 2)}\n`);
+writeFileSync(resolve(OUT, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report.summary));
+await browser.close();
 process.exitCode = report.summary.pass ? 0 : 1;
