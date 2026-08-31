@@ -90,7 +90,11 @@ func _run() -> void:
 		and desktop.inventory.runtime.qa_state().controls[
 			"inventory.items"].item_values == rejection_inventory
 		and desktop.equipment_items.runtime.qa_state().controls[
-			"equipment_items.slots"].item_values == rejection_equipment,
+			"equipment_items.slots"].item_values == rejection_equipment
+		and desktop.inventory.runtime.qa_state().controls[
+			"inventory.items"].interaction_phase == "idle"
+		and desktop.inventory.runtime.qa_state().controls[
+			"inventory.items"].active_surface == "",
 		str(desktop.last_transaction))
 	var tab_result := desktop.inventory.runtime.dispatch("inventory.tabs", "Activate",
 		{"choice": "equip"})

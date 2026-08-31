@@ -219,6 +219,9 @@ await page.waitForTimeout(320);
 const afterInventoryDouble = await qa();
 const inventoryDoubleAfter = await shot("02c-inventory-double-equipped");
 await reload();
+target = point(23, 788);
+await page.mouse.click(target.x, target.y);
+await page.waitForTimeout(100);
 const inventoryDoubleReversed = await shot("02d-inventory-double-reversed");
 record("inventory.items", "DoubleActivate", "EquipInventoryItem", {
   explicit_action: afterInventoryDouble.windows.inventory.controls[

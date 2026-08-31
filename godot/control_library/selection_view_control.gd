@@ -359,6 +359,7 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	var was_double := _double_pending
 	var was_modifier_double := _modifier_double_pending
 	var modifiers := _press_modifiers.duplicate()
+	var release_surface := item
 	var payload := {
 		"item": item,
 		"button": "right" if button == MOUSE_BUTTON_RIGHT else "left",
@@ -384,6 +385,7 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 	var result: Dictionary
 	if was_dragging:
 		var target := _item_at_global(event.global_position)
+		release_surface = target
 		result = runtime.dispatch(spec.id, "DragDrop", {
 			"source": item, "target": target, "version": _drag_version,
 			"start_position": [_press_global.x, _press_global.y],
@@ -418,7 +420,10 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 		return
 	else:
 		result = runtime.dispatch(spec.id, "Activate", payload)
-	runtime.set_interaction_phase(spec.id, "hover", item)
+	if release_surface.is_empty():
+		runtime.set_interaction_phase(spec.id, "idle")
+	else:
+		runtime.set_interaction_phase(spec.id, "hover", release_surface)
 	_refresh()
 	changed.emit(spec.id, result)
 	accept_event()
