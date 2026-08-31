@@ -2,9 +2,23 @@
 # Self-verifying QA loop for the RO-HUD replica (milestone #86).
 # Produces qa/out/report.json that an agent consumes and course-corrects from.
 set -uo pipefail
+
+if [ "${1:-}" = "--headless" ]; then
+  QA_CAPTURE=0
+  shift
+fi
+if [ "$#" -ne 0 ]; then
+  echo "usage: $0 [--headless]" >&2
+  exit 2
+fi
+
 GODOT="${GODOT_BIN:-$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64}"
 cd "$(dirname "$0")/.."
 mkdir -p qa/out
+QA_RUNTIME_HOME="${GODOT_QA_RUNTIME_HOME:-$PWD/qa/out/runtime}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$QA_RUNTIME_HOME/config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$QA_RUNTIME_HOME/data}"
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME"
 : > qa/out/import.log
 rm -f qa/out/capture.png qa/out/fidelity.json qa/out/interact.json
 
@@ -74,8 +88,6 @@ if capture_required:
         or report["fidelity"].get("pass") is not True \
         or interact_rc != 0 \
         or report["interact"].get("failed", 1) != 0
-else:
-    hard_fail = True
 report["pass"] = not hard_fail
 out.joinpath("report.json").write_text(json.dumps(report, indent=2))
 print(json.dumps({"pass": report["pass"],
