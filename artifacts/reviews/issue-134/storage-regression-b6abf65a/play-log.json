@@ -1,0 +1,1368 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 128,
+    "commit_sha": "b6abf65aa38e428407ea38806afdddb5b76c2c1b",
+    "window_id": "storage"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "storage.close",
+    "storage.categories",
+    "storage.items",
+    "storage.scroll",
+    "storage.list",
+    "storage.search_focus",
+    "storage.search",
+    "storage.sort",
+    "storage.bottom_close"
+  ],
+  "required_actions": [
+    {
+      "control_id": "storage",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "storage",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "storage.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "storage.categories",
+      "gesture": "Activate",
+      "window_action": "SelectStorageCategory"
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "Activate",
+      "window_action": "SelectStorageItem"
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleStorageSelection"
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferStorageItem"
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollStorage"
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Activate",
+      "window_action": "StepStorageScroll"
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Drag",
+      "window_action": "SetStorageScrollOffset"
+    },
+    {
+      "control_id": "storage.list",
+      "gesture": "Activate",
+      "window_action": "ToggleStorageView"
+    },
+    {
+      "control_id": "storage.search_focus",
+      "gesture": "Activate",
+      "window_action": "FocusStorageSearch"
+    },
+    {
+      "control_id": "storage.search",
+      "gesture": "KeyCommand",
+      "window_action": "FilterStorage"
+    },
+    {
+      "control_id": "storage.sort",
+      "gesture": "Activate",
+      "window_action": "SortStorage"
+    },
+    {
+      "control_id": "storage.bottom_close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    "after": {
+      "path": "11-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  },
+  "console_errors": [],
+  "actions": [
+    {
+      "control_id": "storage.items",
+      "gesture": "Activate",
+      "window_action": "SelectStorageItem",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"active_surface\":\"r0c0\",\"capacity\":300,\"collection_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"geometry\":{\"height\":315,\"width\":420,\"x\":580,\"y\":639},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"storage.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"item_version\":0,\"last_action\":\"SelectStorageItem\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"SelectStorageItem\",\"error\":null},\"list_labels\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/storage/cell-r0c0-selected-hover.png\",\"r0c1\":\"res://assets/image-79/storage/cell-r0c1-unselected-idle.png\",\"r0c2\":\"res://assets/image-79/storage/cell-r0c2-unselected-idle.png\",\"r0c3\":\"res://assets/image-79/storage/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/storage/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/storage/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/storage/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/storage/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/storage/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/storage/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/storage/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/storage/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/storage/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/storage/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/storage/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/storage/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/storage/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/storage/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/storage/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/storage/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/storage/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/storage/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/storage/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/storage/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/storage/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/storage/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/storage/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/storage/cell-r3c6-unselected-idle.png\",\"r4c0\":\"res://assets/image-79/storage/cell-r4c0-unselected-idle.png\",\"r4c1\":\"res://assets/image-79/storage/cell-r4c1-unselected-idle.png\",\"r4c2\":\"res://assets/image-79/storage/cell-r4c2-unselected-idle.png\",\"r4c3\":\"res://assets/image-79/storage/cell-r4c3-unselected-idle.png\",\"r4c4\":\"res://assets/image-79/storage/cell-r4c4-unselected-idle.png\",\"r4c5\":\"res://assets/image-79/storage/cell-r4c5-unselected-idle.png\",\"r4c6\":\"res://assets/image-79/storage/cell-r4c6-unselected-idle.png\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"rendered_item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"rendered_surface_visibility\":{\"r0c0\":true,\"r0c1\":true,\"r0c2\":true,\"r0c3\":true,\"r0c4\":true,\"r0c5\":true,\"r0c6\":true,\"r1c0\":true,\"r1c1\":true,\"r1c2\":true,\"r1c3\":true,\"r1c4\":true,\"r1c5\":true,\"r1c6\":true,\"r2c0\":true,\"r2c1\":true,\"r2c2\":true,\"r2c3\":true,\"r2c4\":true,\"r2c5\":true,\"r2c6\":true,\"r3c0\":true,\"r3c1\":true,\"r3c2\":true,\"r3c3\":true,\"r3c4\":true,\"r3c5\":true,\"r3c6\":true,\"r4c0\":true,\"r4c1\":true,\"r4c2\":true,\"r4c3\":true,\"r4c4\":true,\"r4c5\":true,\"r4c6\":true},\"scroll_offset\":0,\"selected_item\":\"r0c0\",\"selected_items\":[],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":639},\"r0c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":639},\"r0c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":639},\"r0c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":639},\"r0c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":639},\"r0c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":639},\"r0c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":639},\"r1c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":702},\"r1c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":702},\"r1c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":702},\"r1c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":702},\"r1c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":702},\"r1c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":702},\"r1c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":702},\"r2c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":765},\"r2c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":765},\"r2c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":765},\"r2c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":765},\"r2c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":765},\"r2c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":765},\"r2c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":765},\"r3c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":828},\"r3c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":828},\"r3c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":828},\"r3c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":828},\"r3c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":828},\"r3c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":828},\"r3c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":828},\"r4c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":891},\"r4c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":891},\"r4c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":891},\"r4c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":891},\"r4c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":891},\"r4c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":891},\"r4c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":891}},\"text\":\"r0c0\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":true,\"visible_item_count\":35,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-idle.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "00a-item-selected.png",
+          "sha256": "5fcfbed2c9e5af029f946a81de04b33ecc1f74d526efdc6e3e5df47df1c723b2"
+        },
+        "reversed": {
+          "path": "00d-item-selection-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 476,
+        "intended_region_changed_pixels": 476,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_idle": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "ModifierActivate",
+      "window_action": "ToggleStorageSelection",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"active_surface\":\"r0c1\",\"capacity\":300,\"collection_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"geometry\":{\"height\":315,\"width\":420,\"x\":580,\"y\":639},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"storage.items\",\"interaction_phase\":\"hover\",\"item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"item_version\":0,\"last_action\":\"ToggleStorageSelection\",\"last_error\":null,\"last_gesture\":\"ModifierActivate\",\"last_result\":{\"accepted\":true,\"action\":\"ToggleStorageSelection\",\"error\":null},\"list_labels\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"res://assets/image-79/storage/cell-r0c0-selected-idle.png\",\"r0c1\":\"res://assets/image-79/storage/cell-r0c1-modifier-hover.png\",\"r0c2\":\"res://assets/image-79/storage/cell-r0c2-unselected-idle.png\",\"r0c3\":\"res://assets/image-79/storage/cell-r0c3-unselected-idle.png\",\"r0c4\":\"res://assets/image-79/storage/cell-r0c4-unselected-idle.png\",\"r0c5\":\"res://assets/image-79/storage/cell-r0c5-unselected-idle.png\",\"r0c6\":\"res://assets/image-79/storage/cell-r0c6-unselected-idle.png\",\"r1c0\":\"res://assets/image-79/storage/cell-r1c0-unselected-idle.png\",\"r1c1\":\"res://assets/image-79/storage/cell-r1c1-unselected-idle.png\",\"r1c2\":\"res://assets/image-79/storage/cell-r1c2-unselected-idle.png\",\"r1c3\":\"res://assets/image-79/storage/cell-r1c3-unselected-idle.png\",\"r1c4\":\"res://assets/image-79/storage/cell-r1c4-unselected-idle.png\",\"r1c5\":\"res://assets/image-79/storage/cell-r1c5-unselected-idle.png\",\"r1c6\":\"res://assets/image-79/storage/cell-r1c6-unselected-idle.png\",\"r2c0\":\"res://assets/image-79/storage/cell-r2c0-unselected-idle.png\",\"r2c1\":\"res://assets/image-79/storage/cell-r2c1-unselected-idle.png\",\"r2c2\":\"res://assets/image-79/storage/cell-r2c2-unselected-idle.png\",\"r2c3\":\"res://assets/image-79/storage/cell-r2c3-unselected-idle.png\",\"r2c4\":\"res://assets/image-79/storage/cell-r2c4-unselected-idle.png\",\"r2c5\":\"res://assets/image-79/storage/cell-r2c5-unselected-idle.png\",\"r2c6\":\"res://assets/image-79/storage/cell-r2c6-unselected-idle.png\",\"r3c0\":\"res://assets/image-79/storage/cell-r3c0-unselected-idle.png\",\"r3c1\":\"res://assets/image-79/storage/cell-r3c1-unselected-idle.png\",\"r3c2\":\"res://assets/image-79/storage/cell-r3c2-unselected-idle.png\",\"r3c3\":\"res://assets/image-79/storage/cell-r3c3-unselected-idle.png\",\"r3c4\":\"res://assets/image-79/storage/cell-r3c4-unselected-idle.png\",\"r3c5\":\"res://assets/image-79/storage/cell-r3c5-unselected-idle.png\",\"r3c6\":\"res://assets/image-79/storage/cell-r3c6-unselected-idle.png\",\"r4c0\":\"res://assets/image-79/storage/cell-r4c0-unselected-idle.png\",\"r4c1\":\"res://assets/image-79/storage/cell-r4c1-unselected-idle.png\",\"r4c2\":\"res://assets/image-79/storage/cell-r4c2-unselected-idle.png\",\"r4c3\":\"res://assets/image-79/storage/cell-r4c3-unselected-idle.png\",\"r4c4\":\"res://assets/image-79/storage/cell-r4c4-unselected-idle.png\",\"r4c5\":\"res://assets/image-79/storage/cell-r4c5-unselected-idle.png\",\"r4c6\":\"res://assets/image-79/storage/cell-r4c6-unselected-idle.png\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"rendered_item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"rendered_surface_visibility\":{\"r0c0\":true,\"r0c1\":true,\"r0c2\":true,\"r0c3\":true,\"r0c4\":true,\"r0c5\":true,\"r0c6\":true,\"r1c0\":true,\"r1c1\":true,\"r1c2\":true,\"r1c3\":true,\"r1c4\":true,\"r1c5\":true,\"r1c6\":true,\"r2c0\":true,\"r2c1\":true,\"r2c2\":true,\"r2c3\":true,\"r2c4\":true,\"r2c5\":true,\"r2c6\":true,\"r3c0\":true,\"r3c1\":true,\"r3c2\":true,\"r3c3\":true,\"r3c4\":true,\"r3c5\":true,\"r3c6\":true,\"r4c0\":true,\"r4c1\":true,\"r4c2\":true,\"r4c3\":true,\"r4c4\":true,\"r4c5\":true,\"r4c6\":true},\"scroll_offset\":0,\"selected_item\":\"r0c0\",\"selected_items\":[\"r0c1\"],\"semantic_state\":\"selected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":639},\"r0c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":639},\"r0c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":639},\"r0c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":639},\"r0c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":639},\"r0c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":639},\"r0c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":639},\"r1c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":702},\"r1c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":702},\"r1c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":702},\"r1c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":702},\"r1c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":702},\"r1c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":702},\"r1c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":702},\"r2c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":765},\"r2c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":765},\"r2c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":765},\"r2c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":765},\"r2c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":765},\"r2c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":765},\"r2c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":765},\"r3c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":828},\"r3c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":828},\"r3c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":828},\"r3c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":828},\"r3c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":828},\"r3c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":828},\"r3c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":828},\"r4c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":891},\"r4c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":891},\"r4c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":891},\"r4c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":891},\"r4c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":891},\"r4c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":891},\"r4c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":891}},\"text\":\"r0c0\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":true,\"visible_item_count\":35,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "toggled": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00a-item-selected.png",
+          "sha256": "5fcfbed2c9e5af029f946a81de04b33ecc1f74d526efdc6e3e5df47df1c723b2"
+        },
+        "after": {
+          "path": "00b-item-modifier-selected.png",
+          "sha256": "97d59b32483329a350f84bada1ea3767aaded9e23bdd7a286493d3332a85eeb8"
+        },
+        "reversed": {
+          "path": "00e-modifier-selection-reversed.png",
+          "sha256": "5fcfbed2c9e5af029f946a81de04b33ecc1f74d526efdc6e3e5df47df1c723b2"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 476,
+        "intended_region_changed_pixels": 476,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_single_selection": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.search_focus",
+      "gesture": "Activate",
+      "window_action": "FocusStorageSearch",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"active_surface\":\"field\",\"caret_column\":0,\"focused\":true,\"geometry\":{\"height\":27,\"width\":86,\"x\":736,\"y\":964},\"id\":\"storage.search\",\"interaction_phase\":\"focused\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"rendered_text\":\"\",\"semantic_state\":\"empty\",\"text\":\"\",\"type\":\"TextField\",\"value\":\"\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "focused": true
+      },
+      "frames": {
+        "before": {
+          "path": "00b-item-modifier-selected.png",
+          "sha256": "97d59b32483329a350f84bada1ea3767aaded9e23bdd7a286493d3332a85eeb8"
+        },
+        "after": {
+          "path": "00c-search-focused.png",
+          "sha256": "04c87b6a1eeee84ef5e93c6bd46750a1696d47e097a2d0218b42ef0fa22eb598"
+        },
+        "reversed": {
+          "path": "00f-search-focus-reversed.png",
+          "sha256": "97d59b32483329a350f84bada1ea3767aaded9e23bdd7a286493d3332a85eeb8"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 237,
+        "intended_region_changed_pixels": 237,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_modifier_selection": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.categories",
+      "gesture": "Activate",
+      "window_action": "SelectStorageCategory",
+      "expected": "manifest and Behaviour Card",
+      "observed": "equipment",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "selected": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "00c-search-focused.png",
+          "sha256": "04c87b6a1eeee84ef5e93c6bd46750a1696d47e097a2d0218b42ef0fa22eb598"
+        },
+        "after": {
+          "path": "01-category-equipment.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        },
+        "reversed": {
+          "path": "01b-category-reversed.png",
+          "sha256": "04c87b6a1eeee84ef5e93c6bd46750a1696d47e097a2d0218b42ef0fa22eb598"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 760,
+        "intended_region_changed_pixels": 760,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_initial_category": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollStorage",
+      "expected": "manifest and Behaviour Card",
+      "observed": "3",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "exact_three_rows": true,
+        "one_frame_state": true
+      },
+      "frames": {
+        "before": {
+          "path": "01-category-equipment.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        },
+        "after": {
+          "path": "02-wheel-three-rows.png",
+          "sha256": "e8528a96a073d2f4dda1f13e1cf48fa9ebe90b9e167ecec7e966f2f9c4e3482a"
+        },
+        "reversed": {
+          "path": "02b-wheel-reversed.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 112941,
+        "intended_region_changed_pixels": 112941,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "exact_start": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Activate",
+      "window_action": "StepStorageScroll",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"end\":{\"active_surface\":\"increment\",\"at_end\":true,\"at_start\":false,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"hover\",\"last_action\":\"StepStorageScroll\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"StepStorageScroll\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":5,\"rendered\":true,\"semantic_state\":\"at_end\",\"text\":\"\",\"thumb_y\":243,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":5,\"visible\":true,\"z_index\":0},\"start\":{\"active_surface\":\"decrement\",\"at_end\":false,\"at_start\":true,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"hover\",\"last_action\":\"StepStorageScroll\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"StepStorageScroll\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":16,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":0,\"visible\":true,\"z_index\":0}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "clamps_exact_end": true,
+        "clamps_exact_start": true
+      },
+      "frames": {
+        "before": {
+          "path": "02b-wheel-reversed.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        },
+        "after": {
+          "path": "03-arrow-endpoint.png",
+          "sha256": "783a7995c17159c90040935f94c218b5a6e99f74844544bddaab22a9c788164e"
+        },
+        "reversed": {
+          "path": "03b-arrow-start-endpoint.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 113529,
+        "intended_region_changed_pixels": 113529,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "storage.scroll",
+      "gesture": "Drag",
+      "window_action": "SetStorageScrollOffset",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"end\":{\"active_surface\":\"thumb\",\"at_end\":true,\"at_start\":false,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"dragging\",\"last_action\":\"SetStorageScrollOffset\",\"last_error\":null,\"last_gesture\":\"Drag\",\"last_result\":{\"accepted\":true,\"action\":\"SetStorageScrollOffset\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":5,\"rendered\":true,\"semantic_state\":\"at_end\",\"text\":\"\",\"thumb_y\":243,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":5,\"visible\":true,\"z_index\":0},\"start\":{\"active_surface\":\"thumb\",\"at_end\":false,\"at_start\":true,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"dragging\",\"last_action\":\"SetStorageScrollOffset\",\"last_error\":null,\"last_gesture\":\"Drag\",\"last_result\":{\"accepted\":true,\"action\":\"SetStorageScrollOffset\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":16,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":0,\"visible\":true,\"z_index\":0},\"offsets\":[0,0,0,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5]}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "continuous": true,
+        "dragging_state_visible": true,
+        "clamps_exact_end": true,
+        "clamps_exact_start": true,
+        "offset_changed": true
+      },
+      "frames": {
+        "before": {
+          "path": "03b-arrow-start-endpoint.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        },
+        "mid": {
+          "path": "04-thumb-drag-mid.png",
+          "sha256": "cd942b752f83291e3152b94d0b1edc699cf72f13fe8e2849d3677e1f792e1ee7"
+        },
+        "after": {
+          "path": "04-thumb-end.png",
+          "sha256": "783a7995c17159c90040935f94c218b5a6e99f74844544bddaab22a9c788164e"
+        },
+        "reversed": {
+          "path": "04b-thumb-reversed.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 113529,
+        "intended_region_changed_pixels": 113529,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1007,
+          683
+        ],
+        [
+          1007,
+          691.0666666666667
+        ],
+        [
+          1007,
+          699.1333333333333
+        ],
+        [
+          1007,
+          707.2
+        ],
+        [
+          1007,
+          715.2666666666667
+        ],
+        [
+          1007,
+          723.3333333333334
+        ],
+        [
+          1007,
+          731.4
+        ],
+        [
+          1007,
+          739.4666666666667
+        ],
+        [
+          1007,
+          747.5333333333333
+        ],
+        [
+          1007,
+          755.6
+        ],
+        [
+          1007,
+          763.6666666666666
+        ],
+        [
+          1007,
+          771.7333333333333
+        ],
+        [
+          1007,
+          779.8
+        ],
+        [
+          1007,
+          787.8666666666667
+        ],
+        [
+          1007,
+          795.9333333333334
+        ],
+        [
+          1007,
+          804
+        ],
+        [
+          1007,
+          812.0666666666666
+        ],
+        [
+          1007,
+          820.1333333333333
+        ],
+        [
+          1007,
+          828.2
+        ],
+        [
+          1007,
+          836.2666666666667
+        ],
+        [
+          1007,
+          844.3333333333333
+        ],
+        [
+          1007,
+          852.4
+        ],
+        [
+          1007,
+          860.4666666666667
+        ],
+        [
+          1007,
+          868.5333333333333
+        ],
+        [
+          1007,
+          876.6
+        ],
+        [
+          1007,
+          884.6666666666667
+        ],
+        [
+          1007,
+          892.7333333333333
+        ],
+        [
+          1007,
+          900.8
+        ],
+        [
+          1007,
+          908.8666666666667
+        ],
+        [
+          1007,
+          916.9333333333334
+        ],
+        [
+          1007,
+          925
+        ]
+      ]
+    },
+    {
+      "control_id": "storage.search",
+      "gesture": "KeyCommand",
+      "window_action": "FilterStorage",
+      "expected": "manifest and Behaviour Card",
+      "observed": "Potion 70",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "accepted_text_rendered": true,
+        "filtered_one": true,
+        "scroll_reset": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-search-before.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        },
+        "after": {
+          "path": "05-search-filtered.png",
+          "sha256": "9fa2cc81d919ec6cf6a0a32ae4ea3c8de5127b09e455c8bfdbab31eecff00d8e"
+        },
+        "reversed": {
+          "path": "05b-search-cleared.png",
+          "sha256": "1f14ca9d5f22c1da143086378b00a19d63aa40aeb584b2b7f1510f6f09d8ff4e"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 2142,
+        "intended_region_changed_pixels": 2142,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_empty_filter": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.list",
+      "gesture": "Activate",
+      "window_action": "ToggleStorageView",
+      "expected": "manifest and Behaviour Card",
+      "observed": "list",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "list_mode": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-list-before.png",
+          "sha256": "43b58af17efed488d0fdf3b64ab8d47615811d920f981655c9b81ee453ea3bfb"
+        },
+        "after": {
+          "path": "06-list-mode.png",
+          "sha256": "fd453a52b5021bdd10b1f790ae95cf06e9130aa3cac7912caaaedc22f620fe89"
+        },
+        "reversed": {
+          "path": "06b-list-reversed.png",
+          "sha256": "43b58af17efed488d0fdf3b64ab8d47615811d920f981655c9b81ee453ea3bfb"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 131991,
+        "intended_region_changed_pixels": 131991,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_tree": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.sort",
+      "gesture": "Activate",
+      "window_action": "SortStorage",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"sorted\":false,\"restored\":true}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "reversed_order": true,
+        "restored_order": true,
+        "reordered_pixels": true,
+        "restored_pixels": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-list-mode.png",
+          "sha256": "fd453a52b5021bdd10b1f790ae95cf06e9130aa3cac7912caaaedc22f620fe89"
+        },
+        "after": {
+          "path": "07-sorted.png",
+          "sha256": "bca6c1364281707a657aa92a395e7e9ebd2ce4c5a8dae474da3684affce9c66f"
+        },
+        "reversed": {
+          "path": "07b-sort-reversed.png",
+          "sha256": "fd453a52b5021bdd10b1f790ae95cf06e9130aa3cac7912caaaedc22f620fe89"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 1694,
+        "intended_region_changed_pixels": 1694,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferStorageItem",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"error\":{\"code\":\"TransactionRejectedError\",\"detail\":\"target collection is full\"},\"item\":\"stock-000\",\"ok\":false,\"source_version_before\":0,\"source_window\":\"storage\",\"target_version_before\":0,\"target_window\":\"inventory\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "rejected_full": true,
+        "source_preserved": true,
+        "target_preserved": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-transfer-rejected-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "08-transfer-rejected.png",
+          "sha256": "c29588c7f745a71d9a276721e5998300699464ce963b4b699dc83d7e31085508"
+        },
+        "reversed": {
+          "path": "08b-transfer-rejected-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 476,
+        "intended_region_changed_pixels": 476,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "transaction_was_atomic": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "inventory.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferInventoryItem",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"error\":null,\"item\":\"r0c0\",\"ok\":true,\"source_version_after\":1,\"source_version_before\":0,\"source_window\":\"inventory\",\"target_version_after\":1,\"target_version_before\":0,\"target_window\":\"storage\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "committed": true,
+        "direction": true,
+        "both_versions": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-transfer-outbound-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "09-transfer-outbound.png",
+          "sha256": "9dc046d044f10f2565f67ab07c06b0ac3b5ebb00ccc86a346872445e0338583b"
+        },
+        "reversed": {
+          "path": "09b-transfer-outbound-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 569,
+        "width": 1092,
+        "height": 455
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 74480,
+        "intended_region_changed_pixels": 74480,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_both_collections": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.items",
+      "gesture": "ModifierDoubleActivate",
+      "window_action": "TransferStorageItem",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"error\":null,\"item\":\"r0c0\",\"ok\":true,\"source_version_after\":2,\"source_version_before\":1,\"source_window\":\"storage\",\"target_version_after\":2,\"target_version_before\":1,\"target_window\":\"inventory\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "committed": true,
+        "direction": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-transfer-returned-before.png",
+          "sha256": "c229862344c88e267e6ab2a9e5cec1a80fc27a5969267e0f9122773f59c6443a"
+        },
+        "after": {
+          "path": "10-transfer-returned.png",
+          "sha256": "5f021a847cc63718d6924a747d67865f8996a2e63b98b2107440b893df22e716"
+        },
+        "reversed": {
+          "path": "10b-transfer-returned-reversed.png",
+          "sha256": "c229862344c88e267e6ab2a9e5cec1a80fc27a5969267e0f9122773f59c6443a"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 569,
+        "width": 1092,
+        "height": 455
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 2959,
+        "intended_region_changed_pixels": 2959,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored_outbound_state": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"moved\":[552,569],\"restored\":[492,609]}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "moved": true,
+        "continuous": true,
+        "restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "11-window-drag-before.png",
+          "sha256": "c229862344c88e267e6ab2a9e5cec1a80fc27a5969267e0f9122773f59c6443a"
+        },
+        "mid": {
+          "path": "11-window-drag-mid.png",
+          "sha256": "f728773f26ed62d67fbd399a80a94381af48381dd9da4f295edf556e5e890168"
+        },
+        "after": {
+          "path": "11-window-moved.png",
+          "sha256": "4d8fd8ec769017b05e9b5fe16826ac8c3239014912fcc93a359cda5c692f31cc"
+        },
+        "reversed": {
+          "path": "11b-window-restored.png",
+          "sha256": "c229862344c88e267e6ab2a9e5cec1a80fc27a5969267e0f9122773f59c6443a"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 236595,
+        "intended_region_changed_pixels": 236595,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          700,
+          620
+        ],
+        [
+          702,
+          618.6666666666666
+        ],
+        [
+          704,
+          617.3333333333334
+        ],
+        [
+          706,
+          616
+        ],
+        [
+          708,
+          614.6666666666666
+        ],
+        [
+          710,
+          613.3333333333334
+        ],
+        [
+          712,
+          612
+        ],
+        [
+          714,
+          610.6666666666666
+        ],
+        [
+          716,
+          609.3333333333334
+        ],
+        [
+          718,
+          608
+        ],
+        [
+          720,
+          606.6666666666666
+        ],
+        [
+          722,
+          605.3333333333334
+        ],
+        [
+          724,
+          604
+        ],
+        [
+          726,
+          602.6666666666666
+        ],
+        [
+          728,
+          601.3333333333334
+        ],
+        [
+          730,
+          600
+        ],
+        [
+          732,
+          598.6666666666666
+        ],
+        [
+          734,
+          597.3333333333334
+        ],
+        [
+          736,
+          596
+        ],
+        [
+          738,
+          594.6666666666666
+        ],
+        [
+          740,
+          593.3333333333334
+        ],
+        [
+          742,
+          592
+        ],
+        [
+          744,
+          590.6666666666666
+        ],
+        [
+          746,
+          589.3333333333334
+        ],
+        [
+          748,
+          588
+        ],
+        [
+          750,
+          586.6666666666666
+        ],
+        [
+          752,
+          585.3333333333334
+        ],
+        [
+          754,
+          584
+        ],
+        [
+          756,
+          582.6666666666666
+        ],
+        [
+          758,
+          581.3333333333334
+        ],
+        [
+          760,
+          580
+        ]
+      ]
+    },
+    {
+      "control_id": "storage.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"controls\":{\"storage.bottom_close\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":66,\"x\":932,\"y\":964},\"id\":\"storage.bottom_close\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.categories\":{\"active_surface\":\"\",\"geometry\":{\"height\":228,\"width\":66,\"x\":504,\"y\":649},\"id\":\"storage.categories\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"selected_tab\":\"consumable\",\"semantic_state\":\"ready\",\"text\":\"consumable\",\"type\":\"Tabs\",\"value\":\"consumable\",\"visible\":false,\"z_index\":0},\"storage.close\":{\"active_surface\":\"\",\"geometry\":{\"height\":18,\"width\":18,\"x\":1007,\"y\":617},\"id\":\"storage.close\",\"interaction_phase\":\"idle\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"CloseWindow\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.items\":{\"active_surface\":\"\",\"capacity\":300,\"collection_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"geometry\":{\"height\":315,\"width\":420,\"x\":580,\"y\":639},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"storage.items\",\"interaction_phase\":\"idle\",\"item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"item_version\":0,\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"list_labels\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\",\"r4c0\":\"\",\"r4c1\":\"\",\"r4c2\":\"\",\"r4c3\":\"\",\"r4c4\":\"\",\"r4c5\":\"\",\"r4c6\":\"\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"rendered_item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"rendered_surface_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"scroll_offset\":0,\"selected_item\":\"r0c0\",\"selected_items\":[],\"semantic_state\":\"unselected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":639},\"r0c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":639},\"r0c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":639},\"r0c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":639},\"r0c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":639},\"r0c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":639},\"r0c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":639},\"r1c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":702},\"r1c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":702},\"r1c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":702},\"r1c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":702},\"r1c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":702},\"r1c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":702},\"r1c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":702},\"r2c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":765},\"r2c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":765},\"r2c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":765},\"r2c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":765},\"r2c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":765},\"r2c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":765},\"r2c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":765},\"r3c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":828},\"r3c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":828},\"r3c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":828},\"r3c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":828},\"r3c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":828},\"r3c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":828},\"r3c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":828},\"r4c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":891},\"r4c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":891},\"r4c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":891},\"r4c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":891},\"r4c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":891},\"r4c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":891},\"r4c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":891}},\"text\":\"r0c0\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":false,\"visible_item_count\":35,\"z_index\":0},\"storage.list\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":23,\"x\":621,\"y\":964},\"id\":\"storage.list\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.scroll\":{\"active_surface\":\"\",\"at_end\":false,\"at_start\":true,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":16,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":0,\"visible\":false,\"z_index\":0},\"storage.search\":{\"active_surface\":\"\",\"caret_column\":0,\"focused\":false,\"geometry\":{\"height\":27,\"width\":86,\"x\":736,\"y\":964},\"id\":\"storage.search\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"rendered_text\":\"\",\"semantic_state\":\"empty\",\"text\":\"\",\"type\":\"TextField\",\"value\":\"\",\"visible\":false,\"z_index\":0},\"storage.search_focus\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":47,\"x\":652,\"y\":964},\"id\":\"storage.search_focus\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.sort\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":84,\"x\":836,\"y\":964},\"id\":\"storage.sort\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0}},\"display_facts\":[],\"interaction_log\":[{\"accepted\":true,\"control_id\":\"storage.close\",\"gesture\":\"Activate\",\"semantic_state\":\"ready\",\"value\":null}],\"party_overlay\":{\"asset\":\"\",\"visible\":false},\"status_overlay\":{\"text\":{},\"version\":0,\"visible\":false},\"window\":{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"storage\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/storage/source-plate.png\",\"position\":[492,609],\"resize\":{\"active\":false,\"clamped\":[539,393],\"motion_samples\":0,\"requested\":[539,393],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[539,393],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0},\"window_id\":\"storage\",\"window_pending\":false,\"window_state\":{}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "12-title-close-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "12-title-close-after.png",
+          "sha256": "93270982f095c16b65a05c9f7d61da993db9561af61fcae932658523ad464a6d"
+        },
+        "reversed": {
+          "path": "12b-title-close-restored.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 211827,
+        "intended_region_changed_pixels": 211827,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage.bottom_close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"controls\":{\"storage.bottom_close\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":66,\"x\":932,\"y\":964},\"id\":\"storage.bottom_close\",\"interaction_phase\":\"idle\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"CloseWindow\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.categories\":{\"active_surface\":\"\",\"geometry\":{\"height\":228,\"width\":66,\"x\":504,\"y\":649},\"id\":\"storage.categories\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"selected_tab\":\"consumable\",\"semantic_state\":\"ready\",\"text\":\"consumable\",\"type\":\"Tabs\",\"value\":\"consumable\",\"visible\":false,\"z_index\":0},\"storage.close\":{\"active_surface\":\"\",\"geometry\":{\"height\":18,\"width\":18,\"x\":1007,\"y\":617},\"id\":\"storage.close\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.items\":{\"active_surface\":\"\",\"capacity\":300,\"collection_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"detail_text\":\"\",\"detail_visible\":false,\"drag_state\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"filter_text\":\"\",\"filtered_items\":[\"stock-000\",\"stock-001\",\"stock-002\",\"stock-003\",\"stock-004\",\"stock-005\",\"stock-006\",\"stock-007\",\"stock-008\",\"stock-009\",\"stock-010\",\"stock-011\",\"stock-012\",\"stock-013\",\"stock-014\",\"stock-015\",\"stock-016\",\"stock-017\",\"stock-018\",\"stock-019\",\"stock-020\",\"stock-021\",\"stock-022\",\"stock-023\",\"stock-024\",\"stock-025\",\"stock-026\",\"stock-027\",\"stock-028\",\"stock-029\",\"stock-030\",\"stock-031\",\"stock-032\",\"stock-033\",\"stock-034\",\"stock-035\",\"stock-036\",\"stock-037\",\"stock-038\",\"stock-039\",\"stock-040\",\"stock-041\",\"stock-042\",\"stock-043\",\"stock-044\",\"stock-045\",\"stock-046\",\"stock-047\",\"stock-048\",\"stock-049\",\"stock-050\",\"stock-051\",\"stock-052\",\"stock-053\",\"stock-054\",\"stock-055\",\"stock-056\",\"stock-057\",\"stock-058\",\"stock-059\",\"stock-060\",\"stock-061\",\"stock-062\",\"stock-063\",\"stock-064\",\"stock-065\",\"stock-066\",\"stock-067\",\"stock-068\",\"stock-069\"],\"geometry\":{\"height\":315,\"width\":420,\"x\":580,\"y\":639},\"gesture_drag\":{\"active\":false,\"motion_samples\":0,\"source\":\"\",\"target\":\"\"},\"id\":\"storage.items\",\"interaction_phase\":\"idle\",\"item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"item_version\":0,\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"list_labels\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"list_mode\":false,\"list_values\":{\"r0c0\":\"Potion 01   \",\"r0c1\":\"Potion 02   \",\"r0c2\":\"Potion 03   \",\"r0c3\":\"Potion 04   \",\"r0c4\":\"Potion 05   \",\"r0c5\":\"Potion 06   \",\"r0c6\":\"Potion 07   \",\"r1c0\":\"Potion 08   \",\"r1c1\":\"Potion 09   \",\"r1c2\":\"Potion 10   \",\"r1c3\":\"Potion 11   \",\"r1c4\":\"Potion 12   \",\"r1c5\":\"Potion 13   \",\"r1c6\":\"Potion 14   \",\"r2c0\":\"Potion 15   \",\"r2c1\":\"Potion 16   \",\"r2c2\":\"Potion 17   \",\"r2c3\":\"Potion 18   \",\"r2c4\":\"Potion 19   \",\"r2c5\":\"Potion 20   \",\"r2c6\":\"Potion 21   \",\"r3c0\":\"Potion 22   \",\"r3c1\":\"Potion 23   \",\"r3c2\":\"Potion 24   \"},\"opened_item\":\"\",\"opened_item_value\":\"\",\"rendered\":true,\"rendered_asset_paths\":{\"r0c0\":\"\",\"r0c1\":\"\",\"r0c2\":\"\",\"r0c3\":\"\",\"r0c4\":\"\",\"r0c5\":\"\",\"r0c6\":\"\",\"r1c0\":\"\",\"r1c1\":\"\",\"r1c2\":\"\",\"r1c3\":\"\",\"r1c4\":\"\",\"r1c5\":\"\",\"r1c6\":\"\",\"r2c0\":\"\",\"r2c1\":\"\",\"r2c2\":\"\",\"r2c3\":\"\",\"r2c4\":\"\",\"r2c5\":\"\",\"r2c6\":\"\",\"r3c0\":\"\",\"r3c1\":\"\",\"r3c2\":\"\",\"r3c3\":\"\",\"r3c4\":\"\",\"r3c5\":\"\",\"r3c6\":\"\",\"r4c0\":\"\",\"r4c1\":\"\",\"r4c2\":\"\",\"r4c3\":\"\",\"r4c4\":\"\",\"r4c5\":\"\",\"r4c6\":\"\"},\"rendered_foreign_identity_assets\":{},\"rendered_foreign_identity_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"rendered_item_values\":{\"r0c0\":\"stock-000\",\"r0c1\":\"stock-001\",\"r0c2\":\"stock-002\",\"r0c3\":\"stock-003\",\"r0c4\":\"stock-004\",\"r0c5\":\"stock-005\",\"r0c6\":\"stock-006\",\"r1c0\":\"stock-007\",\"r1c1\":\"stock-008\",\"r1c2\":\"stock-009\",\"r1c3\":\"stock-010\",\"r1c4\":\"stock-011\",\"r1c5\":\"stock-012\",\"r1c6\":\"stock-013\",\"r2c0\":\"stock-014\",\"r2c1\":\"stock-015\",\"r2c2\":\"stock-016\",\"r2c3\":\"stock-017\",\"r2c4\":\"stock-018\",\"r2c5\":\"stock-019\",\"r2c6\":\"stock-020\",\"r3c0\":\"stock-021\",\"r3c1\":\"stock-022\",\"r3c2\":\"stock-023\",\"r3c3\":\"stock-024\",\"r3c4\":\"stock-025\",\"r3c5\":\"stock-026\",\"r3c6\":\"stock-027\",\"r4c0\":\"stock-028\",\"r4c1\":\"stock-029\",\"r4c2\":\"stock-030\",\"r4c3\":\"stock-031\",\"r4c4\":\"stock-032\",\"r4c5\":\"stock-033\",\"r4c6\":\"stock-034\"},\"rendered_surface_visibility\":{\"r0c0\":false,\"r0c1\":false,\"r0c2\":false,\"r0c3\":false,\"r0c4\":false,\"r0c5\":false,\"r0c6\":false,\"r1c0\":false,\"r1c1\":false,\"r1c2\":false,\"r1c3\":false,\"r1c4\":false,\"r1c5\":false,\"r1c6\":false,\"r2c0\":false,\"r2c1\":false,\"r2c2\":false,\"r2c3\":false,\"r2c4\":false,\"r2c5\":false,\"r2c6\":false,\"r3c0\":false,\"r3c1\":false,\"r3c2\":false,\"r3c3\":false,\"r3c4\":false,\"r3c5\":false,\"r3c6\":false,\"r4c0\":false,\"r4c1\":false,\"r4c2\":false,\"r4c3\":false,\"r4c4\":false,\"r4c5\":false,\"r4c6\":false},\"scroll_offset\":0,\"selected_item\":\"r0c0\",\"selected_items\":[],\"semantic_state\":\"unselected\",\"sort_ascending\":true,\"surface_geometry\":{\"r0c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":639},\"r0c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":639},\"r0c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":639},\"r0c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":639},\"r0c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":639},\"r0c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":639},\"r0c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":639},\"r1c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":702},\"r1c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":702},\"r1c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":702},\"r1c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":702},\"r1c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":702},\"r1c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":702},\"r1c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":702},\"r2c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":765},\"r2c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":765},\"r2c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":765},\"r2c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":765},\"r2c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":765},\"r2c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":765},\"r2c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":765},\"r3c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":828},\"r3c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":828},\"r3c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":828},\"r3c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":828},\"r3c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":828},\"r3c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":828},\"r3c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":828},\"r4c0\":{\"height\":63,\"width\":60,\"x\":580,\"y\":891},\"r4c1\":{\"height\":63,\"width\":60,\"x\":640,\"y\":891},\"r4c2\":{\"height\":63,\"width\":60,\"x\":700,\"y\":891},\"r4c3\":{\"height\":63,\"width\":60,\"x\":760,\"y\":891},\"r4c4\":{\"height\":63,\"width\":60,\"x\":820,\"y\":891},\"r4c5\":{\"height\":63,\"width\":60,\"x\":880,\"y\":891},\"r4c6\":{\"height\":63,\"width\":60,\"x\":940,\"y\":891}},\"text\":\"r0c0\",\"transfer_state\":{\"active\":false,\"item\":\"\"},\"type\":\"SelectionView\",\"value\":\"r0c0\",\"visible\":false,\"visible_item_count\":35,\"z_index\":0},\"storage.list\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":23,\"x\":621,\"y\":964},\"id\":\"storage.list\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.scroll\":{\"active_surface\":\"\",\"at_end\":false,\"at_start\":true,\"available\":true,\"geometry\":{\"height\":315,\"width\":14,\"x\":1000,\"y\":639},\"id\":\"storage.scroll\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"maximum\":5,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":16,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":0,\"visible\":false,\"z_index\":0},\"storage.search\":{\"active_surface\":\"\",\"caret_column\":0,\"focused\":false,\"geometry\":{\"height\":27,\"width\":86,\"x\":736,\"y\":964},\"id\":\"storage.search\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"rendered_text\":\"\",\"semantic_state\":\"empty\",\"text\":\"\",\"type\":\"TextField\",\"value\":\"\",\"visible\":false,\"z_index\":0},\"storage.search_focus\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":47,\"x\":652,\"y\":964},\"id\":\"storage.search_focus\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0},\"storage.sort\":{\"active_surface\":\"\",\"geometry\":{\"height\":27,\"width\":84,\"x\":836,\"y\":964},\"id\":\"storage.sort\",\"interaction_phase\":\"idle\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"last_result\":{\"accepted\":false,\"action\":\"\",\"error\":null},\"rendered\":true,\"semantic_state\":\"ready\",\"text\":\"\",\"type\":\"Button\",\"visible\":false,\"z_index\":0}},\"display_facts\":[],\"interaction_log\":[{\"accepted\":true,\"control_id\":\"storage.bottom_close\",\"gesture\":\"Activate\",\"semantic_state\":\"ready\",\"value\":null}],\"party_overlay\":{\"asset\":\"\",\"visible\":false},\"status_overlay\":{\"text\":{},\"version\":0,\"visible\":false},\"window\":{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"storage\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/storage/source-plate.png\",\"position\":[492,609],\"resize\":{\"active\":false,\"clamped\":[539,393],\"motion_samples\":0,\"requested\":[539,393],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[539,393],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0},\"window_id\":\"storage\",\"window_pending\":false,\"window_state\":{}}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "13-bottom-close-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "13-bottom-close-after.png",
+          "sha256": "93270982f095c16b65a05c9f7d61da993db9561af61fcae932658523ad464a6d"
+        },
+        "reversed": {
+          "path": "13b-bottom-close-restored.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 211827,
+        "intended_region_changed_pixels": 211827,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    },
+    {
+      "control_id": "storage",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "manifest and Behaviour Card",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"storage\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/storage/source-plate.png\",\"position\":[492,609],\"resize\":{\"active\":false,\"clamped\":[539,393],\"motion_samples\":0,\"requested\":[539,393],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[539,393],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "assertions": {
+        "hidden": true,
+        "routed": true
+      },
+      "frames": {
+        "before": {
+          "path": "14-key-close-before.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        },
+        "after": {
+          "path": "14-key-close-after.png",
+          "sha256": "93270982f095c16b65a05c9f7d61da993db9561af61fcae932658523ad464a6d"
+        },
+        "reversed": {
+          "path": "14b-key-close-reversed.png",
+          "sha256": "0d0f2f296b694671b2b665f4a1cea7baa17d70bdea5320e3cab4771d7b167883"
+        }
+      },
+      "intended_region": {
+        "x": 492,
+        "y": 569,
+        "width": 600,
+        "height": 433
+      },
+      "invariant_region": {
+        "x": 1400,
+        "y": 800,
+        "width": 100,
+        "height": 100
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 211827,
+        "intended_region_changed_pixels": 211827,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "reversal_assertions": {
+        "restored": true
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      }
+    }
+  ]
+}
