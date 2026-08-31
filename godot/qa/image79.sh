@@ -17,6 +17,8 @@ suites=(
   "run_storage_spec_contracts.gd:storage-spec-contracts.json"
   "run_storage_contracts.gd:storage-contracts.json"
   "run_storage_window_contracts.gd:storage-window-contracts.json"
+  "run_equipment_card_contracts.gd:equipment-card-contracts.json"
+  "run_equipment_card_window_contracts.gd:equipment-card-window-contracts.json"
   "run_options_window_contracts.gd:options-window-contracts.json"
   "run_skill_tree_contracts.gd:skill-tree-contracts.json"
   "run_skill_tree_window_contracts.gd:skill-tree-window-contracts.json"

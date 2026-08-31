@@ -31,7 +31,9 @@ const ACTIONS_BY_TYPE := {
 		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
 		"TransferInventoryItem"],
 	"Stepper": ["StepSkill"],
-	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset"],
+	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
+		"ScrollEquipmentCard", "StepEquipmentCardScroll",
+		"SetEquipmentCardScrollOffset"],
 	"TextField": ["FilterStorage"],
 }
 
@@ -189,6 +191,9 @@ static func _validate_linked_selection_controls(controls: Array, path: String,
 				"ScrollView", "TextField"]:
 			continue
 		var value: Variant = control.get("value", {})
+		if str(control.get("type", "")) == "ScrollView" and value is Dictionary \
+				and value.get("available", true) == false:
+			continue
 		var linked_id := str(value.get("selection_control_id", "")) \
 			if value is Dictionary else ""
 		if linked_id.is_empty() or not declared.has(linked_id) \
@@ -588,11 +593,21 @@ static func _validate_scroll_view_contract(control: Dictionary, path: String,
 		valid = int(value.minimum) == 0 and int(value.maximum) >= int(value.minimum) \
 			and int(value.initial) >= int(value.minimum) \
 			and int(value.initial) <= int(value.maximum) \
-			and int(value.wheel_rows) == 3 and int(value.arrow_rows) == 1 \
-			and not str(value.get("selection_control_id", "")).is_empty()
+			and int(value.wheel_rows) == 3 and int(value.arrow_rows) == 1
+	var available := true
+	if valid and value.has("available"):
+		valid = value.available is bool
+		available = bool(value.available)
+	if valid:
+		if available:
+			valid = not str(value.get("selection_control_id", "")).is_empty()
+		else:
+			valid = int(value.minimum) == 0 and int(value.maximum) == 0 \
+				and int(value.initial) == 0 \
+				and not str(value.get("unavailable_reason", "")).is_empty()
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
-			"ScrollView requires zero-based bounds, an in-range initial offset, three-row wheel and one-row arrow steps, and a linked SelectionView"))
+			"ScrollView requires zero-based bounds, an in-range initial offset, three-row wheel and one-row arrow steps, plus a linked SelectionView or explicit zero-range unavailable authority"))
 	var surfaces: Variant = control.get("surfaces")
 	if not surfaces is Dictionary or not ["track", "thumb", "decrement", "increment"].all(
 		func(surface): return surfaces.has(surface) and surfaces[surface] is Dictionary \

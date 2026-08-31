@@ -10,6 +10,7 @@ var options: ControlWindow
 var skill_tree: ControlWindow
 var inventory: ControlWindow
 var storage: ControlWindow
+var equipment_card: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
@@ -44,6 +45,12 @@ func _ready() -> void:
 	skill_tree = windows.get("skill_tree")
 	inventory = windows.get("inventory")
 	storage = windows.get("storage")
+	equipment_card = windows.get("equipment_card")
+	if equipment_card != null:
+		var detail_route: Dictionary = DesktopActionRouter.open_detail(
+			"equipment_card", equipment_card.spec.get("detail", {}))
+		if detail_route.get("ok", false):
+			equipment_card.detail_item = str(detail_route.detail_item)
 	_publish()
 
 
@@ -63,6 +70,13 @@ func qa_state() -> Dictionary:
 
 func _route_desktop_action(window_id: String, control_id: String,
 		result: Dictionary) -> void:
+	if window_id == "equipment_card" \
+			and str(result.get("action", "")) == "CloseWindow":
+		var card_window: ControlWindow = windows.get(window_id)
+		last_transaction = DesktopActionRouter.close_detail(window_id,
+			str(card_window.detail_item) if card_window != null else "")
+		_publish()
+		return
 	if str(result.get("gesture", "")) != "ModifierDoubleActivate" \
 			or window_id not in ["inventory", "storage"]:
 		return

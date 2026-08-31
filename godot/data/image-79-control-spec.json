@@ -7637,6 +7637,302 @@
           ]
         }
       ]
+    },
+    {
+      "id": "equipment_card",
+      "evidence_policy": {
+        "issue": 129
+      },
+      "geometry": {
+        "x": 1108,
+        "y": 0,
+        "width": 424,
+        "height": 290
+      },
+      "drag_geometry": {
+        "x": 30,
+        "y": 0,
+        "width": 365,
+        "height": 28
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/equipment-card/source-plate.png",
+        "minimized": "res://assets/image-79/equipment-card/minimized-plate.png"
+      },
+      "minimized_controls": [
+        "equipment_card.minimize",
+        "equipment_card.close"
+      ],
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "detail": {
+        "id": "mistress-card",
+        "source_attested": true,
+        "continuation_available": false
+      },
+      "controls": [
+        {
+          "id": "equipment_card.minimize",
+          "type": "Button",
+          "geometry": {
+            "x": 6,
+            "y": 5,
+            "width": 22,
+            "height": 22
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/equipment-card/minimize-idle.png",
+              "hover": "res://assets/image-79/equipment-card/minimize-hover.png",
+              "pressed": "res://assets/image-79/equipment-card/minimize-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleMinimized"
+            }
+          ]
+        },
+        {
+          "id": "equipment_card.close",
+          "type": "Button",
+          "geometry": {
+            "x": 400,
+            "y": 7,
+            "width": 18,
+            "height": 18
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/equipment-card/close-idle.png",
+              "hover": "res://assets/image-79/equipment-card/close-hover.png",
+              "pressed": "res://assets/image-79/equipment-card/close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "equipment_card.scroll",
+          "type": "ScrollView",
+          "geometry": {
+            "x": 390,
+            "y": 80,
+            "width": 28,
+            "height": 190
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed",
+            "dragging"
+          ],
+          "semantic_states": [
+            "at_start",
+            "between",
+            "at_end"
+          ],
+          "initial_semantic_state": "at_start",
+          "state_set": {
+            "at_start": {
+              "idle": "res://assets/image-79/equipment-card/transparent.png",
+              "hover": "res://assets/image-79/equipment-card/transparent.png",
+              "pressed": "res://assets/image-79/equipment-card/transparent.png",
+              "dragging": "res://assets/image-79/equipment-card/transparent.png"
+            },
+            "between": {
+              "idle": "res://assets/image-79/equipment-card/transparent.png",
+              "hover": "res://assets/image-79/equipment-card/transparent.png",
+              "pressed": "res://assets/image-79/equipment-card/transparent.png",
+              "dragging": "res://assets/image-79/equipment-card/transparent.png"
+            },
+            "at_end": {
+              "idle": "res://assets/image-79/equipment-card/transparent.png",
+              "hover": "res://assets/image-79/equipment-card/transparent.png",
+              "pressed": "res://assets/image-79/equipment-card/transparent.png",
+              "dragging": "res://assets/image-79/equipment-card/transparent.png"
+            }
+          },
+          "gestures": [
+            "Wheel",
+            "Activate",
+            "Drag"
+          ],
+          "actions": [
+            {
+              "gesture": "Wheel",
+              "action": "ScrollEquipmentCard"
+            },
+            {
+              "gesture": "Activate",
+              "action": "StepEquipmentCardScroll"
+            },
+            {
+              "gesture": "Drag",
+              "action": "SetEquipmentCardScrollOffset"
+            }
+          ],
+          "value": {
+            "minimum": 0,
+            "maximum": 0,
+            "initial": 0,
+            "wheel_rows": 3,
+            "arrow_rows": 1,
+            "available": false,
+            "unavailable_reason": "image 79 does not attest continuation pixels"
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 28,
+                "height": 26
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-decrement-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-decrement-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-decrement-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-decrement-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-decrement-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-decrement-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-decrement-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-decrement-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-decrement-pressed.png"
+                }
+              }
+            },
+            "track": {
+              "geometry": {
+                "x": 0,
+                "y": 26,
+                "width": 28,
+                "height": 138
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-track-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-track-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-track-pressed.png",
+                  "dragging": "res://assets/image-79/equipment-card/scroll-track-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-track-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-track-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-track-pressed.png",
+                  "dragging": "res://assets/image-79/equipment-card/scroll-track-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-track-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-track-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-track-pressed.png",
+                  "dragging": "res://assets/image-79/equipment-card/scroll-track-pressed.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 0,
+                "y": 164,
+                "width": 28,
+                "height": 26
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-increment-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-increment-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-increment-pressed.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-increment-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-increment-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-increment-pressed.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/equipment-card/scroll-increment-idle.png",
+                  "hover": "res://assets/image-79/equipment-card/scroll-increment-hover.png",
+                  "pressed": "res://assets/image-79/equipment-card/scroll-increment-pressed.png"
+                }
+              }
+            },
+            "thumb": {
+              "geometry": {
+                "x": 0,
+                "y": 26,
+                "width": 28,
+                "height": 78
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/equipment-card/transparent.png",
+                  "hover": "res://assets/image-79/equipment-card/transparent.png",
+                  "pressed": "res://assets/image-79/equipment-card/transparent.png",
+                  "dragging": "res://assets/image-79/equipment-card/transparent.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/equipment-card/transparent.png",
+                  "hover": "res://assets/image-79/equipment-card/transparent.png",
+                  "pressed": "res://assets/image-79/equipment-card/transparent.png",
+                  "dragging": "res://assets/image-79/equipment-card/transparent.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/equipment-card/transparent.png",
+                  "hover": "res://assets/image-79/equipment-card/transparent.png",
+                  "pressed": "res://assets/image-79/equipment-card/transparent.png",
+                  "dragging": "res://assets/image-79/equipment-card/transparent.png"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }

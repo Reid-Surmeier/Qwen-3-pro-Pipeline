@@ -53,6 +53,7 @@ var _geometry_version := 0
 
 func configure(window_spec: Dictionary) -> void:
 	spec = window_spec
+	detail_item = str(spec.get("detail", {}).get("id", ""))
 	runtime = ControlRuntime.new()
 	runtime.configure(spec)
 	name = str(spec.id).replace("-", "_").to_pascal_case()
@@ -472,7 +473,9 @@ func _route_window_gesture(gesture: String, key: String = "") -> Dictionary:
 
 
 func _control_changed(control_id: String, result: Dictionary) -> void:
-	move_to_front()
+	if not result.has("phase") and is_inside_tree() \
+			and not is_queued_for_deletion() and get_parent() != null:
+		move_to_front()
 	if result.get("ok", false) and result.has("action"):
 		match str(result.action):
 			"ToggleMinimized":

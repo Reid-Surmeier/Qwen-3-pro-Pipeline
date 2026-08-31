@@ -1,8 +1,5 @@
 extends SceneTree
-## Public-input smoke contracts for the Issue #128 production Storage Window.
-## The exhaustive gesture drive is the browser Play Log; this native suite only
-## proves that OS-style input reaches the production scene without private-node
-## or adapter-method access.
+## Public-input contracts for the Issue #129 Equipment Card Window.
 
 var results: Array[Dictionary] = []
 var desktop: Control
@@ -19,29 +16,29 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	desktop = current_scene
-	window = desktop.storage
+	window = desktop.windows.get("equipment_card")
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
 		and desktop.windows.size() == 5, str(desktop.validation_errors))
-	await _click(Vector2(537, 704))
-	_check("public-input-category",
-		window.qa_state().controls["storage.categories"].value == "equipment",
-		str(window.qa_state().controls["storage.categories"]))
-	await _click(Vector2(632, 977))
-	var state: Dictionary = window.qa_state()
-	_check("list-layout-uses-declared-two-columns", state.window.view_mode == "list"
-		and state.controls["storage.items"].list_labels.size() == 24,
-		str(state.controls["storage.items"]))
-	await _click(Vector2(632, 977))
-	await _wheel(Vector2(1007, 800), 1)
-	state = window.qa_state()
-	_check("public-input-wheel-three", state.controls["storage.scroll"].offset == 3,
-		str(state.controls["storage.scroll"]))
-	_check("wheel-redraws-logical-items",
-		state.controls["storage.items"].item_values["r0c0"] == "stock-021"
-		and state.controls["storage.items"].rendered_item_values["r0c0"] == "stock-021"
-		and str(state.controls["storage.items"].rendered_asset_paths["r0c0"])
-			.ends_with("cell-r3c0-unselected-idle.png"),
-		str(state.controls["storage.items"]))
+	if window != null:
+		var state: Dictionary = window.qa_state()
+		_check("attested-detail-is-public", state.window.detail_item == "mistress-card",
+			str(state.window))
+		await _click(Vector2(1122, 14))
+		_check("purpose-built-minimize", window.qa_state().window.minimized
+			and window.size.y == 28.0, str(window.qa_state()))
+		await _click(Vector2(1122, 14))
+		_check("restore", not window.qa_state().window.minimized
+			and window.size.y == 290.0, str(window.qa_state().window))
+		await _wheel(Vector2(1510, 160), 1)
+		state = window.qa_state()
+		_check("unattested-scroll-rejected", state.controls["equipment_card.scroll"].offset == 0
+			and state.controls["equipment_card.scroll"].last_error.code == "VisualAuthorityError",
+			str(state.controls["equipment_card.scroll"]))
+		await _click(Vector2(1517, 16))
+		_check("close-routes-detail", window.qa_state().window.visible == false
+			and desktop.last_transaction.get("action") == "CloseDetail"
+			and desktop.last_transaction.get("detail_item") == "mistress-card",
+			str(desktop.last_transaction))
 	_write_report()
 	quit(1 if results.any(func(result): return not result.passed) else 0)
 
@@ -73,6 +70,10 @@ func _wheel(point: Vector2, direction: int) -> void:
 	event.global_position = point
 	Input.parse_input_event(event)
 	await process_frame
+	var release := event.duplicate()
+	release.pressed = false
+	Input.parse_input_event(release)
+	await process_frame
 
 
 func _check(name: String, passed: bool, detail: String = "") -> void:
@@ -82,8 +83,8 @@ func _check(name: String, passed: bool, detail: String = "") -> void:
 func _write_report() -> void:
 	var failed := results.filter(func(result): return not result.passed)
 	DirAccess.make_dir_recursive_absolute("res://qa/out")
-	var file := FileAccess.open("res://qa/out/storage-window-contracts.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify({"suite": "storage-window", "total": results.size(),
+	var file := FileAccess.open("res://qa/out/equipment-card-window-contracts.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify({"suite": "equipment-card-window", "total": results.size(),
 		"failed": failed.size(), "results": results}, "  "))
 	file.close()
-	print("STORAGE PUBLIC INPUT %d/%d passed" % [results.size() - failed.size(), results.size()])
+	print("EQUIPMENT CARD WINDOW %d/%d passed" % [results.size() - failed.size(), results.size()])

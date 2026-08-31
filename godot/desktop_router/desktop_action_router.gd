@@ -1,6 +1,6 @@
 class_name DesktopActionRouter
 extends RefCounted
-## Frozen Issue #128 transaction interface.
+## Frozen transaction and source-attested detail routing interface.
 
 const Errors = preload("res://control_library/control_errors.gd")
 
@@ -35,6 +35,27 @@ static func transfer(source: Dictionary, target: Dictionary, item: String,
 	return {"ok": true, "source": next_source, "target": next_target,
 		"item": item, "source_window": str(source.get("window_id", "")),
 		"target_window": str(target.get("window_id", ""))}
+
+
+static func open_detail(window_id: String, detail: Dictionary) -> Dictionary:
+	var detail_id := str(detail.get("id", ""))
+	if window_id.is_empty() or detail_id.is_empty():
+		return _error(Errors.ACTION_ROUTING,
+			"detail routing requires a Window and detail id")
+	if detail.get("source_attested", false) != true:
+		return _error(Errors.VISUAL_AUTHORITY,
+			"detail pixels are not source-attested")
+	return {"ok": true, "action": "OpenDetail", "window_id": window_id,
+		"detail_item": detail_id, "visible": true,
+		"continuation_available": bool(detail.get("continuation_available", false))}
+
+
+static func close_detail(window_id: String, detail_id: String) -> Dictionary:
+	if window_id.is_empty() or detail_id.is_empty():
+		return _error(Errors.ACTION_ROUTING,
+			"detail routing requires a Window and detail id")
+	return {"ok": true, "action": "CloseDetail", "window_id": window_id,
+		"detail_item": detail_id, "visible": false}
 
 
 static func _error(code: String, detail: String) -> Dictionary:

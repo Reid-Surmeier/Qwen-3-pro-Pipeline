@@ -13,6 +13,10 @@ static func interact(spec: Dictionary, state: Dictionary, gesture: String,
 		return _error(Errors.CONTROL_BINDING,
 			"ScrollView gesture has no declared Window Action: %s" % gesture)
 	var value: Dictionary = spec.get("value", {})
+	if value.get("available", true) == false:
+		return _error(Errors.VISUAL_AUTHORITY,
+			str(value.get("unavailable_reason",
+				"ScrollView continuation is not source-attested")))
 	var minimum := int(state.get("minimum", value.get("minimum", 0)))
 	var maximum := int(state.get("maximum", value.get("maximum", 0)))
 	var next := int(state.get("offset", value.get("initial", minimum)))

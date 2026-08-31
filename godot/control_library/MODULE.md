@@ -4,7 +4,7 @@
 
 `control_spec.gd` is the construction seam. It loads and validates schema-version 3 ControlSpec manifests and returns either the complete manifest or factual typed errors. No runtime Window is constructed from an invalid manifest. Window-level Gesture-to-Action bindings are part of the same seam as Control bindings; `ControlWindow` routes them and reports the last routed Gesture, Action, and error through `qa_state()`. A `SelectionView` may read displayed values only through its manifest-owned `value_control_ids` mapping. `ControlWindow.qa_state()` is the observation seam; adapters may add rendered facts through `rendered_facts()`, which the Window merges into the corresponding public Control state.
 
-`ScrollView.interact()` accepts normalized Wheel, Activate, and Drag payloads and owns row offsets and exact clamps. `TextField.edit()` accepts or rejects complete candidate text atomically. `ControlWindow.action_emitted` publishes accepted Window Actions to the Desktop Action Router without granting it access to private adapter nodes.
+`ScrollView.interact()` accepts normalized Wheel, Activate, and Drag payloads and owns row offsets and exact clamps; a manifest may instead declare a zero-range unavailable visual authority, which rejects every gesture without mutation. `TextField.edit()` accepts or rejects complete candidate text atomically. `ControlWindow.action_emitted` publishes accepted Window Actions to the Desktop Action Router without granting it access to private adapter nodes.
 
 ## Errors
 

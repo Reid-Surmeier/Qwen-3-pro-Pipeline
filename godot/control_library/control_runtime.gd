@@ -71,6 +71,9 @@ func configure(spec: Dictionary) -> Dictionary:
 			state.value = state.offset
 			state.minimum = int(control_spec.value.minimum)
 			state.maximum = int(control_spec.value.maximum)
+			state.available = bool(control_spec.value.get("available", true))
+			state.unavailable_reason = str(control_spec.value.get(
+				"unavailable_reason", ""))
 		elif str(control_spec.type) == "TextField":
 			state.value = str(control_spec.value.initial)
 			state.text = state.value
