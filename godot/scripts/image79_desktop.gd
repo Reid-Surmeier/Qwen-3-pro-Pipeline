@@ -22,9 +22,6 @@ var _last_json := ""
 var _cross_window_drag := {}
 
 func _ready() -> void:
-	if OS.has_feature("web"):
-		get_window().content_scale_size = Vector2i(1536, 1024)
-		get_window().size = Vector2i(1536, 1024)
 	var background := ColorRect.new()
 	background.name = "Image79Magenta"
 	background.color = Color8(255, 0, 254)
