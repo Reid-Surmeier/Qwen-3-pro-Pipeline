@@ -9,6 +9,8 @@ signal changed(control_id: String, result: Dictionary)
 var spec: Dictionary
 var runtime: ControlRuntime
 var visuals := {}
+var foreign_backgrounds := {}
+var foreign_visuals := {}
 var hits := {}
 var list_labels := {}
 var list_overlay: Control
@@ -57,6 +59,8 @@ func set_list_mode(enabled: bool) -> void:
 	for item in hits:
 		hits[item].visible = not enabled
 		visuals[item].visible = not enabled
+		foreign_backgrounds[item].visible = false
+		foreign_visuals[item].visible = false
 	list_overlay.visible = enabled
 	if detail_panel != null:
 		detail_panel.visible = false
@@ -102,6 +106,7 @@ func rendered_facts() -> Dictionary:
 		"surface_geometry": _surface_geometry(),
 		"rendered_item_values": rendered_values,
 		"rendered_asset_paths": rendered_assets,
+		"rendered_foreign_identity_assets": _rendered_foreign_identity_assets(),
 		"visible_item_count": visible_count,
 	}
 
@@ -129,6 +134,23 @@ func _add_item(item: String, surface: Dictionary) -> void:
 	visual.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(visual)
 	visuals[item] = visual
+	var foreign_background := ColorRect.new()
+	foreign_background.name = item + "-foreign-background"
+	foreign_background.position = visual.position
+	foreign_background.size = visual.size
+	foreign_background.color = Color8(247, 247, 247)
+	foreign_background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(foreign_background)
+	foreign_backgrounds[item] = foreign_background
+	var foreign_visual := TextureRect.new()
+	foreign_visual.name = item + "-foreign-visual"
+	foreign_visual.position = visual.position
+	foreign_visual.size = visual.size
+	foreign_visual.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	foreign_visual.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	foreign_visual.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(foreign_visual)
+	foreign_visuals[item] = foreign_visual
 
 	var hit := Control.new()
 	hit.name = item + "-hit"
@@ -310,7 +332,11 @@ func _input(event: InputEvent) -> void:
 				_drag_target, _motion_samples)
 			_refresh()
 			changed.emit(spec.id, {"ok": true, "phase": "dragging",
+				"cross_window_drag": true,
 				"source": _held_item, "target": _drag_target,
+				"version": _drag_version,
+				"start_position": [_press_global.x, _press_global.y],
+				"global_position": [event.global_position.x, event.global_position.y],
 				"motion_samples": _motion_samples})
 	if event is InputEventMouseButton and not event.pressed \
 			and event.button_index == _held_button:
@@ -360,6 +386,13 @@ func _finish_pointer(event: InputEventMouseButton) -> void:
 		runtime.set_selection_drag_state(spec.id, false)
 		_dragging = false
 		_drag_target = ""
+		result.cross_window_drag_end = true
+		result.source = item
+		result.target = target
+		result.version = _drag_version
+		result.start_position = [_press_global.x, _press_global.y]
+		result.global_position = [event.global_position.x, event.global_position.y]
+		result.motion_samples = _motion_samples
 	elif button == MOUSE_BUTTON_RIGHT:
 		result = runtime.dispatch(spec.id, "ContextActivate", payload)
 	elif was_modifier_double:
@@ -453,10 +486,18 @@ func _refresh() -> void:
 	var declared_values: Dictionary = spec.value.get("item_values", {})
 	var identity_backed: bool = not declared_values.is_empty() \
 		or not current_values.is_empty()
+	var show_empty_slots := bool(spec.value.get("show_empty_slots", false))
 	for item in visuals:
 		var identity := str(current_values.get(item, item if not identity_backed else ""))
-		visuals[item].visible = not identity.is_empty() and not _list_mode
-		hits[item].visible = (not identity_backed or not identity.is_empty()) \
+		var foreign_asset := str(spec.value.get("foreign_identity_assets", {}).get(
+			identity, ""))
+		var foreign_identity: bool = identity not in spec.value.items \
+			and not identity.is_empty() and not foreign_asset.is_empty()
+		visuals[item].visible = (show_empty_slots or not identity.is_empty()) and not _list_mode
+		foreign_backgrounds[item].visible = foreign_identity and not _list_mode
+		foreign_visuals[item].visible = foreign_identity and not _list_mode
+		foreign_visuals[item].texture = load(foreign_asset) if foreign_identity else null
+		hits[item].visible = (show_empty_slots or not identity_backed or not identity.is_empty()) \
 			and not _list_mode
 		var path := runtime.visual_surface_asset(spec.id, item)
 		if not path.is_empty():
@@ -477,6 +518,16 @@ func _refresh() -> void:
 func _item_identity(item: String) -> String:
 	var state: Dictionary = runtime.qa_state().controls[spec.id]
 	return str(state.get("item_values", {}).get(item, item))
+
+
+func _rendered_foreign_identity_assets() -> Dictionary:
+	var rendered := {}
+	var assets: Dictionary = spec.value.get("foreign_identity_assets", {})
+	for item in hits:
+		var identity := _item_identity(str(item))
+		if identity not in spec.value.items and assets.has(identity):
+			rendered[str(item)] = str(assets[identity])
+	return rendered
 
 
 func _point(geometry: Dictionary) -> Vector2:

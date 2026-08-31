@@ -196,7 +196,10 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 	if str(entry.spec.type) == "SelectionView":
 		var drag: Dictionary = state.get("drag_state", {})
 		var transfer: Dictionary = state.get("transfer_state", {})
-		if surface.state_set.has("transferring") \
+		var mapped_identity := str(state.get("item_values", {}).get(surface_id, surface_id))
+		if mapped_identity.is_empty() and surface.state_set.has("available"):
+			semantic = "available"
+		elif surface.state_set.has("transferring") \
 				and bool(transfer.get("active", false)) \
 				and str(transfer.get("item", "")) == surface_id:
 			semantic = "transferring"
@@ -414,6 +417,35 @@ func apply_selection_collection(control_id: String, collection: Dictionary) -> D
 	filter_selection(control_id, str(entry.state.filter_text))
 	return {"ok": true, "version": entry.state.item_version,
 		"items": entry.state.collection_items.duplicate()}
+
+
+func selection_slots(control_id: String) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return {}
+	var state: Dictionary = controls[control_id].state
+	return {"window_id": str(window_spec.get("id", "")),
+		"slots": state.item_values.duplicate(true),
+		"version": int(state.item_version), "capacity": int(state.capacity)}
+
+
+func apply_selection_slots(control_id: String, snapshot: Dictionary) -> Dictionary:
+	if not controls.has(control_id) or str(controls[control_id].spec.type) != "SelectionView":
+		return _reject(control_id, "DragDrop", Errors.CONTROL_BINDING,
+			"equipment transaction target must be a SelectionView")
+	var entry: Dictionary = controls[control_id]
+	var slots: Variant = snapshot.get("slots")
+	if not slots is Dictionary or slots.keys().any(func(slot):
+		return slot not in entry.spec.value.items):
+		return _reject(control_id, "DragDrop", Errors.TRANSACTION_REJECTED,
+			"equipment transaction contains an undeclared slot")
+	entry.state.item_values = slots.duplicate(true)
+	entry.state.collection_items = entry.spec.value.items.map(func(slot):
+		return str(slots.get(slot, ""))).filter(func(item): return not item.is_empty())
+	entry.state.filtered_items = entry.state.collection_items.duplicate()
+	entry.state.item_version = int(snapshot.get("version", entry.state.item_version))
+	entry.state.selected_items = []
+	return {"ok": true, "version": entry.state.item_version,
+		"slots": entry.state.item_values.duplicate(true)}
 
 
 func selected_logical_item(control_id: String, slot: String) -> String:

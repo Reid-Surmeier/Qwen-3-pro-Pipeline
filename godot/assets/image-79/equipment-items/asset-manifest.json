@@ -1,0 +1,1194 @@
+{
+  "schema_version": 1,
+  "issue": 130,
+  "provider_requests": 0,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "window_rect": [
+      0,
+      423,
+      484,
+      271
+    ]
+  },
+  "assembly": "deterministic source-pixel crops and source-palette State Sets",
+  "files": [
+    {
+      "path": "godot/assets/image-79/equipment-items/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-unselected-idle.png",
+      "sha256": "d60babd46a06eccca13c04da59f8cfeece2a72e77ec120da3e0c80a6b6190581",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-unselected-hover.png",
+      "sha256": "b7496a3e62a3aa2e3eae9c94abaaa89417395a6251a68de48dc40be4e3a0d0ab",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-unselected-pressed.png",
+      "sha256": "c2f827fbe209c8fcf2af7ac97572bb54c282c46327ca0af95c7575972caed210",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-selected-idle.png",
+      "sha256": "ebe8de81b618fd39886616492397f5339c38ae6c784bdf4667f1a2618c8e9a10",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-selected-hover.png",
+      "sha256": "a1f27339ee07c450fbe42808a63a49705d7acf27c8cadfcf60e9a92183e5261e",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-selected-pressed.png",
+      "sha256": "9848ee944b180b77a61dedeb0abb96a366eaf05054ef674227eabb2422f57ab6",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-dragging-idle.png",
+      "sha256": "8277fbb967feda337551cbd145fc9b0c51d768a24d971567066a49a3729057f2",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-dragging-hover.png",
+      "sha256": "c2d99829fba686e5a766279c6c1a24bf426f28f28fb03ef7fa6974daa3e44e33",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-dragging-pressed.png",
+      "sha256": "664f773f773753640a750ea86385bc74b1949d8f336b2f6a4f6d41276eda2939",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-drop-idle.png",
+      "sha256": "2862f591ef1357626d6e2f9fa0b955a5b230c43ee0b22c2c4f300366ddfec82e",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-drop-hover.png",
+      "sha256": "562b5b6b0fad7379552750fc3af89594d2f0058b84d984d02dee412c5ca5db33",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-drop-pressed.png",
+      "sha256": "f6cf724b771d56293fc55777016fe53a4c901751b263ed7b2f7d0471285fdac1",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-available-idle.png",
+      "sha256": "184f66466e64be5120ad2870d942fe9633cf311e119a022f8c3d5b3d241d1426",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-available-hover.png",
+      "sha256": "fe7d22deff6db7e9668aebcc7d65ff1b208d775f0d877ac2044aa1a8d1c2e8c2",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-head-available-pressed.png",
+      "sha256": "0e16d93d7372d180858881b10323fe9cbcecec006a0d94770d4eb09c1193bf1e",
+      "size": [
+        175,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-unselected-idle.png",
+      "sha256": "2985e5f95bcc2ac4be53beb63f8b636f0836f9e48199c31304171e4ad29dabce",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-unselected-hover.png",
+      "sha256": "c0bf67e1a8b5de233a27c6944f410532ff1659da7dea8eaefc36a89a387296eb",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-unselected-pressed.png",
+      "sha256": "9755f911e5f25d47f5f3290ce0ea14bdcb23c5db982221a514f1889636031001",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-selected-idle.png",
+      "sha256": "ceda394608c9f844555df19753515428c60ffa11ab51f3ce9a871fc6709bba85",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-selected-hover.png",
+      "sha256": "81ede3163012fdd33dbd485601baf94969373baba2556d2f6892c6394f96dfe2",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-selected-pressed.png",
+      "sha256": "4aa5d7d7107574f3ddd3dde523875f8a0ebea24a41bba10439ca009ea2b209bc",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-dragging-idle.png",
+      "sha256": "bfe49cbfd26f98268501fd1d2743105011abc5caa0b200e9f522210009437344",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-dragging-hover.png",
+      "sha256": "9abee6f28d68293a6cae3cda30e5188a52cf54091d22db2845b0cc7267d0c493",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-dragging-pressed.png",
+      "sha256": "e204a2ce869809f91b8f275d630d8f6221e19909b6ec41fe4c1fe5e155dc1ba9",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-drop-idle.png",
+      "sha256": "c313d710098bd6a06eb6c90e3637728cf3ba737c253a22bf85c4aa0addf647e8",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-drop-hover.png",
+      "sha256": "575d8366a021c8ee66171faaba06a3dbee4a1e637e1613f956cd14a4bbc172ef",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-drop-pressed.png",
+      "sha256": "e90e5c47eb3711d4a1f5e22fb0fc6ce5969f647c905bb631904a2ab033251a09",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-available-idle.png",
+      "sha256": "2c9701d925f62d9e3d8eb717d50f61b85057f947fe6384e2ac07612dae08b089",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-available-hover.png",
+      "sha256": "1b8342b61d1d5f31da894a54dc847c75ed28ded8b20323cf4969f8f7c9775c68",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-face-available-pressed.png",
+      "sha256": "434700572cc736580a400588703dee350f27577029561cb80d66dbb4d4dd84cf",
+      "size": [
+        175,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-unselected-idle.png",
+      "sha256": "fa9e4fcddda878223f23a81ca03d8a385bb2ce1e81197e78d173f123e8fe043d",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-unselected-hover.png",
+      "sha256": "a220feca6216e60d9777d28bf4d0e21584b025fde4a228b96c2761ca97f93efe",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-unselected-pressed.png",
+      "sha256": "f10fae67ab0ce00dae30deb817684456f91fe5f02533957331005f2b352622be",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-selected-idle.png",
+      "sha256": "8480732df0f7abac2289437c3d2fd5eb5a149d58c6e0af85b3cca3ca2c19b8b1",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-selected-hover.png",
+      "sha256": "555947a85c645efc4a242a21f6da3e21f26b6346bf4106ee2970b55ace9f694a",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-selected-pressed.png",
+      "sha256": "0fb623b1e4bef8d5e5747f15f7dafebd7f797fddcbf9c30a5622d6ab348205d2",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-dragging-idle.png",
+      "sha256": "41d328ef803c6f60e7d6719ff0b8acf7932f20e05381a6ba8c4ddbc6b227b12e",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-dragging-hover.png",
+      "sha256": "3bd453ea2bd0d0a856f78455ddaad17eb0acc9df4b41cf9d8ddcebc7c81db48a",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-dragging-pressed.png",
+      "sha256": "cc1ef9f3267bebb80cb7f0454bc18b3b9d012a2c4e221e9d8d611cd75fe718a9",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-drop-idle.png",
+      "sha256": "ae4d2090a3f68d601b361c5dfc9ca280f687b700b5e2b7732beacf5953fc9d36",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-drop-hover.png",
+      "sha256": "4a4a9c3ef40421322f8525d0fe5a193102211e65c664d2c1bc476aa41f8db966",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-drop-pressed.png",
+      "sha256": "595a38c51ab449c6a3b375767632bfd6baf55978a188b8171832e5444e6def76",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-available-idle.png",
+      "sha256": "8124a70896df393b18064e35382e08aa81f5088e35fa6e68b573b6f14c93705d",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-available-hover.png",
+      "sha256": "2d5d5f34bf6e0b58f42a19114f1dcfc58602aaf7c9cb1b3abffcdbc31eda8e90",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-armor-available-pressed.png",
+      "sha256": "032059f239b1adfc4247ed725aabc10790ee4d9f34ddd7d8063206940468e56a",
+      "size": [
+        175,
+        38
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-unselected-idle.png",
+      "sha256": "75e0ef09218b90f7123efa11fdda8bf5e4f92ed31c35e4de271026551c1bfcf3",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-unselected-hover.png",
+      "sha256": "b7eb7838635369e5d9d8c1c3d5e2e3d1a7411361612b88d8131de965818cbeeb",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-unselected-pressed.png",
+      "sha256": "4476cc7ad45b2e0cc266e0abd4b52203b7182b9f5ec43f785ac9eb58b876c4a5",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-selected-idle.png",
+      "sha256": "495ad90e2e05834bdc2c1976801fecbeec64fbe67501474499fcb4dad306bbb7",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-selected-hover.png",
+      "sha256": "98960bc17d10aa1b51a82b714eb14ef546bf9dbefe703a3acdc2a72c51ecd830",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-selected-pressed.png",
+      "sha256": "9e23920e3b6779a65a27d7dd17c8ee04d1ee8e6fbb8e75ec4de1dee0abab23f1",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-dragging-idle.png",
+      "sha256": "66a459810c4f5b229ba33467318e597cdee1a04770c9ac3a5ecf8f4d13fcff40",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-dragging-hover.png",
+      "sha256": "c1b80f73b9be6464d68188ffebf2f55bbd2ef8a31aee91b63fb99b44f7291206",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-dragging-pressed.png",
+      "sha256": "39bcd0d6294fbee6169bdb8dc71b9e1c2462b97d46b7454960c4fc9a6f05b183",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-drop-idle.png",
+      "sha256": "e7956dd97b85fa46e42e6cc55bfabba9e7a36683aca73c2800e95593c0a68e56",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-drop-hover.png",
+      "sha256": "a155d7a6258d19a4a6027fc28f519006002f864fc82db81c2dd29fb46d65e675",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-drop-pressed.png",
+      "sha256": "25e941c75cf53dfe9c03a2844e6dda27e313191a1a8eeb6298b03906a6569029",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-available-idle.png",
+      "sha256": "039cf978faa8728c03887685a10173e7c6eaeed8d91e16995b2e823a20aab363",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-available-hover.png",
+      "sha256": "06acb83f6ad85c0686ac068061cdc36ea35b822bfa3f329beb21fba15d434130",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-weapon-available-pressed.png",
+      "sha256": "257d9c300e882868297c6e1b5cb7f1cd79218559f7ed9c479fc7d4200e48efe2",
+      "size": [
+        175,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-unselected-idle.png",
+      "sha256": "ad4cb2778b78c9d22c4873a549f8178aee7acce103b59d97832f2c06723e8009",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-unselected-hover.png",
+      "sha256": "a864c0ad69d53b7c1beee30869becff72a945a8592183378f37fbd99b461afdc",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-unselected-pressed.png",
+      "sha256": "e9230c1960e8cf6a0ffcb7ea9509e9dd7bf749976b9b637a68a76df3e684ebd2",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-selected-idle.png",
+      "sha256": "57a15322b59bb30fb630947be469f8a46d4dd073a403d02b05e618f15f6d1305",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-selected-hover.png",
+      "sha256": "b484c5325e3dbd597e284864c6f8848984cb102966f6352361126860d5e0d15e",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-selected-pressed.png",
+      "sha256": "ccb40e866f9a6e4092bf355de12dfea6c4656f58185c5f438ded837865f59661",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-dragging-idle.png",
+      "sha256": "05a2e509d66e54dd5d60ce705261c80ae174ca48b339ba0231ca4ab60cf0d571",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-dragging-hover.png",
+      "sha256": "ae248b92141fe2626891bd7056a15f380de3d0eaf3c58ef08d74a01c759db6b5",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-dragging-pressed.png",
+      "sha256": "18c63b453168ab179066d9841b3db5f4bf3d472c9c4b21801f0de36af4c3d838",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-drop-idle.png",
+      "sha256": "a4f02d01b47ae8be23309e21f2a934829fcee8f0be7650c0e223cd459276a8f8",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-drop-hover.png",
+      "sha256": "480026ba286ee5b1616c70eb60c27e0e803749dda9ad31c496fb352cd8ae0712",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-drop-pressed.png",
+      "sha256": "ed8c48131d4a1d9bbd4245167fcc3e6b29b84c660fabf2825872278b91e909dc",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-available-idle.png",
+      "sha256": "ea39136fa303ac3d7bd4d1c7a54a28e15ae5d7845c95d3a8b081b2f7262478e0",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-available-hover.png",
+      "sha256": "0cd7ef73ab5b921683ccd96cf0d75672b0c94ca0dfb1273d5c2cb8e1520e3237",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_left-available-pressed.png",
+      "sha256": "3e727e802f52980eca5a6861c13f637e99528e9aae189ec2253e044eac3c5fda",
+      "size": [
+        175,
+        51
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-unselected-idle.png",
+      "sha256": "a8b144f73dcbfa4e1ea8e16daadabb9157d5c4740dbc051f8354560c91c96d62",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-unselected-hover.png",
+      "sha256": "4603064566cdfd4acb9463231354fb49bada9fb9c282565387c27719696b9ce8",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-unselected-pressed.png",
+      "sha256": "07adba652a4ea0eb03a7c6f430f8668d9d9636c860e2be0bfba7ee835d143406",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-selected-idle.png",
+      "sha256": "1e00f73f1534a8e8fb4227185f422e470c6b04f29ed84b3f3c227cc771489065",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-selected-hover.png",
+      "sha256": "89a41bb97431b8767d44af3cf2f6fd978af82d8f2fec181f4225607f066f06bc",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-selected-pressed.png",
+      "sha256": "1418814f5581ee9337dd4a776e0dff6ce998559e31165f5a267c8d11c80b7249",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-dragging-idle.png",
+      "sha256": "7fe46d5ba2b2cfc8e43e57034ead3d6419725948dabac703a818236026d79d5a",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-dragging-hover.png",
+      "sha256": "3456d7ca13dfddde4bd0ea5173a0f65fe6a92d8bc654c1354acd3792041e3959",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-dragging-pressed.png",
+      "sha256": "fd6feb4928b51d557e354abd5b64da1f2576c63c7f538cb0eee8ee40d2b7c034",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-drop-idle.png",
+      "sha256": "8e4c08dfe63025185f523a84ef7710a8429f68848dd3630a21a2afd4d00d78e4",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-drop-hover.png",
+      "sha256": "e0024948aaf242f43473287b6f88ce12ae6ec3a2f72f126dbf5e89e407dad5c8",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-drop-pressed.png",
+      "sha256": "fda873ebdcc968029341fc2782474b86a7894d5204b4e17b3d2d92c02f8256ac",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-available-idle.png",
+      "sha256": "aa09e0509a5f1d2e12ba60a0451627229fa224d88d80e94d7383ffe3c66df6dd",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-available-hover.png",
+      "sha256": "7d06e02f822b8eccfdfaf3a573e19a722a5a1d7204680f896b79d51388910f5b",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-robe-available-pressed.png",
+      "sha256": "91fb9f2ad526cbc1467a159290fd2e28628c825c072f17e74cb1a664c7ecf6c1",
+      "size": [
+        180,
+        36
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-unselected-idle.png",
+      "sha256": "aa49574b1b35cf95b3ca1a7eebf0e137cb86f8f33abadc218ea7b7d0cfc0cf2d",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-unselected-hover.png",
+      "sha256": "ce49cedcba9a212d0409ec16f76532fb2ba131c8834aca69d0412117d50570da",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-unselected-pressed.png",
+      "sha256": "41ee42a89bddee10b28c3ba818a94f58884603e2ec17f5d3ba0fd788d1fca499",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-selected-idle.png",
+      "sha256": "1ba643027d6eec47ba065a0b18dd47497c8b4c7200eeed899326ec4a83f7ebf7",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-selected-hover.png",
+      "sha256": "347b70915c219f7d06ca58411f2b401e373baeb21616714eb7977db3b5483cff",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-selected-pressed.png",
+      "sha256": "4683c03e375d277c25b6f6f1770e75852f842584216d80f42032be8c94b9cd98",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-dragging-idle.png",
+      "sha256": "fa57038ccab3e4ea93f3bdf1c5d5551aedce48256106373de610fba17e8ec5f1",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-dragging-hover.png",
+      "sha256": "7d2dcd8d976fe145236ae00524789ebad2e29f0d64b806b50958ea4722503e46",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-dragging-pressed.png",
+      "sha256": "7d2c3fcb15aca443353c4f334096715aaabfb2f2cd63516a0cfab3dedb793c9e",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-drop-idle.png",
+      "sha256": "1ea6b685a7a4bd4c887eaa9b9af82fec8cecfa5429c83e007e25c122726feaf9",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-drop-hover.png",
+      "sha256": "1cf2624f99f9d8e35eaeba4174439a0675b9ac840a289ef2323d19f2a8c07a8c",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-drop-pressed.png",
+      "sha256": "b2b78705d8d8e49abc4d5db3340ad52069ed40c55602d8758b010d69377fc743",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-available-idle.png",
+      "sha256": "63a6d8d5dae6aab249381787a3b4e2b9e656074714a14158ce5975336af2a171",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-available-hover.png",
+      "sha256": "43deae05644297b79146dacd601b9b85175c8b4f1f04db184d491aca0232fff6",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-body-available-pressed.png",
+      "sha256": "bcb8f7c2c7179c3c7a6aa707d8ef053632ccc702e9220127e49c38848198b72a",
+      "size": [
+        180,
+        40
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-unselected-idle.png",
+      "sha256": "e60c87152df47aca90490b53ae77969c93741633b48abe697b8eb849ebf77fb0",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-unselected-hover.png",
+      "sha256": "59fc03805b2ae011d4480b907ff0e57f09a3fc0653ac2995d56f60b84c30450c",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-unselected-pressed.png",
+      "sha256": "9f24bde37df03d7b2134f3818d949cd5288866723667a7236bf7f77d424395f0",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-selected-idle.png",
+      "sha256": "fdf565e084070d81d6c6149a5b9c6602093dd8c4fb7e229acda1b03bb383fad3",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-selected-hover.png",
+      "sha256": "cbef0ef0c3ddf92633daa8592305a65ae7144c22b7401c35e8285330e0f58d99",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-selected-pressed.png",
+      "sha256": "8220aa86ebbde0304006aa487a0b24e11ab2ab7b03f3bf02e78bb0641ac6cd97",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-dragging-idle.png",
+      "sha256": "b41d84c0d9149fd60d5a15953054b84fe9141377c9cbd61ecadddbd66054df6e",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-dragging-hover.png",
+      "sha256": "2c4c2bab5618496b0aa034f771a82a62adfea69e6b0e4b333f89278ecc62ca05",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-dragging-pressed.png",
+      "sha256": "e2636f46c3661a1c0da05f391b821f649009ba15c32038a9f49d91a6845943eb",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-drop-idle.png",
+      "sha256": "71b848cb24b71109a12795f55e8866620ddb99b877bfeaa4e8c1435a69bd1c28",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-drop-hover.png",
+      "sha256": "6b00ae3ce6a7de0dedf287e545cb59b9497aa745de9f0015f09a1be604085eaf",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-drop-pressed.png",
+      "sha256": "4539fe3e9d9cbe1f32215e8da64dff1f1cae459e988cf0d5ac3d7467daea1477",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-available-idle.png",
+      "sha256": "480e14955375ab593dc03736150dcced1d2cf442dd142fd78fba37b0b3861ea2",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-available-hover.png",
+      "sha256": "11d3fec0410240ad00a487480b196b0d0d71970ea718f2dc74a8ac7268a594ab",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_1-available-pressed.png",
+      "sha256": "c8d976a4b447d1bdf81ed56b4159d467861668cf25b86ef9e69e6e5dd7595285",
+      "size": [
+        180,
+        39
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-unselected-idle.png",
+      "sha256": "624a14f631c5a658ff1a440aea1bdd86599a3335356bbe73a9cbe57e5c478d76",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-unselected-hover.png",
+      "sha256": "dabfcb789ee1529dba39f63ac0cbd82f3c478636c0f3106fae838187064dda63",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-unselected-pressed.png",
+      "sha256": "f5733b73315f71a2811d3eb1255947357cb6b39ca12ec827222295b74abeb9ff",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-selected-idle.png",
+      "sha256": "2409b91b1675fe0d25b6ac15cd213f3b2da06b27783a0343ee8b24e6a1264eed",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-selected-hover.png",
+      "sha256": "4f6372bf838aa8947a80d73fe7d1685a9caf812eb528c481fc0d66bada8c00f4",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-selected-pressed.png",
+      "sha256": "b3fe1d809aaeb4aef7c0165c5499fd5e19465917073552a120ee2a3a20ca035e",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-dragging-idle.png",
+      "sha256": "69d31712fb776ae3e07455943c851e127afde4cb7ddfff792dc49a816f5b5186",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-dragging-hover.png",
+      "sha256": "46c62468beb84c7a4e29bb4b8817388f3ac5d0fff7a801de6bf1229f8c84c464",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-dragging-pressed.png",
+      "sha256": "2b9d01c1b487962d385ed568a31d859495d18070a04485090da259de4163f553",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-drop-idle.png",
+      "sha256": "65e04cb25bcb1005ef88b7c39505fdedc8c80f093c02f856684954a18d49da5b",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-drop-hover.png",
+      "sha256": "c14d72f354b2460745ba9a7b9c4f04e9f124c0f6402e061de4b1428c969994ec",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-drop-pressed.png",
+      "sha256": "e507996da1a417a5accf22bbc4a7ed0748d8a8b57f0fc0bccaa828576d51ed99",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-available-idle.png",
+      "sha256": "afbd38f378a521232d9413d032545c2fb86cf212c294c74384af13631cdafee3",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-available-hover.png",
+      "sha256": "89fb27450c10f0e4d3cf8f52a053473fe7f6d37cd4a98cc2fcb3bc02cf2b37be",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-accessory_right_2-available-pressed.png",
+      "sha256": "6863f35a89762c86c8f7bec46b654bca97277027eeab43527f06687de441d4f0",
+      "size": [
+        180,
+        61
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-detail-idle.png",
+      "sha256": "d9a15198be00e87e78c6293d4c61fb448f2d745806e40eca4303dbff6dbbbaa6",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-detail-hover.png",
+      "sha256": "13ed5d7434b8f7cf620e38e19c9801b6bc170fbbee7794b8569d482dd28cbf0e",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/slot-detail-pressed.png",
+      "sha256": "5961215734c9f5297a36a3f6b6b594340783509af78a248945bcb90f501c8082",
+      "size": [
+        156,
+        50
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-minimize-idle.png",
+      "sha256": "7bd69ceeac45bdef4e63619b7678d9ae6e3a93025a0120d24133cbe3319f5184",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-minimize-hover.png",
+      "sha256": "0529d5cf5f58e8d0700edb5e48b3295ebee65534f2bb8a603fd0321aa3f48c12",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-minimize-pressed.png",
+      "sha256": "4f01ac179396bb6e6671a93b3304ca909e35baceef9c11cccbed357f3a83dd3b",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-close-idle.png",
+      "sha256": "67fbde74e1c39c5b34e5cad65a85c67d3bdd0a3626a7330ac96fef10097bbff5",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-close-hover.png",
+      "sha256": "51e798f4ec4177b0ae05516da5dd813180384f9cf11ae41fc233f4a225cfec73",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/equipment_items-close-pressed.png",
+      "sha256": "26ffb60fafd7ced636863e352320823cb462e1d2b88b6939a683da26edf05940",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/source-plate.png",
+      "sha256": "334d678e70d34ef423c48d21c91c045f39a190001adaa672a9f2384e04b63a47",
+      "size": [
+        484,
+        271
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/equipment-items/minimized-plate.png",
+      "sha256": "6d8837050a5854d94ab4e511180d0684bc8ae6a9e9a0e93ea74e9ef6171e4365",
+      "size": [
+        484,
+        28
+      ]
+    }
+  ]
+}
