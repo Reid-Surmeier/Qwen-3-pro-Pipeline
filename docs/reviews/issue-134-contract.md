@@ -1,0 +1,11 @@
+# Issue 134 System Menu review contract
+
+Candidate review must verify SHA-256 `f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f` and the Image-79 crop at `[1328, 505, 204, 273]`. The expanded idle Window must preserve the exact source pixels and the seven visible source buttons in this order: `セーブポイントへ`, `キャラクター選択`, `サウンド設定`, `環境設定`, `ショートカット`, `ゲーム終了`, `return to game`.
+
+All seven buttons require real idle, hover, pressed, and settled evidence. Sound Settings opens or raises the existing Options Window through the Desktop Action Router without changing Options semantic state or position. Return to game closes System Menu. Save point, Character select, Environment Settings, Shortcuts, and Game exit must expose named `ActionRoutingError` rejection without changing adapter state, Window state, or any unrelated Window; they must not fabricate unavailable destinations or external game/session effects.
+
+Escape is contextual. The frontmost closeable Window consumes its own declared Escape action. When System Menu is frontmost, Escape performs return to game. When no visible closeable Window handles Escape, the desktop opens or raises only System Menu while preserving its geometry and semantic state. No unrelated Window may move, close, open, or change semantic state as a side effect.
+
+Minimize must swap to the distinct purpose-built top Window at `204×27`; runtime cropping of the expanded Window is forbidden. Restore preserves the `204×273` expanded geometry and position. Title drag is real, continuous, clamped, and reversible. System Menu destination availability and action history belong to its Window-state adapter; shared Controls remain domain-neutral.
+
+Prototype code is not production input. The candidate retains only the learned Behaviour Card, State Sets, gestures, and deterministic asset manifest. No provider request is permitted or required. Candidate evidence includes the strict real-Chromium System Menu Play Log, exact-candidate Play Logs for all nine earlier Windows after the shared QA-state change, the complete Image-79 registry, repository baselines, and visual frames for expanded, pressed, minimized, routed, dragged, rejected, closed, and contextual-Escape states.
