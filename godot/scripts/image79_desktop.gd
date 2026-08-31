@@ -12,6 +12,7 @@ var inventory: ControlWindow
 var storage: ControlWindow
 var equipment_card: ControlWindow
 var equipment_items: ControlWindow
+var status: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
@@ -48,6 +49,7 @@ func _ready() -> void:
 	storage = windows.get("storage")
 	equipment_card = windows.get("equipment_card")
 	equipment_items = windows.get("equipment_items")
+	status = windows.get("status")
 	if equipment_card != null:
 		var detail_route: Dictionary = DesktopActionRouter.open_detail(
 			"equipment_card", equipment_card.spec.get("detail", {}))

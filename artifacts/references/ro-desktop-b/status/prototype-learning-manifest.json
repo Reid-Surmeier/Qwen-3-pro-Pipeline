@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "issue": 131,
+  "window_id": "status",
+  "prototype_branch": "prototype/status-window-logic",
+  "prototype_commit": "7d2a163672aa674f94afa151aadd91625471dbfe",
+  "question": "Can one semantic action atomically update an attribute, points, arrow availability, and derived values while every rejected action preserves the complete state?",
+  "source_facts": {
+    "window_rect": [0, 211, 484, 208],
+    "initial_points": 4,
+    "enabled_cost": 2,
+    "disabled_attribute": "Int",
+    "disabled_base": 92,
+    "disabled_cost": 11
+  },
+  "behaviour_cards": [
+    {
+      "id": "status-attribute-step",
+      "gestures": ["Activate", "ContextActivate"],
+      "window_action": "StepStatusAttribute",
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Activate spends the manifest-derived cost and ContextActivate reverses only an allocation made after the source state. Attribute, available points, arrow availability, derived values, and version publish in one state frame."
+    },
+    {
+      "id": "status-unavailable-step",
+      "gestures": ["Activate", "ContextActivate"],
+      "window_action": "StepStatusAttribute",
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Unaffordable, stale, rapid-after-exhaustion, and below-source actions return a named error, preserve the complete state byte-for-byte, and do not advance the semantic version."
+    },
+    {
+      "id": "status-window",
+      "gestures": ["Drag", "KeyCommand"],
+      "actions": ["MoveWindow", "CloseWindow"],
+      "response_frames": 1,
+      "reversible": true
+    },
+    {
+      "id": "status-minimize",
+      "gesture": "Activate",
+      "action": "ToggleMinimized",
+      "response_frames": 1,
+      "reversible": true,
+      "contract": "Use a purpose-built 484x28 title form and restore semantic state and position."
+    }
+  ],
+  "state_sets": {
+    "attribute_arrow": ["available", "disabled"],
+    "interaction_phases": ["idle", "hover", "pressed"],
+    "window": ["expanded", "minimized", "closed"]
+  },
+  "gestures": ["Activate", "ContextActivate", "Drag", "KeyCommand"],
+  "validated_walkthroughs": [
+    "two Str steps spend exactly four points in two frames",
+    "Int step rejects at cost 11 with four points",
+    "Agi step and reverse restore source state; a second reverse rejects",
+    "third rapid Str step rejects after the second exhausts points"
+  ],
+  "provider_requests": 0
+}

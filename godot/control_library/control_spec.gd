@@ -5,6 +5,7 @@ extends RefCounted
 ## partially interactive Window.
 
 const Errors = preload("res://control_library/control_errors.gd")
+const StatusWindowState = preload("res://window_state/status_window_state.gd")
 
 const SCHEMA_VERSION := 3
 const CONTROL_TYPES := [
@@ -31,7 +32,7 @@ const ACTIONS_BY_TYPE := {
 		"SelectStorageItem", "ToggleStorageSelection", "TransferStorageItem",
 		"TransferInventoryItem", "SelectEquipmentSlot", "UnequipEquipmentItem",
 		"MoveEquipmentItem"],
-	"Stepper": ["StepSkill"],
+	"Stepper": ["StepSkill", "StepStatusAttribute"],
 	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
 		"ScrollEquipmentCard", "StepEquipmentCardScroll",
 		"SetEquipmentCardScrollOffset"],
@@ -147,6 +148,9 @@ static func _validate_window(window: Variant, window_index: int, window_ids: Dic
 	for control_index in controls.size():
 		_validate_control(controls[control_index], window_id, control_index,
 			control_ids, errors, asset_exists)
+	if window.has("state_adapter"):
+		_validate_window_state_adapter(window.state_adapter, controls,
+			path + ".state_adapter", errors, asset_exists)
 	_validate_selection_value_controls(controls, window_id, path, errors)
 	_validate_linked_selection_controls(controls, path, errors)
 	_validate_selection_context_actions(controls, path, errors)
@@ -677,15 +681,102 @@ static func _validate_stepper_contract(control: Dictionary, path: String,
 	if not valid:
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".value",
 			"Stepper requires in-range current/target values and a positive step"))
+	var status_stepper: bool = control.get("actions", []).any(func(binding):
+		return binding is Dictionary \
+			and binding.get("action") == "StepStatusAttribute")
+	var required_states := ["available", "disabled"] if status_stepper \
+		else ["visible", "hidden"]
 	var surfaces: Variant = control.get("surfaces")
 	if not surfaces is Dictionary or not ["decrement", "increment"].all(func(surface):
 		return surfaces.has(surface) and surfaces[surface] is Dictionary \
 			and surfaces[surface].has("geometry") \
 			and surfaces[surface].has("state_set") \
-			and surfaces[surface].state_set.has("visible") \
-			and surfaces[surface].state_set.has("hidden")):
+			and required_states.all(func(state):
+				return surfaces[surface].state_set.has(state))):
 		errors.append(_error(Errors.INVALID_STATE_SET, path + ".surfaces",
-			"Stepper requires visible/hidden State Sets for both arrows"))
+			"Status Stepper requires available/disabled State Sets; generic Stepper requires visible/hidden State Sets"))
+	if status_stepper and (control.get("gestures") != ["Activate", "ContextActivate"] \
+			or control.get("semantic_states") != ["available", "disabled"]):
+		errors.append(_error(Errors.INVALID_STATE_SET, path,
+			"Status Stepper requires Activate/ContextActivate and available/disabled states"))
+
+
+static func _validate_window_state_adapter(adapter: Variant, controls: Array,
+		path: String, errors: Array[Dictionary], asset_exists: Callable) -> void:
+	if not adapter is Dictionary or str(adapter.get("type", "")) != "status":
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			"Window state adapter must declare the supported status type"))
+		return
+	var initialized: Dictionary = StatusWindowState.initialize(adapter)
+	if not initialized.get("ok", false):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			str(initialized.get("error", {}).get("detail", "invalid Status adapter"))))
+	var declared := {}
+	for control in controls:
+		if control is Dictionary:
+			declared[str(control.get("id", ""))] = control
+	var attributes: Variant = adapter.get("attributes", {})
+	if attributes is Dictionary:
+		for control_id in attributes:
+			var control: Variant = declared.get(str(control_id))
+			if not control is Dictionary or str(control.get("type", "")) != "Stepper" \
+					or not control.get("actions", []).any(func(binding):
+						return binding is Dictionary \
+							and binding.get("action") == "StepStatusAttribute"):
+				errors.append(_error(Errors.CONTROL_BINDING,
+					path + ".attributes." + str(control_id),
+					"Status attribute must reference a same-Window Stepper bound to StepStatusAttribute"))
+		for control_id in declared:
+			var control: Dictionary = declared[control_id]
+			if str(control.get("type", "")) == "Stepper" \
+					and control.get("actions", []).any(func(binding):
+						return binding is Dictionary \
+							and binding.get("action") == "StepStatusAttribute") \
+					and not attributes.has(control_id):
+				errors.append(_error(Errors.CONTROL_BINDING, path + ".attributes",
+					"Every Status Stepper must belong to the adapter"))
+	_validate_status_presentation(adapter.get("presentation"), attributes,
+		adapter.get("derived", {}), path + ".presentation", errors, asset_exists)
+
+
+static func _validate_status_presentation(presentation: Variant,
+		attributes: Variant, derived: Variant, path: String,
+		errors: Array[Dictionary], asset_exists: Callable) -> void:
+	if not presentation is Dictionary:
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			"Status presentation must be a manifest-owned object"))
+		return
+	_validate_asset(str(presentation.get("font", "")), path + ".font",
+		errors, asset_exists)
+	if not _positive_number(presentation.get("font_size")) \
+			or str(presentation.get("font_color", "")).is_empty() \
+			or str(presentation.get("background", "")).is_empty():
+		errors.append(_error(Errors.INVALID_STATE_SET, path,
+			"Status presentation requires font size, font color, and background"))
+	_validate_geometry(presentation.get("points"), path + ".points", errors)
+	for field in ["attribute_values", "attribute_costs"]:
+		var geometries: Variant = presentation.get(field)
+		if not geometries is Dictionary or not attributes is Dictionary \
+				or geometries.keys().size() != attributes.keys().size() \
+				or not attributes.keys().all(func(control_id):
+					return geometries.has(control_id)):
+			errors.append(_error(Errors.CONTROL_BINDING, path + "." + field,
+				"Status attribute presentation must map every adapter Control"))
+			continue
+		for control_id in geometries:
+			_validate_geometry(geometries[control_id],
+				path + "." + field + "." + str(control_id), errors)
+	var derived_values: Variant = presentation.get("derived_values")
+	if not derived_values is Dictionary or not derived is Dictionary \
+			or derived_values.keys().size() != derived.keys().size() \
+			or not derived.keys().all(func(derived_id):
+				return derived_values.has(derived_id)):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".derived_values",
+			"Status derived presentation must map every derived rule"))
+		return
+	for derived_id in derived_values:
+		_validate_geometry(derived_values[derived_id],
+			path + ".derived_values." + str(derived_id), errors)
 
 
 static func _validate_scroll_view_contract(control: Dictionary, path: String,

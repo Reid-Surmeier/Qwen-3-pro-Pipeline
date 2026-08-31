@@ -9,18 +9,28 @@ const ChoiceGroup = preload("res://control_library/choice_group.gd")
 const TabsModule = preload("res://control_library/tabs.gd")
 const SelectionViewModule = preload("res://control_library/selection_view.gd")
 const StepperModule = preload("res://control_library/stepper.gd")
+const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const ScrollViewModule = preload("res://control_library/scroll_view.gd")
 const TextFieldModule = preload("res://control_library/text_field.gd")
 
 var window_spec: Dictionary = {}
 var controls: Dictionary = {}
 var interaction_log: Array[Dictionary] = []
+var window_state_adapter: Dictionary = {}
+var window_state: Dictionary = {}
 
 
 func configure(spec: Dictionary) -> Dictionary:
 	window_spec = spec.duplicate(true)
 	controls.clear()
 	interaction_log.clear()
+	window_state_adapter = window_spec.get("state_adapter", {}).duplicate(true)
+	window_state.clear()
+	if str(window_state_adapter.get("type", "")) == "status":
+		var initialized: Dictionary = StatusWindowState.initialize(window_state_adapter)
+		if not initialized.get("ok", false):
+			return initialized
+		window_state = initialized.state
 	for control_spec in window_spec.get("controls", []):
 		var control_id := str(control_spec.id)
 		var state := {
@@ -40,14 +50,21 @@ func configure(spec: Dictionary) -> Dictionary:
 			"last_result": {"accepted": false, "action": "", "error": null},
 		}
 		if str(control_spec.type) == "Stepper":
-			state.current = control_spec.value.current
-			state.target = control_spec.value.target
+			var status_attribute: Variant = window_state.get("attributes", {}).get(control_id)
+			state.current = status_attribute.base if status_attribute is Dictionary \
+				else control_spec.value.current
+			state.target = state.current if status_attribute is Dictionary \
+				else control_spec.value.target
 			state.minimum = control_spec.value.minimum
 			state.maximum = control_spec.value.maximum
 			state.step = control_spec.value.step
 			state.pending = false
-			state.arrows_visible = true
-			state.text = StepperModule.format_value(state.current, state.target)
+			state.arrows_visible = bool(window_state.get("availability", {}).get(
+				control_id, true))
+			state.semantic_state = ("available" if state.arrows_visible else "disabled") \
+				if status_attribute is Dictionary else state.semantic_state
+			state.text = str(state.current) if status_attribute is Dictionary \
+				else StepperModule.format_value(state.current, state.target)
 		elif str(control_spec.type) == "SelectionView":
 			state.value = control_spec.value.get("initial")
 			state.text = str(state.value)
@@ -155,6 +172,7 @@ func qa_state() -> Dictionary:
 		"controls": factual_controls,
 		"interaction_log": interaction_log.duplicate(true),
 		"window_pending": _has_pending_stepper(),
+		"window_state": window_state.duplicate(true),
 	}
 
 
@@ -213,7 +231,8 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 			semantic = "selected" if state.get("semantic_state") == "selected" \
 				and str(state.get("value", "")) == surface_id else "unselected"
 	elif str(entry.spec.type) == "Stepper":
-		semantic = "visible" if bool(state.get("arrows_visible", true)) else "hidden"
+		semantic = str(state.semantic_state) if _is_status_stepper(entry) \
+			else ("visible" if bool(state.get("arrows_visible", true)) else "hidden")
 	var phase := str(state.interaction_phase) \
 		if str(state.get("active_surface", "")) == surface_id else "idle"
 	return str(surface.state_set.get(semantic, {}).get(phase, ""))
@@ -489,6 +508,26 @@ func _refresh_selection_page(entry: Dictionary) -> void:
 
 func _dispatch_stepper(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
+	if _is_status_stepper(entry):
+		var direction := 1 if gesture == "Activate" else -1 \
+			if gesture == "ContextActivate" else 0
+		if direction == 0:
+			return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
+				"Status Stepper accepts Activate or ContextActivate")
+		var expected_version := int(payload.get("expected_version",
+			window_state.get("version", -1)))
+		var status_result: Dictionary = StatusWindowState.step(window_state_adapter,
+			window_state, str(entry.state.id), direction, expected_version)
+		if not status_result.get("ok", false):
+			return _reject(entry.state.id, gesture, status_result.error.code,
+				status_result.error.detail)
+		window_state = status_result.state
+		_sync_status_controls()
+		entry.state.interaction_phase = "idle"
+		entry.state.last_action = "StepStatusAttribute"
+		return {"ok": true, "action": "StepStatusAttribute",
+			"control_id": str(entry.state.id), "direction": direction,
+			"window_state": window_state.duplicate(true)}
 	var result: Dictionary = StepperModule.step(entry.spec, entry.state, gesture, payload)
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
@@ -553,14 +592,14 @@ func _has_pending_stepper() -> bool:
 func _set_all_stepper_arrows(visible: bool) -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper":
+		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
 			entry.state.arrows_visible = visible
 
 
 func _commit_steppers() -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper":
+		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
 			entry.state.current = entry.state.target
 			entry.state.pending = false
 			entry.state.semantic_state = "ready"
@@ -572,13 +611,32 @@ func _commit_steppers() -> void:
 func _cancel_steppers() -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper":
+		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
 			entry.state.target = entry.state.current
 			entry.state.pending = false
 			entry.state.semantic_state = "ready"
 			entry.state.text = StepperModule.format_value(
 				entry.state.current, entry.state.target)
 	_set_all_stepper_arrows(true)
+
+
+func _is_status_stepper(entry: Dictionary) -> bool:
+	return str(window_state_adapter.get("type", "")) == "status" \
+		and window_state_adapter.get("attributes", {}).has(str(entry.state.id))
+
+
+func _sync_status_controls() -> void:
+	for control_id in window_state.get("attributes", {}):
+		if not controls.has(control_id):
+			continue
+		var state: Dictionary = controls[control_id].state
+		var attribute: Dictionary = window_state.attributes[control_id]
+		state.current = attribute.base
+		state.target = attribute.base
+		state.text = str(attribute.base)
+		state.pending = false
+		state.arrows_visible = bool(window_state.availability[control_id])
+		state.semantic_state = "available" if state.arrows_visible else "disabled"
 
 
 func _reject(control_id: String, gesture: String, code: String, detail: String) -> Dictionary:
