@@ -469,6 +469,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			return
 		var result := _route_window_gesture("KeyCommand", key)
 		if result.get("ok", false):
+			# Unfocused Window shortcuts do not pass through a child Control's
+			# changed signal, so refresh dependent controls before publishing.
+			if str(result.get("action", "")) == "ChangeChatRows":
+				_refresh_all_controls()
 			get_viewport().set_input_as_handled()
 			action_emitted.emit(str(spec.id), str(spec.id), result.duplicate(true))
 			state_changed.emit(str(spec.id))

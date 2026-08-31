@@ -31,7 +31,11 @@ func refresh() -> void:
 	if background == null:
 		return
 	for label in labels:
-		label.queue_free()
+		# Remove replaced rows synchronously. queue_free() leaves the old labels
+		# drawable until the frame tail and made reverse scrolling look one step
+		# behind even though semantic state had already changed.
+		remove_child(label)
+		label.free()
 	labels.clear()
 	var state: Dictionary = runtime.qa_state().window_state
 	visible = state.get("lines", []).size() > 5 \

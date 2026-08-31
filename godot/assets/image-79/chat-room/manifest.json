@@ -6,7 +6,7 @@
   "inventory": "artifacts/references/ro-desktop-b/control-inventory.json",
   "behaviour_card": {
     "path": "artifacts/references/ro-desktop-b/chat-room/behaviour-card.md",
-    "sha256": "8022c040fdec5714c68871be3e7d51a35e2acb4968eb6fa619f5fc2270347fd8"
+    "sha256": "b41a623e977fe322ef6a926624d5ae42914b1706ba0bcd9b0127cecd40d3aeb9"
   },
   "prototype_learning": {
     "path": "artifacts/references/ro-desktop-b/chat-room/prototype-learning-manifest.json",

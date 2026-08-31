@@ -117,7 +117,10 @@ def main() -> None:
                 "pressed": field["pressed"], "focused": field["hover"]}
                 for state in ("empty", "editing")},
             "gestures": ["KeyCommand"],
-            "actions": [{"gesture": "KeyCommand", "action": "SetChatDraft"}],
+            "actions": [
+                {"gesture": "KeyCommand", "action": "SetChatDraft"},
+                {"gesture": "KeyCommand", "action": "SubmitChat"},
+            ],
             "value": {"initial": "", "maximum_length": 96,
                 "accepted_pattern": "^[^\\n\\r]*$", "chat_input": True},
             "tokens": {"font": "res://fonts/PixelMplus10-Regular.ttf",

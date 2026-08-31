@@ -12,7 +12,7 @@ func _init() -> void:
 
 func _run() -> void:
 	var spec := {
-		"controls": {"input": "chat_room.input", "log": "chat_room.log"},
+		"controls": {"input": "chat_room.input", "scroll": "chat_room.scroll"},
 		"initial_lines": [
 			{"kind": "chat", "text": "Sebas*：レイドリック終わったー"},
 			{"kind": "chat", "text": "SakumaRiri：おつかれさま〜"},
@@ -50,7 +50,11 @@ func _run() -> void:
 		and frame_three.state.lines.size() == 6
 		and frame_three.state.lines[-1].text == "テスト送信"
 		and frame_three.state.lines[-1].scope == "party"
-		and frame_three.state.pending_delivery == null, str(frame_three))
+		and frame_three.state.pending_delivery == null
+		and frame_three.scroll_to_end_control_id == "chat_room.scroll", str(frame_three))
+	var settled := ChatRoomWindowState.advance_frame(spec, frame_three.state)
+	_check("echo-auto-scroll-request-is-one-shot", settled.ok and not settled.changed
+		and not settled.has("scroll_to_end_control_id"), str(settled))
 
 	var resized := ChatRoomWindowState.change_rows(spec, frame_three.state,
 		frame_three.state.version)

@@ -11744,6 +11744,10 @@
             {
               "gesture": "KeyCommand",
               "action": "SetChatDraft"
+            },
+            {
+              "gesture": "KeyCommand",
+              "action": "SubmitChat"
             }
           ],
           "value": {

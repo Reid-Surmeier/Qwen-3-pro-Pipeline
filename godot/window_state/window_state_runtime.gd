@@ -224,15 +224,11 @@ func _chat_room_patches() -> Dictionary:
 	var scroll_id := str(controls.get("scroll", ""))
 	var maximum := maxi(0, state.get("lines", []).size()
 		- int(state.get("visible_row_count", 5)))
-	var scroll_patch := {"maximum": maximum}
-	if str(state.get("last_action", "")) == "AppendChatEcho":
-		scroll_patch.merge({"offset": maximum, "value": maximum,
-			"semantic_state": "at_start" if maximum == 0 else "at_end"})
 	return {
 		input_id: {"value": str(state.get("draft", "")),
 			"text": str(state.get("draft", "")),
 			"semantic_state": "empty" if str(state.get("draft", "")).is_empty() else "editing"},
-		scroll_id: scroll_patch,
+		scroll_id: {"maximum": maximum},
 	}
 
 

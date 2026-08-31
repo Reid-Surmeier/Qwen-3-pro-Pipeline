@@ -82,6 +82,9 @@ static func advance_frame(spec: Dictionary, state: Dictionary) -> Dictionary:
 		next.pending_delivery = null
 		next.version += 1
 		next.last_action = "AppendChatEcho"
+		return {"ok": true, "action": "AdvanceChatFrame", "state": next,
+			"changed": true,
+			"scroll_to_end_control_id": str(spec.get("controls", {}).get("scroll", ""))}
 	return {"ok": true, "action": "AdvanceChatFrame", "state": next,
 		"changed": true}
 

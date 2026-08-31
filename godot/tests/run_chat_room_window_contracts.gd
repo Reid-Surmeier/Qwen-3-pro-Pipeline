@@ -66,12 +66,64 @@ func _run() -> void:
 		await process_frame
 		await process_frame
 
+	# Browser users commonly resize the log after clicking elsewhere. This must
+	# take the Window key route, not the focused TextField shortcut.
+	window.get_viewport().gui_release_focus()
+	await process_frame
 	await _key(KEY_F10)
-	_check("f10-changes-row-count", window.qa_state().window_state.visible_row_count == 7,
-		str(window.qa_state().window_state))
+	var seven_rows := window.qa_state()
+	_check("f10-refreshes-row-count-in-accepted-frame",
+		seven_rows.window_state.visible_row_count == 7
+			and seven_rows.chat_room_overlay.visible
+			and seven_rows.chat_room_overlay.visible_row_count == 7
+			and seven_rows.chat_room_overlay.rendered_lines.size() == 7,
+		str(seven_rows))
 	await _wheel(Vector2(1517, 865), 1)
-	_check("wheel-moves-three-and-clamps", window.qa_state().controls["chat_room.scroll"].offset == 2,
-		str(window.qa_state().controls["chat_room.scroll"]))
+	var scrolled := window.qa_state()
+	_check("wheel-refreshes-log-in-accepted-frame",
+		scrolled.controls["chat_room.scroll"].offset == 2
+			and scrolled.chat_room_overlay.rendered_lines[0].ends_with(
+				str(scrolled.window_state.lines[2].text)), str(scrolled))
+	await _wheel(Vector2(1517, 865), -1)
+	var reversed := window.qa_state()
+	_check("wheel-reverse-refreshes-log-in-accepted-frame",
+		reversed.controls["chat_room.scroll"].offset == 0
+			and reversed.chat_room_overlay.rendered_lines[0].ends_with(
+				str(reversed.window_state.lines[0].text)), str(reversed))
+	await process_frame
+	await process_frame
+	var settled_reverse := window.qa_state()
+	_check("manual-scroll-survives-later-engine-frames",
+		settled_reverse.controls["chat_room.scroll"].offset == 0
+			and settled_reverse.chat_room_overlay.rendered_lines[0].ends_with(
+				str(settled_reverse.window_state.lines[0].text)), str(settled_reverse))
+
+	# Auto-scroll is a one-shot consequence of the new echo, not persistent
+	# history that may overwrite a later user scroll on every process frame.
+	window.control_nodes["chat_room.input"].focus_field()
+	await process_frame
+	await _type_text("persist")
+	await _send(false, false, false)
+	await process_frame
+	await process_frame
+	await process_frame
+	await process_frame
+	var delivered_again := window.qa_state()
+	_check("second-echo-delivered-before-persistence-check",
+		delivered_again.window_state.lines[-1].text == "persist"
+			and delivered_again.window_state.last_action == "AppendChatEcho"
+			and delivered_again.controls["chat_room.scroll"].offset == 3,
+		str(delivered_again.window_state))
+	await process_frame
+	await _wheel(Vector2(1517, 865), -1)
+	await process_frame
+	await process_frame
+	var post_delivery_scroll := window.qa_state()
+	_check("post-delivery-manual-scroll-is-not-overwritten",
+		post_delivery_scroll.controls["chat_room.scroll"].offset == 0
+			and post_delivery_scroll.chat_room_overlay.rendered_lines[0].ends_with(
+				str(post_delivery_scroll.window_state.lines[0].text)),
+		str(post_delivery_scroll))
 
 	await _key(KEY_F10, false, true)
 	_check("alt-f10-hides", not window.visible, str(desktop.last_transaction))

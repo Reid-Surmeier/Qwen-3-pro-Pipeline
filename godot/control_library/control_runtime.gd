@@ -205,6 +205,14 @@ func advance_frame() -> Dictionary:
 	var result: Dictionary = state_runtime.advance_frame()
 	if result.get("ok", false):
 		_apply_window_state_patches()
+		var scroll_id := str(result.get("scroll_to_end_control_id", ""))
+		if not scroll_id.is_empty() and controls.has(scroll_id):
+			var scroll: Dictionary = controls[scroll_id]
+			scroll.state.offset = int(scroll.state.get("maximum", 0))
+			scroll.state.value = scroll.state.offset
+			scroll.state.semantic_state = "at_start" \
+				if int(scroll.state.offset) == int(scroll.state.get("minimum", 0)) \
+				else "at_end"
 	return result
 
 
