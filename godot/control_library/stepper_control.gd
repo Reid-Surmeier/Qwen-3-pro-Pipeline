@@ -173,8 +173,8 @@ func _refresh() -> void:
 		var path := runtime.visual_surface_asset(spec.id, surface_name)
 		if not path.is_empty():
 			visuals[surface_name].texture = load(path)
-		visuals[surface_name].visible = bool(state.arrows_visible) \
-			and (not _is_status_stepper() or surface_name == "increment")
+		visuals[surface_name].visible = surface_name == "increment" \
+			if _is_status_stepper() else bool(state.arrows_visible)
 		hits[surface_name].visible = true if _is_status_stepper() \
 			else bool(state.arrows_visible)
 
