@@ -55,6 +55,11 @@ static func activate(spec: Dictionary, state: Dictionary, gesture: String,
 
 static func _drag_drop(spec: Dictionary, state: Dictionary, action: String,
 		payload: Dictionary) -> Dictionary:
+	var modifiers: Array = payload.get("modifiers", []) \
+		if payload.get("modifiers", []) is Array else []
+	if not modifiers.is_empty():
+		return _error(Errors.INVALID_MODIFIER,
+			"DragDrop does not accept modifiers: %s" % str(modifiers))
 	var source := str(payload.get("source", ""))
 	var target := str(payload.get("target", ""))
 	var items: Array = spec.value.items
@@ -62,6 +67,9 @@ static func _drag_drop(spec: Dictionary, state: Dictionary, action: String,
 	if source not in items or target not in targets:
 		return _error(Errors.INVALID_DROP_TARGET,
 			"source and target must be declared SelectionView items")
+	if source == target:
+		return _error(Errors.INVALID_DROP_TARGET,
+			"source and target must be distinct SelectionView items")
 	var version := int(payload.get("version", -1))
 	if version != int(state.get("item_version", 0)):
 		return _error(Errors.GESTURE_CONFLICT,

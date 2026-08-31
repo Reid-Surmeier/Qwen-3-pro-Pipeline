@@ -193,6 +193,43 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
+    def test_current_window_drag_rejects_scalar_and_stationary_motion(self) -> None:
+        for samples in (list(range(31)), [0] * 31, [[0, 0]] * 31):
+            with self.subTest(samples=samples[0]):
+                log = self._valid_log()
+                log["candidate"]["issue"] = 127
+                log["actions"][0]["motion_samples"] = samples
+                verdict = evaluate_play_log(log, self.root, self._manifest())
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+                self.assertTrue(any(
+                    "two-dimensional" in problem or "threshold" in problem
+                    for problem in verdict["problems"]
+                ), verdict)
+
+    def test_legacy_window_drag_accepts_only_moving_scalar_motion(self) -> None:
+        moving = self._valid_log()
+        moving["actions"][0]["motion_samples"] = list(range(31))
+        self.assertEqual(
+            "PASS", evaluate_play_log(moving, self.root, self._manifest())["verdict"]
+        )
+        stationary = self._valid_log()
+        stationary["actions"][0]["motion_samples"] = [0] * 31
+        verdict = evaluate_play_log(stationary, self.root, self._manifest())
+        self.assertEqual("INVALID", verdict["verdict"], verdict)
+        self.assertTrue(any("threshold" in problem for problem in verdict["problems"]), verdict)
+
+    def test_motion_samples_must_be_finite(self) -> None:
+        for samples in (
+            [[index, float("nan")] for index in range(31)],
+            [[index, float("inf")] for index in range(31)],
+        ):
+            with self.subTest(samples=samples[0]):
+                log = self._valid_log()
+                log["candidate"]["issue"] = 127
+                log["actions"][0]["motion_samples"] = samples
+                verdict = evaluate_play_log(log, self.root, self._manifest())
+                self.assertEqual("INVALID", verdict["verdict"], verdict)
+
     def test_pointer_motion_rejects_scalars_and_stationary_points(self) -> None:
         for gesture in ("Resize", "DragDrop"):
             for samples in ([0] * 31, [[0, 0]] * 31):

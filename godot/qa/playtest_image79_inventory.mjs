@@ -246,9 +246,48 @@ record("inventory.items", "DragDrop", "MoveInventoryItem",
       && movedItem.detail_text === "所持品 1-1\n個数 2" && movedItem.detail_visible,
   }, { before: dragBefore, mid: dragMid, after: dragAfter }, dragSamples);
 
+const movedValues = JSON.stringify(movedItem.item_values);
+await page.keyboard.down("Alt");
+await page.mouse.move(dragStart.x, dragStart.y);
+await page.mouse.down();
+for (let index = 0; index < 31; index += 1) {
+  const t = index / 30;
+  await page.mouse.move(dragStart.x + (dragEnd.x - dragStart.x) * t,
+    dragStart.y + (dragEnd.y - dragStart.y) * t);
+}
+await page.mouse.up();
+await page.keyboard.up("Alt");
+const modifiedDrop = await control("inventory.items");
+check("modified-drag-drop-fails-closed", modifiedDrop.last_result.accepted === false
+  && modifiedDrop.last_result.error?.code === "InvalidModifierError"
+  && JSON.stringify(modifiedDrop.item_values) === movedValues
+  && modifiedDrop.item_version === movedItem.item_version,
+  modifiedDrop.last_result);
+
+await page.mouse.move(dragStart.x, dragStart.y);
+await page.mouse.down();
+const sameItemOffset = point(89, 751);
+for (let index = 0; index < 16; index += 1) {
+  const t = (index + 1) / 16;
+  await page.mouse.move(dragStart.x + (sameItemOffset.x - dragStart.x) * t,
+    dragStart.y + (sameItemOffset.y - dragStart.y) * t);
+}
+for (let index = 0; index < 16; index += 1) {
+  const t = (index + 1) / 16;
+  await page.mouse.move(sameItemOffset.x + (dragStart.x - sameItemOffset.x) * t,
+    sameItemOffset.y + (dragStart.y - sameItemOffset.y) * t);
+}
+await page.mouse.up();
+const sameItemDrop = await control("inventory.items");
+check("same-item-drop-fails-closed", sameItemDrop.last_result.accepted === false
+  && sameItemDrop.last_result.error?.code === "InvalidDropTargetError"
+  && JSON.stringify(sameItemDrop.item_values) === movedValues
+  && sameItemDrop.item_version === movedItem.item_version,
+  sameItemDrop.last_result);
+
 const invalidStart = point(177, 761);
 const invalidEnd = point(450, 900);
-const beforeInvalidDrop = JSON.stringify(movedItem.item_values);
+const beforeInvalidDrop = movedValues;
 await page.mouse.move(invalidStart.x, invalidStart.y);
 await page.mouse.down();
 for (let index = 0; index < 31; index += 1) {
@@ -260,7 +299,8 @@ await page.mouse.up();
 const invalidDrop = await control("inventory.items");
 check("invalid-drop-fails-closed", invalidDrop.last_result.accepted === false
   && invalidDrop.last_result.error?.code === "InvalidDropTargetError"
-  && JSON.stringify(invalidDrop.item_values) === beforeInvalidDrop,
+  && JSON.stringify(invalidDrop.item_values) === beforeInvalidDrop
+  && invalidDrop.item_version === movedItem.item_version,
   invalidDrop.last_result);
 
 const titleStart = point(200, 710);

@@ -140,6 +140,27 @@ func _drag_drop_and_rejections() -> void:
 	_check("drag-detail-follows-item-identity", moved.opened_item_value == "r0c0"
 		and moved.detail_text == "所持品 1-1\n個数 2" and moved.detail_visible, str(moved))
 	var values_before: Dictionary = moved.item_values.duplicate(true)
+	await _press(source, false, true)
+	for index in 31:
+		await _move(source.lerp(target, float(index + 1) / 31.0), true)
+	await _release(target, false, true)
+	var modified: Dictionary = window.qa_state().controls["inventory.items"]
+	_check("real-modified-drag-preserves", not modified.last_result.accepted
+		and modified.last_result.error.code == "InvalidModifierError"
+		and modified.item_values == values_before and modified.item_version == 1,
+		str(modified))
+	await _press(source)
+	for index in 16:
+		await _move(source.lerp(source + Vector2(20, -10), float(index + 1) / 16.0), true)
+	for index in 16:
+		await _move((source + Vector2(20, -10)).lerp(source,
+			float(index + 1) / 16.0), true)
+	await _release(source)
+	var same_item: Dictionary = window.qa_state().controls["inventory.items"]
+	_check("real-same-item-drop-preserves", not same_item.last_result.accepted
+		and same_item.last_result.error.code == "InvalidDropTargetError"
+		and same_item.item_values == values_before and same_item.item_version == 1,
+		str(same_item))
 	await _press(source)
 	for index in 31:
 		await _move(source.lerp(Vector2(500, 900), float(index + 1) / 31.0), true)

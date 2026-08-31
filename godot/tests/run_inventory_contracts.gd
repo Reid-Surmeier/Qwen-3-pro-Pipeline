@@ -13,6 +13,8 @@ func _init() -> void:
 	_contract_modifier_selection_reverses()
 	_contract_invalid_modifier_preserves_state()
 	_contract_drag_drop_swaps_once()
+	_contract_modified_drag_drop_preserves_state()
+	_contract_same_item_drop_preserves_state()
 	_contract_invalid_drop_preserves_state()
 	_contract_conflict_preserves_state()
 	_contract_qa_state_is_factual()
@@ -82,6 +84,33 @@ func _contract_drag_drop_swaps_once() -> void:
 		and state.get("item_values", {}).get("r0c0") == "r0c1"
 		and state.get("item_values", {}).get("r0c1") == "r0c0"
 		and state.get("item_version") == 1, str([result, state]))
+
+
+func _contract_modified_drag_drop_preserves_state() -> void:
+	for modifiers in [["alt"], ["shift"], ["meta"], ["ctrl"], ["ctrl", "shift"]]:
+		var runtime = _runtime()
+		var before: Dictionary = runtime.qa_state().controls["inventory.items"]
+		var result: Dictionary = runtime.dispatch("inventory.items", "DragDrop",
+			{"source": "r0c0", "target": "r0c1", "version": 0,
+				"modifiers": modifiers})
+		var after: Dictionary = runtime.qa_state().controls["inventory.items"]
+		_check("modified-drag-drop-%s-preserves-state" % "-".join(modifiers),
+			not result.get("ok", false)
+			and result.get("error", {}).get("code") == "InvalidModifierError"
+			and before.get("item_values", {}) == after.get("item_values", {})
+			and before.get("item_version") == after.get("item_version"), str(result))
+
+
+func _contract_same_item_drop_preserves_state() -> void:
+	var runtime = _runtime()
+	var before: Dictionary = runtime.qa_state().controls["inventory.items"]
+	var result: Dictionary = runtime.dispatch("inventory.items", "DragDrop",
+		{"source": "r0c0", "target": "r0c0", "version": 0})
+	var after: Dictionary = runtime.qa_state().controls["inventory.items"]
+	_check("same-item-drop-preserves-state", not result.get("ok", false)
+		and result.get("error", {}).get("code") == "InvalidDropTargetError"
+		and before.get("item_values", {}) == after.get("item_values", {})
+		and before.get("item_version") == after.get("item_version"), str(result))
 
 
 func _contract_invalid_drop_preserves_state() -> void:

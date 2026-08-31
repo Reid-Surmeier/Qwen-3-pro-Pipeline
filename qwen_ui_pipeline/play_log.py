@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import re
 from pathlib import Path
 from typing import Any
@@ -12,6 +13,7 @@ SCHEMA_VERSION = "image79-play-log-v2"
 LEGACY_SCHEMA_VERSION = "image79-play-log-v1"
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 _COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
+STRICT_POINTER_EVIDENCE_ISSUE = 127
 
 
 def evaluate_play_log(
@@ -145,15 +147,30 @@ def evaluate_play_log(
         if gesture in {"Drag", "Resize", "DragDrop"}:
             required_roles.add("mid")
             samples = action.get("motion_samples")
+
+            candidate_issue = candidate.get("issue") if isinstance(candidate, dict) else None
+            legacy_scalar_move = (
+                gesture == "Drag"
+                and window_action == "MoveWindow"
+                and isinstance(candidate_issue, int)
+                and candidate_issue < STRICT_POINTER_EVIDENCE_ISSUE
+            )
+
+            def finite_number(value: object) -> bool:
+                return (
+                    isinstance(value, (int, float))
+                    and not isinstance(value, bool)
+                    and math.isfinite(float(value))
+                )
+
             def valid_motion_sample(sample: object) -> bool:
-                if window_action == "SetRange" or gesture == "Drag":
-                    if isinstance(sample, (int, float)) and not isinstance(sample, bool):
-                        return True
                 if window_action == "SetRange":
-                    return isinstance(sample, (int, float)) and not isinstance(sample, bool)
+                    return finite_number(sample)
+                if legacy_scalar_move and finite_number(sample):
+                    return True
                 return isinstance(sample, list) \
                     and len(sample) == 2 and all(
-                        isinstance(axis, (int, float)) and not isinstance(axis, bool)
+                        finite_number(axis)
                         for axis in sample
                     )
 
@@ -161,15 +178,25 @@ def evaluate_play_log(
                     or not all(valid_motion_sample(sample) for sample in samples):
                 problems.append(
                     f"{label} {gesture} requires at least 30 motion samples"
-                    + ("" if window_action == "SetRange" or gesture == "Drag"
+                    + ("" if window_action == "SetRange" or legacy_scalar_move
                        else "; pointer samples must be two-dimensional")
                 )
-            elif window_action != "SetRange" and gesture in {"Resize", "DragDrop"}:
-                origin_x, origin_y = samples[0]
-                crossed_threshold = any(
-                    ((sample[0] - origin_x) ** 2 + (sample[1] - origin_y) ** 2) ** 0.5 > 4.0
-                    for sample in samples[1:]
+            elif window_action != "SetRange":
+                scalar_legacy_samples = legacy_scalar_move and all(
+                    finite_number(sample) for sample in samples
                 )
+                if scalar_legacy_samples:
+                    origin = float(samples[0])
+                    crossed_threshold = any(
+                        abs(float(sample) - origin) > 4.0 for sample in samples[1:]
+                    )
+                else:
+                    origin_x, origin_y = samples[0]
+                    crossed_threshold = any(
+                        ((sample[0] - origin_x) ** 2
+                         + (sample[1] - origin_y) ** 2) ** 0.5 > 4.0
+                        for sample in samples[1:]
+                    )
                 if not crossed_threshold:
                     problems.append(f"{label} {gesture} motion never crosses the pointer threshold")
                 if gesture == "Resize" and not (
