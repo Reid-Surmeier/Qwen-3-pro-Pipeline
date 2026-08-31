@@ -6,6 +6,7 @@ extends RefCounted
 const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const PartyWindowState = preload("res://window_state/party_window_state.gd")
+const SystemMenuWindowState = preload("res://window_state/system_menu_window_state.gd")
 
 var adapter_spec: Dictionary = {}
 var state: Dictionary = {}
@@ -19,6 +20,8 @@ func configure(spec: Dictionary) -> Dictionary:
 			initialized = StatusWindowState.initialize(adapter_spec)
 		"party":
 			initialized = PartyWindowState.initialize(adapter_spec)
+		"system_menu":
+			initialized = SystemMenuWindowState.initialize(adapter_spec)
 		_:
 			return _error(Errors.INVALID_CONTROL_SPEC,
 				"Window state adapter type is unsupported")
@@ -37,6 +40,8 @@ func owns(control_id: String) -> bool:
 			return control_id == str(mappings.get("mode", "")) \
 				or control_id == str(mappings.get("members", "")) \
 				or control_id in mappings.get("actions", [])
+		"system_menu":
+			return adapter_spec.get("actions", {}).has(control_id)
 	return false
 
 
@@ -52,6 +57,8 @@ func dispatch(control_spec: Dictionary, gesture: String,
 			result = _dispatch_status(control_id, gesture, payload)
 		"party":
 			result = _dispatch_party(control_spec, gesture, payload)
+		"system_menu":
+			result = _dispatch_system_menu(control_spec, gesture, payload)
 		_:
 			return _error(Errors.INVALID_CONTROL_SPEC,
 				"Window state adapter type is unsupported")
@@ -67,6 +74,8 @@ func control_patches() -> Dictionary:
 			return _status_patches()
 		"party":
 			return _party_patches()
+		"system_menu":
+			return {}
 	return {}
 
 
@@ -105,6 +114,16 @@ func _dispatch_party(control_spec: Dictionary, gesture: String,
 	return PartyWindowState.activate_action(adapter_spec, state,
 		str(control_spec.get("value", {}).get("action_id", control_id)),
 		int(payload.get("expected_version", state.get("version", -1))))
+
+
+func _dispatch_system_menu(control_spec: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	if gesture != "Activate":
+		return _error(Errors.CONTROL_BINDING,
+			"System Menu destination Buttons accept Activate")
+	return SystemMenuWindowState.activate(adapter_spec, state,
+		str(control_spec.get("id", "")), int(payload.get("expected_version",
+		state.get("version", -1))))
 
 
 func _status_patches() -> Dictionary:

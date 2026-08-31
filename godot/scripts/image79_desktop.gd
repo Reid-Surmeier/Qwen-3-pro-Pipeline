@@ -14,6 +14,7 @@ var equipment_card: ControlWindow
 var equipment_items: ControlWindow
 var status: ControlWindow
 var basic_info: ControlWindow
+var system_menu: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
@@ -52,6 +53,7 @@ func _ready() -> void:
 	equipment_items = windows.get("equipment_items")
 	status = windows.get("status")
 	basic_info = windows.get("basic_info")
+	system_menu = windows.get("system_menu")
 	# Manifest order remains the stable ControlSpec interface (Options first),
 	# while source reset stacking places Basic Info behind overlapping Windows.
 	if basic_info != null:
@@ -61,6 +63,27 @@ func _ready() -> void:
 			"equipment_card", equipment_card.spec.get("detail", {}))
 		if detail_route.get("ok", false):
 			equipment_card.detail_item = str(detail_route.detail_item)
+	_publish()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not (event is InputEventKey) or not event.pressed or event.echo \
+			or event.keycode != KEY_ESCAPE or system_menu == null:
+		return
+	var semantic_before: Dictionary = system_menu.runtime.qa_state()
+	var position_before: Array = system_menu.qa_state().window.position
+	last_transaction = DesktopActionRouter.open_window(windows.keys(), "system_menu")
+	last_transaction.source_window = "desktop"
+	last_transaction.control_id = "desktop.escape"
+	last_transaction.context = "no_frontmost_closeable_window"
+	if last_transaction.get("ok", false):
+		system_menu.visible = true
+		system_menu.move_to_front()
+		last_transaction.position_before = position_before
+		last_transaction.position_after = system_menu.qa_state().window.position
+		last_transaction.semantic_state_preserved = \
+			system_menu.runtime.qa_state() == semantic_before
+		get_viewport().set_input_as_handled()
 	_publish()
 
 

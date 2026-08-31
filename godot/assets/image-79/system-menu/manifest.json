@@ -1,0 +1,233 @@
+{
+  "kind": "deterministic-assembly",
+  "issue": 134,
+  "source": "artifacts/references/ro-desktop-b/reference-native.png",
+  "source_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "inventory": "artifacts/references/ro-desktop-b/control-inventory.json",
+  "source_rect": [
+    1328,
+    505,
+    1532,
+    778
+  ],
+  "button_copy": [
+    "セーブポイントへ",
+    "キャラクター選択",
+    "サウンド設定",
+    "環境設定",
+    "ショートカット",
+    "ゲーム終了",
+    "return to game"
+  ],
+  "provider_requests": 0,
+  "outputs": [
+    {
+      "path": "godot/assets/image-79/system-menu/source-plate.png",
+      "sha256": "c0b80a6dbee95fa5fa713c49f4ad14b01bd690cc314ee5319a210014dbcfcf5e",
+      "size": [
+        204,
+        273
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/minimized-plate.png",
+      "sha256": "0a2d8933eddf3ddfe5c0df8dbe6d77acf7e88392f141cdc9baedad0cb4f0944a",
+      "size": [
+        204,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/minimize-idle.png",
+      "sha256": "1ec3fc1dc76c090653428cf65a5501e2eb0d1ed121a5d8f64dbb8cae8513c0a5",
+      "size": [
+        14,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/minimize-hover.png",
+      "sha256": "9a790b616a7c5f187104ec73e7c8b2b3ac0175edbcd7785e3a02b1dca79c296f",
+      "size": [
+        14,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/minimize-pressed.png",
+      "sha256": "1824b2f878fd62d6b57c78c4288486d79023a8f530fc5a5aeac17a656f43aee4",
+      "size": [
+        14,
+        14
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-save_point-idle.png",
+      "sha256": "d750069ebe6439403f465f8a0f8a2666c8f9dd89e773aa09051b0273ed9be390",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-save_point-hover.png",
+      "sha256": "390ffa9daecbb69e8161a360afa5d3ba6f66fddb7b352a396c9961ee13ad88a0",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-save_point-pressed.png",
+      "sha256": "9399f579513efe43c4a2dac4545da6fae0e4daf34ca252dc52fb78628656614b",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-character_select-idle.png",
+      "sha256": "d8877d47107c3ac98ec4a33999505705c871afb94ae20b9e0e832e4183cefbfa",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-character_select-hover.png",
+      "sha256": "8384741df8918489183451bdd785fd2ba6b5373a7032d3102236a4694fe0c5ba",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-character_select-pressed.png",
+      "sha256": "74e73ed80bba46c10eb179a8b69555d3f8154b1c9d57df99d68534eefd35a46a",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-sound_settings-idle.png",
+      "sha256": "d62bc12a2dbdb46db12283b25e60d2da8244198e86875926f509e952f916bfb0",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-sound_settings-hover.png",
+      "sha256": "b428cefd284a6cf2c2bd438f6a9a01c041409cceaa3f275a3af656504268a26a",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-sound_settings-pressed.png",
+      "sha256": "83fc5889c049e43abda02f81987e54d26253d96aa76ea7f86e5487f8e7ac680c",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-environment_settings-idle.png",
+      "sha256": "76f7aab7697bbecf294804cf728bfda9b587e6f5fb3884c4c9bd411791f2b06b",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-environment_settings-hover.png",
+      "sha256": "52368b4a314a2489f9182f8aa900e497eb8fddc42cdf66c55794303d3e57e1ed",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-environment_settings-pressed.png",
+      "sha256": "47409820025606004ca85246ac0fbd9fbd5a8a82c9b05c34416be6b04b44eb8c",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-shortcuts-idle.png",
+      "sha256": "4810497c5981594019609bd0aaa0c12ef270099a64be167387fab54476f5ddb0",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-shortcuts-hover.png",
+      "sha256": "e2c4303c6c88f3899c52741a3a6843c89ebf96069302d2f94eaba4b479cb028f",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-shortcuts-pressed.png",
+      "sha256": "f5f81a17626ec79b79427c3a3b13f39b7c4beeedd9b823f81f85b93a07895fcd",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-game_exit-idle.png",
+      "sha256": "905c79ffa1451559eff28677a1261281639fbdfdc67fb0adb053df1a3daf285c",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-game_exit-hover.png",
+      "sha256": "753df4c1bf4445e700083099a57b410f274fdcb5fb1637ecd04c86b7b9f29f69",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-game_exit-pressed.png",
+      "sha256": "fc85dca60c8a01ce61788be127a6ace7abbc1c6b6f5a04355acc192a99c2b15d",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-return_to_game-idle.png",
+      "sha256": "be250de80b14b153d3b369b6bda7ae06489af1c1c2405e23a1c215ecdaadcff3",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-return_to_game-hover.png",
+      "sha256": "2c0968784c722b56e791b7a1e2f84e7fb8c3b2987e3575c973bfbe4517e93a3f",
+      "size": [
+        188,
+        27
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/system-menu/button-return_to_game-pressed.png",
+      "sha256": "da4304c5f4872a7f5db1736a590b7b47309594fd404586a44f252e31f77115db",
+      "size": [
+        188,
+        27
+      ]
+    }
+  ]
+}

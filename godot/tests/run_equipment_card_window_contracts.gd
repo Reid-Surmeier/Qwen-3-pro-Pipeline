@@ -18,7 +18,7 @@ func _run() -> void:
 	desktop = current_scene
 	window = desktop.windows.get("equipment_card")
 	_check("scene-valid", window != null and desktop.validation_errors.is_empty()
-		and desktop.windows.size() == 9, str(desktop.validation_errors))
+		and desktop.windows.size() == 10, str(desktop.validation_errors))
 	if window != null:
 		var state: Dictionary = window.qa_state()
 		_check("attested-detail-is-public", state.window.detail_item == "mistress-card",

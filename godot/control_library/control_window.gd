@@ -147,6 +147,7 @@ func qa_state() -> Dictionary:
 		"size": [size.x, size.y],
 		"visible": visible,
 		"minimized": minimized,
+		"plate_asset": str(plate.texture.resource_path) if plate.texture != null else "",
 		"view_mode": view_mode,
 		"detail_item": detail_item,
 		"pending": state.get("window_pending", false),

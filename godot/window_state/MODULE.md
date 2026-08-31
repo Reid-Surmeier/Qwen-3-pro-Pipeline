@@ -6,6 +6,8 @@
 
 `party_window_state.gd` is the pure semantic interface for the Party Window. `initialize(adapter_spec)`, `select_mode(adapter_spec, state, mode, expected_version)`, `select_member(adapter_spec, state, member_id, expected_version)`, and `activate_action(adapter_spec, state, action_id, expected_version)` return one complete versioned state or one typed rejection without mutating their input. Party/Friends mode, membership, member selection, and action availability belong here; shared Controls remain domain-neutral.
 
+`system_menu_window_state.gd` is the pure destination-policy interface for the System Menu. `initialize(adapter_spec)` publishes immutable destination availability; `activate(adapter_spec, state, control_id, expected_version)` emits a normalized `OpenWindow` request, increments state only for a declared available destination, and leaves rejected destination state byte-for-byte unchanged for the Desktop Action Router to name and expose.
+
 `window_state_spec.gd`, `window_state_runtime.gd`, and `window_state_overlay.gd` form the domain-neutral host seam consumed by the Control Library. The spec host validates adapter-owned mappings before construction; the runtime host owns dispatch and returns complete Control patches; the overlay host returns optional rendered facts. Shared Control files never import or branch on a specific Window policy.
 
 The replacement state publishes `version`, `points`, `attributes`, `derived`, and `availability` together. Cost and derived rules come only from the manifest adapter spec. The shared `Stepper` remains generic and does not calculate points or derived values.
