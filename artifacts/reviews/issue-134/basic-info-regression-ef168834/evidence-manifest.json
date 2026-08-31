@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "ef168834d6bb936528a0ba564754177dda7d5efe",
+  "files": [
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "close-button-after.png",
+      "sha256": "1b310c29bd59c6df88ca7f060635240ca1659696800079bfdcbfdf584adb8755"
+    },
+    {
+      "path": "close-button-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "close-button-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-equip-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-equip-before.png",
+      "sha256": "88e8ee49a9d0aea51e7ab98d0af3ab6bd17a910990395e3367cb6009750e9c3c"
+    },
+    {
+      "path": "destination-equip-reversed.png",
+      "sha256": "88e8ee49a9d0aea51e7ab98d0af3ab6bd17a910990395e3367cb6009750e9c3c"
+    },
+    {
+      "path": "destination-items-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-items-before.png",
+      "sha256": "fe38c1bda6738c936fdeec39e6132aa217dbff104fac142485830358d5f9d732"
+    },
+    {
+      "path": "destination-items-reversed.png",
+      "sha256": "fe38c1bda6738c936fdeec39e6132aa217dbff104fac142485830358d5f9d732"
+    },
+    {
+      "path": "destination-option-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-option-before.png",
+      "sha256": "64a0245b924ac04763d210a854e60ab0785406e5ea5bc48a7754cb06edaa78ed"
+    },
+    {
+      "path": "destination-option-reversed.png",
+      "sha256": "64a0245b924ac04763d210a854e60ab0785406e5ea5bc48a7754cb06edaa78ed"
+    },
+    {
+      "path": "destination-skill-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-skill-before.png",
+      "sha256": "ba98a50df549c747cd3a9755fa1a89b3b9f2c041fd8c0a66d23f1e130fead968"
+    },
+    {
+      "path": "destination-skill-reversed.png",
+      "sha256": "ba98a50df549c747cd3a9755fa1a89b3b9f2c041fd8c0a66d23f1e130fead968"
+    },
+    {
+      "path": "destination-status-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "destination-status-before.png",
+      "sha256": "ae8190acecd8ba1fd20dd408d2814f49efceaaa561dec6b05e9dfbe085d050d4"
+    },
+    {
+      "path": "destination-status-reversed.png",
+      "sha256": "ae8190acecd8ba1fd20dd408d2814f49efceaaa561dec6b05e9dfbe085d050d4"
+    },
+    {
+      "path": "drag-after.png",
+      "sha256": "72931a33cd150f76fbe6046dcebc05a07e2dbba324cd04d4de52985919c95205"
+    },
+    {
+      "path": "drag-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "drag-mid.png",
+      "sha256": "96e19559510d546e0ee72b31adc7f17b2e88b76d3861a98b6a3ff899256e4c0b"
+    },
+    {
+      "path": "drag-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "escape-after.png",
+      "sha256": "1b310c29bd59c6df88ca7f060635240ca1659696800079bfdcbfdf584adb8755"
+    },
+    {
+      "path": "escape-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "escape-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "minimize-after.png",
+      "sha256": "2bc68f8092dd62c9de30a9df962922bb17814f14b6695f09f539e66075a0d51d"
+    },
+    {
+      "path": "minimize-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "minimize-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "eb7b57f9925ce0cc2674b063df79fd0a95c08a33415e4fe79e1baa4067b30955"
+    },
+    {
+      "path": "unavailable-chat-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-chat-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-chat-mid.png",
+      "sha256": "2806a13a47c053c2d4e7e4029c9ead26a6a434f743aa459dcdd1771aec883ced"
+    },
+    {
+      "path": "unavailable-chat-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-friend-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-friend-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-friend-mid.png",
+      "sha256": "c6bf09a39d73acedd8110eebd5afd2ee628f0c1c397b49385b0bf94e7f3eabe6"
+    },
+    {
+      "path": "unavailable-friend-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-map-after.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-map-before.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "unavailable-map-mid.png",
+      "sha256": "3eb628833f82805760ebbb7ac89fa0ee5e9a37b2be5fa941abf2a41108192a4e"
+    },
+    {
+      "path": "unavailable-map-reversed.png",
+      "sha256": "4c1f5eb93418c25c97e6f529598779652012eab6e62e9250e43a2214124172a3"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "1ee309e2f3ee77cd5de4687934ac0c85c1601b1c1da6c7c8eff2bb1758ae9408"
+    },
+    {
+      "path": "zz-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    }
+  ]
+}

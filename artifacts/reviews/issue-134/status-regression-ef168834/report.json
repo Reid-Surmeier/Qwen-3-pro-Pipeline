@@ -1,0 +1,415 @@
+{
+  "url": "http://127.0.0.1:8905/?screen=image79&evidence=status",
+  "window": {
+    "id": "status",
+    "geometry": {
+      "x": 0,
+      "y": 211,
+      "width": 484,
+      "height": 208
+    }
+  },
+  "driver": "Playwright Chromium real pointer, click, context-click, drag, and keyboard input",
+  "checks": [
+    {
+      "name": "idle-source-factual",
+      "passed": true,
+      "detail": {
+        "attributes": {
+          "status.attribute.agi": {
+            "base": 1,
+            "bonus": 2,
+            "cost": 2,
+            "initial_base": 1,
+            "key": "Agi"
+          },
+          "status.attribute.dex": {
+            "base": 1,
+            "bonus": 3,
+            "cost": 2,
+            "initial_base": 1,
+            "key": "Dex"
+          },
+          "status.attribute.int": {
+            "base": 92,
+            "bonus": 10,
+            "cost": 11,
+            "initial_base": 92,
+            "key": "Int"
+          },
+          "status.attribute.luk": {
+            "base": 1,
+            "bonus": 5,
+            "cost": 2,
+            "initial_base": 1,
+            "key": "Luk"
+          },
+          "status.attribute.str": {
+            "base": 1,
+            "bonus": 2,
+            "cost": 2,
+            "initial_base": 1,
+            "key": "Str"
+          },
+          "status.attribute.vit": {
+            "base": 1,
+            "bonus": 3,
+            "cost": 2,
+            "initial_base": 1,
+            "key": "Vit"
+          }
+        },
+        "availability": {
+          "status.attribute.agi": true,
+          "status.attribute.dex": true,
+          "status.attribute.int": false,
+          "status.attribute.luk": true,
+          "status.attribute.str": true,
+          "status.attribute.vit": true
+        },
+        "derived": {
+          "Aspd": 140,
+          "Atk": 63,
+          "Critical": 3,
+          "Def": 20,
+          "Flee": 64,
+          "Hit": 64,
+          "MatkMax": 502,
+          "MatkMin": 298,
+          "Mdef": 107
+        },
+        "points": 4,
+        "reverse_availability": {
+          "status.attribute.agi": false,
+          "status.attribute.dex": false,
+          "status.attribute.int": false,
+          "status.attribute.luk": false,
+          "status.attribute.str": false,
+          "status.attribute.vit": false
+        },
+        "version": 0
+      }
+    },
+    {
+      "name": "status.minimize:Activate:ToggleMinimized",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "minimized": true,
+          "restored": true,
+          "semantic_state_preserved": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.str:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hover_exposed": true,
+          "pressed_exposed": true,
+          "one_version": true,
+          "points_spent": true,
+          "attribute_incremented": true,
+          "derived_same_frame": true,
+          "reversed_semantically": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.str:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "refunded": true,
+          "source_value": true,
+          "source_overlay_hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.agi:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hover_exposed": true,
+          "pressed_exposed": true,
+          "one_version": true,
+          "points_spent": true,
+          "attribute_incremented": true,
+          "derived_same_frame": true,
+          "reversed_semantically": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.agi:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "refunded": true,
+          "source_value": true,
+          "source_overlay_hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.vit:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hover_exposed": true,
+          "pressed_exposed": true,
+          "one_version": true,
+          "points_spent": true,
+          "attribute_incremented": true,
+          "derived_same_frame": true,
+          "reversed_semantically": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.vit:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "refunded": true,
+          "source_value": true,
+          "source_overlay_hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.dex:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hover_exposed": true,
+          "pressed_exposed": true,
+          "one_version": true,
+          "points_spent": true,
+          "attribute_incremented": true,
+          "derived_same_frame": true,
+          "reversed_semantically": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.dex:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "refunded": true,
+          "source_value": true,
+          "source_overlay_hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.luk:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hover_exposed": true,
+          "pressed_exposed": true,
+          "one_version": true,
+          "points_spent": true,
+          "attribute_incremented": true,
+          "derived_same_frame": true,
+          "reversed_semantically": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.luk:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "refunded": true,
+          "source_value": true,
+          "source_overlay_hidden": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.int:Activate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "rejected_named": true,
+          "state_atomic": true,
+          "unavailable": true,
+          "transient_feedback": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": false,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.attribute.int:ContextActivate:StepStatusAttribute",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "rejected_named": true,
+          "state_atomic": true,
+          "unavailable": true,
+          "transient_feedback": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": false,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status:Drag:MoveWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "moved_x": true,
+          "moved_y": true,
+          "continuous": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status.close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hidden": true,
+          "routed": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    },
+    {
+      "name": "status:KeyCommand:CloseWindow",
+      "passed": true,
+      "detail": {
+        "assertions": {
+          "hidden": true,
+          "routed": true
+        },
+        "contract_facts": {
+          "real_gesture_path": true,
+          "intended_region_changed": true,
+          "invariants_stable": true,
+          "source_approved": true,
+          "reversible": true
+        }
+      }
+    }
+  ],
+  "console_entries": [
+    "[warning] [.WebGL-0x1acc0dbbdc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x1acc0dbbdc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x1acc0dbbdc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x1acc0dbbdc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "summary": {
+    "pass": true,
+    "total": 17,
+    "failed": 0,
+    "console_errors": 0,
+    "provider_requests": 0
+  }
+}
