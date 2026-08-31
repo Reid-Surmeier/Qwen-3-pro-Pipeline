@@ -199,6 +199,33 @@ func adapter_owns(control_id: String) -> bool:
 	return state_runtime != null and state_runtime.owns(control_id)
 
 
+func advance_frame() -> Dictionary:
+	if state_runtime == null:
+		return {"ok": true, "changed": false}
+	var result: Dictionary = state_runtime.advance_frame()
+	if result.get("ok", false):
+		_apply_window_state_patches()
+		var scroll_id := str(result.get("scroll_to_end_control_id", ""))
+		if not scroll_id.is_empty() and controls.has(scroll_id):
+			var scroll: Dictionary = controls[scroll_id]
+			scroll.state.offset = int(scroll.state.get("maximum", 0))
+			scroll.state.value = scroll.state.offset
+			scroll.state.semantic_state = "at_start" \
+				if int(scroll.state.offset) == int(scroll.state.get("minimum", 0)) \
+				else "at_end"
+	return result
+
+
+func dispatch_window_action(action: String) -> Dictionary:
+	if state_runtime == null:
+		return {"ok": false, "error": {"code": Errors.ACTION_ROUTING,
+			"detail": "Window has no state adapter"}}
+	var result: Dictionary = state_runtime.dispatch_window_action(action)
+	if result.get("ok", false):
+		_apply_window_state_patches()
+	return result
+
+
 func reject_action(control_id: String, action: String,
 		code: String = Errors.ACTION_ROUTING, detail: String = "") -> Dictionary:
 	var message := detail if not detail.is_empty() \
@@ -641,6 +668,17 @@ func _apply_window_state_patches() -> void:
 		var patch: Dictionary = patches[control_id]
 		for field in patch:
 			controls[str(control_id)].state[field] = patch[field]
+		if controls[str(control_id)].state.has("offset"):
+			controls[str(control_id)].state.offset = clampi(
+				int(controls[str(control_id)].state.offset),
+				int(controls[str(control_id)].state.get("minimum", 0)),
+				int(controls[str(control_id)].state.get("maximum", 0)))
+			controls[str(control_id)].state.value = controls[str(control_id)].state.offset
+			var offset := int(controls[str(control_id)].state.offset)
+			var minimum := int(controls[str(control_id)].state.get("minimum", 0))
+			var maximum := int(controls[str(control_id)].state.get("maximum", 0))
+			controls[str(control_id)].state.semantic_state = "at_start" \
+				if offset == minimum else "at_end" if offset == maximum else "between"
 	window_state = state_runtime.state.duplicate(true)
 
 func _reject(control_id: String, gesture: String, code: String, detail: String) -> Dictionary:

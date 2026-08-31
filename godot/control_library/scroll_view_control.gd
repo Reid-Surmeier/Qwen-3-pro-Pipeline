@@ -109,8 +109,9 @@ func _set_from_global_y(global_y: float) -> void:
 	var track: TextureRect = visuals.track
 	var thumb: TextureRect = visuals.thumb
 	var local_y := global_y - global_position.y
-	var travel := track.size.y - thumb.size.y
-	var normalized := (local_y - track.position.y - thumb.size.y / 2.0) / travel
+	var thumb_start := float(spec.surfaces.thumb.geometry.y)
+	var travel := track.position.y + track.size.y - thumb.size.y - thumb_start
+	var normalized := (local_y - thumb_start - thumb.size.y / 2.0) / travel
 	var result: Dictionary = runtime.dispatch(spec.id, "Drag", {"normalized": normalized})
 	_refresh()
 	changed.emit(spec.id, result)
@@ -137,7 +138,9 @@ func _refresh() -> void:
 		float(int(state.offset) - minimum) / float(maximum - minimum)
 	var track: TextureRect = visuals.track
 	var thumb: TextureRect = visuals.thumb
-	thumb.position.y = track.position.y + round(normalized * (track.size.y - thumb.size.y))
+	var thumb_start := float(spec.surfaces.thumb.geometry.y)
+	var travel := track.position.y + track.size.y - thumb.size.y - thumb_start
+	thumb.position.y = thumb_start + round(normalized * travel)
 	if hits.has("thumb"):
 		hits.thumb.position = thumb.position
 	for surface in visuals:

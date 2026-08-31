@@ -7,6 +7,7 @@ const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const PartyWindowState = preload("res://window_state/party_window_state.gd")
 const SystemMenuWindowState = preload("res://window_state/system_menu_window_state.gd")
+const ChatRoomWindowState = preload("res://window_state/chat_room_window_state.gd")
 
 var adapter_spec: Dictionary = {}
 var state: Dictionary = {}
@@ -22,6 +23,8 @@ func configure(spec: Dictionary) -> Dictionary:
 			initialized = PartyWindowState.initialize(adapter_spec)
 		"system_menu":
 			initialized = SystemMenuWindowState.initialize(adapter_spec)
+		"chat_room":
+			initialized = ChatRoomWindowState.initialize(adapter_spec)
 		_:
 			return _error(Errors.INVALID_CONTROL_SPEC,
 				"Window state adapter type is unsupported")
@@ -42,6 +45,8 @@ func owns(control_id: String) -> bool:
 				or control_id in mappings.get("actions", [])
 		"system_menu":
 			return adapter_spec.get("actions", {}).has(control_id)
+		"chat_room":
+			return control_id == str(adapter_spec.get("controls", {}).get("input", ""))
 	return false
 
 
@@ -59,6 +64,8 @@ func dispatch(control_spec: Dictionary, gesture: String,
 			result = _dispatch_party(control_spec, gesture, payload)
 		"system_menu":
 			result = _dispatch_system_menu(control_spec, gesture, payload)
+		"chat_room":
+			result = _dispatch_chat_room(control_spec, gesture, payload)
 		_:
 			return _error(Errors.INVALID_CONTROL_SPEC,
 				"Window state adapter type is unsupported")
@@ -76,7 +83,32 @@ func control_patches() -> Dictionary:
 			return _party_patches()
 		"system_menu":
 			return {}
+		"chat_room":
+			return _chat_room_patches()
 	return {}
+
+
+func advance_frame() -> Dictionary:
+	if str(adapter_spec.get("type", "")) != "chat_room":
+		return {"ok": true, "changed": false, "state": state.duplicate(true)}
+	var result := ChatRoomWindowState.advance_frame(adapter_spec, state)
+	if result.get("ok", false):
+		state = result.state
+		result.window_state = state.duplicate(true)
+	return result
+
+
+func dispatch_window_action(action: String) -> Dictionary:
+	if str(adapter_spec.get("type", "")) != "chat_room" \
+			or action != "ChangeChatRows":
+		return _error(Errors.ACTION_ROUTING,
+			"Window state adapter cannot route action: %s" % action)
+	var result := ChatRoomWindowState.change_rows(adapter_spec, state,
+		int(state.get("version", -1)))
+	if result.get("ok", false):
+		state = result.state
+		result.window_state = state.duplicate(true)
+	return result
 
 
 func _dispatch_status(control_id: String, gesture: String,
@@ -126,6 +158,22 @@ func _dispatch_system_menu(control_spec: Dictionary, gesture: String,
 		state.get("version", -1))))
 
 
+func _dispatch_chat_room(control_spec: Dictionary, gesture: String,
+		payload: Dictionary) -> Dictionary:
+	if gesture != "KeyCommand":
+		return _error(Errors.CONTROL_BINDING,
+			"Chat input accepts KeyCommand")
+	var expected := int(payload.get("expected_version", state.get("version", -1)))
+	if bool(payload.get("submit", false)):
+		return ChatRoomWindowState.submit(adapter_spec, state,
+			str(payload.get("scope", "screen")), expected)
+	if not payload.has("text") or not payload.text is String:
+		return _error(Errors.CONTROL_BINDING,
+			"Chat input editing requires complete text")
+	return ChatRoomWindowState.edit_draft(adapter_spec, state,
+		str(payload.text), expected)
+
+
 func _status_patches() -> Dictionary:
 	var patches := {}
 	for control_id in state.get("attributes", {}):
@@ -168,6 +216,20 @@ func _party_patches() -> Dictionary:
 				if bool(state.availability.get(str(action_id), false)) else "disabled",
 		}
 	return patches
+
+
+func _chat_room_patches() -> Dictionary:
+	var controls: Dictionary = adapter_spec.get("controls", {})
+	var input_id := str(controls.get("input", ""))
+	var scroll_id := str(controls.get("scroll", ""))
+	var maximum := maxi(0, state.get("lines", []).size()
+		- int(state.get("visible_row_count", 5)))
+	return {
+		input_id: {"value": str(state.get("draft", "")),
+			"text": str(state.get("draft", "")),
+			"semantic_state": "empty" if str(state.get("draft", "")).is_empty() else "editing"},
+		scroll_id: {"maximum": maximum},
+	}
 
 
 func _error(code: String, detail: String) -> Dictionary:

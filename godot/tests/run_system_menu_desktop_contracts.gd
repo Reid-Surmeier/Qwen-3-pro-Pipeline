@@ -18,7 +18,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	_check("assembled-desktop-has-system-menu",
-		desktop.validation_errors.is_empty() and desktop.windows.size() == 10
+		desktop.validation_errors.is_empty() and desktop.windows.size() == 11
 		and desktop.system_menu != null and desktop.system_menu.visible,
 		str(desktop.qa_state()))
 

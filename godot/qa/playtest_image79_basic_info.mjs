@@ -19,7 +19,10 @@ const CANDIDATE = process.env.CANDIDATE_SHA
   ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const DESIGN = { width: 1536, height: 1024 };
 const INTENDED = { x: 0, y: 0, width: 1536, height: 1024 };
-const INVARIANT = { x: 1400, y: 800, width: 100, height: 100 };
+// The final Chat Room occupies the old lower-right invariant. Use the exact
+// source-background seam between Skill Tree and Storage instead; no declared
+// Basic Info destination or drag path may touch it.
+const INVARIANT = { x: 700, y: 598, width: 100, height: 8 };
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
@@ -155,7 +158,7 @@ const clickControl = async (id) => {
 };
 const targetTitles = {
   status: [100, 222], options: [1200, 308], inventory: [100, 713],
-  equipment_items: [100, 435], skill_tree: [650, 12],
+  equipment_items: [100, 435], skill_tree: [650, 12], chat_room: [1200, 794],
 };
 const closeTarget = async (target) => {
   const p = point(...targetTitles[target]);
@@ -166,9 +169,10 @@ const closeTarget = async (target) => {
 
 const invariantBefore = await invariantShot("00-invariant-before");
 
-// Five live source destinations close, then reopen/raise, then close exactly.
+// Six live source destinations close, then reopen/raise, then close exactly.
 for (const [name, target] of [["status", "status"], ["option", "options"],
-  ["items", "inventory"], ["equip", "equipment_items"], ["skill", "skill_tree"]]) {
+  ["items", "inventory"], ["equip", "equipment_items"], ["skill", "skill_tree"],
+  ["chat", "chat_room"]]) {
   await reload();
   await closeTarget(target);
   await bringBasic();
@@ -190,7 +194,7 @@ for (const [name, target] of [["status", "status"], ["option", "options"],
 }
 
 // Unavailable source buttons show pressed feedback and commit no pixels/state.
-for (const name of ["map", "chat", "friend"]) {
+for (const name of ["map", "friend"]) {
   await reload();
   await bringBasic();
   const before = await shot(`unavailable-${name}-before`);

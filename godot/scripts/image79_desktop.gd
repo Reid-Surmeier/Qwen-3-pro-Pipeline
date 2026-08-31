@@ -15,14 +15,20 @@ var equipment_items: ControlWindow
 var status: ControlWindow
 var basic_info: ControlWindow
 var system_menu: ControlWindow
+var chat_room: ControlWindow
 var windows := {}
 var validation_errors: Array = []
 var last_transaction: Dictionary = {}
 var _last_json := ""
 var _cross_window_drag := {}
 var _published_window_states := {}
+var _published_window_json := {}
+var _web_full_publishes := 0
+var _web_patch_publishes := 0
+var _web_max_patch_bytes := 0
 
 func _ready() -> void:
+	set_meta("constructing_windows", true)
 	var background := ColorRect.new()
 	background.name = "Image79Magenta"
 	background.color = Color8(255, 0, 254)
@@ -34,6 +40,7 @@ func _ready() -> void:
 	validation_errors = loaded.errors
 	if not validation_errors.is_empty():
 		push_error("Image 79 ControlSpec rejected: %s" % str(validation_errors))
+		remove_meta("constructing_windows")
 		_publish()
 		return
 	for window_spec in loaded.manifest.windows:
@@ -52,6 +59,7 @@ func _ready() -> void:
 	status = windows.get("status")
 	basic_info = windows.get("basic_info")
 	system_menu = windows.get("system_menu")
+	chat_room = windows.get("chat_room")
 	# Manifest order remains the stable ControlSpec interface (Options first),
 	# while source reset stacking places Basic Info behind overlapping Windows.
 	if basic_info != null:
@@ -61,12 +69,24 @@ func _ready() -> void:
 			"equipment_card", equipment_card.spec.get("detail", {}))
 		if detail_route.get("ok", false):
 			equipment_card.detail_item = str(detail_route.detail_item)
+	remove_meta("constructing_windows")
 	_publish()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if not (event is InputEventKey) or not event.pressed or event.echo \
-			or event.keycode != KEY_ESCAPE or system_menu == null:
+	if not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	if event.keycode == KEY_F10 and event.alt_pressed and chat_room != null:
+		chat_room.visible = not chat_room.visible
+		if chat_room.visible:
+			chat_room.move_to_front()
+		last_transaction = {"ok": true, "action": "ToggleWindow",
+			"source_window": "desktop", "control_id": "desktop.alt_f10",
+			"target_window": "chat_room", "visible": chat_room.visible}
+		get_viewport().set_input_as_handled()
+		_publish()
+		return
+	if event.keycode != KEY_ESCAPE or system_menu == null:
 		return
 	var semantic_before: Dictionary = system_menu.runtime.qa_state()
 	var position_before: Array = system_menu.qa_state().window.position
@@ -309,36 +329,57 @@ func _slot_at_global(window_id: String, control_id: String, point: Vector2) -> S
 
 
 func _publish(_window_id: String = "") -> void:
-	if has_meta("suppress_publish"):
+	if has_meta("suppress_publish") or has_meta("constructing_windows"):
 		return
-	var snapshot := qa_state() if not OS.has_feature("web") \
-		else _web_qa_state(_window_id)
+	if OS.has_feature("web"):
+		_publish_web(_window_id)
+		return
+	var snapshot := qa_state()
 	var json := JSON.stringify(snapshot)
 	if json == _last_json:
 		return
 	_last_json = json
-	if OS.has_feature("web"):
-		JavaScriptBridge.eval("window.godotQaState = " + json + ";", true)
-	else:
+	if OS.get_environment("IMAGE79_PRINT_QA_STATE") == "1":
 		print(json)
 
 
-func _web_qa_state(changed_window_id: String) -> Dictionary:
-	if _published_window_states.is_empty() or changed_window_id.is_empty():
-		_published_window_states.clear()
-		for window_id in windows:
-			_published_window_states[window_id] = windows[window_id].qa_state()
-	elif windows.has(changed_window_id):
-		_published_window_states[changed_window_id] = \
-			windows[changed_window_id].qa_state()
-	return {
-		"schema_version": 3,
-		"reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
-		"viewport": [1536, 1024],
-		"validation_errors": validation_errors,
-		"windows": _published_window_states,
-		"last_transaction": last_transaction.duplicate(true),
-	}
+func _publish_web(changed_window_id: String) -> void:
+	if _published_window_json.is_empty() or changed_window_id.is_empty() \
+			or not windows.has(changed_window_id):
+		var snapshot := qa_state()
+		var json := JSON.stringify(snapshot)
+		if json == _last_json:
+			return
+		_last_json = json
+		_published_window_states = snapshot.windows.duplicate(true)
+		_published_window_json.clear()
+		for window_id in _published_window_states:
+			_published_window_json[window_id] = JSON.stringify(
+				_published_window_states[window_id])
+		_web_full_publishes += 1
+		JavaScriptBridge.eval("window.godotQaState = " + json + ";" \
+			+ _web_metrics_script(json.length(), false), true)
+		return
+	var window_state: Dictionary = windows[changed_window_id].qa_state()
+	var window_json := JSON.stringify(window_state)
+	if str(_published_window_json.get(changed_window_id, "")) == window_json:
+		return
+	_published_window_states[changed_window_id] = window_state.duplicate(true)
+	_published_window_json[changed_window_id] = window_json
+	_web_patch_publishes += 1
+	_web_max_patch_bytes = maxi(_web_max_patch_bytes, window_json.length())
+	var quoted_id := JSON.stringify(changed_window_id)
+	var transaction_json := JSON.stringify(last_transaction)
+	JavaScriptBridge.eval("window.godotQaState.windows[" + quoted_id + "] = " \
+		+ window_json + ";window.godotQaState.last_transaction = " \
+		+ transaction_json + ";" + _web_metrics_script(window_json.length(), true), true)
+
+
+func _web_metrics_script(payload_bytes: int, patched: bool) -> String:
+	return ("window.godotQaMetrics = {fullPublishes:%d,patchPublishes:%d," \
+		+ "lastPayloadBytes:%d,maxPatchBytes:%d,lastWasPatch:%s};") % [
+			_web_full_publishes, _web_patch_publishes, payload_bytes,
+			_web_max_patch_bytes, "true" if patched else "false"]
 
 
 func _process(_delta: float) -> void:

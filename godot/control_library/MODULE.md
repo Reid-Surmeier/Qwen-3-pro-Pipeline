@@ -6,6 +6,14 @@
 
 `ScrollView.interact()` accepts normalized Wheel, Activate, and Drag payloads and owns row offsets and exact clamps; a manifest may instead declare a zero-range unavailable visual authority, which rejects every gesture without mutation. `TextField.edit()` accepts or rejects complete candidate text atomically. `ControlWindow.action_emitted` publishes accepted Window Actions to the Desktop Action Router without granting it access to private adapter nodes.
 
+A manifest-owned chat TextField may additionally submit its complete draft with
+one declared modifier scope. `ControlWindow` anchors delayed delivery to engine
+frame numbers, so coroutine or browser scheduling cannot accelerate the exact
+three-frame state transition. Web QA publication preserves the complete public
+state while sending only the changed Window after the initial snapshot; the
+browser exposes payload counters in `window.godotQaMetrics` for regression
+evidence.
+
 `Meter.project()` is the read-only Meter interface. A Meter declares ordered bounds, a current value, fill axis, and source-owned fill extent; it exposes no Gesture Capability and `MeterControl` renders its State Set without making the source plate interactive.
 
 `SelectionViewControl` owns real press/move/release recognition. It publishes
@@ -34,6 +42,9 @@ The Equipment Items contracts additionally drive real 31-sample pointer paths
 across Inventory and Equipment Items and inspect only public QA state.
 They include invalid-destination rejection frames, explicit Equip-tab
 DoubleActivate ownership, and adversarial foreign-asset validation.
+`res://tests/run_chat_room_window_contracts.gd` drives actual text and modifier
+input, exact accepted/third-frame observations, F10, Alt+F10, and clamped Wheel
+input through the same public seam.
 
 ## Implementation freedom
 

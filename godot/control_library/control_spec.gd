@@ -19,7 +19,7 @@ const GESTURES := [
 	"ModifierDoubleActivate", "Drag", "DragDrop", "Resize", "Wheel", "KeyCommand",
 ]
 const ACTIONS_BY_TYPE := {
-	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow"],
+	"Window": ["MoveWindow", "ResizeWindow", "CloseWindow", "ChangeChatRows", "ToggleWindow"],
 	"Button": ["ToggleMinimized", "CloseWindow", "ToggleSkillView",
 		"CommitSkillChanges", "CancelSkillChanges", "ToggleStorageView",
 		"SortStorage", "FocusStorageSearch", "OpenWindow", "ActivatePartyAction"],
@@ -36,8 +36,9 @@ const ACTIONS_BY_TYPE := {
 	"Stepper": ["StepSkill", "StepStatusAttribute"],
 	"ScrollView": ["ScrollStorage", "StepStorageScroll", "SetStorageScrollOffset",
 		"ScrollEquipmentCard", "StepEquipmentCardScroll",
-		"SetEquipmentCardScrollOffset"],
-	"TextField": ["FilterStorage"],
+		"SetEquipmentCardScrollOffset", "ScrollChatLog", "StepChatLog",
+		"SetChatLogOffset"],
+	"TextField": ["FilterStorage", "SetChatDraft", "SubmitChat"],
 }
 
 
@@ -231,6 +232,9 @@ static func _validate_linked_selection_controls(controls: Array, path: String,
 				"ScrollView", "TextField"]:
 			continue
 		var value: Variant = control.get("value", {})
+		if value is Dictionary and (bool(value.get("chat_log", false)) \
+				or bool(value.get("chat_input", false))):
+			continue
 		if str(control.get("type", "")) == "ScrollView" and value is Dictionary \
 				and value.get("available", true) == false:
 			continue
@@ -789,7 +793,8 @@ static func _validate_scroll_view_contract(control: Dictionary, path: String,
 		available = bool(value.available)
 	if valid:
 		if available:
-			valid = not str(value.get("selection_control_id", "")).is_empty()
+			valid = bool(value.get("chat_log", false)) \
+				or not str(value.get("selection_control_id", "")).is_empty()
 		else:
 			valid = int(value.minimum) == 0 and int(value.maximum) == 0 \
 				and int(value.initial) == 0 \
@@ -811,7 +816,8 @@ static func _validate_text_field_contract(control: Dictionary, path: String,
 	var valid := value is Dictionary and value.get("initial") is String \
 		and _positive_number(value.get("maximum_length")) \
 		and not str(value.get("accepted_pattern", "")).is_empty() \
-		and not str(value.get("selection_control_id", "")).is_empty()
+		and (bool(value.get("chat_input", false)) \
+			or not str(value.get("selection_control_id", "")).is_empty())
 	if valid:
 		var regex := RegEx.new()
 		valid = regex.compile(str(value.accepted_pattern)) == OK

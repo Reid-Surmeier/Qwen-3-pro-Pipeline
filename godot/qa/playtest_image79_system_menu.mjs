@@ -19,7 +19,10 @@ const CANDIDATE = process.env.CANDIDATE_SHA
 const DESIGN = { width: 1536, height: 1024 };
 const INTENDED = { x: 1328, y: 505, width: 204, height: 273 };
 const OPTIONS_REGION = { x: 1108, y: 297, width: 424, height: 202 };
-const INVARIANT = { x: 1400, y: 800, width: 100, height: 100 };
+// The desktop-context Escape case intentionally closes Chat Room, so its
+// lower-right rectangle cannot be a global invariant. This source-background
+// seam remains untouched whether the surrounding Windows are visible or not.
+const INVARIANT = { x: 700, y: 598, width: 100, height: 8 };
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");

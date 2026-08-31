@@ -1,0 +1,684 @@
+{
+  "url": "http://127.0.0.1:8878/?screen=image79&candidate=1c63702",
+  "window": {
+    "id": "storage",
+    "geometry": {
+      "x": 492,
+      "y": 609,
+      "width": 539,
+      "height": 393
+    }
+  },
+  "driver": "Playwright Chromium real pointer, wheel, and keyboard input",
+  "checks": [
+    {
+      "name": "idle-factual",
+      "passed": true,
+      "detail": {
+        "detail_item": "",
+        "geometry_version": 0,
+        "id": "storage",
+        "last_action": "",
+        "last_error": null,
+        "last_gesture": "",
+        "minimized": false,
+        "pending": false,
+        "plate_asset": "res://assets/image-79/storage/source-plate.png",
+        "position": [
+          492,
+          609
+        ],
+        "resize": {
+          "active": false,
+          "clamped": [
+            539,
+            393
+          ],
+          "motion_samples": 0,
+          "requested": [
+            539,
+            393
+          ],
+          "stale_footer_covered": false,
+          "stale_footer_grip_covered": false,
+          "stale_right_edge_covered": false,
+          "stale_title_controls_covered": false
+        },
+        "size": [
+          539,
+          393
+        ],
+        "view_mode": "tree",
+        "visible": true,
+        "z_index": 0
+      }
+    },
+    {
+      "name": "storage.items:Activate:SelectStorageItem",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:ToggleStorageSelection",
+      "passed": true,
+      "detail": {
+        "toggled": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:FocusStorageSearch",
+      "passed": true,
+      "detail": {
+        "focused": true
+      }
+    },
+    {
+      "name": "storage.items:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_idle": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_single_selection": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_modifier_selection": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:SelectStorageCategory",
+      "passed": true,
+      "detail": {
+        "selected": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_initial_category": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:ScrollStorage",
+      "passed": true,
+      "detail": {
+        "exact_three_rows": true,
+        "one_frame_state": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:reversal",
+      "passed": true,
+      "detail": {
+        "exact_start": true
+      }
+    },
+    {
+      "name": "storage.scroll:Activate:StepStorageScroll",
+      "passed": true,
+      "detail": {
+        "clamps_exact_end": true,
+        "clamps_exact_start": true
+      }
+    },
+    {
+      "name": "storage.scroll:Drag:SetStorageScrollOffset",
+      "passed": true,
+      "detail": {
+        "continuous": true,
+        "dragging_state_visible": true,
+        "clamps_exact_end": true,
+        "clamps_exact_start": true,
+        "offset_changed": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:FilterStorage",
+      "passed": true,
+      "detail": {
+        "accepted_text_rendered": true,
+        "filtered_one": true,
+        "scroll_reset": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:reversal",
+      "passed": true,
+      "detail": {
+        "restored_empty_filter": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:ToggleStorageView",
+      "passed": true,
+      "detail": {
+        "list_mode": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_tree": true
+      }
+    },
+    {
+      "name": "storage.sort:Activate:SortStorage",
+      "passed": true,
+      "detail": {
+        "reversed_order": true,
+        "restored_order": true,
+        "reordered_pixels": true,
+        "restored_pixels": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "rejected_full": true,
+        "source_preserved": true,
+        "target_preserved": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "transaction_was_atomic": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:TransferInventoryItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true,
+        "both_versions": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_both_collections": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:TransferStorageItem",
+      "passed": true,
+      "detail": {
+        "committed": true,
+        "direction": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:reversal",
+      "passed": true,
+      "detail": {
+        "restored_outbound_state": true
+      }
+    },
+    {
+      "name": "storage:Drag:MoveWindow",
+      "passed": true,
+      "detail": {
+        "moved": true,
+        "continuous": true,
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:CloseWindow",
+      "passed": true,
+      "detail": {
+        "hidden": true,
+        "routed": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:reversal",
+      "passed": true,
+      "detail": {
+        "restored": true
+      }
+    },
+    {
+      "name": "storage.items:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.search_focus:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.categories:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Wheel:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.scroll:Drag:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.search:KeyCommand:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.list:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.sort:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "inventory.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.items:ModifierDoubleActivate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage:Drag:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.close:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage.bottom_close:Activate:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "name": "storage:KeyCommand:contract-facts",
+      "passed": true,
+      "detail": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ],
+  "frames": {
+    "00-idle": {
+      "path": "00-idle.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "00a-item-selected": {
+      "path": "00a-item-selected.png",
+      "sha256": "d4e5a4087e2500a3d04325f997e4671fc82cf9c4bed8cd7ac9c2c6b0dd4ab33b"
+    },
+    "00b-item-modifier-selected": {
+      "path": "00b-item-modifier-selected.png",
+      "sha256": "7e9db5bca463054ac8a3ad616cabc961d27a5a14578c0b9e1c04432c66fced29"
+    },
+    "00c-search-focused": {
+      "path": "00c-search-focused.png",
+      "sha256": "e58b2d7e8beba452dfd95f3a0c15ca37e8d7d4c2335d8983e30f6367b6ef9329"
+    },
+    "00d-item-selection-reversed": {
+      "path": "00d-item-selection-reversed.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "00e-modifier-selection-reversed": {
+      "path": "00e-modifier-selection-reversed.png",
+      "sha256": "d4e5a4087e2500a3d04325f997e4671fc82cf9c4bed8cd7ac9c2c6b0dd4ab33b"
+    },
+    "00f-search-focus-reversed": {
+      "path": "00f-search-focus-reversed.png",
+      "sha256": "7e9db5bca463054ac8a3ad616cabc961d27a5a14578c0b9e1c04432c66fced29"
+    },
+    "01-category-equipment": {
+      "path": "01-category-equipment.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "01b-category-reversed": {
+      "path": "01b-category-reversed.png",
+      "sha256": "e58b2d7e8beba452dfd95f3a0c15ca37e8d7d4c2335d8983e30f6367b6ef9329"
+    },
+    "02-wheel-three-rows": {
+      "path": "02-wheel-three-rows.png",
+      "sha256": "240948d2ed0b94459e273c4a60dd9470ff909687d925c8c3305b1eb78eeaacba"
+    },
+    "02b-wheel-reversed": {
+      "path": "02b-wheel-reversed.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "03-arrow-endpoint": {
+      "path": "03-arrow-endpoint.png",
+      "sha256": "fc3e4aa1c29829d2b6173cec1b7241a6f8243ee1938cb26e93e1446479ab5dbc"
+    },
+    "03b-arrow-start-endpoint": {
+      "path": "03b-arrow-start-endpoint.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "04-thumb-drag-mid": {
+      "path": "04-thumb-drag-mid.png",
+      "sha256": "450b056d3cecd97608cadbd56221403d57ef822cc5affc7000da3e9a73cbe7ce"
+    },
+    "04-thumb-end": {
+      "path": "04-thumb-end.png",
+      "sha256": "fc3e4aa1c29829d2b6173cec1b7241a6f8243ee1938cb26e93e1446479ab5dbc"
+    },
+    "04b-thumb-reversed": {
+      "path": "04b-thumb-reversed.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "05-search-before": {
+      "path": "05-search-before.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "05-search-filtered": {
+      "path": "05-search-filtered.png",
+      "sha256": "c17745f251d3e495596b7265275055ab85d2adc21dcc55f1e788be3e922207a7"
+    },
+    "05b-search-cleared": {
+      "path": "05b-search-cleared.png",
+      "sha256": "6660a4b41385c8b654b700bcf8039f529549d142689bc6fb0d193cfcd4b22f17"
+    },
+    "06-list-before": {
+      "path": "06-list-before.png",
+      "sha256": "00e3714e9e90e5863c5be883adc3817b1d4df98ebd7bef0d5bbfd010d51c61f5"
+    },
+    "06-list-mode": {
+      "path": "06-list-mode.png",
+      "sha256": "7f6e8d878227528101aa671f5503c3943244ac91e2e0322c88a78816e9cda402"
+    },
+    "06b-list-reversed": {
+      "path": "06b-list-reversed.png",
+      "sha256": "00e3714e9e90e5863c5be883adc3817b1d4df98ebd7bef0d5bbfd010d51c61f5"
+    },
+    "06c-list-restored": {
+      "path": "06c-list-restored.png",
+      "sha256": "7f6e8d878227528101aa671f5503c3943244ac91e2e0322c88a78816e9cda402"
+    },
+    "07-sorted": {
+      "path": "07-sorted.png",
+      "sha256": "57131562ee4b2074e23ac450573780b7d3d270620ffe27fd8092c0a62ac2af82"
+    },
+    "07b-sort-reversed": {
+      "path": "07b-sort-reversed.png",
+      "sha256": "7f6e8d878227528101aa671f5503c3943244ac91e2e0322c88a78816e9cda402"
+    },
+    "07c-tree-restored": {
+      "path": "07c-tree-restored.png",
+      "sha256": "00e3714e9e90e5863c5be883adc3817b1d4df98ebd7bef0d5bbfd010d51c61f5"
+    },
+    "08-transfer-rejected-before": {
+      "path": "08-transfer-rejected-before.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "08-transfer-rejected": {
+      "path": "08-transfer-rejected.png",
+      "sha256": "f3d4096df1a01cb5f68a7ae445b8434ea6c060de93f63d58c267260744d51bd8"
+    },
+    "08b-transfer-rejected-reversed": {
+      "path": "08b-transfer-rejected-reversed.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "09-transfer-outbound-before": {
+      "path": "09-transfer-outbound-before.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "09-transfer-outbound": {
+      "path": "09-transfer-outbound.png",
+      "sha256": "12a6ad2460bdfa9523a41c431aa10e128cdbea637adfd3fe87b971de2cca4a74"
+    },
+    "09b-transfer-outbound-reversed": {
+      "path": "09b-transfer-outbound-reversed.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "10-transfer-returned-before": {
+      "path": "10-transfer-returned-before.png",
+      "sha256": "c06a20b7816a9dc350ef544922c5f1da83ea5edff83bb2495b5ba43c0d914cfa"
+    },
+    "10-transfer-returned": {
+      "path": "10-transfer-returned.png",
+      "sha256": "200706d6a8c9f3b4e1a1b2f28d08e24a9bab6edac08bcf820537e983f09be39d"
+    },
+    "10b-transfer-returned-reversed": {
+      "path": "10b-transfer-returned-reversed.png",
+      "sha256": "c06a20b7816a9dc350ef544922c5f1da83ea5edff83bb2495b5ba43c0d914cfa"
+    },
+    "11-window-drag-before": {
+      "path": "11-window-drag-before.png",
+      "sha256": "c06a20b7816a9dc350ef544922c5f1da83ea5edff83bb2495b5ba43c0d914cfa"
+    },
+    "11-window-drag-mid": {
+      "path": "11-window-drag-mid.png",
+      "sha256": "cad6df29db52a06a1f3860436e54da156f09d104f4a2348a47887258e3002676"
+    },
+    "11-window-moved": {
+      "path": "11-window-moved.png",
+      "sha256": "c6623099393eb58ea6579be04d15a58089294637df386da0ca03d6807bc4c44d"
+    },
+    "11b-window-restored": {
+      "path": "11b-window-restored.png",
+      "sha256": "c06a20b7816a9dc350ef544922c5f1da83ea5edff83bb2495b5ba43c0d914cfa"
+    },
+    "12-title-close-before": {
+      "path": "12-title-close-before.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "12-title-close-after": {
+      "path": "12-title-close-after.png",
+      "sha256": "51c1f1acf99ba720d5762bef8951173d97363562b70db43d9f75d86e2f2ad472"
+    },
+    "12b-title-close-restored": {
+      "path": "12b-title-close-restored.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "13-bottom-close-before": {
+      "path": "13-bottom-close-before.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "13-bottom-close-after": {
+      "path": "13-bottom-close-after.png",
+      "sha256": "51c1f1acf99ba720d5762bef8951173d97363562b70db43d9f75d86e2f2ad472"
+    },
+    "13b-bottom-close-restored": {
+      "path": "13b-bottom-close-restored.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "14-key-close-before": {
+      "path": "14-key-close-before.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    },
+    "14-key-close-after": {
+      "path": "14-key-close-after.png",
+      "sha256": "51c1f1acf99ba720d5762bef8951173d97363562b70db43d9f75d86e2f2ad472"
+    },
+    "14b-key-close-reversed": {
+      "path": "14b-key-close-reversed.png",
+      "sha256": "ccfb79d44c8a639e3e544c7ba8f80f0b50f7ac816ad1c4421445dec0a37d2f33"
+    }
+  },
+  "console_entries": [
+    "[warning] [.WebGL-0x61405ef9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x61405ef9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x61405ef9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[warning] [.WebGL-0x61405ef9c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "summary": {
+    "pass": true,
+    "total": 48,
+    "failed": 0,
+    "console_errors": 0
+  }
+}

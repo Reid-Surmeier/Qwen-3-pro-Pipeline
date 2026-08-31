@@ -43,6 +43,7 @@ func _ready() -> void:
 	field.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
 	field.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	field.text_changed.connect(_text_changed)
+	field.gui_input.connect(_key_input)
 	field.focus_entered.connect(_focus.bind(true))
 	field.focus_exited.connect(_focus.bind(false))
 	add_child(field)
@@ -74,6 +75,30 @@ func _text_changed(candidate: String) -> void:
 	changed.emit(spec.id, result)
 
 
+func _key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_F10 and bool(spec.value.get("chat_input", false)):
+		var window: ControlWindow = get_parent()
+		var key := "Alt+F10" if event.alt_pressed else "F10"
+		var window_result: Dictionary = window._route_window_gesture("KeyCommand", key)
+		changed.emit(spec.id, window_result)
+		accept_event()
+		return
+	if not event is InputEventKey or not event.pressed or event.echo \
+			or event.keycode not in [KEY_ENTER, KEY_KP_ENTER] \
+			or not bool(spec.value.get("chat_input", false)):
+		return
+	var scope := "party" if event.ctrl_pressed else "guild" if event.alt_pressed \
+		else "allied_guild" if event.shift_pressed else "screen"
+	var result: Dictionary = runtime.dispatch(spec.id, "KeyCommand", {
+		"submit": true, "scope": scope,
+		"expected_version": runtime.qa_state().window_state.get("version", -1),
+	})
+	_refresh()
+	changed.emit(spec.id, result)
+	accept_event()
+
+
 func refresh() -> void:
 	_refresh()
 
@@ -86,6 +111,12 @@ func rendered_facts() -> Dictionary:
 func _refresh() -> void:
 	if visual == null:
 		return
+	var expected := str(runtime.qa_state().controls[spec.id].text)
+	if field != null and field.text != expected:
+		_reverting = true
+		field.text = expected
+		field.caret_column = field.text.length()
+		_reverting = false
 	var path := runtime.visual_asset(spec.id)
 	if not path.is_empty():
 		visual.texture = load(path)

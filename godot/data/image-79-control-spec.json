@@ -9945,11 +9945,11 @@
             "pressed"
           ],
           "semantic_states": [
-            "disabled"
+            "ready"
           ],
-          "initial_semantic_state": "disabled",
+          "initial_semantic_state": "ready",
           "state_set": {
-            "disabled": {
+            "ready": {
               "idle": "res://assets/image-79/basic-info/destination-chat-idle.png",
               "hover": "res://assets/image-79/basic-info/destination-chat-hover.png",
               "pressed": "res://assets/image-79/basic-info/destination-chat-pressed.png"
@@ -11512,6 +11512,419 @@
               "action": "CloseWindow"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "chat_room",
+      "evidence_policy": {
+        "issue": 135
+      },
+      "geometry": {
+        "x": 1037,
+        "y": 782,
+        "width": 495,
+        "height": 226
+      },
+      "drag_geometry": {
+        "x": 0,
+        "y": 0,
+        "width": 470,
+        "height": 24
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/chat-room/source-plate.png",
+        "minimized": "res://assets/image-79/chat-room/title-plate.png"
+      },
+      "backing_color": "#00000000",
+      "display_facts": [
+        {
+          "id": "source-line-1",
+          "text": "Sebas*：レイドリック終わったー",
+          "geometry": [
+            7,
+            33,
+            460,
+            25
+          ]
+        },
+        {
+          "id": "source-line-2",
+          "text": "SakumaRiri：おつかれさま〜",
+          "geometry": [
+            7,
+            58,
+            460,
+            25
+          ]
+        },
+        {
+          "id": "source-line-3",
+          "text": "ANRI：もう1周いきますか？",
+          "geometry": [
+            7,
+            83,
+            460,
+            25
+          ]
+        },
+        {
+          "id": "source-line-4",
+          "text": "Show_A：いきましょう！",
+          "geometry": [
+            7,
+            108,
+            460,
+            25
+          ]
+        },
+        {
+          "id": "source-line-5",
+          "text": "経験値が 10800 上がりました。",
+          "geometry": [
+            7,
+            133,
+            460,
+            25
+          ]
+        }
+      ],
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "F10",
+          "action": "ChangeChatRows"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Alt+F10",
+          "action": "ToggleWindow"
+        }
+      ],
+      "state_adapter": {
+        "type": "chat_room",
+        "controls": {
+          "input": "chat_room.input",
+          "scroll": "chat_room.scroll"
+        },
+        "initial_lines": [
+          {
+            "kind": "chat",
+            "text": "Sebas*：レイドリック終わったー"
+          },
+          {
+            "kind": "chat",
+            "text": "SakumaRiri：おつかれさま〜"
+          },
+          {
+            "kind": "chat",
+            "text": "ANRI：もう1周いきますか？"
+          },
+          {
+            "kind": "chat",
+            "text": "Show_A：いきましょう！"
+          },
+          {
+            "kind": "system",
+            "text": "経験値が 10800 上がりました。"
+          }
+        ],
+        "row_count_cycle": [
+          5,
+          7,
+          3
+        ],
+        "presentation": {
+          "background": "res://assets/image-79/chat-room/clean-log.png",
+          "geometry": {
+            "x": 7,
+            "y": 28,
+            "width": 460,
+            "height": 152
+          },
+          "font": "res://fonts/PixelMplus10-Regular.ttf",
+          "font_size": 13,
+          "colors": {
+            "chat": "#202020",
+            "system": "#ee2828",
+            "screen": "#202020",
+            "party": "#1e47ee",
+            "guild": "#2b9a4a",
+            "allied_guild": "#a84db6"
+          }
+        }
+      },
+      "controls": [
+        {
+          "id": "chat_room.close",
+          "type": "Button",
+          "geometry": {
+            "x": 470,
+            "y": 7,
+            "width": 18,
+            "height": 18
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/chat-room/close-idle.png",
+              "hover": "res://assets/image-79/chat-room/close-hover.png",
+              "pressed": "res://assets/image-79/chat-room/close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "chat_room.input",
+          "type": "TextField",
+          "geometry": {
+            "x": 7,
+            "y": 196,
+            "width": 458,
+            "height": 21
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed",
+            "focused"
+          ],
+          "semantic_states": [
+            "empty",
+            "editing"
+          ],
+          "initial_semantic_state": "empty",
+          "state_set": {
+            "empty": {
+              "idle": "res://assets/image-79/chat-room/input-idle.png",
+              "hover": "res://assets/image-79/chat-room/input-hover.png",
+              "pressed": "res://assets/image-79/chat-room/input-pressed.png",
+              "focused": "res://assets/image-79/chat-room/input-hover.png"
+            },
+            "editing": {
+              "idle": "res://assets/image-79/chat-room/input-idle.png",
+              "hover": "res://assets/image-79/chat-room/input-hover.png",
+              "pressed": "res://assets/image-79/chat-room/input-pressed.png",
+              "focused": "res://assets/image-79/chat-room/input-hover.png"
+            }
+          },
+          "gestures": [
+            "KeyCommand"
+          ],
+          "actions": [
+            {
+              "gesture": "KeyCommand",
+              "action": "SetChatDraft"
+            },
+            {
+              "gesture": "KeyCommand",
+              "action": "SubmitChat"
+            }
+          ],
+          "value": {
+            "initial": "",
+            "maximum_length": 96,
+            "accepted_pattern": "^[^\\n\\r]*$",
+            "chat_input": true
+          },
+          "tokens": {
+            "font": "res://fonts/PixelMplus10-Regular.ttf",
+            "font_size": 13,
+            "font_color": "#2a252a"
+          }
+        },
+        {
+          "id": "chat_room.scroll",
+          "type": "ScrollView",
+          "geometry": {
+            "x": 470,
+            "y": 28,
+            "width": 20,
+            "height": 152
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed",
+            "dragging"
+          ],
+          "semantic_states": [
+            "at_start",
+            "between",
+            "at_end"
+          ],
+          "initial_semantic_state": "at_start",
+          "state_set": {
+            "at_start": {
+              "idle": "res://assets/image-79/chat-room/transparent.png",
+              "hover": "res://assets/image-79/chat-room/transparent.png",
+              "pressed": "res://assets/image-79/chat-room/transparent.png",
+              "dragging": "res://assets/image-79/chat-room/transparent.png"
+            },
+            "between": {
+              "idle": "res://assets/image-79/chat-room/transparent.png",
+              "hover": "res://assets/image-79/chat-room/transparent.png",
+              "pressed": "res://assets/image-79/chat-room/transparent.png",
+              "dragging": "res://assets/image-79/chat-room/transparent.png"
+            },
+            "at_end": {
+              "idle": "res://assets/image-79/chat-room/transparent.png",
+              "hover": "res://assets/image-79/chat-room/transparent.png",
+              "pressed": "res://assets/image-79/chat-room/transparent.png",
+              "dragging": "res://assets/image-79/chat-room/transparent.png"
+            }
+          },
+          "gestures": [
+            "Wheel",
+            "Activate",
+            "Drag"
+          ],
+          "actions": [
+            {
+              "gesture": "Wheel",
+              "action": "ScrollChatLog"
+            },
+            {
+              "gesture": "Activate",
+              "action": "StepChatLog"
+            },
+            {
+              "gesture": "Drag",
+              "action": "SetChatLogOffset"
+            }
+          ],
+          "value": {
+            "minimum": 0,
+            "maximum": 0,
+            "initial": 0,
+            "wheel_rows": 3,
+            "arrow_rows": 1,
+            "chat_log": true
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 0,
+                "y": 0,
+                "width": 20,
+                "height": 20
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/chat-room/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-up-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-up-dragging.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/chat-room/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-up-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-up-dragging.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/chat-room/scroll-up-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-up-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-up-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-up-dragging.png"
+                }
+              }
+            },
+            "track": {
+              "geometry": {
+                "x": 0,
+                "y": 20,
+                "width": 20,
+                "height": 112
+              },
+              "asset": "res://assets/image-79/chat-room/scroll-track.png"
+            },
+            "increment": {
+              "geometry": {
+                "x": 0,
+                "y": 132,
+                "width": 20,
+                "height": 20
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/chat-room/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-down-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-down-dragging.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/chat-room/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-down-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-down-dragging.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/chat-room/scroll-down-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-down-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-down-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-down-dragging.png"
+                }
+              }
+            },
+            "thumb": {
+              "geometry": {
+                "x": 2,
+                "y": 21,
+                "width": 16,
+                "height": 42
+              },
+              "state_set": {
+                "at_start": {
+                  "idle": "res://assets/image-79/chat-room/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-thumb-dragging.png"
+                },
+                "between": {
+                  "idle": "res://assets/image-79/chat-room/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-thumb-dragging.png"
+                },
+                "at_end": {
+                  "idle": "res://assets/image-79/chat-room/scroll-thumb-idle.png",
+                  "hover": "res://assets/image-79/chat-room/scroll-thumb-hover.png",
+                  "pressed": "res://assets/image-79/chat-room/scroll-thumb-pressed.png",
+                  "dragging": "res://assets/image-79/chat-room/scroll-thumb-dragging.png"
+                }
+              }
+            }
+          }
         }
       ]
     }
