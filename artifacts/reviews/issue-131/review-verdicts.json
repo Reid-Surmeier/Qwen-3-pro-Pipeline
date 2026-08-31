@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "issue": 131,
+  "candidate_commit": "6efdc10bb46c81b1b4a8da0699228b812d3beddf",
+  "evidence_commit": "29cac42cfc041fb25fac0acff4151d4672c4fe5e",
+  "verdicts": [
+    {
+      "review": "specification",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "All Issue acceptance criteria pass. The exact packet, 353 evidence hashes, 16 Status actions, 53 frames, atomic rejection, exact source reversal, six prior-window regressions, and repository baselines were independently verified."
+    },
+    {
+      "review": "engineering",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The Status Window State Adapter owns cost and derived logic; shared Stepper remains generic. Typed atomic rejection, deterministic assets, seams, tests, packet, and prior-window regressions have no findings."
+    },
+    {
+      "review": "blind_artifact",
+      "verdict": "PASS",
+      "findings": [],
+      "summary": "The source-locked idle artifact, truthful allocation projection, unavailable transient feedback, reversible Window gestures, and coherent seven-window assembly pass blind review for the exact candidate."
+    }
+  ]
+}
