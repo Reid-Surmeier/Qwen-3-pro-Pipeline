@@ -1,0 +1,12 @@
+{
+  "issue": 135,
+  "window": "chat_room",
+  "prototype_code_retained": false,
+  "source_rect": [1037, 782, 495, 226],
+  "source_rows": 5,
+  "delivery_frames": 3,
+  "scopes": ["screen", "party", "guild", "allied_guild"],
+  "row_count_cycle": [5, 7, 3],
+  "gesture_capabilities": ["KeyCommand", "Wheel", "Activate", "Drag"],
+  "unidentified_controls": ["bottom-right icon"]
+}

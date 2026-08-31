@@ -55,7 +55,7 @@ func _run() -> void:
 	await process_frame
 	var initial := desktop.qa_state()
 	_check("assembled-ten-window-state", initial.windows.has("status")
-		and initial.windows.size() == 10 and desktop.status != null, str(initial.keys()))
+		and initial.windows.size() == 11 and desktop.status != null, str(initial.keys()))
 	if desktop.status == null:
 		desktop.queue_free()
 		_finish()

@@ -52,6 +52,8 @@ var _resize_clamped := Vector2.ZERO
 var _resize_motion_samples := 0
 var _geometry_version := 0
 var state_overlay: WindowStateOverlay
+var _chat_submit_frame := -1
+var _chat_last_advance_frame := -1
 
 
 func configure(window_spec: Dictionary) -> void:
@@ -125,6 +127,23 @@ func _ready() -> void:
 	_add_resize_grip()
 	gui_input.connect(_window_input)
 	state_changed.emit(str(spec.id))
+	set_process(true)
+
+
+func _process(_delta: float) -> void:
+	if _chat_submit_frame >= 0:
+		var current_frame := Engine.get_process_frames()
+		if current_frame <= _chat_submit_frame \
+				or current_frame == _chat_last_advance_frame:
+			return
+		_chat_last_advance_frame = current_frame
+	var result := runtime.advance_frame()
+	if result.get("ok", false) and result.get("changed", false):
+		if runtime.qa_state().get("window_state", {}).get("pending_delivery") == null:
+			_chat_submit_frame = -1
+			_chat_last_advance_frame = -1
+		_refresh_all_controls()
+		state_changed.emit(str(spec.id))
 
 
 func qa_state() -> Dictionary:
@@ -435,18 +454,32 @@ func _window_input(event: InputEvent) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo \
-			and event.keycode == KEY_ESCAPE and _is_frontmost_window():
+			and _is_frontmost_window():
+		var key := _window_key(event)
+		if key.is_empty():
+			return
 		for control_id in control_nodes:
 			var node: Control = control_nodes[control_id]
-			if node is DropdownControl and runtime.qa_state().controls[control_id].semantic_state == "open":
+			if key == "Escape" and node is DropdownControl \
+					and runtime.qa_state().controls[control_id].semantic_state == "open":
 				node.dismiss()
 				get_viewport().set_input_as_handled()
 				return
-		var result := _route_window_gesture("KeyCommand", "Escape")
+		if not _has_window_key_binding(key):
+			return
+		var result := _route_window_gesture("KeyCommand", key)
 		if result.get("ok", false):
 			get_viewport().set_input_as_handled()
 			action_emitted.emit(str(spec.id), str(spec.id), result.duplicate(true))
 			state_changed.emit(str(spec.id))
+
+
+func _window_key(event: InputEventKey) -> String:
+	var base := "Escape" if event.keycode == KEY_ESCAPE else \
+		"F10" if event.keycode == KEY_F10 else ""
+	if base.is_empty():
+		return ""
+	return "Alt+" + base if event.alt_pressed else base
 
 
 func _is_frontmost_window() -> bool:
@@ -455,6 +488,12 @@ func _is_frontmost_window() -> bool:
 	var siblings := get_parent().get_children().filter(func(node):
 		return node is ControlWindow and node.visible)
 	return not siblings.is_empty() and siblings.back() == self
+
+
+func _has_window_key_binding(key: String) -> bool:
+	return spec.get("actions", []).any(func(binding):
+		return binding is Dictionary and binding.get("gesture") == "KeyCommand" \
+			and str(binding.get("key", "")) == key)
 
 
 func _route_window_gesture(gesture: String, key: String = "") -> Dictionary:
@@ -478,6 +517,13 @@ func _route_window_gesture(gesture: String, key: String = "") -> Dictionary:
 			"CloseWindow":
 				dismiss_dropdowns()
 				visible = false
+			"ChangeChatRows":
+				var state_result := runtime.dispatch_window_action(_last_window_action)
+				if not state_result.get("ok", false):
+					_last_window_error = state_result.get("error", {})
+					return {"ok": false, "error": _last_window_error}
+			"ToggleWindow":
+				visible = not visible
 			_:
 				_last_window_error = {"code": "ActionRoutingError",
 					"message": "Window cannot route action: %s" % _last_window_action}
@@ -489,6 +535,11 @@ func _route_window_gesture(gesture: String, key: String = "") -> Dictionary:
 
 
 func _control_changed(control_id: String, result: Dictionary) -> void:
+	if result.get("ok", false) and str(result.get("action", "")) == "SubmitChat":
+		# Anchor delivery to engine frames, not coroutine scheduling. A send
+		# accepted in frame N advances on N+1, N+2, and N+3 exactly once each.
+		_chat_submit_frame = Engine.get_process_frames()
+		_chat_last_advance_frame = _chat_submit_frame
 	if not result.has("phase") and is_inside_tree() \
 			and not is_queued_for_deletion() and get_parent() != null:
 		move_to_front()
@@ -534,7 +585,9 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 					"ToggleStorageSelection", "TransferStorageItem", \
 					"TransferInventoryItem", "SelectEquipmentSlot", \
 					"UnequipEquipmentItem", "MoveEquipmentItem", "EquipInventoryItem", \
-					"OpenWindow":
+			"OpenWindow":
+				pass
+			"ScrollChatLog", "StepChatLog", "SetChatLogOffset", "SetChatDraft", "SubmitChat":
 				pass
 			_:
 				runtime.reject_action(control_id, str(result.action))

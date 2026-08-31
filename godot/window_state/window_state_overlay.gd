@@ -5,15 +5,19 @@ extends Control
 
 const StatusWindowOverlayScript = preload("res://window_state/status_window_overlay.gd")
 const PartyWindowOverlayScript = preload("res://window_state/party_window_overlay.gd")
+const ChatRoomOverlayScript = preload("res://window_state/chat_room_overlay.gd")
 
 var status_overlay: StatusWindowOverlay
 var party_overlay: PartyWindowOverlay
+var chat_room_overlay: ChatRoomOverlay
 
 
 static func empty_facts() -> Dictionary:
 	return {
 		"status_overlay": {"visible": false, "version": 0, "text": {}},
 		"party_overlay": {"visible": false, "asset": ""},
+		"chat_room_overlay": {"visible": false, "rendered_lines": [],
+			"visible_row_count": 5, "pending_delivery": null, "version": 0},
 	}
 
 
@@ -29,6 +33,10 @@ func configure(adapter_spec: Dictionary, runtime: ControlRuntime,
 			party_overlay = PartyWindowOverlayScript.new()
 			party_overlay.configure(adapter_spec, runtime)
 			add_child(party_overlay)
+		"chat_room":
+			chat_room_overlay = ChatRoomOverlayScript.new()
+			chat_room_overlay.configure(adapter_spec, runtime)
+			add_child(chat_room_overlay)
 
 
 func rendered_facts() -> Dictionary:
@@ -38,6 +46,10 @@ func rendered_facts() -> Dictionary:
 			if status_overlay != null else {"visible": false, "version": 0, "text": {}},
 		"party_overlay": party_overlay.rendered_facts() \
 			if party_overlay != null else {"visible": false, "asset": ""},
+		"chat_room_overlay": chat_room_overlay.rendered_facts() \
+			if chat_room_overlay != null else {"visible": false,
+				"rendered_lines": [], "visible_row_count": 5,
+				"pending_delivery": null, "version": 0},
 	}, true)
 	return facts
 
@@ -52,3 +64,5 @@ func refresh() -> void:
 		status_overlay.refresh()
 	if party_overlay != null:
 		party_overlay.refresh()
+	if chat_room_overlay != null:
+		chat_room_overlay.refresh()

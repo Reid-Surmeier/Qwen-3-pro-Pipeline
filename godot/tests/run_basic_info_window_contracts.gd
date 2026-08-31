@@ -54,7 +54,7 @@ func _run() -> void:
 	get_root().add_child(desktop)
 	await process_frame
 	var initial := desktop.qa_state()
-	_check("assembled-ten-window-state", initial.windows.size() == 10
+	_check("assembled-eleven-window-state", initial.windows.size() == 11
 		and desktop.basic_info != null and initial.windows.has("basic_info"),
 		str(initial.windows.keys()))
 	if desktop.basic_info == null:

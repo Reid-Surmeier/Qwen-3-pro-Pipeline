@@ -6,11 +6,12 @@ const Errors = preload("res://control_library/control_errors.gd")
 const StatusWindowState = preload("res://window_state/status_window_state.gd")
 const PartyWindowState = preload("res://window_state/party_window_state.gd")
 const SystemMenuWindowState = preload("res://window_state/system_menu_window_state.gd")
+const ChatRoomWindowState = preload("res://window_state/chat_room_window_state.gd")
 
 
 static func validate(adapter: Variant, controls: Array, path: String,
 		errors: Array[Dictionary], asset_exists: Callable) -> void:
-	if not adapter is Dictionary or str(adapter.get("type", "")) not in ["status", "party", "system_menu"]:
+	if not adapter is Dictionary or str(adapter.get("type", "")) not in ["status", "party", "system_menu", "chat_room"]:
 		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
 			"Window state adapter must declare a supported type"))
 		return
@@ -18,6 +19,8 @@ static func validate(adapter: Variant, controls: Array, path: String,
 		_validate_party(adapter, controls, path, errors, asset_exists)
 	elif str(adapter.type) == "system_menu":
 		_validate_system_menu(adapter, controls, path, errors)
+	elif str(adapter.type) == "chat_room":
+		_validate_chat_room(adapter, controls, path, errors)
 	else:
 		_validate_status(adapter, controls, path, errors, asset_exists)
 
@@ -146,6 +149,32 @@ static func _validate_system_menu(adapter: Dictionary, controls: Array,
 			errors.append(_error(Errors.CONTROL_BINDING,
 				path + ".actions." + str(control_id),
 				"System Menu policy must map a same-Window OpenWindow Button and exact target"))
+
+
+static func _validate_chat_room(adapter: Dictionary, controls: Array,
+		path: String, errors: Array[Dictionary]) -> void:
+	var initialized := ChatRoomWindowState.initialize(adapter)
+	if not initialized.get("ok", false):
+		errors.append(_error(Errors.INVALID_CONTROL_SPEC, path,
+			str(initialized.get("error", {}).get("detail", "invalid Chat Room adapter"))))
+	var declared := _declared_controls(controls)
+	var mappings: Variant = adapter.get("controls")
+	if not mappings is Dictionary:
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls",
+			"Chat Room adapter requires Control mappings"))
+		return
+	var input_id := str(mappings.get("input", ""))
+	var scroll_id := str(mappings.get("scroll", ""))
+	if not declared.get(input_id) is Dictionary \
+			or str(declared[input_id].get("type", "")) != "TextField" \
+			or not _has_action(declared[input_id], "SetChatDraft"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls.input",
+			"Chat input must map a TextField bound to SetChatDraft"))
+	if not declared.get(scroll_id) is Dictionary \
+			or str(declared[scroll_id].get("type", "")) != "ScrollView" \
+			or not _has_action(declared[scroll_id], "ScrollChatLog"):
+		errors.append(_error(Errors.CONTROL_BINDING, path + ".controls.scroll",
+			"Chat log must map a ScrollView bound to ScrollChatLog"))
 
 
 static func _validate_status_presentation(presentation: Variant,

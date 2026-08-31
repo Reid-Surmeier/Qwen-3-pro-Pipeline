@@ -1,0 +1,224 @@
+{
+  "kind": "deterministic-assembly",
+  "issue": 135,
+  "source": "artifacts/references/ro-desktop-b/reference-native.png",
+  "source_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "inventory": "artifacts/references/ro-desktop-b/control-inventory.json",
+  "behaviour_card": {
+    "path": "artifacts/references/ro-desktop-b/chat-room/behaviour-card.md",
+    "sha256": "8022c040fdec5714c68871be3e7d51a35e2acb4968eb6fa619f5fc2270347fd8"
+  },
+  "prototype_learning": {
+    "path": "artifacts/references/ro-desktop-b/chat-room/prototype-learning-manifest.json",
+    "sha256": "95f01674c92d96c7847611f2ac48c03c7a735f7a1be7ca553eb44d002cddd933"
+  },
+  "source_rect": [
+    1037,
+    782,
+    1532,
+    1008
+  ],
+  "provider_requests": 0,
+  "outputs": [
+    {
+      "path": "godot/assets/image-79/chat-room/source-plate.png",
+      "sha256": "c090d5791e7f2e421ee80370dc7ee06381308dfa37e5787dcfa11c444114b71f",
+      "size": [
+        495,
+        226
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/title-plate.png",
+      "sha256": "5c0fdcd7e07cc2cb7ce203dfa101d1192ab73295c40548cede08c2a8669e69dc",
+      "size": [
+        495,
+        24
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/clean-log.png",
+      "sha256": "27fcb8bf7cc9537a056e1a0fdc3ce8603b84bf13bdf55bfeb773683cbf0b844a",
+      "size": [
+        460,
+        152
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/close-idle.png",
+      "sha256": "22bcb5da37bf96dce5cbabf198ad5a85daf51549886ebcd879d1284ed29dcccc",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/close-hover.png",
+      "sha256": "5008467165bfc7fa475e94cfe152326f984efdc4d1f2e4628957f211b9e9ba1b",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/close-pressed.png",
+      "sha256": "fa3523fb2aac4c0f85e3f724459d63225eb1b0f3987c29284309ffdc048e1dbb",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/close-dragging.png",
+      "sha256": "fa3523fb2aac4c0f85e3f724459d63225eb1b0f3987c29284309ffdc048e1dbb",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/input-idle.png",
+      "sha256": "3315e3ddcc4a7b318367555cea5c28e9a7b62056a83c1795dbcea8e99569bd1f",
+      "size": [
+        458,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/input-hover.png",
+      "sha256": "ee95fa487a3a264ab5f16dbbb0dd25d9c70e77da52536f8538d759b266eba44c",
+      "size": [
+        458,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/input-pressed.png",
+      "sha256": "45899fb536b1940c9c56f0f83cb03a5ea051c71e2db1313217ce627dd15490d3",
+      "size": [
+        458,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/input-dragging.png",
+      "sha256": "45899fb536b1940c9c56f0f83cb03a5ea051c71e2db1313217ce627dd15490d3",
+      "size": [
+        458,
+        21
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-up-idle.png",
+      "sha256": "c62c007e5463d176b31becafcd0b9f5c702107739c7e4e8ab3f60031d361d5d1",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-up-hover.png",
+      "sha256": "cb5b714b6bd45901deb5a595fbe0b059b86a45cdc54a292904502ffed0cd3a7f",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-up-pressed.png",
+      "sha256": "815c7c4a637e58a8db81e3d4df27a84d97659f7e88d913a3c523d6afad24880e",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-up-dragging.png",
+      "sha256": "815c7c4a637e58a8db81e3d4df27a84d97659f7e88d913a3c523d6afad24880e",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-down-idle.png",
+      "sha256": "68e84ade00975463e65ede0f4e8790de8ad228784d3240459fded2d727e12d1a",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-down-hover.png",
+      "sha256": "f83b71cdc192ffaf5e77857f2d4436bef84f9700fa6112afe7a4099537bb1b4c",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-down-pressed.png",
+      "sha256": "9d2e15cc3a0f19079f8d2fde584c45689d32bd5a57d616b50dc887fdf28e220c",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-down-dragging.png",
+      "sha256": "9d2e15cc3a0f19079f8d2fde584c45689d32bd5a57d616b50dc887fdf28e220c",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-track.png",
+      "sha256": "b467cc1eb2d7f0ea6bcb859e0359081616ca338447a1034d8909c0324e9b5781",
+      "size": [
+        20,
+        112
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-thumb-idle.png",
+      "sha256": "7db40dcbf7a88cb503611c04e280bb44045a58f94a5bffcbca1603a3c802044f",
+      "size": [
+        16,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-thumb-hover.png",
+      "sha256": "bc368f76214c7b39281fc9914367c5ac84da8ac6a0fd31823d99a398bf66bf5b",
+      "size": [
+        16,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-thumb-pressed.png",
+      "sha256": "09e79e5343f0d9034f8e022d0a35db227e1c6891ad7893e74975e47363d570e3",
+      "size": [
+        16,
+        42
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/chat-room/scroll-thumb-dragging.png",
+      "sha256": "09e79e5343f0d9034f8e022d0a35db227e1c6891ad7893e74975e47363d570e3",
+      "size": [
+        16,
+        42
+      ]
+    }
+  ]
+}

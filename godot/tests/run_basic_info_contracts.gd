@@ -29,12 +29,12 @@ func _init() -> void:
 					and control.get("actions", []).any(func(binding):
 						return binding.get("action") == "OpenWindow"):
 				destinations.append(control)
-		_check("five-live-destinations-are-declared", destinations.size() == 5
+		_check("six-live-destinations-are-declared", destinations.size() == 6
 			and destinations.all(func(control):
 				return not str(control.get("value", {}).get("target_window", "")).is_empty()),
 			str(destinations))
 	var opened := Router.open_window(["basic_info", "status"], "status")
-	var missing := Router.open_window(["basic_info", "status"], "chat_room")
+	var missing := Router.open_window(["basic_info", "status", "chat_room"], "friends")
 	_check("router-opens-declared-target", opened.get("ok", false)
 		and opened.action == "OpenWindow" and opened.target_window == "status",
 		str(opened))
