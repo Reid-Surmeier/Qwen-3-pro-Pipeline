@@ -1,0 +1,5 @@
+# Issue 133 Party review contract
+
+Candidate review must verify SHA-256 `f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f` and its image-79 crop at `[1107, 505, 215, 269]`. The Party Window presents the five exact source members and meters, starts in Party mode, switches reversibly between Party and Friends, and permits one selected member at a time. Leave is the only source-supported committing action. Info, Memo, Search, and Target must show real pressed feedback and publish a named `TransactionRejectedError` without mutating Party state.
+
+Create Party and Party Settings remain absent because the source does not contain the required name-entry or settings Windows; the candidate must not fake or partially implement either flow. Title drag, title close, and focused Escape close are real and reversible. Prototype implementation is not production input; only the learned Behaviour Card, State Set, gestures, and deterministic asset manifest are retained. No provider request is permitted or required. Candidate evidence includes the strict real-Chromium Play Log and the complete shared Image-79 contract registry after the Control Library change.

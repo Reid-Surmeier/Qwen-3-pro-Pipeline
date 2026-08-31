@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "issue": 133,
+  "pull_request": 82,
+  "candidate_commit": "3bf128af8d77789d575212de21076fc89c986572",
+  "acceptance_contract": "docs/reviews/issue-133-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-133/party-3bf128a/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-133/party-3bf128a/reference-party-4x.png",
+      "artifacts/reviews/issue-133/party-3bf128a/candidate-party-4x.png",
+      "artifacts/reviews/issue-133/party-3bf128a/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-133/party-3bf128a/mode-friends-after.png",
+      "artifacts/reviews/issue-133/party-3bf128a/member-after.png",
+      "artifacts/reviews/issue-133/party-3bf128a/info-mid.png",
+      "artifacts/reviews/issue-133/party-3bf128a/leave-after.png",
+      "artifacts/reviews/issue-133/party-3bf128a/drag-mid.png",
+      "artifacts/reviews/issue-133/party-3bf128a/play-log.json",
+      "artifacts/reviews/issue-133/party-3bf128a/verdict.json",
+      "artifacts/reviews/issue-133/party-3bf128a/image79-contracts.json",
+      "artifacts/reviews/issue-133/party-3bf128a/python-baseline.log",
+      "artifacts/reviews/issue-133/party-3bf128a/node-baseline.log"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE133_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE133_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE133_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE133_GODOT_BIN\" --headless --path godot --editor --quit-after 2"
+  }
+}
