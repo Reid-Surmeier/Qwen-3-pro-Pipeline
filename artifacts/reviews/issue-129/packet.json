@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "issue": 129,
+  "pull_request": 82,
+  "candidate_commit": "bbeaafb28c1e87121e6ad19bc875b7b1324f755b",
+  "acceptance_contract": "docs/reviews/issue-129-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/evidence-manifest.json",
+      "artifacts/reviews/issue-129/options-regression-bbeaafb/evidence-manifest.json",
+      "artifacts/reviews/issue-129/skill-tree-regression-bbeaafb/evidence-manifest.json",
+      "artifacts/reviews/issue-129/inventory-regression-bbeaafb/evidence-manifest.json",
+      "artifacts/reviews/issue-129/storage-regression-bbeaafb/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/reference-equipment-card-4x.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/candidate-equipment-card-4x.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/assembled-desktop-native.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/00-idle.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/01-minimized.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/01b-restored.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/02-wheel-rejected.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/03-arrow-rejected.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/04-drag-rejected-mid.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/05-moved.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/06-closed.png",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/play-log.json",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/report.json",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/verdict.json",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/image79-contracts.json",
+      "artifacts/reviews/issue-129/equipment-card-bbeaafb/repository-baseline.log",
+      "artifacts/reviews/issue-129/options-regression-bbeaafb/00-idle.png",
+      "artifacts/reviews/issue-129/options-regression-bbeaafb/14-options-skin-activate-after.png",
+      "artifacts/reviews/issue-129/options-regression-bbeaafb/play-log.json",
+      "artifacts/reviews/issue-129/skill-tree-regression-bbeaafb/00-idle.png",
+      "artifacts/reviews/issue-129/skill-tree-regression-bbeaafb/02-context-detail.png",
+      "artifacts/reviews/issue-129/skill-tree-regression-bbeaafb/play-log.json",
+      "artifacts/reviews/issue-129/inventory-regression-bbeaafb/00-idle.png",
+      "artifacts/reviews/issue-129/inventory-regression-bbeaafb/08-minimized.png",
+      "artifacts/reviews/issue-129/inventory-regression-bbeaafb/play-log.json",
+      "artifacts/reviews/issue-129/storage-regression-bbeaafb/00-idle.png",
+      "artifacts/reviews/issue-129/storage-regression-bbeaafb/04-thumb-drag-mid.png",
+      "artifacts/reviews/issue-129/storage-regression-bbeaafb/play-log.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE129_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE129_GODOT_BIN\" --headless --path godot --import && DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE129_GODOT_BIN\" --path godot -- --screen=image79",
+    "clean_state_command": "test ! -f /tmp/issue129-blind-review.pid || kill \"$(cat /tmp/issue129-blind-review.pid)\" 2>/dev/null || true; ISSUE129_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE129_GODOT_BIN\" --headless --path godot --import >/tmp/issue129-blind-review-import.log 2>&1 && { nohup env DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE129_GODOT_BIN\" --path godot -- --screen=image79 >/tmp/issue129-blind-review.log 2>&1 & echo $! >/tmp/issue129-blind-review.pid; }"
+  }
+}

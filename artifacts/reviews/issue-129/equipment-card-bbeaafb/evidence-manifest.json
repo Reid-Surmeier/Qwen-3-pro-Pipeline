@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "bbeaafb28c1e87121e6ad19bc875b7b1324f755b",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-minimized.png",
+      "sha256": "840cae141db7b59b5ad27bfd7cfab853195c6d49f39fc64e51256fdf67ca1374"
+    },
+    {
+      "path": "01b-restored.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "02-wheel-rejected-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "02-wheel-rejected-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "02-wheel-rejected.png",
+      "sha256": "0d054abbbce51d2e94d84d1fdacf9431cb7b7e986f347ab7c000f6d0d8af0c70"
+    },
+    {
+      "path": "03-arrow-rejected-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "03-arrow-rejected-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "03-arrow-rejected.png",
+      "sha256": "0d054abbbce51d2e94d84d1fdacf9431cb7b7e986f347ab7c000f6d0d8af0c70"
+    },
+    {
+      "path": "04-drag-rejected-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "04-drag-rejected-mid.png",
+      "sha256": "3f4fbdd894bf6e6ebb452959e9e0bde64c7566e1f80fea6d6b31a75edcd7c464"
+    },
+    {
+      "path": "04b-drag-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "05-move-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "05-moved.png",
+      "sha256": "a436c990212425a1bc9e76224e27a4dcf4b801658dcb08b52b4fee84d968eb1e"
+    },
+    {
+      "path": "05b-move-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "06-close-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "06-closed.png",
+      "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+    },
+    {
+      "path": "06b-close-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "07-key-close-before.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "07-key-closed.png",
+      "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+    },
+    {
+      "path": "07b-key-reversed.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "08-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "assembled-desktop-browser.png",
+      "sha256": "9ea6642309262309b92d7c19b76a4dd4451ef62594461334b9e24e5cf29ec75e"
+    },
+    {
+      "path": "assembled-desktop-native.png",
+      "sha256": "e4afc73f7733c645a25c2732c959603df3ccb7f3f34cde231b2d13697b3a9438"
+    },
+    {
+      "path": "candidate-equipment-card-4x.png",
+      "sha256": "b9a10536bf2177160c41bde0ca714b4332ca03728e5ab1a245fc5b7df83ca020"
+    },
+    {
+      "path": "image79-contracts.json",
+      "sha256": "bbfb40458cfd38e83c17f4610b257ec93c902faf9a5906724f9cb4373faf7190"
+    },
+    {
+      "path": "native-capture.log",
+      "sha256": "b39b75295ecf3e7cbf4105de15360b2e4aaaefb6e7a580e58548649fcd15016e"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "718511aeb53ad7260ea94c1926114a54488e7b14e35808da19258bcf4c5f258d"
+    },
+    {
+      "path": "reference-equipment-card-4x.png",
+      "sha256": "3d6f8e3235b993fed67f3a49e5a50e34dca15108bb5443e44f876019222a8bd7"
+    },
+    {
+      "path": "report.json",
+      "sha256": "3197d166349325e5825689458560b9d2efeb399213220d2767033b5f4a3e1a77"
+    },
+    {
+      "path": "repository-baseline.log",
+      "sha256": "4d82c04a1348a07e6d1a8ae323c4e8bc5cad88a650cb39b1b082f50308cd64b7"
+    },
+    {
+      "path": "verdict.json",
+      "sha256": "1220edc5dcc91edc263527bc83018720923f89e1e665c746940d5401b33ae59d"
+    }
+  ]
+}
