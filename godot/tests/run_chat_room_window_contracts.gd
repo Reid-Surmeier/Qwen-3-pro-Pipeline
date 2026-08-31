@@ -36,7 +36,8 @@ func _run() -> void:
 	_check("accepted-frame-clears-only", accepted.controls["chat_room.input"].rendered_text == ""
 		and accepted.window_state.lines.size() == 5
 		and accepted.window_state.pending_delivery.frames_remaining == 3
-		and accepted.window_state.pending_delivery.scope == "screen", str(accepted.window_state))
+		and accepted.window_state.pending_delivery.scope == "screen"
+		and accepted.window.process_active, str(accepted.window_state))
 	# The process-frame signal precedes Node._process. The first signal is the
 	# accepted frame's tail; the next three completed process passes are N+1..3.
 	await process_frame
@@ -49,7 +50,8 @@ func _run() -> void:
 	_check("third-frame-exact-echo", one.window_state.lines.size() == 5
 		and two.window_state.lines.size() == 5 and three.window_state.lines.size() == 6
 		and three.window_state.lines[-1].text == "hello"
-		and three.chat_room_overlay.rendered_lines[-1].ends_with("hello"), str(three))
+		and three.chat_room_overlay.rendered_lines[-1].ends_with("hello")
+		and not three.window.process_active, str(three))
 
 	for scope_case in [["p", true, false, false, "party"],
 			["g", false, true, false, "guild"],

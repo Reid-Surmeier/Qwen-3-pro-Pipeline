@@ -26,6 +26,15 @@ var _published_window_json := {}
 var _web_full_publishes := 0
 var _web_patch_publishes := 0
 var _web_max_patch_bytes := 0
+var _web_geometry_publishes := 0
+var _web_geometry_skips := 0
+var _web_pending_full := false
+var _web_pending_windows := {}
+var _web_flush_scheduled := false
+var _web_last_geometry_publish_msec := {}
+var _reset_stack: Array[String] = []
+
+const WEB_GEOMETRY_PUBLISH_INTERVAL_MSEC := 250
 
 func _ready() -> void:
 	set_meta("constructing_windows", true)
@@ -64,12 +73,28 @@ func _ready() -> void:
 	# while source reset stacking places Basic Info behind overlapping Windows.
 	if basic_info != null:
 		move_child(basic_info, 1)
+	_reset_stack.clear()
+	for child in get_children():
+		if child is ControlWindow:
+			_reset_stack.append(str(child.spec.id))
 	if equipment_card != null:
 		var detail_route: Dictionary = DesktopActionRouter.open_detail(
 			"equipment_card", equipment_card.spec.get("detail", {}))
 		if detail_route.get("ok", false):
 			equipment_card.detail_item = str(detail_route.detail_item)
 	remove_meta("constructing_windows")
+	_publish()
+
+
+func reset() -> void:
+	set_meta("suppress_publish", true)
+	last_transaction = {}
+	_cross_window_drag = {}
+	for window_id in windows:
+		windows[window_id].reset()
+	for window_id in _reset_stack:
+		move_child(windows[window_id], get_child_count() - 1)
+	remove_meta("suppress_publish")
 	_publish()
 
 
@@ -332,7 +357,7 @@ func _publish(_window_id: String = "") -> void:
 	if has_meta("suppress_publish") or has_meta("constructing_windows"):
 		return
 	if OS.has_feature("web"):
-		_publish_web(_window_id)
+		_queue_web_publish(_window_id)
 		return
 	var snapshot := qa_state()
 	var json := JSON.stringify(snapshot)
@@ -341,6 +366,31 @@ func _publish(_window_id: String = "") -> void:
 	_last_json = json
 	if OS.get_environment("IMAGE79_PRINT_QA_STATE") == "1":
 		print(json)
+
+
+func _queue_web_publish(changed_window_id: String) -> void:
+	if changed_window_id.is_empty() or not windows.has(changed_window_id):
+		_web_pending_full = true
+		_web_pending_windows.clear()
+	elif not _web_pending_full:
+		_web_pending_windows[changed_window_id] = true
+	if _web_flush_scheduled:
+		return
+	_web_flush_scheduled = true
+	call_deferred("_flush_web_publishes")
+
+
+func _flush_web_publishes() -> void:
+	_web_flush_scheduled = false
+	var full := _web_pending_full
+	var pending: Array = _web_pending_windows.keys()
+	_web_pending_full = false
+	_web_pending_windows.clear()
+	if full or _published_window_json.is_empty():
+		_publish_web("")
+		return
+	for window_id in pending:
+		_publish_web(str(window_id))
 
 
 func _publish_web(changed_window_id: String) -> void:
@@ -361,6 +411,32 @@ func _publish_web(changed_window_id: String) -> void:
 			+ _web_metrics_script(json.length(), false), true)
 		return
 	var window_state: Dictionary = windows[changed_window_id].qa_state()
+	var high_frequency_geometry := bool(window_state.window.get("drag_active", false)) \
+		or bool(window_state.window.get("resize", {}).get("active", false))
+	if high_frequency_geometry:
+		# Continuous pointer motion only changes Window geometry. Publishing the
+		# entire Skill Tree state here serialized ~29 KiB per sample and produced
+		# repeatable 83 ms browser frames. Keep the factual Window sample live;
+		# mouse-up publishes the complete settled Window and refreshed Control
+		# geometry through the normal path below.
+		var now := Time.get_ticks_msec()
+		var last := int(_web_last_geometry_publish_msec.get(changed_window_id, -1000000))
+		if now - last < WEB_GEOMETRY_PUBLISH_INTERVAL_MSEC:
+			_web_geometry_skips += 1
+			return
+		_web_last_geometry_publish_msec[changed_window_id] = now
+		_web_geometry_publishes += 1
+		_published_window_states[changed_window_id].window = \
+			window_state.window.duplicate(true)
+		_web_patch_publishes += 1
+		var geometry_json := JSON.stringify(window_state.window)
+		_web_max_patch_bytes = maxi(_web_max_patch_bytes, geometry_json.length())
+		var geometry_id := JSON.stringify(changed_window_id)
+		JavaScriptBridge.eval("window.godotQaState.windows[" + geometry_id \
+			+ "].window = " + geometry_json + ";" \
+			+ _web_metrics_script(geometry_json.length(), true), true)
+		return
+	_web_last_geometry_publish_msec.erase(changed_window_id)
 	var window_json := JSON.stringify(window_state)
 	if str(_published_window_json.get(changed_window_id, "")) == window_json:
 		return
@@ -377,8 +453,10 @@ func _publish_web(changed_window_id: String) -> void:
 
 func _web_metrics_script(payload_bytes: int, patched: bool) -> String:
 	return ("window.godotQaMetrics = {fullPublishes:%d,patchPublishes:%d," \
+		+ "geometryPublishes:%d,geometrySkips:%d," \
 		+ "lastPayloadBytes:%d,maxPatchBytes:%d,lastWasPatch:%s};") % [
-			_web_full_publishes, _web_patch_publishes, payload_bytes,
+			_web_full_publishes, _web_patch_publishes,
+			_web_geometry_publishes, _web_geometry_skips, payload_bytes,
 			_web_max_patch_bytes, "true" if patched else "false"]
 
 

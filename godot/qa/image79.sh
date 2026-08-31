@@ -35,6 +35,7 @@ suites=(
   "run_system_menu_desktop_contracts.gd:system-menu-desktop-contracts.json"
   "run_chat_room_state_contracts.gd:chat-room-state-contracts.json"
   "run_chat_room_window_contracts.gd:chat-room-window-contracts.json"
+  "run_image79_assembly_contracts.gd:image79-assembly-contracts.json"
   "run_options_window_contracts.gd:options-window-contracts.json"
   "run_skill_tree_contracts.gd:skill-tree-contracts.json"
   "run_skill_tree_window_contracts.gd:skill-tree-window-contracts.json"

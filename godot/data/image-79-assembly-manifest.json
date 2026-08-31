@@ -1,0 +1,3956 @@
+{
+  "schema_version": 1,
+  "issue": 136,
+  "reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "source_inventory_sha256": "0518b72c486a338a753b923ba9578275c434961a059cf08dafaf4c807e3301af",
+  "viewport": [
+    1536,
+    1024
+  ],
+  "window_ids": [
+    "options",
+    "skill_tree",
+    "inventory",
+    "storage",
+    "equipment_card",
+    "equipment_items",
+    "status",
+    "basic_info",
+    "party",
+    "system_menu",
+    "chat_room"
+  ],
+  "source_control_count": 239,
+  "source_counts_by_window": {
+    "options": 12,
+    "skill_tree": 59,
+    "inventory": 38,
+    "storage": 48,
+    "equipment_card": 4,
+    "equipment_items": 16,
+    "status": 15,
+    "basic_info": 14,
+    "party": 14,
+    "system_menu": 9,
+    "chat_room": 10
+  },
+  "generation_requests": 0,
+  "controls": [
+    {
+      "source_index": 0,
+      "stable_id": "source.basic_info.000.title_drag",
+      "window_id": "basic_info",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        0,
+        0,
+        484,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "basic_info.title_drag"
+    },
+    {
+      "source_index": 1,
+      "stable_id": "source.basic_info.001.minimize",
+      "window_id": "basic_info",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        460,
+        6,
+        16,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.minimize",
+      "control_id": "basic_info.minimize"
+    },
+    {
+      "source_index": 2,
+      "stable_id": "source.basic_info.002.meter",
+      "window_id": "basic_info",
+      "source_type": "meter",
+      "source_label": "HP",
+      "source_rect": [
+        189,
+        37,
+        151,
+        15
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.meter.hp",
+      "control_id": "basic_info.meter.hp"
+    },
+    {
+      "source_index": 3,
+      "stable_id": "source.basic_info.003.meter",
+      "window_id": "basic_info",
+      "source_type": "meter",
+      "source_label": "SP",
+      "source_rect": [
+        189,
+        74,
+        151,
+        14
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.meter.sp",
+      "control_id": "basic_info.meter.sp"
+    },
+    {
+      "source_index": 4,
+      "stable_id": "source.basic_info.004.meter",
+      "window_id": "basic_info",
+      "source_type": "meter",
+      "source_label": "Base Lv. 60",
+      "source_rect": [
+        146,
+        131,
+        184,
+        11
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.meter.base",
+      "control_id": "basic_info.meter.base"
+    },
+    {
+      "source_index": 5,
+      "stable_id": "source.basic_info.005.meter",
+      "window_id": "basic_info",
+      "source_type": "meter",
+      "source_label": "Job Lv. 47",
+      "source_rect": [
+        146,
+        148,
+        184,
+        11
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.meter.job",
+      "control_id": "basic_info.meter.job"
+    },
+    {
+      "source_index": 6,
+      "stable_id": "source.basic_info.006.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "status",
+      "source_rect": [
+        356,
+        42,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.status",
+      "control_id": "basic_info.destination.status"
+    },
+    {
+      "source_index": 7,
+      "stable_id": "source.basic_info.007.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "option",
+      "source_rect": [
+        418,
+        42,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.option",
+      "control_id": "basic_info.destination.option"
+    },
+    {
+      "source_index": 8,
+      "stable_id": "source.basic_info.008.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "items",
+      "source_rect": [
+        356,
+        83,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.items",
+      "control_id": "basic_info.destination.items"
+    },
+    {
+      "source_index": 9,
+      "stable_id": "source.basic_info.009.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "equip",
+      "source_rect": [
+        418,
+        83,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.equip",
+      "control_id": "basic_info.destination.equip"
+    },
+    {
+      "source_index": 10,
+      "stable_id": "source.basic_info.010.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "skill",
+      "source_rect": [
+        356,
+        124,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.skill",
+      "control_id": "basic_info.destination.skill"
+    },
+    {
+      "source_index": 11,
+      "stable_id": "source.basic_info.011.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "map",
+      "source_rect": [
+        418,
+        124,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.map",
+      "control_id": "basic_info.destination.map"
+    },
+    {
+      "source_index": 12,
+      "stable_id": "source.basic_info.012.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "chat",
+      "source_rect": [
+        356,
+        165,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.chat",
+      "control_id": "basic_info.destination.chat"
+    },
+    {
+      "source_index": 13,
+      "stable_id": "source.basic_info.013.button",
+      "window_id": "basic_info",
+      "source_type": "button",
+      "source_label": "friend",
+      "source_rect": [
+        418,
+        165,
+        48,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "basic_info.destination.friend",
+      "control_id": "basic_info.destination.friend"
+    },
+    {
+      "source_index": 14,
+      "stable_id": "source.skill_tree.000.title_drag",
+      "window_id": "skill_tree",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        492,
+        0,
+        611,
+        26
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "skill_tree.title_drag"
+    },
+    {
+      "source_index": 15,
+      "stable_id": "source.skill_tree.001.close",
+      "window_id": "skill_tree",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1082,
+        7,
+        17,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.close",
+      "control_id": "skill_tree.close"
+    },
+    {
+      "source_index": 16,
+      "stable_id": "source.skill_tree.002.checkbox",
+      "window_id": "skill_tree",
+      "source_type": "checkbox",
+      "source_label": "スキル説明表示",
+      "source_rect": [
+        750,
+        12,
+        16,
+        14
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.descriptions",
+      "control_id": "skill_tree.descriptions"
+    },
+    {
+      "source_index": 17,
+      "stable_id": "source.skill_tree.003.button",
+      "window_id": "skill_tree",
+      "source_type": "button",
+      "source_label": "View",
+      "source_rect": [
+        1022,
+        6,
+        53,
+        19
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.view",
+      "control_id": "skill_tree.view"
+    },
+    {
+      "source_index": 18,
+      "stable_id": "source.skill_tree.004.button",
+      "window_id": "skill_tree",
+      "source_type": "button",
+      "source_label": "use",
+      "source_rect": [
+        922,
+        556,
+        70,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.use",
+      "control_id": "skill_tree.use"
+    },
+    {
+      "source_index": 19,
+      "stable_id": "source.skill_tree.005.button",
+      "window_id": "skill_tree",
+      "source_type": "button",
+      "source_label": "close",
+      "source_rect": [
+        1009,
+        556,
+        75,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.cancel",
+      "control_id": "skill_tree.cancel"
+    },
+    {
+      "source_index": 20,
+      "stable_id": "source.skill_tree.006.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ホーリー..",
+      "source_rect": [
+        538,
+        67,
+        41,
+        41
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c1",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c1"
+    },
+    {
+      "source_index": 21,
+      "stable_id": "source.skill_tree.007.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ホーリー.. 5/5",
+      "source_rect": [
+        522,
+        111,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r1c1",
+      "control_id": "skill_tree.stepper.r1c1"
+    },
+    {
+      "source_index": 22,
+      "stable_id": "source.skill_tree.008.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "リザレク..",
+      "source_rect": [
+        637,
+        67,
+        42,
+        42
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c2",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c2"
+    },
+    {
+      "source_index": 23,
+      "stable_id": "source.skill_tree.009.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ヒール",
+      "source_rect": [
+        738,
+        67,
+        38,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c3",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c3"
+    },
+    {
+      "source_index": 24,
+      "stable_id": "source.skill_tree.010.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ヒール 10/10",
+      "source_rect": [
+        716,
+        111,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r1c3",
+      "control_id": "skill_tree.stepper.r1c3"
+    },
+    {
+      "source_index": 25,
+      "stable_id": "source.skill_tree.011.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "アクア..",
+      "source_rect": [
+        837,
+        67,
+        36,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c4",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c4"
+    },
+    {
+      "source_index": 26,
+      "stable_id": "source.skill_tree.012.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "アクア.. 10/10",
+      "source_rect": [
+        813,
+        111,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r1c4",
+      "control_id": "skill_tree.stepper.r1c4"
+    },
+    {
+      "source_index": 27,
+      "stable_id": "source.skill_tree.013.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ディバイ..",
+      "source_rect": [
+        929,
+        67,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c5",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c5"
+    },
+    {
+      "source_index": 28,
+      "stable_id": "source.skill_tree.014.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ディバイ.. 5/5",
+      "source_rect": [
+        910,
+        111,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r1c5",
+      "control_id": "skill_tree.stepper.r1c5"
+    },
+    {
+      "source_index": 29,
+      "stable_id": "source.skill_tree.015.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ブレッシ..",
+      "source_rect": [
+        1022,
+        67,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r1c6",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r1c6"
+    },
+    {
+      "source_index": 30,
+      "stable_id": "source.skill_tree.016.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ブレッシ.. 10/10",
+      "source_rect": [
+        1007,
+        111,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r1c6",
+      "control_id": "skill_tree.stepper.r1c6"
+    },
+    {
+      "source_index": 31,
+      "stable_id": "source.skill_tree.017.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "プロテク..",
+      "source_rect": [
+        538,
+        170,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r2c1",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r2c1"
+    },
+    {
+      "source_index": 32,
+      "stable_id": "source.skill_tree.018.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "プロテク.. 5/5",
+      "source_rect": [
+        522,
+        212,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r2c1",
+      "control_id": "skill_tree.stepper.r2c1"
+    },
+    {
+      "source_index": 33,
+      "stable_id": "source.skill_tree.019.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "キリエエ..",
+      "source_rect": [
+        638,
+        170,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r2c2",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r2c2"
+    },
+    {
+      "source_index": 34,
+      "stable_id": "source.skill_tree.020.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "キリエエ.. 1/1",
+      "source_rect": [
+        619,
+        212,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r2c2",
+      "control_id": "skill_tree.stepper.r2c2"
+    },
+    {
+      "source_index": 35,
+      "stable_id": "source.skill_tree.021.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "サンクチ..",
+      "source_rect": [
+        738,
+        170,
+        38,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r2c3",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r2c3"
+    },
+    {
+      "source_index": 36,
+      "stable_id": "source.skill_tree.022.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "サンクチ.. 5/5",
+      "source_rect": [
+        716,
+        212,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r2c3",
+      "control_id": "skill_tree.stepper.r2c3"
+    },
+    {
+      "source_index": 37,
+      "stable_id": "source.skill_tree.023.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "デーモン..",
+      "source_rect": [
+        837,
+        170,
+        36,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r2c4",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r2c4"
+    },
+    {
+      "source_index": 38,
+      "stable_id": "source.skill_tree.024.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "デーモン.. 0/5",
+      "source_rect": [
+        813,
+        212,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r2c4",
+      "control_id": "skill_tree.stepper.r2c4"
+    },
+    {
+      "source_index": 39,
+      "stable_id": "source.skill_tree.025.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "魔法反射",
+      "source_rect": [
+        931,
+        170,
+        39,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r2c5",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r2c5"
+    },
+    {
+      "source_index": 40,
+      "stable_id": "source.skill_tree.026.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "魔法反射 0/3",
+      "source_rect": [
+        910,
+        212,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r2c5",
+      "control_id": "skill_tree.stepper.r2c5"
+    },
+    {
+      "source_index": 41,
+      "stable_id": "source.skill_tree.027.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "速度増加",
+      "source_rect": [
+        538,
+        271,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c1",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c1"
+    },
+    {
+      "source_index": 42,
+      "stable_id": "source.skill_tree.028.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "速度増加 5/5",
+      "source_rect": [
+        522,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c1",
+      "control_id": "skill_tree.stepper.r3c1"
+    },
+    {
+      "source_index": 43,
+      "stable_id": "source.skill_tree.029.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "天使の恵み",
+      "source_rect": [
+        638,
+        271,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c2",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c2"
+    },
+    {
+      "source_index": 44,
+      "stable_id": "source.skill_tree.030.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "天使の恵み 3/3",
+      "source_rect": [
+        619,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c2",
+      "control_id": "skill_tree.stepper.r3c2"
+    },
+    {
+      "source_index": 45,
+      "stable_id": "source.skill_tree.031.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "エンジェ..",
+      "source_rect": [
+        738,
+        271,
+        38,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c3",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c3"
+    },
+    {
+      "source_index": 46,
+      "stable_id": "source.skill_tree.032.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "エンジェ.. 1/1",
+      "source_rect": [
+        716,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c3",
+      "control_id": "skill_tree.stepper.r3c3"
+    },
+    {
+      "source_index": 47,
+      "stable_id": "source.skill_tree.033.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ニューマ",
+      "source_rect": [
+        837,
+        271,
+        36,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c4",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c4"
+    },
+    {
+      "source_index": 48,
+      "stable_id": "source.skill_tree.034.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ニューマ 5/5",
+      "source_rect": [
+        813,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c4",
+      "control_id": "skill_tree.stepper.r3c4"
+    },
+    {
+      "source_index": 49,
+      "stable_id": "source.skill_tree.035.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ストリッ..",
+      "source_rect": [
+        931,
+        271,
+        39,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c5",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c5"
+    },
+    {
+      "source_index": 50,
+      "stable_id": "source.skill_tree.036.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ストリッ.. 0/5",
+      "source_rect": [
+        910,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c5",
+      "control_id": "skill_tree.stepper.r3c5"
+    },
+    {
+      "source_index": 51,
+      "stable_id": "source.skill_tree.037.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "シールド..",
+      "source_rect": [
+        1022,
+        271,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r3c6",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r3c6"
+    },
+    {
+      "source_index": 52,
+      "stable_id": "source.skill_tree.038.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "シールド.. 3/3",
+      "source_rect": [
+        1007,
+        313,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r3c6",
+      "control_id": "skill_tree.stepper.r3c6"
+    },
+    {
+      "source_index": 53,
+      "stable_id": "source.skill_tree.039.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "リカバリー",
+      "source_rect": [
+        537,
+        372,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c1",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c1"
+    },
+    {
+      "source_index": 54,
+      "stable_id": "source.skill_tree.040.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "リカバリー 1/1",
+      "source_rect": [
+        522,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c1",
+      "control_id": "skill_tree.stepper.r4c1"
+    },
+    {
+      "source_index": 55,
+      "stable_id": "source.skill_tree.041.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "レックス..",
+      "source_rect": [
+        637,
+        372,
+        42,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c2",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c2"
+    },
+    {
+      "source_index": 56,
+      "stable_id": "source.skill_tree.042.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "レックス.. 10/10",
+      "source_rect": [
+        619,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c2",
+      "control_id": "skill_tree.stepper.r4c2"
+    },
+    {
+      "source_index": 57,
+      "stable_id": "source.skill_tree.043.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "カントキ..",
+      "source_rect": [
+        738,
+        372,
+        38,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c3",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c3"
+    },
+    {
+      "source_index": 58,
+      "stable_id": "source.skill_tree.044.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "カントキ.. 1/1",
+      "source_rect": [
+        716,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c3",
+      "control_id": "skill_tree.stepper.r4c3"
+    },
+    {
+      "source_index": 59,
+      "stable_id": "source.skill_tree.045.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "クァグマ..",
+      "source_rect": [
+        837,
+        372,
+        36,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c4",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c4"
+    },
+    {
+      "source_index": 60,
+      "stable_id": "source.skill_tree.046.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "クァグマ.. 1/1",
+      "source_rect": [
+        813,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c4",
+      "control_id": "skill_tree.stepper.r4c4"
+    },
+    {
+      "source_index": 61,
+      "stable_id": "source.skill_tree.047.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ペイニッ..",
+      "source_rect": [
+        931,
+        372,
+        39,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c5",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c5"
+    },
+    {
+      "source_index": 62,
+      "stable_id": "source.skill_tree.048.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ペイニッ.. 0/5",
+      "source_rect": [
+        910,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c5",
+      "control_id": "skill_tree.stepper.r4c5"
+    },
+    {
+      "source_index": 63,
+      "stable_id": "source.skill_tree.049.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "セイフティ..",
+      "source_rect": [
+        1022,
+        372,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r4c6",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r4c6"
+    },
+    {
+      "source_index": 64,
+      "stable_id": "source.skill_tree.050.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "セイフティ.. 0/5",
+      "source_rect": [
+        1007,
+        414,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r4c6",
+      "control_id": "skill_tree.stepper.r4c6"
+    },
+    {
+      "source_index": 65,
+      "stable_id": "source.skill_tree.051.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "グロリア",
+      "source_rect": [
+        538,
+        473,
+        41,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r5c1",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r5c1"
+    },
+    {
+      "source_index": 66,
+      "stable_id": "source.skill_tree.052.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "グロリア 5/5",
+      "source_rect": [
+        522,
+        515,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r5c1",
+      "control_id": "skill_tree.stepper.r5c1"
+    },
+    {
+      "source_index": 67,
+      "stable_id": "source.skill_tree.053.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "エクスピア..",
+      "source_rect": [
+        738,
+        473,
+        38,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r5c3",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r5c3"
+    },
+    {
+      "source_index": 68,
+      "stable_id": "source.skill_tree.054.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "エクスピア.. 0/1",
+      "source_rect": [
+        716,
+        515,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r5c3",
+      "control_id": "skill_tree.stepper.r5c3"
+    },
+    {
+      "source_index": 69,
+      "stable_id": "source.skill_tree.055.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "エクスピア..",
+      "source_rect": [
+        837,
+        474,
+        36,
+        39
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r5c4",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r5c4"
+    },
+    {
+      "source_index": 70,
+      "stable_id": "source.skill_tree.056.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "エクスピア.. 0/1",
+      "source_rect": [
+        813,
+        515,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r5c4",
+      "control_id": "skill_tree.stepper.r5c4"
+    },
+    {
+      "source_index": 71,
+      "stable_id": "source.skill_tree.057.grid_cell",
+      "window_id": "skill_tree",
+      "source_type": "grid cell",
+      "source_label": "ターンア..",
+      "source_rect": [
+        926,
+        473,
+        40,
+        40
+      ],
+      "owner_kind": "surface",
+      "production_owner": "skill_tree.skills#r5c5",
+      "control_id": "skill_tree.skills",
+      "surface_id": "r5c5"
+    },
+    {
+      "source_index": 72,
+      "stable_id": "source.skill_tree.058.stepper",
+      "window_id": "skill_tree",
+      "source_type": "stepper",
+      "source_label": "ターンア.. 0/10",
+      "source_rect": [
+        910,
+        515,
+        72,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "skill_tree.stepper.r5c5",
+      "control_id": "skill_tree.stepper.r5c5"
+    },
+    {
+      "source_index": 73,
+      "stable_id": "source.equipment_card.000.title_drag",
+      "window_id": "equipment_card",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        1108,
+        0,
+        424,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "equipment_card.title_drag"
+    },
+    {
+      "source_index": 74,
+      "stable_id": "source.equipment_card.001.close",
+      "window_id": "equipment_card",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1508,
+        7,
+        18,
+        18
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_card.close",
+      "control_id": "equipment_card.close"
+    },
+    {
+      "source_index": 75,
+      "stable_id": "source.equipment_card.002.grid_cell",
+      "window_id": "equipment_card",
+      "source_type": "grid cell",
+      "source_label": "ミストレスカード (card art)",
+      "source_rect": [
+        1123,
+        39,
+        180,
+        231
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "equipment_card.source_state"
+    },
+    {
+      "source_index": 76,
+      "stable_id": "source.equipment_card.003.scrollbar",
+      "window_id": "equipment_card",
+      "source_type": "scrollbar",
+      "source_label": null,
+      "source_rect": [
+        1498,
+        80,
+        28,
+        190
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_card.scroll",
+      "control_id": "equipment_card.scroll"
+    },
+    {
+      "source_index": 77,
+      "stable_id": "source.status.000.title_drag",
+      "window_id": "status",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        0,
+        211,
+        484,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "status.title_drag"
+    },
+    {
+      "source_index": 78,
+      "stable_id": "source.status.001.minimize",
+      "window_id": "status",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        434,
+        219,
+        16,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.minimize",
+      "control_id": "status.minimize"
+    },
+    {
+      "source_index": 79,
+      "stable_id": "source.status.002.close",
+      "window_id": "status",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        459,
+        219,
+        17,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.close",
+      "control_id": "status.close"
+    },
+    {
+      "source_index": 80,
+      "stable_id": "source.status.003.tab",
+      "window_id": "status",
+      "source_type": "tab",
+      "source_label": "職業/status",
+      "source_rect": [
+        8,
+        241,
+        13,
+        165
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "status.source_state"
+    },
+    {
+      "source_index": 81,
+      "stable_id": "source.status.004.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Str",
+      "source_rect": [
+        88,
+        250,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.str",
+      "control_id": "status.attribute.str"
+    },
+    {
+      "source_index": 82,
+      "stable_id": "source.status.005.stepper",
+      "window_id": "status",
+      "source_type": "stepper",
+      "source_label": "raise Str",
+      "source_rect": [
+        153,
+        252,
+        19,
+        13
+      ],
+      "owner_kind": "surface",
+      "production_owner": "status.attribute.str#decrement",
+      "control_id": "status.attribute.str",
+      "surface_id": "decrement"
+    },
+    {
+      "source_index": 83,
+      "stable_id": "source.status.006.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Agi",
+      "source_rect": [
+        88,
+        277,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.agi",
+      "control_id": "status.attribute.agi"
+    },
+    {
+      "source_index": 84,
+      "stable_id": "source.status.007.stepper",
+      "window_id": "status",
+      "source_type": "stepper",
+      "source_label": "raise Agi",
+      "source_rect": [
+        153,
+        279,
+        19,
+        13
+      ],
+      "owner_kind": "surface",
+      "production_owner": "status.attribute.agi#decrement",
+      "control_id": "status.attribute.agi",
+      "surface_id": "decrement"
+    },
+    {
+      "source_index": 85,
+      "stable_id": "source.status.008.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Vit",
+      "source_rect": [
+        88,
+        304,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.vit",
+      "control_id": "status.attribute.vit"
+    },
+    {
+      "source_index": 86,
+      "stable_id": "source.status.009.stepper",
+      "window_id": "status",
+      "source_type": "stepper",
+      "source_label": "raise Vit",
+      "source_rect": [
+        153,
+        306,
+        19,
+        13
+      ],
+      "owner_kind": "surface",
+      "production_owner": "status.attribute.vit#decrement",
+      "control_id": "status.attribute.vit",
+      "surface_id": "decrement"
+    },
+    {
+      "source_index": 87,
+      "stable_id": "source.status.010.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Int",
+      "source_rect": [
+        88,
+        331,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.int",
+      "control_id": "status.attribute.int"
+    },
+    {
+      "source_index": 88,
+      "stable_id": "source.status.011.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Dex",
+      "source_rect": [
+        88,
+        358,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.dex",
+      "control_id": "status.attribute.dex"
+    },
+    {
+      "source_index": 89,
+      "stable_id": "source.status.012.stepper",
+      "window_id": "status",
+      "source_type": "stepper",
+      "source_label": "raise Dex",
+      "source_rect": [
+        153,
+        360,
+        19,
+        13
+      ],
+      "owner_kind": "surface",
+      "production_owner": "status.attribute.dex#decrement",
+      "control_id": "status.attribute.dex",
+      "surface_id": "decrement"
+    },
+    {
+      "source_index": 90,
+      "stable_id": "source.status.013.text_field",
+      "window_id": "status",
+      "source_type": "text field",
+      "source_label": "Luk",
+      "source_rect": [
+        88,
+        385,
+        112,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "status.attribute.luk",
+      "control_id": "status.attribute.luk"
+    },
+    {
+      "source_index": 91,
+      "stable_id": "source.status.014.stepper",
+      "window_id": "status",
+      "source_type": "stepper",
+      "source_label": "raise Luk",
+      "source_rect": [
+        153,
+        387,
+        19,
+        13
+      ],
+      "owner_kind": "surface",
+      "production_owner": "status.attribute.luk#decrement",
+      "control_id": "status.attribute.luk",
+      "surface_id": "decrement"
+    },
+    {
+      "source_index": 92,
+      "stable_id": "source.options.000.title_drag",
+      "window_id": "options",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        1108,
+        297,
+        424,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "options.title_drag"
+    },
+    {
+      "source_index": 93,
+      "stable_id": "source.options.001.minimize",
+      "window_id": "options",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        1484,
+        303,
+        15,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.minimize",
+      "control_id": "options.minimize"
+    },
+    {
+      "source_index": 94,
+      "stable_id": "source.options.002.close",
+      "window_id": "options",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1508,
+        303,
+        19,
+        18
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.close",
+      "control_id": "options.close"
+    },
+    {
+      "source_index": 95,
+      "stable_id": "source.options.003.slider",
+      "window_id": "options",
+      "source_type": "slider",
+      "source_label": "BGM",
+      "source_rect": [
+        1224,
+        347,
+        254,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.bgm",
+      "control_id": "options.bgm"
+    },
+    {
+      "source_index": 96,
+      "stable_id": "source.options.004.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "on (BGM)",
+      "source_rect": [
+        1487,
+        353,
+        12,
+        11
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.bgm_on",
+      "control_id": "options.bgm_on"
+    },
+    {
+      "source_index": 97,
+      "stable_id": "source.options.005.slider",
+      "window_id": "options",
+      "source_type": "slider",
+      "source_label": "Effect",
+      "source_rect": [
+        1224,
+        381,
+        254,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.effect",
+      "control_id": "options.effect"
+    },
+    {
+      "source_index": 98,
+      "stable_id": "source.options.006.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "on (Effect)",
+      "source_rect": [
+        1487,
+        387,
+        12,
+        11
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.effect_on",
+      "control_id": "options.effect_on"
+    },
+    {
+      "source_index": 99,
+      "stable_id": "source.options.007.dropdown",
+      "window_id": "options",
+      "source_type": "dropdown",
+      "source_label": "Skin",
+      "source_rect": [
+        1224,
+        416,
+        294,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.skin",
+      "control_id": "options.skin"
+    },
+    {
+      "source_index": 100,
+      "stable_id": "source.options.008.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "attack",
+      "source_rect": [
+        1138,
+        467,
+        12,
+        12
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.attack",
+      "control_id": "options.attack"
+    },
+    {
+      "source_index": 101,
+      "stable_id": "source.options.009.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "skill",
+      "source_rect": [
+        1228,
+        467,
+        12,
+        12
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.skill",
+      "control_id": "options.skill"
+    },
+    {
+      "source_index": 102,
+      "stable_id": "source.options.010.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "item",
+      "source_rect": [
+        1300,
+        467,
+        12,
+        12
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.item",
+      "control_id": "options.item"
+    },
+    {
+      "source_index": 103,
+      "stable_id": "source.options.011.checkbox",
+      "window_id": "options",
+      "source_type": "checkbox",
+      "source_label": "option",
+      "source_rect": [
+        1397,
+        467,
+        12,
+        12
+      ],
+      "owner_kind": "control",
+      "production_owner": "options.option",
+      "control_id": "options.option"
+    },
+    {
+      "source_index": 104,
+      "stable_id": "source.equipment_items.000.title_drag",
+      "window_id": "equipment_items",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        0,
+        423,
+        484,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "equipment_items.title_drag"
+    },
+    {
+      "source_index": 105,
+      "stable_id": "source.equipment_items.001.minimize",
+      "window_id": "equipment_items",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        434,
+        431,
+        17,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.minimize",
+      "control_id": "equipment_items.minimize"
+    },
+    {
+      "source_index": 106,
+      "stable_id": "source.equipment_items.002.close",
+      "window_id": "equipment_items",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        459,
+        431,
+        17,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.close",
+      "control_id": "equipment_items.close"
+    },
+    {
+      "source_index": 107,
+      "stable_id": "source.equipment_items.003.tab",
+      "window_id": "equipment_items",
+      "source_type": "tab",
+      "source_label": "一般装備",
+      "source_rect": [
+        8,
+        454,
+        99,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 108,
+      "stable_id": "source.equipment_items.004.tab",
+      "window_id": "equipment_items",
+      "source_type": "tab",
+      "source_label": "衣装装備",
+      "source_rect": [
+        111,
+        454,
+        119,
+        26
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 109,
+      "stable_id": "source.equipment_items.005.button",
+      "window_id": "equipment_items",
+      "source_type": "button",
+      "source_label": "items",
+      "source_rect": [
+        212,
+        635,
+        52,
+        24
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 110,
+      "stable_id": "source.equipment_items.006.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "+7 聖者の冠",
+      "source_rect": [
+        8,
+        483,
+        182,
+        35
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 111,
+      "stable_id": "source.equipment_items.007.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "聖者のローブ +4",
+      "source_rect": [
+        295,
+        483,
+        181,
+        35
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 112,
+      "stable_id": "source.equipment_items.008.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "くわえた魚",
+      "source_rect": [
+        8,
+        521,
+        182,
+        30
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 113,
+      "stable_id": "source.equipment_items.009.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "+4 ディアボロス",
+      "source_rect": [
+        295,
+        521,
+        181,
+        30
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 114,
+      "stable_id": "source.equipment_items.010.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "+5 イービルグロリアス",
+      "source_rect": [
+        8,
+        554,
+        182,
+        37
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 115,
+      "stable_id": "source.equipment_items.011.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "ロザリオ",
+      "source_rect": [
+        295,
+        554,
+        181,
+        37
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 116,
+      "stable_id": "source.equipment_items.012.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "+7 治癒の杖",
+      "source_rect": [
+        8,
+        593,
+        182,
+        30
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 117,
+      "stable_id": "source.equipment_items.013.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "+5 ソウルエンチャン...",
+      "source_rect": [
+        295,
+        593,
+        181,
+        30
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 118,
+      "stable_id": "source.equipment_items.014.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "サバイバルイヤリング",
+      "source_rect": [
+        8,
+        628,
+        182,
+        45
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 119,
+      "stable_id": "source.equipment_items.015.grid_cell",
+      "window_id": "equipment_items",
+      "source_type": "grid cell",
+      "source_label": "サバイバルイヤリング",
+      "source_rect": [
+        295,
+        628,
+        181,
+        45
+      ],
+      "owner_kind": "control",
+      "production_owner": "equipment_items.slots",
+      "control_id": "equipment_items.slots"
+    },
+    {
+      "source_index": 120,
+      "stable_id": "source.party.000.title_drag",
+      "window_id": "party",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        1107,
+        505,
+        215,
+        22
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "party.title_drag"
+    },
+    {
+      "source_index": 121,
+      "stable_id": "source.party.001.close",
+      "window_id": "party",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1301,
+        510,
+        13,
+        13
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.close",
+      "control_id": "party.close"
+    },
+    {
+      "source_index": 122,
+      "stable_id": "source.party.002.list_row",
+      "window_id": "party",
+      "source_type": "list row",
+      "source_label": "SakumaRiri（フェイヨン..",
+      "source_rect": [
+        1113,
+        538,
+        200,
+        32
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.members#sakumariri",
+      "control_id": "party.members",
+      "surface_id": "sakumariri"
+    },
+    {
+      "source_index": 123,
+      "stable_id": "source.party.003.list_row",
+      "window_id": "party",
+      "source_type": "list row",
+      "source_label": "Sebas*（フェイヨン...",
+      "source_rect": [
+        1113,
+        572,
+        200,
+        32
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.members#sebas",
+      "control_id": "party.members",
+      "surface_id": "sebas"
+    },
+    {
+      "source_index": 124,
+      "stable_id": "source.party.004.list_row",
+      "window_id": "party",
+      "source_type": "list row",
+      "source_label": "ANRI（フェイヨン森）",
+      "source_rect": [
+        1113,
+        606,
+        200,
+        32
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.members#anri",
+      "control_id": "party.members",
+      "surface_id": "anri"
+    },
+    {
+      "source_index": 125,
+      "stable_id": "source.party.005.list_row",
+      "window_id": "party",
+      "source_type": "list row",
+      "source_label": "Show_A（フェイヨン森..",
+      "source_rect": [
+        1113,
+        640,
+        200,
+        32
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.members#show_a",
+      "control_id": "party.members",
+      "surface_id": "show_a"
+    },
+    {
+      "source_index": 126,
+      "stable_id": "source.party.006.list_row",
+      "window_id": "party",
+      "source_type": "list row",
+      "source_label": "AyanaIshizuka（フェイヨン...",
+      "source_rect": [
+        1113,
+        674,
+        200,
+        32
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.members#ayana_ishizuka",
+      "control_id": "party.members",
+      "surface_id": "ayana_ishizuka"
+    },
+    {
+      "source_index": 127,
+      "stable_id": "source.party.007.button",
+      "window_id": "party",
+      "source_type": "button",
+      "source_label": "memo",
+      "source_rect": [
+        1122,
+        719,
+        21,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.action.memo",
+      "control_id": "party.action.memo"
+    },
+    {
+      "source_index": 128,
+      "stable_id": "source.party.008.button",
+      "window_id": "party",
+      "source_type": "button",
+      "source_label": "info",
+      "source_rect": [
+        1157,
+        719,
+        21,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.action.info",
+      "control_id": "party.action.info"
+    },
+    {
+      "source_index": 129,
+      "stable_id": "source.party.009.button",
+      "window_id": "party",
+      "source_type": "button",
+      "source_label": "target",
+      "source_rect": [
+        1192,
+        719,
+        21,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.action.target",
+      "control_id": "party.action.target"
+    },
+    {
+      "source_index": 130,
+      "stable_id": "source.party.010.button",
+      "window_id": "party",
+      "source_type": "button",
+      "source_label": "search",
+      "source_rect": [
+        1227,
+        719,
+        21,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.action.search",
+      "control_id": "party.action.search"
+    },
+    {
+      "source_index": 131,
+      "stable_id": "source.party.011.button",
+      "window_id": "party",
+      "source_type": "button",
+      "source_label": "leave",
+      "source_rect": [
+        1262,
+        719,
+        21,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "party.action.leave",
+      "control_id": "party.action.leave"
+    },
+    {
+      "source_index": 132,
+      "stable_id": "source.party.012.radio",
+      "window_id": "party",
+      "source_type": "radio",
+      "source_label": "友達",
+      "source_rect": [
+        1114,
+        750,
+        16,
+        16
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.mode#friends",
+      "control_id": "party.mode",
+      "surface_id": "friends"
+    },
+    {
+      "source_index": 133,
+      "stable_id": "source.party.013.radio",
+      "window_id": "party",
+      "source_type": "radio",
+      "source_label": "パーティー",
+      "source_rect": [
+        1195,
+        750,
+        16,
+        16
+      ],
+      "owner_kind": "surface",
+      "production_owner": "party.mode#party",
+      "control_id": "party.mode",
+      "surface_id": "party"
+    },
+    {
+      "source_index": 134,
+      "stable_id": "source.system_menu.000.title_drag",
+      "window_id": "system_menu",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        1328,
+        505,
+        204,
+        22
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "system_menu.title_drag"
+    },
+    {
+      "source_index": 135,
+      "stable_id": "source.system_menu.001.minimize",
+      "window_id": "system_menu",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        1509,
+        510,
+        14,
+        14
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.minimize",
+      "control_id": "system_menu.minimize"
+    },
+    {
+      "source_index": 136,
+      "stable_id": "source.system_menu.002.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "セーブポイントへ",
+      "source_rect": [
+        1336,
+        536,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.save_point",
+      "control_id": "system_menu.save_point"
+    },
+    {
+      "source_index": 137,
+      "stable_id": "source.system_menu.003.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "キャラクター選択",
+      "source_rect": [
+        1336,
+        570,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.character_select",
+      "control_id": "system_menu.character_select"
+    },
+    {
+      "source_index": 138,
+      "stable_id": "source.system_menu.004.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "サウンド設定",
+      "source_rect": [
+        1336,
+        604,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.sound_settings",
+      "control_id": "system_menu.sound_settings"
+    },
+    {
+      "source_index": 139,
+      "stable_id": "source.system_menu.005.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "環境設定",
+      "source_rect": [
+        1336,
+        638,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.environment_settings",
+      "control_id": "system_menu.environment_settings"
+    },
+    {
+      "source_index": 140,
+      "stable_id": "source.system_menu.006.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "ショートカット",
+      "source_rect": [
+        1336,
+        672,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.shortcuts",
+      "control_id": "system_menu.shortcuts"
+    },
+    {
+      "source_index": 141,
+      "stable_id": "source.system_menu.007.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "ゲーム終了",
+      "source_rect": [
+        1336,
+        706,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.game_exit",
+      "control_id": "system_menu.game_exit"
+    },
+    {
+      "source_index": 142,
+      "stable_id": "source.system_menu.008.button",
+      "window_id": "system_menu",
+      "source_type": "button",
+      "source_label": "return to game",
+      "source_rect": [
+        1336,
+        740,
+        188,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "system_menu.return_to_game",
+      "control_id": "system_menu.return_to_game"
+    },
+    {
+      "source_index": 143,
+      "stable_id": "source.storage.000.title_drag",
+      "window_id": "storage",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        492,
+        609,
+        539,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "storage.title_drag"
+    },
+    {
+      "source_index": 144,
+      "stable_id": "source.storage.001.close",
+      "window_id": "storage",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1007,
+        617,
+        18,
+        18
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.close",
+      "control_id": "storage.close"
+    },
+    {
+      "source_index": 145,
+      "stable_id": "source.storage.002.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "消耗品",
+      "source_rect": [
+        504,
+        649,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#consumable",
+      "control_id": "storage.categories",
+      "surface_id": "consumable"
+    },
+    {
+      "source_index": 146,
+      "stable_id": "source.storage.003.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "装備品",
+      "source_rect": [
+        504,
+        688,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#equipment",
+      "control_id": "storage.categories",
+      "surface_id": "equipment"
+    },
+    {
+      "source_index": 147,
+      "stable_id": "source.storage.004.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "カード",
+      "source_rect": [
+        504,
+        727,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#card",
+      "control_id": "storage.categories",
+      "surface_id": "card"
+    },
+    {
+      "source_index": 148,
+      "stable_id": "source.storage.005.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "材料",
+      "source_rect": [
+        504,
+        766,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#material",
+      "control_id": "storage.categories",
+      "surface_id": "material"
+    },
+    {
+      "source_index": 149,
+      "stable_id": "source.storage.006.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "収集品",
+      "source_rect": [
+        504,
+        805,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#collectible",
+      "control_id": "storage.categories",
+      "surface_id": "collectible"
+    },
+    {
+      "source_index": 150,
+      "stable_id": "source.storage.007.tab",
+      "window_id": "storage",
+      "source_type": "tab",
+      "source_label": "その他",
+      "source_rect": [
+        504,
+        844,
+        66,
+        33
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.categories#other",
+      "control_id": "storage.categories",
+      "surface_id": "other"
+    },
+    {
+      "source_index": 151,
+      "stable_id": "source.storage.008.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c0",
+      "source_rect": [
+        580,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c0",
+      "control_id": "storage.items",
+      "surface_id": "r0c0"
+    },
+    {
+      "source_index": 152,
+      "stable_id": "source.storage.009.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c1",
+      "source_rect": [
+        640,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c1",
+      "control_id": "storage.items",
+      "surface_id": "r0c1"
+    },
+    {
+      "source_index": 153,
+      "stable_id": "source.storage.010.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c2",
+      "source_rect": [
+        700,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c2",
+      "control_id": "storage.items",
+      "surface_id": "r0c2"
+    },
+    {
+      "source_index": 154,
+      "stable_id": "source.storage.011.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c3",
+      "source_rect": [
+        760,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c3",
+      "control_id": "storage.items",
+      "surface_id": "r0c3"
+    },
+    {
+      "source_index": 155,
+      "stable_id": "source.storage.012.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c4",
+      "source_rect": [
+        820,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c4",
+      "control_id": "storage.items",
+      "surface_id": "r0c4"
+    },
+    {
+      "source_index": 156,
+      "stable_id": "source.storage.013.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c5",
+      "source_rect": [
+        880,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c5",
+      "control_id": "storage.items",
+      "surface_id": "r0c5"
+    },
+    {
+      "source_index": 157,
+      "stable_id": "source.storage.014.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r0c6",
+      "source_rect": [
+        940,
+        639,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r0c6",
+      "control_id": "storage.items",
+      "surface_id": "r0c6"
+    },
+    {
+      "source_index": 158,
+      "stable_id": "source.storage.015.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c0",
+      "source_rect": [
+        580,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c0",
+      "control_id": "storage.items",
+      "surface_id": "r1c0"
+    },
+    {
+      "source_index": 159,
+      "stable_id": "source.storage.016.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c1",
+      "source_rect": [
+        640,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c1",
+      "control_id": "storage.items",
+      "surface_id": "r1c1"
+    },
+    {
+      "source_index": 160,
+      "stable_id": "source.storage.017.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c2",
+      "source_rect": [
+        700,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c2",
+      "control_id": "storage.items",
+      "surface_id": "r1c2"
+    },
+    {
+      "source_index": 161,
+      "stable_id": "source.storage.018.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c3",
+      "source_rect": [
+        760,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c3",
+      "control_id": "storage.items",
+      "surface_id": "r1c3"
+    },
+    {
+      "source_index": 162,
+      "stable_id": "source.storage.019.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c4",
+      "source_rect": [
+        820,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c4",
+      "control_id": "storage.items",
+      "surface_id": "r1c4"
+    },
+    {
+      "source_index": 163,
+      "stable_id": "source.storage.020.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c5",
+      "source_rect": [
+        880,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c5",
+      "control_id": "storage.items",
+      "surface_id": "r1c5"
+    },
+    {
+      "source_index": 164,
+      "stable_id": "source.storage.021.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r1c6",
+      "source_rect": [
+        940,
+        702,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r1c6",
+      "control_id": "storage.items",
+      "surface_id": "r1c6"
+    },
+    {
+      "source_index": 165,
+      "stable_id": "source.storage.022.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c0",
+      "source_rect": [
+        580,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c0",
+      "control_id": "storage.items",
+      "surface_id": "r2c0"
+    },
+    {
+      "source_index": 166,
+      "stable_id": "source.storage.023.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c1",
+      "source_rect": [
+        640,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c1",
+      "control_id": "storage.items",
+      "surface_id": "r2c1"
+    },
+    {
+      "source_index": 167,
+      "stable_id": "source.storage.024.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c2",
+      "source_rect": [
+        700,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c2",
+      "control_id": "storage.items",
+      "surface_id": "r2c2"
+    },
+    {
+      "source_index": 168,
+      "stable_id": "source.storage.025.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c3",
+      "source_rect": [
+        760,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c3",
+      "control_id": "storage.items",
+      "surface_id": "r2c3"
+    },
+    {
+      "source_index": 169,
+      "stable_id": "source.storage.026.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c4",
+      "source_rect": [
+        820,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c4",
+      "control_id": "storage.items",
+      "surface_id": "r2c4"
+    },
+    {
+      "source_index": 170,
+      "stable_id": "source.storage.027.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c5",
+      "source_rect": [
+        880,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c5",
+      "control_id": "storage.items",
+      "surface_id": "r2c5"
+    },
+    {
+      "source_index": 171,
+      "stable_id": "source.storage.028.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r2c6",
+      "source_rect": [
+        940,
+        765,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r2c6",
+      "control_id": "storage.items",
+      "surface_id": "r2c6"
+    },
+    {
+      "source_index": 172,
+      "stable_id": "source.storage.029.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c0",
+      "source_rect": [
+        580,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c0",
+      "control_id": "storage.items",
+      "surface_id": "r3c0"
+    },
+    {
+      "source_index": 173,
+      "stable_id": "source.storage.030.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c1",
+      "source_rect": [
+        640,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c1",
+      "control_id": "storage.items",
+      "surface_id": "r3c1"
+    },
+    {
+      "source_index": 174,
+      "stable_id": "source.storage.031.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c2",
+      "source_rect": [
+        700,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c2",
+      "control_id": "storage.items",
+      "surface_id": "r3c2"
+    },
+    {
+      "source_index": 175,
+      "stable_id": "source.storage.032.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c3",
+      "source_rect": [
+        760,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c3",
+      "control_id": "storage.items",
+      "surface_id": "r3c3"
+    },
+    {
+      "source_index": 176,
+      "stable_id": "source.storage.033.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c4",
+      "source_rect": [
+        820,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c4",
+      "control_id": "storage.items",
+      "surface_id": "r3c4"
+    },
+    {
+      "source_index": 177,
+      "stable_id": "source.storage.034.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c5",
+      "source_rect": [
+        880,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c5",
+      "control_id": "storage.items",
+      "surface_id": "r3c5"
+    },
+    {
+      "source_index": 178,
+      "stable_id": "source.storage.035.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r3c6",
+      "source_rect": [
+        940,
+        828,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r3c6",
+      "control_id": "storage.items",
+      "surface_id": "r3c6"
+    },
+    {
+      "source_index": 179,
+      "stable_id": "source.storage.036.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c0",
+      "source_rect": [
+        580,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c0",
+      "control_id": "storage.items",
+      "surface_id": "r4c0"
+    },
+    {
+      "source_index": 180,
+      "stable_id": "source.storage.037.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c1",
+      "source_rect": [
+        640,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c1",
+      "control_id": "storage.items",
+      "surface_id": "r4c1"
+    },
+    {
+      "source_index": 181,
+      "stable_id": "source.storage.038.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c2",
+      "source_rect": [
+        700,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c2",
+      "control_id": "storage.items",
+      "surface_id": "r4c2"
+    },
+    {
+      "source_index": 182,
+      "stable_id": "source.storage.039.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c3",
+      "source_rect": [
+        760,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c3",
+      "control_id": "storage.items",
+      "surface_id": "r4c3"
+    },
+    {
+      "source_index": 183,
+      "stable_id": "source.storage.040.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c4",
+      "source_rect": [
+        820,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c4",
+      "control_id": "storage.items",
+      "surface_id": "r4c4"
+    },
+    {
+      "source_index": 184,
+      "stable_id": "source.storage.041.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c5",
+      "source_rect": [
+        880,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c5",
+      "control_id": "storage.items",
+      "surface_id": "r4c5"
+    },
+    {
+      "source_index": 185,
+      "stable_id": "source.storage.042.grid_cell",
+      "window_id": "storage",
+      "source_type": "grid cell",
+      "source_label": "storage slot r4c6",
+      "source_rect": [
+        940,
+        891,
+        60,
+        63
+      ],
+      "owner_kind": "surface",
+      "production_owner": "storage.items#r4c6",
+      "control_id": "storage.items",
+      "surface_id": "r4c6"
+    },
+    {
+      "source_index": 186,
+      "stable_id": "source.storage.043.button",
+      "window_id": "storage",
+      "source_type": "button",
+      "source_label": "list mode (icon)",
+      "source_rect": [
+        621,
+        964,
+        23,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.list",
+      "control_id": "storage.list"
+    },
+    {
+      "source_index": 187,
+      "stable_id": "source.storage.044.button",
+      "window_id": "storage",
+      "source_type": "button",
+      "source_label": "search (icon)",
+      "source_rect": [
+        652,
+        964,
+        47,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.search_focus",
+      "control_id": "storage.search_focus"
+    },
+    {
+      "source_index": 188,
+      "stable_id": "source.storage.045.button",
+      "window_id": "storage",
+      "source_type": "button",
+      "source_label": "search",
+      "source_rect": [
+        736,
+        964,
+        86,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.search",
+      "control_id": "storage.search"
+    },
+    {
+      "source_index": 189,
+      "stable_id": "source.storage.046.button",
+      "window_id": "storage",
+      "source_type": "button",
+      "source_label": "sort",
+      "source_rect": [
+        836,
+        964,
+        84,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.sort",
+      "control_id": "storage.sort"
+    },
+    {
+      "source_index": 190,
+      "stable_id": "source.storage.047.button",
+      "window_id": "storage",
+      "source_type": "button",
+      "source_label": "close",
+      "source_rect": [
+        932,
+        964,
+        66,
+        27
+      ],
+      "owner_kind": "control",
+      "production_owner": "storage.bottom_close",
+      "control_id": "storage.bottom_close"
+    },
+    {
+      "source_index": 191,
+      "stable_id": "source.inventory.000.title_drag",
+      "window_id": "inventory",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        0,
+        701,
+        484,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "inventory.title_drag"
+    },
+    {
+      "source_index": 192,
+      "stable_id": "source.inventory.001.minimize",
+      "window_id": "inventory",
+      "source_type": "minimize",
+      "source_label": null,
+      "source_rect": [
+        435,
+        709,
+        17,
+        16
+      ],
+      "owner_kind": "control",
+      "production_owner": "inventory.minimize",
+      "control_id": "inventory.minimize"
+    },
+    {
+      "source_index": 193,
+      "stable_id": "source.inventory.002.close",
+      "window_id": "inventory",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        460,
+        709,
+        18,
+        17
+      ],
+      "owner_kind": "control",
+      "production_owner": "inventory.close",
+      "control_id": "inventory.close"
+    },
+    {
+      "source_index": 194,
+      "stable_id": "source.inventory.003.tab",
+      "window_id": "inventory",
+      "source_type": "tab",
+      "source_label": "item",
+      "source_rect": [
+        10,
+        731,
+        26,
+        36
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.tabs#item",
+      "control_id": "inventory.tabs",
+      "surface_id": "item"
+    },
+    {
+      "source_index": 195,
+      "stable_id": "source.inventory.004.tab",
+      "window_id": "inventory",
+      "source_type": "tab",
+      "source_label": "equip",
+      "source_rect": [
+        10,
+        770,
+        26,
+        36
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.tabs#equip",
+      "control_id": "inventory.tabs",
+      "surface_id": "equip"
+    },
+    {
+      "source_index": 196,
+      "stable_id": "source.inventory.005.tab",
+      "window_id": "inventory",
+      "source_type": "tab",
+      "source_label": "etc",
+      "source_rect": [
+        10,
+        809,
+        26,
+        36
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.tabs#etc-1",
+      "control_id": "inventory.tabs",
+      "surface_id": "etc-1"
+    },
+    {
+      "source_index": 197,
+      "stable_id": "source.inventory.006.tab",
+      "window_id": "inventory",
+      "source_type": "tab",
+      "source_label": "etc",
+      "source_rect": [
+        10,
+        848,
+        26,
+        36
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.tabs#etc-2",
+      "control_id": "inventory.tabs",
+      "surface_id": "etc-2"
+    },
+    {
+      "source_index": 198,
+      "stable_id": "source.inventory.007.tab",
+      "window_id": "inventory",
+      "source_type": "tab",
+      "source_label": "cash",
+      "source_rect": [
+        10,
+        887,
+        26,
+        36
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.tabs#cash",
+      "control_id": "inventory.tabs",
+      "surface_id": "cash"
+    },
+    {
+      "source_index": 199,
+      "stable_id": "source.inventory.008.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c0",
+      "source_rect": [
+        42,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c0",
+      "control_id": "inventory.items",
+      "surface_id": "r0c0"
+    },
+    {
+      "source_index": 200,
+      "stable_id": "source.inventory.009.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c1",
+      "source_rect": [
+        96,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c1",
+      "control_id": "inventory.items",
+      "surface_id": "r0c1"
+    },
+    {
+      "source_index": 201,
+      "stable_id": "source.inventory.010.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c2",
+      "source_rect": [
+        150,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c2",
+      "control_id": "inventory.items",
+      "surface_id": "r0c2"
+    },
+    {
+      "source_index": 202,
+      "stable_id": "source.inventory.011.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c3",
+      "source_rect": [
+        204,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c3",
+      "control_id": "inventory.items",
+      "surface_id": "r0c3"
+    },
+    {
+      "source_index": 203,
+      "stable_id": "source.inventory.012.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c4",
+      "source_rect": [
+        258,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c4",
+      "control_id": "inventory.items",
+      "surface_id": "r0c4"
+    },
+    {
+      "source_index": 204,
+      "stable_id": "source.inventory.013.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c5",
+      "source_rect": [
+        312,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c5",
+      "control_id": "inventory.items",
+      "surface_id": "r0c5"
+    },
+    {
+      "source_index": 205,
+      "stable_id": "source.inventory.014.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r0c6",
+      "source_rect": [
+        366,
+        731,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r0c6",
+      "control_id": "inventory.items",
+      "surface_id": "r0c6"
+    },
+    {
+      "source_index": 206,
+      "stable_id": "source.inventory.015.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c0",
+      "source_rect": [
+        42,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c0",
+      "control_id": "inventory.items",
+      "surface_id": "r1c0"
+    },
+    {
+      "source_index": 207,
+      "stable_id": "source.inventory.016.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c1",
+      "source_rect": [
+        96,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c1",
+      "control_id": "inventory.items",
+      "surface_id": "r1c1"
+    },
+    {
+      "source_index": 208,
+      "stable_id": "source.inventory.017.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c2",
+      "source_rect": [
+        150,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c2",
+      "control_id": "inventory.items",
+      "surface_id": "r1c2"
+    },
+    {
+      "source_index": 209,
+      "stable_id": "source.inventory.018.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c3",
+      "source_rect": [
+        204,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c3",
+      "control_id": "inventory.items",
+      "surface_id": "r1c3"
+    },
+    {
+      "source_index": 210,
+      "stable_id": "source.inventory.019.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c4",
+      "source_rect": [
+        258,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c4",
+      "control_id": "inventory.items",
+      "surface_id": "r1c4"
+    },
+    {
+      "source_index": 211,
+      "stable_id": "source.inventory.020.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c5",
+      "source_rect": [
+        312,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c5",
+      "control_id": "inventory.items",
+      "surface_id": "r1c5"
+    },
+    {
+      "source_index": 212,
+      "stable_id": "source.inventory.021.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r1c6",
+      "source_rect": [
+        366,
+        792,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r1c6",
+      "control_id": "inventory.items",
+      "surface_id": "r1c6"
+    },
+    {
+      "source_index": 213,
+      "stable_id": "source.inventory.022.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c0",
+      "source_rect": [
+        42,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c0",
+      "control_id": "inventory.items",
+      "surface_id": "r2c0"
+    },
+    {
+      "source_index": 214,
+      "stable_id": "source.inventory.023.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c1",
+      "source_rect": [
+        96,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c1",
+      "control_id": "inventory.items",
+      "surface_id": "r2c1"
+    },
+    {
+      "source_index": 215,
+      "stable_id": "source.inventory.024.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c2",
+      "source_rect": [
+        150,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c2",
+      "control_id": "inventory.items",
+      "surface_id": "r2c2"
+    },
+    {
+      "source_index": 216,
+      "stable_id": "source.inventory.025.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c3",
+      "source_rect": [
+        204,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c3",
+      "control_id": "inventory.items",
+      "surface_id": "r2c3"
+    },
+    {
+      "source_index": 217,
+      "stable_id": "source.inventory.026.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c4",
+      "source_rect": [
+        258,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c4",
+      "control_id": "inventory.items",
+      "surface_id": "r2c4"
+    },
+    {
+      "source_index": 218,
+      "stable_id": "source.inventory.027.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c5",
+      "source_rect": [
+        312,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c5",
+      "control_id": "inventory.items",
+      "surface_id": "r2c5"
+    },
+    {
+      "source_index": 219,
+      "stable_id": "source.inventory.028.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r2c6",
+      "source_rect": [
+        366,
+        853,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r2c6",
+      "control_id": "inventory.items",
+      "surface_id": "r2c6"
+    },
+    {
+      "source_index": 220,
+      "stable_id": "source.inventory.029.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c0",
+      "source_rect": [
+        42,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c0",
+      "control_id": "inventory.items",
+      "surface_id": "r3c0"
+    },
+    {
+      "source_index": 221,
+      "stable_id": "source.inventory.030.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c1",
+      "source_rect": [
+        96,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c1",
+      "control_id": "inventory.items",
+      "surface_id": "r3c1"
+    },
+    {
+      "source_index": 222,
+      "stable_id": "source.inventory.031.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c2",
+      "source_rect": [
+        150,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c2",
+      "control_id": "inventory.items",
+      "surface_id": "r3c2"
+    },
+    {
+      "source_index": 223,
+      "stable_id": "source.inventory.032.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c3",
+      "source_rect": [
+        204,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c3",
+      "control_id": "inventory.items",
+      "surface_id": "r3c3"
+    },
+    {
+      "source_index": 224,
+      "stable_id": "source.inventory.033.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c4",
+      "source_rect": [
+        258,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c4",
+      "control_id": "inventory.items",
+      "surface_id": "r3c4"
+    },
+    {
+      "source_index": 225,
+      "stable_id": "source.inventory.034.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c5",
+      "source_rect": [
+        312,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c5",
+      "control_id": "inventory.items",
+      "surface_id": "r3c5"
+    },
+    {
+      "source_index": 226,
+      "stable_id": "source.inventory.035.grid_cell",
+      "window_id": "inventory",
+      "source_type": "grid cell",
+      "source_label": "inventory slot r3c6",
+      "source_rect": [
+        366,
+        914,
+        54,
+        61
+      ],
+      "owner_kind": "surface",
+      "production_owner": "inventory.items#r3c6",
+      "control_id": "inventory.items",
+      "surface_id": "r3c6"
+    },
+    {
+      "source_index": 227,
+      "stable_id": "source.inventory.036.scrollbar",
+      "window_id": "inventory",
+      "source_type": "scrollbar",
+      "source_label": null,
+      "source_rect": [
+        457,
+        731,
+        21,
+        230
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "inventory.source_state"
+    },
+    {
+      "source_index": 228,
+      "stable_id": "source.inventory.037.button",
+      "window_id": "inventory",
+      "source_type": "button",
+      "source_label": "search (icon)",
+      "source_rect": [
+        109,
+        976,
+        19,
+        20
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "inventory.source_state"
+    },
+    {
+      "source_index": 229,
+      "stable_id": "source.chat_room.000.title_drag",
+      "window_id": "chat_room",
+      "source_type": "title drag",
+      "source_label": null,
+      "source_rect": [
+        1037,
+        782,
+        495,
+        24
+      ],
+      "owner_kind": "window_drag",
+      "production_owner": "chat_room.title_drag"
+    },
+    {
+      "source_index": 230,
+      "stable_id": "source.chat_room.001.close",
+      "window_id": "chat_room",
+      "source_type": "close",
+      "source_label": null,
+      "source_rect": [
+        1507,
+        789,
+        18,
+        18
+      ],
+      "owner_kind": "control",
+      "production_owner": "chat_room.close",
+      "control_id": "chat_room.close"
+    },
+    {
+      "source_index": 231,
+      "stable_id": "source.chat_room.002.list_row",
+      "window_id": "chat_room",
+      "source_type": "list row",
+      "source_label": "Sebas*：レイドリック終わったー",
+      "source_rect": [
+        1044,
+        815,
+        460,
+        25
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "chat_room.source_state"
+    },
+    {
+      "source_index": 232,
+      "stable_id": "source.chat_room.003.list_row",
+      "window_id": "chat_room",
+      "source_type": "list row",
+      "source_label": "SakumaRiri：おつかれさま〜",
+      "source_rect": [
+        1044,
+        840,
+        460,
+        25
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "chat_room.source_state"
+    },
+    {
+      "source_index": 233,
+      "stable_id": "source.chat_room.004.list_row",
+      "window_id": "chat_room",
+      "source_type": "list row",
+      "source_label": "ANRI：もう1周いきますか？",
+      "source_rect": [
+        1044,
+        865,
+        460,
+        25
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "chat_room.source_state"
+    },
+    {
+      "source_index": 234,
+      "stable_id": "source.chat_room.005.list_row",
+      "window_id": "chat_room",
+      "source_type": "list row",
+      "source_label": "Show_A：いきましょう！",
+      "source_rect": [
+        1044,
+        890,
+        460,
+        25
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "chat_room.source_state"
+    },
+    {
+      "source_index": 235,
+      "stable_id": "source.chat_room.006.list_row",
+      "window_id": "chat_room",
+      "source_type": "list row",
+      "source_label": "経験値が 10800 上がりました。",
+      "source_rect": [
+        1044,
+        915,
+        460,
+        25
+      ],
+      "owner_kind": "state_surface",
+      "production_owner": "chat_room.source_state"
+    },
+    {
+      "source_index": 236,
+      "stable_id": "source.chat_room.007.scrollbar",
+      "window_id": "chat_room",
+      "source_type": "scrollbar",
+      "source_label": null,
+      "source_rect": [
+        1507,
+        810,
+        20,
+        152
+      ],
+      "owner_kind": "control",
+      "production_owner": "chat_room.scroll",
+      "control_id": "chat_room.scroll"
+    },
+    {
+      "source_index": 237,
+      "stable_id": "source.chat_room.008.text_field",
+      "window_id": "chat_room",
+      "source_type": "text field",
+      "source_label": "chat input",
+      "source_rect": [
+        1044,
+        978,
+        458,
+        21
+      ],
+      "owner_kind": "control",
+      "production_owner": "chat_room.input",
+      "control_id": "chat_room.input"
+    },
+    {
+      "source_index": 238,
+      "stable_id": "source.chat_room.009.button",
+      "window_id": "chat_room",
+      "source_type": "button",
+      "source_label": "chat settings (icon)",
+      "source_rect": [
+        1505,
+        978,
+        21,
+        21
+      ],
+      "owner_kind": "baked_visual",
+      "production_owner": "chat_room.source_plate.unidentified_icon"
+    }
+  ]
+}

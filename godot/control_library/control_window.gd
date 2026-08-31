@@ -29,6 +29,8 @@ var _expanded_size := Vector2.ZERO
 var _home_size := Vector2.ZERO
 var _dragging := false
 var _drag_offset := Vector2.ZERO
+var _drag_motion_samples := 0
+var _drag_position_samples: Array = []
 var _home := Vector2.ZERO
 var _last_window_gesture := ""
 var _last_window_action := ""
@@ -127,21 +129,27 @@ func _ready() -> void:
 	_add_resize_grip()
 	gui_input.connect(_window_input)
 	state_changed.emit(str(spec.id))
-	set_process(true)
+	# Only the Chat Room's accepted three-frame delivery needs frame work.
+	# Keeping all eleven Windows active while idle repeatedly patched adapter
+	# state and was visible as browser drag/input lag in the complete Assembly.
+	set_process(false)
 
 
 func _process(_delta: float) -> void:
-	if _chat_submit_frame >= 0:
-		var current_frame := Engine.get_process_frames()
-		if current_frame <= _chat_submit_frame \
-				or current_frame == _chat_last_advance_frame:
-			return
-		_chat_last_advance_frame = current_frame
+	if _chat_submit_frame < 0:
+		set_process(false)
+		return
+	var current_frame := Engine.get_process_frames()
+	if current_frame <= _chat_submit_frame \
+			or current_frame == _chat_last_advance_frame:
+		return
+	_chat_last_advance_frame = current_frame
 	var result := runtime.advance_frame()
 	if result.get("ok", false) and result.get("changed", false):
 		if runtime.qa_state().get("window_state", {}).get("pending_delivery") == null:
 			_chat_submit_frame = -1
 			_chat_last_advance_frame = -1
+			set_process(false)
 		_refresh_all_controls()
 		state_changed.emit(str(spec.id))
 
@@ -175,6 +183,12 @@ func qa_state() -> Dictionary:
 		"last_action": _last_window_action,
 		"last_error": _last_window_error,
 		"geometry_version": _geometry_version,
+		"stack_index": _window_stack_index(),
+		"process_active": is_processing(),
+		"drag_active": _dragging,
+		"drag": {"active": _dragging,
+			"motion_samples": _drag_motion_samples,
+			"position_samples": _drag_position_samples.duplicate(true)},
 		"resize": {"active": _resizing,
 			"requested": [_resize_requested.x, _resize_requested.y],
 			"clamped": [_resize_clamped.x, _resize_clamped.y],
@@ -428,6 +442,8 @@ func _title_input(event: InputEvent) -> void:
 			move_to_front()
 			_dragging = true
 			_drag_offset = event.global_position - global_position
+			_drag_motion_samples = 0
+			_drag_position_samples = []
 			accept_event()
 		else:
 			_dragging = false
@@ -441,6 +457,8 @@ func _title_input(event: InputEvent) -> void:
 		var max_position := Vector2(maxf(0.0, viewport_size.x - size.x),
 			maxf(0.0, viewport_size.y - size.y))
 		position = (event.global_position - _drag_offset).clamp(Vector2.ZERO, max_position)
+		_drag_motion_samples += 1
+		_drag_position_samples.append([position.x, position.y])
 		state_changed.emit(str(spec.id))
 		accept_event()
 
@@ -494,6 +512,14 @@ func _is_frontmost_window() -> bool:
 	return not siblings.is_empty() and siblings.back() == self
 
 
+func _window_stack_index() -> int:
+	if get_parent() == null:
+		return -1
+	var siblings := get_parent().get_children().filter(func(node):
+		return node is ControlWindow)
+	return siblings.find(self)
+
+
 func _has_window_key_binding(key: String) -> bool:
 	return spec.get("actions", []).any(func(binding):
 		return binding is Dictionary and binding.get("gesture") == "KeyCommand" \
@@ -544,6 +570,7 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 		# accepted in frame N advances on N+1, N+2, and N+3 exactly once each.
 		_chat_submit_frame = Engine.get_process_frames()
 		_chat_last_advance_frame = _chat_submit_frame
+		set_process(true)
 	if not result.has("phase") and is_inside_tree() \
 			and not is_queued_for_deletion() and get_parent() != null:
 		move_to_front()
