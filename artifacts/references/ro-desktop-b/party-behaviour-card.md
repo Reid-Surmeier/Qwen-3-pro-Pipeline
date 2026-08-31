@@ -15,7 +15,7 @@ Authority: `reference-native.png` SHA-256 `f4844fa9030b31b233f43244290f729db105f
 | --- | --- | --- | --- |
 | Click Party/Friends choice | Either mode | Exactly one choice selected; affected list and action availability update in one version/frame | Unknown choice: `ActionRoutingError`, immutable |
 | Click member row | Party mode with membership | Exactly one selected member | Hidden/non-member state: `TransactionRejectedError`, immutable |
-| Click Memo/Info/Target/Search | Any | No transition | `ActionRoutingError`, immutable |
+| Click Memo/Info/Target/Search | Any | No transition | `TransactionRejectedError`, immutable |
 | Click Leave | Party mode with membership | Membership becomes none; member rows clear; member-only actions disable | Repeat/unavailable: `TransactionRejectedError`, immutable |
 | Drag title | Visible | Window follows pointer and clamps to desktop | Undeclared gesture rejected |
 | Click close or focused Escape | Visible | Window closes | — |
@@ -23,10 +23,11 @@ Authority: `reference-native.png` SHA-256 `f4844fa9030b31b233f43244290f729db105f
 ## State Sets
 
 - Radio choices: selected/unselected × idle/hover/pressed.
-- Member rows: unselected/selected × idle/hover/pressed; rows become absent when their identity is not visible.
+- Member rows: unselected/selected/unavailable × idle/hover/pressed. Friends mode renders the unavailable State Set rather than retaining selected or visible Party rows.
 - Unattested icons: disabled × idle/hover/pressed with no implied live hover treatment.
 - Leave: available/disabled × idle/hover/pressed.
 - Party, Friends, and no-membership list surfaces are distinct semantic states. Only the Image-79 Party state is visual authority; missing list content is rendered as an honest empty source-style surface.
+- `membership` describes the active mode and is always `none` in Friends mode. `party_membership` explicitly records whether the Party roster still exists so returning to Party can restore it without silently exposing Party membership in Friends; Leave clears both.
 
 ## Explicitly parked
 

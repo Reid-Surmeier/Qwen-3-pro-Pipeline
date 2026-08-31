@@ -41,6 +41,8 @@ func _run() -> void:
 	var friends := window.qa_state()
 	_check("real-friends-mode-one-frame", friends.window_state.mode == "friends"
 		and friends.window_state.version == 1 and friends.party_overlay.visible
+		and friends.window_state.membership == "none"
+		and friends.window_state.party_membership == "member"
 		and friends.controls["party.members"].visible_item_count == 0
 		and friends.controls["party.members"].semantic_state == "unavailable"
 		and friends.controls["party.action.leave"].semantic_state == "disabled",
@@ -49,6 +51,7 @@ func _run() -> void:
 	var party := window.qa_state()
 	_check("real-party-mode-restores-one-frame", party.window_state.mode == "party"
 		and party.window_state.version == 2 and not party.party_overlay.visible
+		and party.window_state.membership == "member"
 		and party.controls["party.members"].visible_item_count == 5,
 		str(party))
 
@@ -79,6 +82,7 @@ func _run() -> void:
 	var repeated_error: Variant = repeated.controls["party.action.leave"].last_error
 	_check("real-leave-and-repeat", left.window_state.version == 4
 		and left.window_state.membership == "none" and left.party_overlay.visible
+		and left.window_state.party_membership == "none"
 		and left.controls["party.members"].visible_item_count == 0
 		and left.controls["party.action.leave"].semantic_state == "disabled"
 		and repeated_error is Dictionary \

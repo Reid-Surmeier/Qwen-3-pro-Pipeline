@@ -17,7 +17,8 @@ static func initialize(adapter_spec: Dictionary) -> Dictionary:
 	var state := {
 		"version": 0,
 		"mode": str(adapter_spec.initial_mode),
-		"membership": str(adapter_spec.initial_membership),
+		"membership": "none",
+		"party_membership": str(adapter_spec.initial_membership),
 		"selected_member": "",
 		"visible_members": [],
 		"availability": {},
@@ -76,7 +77,7 @@ static func activate_action(adapter_spec: Dictionary, state: Dictionary,
 			"Leave Party is unavailable without active Party membership")
 	var next := state.duplicate(true)
 	next.version = int(state.version) + 1
-	next.membership = "none"
+	next.party_membership = "none"
 	_refresh(adapter_spec, next)
 	return {"ok": true, "action": "LeaveParty", "state": next}
 
@@ -97,8 +98,10 @@ static func _preflight(adapter_spec: Dictionary, state: Dictionary,
 
 
 static func _refresh(adapter_spec: Dictionary, state: Dictionary) -> void:
+	state.membership = str(state.party_membership) \
+		if str(state.mode) == "party" else "none"
 	var party_visible := str(state.mode) == "party" \
-		and str(state.membership) == "member"
+		and str(state.party_membership) == "member"
 	state.visible_members = _member_ids(adapter_spec) if party_visible else []
 	if party_visible:
 		if not str(state.selected_member).is_empty() \
@@ -157,11 +160,17 @@ static func _state_problem(adapter_spec: Dictionary, state: Dictionary) -> Strin
 	if not state.get("version") is int or int(state.get("version", -1)) < 0 \
 			or str(state.get("mode", "")) not in MODES \
 			or str(state.get("membership", "")) not in MEMBERSHIPS \
+			or str(state.get("party_membership", "")) not in MEMBERSHIPS \
 			or not state.get("selected_member") is String \
 			or not state.get("visible_members") is Array \
 			or not state.get("availability") is Dictionary:
 		return "Party state has malformed fields"
-	var party_visible := str(state.mode) == "party" and str(state.membership) == "member"
+	var expected_membership := str(state.party_membership) \
+		if str(state.mode) == "party" else "none"
+	if str(state.membership) != expected_membership:
+		return "Party membership contradicts the active mode"
+	var party_visible := str(state.mode) == "party" \
+		and str(state.party_membership) == "member"
 	var expected_visible := _member_ids(adapter_spec) if party_visible else []
 	if state.visible_members != expected_visible:
 		return "Party visible members contradict mode or membership"

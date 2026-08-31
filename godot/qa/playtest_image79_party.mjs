@@ -175,6 +175,8 @@ await page.waitForTimeout(80);
 let reversed = await shot("mode-friends-reversed");
 record("party.mode", "Activate", "SelectPartyMode", {
   friends_selected: state.window_state.mode === "friends",
+  current_membership_cleared: state.window_state.membership === "none",
+  party_membership_explicit: state.window_state.party_membership === "member",
   list_cleared: state.controls["party.members"].visible_item_count === 0,
   members_unavailable: state.controls["party.members"].semantic_state
     === "unavailable",

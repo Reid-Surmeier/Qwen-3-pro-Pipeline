@@ -42,6 +42,7 @@ func _contract_source_state() -> void:
 	var state: Dictionary = result.get("state", {})
 	_check("source-state", result.get("ok", false) and state.version == 0
 		and state.mode == "party" and state.membership == "member"
+		and state.party_membership == "member"
 		and state.selected_member == ""
 		and state.visible_members.size() == 5
 		and state.availability["party.action.leave"]
@@ -54,6 +55,8 @@ func _contract_mode_switch_is_atomic() -> void:
 	_check("mode-switch-one-complete-state", result.get("ok", false)
 		and result.action == "SelectPartyMode" and result.state.version == 1
 		and result.state.mode == "friends" and result.state.visible_members.is_empty()
+		and result.state.membership == "none"
+		and result.state.party_membership == "member"
 		and result.state.selected_member == ""
 		and result.state.availability.values().all(func(value): return not value)
 		and source.version == 0 and source.mode == "party"
@@ -90,7 +93,8 @@ func _contract_leave_is_atomic_and_repeat_rejects() -> void:
 		spec, left.state, "party.action.leave", 1)
 	_check("leave-and-repeat-contract", left.get("ok", false)
 		and left.action == "LeaveParty" and left.state.version == 1
-		and left.state.membership == "none" and left.state.selected_member == ""
+		and left.state.membership == "none" and left.state.party_membership == "none"
+		and left.state.selected_member == ""
 		and left.state.visible_members.is_empty()
 		and left.state.availability.values().all(func(value): return not value)
 		and source.membership == "member" and source.visible_members.size() == 5
@@ -112,8 +116,7 @@ func _contract_stale_version_rejects_immutably() -> void:
 
 func _contract_inconsistent_state_rejects_immutably() -> void:
 	var inconsistent: Dictionary = PartyWindowState.initialize(spec).state
-	inconsistent.membership = "none"
-	inconsistent.availability["party.action.leave"] = true
+	inconsistent.mode = "friends"
 	var before := JSON.stringify(inconsistent)
 	var rejected: Dictionary = PartyWindowState.activate_action(
 		spec, inconsistent, "party.action.leave", 0)

@@ -64,6 +64,8 @@ func _init() -> void:
 	_check("friends-mode-clears-party-surfaces-atomically", friends.get("ok", false)
 		and after_friends.window_state.version == 2
 		and after_friends.controls["party.mode"].value == "friends"
+		and after_friends.window_state.membership == "none"
+		and after_friends.window_state.party_membership == "member"
 		and after_friends.controls["party.members"].item_values.values().all(
 			func(value): return str(value).is_empty())
 		and after_friends.controls["party.members"].semantic_state == "unavailable"
@@ -79,6 +81,7 @@ func _init() -> void:
 		and left.get("ok", false) and left.action == "LeaveParty"
 		and after_left.window_state.version == 4
 		and after_left.window_state.membership == "none"
+		and after_left.window_state.party_membership == "none"
 		and after_left.controls["party.members"].item_values.values().all(
 			func(value): return str(value).is_empty())
 		and after_left.controls["party.action.leave"].semantic_state == "disabled"
