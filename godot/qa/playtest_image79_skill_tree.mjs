@@ -21,7 +21,12 @@ const OUT = resolve(process.env.IMAGE79_PLAYTEST_OUT
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
-const browser = await chromium.launch({ headless: true });
+const headedMesa = process.env.IMAGE79_HEADED_MESA === "1";
+const browser = await chromium.launch(headedMesa ? {
+  headless: false,
+  executablePath: process.env.IMAGE79_CHROME_BIN ?? "/usr/bin/google-chrome-stable",
+  args: ["--use-gl=desktop", "--disable-gpu-sandbox"],
+} : { headless: true });
 const page = await browser.newPage({ viewport: DESIGN });
 const consoleEntries = [];
 page.on("console", (message) => {
