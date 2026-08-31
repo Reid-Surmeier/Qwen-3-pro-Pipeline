@@ -32,6 +32,7 @@ func _init() -> void:
 	_contract_unavailable_action_rejects_immutably()
 	_contract_leave_is_atomic_and_repeat_rejects()
 	_contract_stale_version_rejects_immutably()
+	_contract_inconsistent_state_rejects_immutably()
 	_contract_malformed_spec_fails_closed()
 	_finish()
 
@@ -75,7 +76,7 @@ func _contract_unavailable_action_rejects_immutably() -> void:
 	var rejected: Dictionary = PartyWindowState.activate_action(
 		spec, state, "party.action.search", 0)
 	_check("unavailable-action-rejects-immutably", not rejected.get("ok", true)
-		and rejected.error.code == "ActionRoutingError"
+		and rejected.error.code == "TransactionRejectedError"
 		and JSON.stringify(rejected.state) == before and JSON.stringify(state) == before,
 		str(rejected))
 
@@ -107,6 +108,19 @@ func _contract_stale_version_rejects_immutably() -> void:
 	_check("stale-version-rejects-immutably", not rejected.get("ok", true)
 		and rejected.error.code == "GestureConflictError"
 		and JSON.stringify(rejected.state) == before, str(rejected))
+
+
+func _contract_inconsistent_state_rejects_immutably() -> void:
+	var inconsistent: Dictionary = PartyWindowState.initialize(spec).state
+	inconsistent.membership = "none"
+	inconsistent.availability["party.action.leave"] = true
+	var before := JSON.stringify(inconsistent)
+	var rejected: Dictionary = PartyWindowState.activate_action(
+		spec, inconsistent, "party.action.leave", 0)
+	_check("inconsistent-state-fails-closed", not rejected.get("ok", true)
+		and rejected.error.code == "InvalidControlSpec"
+		and JSON.stringify(rejected.state) == before
+		and JSON.stringify(inconsistent) == before, str(rejected))
 
 
 func _contract_malformed_spec_fails_closed() -> void:

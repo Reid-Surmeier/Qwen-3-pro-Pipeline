@@ -115,7 +115,13 @@ def main() -> None:
         selected_idle = ImageEnhance.Brightness(row).enhance(0.72)
         ImageDraw.Draw(selected_idle).rectangle((0, 0, 199, 31), outline=BLUE)
         selected = phase_variants(selected_idle, f"member-{member_id}-selected", records)
-        row_states[member_id] = {"unselected": unselected, "selected": selected}
+        unavailable = phase_variants(
+            row, f"member-{member_id}-unavailable", records, disabled=True)
+        row_states[member_id] = {
+            "unselected": unselected,
+            "selected": selected,
+            "unavailable": unavailable,
+        }
         surfaces[member_id] = {
             "geometry": {"x": 0, "y": index * 34, "width": 200, "height": 32},
             "state_set": row_states[member_id],
@@ -132,9 +138,10 @@ def main() -> None:
     controls.append(control(
         "party.members", "SelectionView", (6, 33, 200, 168),
         {"unselected": {p: transparent for p in ("idle", "hover", "pressed")},
-         "selected": {p: transparent for p in ("idle", "hover", "pressed")}},
+         "selected": {p: transparent for p in ("idle", "hover", "pressed")},
+         "unavailable": {p: transparent for p in ("idle", "hover", "pressed")}},
         ["Activate"], [{"gesture": "Activate", "action": "SelectPartyMember"}],
-        ["unselected", "selected"], "unselected",
+        ["unselected", "selected", "unavailable"], "unselected",
         value={"items": [entry[0] for entry in MEMBERS], "initial": MEMBERS[0][0],
                "details": details, "item_values": item_values,
                "value_control_ids": {}, "show_empty_slots": False},

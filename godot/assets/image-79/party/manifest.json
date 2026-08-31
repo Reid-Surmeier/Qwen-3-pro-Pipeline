@@ -109,6 +109,30 @@
       ]
     },
     {
+      "path": "godot/assets/image-79/party/member-sakumariri-unavailable-idle.png",
+      "sha256": "b84757fadb62cf07f51fa934ee585f04e657b1a365284145a3b5953affbe9b27",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-unavailable-hover.png",
+      "sha256": "b84757fadb62cf07f51fa934ee585f04e657b1a365284145a3b5953affbe9b27",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sakumariri-unavailable-pressed.png",
+      "sha256": "3ea7893fef1875ba873436132f30212c8013ef756ff5383b65fdfbac0c60bc71",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
       "path": "godot/assets/image-79/party/member-sebas-unselected-idle.png",
       "sha256": "62ddbe569b895c83b719720664faf5a885430616c5f073756862e1848f56ae0f",
       "size": [
@@ -151,6 +175,30 @@
     {
       "path": "godot/assets/image-79/party/member-sebas-selected-pressed.png",
       "sha256": "4609b80034764776b39c2b3406759c9a8809bbd614bfd42c6046174f57ccbd1a",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unavailable-idle.png",
+      "sha256": "417253cebd40cab7c394be17b493999265dbfea6e720f5ffe622dd56623b8ca2",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unavailable-hover.png",
+      "sha256": "417253cebd40cab7c394be17b493999265dbfea6e720f5ffe622dd56623b8ca2",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-sebas-unavailable-pressed.png",
+      "sha256": "d59c8a4d48a98d09112b564f5a2f55452534a5a0073abd6c32e671acb17254e6",
       "size": [
         200,
         32
@@ -205,6 +253,30 @@
       ]
     },
     {
+      "path": "godot/assets/image-79/party/member-anri-unavailable-idle.png",
+      "sha256": "a0486cfddcf7cab908da098a1539be1017177a9df4fcd519acf0aac8c708f24d",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-unavailable-hover.png",
+      "sha256": "a0486cfddcf7cab908da098a1539be1017177a9df4fcd519acf0aac8c708f24d",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-anri-unavailable-pressed.png",
+      "sha256": "25b025fcdcbdbb0ce2d100b57140a51e4c46e6d7184fa20d17b7a87a76ff1d75",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
       "path": "godot/assets/image-79/party/member-show_a-unselected-idle.png",
       "sha256": "0afb7abab74ffc74a07fff17fdf37de01e4c3edbf05a50a6581e32a61cdbe7c7",
       "size": [
@@ -253,6 +325,30 @@
       ]
     },
     {
+      "path": "godot/assets/image-79/party/member-show_a-unavailable-idle.png",
+      "sha256": "38e9a36616c206aa309ef3baa1978506d81323511d5c2ca815ddb3c50d9f8c3c",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-unavailable-hover.png",
+      "sha256": "38e9a36616c206aa309ef3baa1978506d81323511d5c2ca815ddb3c50d9f8c3c",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-show_a-unavailable-pressed.png",
+      "sha256": "ebe4d696a7c065f73ea87880ffd528f883e62e7b066f433f7a7d8f487ef0709a",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
       "path": "godot/assets/image-79/party/member-ayana_ishizuka-unselected-idle.png",
       "sha256": "7d6bdcd18adc9b9ca1257650543f7a0c67b58393009e727df7d29800114c8cb8",
       "size": [
@@ -295,6 +391,30 @@
     {
       "path": "godot/assets/image-79/party/member-ayana_ishizuka-selected-pressed.png",
       "sha256": "4a51324698aa309cacdfd57c53acc9c2e6e5364c9b9773740908dfff38ac8cfb",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unavailable-idle.png",
+      "sha256": "0f689283a8de0432e38fcf1e4e26e2ccddcb1c25fc8faaaa628fb80a5ad0ec4f",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unavailable-hover.png",
+      "sha256": "0f689283a8de0432e38fcf1e4e26e2ccddcb1c25fc8faaaa628fb80a5ad0ec4f",
+      "size": [
+        200,
+        32
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/party/member-ayana_ishizuka-unavailable-pressed.png",
+      "sha256": "48e854325aa3f1e4c7fd895236af668872e5c18620e9a17f36cebd2c2f15dac4",
       "size": [
         200,
         32

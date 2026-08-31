@@ -108,7 +108,8 @@ const approved = new Set(requiredActions.map((entry) =>
   `${entry.control_id}:${entry.gesture}:${entry.window_action}`));
 const actions = [];
 const record = (controlId, gesture, action, assertions, frames, observed,
-  { expectedRejection = false, motionSamples = undefined } = {}) => {
+  { expectedRejection = false, motionSamples = undefined,
+    rapidGestures = undefined } = {}) => {
   const pixelMetrics = metrics(frames.before, frames.after);
   const reversalMetrics = metrics(frames.before, frames.reversed);
   const entry = {
@@ -131,6 +132,7 @@ const record = (controlId, gesture, action, assertions, frames, observed,
   };
   if (expectedRejection) entry.mid_pixel_metrics = metrics(frames.before, frames.mid);
   if (motionSamples) entry.motion_samples = motionSamples;
+  if (rapidGestures) entry.rapid_gestures = rapidGestures;
   actions.push(entry);
 };
 const reload = async () => {
@@ -174,6 +176,8 @@ let reversed = await shot("mode-friends-reversed");
 record("party.mode", "Activate", "SelectPartyMode", {
   friends_selected: state.window_state.mode === "friends",
   list_cleared: state.controls["party.members"].visible_item_count === 0,
+  members_unavailable: state.controls["party.members"].semantic_state
+    === "unavailable",
   atomic_version: state.window_state.version === 1,
 }, { before, after, reversed }, state.window_state);
 
@@ -201,7 +205,7 @@ for (const name of ["memo", "info", "target", "search"]) {
   reversed = await shot(`${name}-reversed`);
   record(`party.action.${name}`, "Activate", "ActivatePartyAction", {
     named_rejection: state.controls[`party.action.${name}`].last_error?.code
-      === "ActionRoutingError",
+      === "TransactionRejectedError",
     semantic_state_preserved: state.controls[`party.action.${name}`].semantic_state
       === "disabled",
   }, { before, mid, after, reversed }, state.controls[`party.action.${name}`],
@@ -236,6 +240,33 @@ record("party.action.leave", "Activate", "ActivatePartyAction", {
   membership_preserved: state.window_state.membership === "none",
 }, { before, mid: repeatMid, after, reversed }, state.controls["party.action.leave"],
 { expectedRejection: true });
+
+// Two real activations without an inter-gesture wait commit once, reject once,
+// and settle rather than wedging the Control.
+await reload();
+before = await shot("rapid-leave-before");
+const rapidGeometry = (await party()).controls["party.action.leave"].geometry;
+const rapidPoint = point(rapidGeometry.x + rapidGeometry.width / 2,
+  rapidGeometry.y + rapidGeometry.height / 2);
+const rapidStarted = performance.now();
+await page.mouse.click(rapidPoint.x, rapidPoint.y);
+await page.mouse.click(rapidPoint.x, rapidPoint.y);
+const rapidElapsed = Math.round(performance.now() - rapidStarted);
+await page.waitForTimeout(80);
+state = await party();
+after = await shot("rapid-leave-after");
+await reload();
+reversed = await shot("rapid-leave-reversed");
+record("party.action.leave", "Activate", "ActivatePartyAction", {
+  first_committed: state.window_state.membership === "none"
+    && state.window_state.version === 1,
+  repeat_rejected: state.controls["party.action.leave"].last_error?.code
+    === "TransactionRejectedError",
+  control_settled: state.controls["party.action.leave"].interaction_phase === "idle",
+  rapid_pair: rapidElapsed < 500,
+}, { before, after, reversed }, state.controls["party.action.leave"], {
+  rapidGestures: { count: 2, elapsed_ms: rapidElapsed, inter_gesture_wait_ms: 0 },
+});
 
 // Continuous title drag and exact reversal.
 await reload();

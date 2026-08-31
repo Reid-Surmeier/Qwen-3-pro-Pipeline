@@ -42,6 +42,7 @@ func _run() -> void:
 	_check("real-friends-mode-one-frame", friends.window_state.mode == "friends"
 		and friends.window_state.version == 1 and friends.party_overlay.visible
 		and friends.controls["party.members"].visible_item_count == 0
+		and friends.controls["party.members"].semantic_state == "unavailable"
 		and friends.controls["party.action.leave"].semantic_state == "disabled",
 		str(friends))
 	await _click(Vector2(1210, 758))
@@ -66,7 +67,7 @@ func _run() -> void:
 	_check("real-unavailable-icon-rejection", not unavailable.controls[
 		"party.action.search"].last_result.accepted
 		and unavailable_error is Dictionary \
-		and unavailable_error.get("code") == "ActionRoutingError"
+		and unavailable_error.get("code") == "TransactionRejectedError"
 		and JSON.stringify(unavailable.window_state) == before_unavailable,
 		str([unavailable.controls["party.action.search"], unavailable.interaction_log]))
 

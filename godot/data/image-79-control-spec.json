@@ -10422,7 +10422,8 @@
           ],
           "semantic_states": [
             "unselected",
-            "selected"
+            "selected",
+            "unavailable"
           ],
           "initial_semantic_state": "unselected",
           "state_set": {
@@ -10432,6 +10433,11 @@
               "pressed": "res://assets/image-79/party/transparent.png"
             },
             "selected": {
+              "idle": "res://assets/image-79/party/transparent.png",
+              "hover": "res://assets/image-79/party/transparent.png",
+              "pressed": "res://assets/image-79/party/transparent.png"
+            },
+            "unavailable": {
               "idle": "res://assets/image-79/party/transparent.png",
               "hover": "res://assets/image-79/party/transparent.png",
               "pressed": "res://assets/image-79/party/transparent.png"
@@ -10490,6 +10496,11 @@
                   "idle": "res://assets/image-79/party/member-sakumariri-selected-idle.png",
                   "hover": "res://assets/image-79/party/member-sakumariri-selected-hover.png",
                   "pressed": "res://assets/image-79/party/member-sakumariri-selected-pressed.png"
+                },
+                "unavailable": {
+                  "idle": "res://assets/image-79/party/member-sakumariri-unavailable-idle.png",
+                  "hover": "res://assets/image-79/party/member-sakumariri-unavailable-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sakumariri-unavailable-pressed.png"
                 }
               }
             },
@@ -10510,6 +10521,11 @@
                   "idle": "res://assets/image-79/party/member-sebas-selected-idle.png",
                   "hover": "res://assets/image-79/party/member-sebas-selected-hover.png",
                   "pressed": "res://assets/image-79/party/member-sebas-selected-pressed.png"
+                },
+                "unavailable": {
+                  "idle": "res://assets/image-79/party/member-sebas-unavailable-idle.png",
+                  "hover": "res://assets/image-79/party/member-sebas-unavailable-hover.png",
+                  "pressed": "res://assets/image-79/party/member-sebas-unavailable-pressed.png"
                 }
               }
             },
@@ -10530,6 +10546,11 @@
                   "idle": "res://assets/image-79/party/member-anri-selected-idle.png",
                   "hover": "res://assets/image-79/party/member-anri-selected-hover.png",
                   "pressed": "res://assets/image-79/party/member-anri-selected-pressed.png"
+                },
+                "unavailable": {
+                  "idle": "res://assets/image-79/party/member-anri-unavailable-idle.png",
+                  "hover": "res://assets/image-79/party/member-anri-unavailable-hover.png",
+                  "pressed": "res://assets/image-79/party/member-anri-unavailable-pressed.png"
                 }
               }
             },
@@ -10550,6 +10571,11 @@
                   "idle": "res://assets/image-79/party/member-show_a-selected-idle.png",
                   "hover": "res://assets/image-79/party/member-show_a-selected-hover.png",
                   "pressed": "res://assets/image-79/party/member-show_a-selected-pressed.png"
+                },
+                "unavailable": {
+                  "idle": "res://assets/image-79/party/member-show_a-unavailable-idle.png",
+                  "hover": "res://assets/image-79/party/member-show_a-unavailable-hover.png",
+                  "pressed": "res://assets/image-79/party/member-show_a-unavailable-pressed.png"
                 }
               }
             },
@@ -10570,6 +10596,11 @@
                   "idle": "res://assets/image-79/party/member-ayana_ishizuka-selected-idle.png",
                   "hover": "res://assets/image-79/party/member-ayana_ishizuka-selected-hover.png",
                   "pressed": "res://assets/image-79/party/member-ayana_ishizuka-selected-pressed.png"
+                },
+                "unavailable": {
+                  "idle": "res://assets/image-79/party/member-ayana_ishizuka-unavailable-idle.png",
+                  "hover": "res://assets/image-79/party/member-ayana_ishizuka-unavailable-hover.png",
+                  "pressed": "res://assets/image-79/party/member-ayana_ishizuka-unavailable-pressed.png"
                 }
               }
             }

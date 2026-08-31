@@ -26,6 +26,13 @@ func _init() -> void:
 	if matches.is_empty():
 		_finish()
 		return
+	var member_control: Dictionary = matches[0].controls.filter(func(control):
+		return control.get("id") == "party.members")[0]
+	_check("member-state-sets-are-complete",
+		member_control.semantic_states == ["unselected", "selected", "unavailable"]
+		and member_control.state_set.has("unavailable")
+		and member_control.surfaces.values().all(func(surface):
+			return surface.state_set.has("unavailable")), str(member_control))
 	var runtime := ControlRuntime.new()
 	var configured: Dictionary = runtime.configure(matches[0])
 	var initial := runtime.qa_state()
@@ -48,7 +55,7 @@ func _init() -> void:
 	var unavailable_before := JSON.stringify(after_selected.window_state)
 	var unavailable: Dictionary = runtime.dispatch("party.action.search", "Activate", {})
 	_check("unattested-icon-rejects-without-state-change", not unavailable.get("ok", true)
-		and unavailable.error.code == "ActionRoutingError"
+		and unavailable.error.code == "TransactionRejectedError"
 		and JSON.stringify(runtime.qa_state().window_state) == unavailable_before,
 		str(unavailable))
 	var friends: Dictionary = runtime.dispatch(
@@ -59,6 +66,7 @@ func _init() -> void:
 		and after_friends.controls["party.mode"].value == "friends"
 		and after_friends.controls["party.members"].item_values.values().all(
 			func(value): return str(value).is_empty())
+		and after_friends.controls["party.members"].semantic_state == "unavailable"
 		and after_friends.controls["party.action.leave"].semantic_state == "disabled",
 		str(after_friends))
 	var party: Dictionary = runtime.dispatch(

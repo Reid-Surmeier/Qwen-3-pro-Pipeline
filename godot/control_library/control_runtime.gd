@@ -9,8 +9,7 @@ const ChoiceGroup = preload("res://control_library/choice_group.gd")
 const TabsModule = preload("res://control_library/tabs.gd")
 const SelectionViewModule = preload("res://control_library/selection_view.gd")
 const StepperModule = preload("res://control_library/stepper.gd")
-const StatusWindowState = preload("res://window_state/status_window_state.gd")
-const PartyWindowState = preload("res://window_state/party_window_state.gd")
+const WindowStateRuntime = preload("res://window_state/window_state_runtime.gd")
 const ScrollViewModule = preload("res://control_library/scroll_view.gd")
 const TextFieldModule = preload("res://control_library/text_field.gd")
 const MeterModule = preload("res://control_library/meter.gd")
@@ -20,6 +19,7 @@ var controls: Dictionary = {}
 var interaction_log: Array[Dictionary] = []
 var window_state_adapter: Dictionary = {}
 var window_state: Dictionary = {}
+var state_runtime: WindowStateRuntime
 
 
 func configure(spec: Dictionary) -> Dictionary:
@@ -28,13 +28,10 @@ func configure(spec: Dictionary) -> Dictionary:
 	interaction_log.clear()
 	window_state_adapter = window_spec.get("state_adapter", {}).duplicate(true)
 	window_state.clear()
-	if str(window_state_adapter.get("type", "")) == "status":
-		var initialized: Dictionary = StatusWindowState.initialize(window_state_adapter)
-		if not initialized.get("ok", false):
-			return initialized
-		window_state = initialized.state
-	elif str(window_state_adapter.get("type", "")) == "party":
-		var initialized: Dictionary = PartyWindowState.initialize(window_state_adapter)
+	state_runtime = null
+	if not window_state_adapter.is_empty():
+		state_runtime = WindowStateRuntime.new()
+		var initialized: Dictionary = state_runtime.configure(window_state_adapter)
 		if not initialized.get("ok", false):
 			return initialized
 		window_state = initialized.state
@@ -57,21 +54,14 @@ func configure(spec: Dictionary) -> Dictionary:
 			"last_result": {"accepted": false, "action": "", "error": null},
 		}
 		if str(control_spec.type) == "Stepper":
-			var status_attribute: Variant = window_state.get("attributes", {}).get(control_id)
-			state.current = status_attribute.base if status_attribute is Dictionary \
-				else control_spec.value.current
-			state.target = state.current if status_attribute is Dictionary \
-				else control_spec.value.target
+			state.current = control_spec.value.current
+			state.target = control_spec.value.target
 			state.minimum = control_spec.value.minimum
 			state.maximum = control_spec.value.maximum
 			state.step = control_spec.value.step
 			state.pending = false
-			state.arrows_visible = bool(window_state.get("availability", {}).get(
-				control_id, true))
-			state.semantic_state = ("available" if state.arrows_visible else "disabled") \
-				if status_attribute is Dictionary else state.semantic_state
-			state.text = str(state.current) if status_attribute is Dictionary \
-				else StepperModule.format_value(state.current, state.target)
+			state.arrows_visible = true
+			state.text = StepperModule.format_value(state.current, state.target)
 		elif str(control_spec.type) == "SelectionView":
 			state.value = control_spec.value.get("initial")
 			state.text = str(state.value)
@@ -116,8 +106,7 @@ func configure(spec: Dictionary) -> Dictionary:
 			if state.value is String:
 				state.text = state.value
 		controls[control_id] = {"spec": control_spec.duplicate(true), "state": state}
-	if str(window_state_adapter.get("type", "")) == "party":
-		_sync_party_controls()
+	_apply_window_state_patches()
 	return {"ok": true, "window_id": str(window_spec.get("id", "")),
 		"control_count": controls.size()}
 
@@ -145,30 +134,41 @@ func dispatch(control_id: String, gesture: String, payload: Dictionary) -> Dicti
 		return _reject(control_id, gesture, Errors.UNSUPPORTED_GESTURE,
 			"gesture is not declared by the control")
 	var result: Dictionary
-	match str(spec.type):
-		"Toggle":
-			result = _dispatch_toggle(entry, gesture)
-		"Range":
-			result = _dispatch_range(entry, gesture, payload)
-		"Dropdown":
-			result = _dispatch_dropdown(entry, gesture, payload)
-		"ChoiceGroup":
-			result = _dispatch_choice_group(entry, gesture, payload)
-		"Tabs":
-			result = _dispatch_tabs(entry, gesture, payload)
-		"SelectionView":
-			result = _dispatch_selection_view(entry, gesture, payload)
-		"Stepper":
-			result = _dispatch_stepper(entry, gesture, payload)
-		"ScrollView":
-			result = _dispatch_scroll_view(entry, gesture, payload)
-		"TextField":
-			result = _dispatch_text_field(entry, gesture, payload)
-		"Button":
-			result = _dispatch_button(entry, gesture)
-		_:
-			result = _reject(control_id, gesture, Errors.CONTROL_BINDING,
-				"control type has no runtime action adapter")
+	if state_runtime != null and state_runtime.owns(control_id):
+		result = state_runtime.dispatch(spec, gesture, payload)
+		if not result.get("ok", false):
+			result = _reject(control_id, gesture, result.error.code,
+				result.error.detail)
+		else:
+			window_state = result.window_state
+			_apply_window_state_patches()
+			entry.state.interaction_phase = "idle"
+			entry.state.last_action = str(result.action)
+	else:
+		match str(spec.type):
+			"Toggle":
+				result = _dispatch_toggle(entry, gesture)
+			"Range":
+				result = _dispatch_range(entry, gesture, payload)
+			"Dropdown":
+				result = _dispatch_dropdown(entry, gesture, payload)
+			"ChoiceGroup":
+				result = _dispatch_choice_group(entry, gesture, payload)
+			"Tabs":
+				result = _dispatch_tabs(entry, gesture, payload)
+			"SelectionView":
+				result = _dispatch_selection_view(entry, gesture, payload)
+			"Stepper":
+				result = _dispatch_stepper(entry, gesture, payload)
+			"ScrollView":
+				result = _dispatch_scroll_view(entry, gesture, payload)
+			"TextField":
+				result = _dispatch_text_field(entry, gesture, payload)
+			"Button":
+				result = _dispatch_button(entry, gesture)
+			_:
+				result = _reject(control_id, gesture, Errors.CONTROL_BINDING,
+					"control type has no runtime action adapter")
 	if result.get("ok", false):
 		entry.state.last_error = null
 		entry.state.last_gesture = gesture
@@ -193,6 +193,10 @@ func qa_state() -> Dictionary:
 		"window_pending": _has_pending_stepper(),
 		"window_state": window_state.duplicate(true),
 	}
+
+
+func adapter_owns(control_id: String) -> bool:
+	return state_runtime != null and state_runtime.owns(control_id)
 
 
 func reject_action(control_id: String, action: String,
@@ -252,7 +256,8 @@ func visual_surface_asset(control_id: String, surface_id: String) -> String:
 			semantic = "selected" if state.get("semantic_state") == "selected" \
 				and str(state.get("value", "")) == surface_id else "unselected"
 	elif str(entry.spec.type) == "Stepper":
-		semantic = str(state.semantic_state) if _is_status_stepper(entry) \
+		semantic = str(state.semantic_state) \
+			if state_runtime != null and state_runtime.owns(str(entry.state.id)) \
 			else ("visible" if bool(state.get("arrows_visible", true)) else "hidden")
 	var phase := str(state.interaction_phase) \
 		if str(state.get("active_surface", "")) == surface_id else "idle"
@@ -330,23 +335,6 @@ func _dispatch_dropdown(entry: Dictionary, gesture: String, payload: Dictionary)
 
 func _dispatch_choice_group(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
-	if str(window_state_adapter.get("type", "")) == "party" \
-			and str(entry.state.id) == str(window_state_adapter.get("controls", {}).get("mode", "")):
-		if gesture != "Activate" or not payload.has("choice"):
-			return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
-				"Party mode requires an activated choice")
-		var party_result: Dictionary = PartyWindowState.select_mode(
-			window_state_adapter, window_state, str(payload.choice),
-			int(payload.get("expected_version", window_state.get("version", -1))))
-		if not party_result.get("ok", false):
-			return _reject(entry.state.id, gesture, party_result.error.code,
-				party_result.error.detail)
-		window_state = party_result.state
-		_sync_party_controls()
-		entry.state.interaction_phase = "idle"
-		entry.state.last_action = "SelectPartyMode"
-		return {"ok": true, "action": "SelectPartyMode", "value": entry.state.value,
-			"window_state": window_state.duplicate(true)}
 	var result: Dictionary = ChoiceGroup.select(entry.spec, entry.state, gesture, payload)
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
@@ -367,23 +355,6 @@ func _dispatch_tabs(entry: Dictionary, gesture: String,
 
 func _dispatch_selection_view(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
-	if str(window_state_adapter.get("type", "")) == "party" \
-			and str(entry.state.id) == str(window_state_adapter.get("controls", {}).get("members", "")):
-		if gesture != "Activate":
-			return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
-				"Party members accept Activate")
-		var party_result: Dictionary = PartyWindowState.select_member(
-			window_state_adapter, window_state, str(payload.get("item", "")),
-			int(payload.get("expected_version", window_state.get("version", -1))))
-		if not party_result.get("ok", false):
-			return _reject(entry.state.id, gesture, party_result.error.code,
-				party_result.error.detail)
-		window_state = party_result.state
-		_sync_party_controls()
-		entry.state.interaction_phase = "idle"
-		entry.state.last_action = "SelectPartyMember"
-		return {"ok": true, "action": "SelectPartyMember", "value": entry.state.value,
-			"window_state": window_state.duplicate(true)}
 	var result: Dictionary = SelectionViewModule.activate(entry.spec, entry.state,
 		gesture, payload)
 	if not result.ok:
@@ -563,26 +534,6 @@ func _refresh_selection_page(entry: Dictionary) -> void:
 
 func _dispatch_stepper(entry: Dictionary, gesture: String,
 		payload: Dictionary) -> Dictionary:
-	if _is_status_stepper(entry):
-		var direction := 1 if gesture == "Activate" else -1 \
-			if gesture == "ContextActivate" else 0
-		if direction == 0:
-			return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
-				"Status Stepper accepts Activate or ContextActivate")
-		var expected_version := int(payload.get("expected_version",
-			window_state.get("version", -1)))
-		var status_result: Dictionary = StatusWindowState.step(window_state_adapter,
-			window_state, str(entry.state.id), direction, expected_version)
-		if not status_result.get("ok", false):
-			return _reject(entry.state.id, gesture, status_result.error.code,
-				status_result.error.detail)
-		window_state = status_result.state
-		_sync_status_controls()
-		entry.state.interaction_phase = "idle"
-		entry.state.last_action = "StepStatusAttribute"
-		return {"ok": true, "action": "StepStatusAttribute",
-			"control_id": str(entry.state.id), "direction": direction,
-			"window_state": window_state.duplicate(true)}
 	var result: Dictionary = StepperModule.step(entry.spec, entry.state, gesture, payload)
 	if not result.ok:
 		return _reject(entry.state.id, gesture, result.error.code, result.error.detail)
@@ -612,20 +563,6 @@ func _dispatch_button(entry: Dictionary, gesture: String) -> Dictionary:
 	if gesture != "Activate":
 		return _reject(entry.state.id, gesture, Errors.CONTROL_BINDING,
 			"Button accepts Activate")
-	if _is_party_action(entry):
-		var action_id := str(entry.spec.get("value", {}).get("action_id", entry.state.id))
-		var party_result: Dictionary = PartyWindowState.activate_action(
-			window_state_adapter, window_state, action_id,
-			int(window_state.get("version", -1)))
-		if not party_result.get("ok", false):
-			return _reject(entry.state.id, gesture, party_result.error.code,
-				party_result.error.detail)
-		window_state = party_result.state
-		_sync_party_controls()
-		entry.state.interaction_phase = "idle"
-		entry.state.last_action = str(party_result.action)
-		return {"ok": true, "action": str(party_result.action),
-			"window_state": window_state.duplicate(true)}
 	var action := ""
 	for binding in entry.spec.actions:
 		if binding.gesture == gesture:
@@ -663,14 +600,16 @@ func _has_pending_stepper() -> bool:
 func _set_all_stepper_arrows(visible: bool) -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
+		if str(entry.spec.type) == "Stepper" \
+				and not (state_runtime != null and state_runtime.owns(str(entry.state.id))):
 			entry.state.arrows_visible = visible
 
 
 func _commit_steppers() -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
+		if str(entry.spec.type) == "Stepper" \
+				and not (state_runtime != null and state_runtime.owns(str(entry.state.id))):
 			entry.state.current = entry.state.target
 			entry.state.pending = false
 			entry.state.semantic_state = "ready"
@@ -682,7 +621,8 @@ func _commit_steppers() -> void:
 func _cancel_steppers() -> void:
 	for control_id in controls:
 		var entry: Dictionary = controls[control_id]
-		if str(entry.spec.type) == "Stepper" and not _is_status_stepper(entry):
+		if str(entry.spec.type) == "Stepper" \
+				and not (state_runtime != null and state_runtime.owns(str(entry.state.id))):
 			entry.state.target = entry.state.current
 			entry.state.pending = false
 			entry.state.semantic_state = "ready"
@@ -691,55 +631,17 @@ func _cancel_steppers() -> void:
 	_set_all_stepper_arrows(true)
 
 
-func _is_status_stepper(entry: Dictionary) -> bool:
-	return str(window_state_adapter.get("type", "")) == "status" \
-		and window_state_adapter.get("attributes", {}).has(str(entry.state.id))
-
-
-func _is_party_action(entry: Dictionary) -> bool:
-	return str(window_state_adapter.get("type", "")) == "party" \
-		and str(entry.state.id) in window_state_adapter.get("controls", {}).get("actions", [])
-
-
-func _sync_party_controls() -> void:
-	var mappings: Dictionary = window_state_adapter.get("controls", {})
-	var mode_id := str(mappings.get("mode", ""))
-	if controls.has(mode_id):
-		controls[mode_id].state.value = str(window_state.get("mode", "party"))
-		controls[mode_id].state.text = controls[mode_id].state.value
-	var members_id := str(mappings.get("members", ""))
-	if controls.has(members_id):
-		var member_state: Dictionary = controls[members_id].state
-		var values := {}
-		for item in controls[members_id].spec.value.items:
-			values[str(item)] = str(item) \
-				if str(item) in window_state.get("visible_members", []) else ""
-		member_state.item_values = values
-		member_state.value = str(window_state.get("selected_member", ""))
-		member_state.text = member_state.value
-		member_state.semantic_state = "selected" \
-			if not member_state.value.is_empty() else "unselected"
-		member_state.active_surface = member_state.value
-	for action_id in mappings.get("actions", []):
-		if not controls.has(str(action_id)):
+func _apply_window_state_patches() -> void:
+	if state_runtime == null:
+		return
+	var patches: Dictionary = state_runtime.control_patches()
+	for control_id in patches:
+		if not controls.has(str(control_id)):
 			continue
-		var available := bool(window_state.get("availability", {}).get(str(action_id), false))
-		controls[str(action_id)].state.semantic_state = "available" if available else "disabled"
-
-
-func _sync_status_controls() -> void:
-	for control_id in window_state.get("attributes", {}):
-		if not controls.has(control_id):
-			continue
-		var state: Dictionary = controls[control_id].state
-		var attribute: Dictionary = window_state.attributes[control_id]
-		state.current = attribute.base
-		state.target = attribute.base
-		state.text = str(attribute.base)
-		state.pending = false
-		state.arrows_visible = bool(window_state.availability[control_id])
-		state.semantic_state = "available" if state.arrows_visible else "disabled"
-
+		var patch: Dictionary = patches[control_id]
+		for field in patch:
+			controls[str(control_id)].state[field] = patch[field]
+	window_state = state_runtime.state.duplicate(true)
 
 func _reject(control_id: String, gesture: String, code: String, detail: String) -> Dictionary:
 	var error := {"code": code, "detail": detail}

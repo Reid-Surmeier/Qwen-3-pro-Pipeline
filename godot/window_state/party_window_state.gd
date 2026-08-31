@@ -69,7 +69,7 @@ static func activate_action(adapter_spec: Dictionary, state: Dictionary,
 		return _rejected(state, Errors.ACTION_ROUTING,
 			"Party action is not declared: %s" % action_id)
 	if action_id != LEAVE_ACTION:
-		return _rejected(state, Errors.ACTION_ROUTING,
+		return _rejected(state, Errors.TRANSACTION_REJECTED,
 			str(adapter_spec.actions[action_id].reason))
 	if not bool(state.availability.get(LEAVE_ACTION, false)):
 		return _rejected(state, Errors.TRANSACTION_REJECTED,
@@ -86,9 +86,10 @@ static func _preflight(adapter_spec: Dictionary, state: Dictionary,
 	var initialized := initialize(adapter_spec)
 	if not initialized.get("ok", false):
 		return _rejected(state, initialized.error.code, initialized.error.detail)
-	if not _valid_state(state):
+	var state_problem := _state_problem(adapter_spec, state)
+	if not state_problem.is_empty():
 		return _rejected(state, Errors.INVALID_CONTROL_SPEC,
-			"Party state is malformed")
+			state_problem)
 	if int(state.version) != expected_version:
 		return _rejected(state, Errors.GESTURE_CONFLICT,
 			"Party version changed before the action")
@@ -152,13 +153,31 @@ static func _member_ids(adapter_spec: Dictionary) -> Array:
 	return adapter_spec.members.map(func(member): return str(member.id))
 
 
-static func _valid_state(state: Dictionary) -> bool:
-	return state.get("version") is int and int(state.get("version", -1)) >= 0 \
-		and str(state.get("mode", "")) in MODES \
-		and str(state.get("membership", "")) in MEMBERSHIPS \
-		and state.get("selected_member") is String \
-		and state.get("visible_members") is Array \
-		and state.get("availability") is Dictionary
+static func _state_problem(adapter_spec: Dictionary, state: Dictionary) -> String:
+	if not state.get("version") is int or int(state.get("version", -1)) < 0 \
+			or str(state.get("mode", "")) not in MODES \
+			or str(state.get("membership", "")) not in MEMBERSHIPS \
+			or not state.get("selected_member") is String \
+			or not state.get("visible_members") is Array \
+			or not state.get("availability") is Dictionary:
+		return "Party state has malformed fields"
+	var party_visible := str(state.mode) == "party" and str(state.membership) == "member"
+	var expected_visible := _member_ids(adapter_spec) if party_visible else []
+	if state.visible_members != expected_visible:
+		return "Party visible members contradict mode or membership"
+	if not str(state.selected_member).is_empty() \
+			and str(state.selected_member) not in expected_visible:
+		return "Party selection is not a visible declared member"
+	var availability: Dictionary = state.availability
+	if availability.size() != adapter_spec.actions.size():
+		return "Party availability keys do not match declared actions"
+	for action_id in adapter_spec.actions:
+		if not availability.has(action_id) or not availability[action_id] is bool:
+			return "Party availability must contain Boolean action entries"
+		var expected: bool = action_id == LEAVE_ACTION and party_visible
+		if bool(availability[action_id]) != expected:
+			return "Party action availability contradicts current state"
+	return ""
 
 
 static func _positive_integer(value: Variant) -> bool:
