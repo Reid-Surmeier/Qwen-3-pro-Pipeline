@@ -1,4 +1,4 @@
-# Issue #138 v004 blind-review contract
+# Issue #138 v005 blind-review contract
 
 Candidate: the exact commit pinned in `packet.json`.
 
@@ -23,10 +23,10 @@ frame and row surface described below.
   popup option is drawn at the same native 10 px PixelMplus size. The three
   closed rows use equal 21 px baseline gaps. The 4x review text is an exact
   nearest-neighbor enlargement; the title alone uses the dedicated native
-  PixelMplus12 face. Body text reproduces the source's gray `(2,2)` and light
-  blue `(1,1)` depth pixels behind its navy strokes. The title reproduces the
-  owner crop's gray `(1,1)` depth and light `(-1,-1)` highlight behind black
-  strokes. Text has no flat, broken, clipped, or merged glyphs.
+  PixelMplus12 face. Body text uses exactly one gray `(1,1)` native edge behind
+  its navy strokes. The title uses exactly one pale `(1,1)` native edge behind
+  black strokes. There is no `(2,2)` far copy, opposing offset, full outline,
+  or second chunky glyph. Text has no flat, broken, clipped, or merged glyphs.
 - **C4 - Complete dropdown.** The open state aligns the popup to the left and
   right edges of the sort field and shows all nine Issue strings in order. No
   row, glyph, border, or bottom option is clipped.
@@ -42,7 +42,7 @@ frame and row surface described below.
   this is not an ADR 0002 strict exact-preservation claim. Closed/native size
   is 336 x 126; open/native size is 336 x 196. The
   retained OpenRouter Qwen pass requested/completed 2/2 images with zero
-  ambiguity and v004 made no new paid request. The open popup also has its own
+  ambiguity and v005 made no new paid request. The open popup also has its own
   declared native mask against the closed candidate on a transparent 336 x 196
   canvas, with zero changes outside the popup rectangle.
 

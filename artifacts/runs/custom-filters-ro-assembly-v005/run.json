@@ -1,0 +1,38 @@
+{
+  "issue": 138,
+  "method": "native-grid widened Assembly with exact source caps and controls",
+  "rejected": [
+    "custom-filters-ro-assembly-v001",
+    "custom-filters-ro-assembly-v002",
+    "custom-filters-ro-assembly-v003",
+    "custom-filters-ro-assembly-v004"
+  ],
+  "outputs": {
+    "closed_native": "artifacts/runs/custom-filters-ro-assembly-v005/custom-filters-closed-native.png",
+    "closed": "artifacts/runs/custom-filters-ro-assembly-v005/custom-filters-closed.png",
+    "open_native": "artifacts/runs/custom-filters-ro-assembly-v005/custom-filters-open-native.png",
+    "open": "artifacts/runs/custom-filters-ro-assembly-v005/custom-filters-open.png",
+    "declared_native": "artifacts/runs/custom-filters-ro-assembly-v005/native-edit-mask.png",
+    "declared": "artifacts/runs/custom-filters-ro-assembly-v005/native-edit-mask-4x.png",
+    "actual_native": "artifacts/runs/custom-filters-ro-assembly-v005/actual-difference-mask-native.png",
+    "actual": "artifacts/runs/custom-filters-ro-assembly-v005/actual-difference-mask-4x.png",
+    "open_declared_native": "artifacts/runs/custom-filters-ro-assembly-v005/open-native-edit-mask.png",
+    "open_declared": "artifacts/runs/custom-filters-ro-assembly-v005/open-native-edit-mask-4x.png",
+    "open_actual_native": "artifacts/runs/custom-filters-ro-assembly-v005/open-actual-difference-mask-native.png",
+    "open_actual": "artifacts/runs/custom-filters-ro-assembly-v005/open-actual-difference-mask-4x.png",
+    "contact": "artifacts/runs/custom-filters-ro-assembly-v005/contact-sheet.png"
+  },
+  "verification": "artifacts/runs/custom-filters-ro-assembly-v005/verification.json",
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "usage": "retained masked popup surface only; no generated glyph or closed-state control pixels",
+    "new_requests_for_v005": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}

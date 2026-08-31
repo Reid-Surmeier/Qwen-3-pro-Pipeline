@@ -1,0 +1,205 @@
+{
+  "issue": 138,
+  "assembly": "custom-filters-ro-v005",
+  "status": "candidate_pending_owner_visual_approval",
+  "style_source": "artifacts/references/custom-filters-ro-v001/style-chat-room.png",
+  "style_source_sha256": "2e36c678530cf43b15137e313929d96eea6c2ec641a2ae673204b82515e3793d",
+  "data_source": "artifacts/references/custom-filters-ro-v001/data-sort-dropdown.png",
+  "data_source_sha256": "b7de723887800b76a13495fee26145496ad5bc0f5b3c6d5fe5bb3330a6976085",
+  "data_source_usage": "strings and order only",
+  "rejected_parents": [
+    "artifacts/runs/custom-filters-ro-assembly-v001/custom-filters-closed.png",
+    "artifacts/runs/custom-filters-ro-assembly-v002/custom-filters-closed.png",
+    "artifacts/runs/custom-filters-ro-assembly-v003/custom-filters-closed.png",
+    "artifacts/runs/custom-filters-ro-assembly-v004/custom-filters-closed.png"
+  ],
+  "title_text_authority": "artifacts/references/custom-filters-ro-v001/title-text-authority.png",
+  "title_text_authority_sha256": "0e297d8786a0d8413b31c776f0beecd0fb6422e08eeb9e8f4de46d5997cd2caa",
+  "font": "godot/fonts/PixelMplus10-Regular.ttf",
+  "font_sha256": "01b5e4aea5a3bbe80463c178e7868d5a34cd75e8ed7bc4d97097ebb1a71af7c7",
+  "title_font": "godot/fonts/PixelMplus12-Regular.ttf",
+  "title_font_sha256": "02f19467ea7cc235cc06c570b7f6c3b0a12a6f682bc8d74c43f2d323d97bcd12",
+  "body_font_size_native": 10,
+  "popup_font_size_native": 10,
+  "title_font_size_native": 12,
+  "label_text_effects_native": [
+    [
+      [
+        1,
+        1
+      ],
+      [
+        188,
+        197,
+        206,
+        255
+      ]
+    ],
+    [
+      [
+        0,
+        0
+      ],
+      [
+        46,
+        69,
+        96,
+        255
+      ]
+    ]
+  ],
+  "value_text_effects_native": [
+    [
+      [
+        1,
+        1
+      ],
+      [
+        188,
+        197,
+        206,
+        255
+      ]
+    ],
+    [
+      [
+        0,
+        0
+      ],
+      [
+        46,
+        69,
+        96,
+        255
+      ]
+    ]
+  ],
+  "title_text_effects_native": [
+    [
+      [
+        1,
+        1
+      ],
+      [
+        250,
+        255,
+        255,
+        255
+      ]
+    ],
+    [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        7,
+        255
+      ]
+    ]
+  ],
+  "row_baselines_native": [
+    30,
+    51,
+    72
+  ],
+  "row_gaps_native": [
+    21,
+    21
+  ],
+  "assembly_resolution": [
+    336,
+    126
+  ],
+  "review_resolution": [
+    1344,
+    504
+  ],
+  "open_native_resolution": [
+    336,
+    196
+  ],
+  "open_review_resolution": [
+    1344,
+    784
+  ],
+  "review_resampling": "nearest for text and shell; byte-exact full-resolution source overlays for named controls",
+  "source_normalization_resampling": "complete 1088x504 source reduced once to 272x126 with nearest-neighbor before Assembly",
+  "complete_source_horizontally_resampled_during_widening": false,
+  "native_shell_extension": {
+    "insert_at": 136,
+    "insert_width": 64,
+    "method": "exact halves plus nearest-neighbor center donor strip"
+  },
+  "exterior_edge_cleanup": "clean native rounded silhouette outside exact inner frame caps",
+  "exact_native_source_pixels": {
+    "left_exterior_cap": true,
+    "right_exterior_cap": true,
+    "close": true,
+    "page_arrow": true,
+    "sort_arrow": true,
+    "on_radio": true,
+    "off_radio": true,
+    "button_pair": true
+  },
+  "full_resolution_source_control_overlays": true,
+  "strict_exact_preservation_claim": false,
+  "mask_comparison_baseline": "deterministic native widened shell",
+  "native_edit_mask_pixels": 26208,
+  "changed_pixels": 15825,
+  "changed_pixels_outside_native_edit_mask": 0,
+  "actual_is_subset_of_native_edit_mask": true,
+  "open_mask_comparison_baseline": "closed candidate on transparent 336x196 canvas",
+  "open_native_edit_mask_pixels": 15360,
+  "open_changed_pixels": 14939,
+  "open_changed_pixels_outside_native_edit_mask": 0,
+  "open_actual_is_subset_of_native_edit_mask": true,
+  "qwen_popup_surface_source": "artifacts/runs/custom-filters-ro-render-v001/image-01.png",
+  "qwen_popup_surface_source_sha256": "b61a9c82e151ab3e1db5e4557644f27ba4c9da3030c98038c1a0f41ab92e355c",
+  "generated_glyph_pixels_in_final": false,
+  "exact_copy": {
+    "title": "Custom filters",
+    "custom_filters": "Custom filters:",
+    "images_per_page": "Images per page:",
+    "page_value": "20",
+    "sort_by": "Sort by:",
+    "selected_sort": "Relevance",
+    "choices": [
+      "On",
+      "Off"
+    ],
+    "source_buttons": [
+      "OK",
+      "cancel"
+    ],
+    "sort_options": [
+      "Relevance",
+      "Title (a-z)",
+      "Title (z-a)",
+      "Date (newest-oldest)",
+      "Date (oldest-newest)",
+      "Artist/Maker (a-z)",
+      "Artist/Maker (z-a)",
+      "Accession Number (0-9)",
+      "Accession Number (9-0)"
+    ]
+  },
+  "closed_native_sha256": "bb1560d79b05544893e3a2e97afcdd50bfc9b307537190962aca29ebf5e4d969",
+  "closed_sha256": "810830dcd21120c7a7d30501e05c3e3269507a5035120816056e112db6be70da",
+  "open_native_sha256": "c8ccd588ea46ee591b6f49b92c2d0310c94bccee3e5435e67f85de6b54debea0",
+  "open_sha256": "b0ab53e08ee421ab6d58cef0524375cc030abe59dc04ac3854cfbefcb5b72894",
+  "render_pass": {
+    "provider": "openrouter",
+    "model": "qwen/qwen-image-3-pro",
+    "requested_outputs": 2,
+    "completed_outputs": 2,
+    "ambiguous_outputs": 0,
+    "prompt_id": "e12f195d-dfaa-4810-bac9-96963b4b3c35",
+    "usage": "retained masked popup surface only; no generated glyph or closed-state control pixels",
+    "new_requests_for_v005": 0,
+    "estimated_cost_usd": 0.1,
+    "actual_cost_usd": null
+  }
+}
