@@ -125,6 +125,13 @@ def _pair_boxes(mask, transpose=False, hi=140):
                 if y + dy not in runs:
                     continue
                 if any(abs(r[0] - s_) <= 4 and abs(r[1] - e_) <= 4 for r in runs[y + dy]):
+                    inner = m[y + 1:y + dy, s_ + 1:e_ + 1]
+                    if inner.size and float(inner.mean()) > 0.3:
+                        continue      # a plate's interior is digits on fill, not solid ink
+                    lcol = m[y:y + dy + 1, s_]
+                    rcol = m[y:y + dy + 1, min(e_, m.shape[1] - 1)]
+                    if float(lcol.mean()) < 0.4 and float(rcol.mean()) < 0.4:
+                        continue      # a plate is framed on at least one vertical side
                     boxes.append((y, y + dy + 1, s_, e_ + 1))
                     taken[y:y + dy + 1, s_:e_ + 1] = True
                     break

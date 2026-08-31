@@ -156,6 +156,13 @@ def pair_boxes(mask, transpose=False, hi=140, lo=28):
                 if y + dy not in runs:
                     continue
                 if any(abs(r[0] - s_) <= 4 and abs(r[1] - e_) <= 4 for r in runs[y + dy]):
+                    inner = m[y + 1:y + dy, s_ + 1:e_ + 1]
+                    if inner.size and float(inner.mean()) > 0.3:
+                        continue      # a plate's interior is digits on fill, not solid ink
+                    lcol = m[y:y + dy + 1, s_]
+                    rcol = m[y:y + dy + 1, min(e_, m.shape[1] - 1)]
+                    if float(lcol.mean()) < 0.4 and float(rcol.mean()) < 0.4:
+                        continue      # a plate is framed on at least one vertical side
                     boxes.append((y, y + dy + 1, s_, e_ + 1))
                     taken[y:y + dy + 1, s_:e_ + 1] = True
                     break
@@ -284,7 +291,9 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
                  and m[:, 0].sum() >= 0.75 * hh and m[:, -1].sum() >= 0.75 * hh)
     if not straight4:
         continue
-    if cnt < (0.55 if tall else 0.8) * hh * ww2:
+    boxreg = (fills | WHITE | BLACK | SHADOW | GREY | NAVY)[sl]
+    solid_box = float(boxreg.mean()) >= 0.95 and cnt >= 0.35 * hh * ww2
+    if cnt < (0.55 if tall else 0.8) * hh * ww2 and not solid_box:
         continue          # true marker boxes have dead-straight edges
     sl2 = tuple(slice(max(0, a.start - 3), a.stop + 3) for a in sl)
     m2 = np.zeros((sl2[0].stop - sl2[0].start, sl2[1].stop - sl2[1].start), bool)
@@ -294,8 +303,46 @@ for i, sl in enumerate(ndimage.find_objects(labf), start=1):
     ring3 = ndimage.binary_dilation(m2, iterations=3) & ~ndimage.binary_dilation(m2, iterations=2)
     frame_frac = float((BLACK | SHADOW | GREY | NAVY)[sl2][ring1].mean())
     sea_frac = float((WHITE | GRID)[sl2][ring3].mean())
-    if frame_frac >= 0.5 and sea_frac >= (0.35 if tall else 0.6):
+    # A marker plate is a straight-edged fill whose dark/grey frame hugs it on every
+    # side. A container box (Socotra, Marquesas) frames its island from far away, so
+    # the 1-px ring there is open sea -> never a marker, contents preserved.
+    if frame_frac >= 0.8:
         R1[sl2[0].start:sl2[0].stop, sl2[1].start:sl2[1].stop] |= ndimage.binary_dilation(m2, iterations=2)
+
+# glyph plates: a small fill whose bbox ring is a closed dark/grey frame AND whose
+# interior holds white glyph pixels that touch no bbox edge. Country enclaves are
+# framed too, but never contain enclosed white text, so they are safe.
+n_glyph = 0
+for i, sl in enumerate(ndimage.find_objects(labf), start=1):
+    m = labf[sl] == i
+    cnt = int(m.sum())
+    if not (10 <= cnt <= 400):
+        continue
+    y0, y1, x0, x1 = sl[0].start, sl[0].stop, sl[1].start, sl[1].stop
+    ry0, ry1 = max(0, y0 - 1), min(H, y1 + 1)
+    rx0, rx1 = max(0, x0 - 1), min(W, x1 + 1)
+    ringb = np.zeros((ry1 - ry0, rx1 - rx0), bool)
+    ringb[0, :] = ringb[-1, :] = True
+    ringb[:, 0] = ringb[:, -1] = True
+    if float((BLACK | SHADOW | GREY | NAVY)[ry0:ry1, rx0:rx1][ringb].mean()) < 0.7:
+        continue
+    inner = WHITE[y0:y1, x0:x1].copy()
+    if inner.shape[0] < 3 or inner.shape[1] < 3:
+        continue
+    edge_touch = np.zeros_like(inner)
+    edge_touch[0, :] = edge_touch[-1, :] = True
+    edge_touch[:, 0] = edge_touch[:, -1] = True
+    labW3, nW3 = ndimage.label(inner)
+    keepW3 = np.ones(nW3 + 1, bool)
+    keepW3[0] = False
+    for j in np.unique(labW3[edge_touch & inner]):
+        if j:
+            keepW3[j] = False
+    if int(keepW3[labW3].sum()) < 2:
+        continue
+    R1[max(0, y0 - 2):y1 + 2, max(0, x0 - 2):x1 + 2] = True
+    n_glyph += 1
+print("glyph plates wiped:", n_glyph)
 
 wiped = (R1 | R2 | R3 | R4 | R5) & ~credit
 wiped |= SHADOW & ~credit
@@ -503,7 +550,8 @@ O[stroke] = (0x04, 0x02, 0x04)
 # stranded texture/blend pixels on recoloured land take the neighbour patch colour
 known = fills | WHITE | GRID | BLACK | NAVY | GREY | SHADOW | GWLINE | ORANGE
 luma_S = 0.299 * S[..., 0] + 0.587 * S[..., 1] + 0.114 * S[..., 2]
-odd = ((~known & (luma_S >= 90)) | YELLOW) & ~wiped & ~credit & ~ndimage.binary_dilation(GREY, iterations=1)
+hatch = GRID & ~gridmask
+odd = ((~known & (luma_S >= 90)) | YELLOW | hatch) & ~wiped & ~credit & ~ndimage.binary_dilation(GREY, iterations=1)
 # grey-line anti-aliasing lightens with its line instead
 grey_aa = (~known & (luma_S >= 90)) & ~wiped & ~credit & ndimage.binary_dilation(GREY, iterations=1)
 O[grey_aa] = (0xB8, 0xB8, 0xB8)

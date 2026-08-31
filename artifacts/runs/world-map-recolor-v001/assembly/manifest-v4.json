@@ -4,7 +4,7 @@
   "per_pixel_splits": 21,
   "white_cells_recoloured": 0,
   "plates_detected": 79,
-  "wiped_px": 85093,
+  "wiped_px": 86064,
   "inputs": [
     "countries-registered.npy (#146)",
     "pinned-country-colours.json (#145)"
