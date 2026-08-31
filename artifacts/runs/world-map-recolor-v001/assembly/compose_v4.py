@@ -214,7 +214,7 @@ for (x0, y0, x1, y1) in dedup:
 R1 = np.zeros((H, W), bool)
 for (x0, y0, x1, y1) in grown:
     if not credit[max(0, y0):y1, max(0, x0):x1].any():
-        R1[max(0, y0 - 1):y1 + 1, max(0, x0 - 1):x1 + 1] = True
+        R1[max(0, y0 - 2):y1 + 3, max(0, x0 - 2):x1 + 3] = True
 
 R2 = np.zeros((H, W), bool)
 laby, ny = ndimage.label(ndimage.binary_dilation(YELLOW, iterations=1))
@@ -304,7 +304,7 @@ difB3 = ndimage.mean(diff_d3.astype(np.float32), labB3, range(1, nB3 + 1))
 annB3 = ndimage.mean(annotish.astype(np.float32), labB3, range(1, nB3 + 1))
 spareB = np.zeros(nB3 + 1, bool)
 inW3 = ndimage.mean(wiped.astype(np.float32), labB3, range(1, nB3 + 1))
-spareB[1:] = (szB3 <= 80) & (difB3 == 0.0) & (annB3 < 0.3) & (inW3 < 0.85)
+spareB[1:] = (szB3 <= 80) & (difB3 == 0.0) & (annB3 < 0.3) & (inW3 < 0.95)
 wiped &= ~(spareB[labB3] & BLACK)    # black glyphs with no changing digits nearby are labels
 
 # ---------------------------------------------------------------- recolour
@@ -389,9 +389,23 @@ wy, wx = np.where(wiped)
 # under annotations the source carries no truth; the locally-registered grid (#146,
 # residual <=2 px in every populated region) supplies land/sea class and the coastline.
 # Colours still come only from source-frame donors. Documented #143 exception on #147.
-is_land = regcid[wy, wx] >= 0
+sandL2 = np.zeros((H, W), bool); sandR2 = np.zeros((H, W), bool)
+sandU2 = np.zeros((H, W), bool); sandD2 = np.zeros((H, W), bool)
+for k in range(1, 19):
+    sandL2 |= np.roll(donor_land, k, axis=1)
+    sandR2 |= np.roll(donor_land, -k, axis=1)
+    sandU2 |= np.roll(donor_land, k, axis=0)
+    sandD2 |= np.roll(donor_land, -k, axis=0)
+sand10 = (sandL2 & sandR2) | (sandU2 & sandD2)
+anyNear = sandL2 | sandR2 | sandU2 | sandD2
+cid_raw2 = np.load("countries-raw.npy").astype(np.int32)
+agree = (regcid[wy, wx] >= 0) & ((cid_raw2[wy, wx] >= 0) | (dl[0][wy, wx] <= 10))
+is_land = (agree & anyNear[wy, wx]) | sand10[wy, wx]
 ly, lx = wy[is_land], wx[is_land]
-O[ly, lx] = O[dl[1][0][ly, lx], dl[1][1][ly, lx]]
+has_c = regcid[ly, lx] >= 0
+O[ly[has_c], lx[has_c]] = colour_of[regcid[ly[has_c], lx[has_c]]]
+nb2 = ~has_c
+O[ly[nb2], lx[nb2]] = O[dl[1][0][ly[nb2], lx[nb2]], dl[1][1][ly[nb2], lx[nb2]]]
 sy, sx = wy[~is_land], wx[~is_land]
 O[sy, sx] = (0xFC, 0xFE, 0xFC)
 gridland = regcid >= 0

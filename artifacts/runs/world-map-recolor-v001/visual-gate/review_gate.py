@@ -137,7 +137,7 @@ for c in [(0x04,0x9A,0xFC),(0xFC,0x32,0x34),(0x04,0xCE,0x34),(0xFC,0xCE,0x34),(0
     fillsS |= eq(S, *c)
 blackS = eq(S, 4, 2, 4)
 for (bx0, by0, bx1, by1) in _pair_boxes(blackS) + [b for b in _pair_boxes(blackS, transpose=True, hi=220) if b[2] - b[0] <= 18 and float(fillsS[b[1]:b[3], b[0]:b[2]].mean()) < 0.25]:
-    plate_annot[max(0, by0 - 3):by1 + 3, max(0, bx0 - 3):bx1 + 3] = True
+    plate_annot[max(0, by0 - 5):by1 + 5, max(0, bx0 - 5):bx1 + 5] = True
 shadowS = eq(S, 0x34, 0x32, 0x34)
 dark_bs2 = blackS | shadowS
 second = src_p.parent / "wtz-map-second.gif"
@@ -173,7 +173,7 @@ for (bx0, by0, bx1, by1) in _boxes:
             x1 += 1; g = True
         if not g:
             break
-    plate_annot[max(0, y0 - 3):y1 + 3, max(0, x0 - 3):x1 + 3] = True
+    plate_annot[max(0, y0 - 5):y1 + 5, max(0, x0 - 5):x1 + 5] = True
 # marker rectangles (straight-edged fill boxes framed dark, ringed by sea)
 whiteS = eq(S, 0xFC, 0xFE, 0xFC) | eq(S, 0xCC, 0xCE, 0xFC)
 labF2, nF2 = ndimage.label(fillsS)
