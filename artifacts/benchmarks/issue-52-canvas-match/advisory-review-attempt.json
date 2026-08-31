@@ -2,7 +2,7 @@
   "completed_at": "2026-08-27T03:28:04.197284+00:00",
   "completed_reviews": 1,
   "estimated_cost_ceiling_usd": 0.02,
-  "invalid_reason": "Whole-screen comparison did not satisfy ADR 0004's bounded source/candidate crop-pair requirement. Retained only as paid-call provenance; its annotations are not used as Issue #52 findings.",
+  "invalid_reason": "Whole-screen comparison did not satisfy ADR 0006's bounded source/candidate crop-pair requirement. Retained only as paid-call provenance; its annotations are not used as Issue #52 findings.",
   "method_valid": false,
   "model": "google/gemini-3.7-flash",
   "provider": "openrouter",

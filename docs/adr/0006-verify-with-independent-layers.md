@@ -1,10 +1,8 @@
-# 4. Verify with independent layers, and never let a builder grade itself
+# 6. Verify with independent layers, and never let a builder grade itself
 
 Date: 2026-08-26
 
-## Status
-
-Accepted
+Status: accepted on 2026-08-26.
 
 ## Context
 

@@ -66,7 +66,7 @@ Do not require the Issue author to prescribe code structure unless that structur
 Use the canonical workflow labels in [`triage-labels.md`](triage-labels.md).
 
 Triage still happens, but it no longer waits for an Issue-level human
-decision ([ADR 0004](../adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+decision ([ADR 0007](../adr/0007-move-human-approval-to-the-pull-request-gate.md)).
 An agent posts the five-part triage brief defined in
 [`issue-tracker.md`](issue-tracker.md), sharpens the Issue body into a
 testable specification, records the interpretation it takes, and proceeds to

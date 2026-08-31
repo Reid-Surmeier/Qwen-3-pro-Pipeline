@@ -3,7 +3,7 @@
 These labels describe whether work is ready and who should act next. They are
 workflow gates, not priority labels. Human approval happens at the pull
 request, not on the Issue
-([ADR 0004](../adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+([ADR 0007](../adr/0007-move-human-approval-to-the-pull-request-gate.md)).
 
 | Label | Meaning | Exit condition |
 | --- | --- | --- |

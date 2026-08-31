@@ -51,7 +51,7 @@ An Issue is ready for implementation when:
 - paid operations and credentials are identified.
 
 Human approval is not part of Issue readiness; it happens at the pull request
-([ADR 0004](../adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+([ADR 0007](../adr/0007-move-human-approval-to-the-pull-request-gate.md)).
 Use `needs-info` when an unanswered question could materially change the
 solution. Use `blocked` with `Blocked by #N` and a stated unblocking event
 when a named dependency must finish first. Use `ready-for-human` when direct

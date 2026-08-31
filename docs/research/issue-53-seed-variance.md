@@ -3,7 +3,7 @@
 Eight pre-registered seeds, one fixed brief (the Issue #18 localized-
 replacement canonical brief), byte-identical settings otherwise. Explicit
 OpenRouter / `qwen/qwen-image-3-pro` via live ComfyUI, 1K, 5:4, source
-plantstudio `c9ddeaa3…`. Run 2026-08-26 under ADR 0004's standing
+plantstudio `c9ddeaa3…`. Run 2026-08-26 under ADR 0007's standing
 authorization; pre-submission record on the Issue.
 
 Outcome: 8 requested, 7 completed, 1 provider read-timeout (seed 555,

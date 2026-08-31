@@ -200,7 +200,7 @@ class PlayLogVerdictTests(unittest.TestCase):
         verdict = evaluate_play_log(log, self.root, manifest)
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
-    def test_issue_128_requires_all_adr_0004_interaction_facts(self) -> None:
+    def test_issue_128_requires_all_adr_0006_interaction_facts(self) -> None:
         log = self._valid_log()
         log["candidate"]["issue"] = 128
         verdict = evaluate_play_log(log, self.root, self._manifest())
@@ -241,7 +241,7 @@ class PlayLogVerdictTests(unittest.TestCase):
                 verdict = evaluate_play_log(log, self.root, self._manifest())
                 self.assertEqual("INVALID", verdict["verdict"], verdict)
 
-    def test_issue_128_complete_adr_0004_evidence_passes(self) -> None:
+    def test_issue_128_complete_adr_0006_evidence_passes(self) -> None:
         verdict = evaluate_play_log(self._strict_log(), self.root, self._strict_manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 

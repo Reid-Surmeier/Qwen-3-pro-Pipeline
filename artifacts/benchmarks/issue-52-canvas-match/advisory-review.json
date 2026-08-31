@@ -108,7 +108,7 @@
   },
   "builder": "qwen/qwen-image-3-pro",
   "cross_arm_note": "None of the candidates exhibited global redraw (T20). Compositional variation (T22) was primarily characterized by subtle bottom-edge cropping across A, B, and D, and severe pillarbox padding in Candidate C.",
-  "invalid_reason": "The review compared whole screenshots instead of bounded source/candidate crop pairs required by ADR 0004. Its annotations are retained but rejected and are not used as Issue #52 findings.",
+  "invalid_reason": "The review compared whole screenshots instead of bounded source/candidate crop pairs required by ADR 0006. Its annotations are retained but rejected and are not used as Issue #52 findings.",
   "method_valid": false,
   "raw_response_retained": false,
   "response_id": "gen-1787801269-8eE4PBhySmBRswLZcSxh",

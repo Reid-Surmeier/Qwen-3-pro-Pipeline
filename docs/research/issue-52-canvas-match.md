@@ -108,7 +108,7 @@ the corresponding attempt and run records.
 
 One separately preregistered advisory review was requested and completed
 through OpenRouter for $0.004879125. It compared whole screenshots, contrary to
-ADR 0004's bounded-crop method, and its T20 annotations visibly contradicted the
+ADR 0006's bounded-crop method, and its T20 annotations visibly contradicted the
 crop and pixel evidence. The call is retained only as rejected-method
 provenance: model, exact prompts, canonical request hash, response ID, blind
 mapping, parsed annotations, and usage are recorded. The raw response was not

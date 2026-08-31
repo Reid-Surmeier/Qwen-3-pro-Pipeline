@@ -17,7 +17,7 @@ If these sources conflict, stop and surface the conflict. Do not silently choose
 ## Work-readiness gate
 
 Human approval lives at the pull request, not the Issue
-([ADR 0004](docs/adr/0004-move-human-approval-to-the-pull-request-gate.md)).
+([ADR 0007](docs/adr/0007-move-human-approval-to-the-pull-request-gate.md)).
 An agent may triage an Issue and proceed directly to implementation without
 waiting for an Issue-level human decision.
 
@@ -52,7 +52,7 @@ Then confirm:
 - no secret or credential is present in the requested inputs,
 - the proposed work does not conflict with `CONTEXT.md` or an accepted ADR,
 - paid generation stays within the standing OpenRouter allowance (ADR 0003,
-  ADR 0004) and external side effects beyond it have human approval.
+  ADR 0007) and external side effects beyond it have human approval.
 
 A failed preflight is a stop condition.
 
@@ -133,7 +133,7 @@ integration line; stop before any request that could exceed 200.
 - Use exact baseline and candidate commit SHAs for reproducible comparisons.
 - Do not place provider keys, tokens, passwords, or credentials in source, logs, prompts, issues, pull requests, workflow YAML, or artifacts.
 - Paid or model-backed evaluation must not run automatically in ordinary pull-request CI.
-- Paid image generation for Issue testing is generally authorized through explicit OpenRouter only (ADR 0004); it needs no per-Issue human pre-approval. Use the smallest useful batch, never exceed 10 cumulative output images for the linked Issue/PR, and stop before submitting any request that could produce image 11. Do not use `provider: auto` or direct Alibaba under this allowance. Write the pre-submission record (question, batch, estimate, stop rule) before spending.
+- Paid image generation for Issue testing is generally authorized through explicit OpenRouter only (ADR 0007); it needs no per-Issue human pre-approval. Use the smallest useful batch, never exceed 10 cumulative output images for the linked Issue/PR, and stop before submitting any request that could produce image 11. Do not use `provider: auto` or direct Alibaba under this allowance. Write the pre-submission record (question, batch, estimate, stop rule) before spending.
 - Record requested and completed image counts, provider/model, prompt or task ID, estimate and actual cost when exposed, output paths, hashes, and provenance for every paid verification run.
 - Do not blindly retry an ambiguous provider failure that might create duplicate billing.
 - Count an ambiguous possibly billed request against the 10-image verification allowance until it is reconciled.
