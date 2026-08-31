@@ -187,8 +187,13 @@ record("inventory.items", "ModifierDoubleActivate", "TransferInventoryItem", {
 }, { before: frames["08-transfer-rejected"], after: await shot("09-transfer-outbound") },
 outbound.last_transaction);
 
+const returningItem = outbound.last_transaction.item;
 await click(779, 977);
-await page.keyboard.type("r0c0", { delay: 25 });
+await page.keyboard.press("Control+A");
+await page.keyboard.press("Backspace");
+await page.keyboard.type(returningItem, { delay: 25 });
+await page.waitForFunction((item) => window.godotQaState.windows.storage.controls[
+  "storage.items"].filtered_items.includes(item), returningItem);
 await ctrlDouble(610, 670);
 const returned = await qa();
 record("storage.items", "ModifierDoubleActivate", "TransferStorageItem", {
