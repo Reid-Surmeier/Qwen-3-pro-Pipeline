@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "candidate_commit": "7bfd1b7aeedadfcbac885406416eb1f0a8eb2ca5",
+  "files": [
+    {
+      "path": "00-idle.png",
+      "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+    },
+    {
+      "path": "00-invariant-before.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "01-selected.png",
+      "sha256": "d3c1d5ddca84211d914b82458ffa88fd23dd073c6739d747fb2348fa6e84004e"
+    },
+    {
+      "path": "02-context-detail.png",
+      "sha256": "80c79b8552a929b49fdff3c3caca722ac4536e6264b355b06b2f2708027d42ef"
+    },
+    {
+      "path": "02b-bound-before.png",
+      "sha256": "a163f4e8b07e74ba7c031c50004af8ae072cb59407c3161a2291b1fbccf33498"
+    },
+    {
+      "path": "02b-bound-rejected.png",
+      "sha256": "d3c1d5ddca84211d914b82458ffa88fd23dd073c6739d747fb2348fa6e84004e"
+    },
+    {
+      "path": "03-00-skill_tree.stepper.r1c1-after.png",
+      "sha256": "4907ba59432b67c4216e6a137ced73727c20b1653075ea8bb5f8392635c18bf3"
+    },
+    {
+      "path": "03-00-skill_tree.stepper.r1c1-before.png",
+      "sha256": "d3c1d5ddca84211d914b82458ffa88fd23dd073c6739d747fb2348fa6e84004e"
+    },
+    {
+      "path": "03-01-skill_tree.stepper.r1c3-after.png",
+      "sha256": "241dfff7ff4a4423b58453cc37a026d7808e58cf0744c6b53fcffa13f39f0645"
+    },
+    {
+      "path": "03-01-skill_tree.stepper.r1c3-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-02-skill_tree.stepper.r1c4-after.png",
+      "sha256": "c3ff1cf00d73fcbb0b56524241a4600cacc766cb4fe737f4263a886c0a1a358f"
+    },
+    {
+      "path": "03-02-skill_tree.stepper.r1c4-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-03-skill_tree.stepper.r1c5-after.png",
+      "sha256": "6c72374e3f44f22cbf27a681a1b29c0b3da76ff340a16e57a5956eca1b1792a0"
+    },
+    {
+      "path": "03-03-skill_tree.stepper.r1c5-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-04-skill_tree.stepper.r1c6-after.png",
+      "sha256": "a4ef776319fb0c30cf2d2ee1dec69656f4ed93bae37bb1227dc798b3d849a5a8"
+    },
+    {
+      "path": "03-04-skill_tree.stepper.r1c6-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-05-skill_tree.stepper.r2c1-after.png",
+      "sha256": "1dcc9ee498d77c10df15957cd5a7c5c97e1ab85befa9dec4cd597343c2d7eb93"
+    },
+    {
+      "path": "03-05-skill_tree.stepper.r2c1-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-06-skill_tree.stepper.r2c2-after.png",
+      "sha256": "89ab17dd6046ed52f63d77ecf0fcf23ccc1e62ac50a0d9df6dfb03baf7abcdb4"
+    },
+    {
+      "path": "03-06-skill_tree.stepper.r2c2-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-07-skill_tree.stepper.r2c3-after.png",
+      "sha256": "e2aef1d4810df7462f5beb08135709ffc46148a974ffc65ab92623998ebb0f97"
+    },
+    {
+      "path": "03-07-skill_tree.stepper.r2c3-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-08-skill_tree.stepper.r2c4-after.png",
+      "sha256": "ac93538957cf9a3bd459518a06d8e19d2961b31ddca1e393f049549bd2fa2995"
+    },
+    {
+      "path": "03-08-skill_tree.stepper.r2c4-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-09-skill_tree.stepper.r2c5-after.png",
+      "sha256": "bc3ed6d7c16a203d30b0a4d6ddbeccf3570ff3a7421b75bfb9a0dabd45d78a65"
+    },
+    {
+      "path": "03-09-skill_tree.stepper.r2c5-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-10-skill_tree.stepper.r3c1-after.png",
+      "sha256": "11ffa76d454f413137437a9f1b1f3661301501e8313d6a7f8bf20b14ac308083"
+    },
+    {
+      "path": "03-10-skill_tree.stepper.r3c1-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-11-skill_tree.stepper.r3c2-after.png",
+      "sha256": "ba69f15787661822765d76d2756c341bed05352c463da92ea8c23b56fe6fe22b"
+    },
+    {
+      "path": "03-11-skill_tree.stepper.r3c2-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-12-skill_tree.stepper.r3c3-after.png",
+      "sha256": "1fd7eb20244b85046f6213d98f5e6be91d5184ebb8c3b9417328f3f1c2674e7d"
+    },
+    {
+      "path": "03-12-skill_tree.stepper.r3c3-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-13-skill_tree.stepper.r3c4-after.png",
+      "sha256": "7ebc9bb082521cd519320f4796064c18e30c7dd9380bdbbe71d9b1c29707d422"
+    },
+    {
+      "path": "03-13-skill_tree.stepper.r3c4-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-14-skill_tree.stepper.r3c5-after.png",
+      "sha256": "6f15c7e41f6ba010c73fb1e305152e14f270a2312e0d8f1081d4f8342bb23521"
+    },
+    {
+      "path": "03-14-skill_tree.stepper.r3c5-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-15-skill_tree.stepper.r3c6-after.png",
+      "sha256": "67b8a9db0eee208b698b20f10a6c1aca348ec7e979dbe7d347fd1a8cbcbd803b"
+    },
+    {
+      "path": "03-15-skill_tree.stepper.r3c6-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-16-skill_tree.stepper.r4c1-after.png",
+      "sha256": "7f9064f9a573d0a3eccd8ea3af884a843cb93a9c93c3ab6730760ae322b52795"
+    },
+    {
+      "path": "03-16-skill_tree.stepper.r4c1-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-17-skill_tree.stepper.r4c2-after.png",
+      "sha256": "2a747bce687f5abbc09c2403bc8fb80634b2e93b51bc539b043014cf57cbfdba"
+    },
+    {
+      "path": "03-17-skill_tree.stepper.r4c2-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-18-skill_tree.stepper.r4c3-after.png",
+      "sha256": "435b6e4dc4cec7359739bda8b24cfa7d5b0b816497e63b8b3339bb0e8df557c4"
+    },
+    {
+      "path": "03-18-skill_tree.stepper.r4c3-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-19-skill_tree.stepper.r4c4-after.png",
+      "sha256": "f2e9c01a5e3ac511a8c6c5cf4186109434f3afa1c3cb718750cc3ca02091d5a9"
+    },
+    {
+      "path": "03-19-skill_tree.stepper.r4c4-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-20-skill_tree.stepper.r4c5-after.png",
+      "sha256": "e63f9a8842ba9a9949a5f745341798a397c8c9d9f34fad2bc84e39f4fc631b64"
+    },
+    {
+      "path": "03-20-skill_tree.stepper.r4c5-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-21-skill_tree.stepper.r4c6-after.png",
+      "sha256": "b53fad789ac2ddf34368694cd0bdd931c0a6c78d071b1b09195add86bc282b32"
+    },
+    {
+      "path": "03-21-skill_tree.stepper.r4c6-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-22-skill_tree.stepper.r5c1-after.png",
+      "sha256": "217ce2b431e3e50537e2d406f509219328c11e718160c0b4dc820e24dfa11015"
+    },
+    {
+      "path": "03-22-skill_tree.stepper.r5c1-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-23-skill_tree.stepper.r5c3-after.png",
+      "sha256": "56a3f0e12cc47e1b765bbee770811ffef14d1135578d5dbbe565cac8d75ffdff"
+    },
+    {
+      "path": "03-23-skill_tree.stepper.r5c3-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-24-skill_tree.stepper.r5c4-after.png",
+      "sha256": "024e795bfc3647ccfbc8191358188e80ea8c1309ac191971e008e20c7ba5303a"
+    },
+    {
+      "path": "03-24-skill_tree.stepper.r5c4-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "03-25-skill_tree.stepper.r5c5-after.png",
+      "sha256": "8b742fea924b6ee681606c64cf4d45b09d95d390625901be7be15c4df8adab2c"
+    },
+    {
+      "path": "03-25-skill_tree.stepper.r5c5-before.png",
+      "sha256": "e267951fa41984d5e86ef633c8b87e56c36f18479ed0199c9accefd6b1a0c40f"
+    },
+    {
+      "path": "04-commit-before.png",
+      "sha256": "ac93538957cf9a3bd459518a06d8e19d2961b31ddca1e393f049549bd2fa2995"
+    },
+    {
+      "path": "04-committed.png",
+      "sha256": "e9cbb6d8961b11b034cd1313c26bb2bfc72f1de7b444db09a51a7d5018d9c368"
+    },
+    {
+      "path": "05-cancel-before.png",
+      "sha256": "9da538db8bb26c499c4086ed6e799dbfeb479320a89e50a3f30c7c39a041ec6a"
+    },
+    {
+      "path": "05-cancelled.png",
+      "sha256": "716132c24aabb8a4ae1a8803dcc2aa9e3f3f0c2ca86ca73631dc7a1ee6571166"
+    },
+    {
+      "path": "06-list-view.png",
+      "sha256": "e3f3732e4b4f3169ea08643b8ac25a238769769488f1d59980e5d6c773c205ec"
+    },
+    {
+      "path": "07-tree-restored.png",
+      "sha256": "e7c77128514a423cb767bbe6b43dc9420ba1c1076f4af13aa2a267a796c59773"
+    },
+    {
+      "path": "08-descriptions-before.png",
+      "sha256": "5a6333bd3247b1276b235e18057dd422cb4dd7cd084c6eb07e616cbd7d00f4be"
+    },
+    {
+      "path": "08-descriptions-on.png",
+      "sha256": "4dc323ea8a94469b183fbb0ad7150314374ea6d0a8b42f16f50ac2b022020789"
+    },
+    {
+      "path": "08-descriptions-reversed.png",
+      "sha256": "5a6333bd3247b1276b235e18057dd422cb4dd7cd084c6eb07e616cbd7d00f4be"
+    },
+    {
+      "path": "09-minimize-before.png",
+      "sha256": "5a6333bd3247b1276b235e18057dd422cb4dd7cd084c6eb07e616cbd7d00f4be"
+    },
+    {
+      "path": "09-minimized.png",
+      "sha256": "98aaa3c5e8160c25c8f4613cca811683632aa618b1d2913803e643524bb68cbf"
+    },
+    {
+      "path": "10-minimize-restored.png",
+      "sha256": "5a6333bd3247b1276b235e18057dd422cb4dd7cd084c6eb07e616cbd7d00f4be"
+    },
+    {
+      "path": "11-drag-after.png",
+      "sha256": "10aac6eaadeaa8d8ace03d2c75b9e702025cca0dc15e4732b36788a2c59ca041"
+    },
+    {
+      "path": "11-drag-before.png",
+      "sha256": "5a6333bd3247b1276b235e18057dd422cb4dd7cd084c6eb07e616cbd7d00f4be"
+    },
+    {
+      "path": "11-drag-mid.png",
+      "sha256": "993cc455e9142bb93649033426fb22e3e224777fcfffa0ea01b7dba4490381de"
+    },
+    {
+      "path": "12-button-closed.png",
+      "sha256": "87f60fd32ab80e79cbd405ae3575b7a4bdf48db74f44a908ab4cbeaadaa9e01d"
+    },
+    {
+      "path": "13-key-before.png",
+      "sha256": "b3c4df958d0ce254793be2a75746fbbe611b28db075a89af66c19116e7748537"
+    },
+    {
+      "path": "13-key-closed.png",
+      "sha256": "87f60fd32ab80e79cbd405ae3575b7a4bdf48db74f44a908ab4cbeaadaa9e01d"
+    },
+    {
+      "path": "14-invariant-after.png",
+      "sha256": "1bd2b46ec985fb938ee6a17de18d39c4c71ee5a2f68f214e384fbde8303a0d92"
+    },
+    {
+      "path": "play-log.json",
+      "sha256": "849690e2ad32a215a42cb3fa8f34aa3ba78f198cb978caa1345f512c55695cdf"
+    },
+    {
+      "path": "report.json",
+      "sha256": "0c7edcd6673ffccad5718c3a4745fe00f5cd98d8344e94bfe94b6c52a62f94dd"
+    }
+  ]
+}
