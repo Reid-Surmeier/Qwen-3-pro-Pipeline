@@ -395,6 +395,51 @@ for i, slz in enumerate(ndimage.find_objects(labZ), start=1):
     lightZ[i] = max(hz, wz) >= 40 and cz <= 0.1 * hz * wz + 3 * max(hz, wz)
 O[lightZ[labZ] & GREY & ~credit & ~strip] = (0xB8, 0xB8, 0xB8)
 
+# ------------------------------------------- per-landmass local grid registration
+# #146 corrected the warp globally but excluded sparse-island tiles (UK, Iceland,
+# the Indonesian chain). Here each landmass that needs reconstruction re-fits the
+# grid locally against its own VISIBLE source pixels, then reconstruction uses the
+# locally-aligned grid. Source stays truth; the grid is only aligned to it.
+gridland0 = regcid >= 0
+visfill = fills & ~wiped
+off_y = np.zeros((H, W), np.int16)
+off_x = np.zeros((H, W), np.int16)
+labL, nL = ndimage.label(fills | (wiped & gridland0), structure=np.ones((3, 3)))
+objsL = ndimage.find_objects(labL)
+n_reg = 0
+for i in range(1, nL + 1):
+    sl = objsL[i - 1]
+    m = labL[sl] == i
+    if int(m.sum()) < 60:
+        continue
+    vis = m & visfill[sl]
+    need = m & wiped[sl]
+    if int(vis.sum()) < 40 or int(need.sum()) < 20:
+        continue
+    y0, y1 = max(0, sl[0].start - 14), min(H, sl[0].stop + 14)
+    x0, x1 = max(0, sl[1].start - 14), min(W, sl[1].stop + 14)
+    visw = np.zeros((y1 - y0, x1 - x0), bool)
+    visw[sl[0].start - y0:sl[0].stop - y0, sl[1].start - x0:sl[1].stop - x0] = vis
+    glw = gridland0[y0:y1, x0:x1]
+    best, bdy, bdx = -1, 0, 0
+    for dy in range(-12, 13):
+        rr = np.roll(glw, dy, axis=0)
+        for dx in range(-12, 13):
+            sc = int((visw & np.roll(rr, dx, axis=1)).sum())
+            if sc > best:
+                best, bdy, bdx = sc, dy, dx
+    base = int((visw & glw).sum())
+    if best > base * 1.05 and (bdy or bdx):
+        grow = ndimage.binary_dilation(m, iterations=6)
+        gy, gx = np.where(grow)
+        gy = np.clip(gy + sl[0].start, 0, H - 1); gx = np.clip(gx + sl[1].start, 0, W - 1)
+        off_y[gy, gx] = bdy; off_x[gy, gx] = bdx
+        n_reg += 1
+print("landmasses locally re-registered:", n_reg)
+yy_i = np.clip(np.arange(H)[:, None] - off_y, 0, H - 1)
+xx_i = np.clip(np.arange(W)[None, :] - off_x, 0, W - 1)
+regcid = regcid[yy_i, xx_i]
+
 # ---------------------------------------------------------------- context fill
 donor_land = fills & ~wiped                     # post-recolour palette pixels, source frame
 donor_bg = (WHITE | GRID) & ~wiped
@@ -404,18 +449,37 @@ wy, wx = np.where(wiped)
 # under annotations the source carries no truth; the locally-registered grid (#146,
 # residual <=2 px in every populated region) supplies land/sea class and the coastline.
 # Colours still come only from source-frame donors. Documented #143 exception on #147.
-sandL2 = np.zeros((H, W), bool); sandR2 = np.zeros((H, W), bool)
-sandU2 = np.zeros((H, W), bool); sandD2 = np.zeros((H, W), bool)
-for k in range(1, 19):
-    sandL2 |= np.roll(donor_land, k, axis=1)
-    sandR2 |= np.roll(donor_land, -k, axis=1)
-    sandU2 |= np.roll(donor_land, k, axis=0)
-    sandD2 |= np.roll(donor_land, -k, axis=0)
-sand10 = (sandL2 & sandR2) | (sandU2 & sandD2)
-anyNear = sandL2 | sandR2 | sandU2 | sandD2
+# 4-direction source-continuity vote: in each direction, is the nearest UNWIPED
+# source pixel within 12 px a land fill? Land needs >=3 of 4 directions (or a
+# trusted grid verdict). This cannot paint open sea: a coastal pixel sees sea on
+# the seaward sides.
+donor_bg2 = (WHITE | GRID) & ~wiped
+xsI = np.arange(W)[None, :].repeat(H, 0)
+ysI = np.arange(H)[:, None].repeat(W, 1)
+votes = np.zeros((H, W), np.int8)
+for axis, idxA in ((1, xsI), (0, ysI)):
+    for flip in (False, True):
+        landI = np.where(donor_land, idxA, -1)
+        bgI = np.where(donor_bg2, idxA, -1)
+        if flip:
+            landI = landI[::-1, :] if axis == 0 else landI[:, ::-1]
+            bgI = bgI[::-1, :] if axis == 0 else bgI[:, ::-1]
+            idxF = idxA[::-1, :] if axis == 0 else idxA[:, ::-1]
+        else:
+            idxF = idxA
+        lastL = np.maximum.accumulate(landI, axis=axis)
+        lastB = np.maximum.accumulate(bgI, axis=axis)
+        hit = (lastL > lastB) & (np.abs(idxF - lastL) <= 12)
+        if flip:
+            hit = hit[::-1, :] if axis == 0 else hit[:, ::-1]
+        votes += hit.astype(np.int8)
 cid_raw2 = np.load("countries-raw.npy").astype(np.int32)
+distrust = noSplit.copy()
+distrust[265:325, 755:835] = True     # Borneo north (known warp fault)
 agree = (regcid[wy, wx] >= 0) & ((cid_raw2[wy, wx] >= 0) | (dl[0][wy, wx] <= 10))
-is_land = (agree & anyNear[wy, wx]) | sand10[wy, wx]
+trust = regcid[wy, wx] >= 0
+cls = np.where(distrust[wy, wx], agree, trust)
+is_land = cls | (votes[wy, wx] >= 3)
 ly, lx = wy[is_land], wx[is_land]
 has_c = regcid[ly, lx] >= 0
 O[ly[has_c], lx[has_c]] = colour_of[regcid[ly[has_c], lx[has_c]]]
@@ -429,6 +493,12 @@ landmap = np.zeros((H, W), bool)
 landmap[wy[is_land], wx[is_land]] = True
 stroke = (coast & wiped & ~ndimage.binary_dilation((DARK | GWLINE) & ~wiped, iterations=2)
           & ndimage.binary_dilation(landmap, iterations=2))
+labST, nST = ndimage.label(stroke, structure=np.ones((3, 3)))
+if nST:
+    szST = ndimage.sum(stroke, labST, range(1, nST + 1))
+    keepST = np.zeros(nST + 1, bool)
+    keepST[1:] = szST >= 3
+    stroke = keepST[labST]
 O[stroke] = (0x04, 0x02, 0x04)
 # stranded texture/blend pixels on recoloured land take the neighbour patch colour
 known = fills | WHITE | GRID | BLACK | NAVY | GREY | SHADOW | GWLINE | ORANGE
