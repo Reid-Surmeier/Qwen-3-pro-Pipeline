@@ -84,6 +84,10 @@ func _build_menu() -> void:
 	menu.name = "Menu"
 	menu.position = get_parent().position + position + Vector2(0, 32)
 	menu.size = Vector2(300, spec.value.choices.size() * ROW_HEIGHT + 2)
+	# The popup is reparented to the desktop so it can escape the Window's
+	# rectangle. Give that detached surface an explicit desktop-level layer so
+	# later sibling Windows cannot paint over it or intercept its row gestures.
+	menu.z_index = 1000
 	menu.mouse_filter = Control.MOUSE_FILTER_STOP
 	menu.visible = false
 	get_parent().get_parent().add_child(menu)
@@ -202,5 +206,7 @@ func _refresh() -> void:
 	var arrow_set: Dictionary = spec.surfaces.arrow.state_set
 	arrow.texture = load(str(arrow_set[state.semantic_state][phase]))
 	menu.visible = state.semantic_state == "open"
+	if menu.visible:
+		menu.move_to_front()
 	label.text = str(state.value)
 	label.visible = state.value != "Classic Blue"

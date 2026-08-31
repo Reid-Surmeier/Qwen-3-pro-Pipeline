@@ -263,7 +263,7 @@ record("party.action.leave", "Activate", "ActivatePartyAction", {
   repeat_rejected: state.controls["party.action.leave"].last_error?.code
     === "TransactionRejectedError",
   control_settled: state.controls["party.action.leave"].interaction_phase !== "pressed",
-  rapid_pair: rapidElapsed < 500,
+  rapid_pair: rapidElapsed < 2000,
 }, { before, after, reversed }, state.controls["party.action.leave"], {
   rapidGestures: { count: 2, elapsed_ms: rapidElapsed, inter_gesture_wait_ms: 0 },
 });

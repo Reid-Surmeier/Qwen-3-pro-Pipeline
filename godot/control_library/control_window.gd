@@ -491,6 +491,10 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 	if not result.has("phase") and is_inside_tree() \
 			and not is_queued_for_deletion() and get_parent() != null:
 		move_to_front()
+		var changed_node: Variant = control_nodes.get(control_id)
+		if changed_node is DropdownControl \
+				and runtime.qa_state().controls[control_id].semantic_state == "open":
+			changed_node.menu.move_to_front()
 	if result.get("ok", false) and result.has("action") \
 			and not runtime.adapter_owns(control_id):
 		match str(result.action):
