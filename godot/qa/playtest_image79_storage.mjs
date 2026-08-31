@@ -281,20 +281,22 @@ const invariantAfter = await invariantShot("11-invariant-after");
 await reloadStorage();
 const titleCloseBefore = await shot("12-title-close-before");
 await click(1016, 626);
-const titleClosed = (await storage()).window;
+const titleClosedState = await storage();
+const titleClosed = titleClosedState.window;
 record("storage.close", "Activate", "CloseWindow", {
   hidden: titleClosed.visible === false,
-  routed: titleClosed.last_action === "CloseWindow",
-}, { before: titleCloseBefore, after: await shot("12-title-close-after") }, titleClosed);
+  routed: titleClosedState.controls["storage.close"].last_action === "CloseWindow",
+}, { before: titleCloseBefore, after: await shot("12-title-close-after") }, titleClosedState);
 
 await reloadStorage();
 const bottomCloseBefore = await shot("13-bottom-close-before");
 await click(965, 977);
-const bottomClosed = (await storage()).window;
+const bottomClosedState = await storage();
+const bottomClosed = bottomClosedState.window;
 record("storage.bottom_close", "Activate", "CloseWindow", {
   hidden: bottomClosed.visible === false,
-  routed: bottomClosed.last_action === "CloseWindow",
-}, { before: bottomCloseBefore, after: await shot("13-bottom-close-after") }, bottomClosed);
+  routed: bottomClosedState.controls["storage.bottom_close"].last_action === "CloseWindow",
+}, { before: bottomCloseBefore, after: await shot("13-bottom-close-after") }, bottomClosedState);
 
 await reloadStorage();
 await click(700, 620);
