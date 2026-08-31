@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PROTOTYPE — Status allocation model</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #10151f; color: #e9eef8; }
+    body { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+    h1, h2 { margin-bottom: 8px; }
+    .warning { color: #ffcb6b; font-weight: 700; letter-spacing: .05em; }
+    .question, .panel { background: #182131; border: 1px solid #33425c; border-radius: 12px; padding: 18px; margin: 18px 0; }
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .metric { background: #0f1724; padding: 12px; border-radius: 8px; }
+    .metric strong { display: block; font-size: 1.45rem; color: #83d7ff; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 9px 6px; border-bottom: 1px solid #2c3950; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    button { background: #2e6fa6; color: white; border: 0; border-radius: 6px; padding: 8px 11px; margin: 2px; cursor: pointer; }
+    button[disabled] { background: #354052; color: #808a9c; cursor: not-allowed; }
+    button.secondary { background: #394965; }
+    .error { color: #ff8e8e; min-height: 1.4em; }
+    .ok { color: #9ce3a8; }
+    .tabs button.active { outline: 2px solid #83d7ff; }
+    .scenario { display: none; }
+    .scenario.active { display: block; }
+    code { color: #b8c8ff; }
+    @media (max-width: 760px) { .grid, .summary { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="warning">THROWAWAY PROTOTYPE — Issue #131</div>
+  <h1>Status allocation model</h1>
+  <div class="question">
+    <strong>Question:</strong> Can one pure semantic action atomically update an attribute, available points,
+    every arrow’s availability, and all affected derived values in the same declared frame—while rejecting
+    unaffordable, stale, rapid, or below-source changes without partial mutation?
+  </div>
+
+  <section class="panel">
+    <h2>Current state</h2>
+    <div class="summary">
+      <div class="metric">Available Status Points<strong id="points"></strong></div>
+      <div class="metric">Semantic frame<strong id="frame"></strong></div>
+      <div class="metric">Last result<strong id="result"></strong></div>
+    </div>
+    <p id="message" class="error"></p>
+    <div class="grid">
+      <div><h3>Attributes</h3><table><thead><tr><th>Attribute</th><th>Base + bonus</th><th>Cost</th><th>Actions</th></tr></thead><tbody id="attributes"></tbody></table></div>
+      <div><h3>Derived values</h3><table><tbody id="derived"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Free play</h2>
+    <div id="free"></div>
+    <button class="secondary" data-action="reset">Reset source state</button>
+    <button class="secondary" data-action="rapid">Rapid Str ×3</button>
+  </section>
+
+  <section class="panel">
+    <h2>Guided walkthroughs</h2>
+    <div class="tabs">
+      <button class="active" data-tab="happy">Spend exactly four</button>
+      <button data-tab="disabled">Unaffordable Int</button>
+      <button data-tab="reverse">Reverse safely</button>
+    </div>
+    <div id="happy" class="scenario active">
+      <p>Start from Image 79. Spend two points twice on Str; watch points, Atk, and all arrows update in the same frame.</p>
+      <button data-scenario-reset>Start walkthrough</button><button data-step="Str">Step Str</button><button data-step="Str">Step Str again</button>
+    </div>
+    <div id="disabled" class="scenario">
+      <p>Int 92 costs 11 while only 4 points exist. Its arrow is unavailable and activation must preserve the complete state.</p>
+      <button data-scenario-reset>Start walkthrough</button><button data-step="Int">Try Int</button>
+    </div>
+    <div id="reverse" class="scenario">
+      <p>Spend on Agi, reverse it, then try to reverse below the source value. Only the accepted actions advance the frame.</p>
+      <button data-scenario-reset>Start walkthrough</button><button data-step="Agi">Step Agi</button><button data-back="Agi">Reverse Agi</button><button data-back="Agi">Try below source</button>
+    </div>
+  </section>
+
+  <script>
+    const MODEL = Object.freeze({
+      initialPoints: 4,
+      attributes: {
+        Str: { base: 1, bonus: 2 }, Agi: { base: 1, bonus: 2 }, Vit: { base: 1, bonus: 3 },
+        Int: { base: 92, bonus: 10 }, Dex: { base: 1, bonus: 3 }, Luk: { base: 1, bonus: 5 }
+      },
+      derivedBase: { Atk: 63, Def: 20, MatkMin: 298, MatkMax: 502, Mdef: 107, Hit: 64, Flee: 64, Critical: 3, Aspd: 140 },
+      derivedRules: {
+        Str: { Atk: 1 }, Agi: { Flee: 1, Aspd: 1 }, Vit: { Def: 1 },
+        Int: { MatkMin: 2, MatkMax: 3, Mdef: 1 }, Dex: { Hit: 1, Atk: 1 }, Luk: { Critical: 1 }
+      }
+    });
+
+    const costFor = value => Math.floor((value - 1) / 10) + 2;
+    const cloneAttributes = attrs => Object.fromEntries(Object.entries(attrs).map(([id, value]) => [id, { ...value }]));
+    const derive = attributes => {
+      const result = { ...MODEL.derivedBase };
+      for (const [id, attribute] of Object.entries(attributes)) {
+        const delta = attribute.base - MODEL.attributes[id].base;
+        for (const [name, factor] of Object.entries(MODEL.derivedRules[id] || {})) result[name] += delta * factor;
+      }
+      return result;
+    };
+    const availability = state => Object.fromEntries(Object.entries(state.attributes).map(([id, value]) => [id, costFor(value.base) <= state.points]));
+    const initialState = () => {
+      const state = { points: MODEL.initialPoints, frame: 0, attributes: cloneAttributes(MODEL.attributes), last: { ok: true, code: "Idle", detail: "Source state" } };
+      return { ...state, derived: derive(state.attributes), available: availability(state) };
+    };
+    function reduce(state, action) {
+      if (action.type === "Reset") return initialState();
+      const source = state.attributes[action.attribute];
+      if (!source) return { ...state, last: { ok: false, code: "UnknownAttributeError", detail: action.attribute } };
+      const attributes = cloneAttributes(state.attributes);
+      let points = state.points;
+      if (action.type === "Step") {
+        const cost = costFor(source.base);
+        if (cost > points) return { ...state, last: { ok: false, code: "UnavailableStepError", detail: `${action.attribute} costs ${cost}; ${points} available` } };
+        attributes[action.attribute].base += 1;
+        points -= cost;
+      } else if (action.type === "Reverse") {
+        const floor = MODEL.attributes[action.attribute].base;
+        if (source.base <= floor) return { ...state, last: { ok: false, code: "SourceFloorError", detail: `${action.attribute} is already at source value` } };
+        points += costFor(source.base - 1);
+        attributes[action.attribute].base -= 1;
+      } else return { ...state, last: { ok: false, code: "UnknownActionError", detail: action.type } };
+      const accepted = { points, frame: state.frame + 1, attributes, last: { ok: true, code: action.type, detail: action.attribute } };
+      return { ...accepted, derived: derive(attributes), available: availability(accepted) };
+    }
+
+    let state = initialState();
+    const scriptedActions = new URLSearchParams(location.search).get("actions");
+    if (scriptedActions) for (const token of scriptedActions.split(",")) {
+      const [type, attribute] = token.split(":");
+      state = reduce(state, { type, attribute });
+    }
+    const dispatch = action => { state = reduce(state, action); render(); };
+    function render() {
+      points.textContent = state.points; frame.textContent = state.frame;
+      result.textContent = state.last.ok ? "accepted" : "rejected";
+      message.className = state.last.ok ? "ok" : "error"; message.textContent = `${state.last.code}: ${state.last.detail}`;
+      attributes.innerHTML = Object.entries(state.attributes).map(([id, value]) => `<tr><td>${id}</td><td>${value.base} + ${value.bonus}</td><td>${costFor(value.base)}</td><td><button data-step="${id}" ${state.available[id] ? "" : "disabled"}>▶</button><button class="secondary" data-back="${id}" ${value.base <= MODEL.attributes[id].base ? "disabled" : ""}>↶</button></td></tr>`).join("");
+      const labels = { MatkMin: "Matk min", MatkMax: "Matk max" };
+      derived.innerHTML = Object.entries(state.derived).map(([id, value]) => `<tr><td>${labels[id] || id}</td><td>${value}</td></tr>`).join("");
+    }
+    document.addEventListener("click", event => {
+      const target = event.target.closest("button"); if (!target) return;
+      if (target.dataset.step) dispatch({ type: "Step", attribute: target.dataset.step });
+      if (target.dataset.back) dispatch({ type: "Reverse", attribute: target.dataset.back });
+      if (target.dataset.action === "reset" || target.hasAttribute("data-scenario-reset")) dispatch({ type: "Reset" });
+      if (target.dataset.action === "rapid") for (let index = 0; index < 3; index++) dispatch({ type: "Step", attribute: "Str" });
+      if (target.dataset.tab) {
+        document.querySelectorAll("[data-tab]").forEach(node => node.classList.toggle("active", node === target));
+        document.querySelectorAll(".scenario").forEach(node => node.classList.toggle("active", node.id === target.dataset.tab));
+        dispatch({ type: "Reset" });
+      }
+    });
+    render();
+  </script>
+</body>
+</html>
