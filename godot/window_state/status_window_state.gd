@@ -109,7 +109,7 @@ static func _refresh_availability(state: Dictionary) -> void:
 static func _validate_spec(adapter_spec: Dictionary) -> String:
 	if str(adapter_spec.get("type", "")) != "status":
 		return "Status adapter type is required"
-	if not adapter_spec.get("initial_points") is int \
+	if not _integer(adapter_spec.get("initial_points")) \
 			or int(adapter_spec.get("initial_points", -1)) < 0:
 		return "Status initial_points must be a non-negative integer"
 	var attributes: Variant = adapter_spec.get("attributes")
@@ -120,10 +120,10 @@ static func _validate_spec(adapter_spec: Dictionary) -> String:
 		var value: Variant = attributes[control_id]
 		if str(control_id).is_empty() or not value is Dictionary \
 				or str(value.get("key", "")).is_empty() \
-				or not value.get("base") is int or int(value.get("base", 0)) < 1 \
-				or not value.get("bonus") is int or int(value.get("bonus", -1)) < 0:
+				or not _integer(value.get("base")) or int(value.get("base", 0)) < 1 \
+				or not _integer(value.get("bonus")) or int(value.get("bonus", -1)) < 0:
 			return "Every Status attribute requires a control id, key, positive base, and non-negative bonus"
-		if value.has("maximum") and (not value.maximum is int \
+		if value.has("maximum") and (not _integer(value.maximum) \
 				or int(value.maximum) < int(value.base)):
 			return "Status attribute maximum must be an integer at or above base"
 		if keys.has(str(value.key)):
@@ -156,6 +156,10 @@ static func _valid_state(state: Dictionary, adapter_spec: Dictionary) -> bool:
 static func _number(value: Variant) -> bool:
 	return (value is int or value is float) and not value is bool \
 		and is_finite(float(value))
+
+
+static func _integer(value: Variant) -> bool:
+	return _number(value) and float(value) == floor(float(value))
 
 
 static func _rejected(state: Dictionary, code: String, detail: String) -> Dictionary:

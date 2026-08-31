@@ -12,6 +12,7 @@ var hits := {}
 var text_background: ColorRect
 var value_label: Label
 var _held_surface := ""
+var _held_button: MouseButton = MOUSE_BUTTON_NONE
 
 
 func configure(control_spec: Dictionary, control_runtime: ControlRuntime) -> void:
@@ -44,7 +45,17 @@ func rendered_facts() -> Dictionary:
 		"rendered_arrow_visibility": rendered_visibility,
 		"rendered_arrow_pixels": rendered_arrow_pixels,
 		"text_visible": value_label.visible,
+		"surface_geometry": _surface_geometry(),
 	}
+
+
+func _surface_geometry() -> Dictionary:
+	var geometry := {}
+	for surface_name in hits:
+		var rect: Rect2 = hits[surface_name].get_global_rect()
+		geometry[surface_name] = {"x": rect.position.x, "y": rect.position.y,
+			"width": rect.size.x, "height": rect.size.y}
+	return geometry
 
 
 func _blue_pixel_count(texture: Texture2D) -> int:
@@ -85,6 +96,9 @@ func _add_text() -> void:
 	value_label.add_theme_color_override("font_color", Color8(24, 24, 24))
 	value_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(value_label)
+	if _is_status_stepper():
+		text_background.visible = false
+		value_label.visible = false
 
 
 func _add_surface(surface_name: String, surface: Dictionary) -> void:
@@ -125,16 +139,23 @@ func _exited(surface_name: String) -> void:
 
 
 func _surface_input(event: InputEvent, surface_name: String) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	var allowed_button: bool = event is InputEventMouseButton \
+		and (event.button_index == MOUSE_BUTTON_LEFT \
+			or (_is_status_stepper() and event.button_index == MOUSE_BUTTON_RIGHT))
+	if allowed_button:
 		if event.pressed:
 			_held_surface = surface_name
+			_held_button = event.button_index
 			runtime.set_interaction_phase(spec.id, "pressed", surface_name)
 			_refresh()
 			changed.emit(spec.id, {"ok": true, "phase": "pressed", "surface": surface_name})
 			accept_event()
-		elif _held_surface == surface_name:
+		elif _held_surface == surface_name and _held_button == event.button_index:
 			_held_surface = ""
-			var result: Dictionary = runtime.dispatch(spec.id, "Activate",
+			_held_button = MOUSE_BUTTON_NONE
+			var gesture := "ContextActivate" \
+				if event.button_index == MOUSE_BUTTON_RIGHT else "Activate"
+			var result: Dictionary = runtime.dispatch(spec.id, gesture,
 				{"direction": -1 if surface_name == "decrement" else 1,
 				 "surface": surface_name,
 				 "position": [event.position.x, event.position.y],
@@ -152,8 +173,16 @@ func _refresh() -> void:
 		var path := runtime.visual_surface_asset(spec.id, surface_name)
 		if not path.is_empty():
 			visuals[surface_name].texture = load(path)
-		visuals[surface_name].visible = bool(state.arrows_visible)
-		hits[surface_name].visible = bool(state.arrows_visible)
+		visuals[surface_name].visible = bool(state.arrows_visible) \
+			and (not _is_status_stepper() or surface_name == "increment")
+		hits[surface_name].visible = true if _is_status_stepper() \
+			else bool(state.arrows_visible)
+
+
+func _is_status_stepper() -> bool:
+	return spec.get("actions", []).any(func(binding):
+		return binding is Dictionary \
+			and binding.get("action") == "StepStatusAttribute")
 
 
 func _point(geometry: Dictionary) -> Vector2:

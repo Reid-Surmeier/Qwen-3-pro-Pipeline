@@ -15,6 +15,7 @@ const SelectionViewControlScript = preload("res://control_library/selection_view
 const StepperControlScript = preload("res://control_library/stepper_control.gd")
 const ScrollViewControlScript = preload("res://control_library/scroll_view_control.gd")
 const TextFieldControlScript = preload("res://control_library/text_field_control.gd")
+const StatusWindowOverlayScript = preload("res://window_state/status_window_overlay.gd")
 
 var spec: Dictionary
 var runtime: ControlRuntime
@@ -49,6 +50,7 @@ var _resize_requested := Vector2.ZERO
 var _resize_clamped := Vector2.ZERO
 var _resize_motion_samples := 0
 var _geometry_version := 0
+var status_overlay: StatusWindowOverlay
 
 
 func configure(window_spec: Dictionary) -> void:
@@ -111,6 +113,10 @@ func _ready() -> void:
 		node.changed.connect(_control_changed)
 		add_child(node)
 		control_nodes[str(control_spec.id)] = node
+	if str(spec.get("state_adapter", {}).get("type", "")) == "status":
+		status_overlay = StatusWindowOverlayScript.new()
+		status_overlay.configure(spec.state_adapter, runtime, size)
+		add_child(status_overlay)
 	_add_title_drag()
 	_add_resize_grip()
 	gui_input.connect(_window_input)
@@ -158,6 +164,8 @@ func qa_state() -> Dictionary:
 			"stale_right_edge_covered": _resize_old_right_edge_cover != null \
 				and _resize_old_right_edge_cover.visible},
 	}
+	state.status_overlay = status_overlay.rendered_facts() \
+		if status_overlay != null else {"visible": false, "version": 0, "text": {}}
 	return state
 
 
@@ -507,6 +515,7 @@ func _control_changed(control_id: String, result: Dictionary) -> void:
 			"OpenSkillDetail", "OpenInventoryItem":
 				_show_selection_detail(str(result.get("value", "")))
 			"SelectSkill", "StepSkill", "CommitSkillChanges", "CancelSkillChanges", \
+					"StepStatusAttribute", \
 					"SelectInventoryTab", "SelectInventoryItem", \
 					"ToggleInventorySelection", "MoveInventoryItem", \
 					"SelectStorageCategory", "SelectStorageItem", \
@@ -547,6 +556,8 @@ func _toggle_minimized() -> void:
 	for control_id in control_nodes:
 		var node: Control = control_nodes[control_id]
 		node.visible = not minimized or control_id in keep_visible
+	if status_overlay != null:
+		status_overlay.set_minimized(minimized)
 	if not minimized:
 		_apply_view_mode()
 		if not detail_item.is_empty():
@@ -587,3 +598,5 @@ func _refresh_all_controls() -> void:
 		var node: Control = control_nodes[control_id]
 		if node.has_method("refresh"):
 			node.refresh()
+	if status_overlay != null:
+		status_overlay.refresh()

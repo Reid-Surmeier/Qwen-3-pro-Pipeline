@@ -8551,6 +8551,941 @@
           }
         }
       ]
+    },
+    {
+      "id": "status",
+      "evidence_policy": {
+        "issue": 131
+      },
+      "geometry": {
+        "x": 0,
+        "y": 211,
+        "width": 484,
+        "height": 208
+      },
+      "drag_geometry": {
+        "x": 30,
+        "y": 0,
+        "width": 400,
+        "height": 28
+      },
+      "plates": {
+        "expanded": "res://assets/image-79/status/source-plate.png",
+        "minimized": "res://assets/image-79/status/minimized-plate.png"
+      },
+      "minimized_controls": [
+        "status.minimize",
+        "status.close"
+      ],
+      "state_adapter": {
+        "type": "status",
+        "initial_points": 4,
+        "attributes": {
+          "status.attribute.str": {
+            "key": "Str",
+            "base": 1,
+            "bonus": 2,
+            "maximum": 99
+          },
+          "status.attribute.agi": {
+            "key": "Agi",
+            "base": 1,
+            "bonus": 2,
+            "maximum": 99
+          },
+          "status.attribute.vit": {
+            "key": "Vit",
+            "base": 1,
+            "bonus": 3,
+            "maximum": 99
+          },
+          "status.attribute.int": {
+            "key": "Int",
+            "base": 92,
+            "bonus": 10,
+            "maximum": 99
+          },
+          "status.attribute.dex": {
+            "key": "Dex",
+            "base": 1,
+            "bonus": 3,
+            "maximum": 99
+          },
+          "status.attribute.luk": {
+            "key": "Luk",
+            "base": 1,
+            "bonus": 5,
+            "maximum": 99
+          }
+        },
+        "derived": {
+          "Atk": {
+            "base": 63,
+            "coefficients": {
+              "Str": 1,
+              "Dex": 1
+            }
+          },
+          "Def": {
+            "base": 20,
+            "coefficients": {
+              "Vit": 1
+            }
+          },
+          "MatkMin": {
+            "base": 298,
+            "coefficients": {
+              "Int": 2
+            }
+          },
+          "MatkMax": {
+            "base": 502,
+            "coefficients": {
+              "Int": 3
+            }
+          },
+          "Mdef": {
+            "base": 107,
+            "coefficients": {
+              "Int": 1
+            }
+          },
+          "Hit": {
+            "base": 64,
+            "coefficients": {
+              "Dex": 1
+            }
+          },
+          "Flee": {
+            "base": 64,
+            "coefficients": {
+              "Agi": 1
+            }
+          },
+          "Critical": {
+            "base": 3,
+            "coefficients": {
+              "Luk": 1
+            }
+          },
+          "Aspd": {
+            "base": 140,
+            "coefficients": {
+              "Agi": 1
+            }
+          }
+        },
+        "presentation": {
+          "font": "res://fonts/PixelMplus10-Regular.ttf",
+          "font_size": 20,
+          "font_color": "#171717",
+          "background": "#fcfcfc",
+          "points": {
+            "x": 438,
+            "y": 143,
+            "width": 38,
+            "height": 25
+          },
+          "attribute_values": {
+            "status.attribute.str": {
+              "x": 91,
+              "y": 35,
+              "width": 59,
+              "height": 25
+            },
+            "status.attribute.agi": {
+              "x": 91,
+              "y": 62,
+              "width": 59,
+              "height": 25
+            },
+            "status.attribute.vit": {
+              "x": 91,
+              "y": 89,
+              "width": 59,
+              "height": 25
+            },
+            "status.attribute.int": {
+              "x": 91,
+              "y": 116,
+              "width": 59,
+              "height": 25
+            },
+            "status.attribute.dex": {
+              "x": 91,
+              "y": 143,
+              "width": 59,
+              "height": 25
+            },
+            "status.attribute.luk": {
+              "x": 91,
+              "y": 170,
+              "width": 59,
+              "height": 25
+            }
+          },
+          "attribute_costs": {
+            "status.attribute.str": {
+              "x": 172,
+              "y": 35,
+              "width": 27,
+              "height": 25
+            },
+            "status.attribute.agi": {
+              "x": 172,
+              "y": 62,
+              "width": 27,
+              "height": 25
+            },
+            "status.attribute.vit": {
+              "x": 172,
+              "y": 89,
+              "width": 27,
+              "height": 25
+            },
+            "status.attribute.int": {
+              "x": 172,
+              "y": 116,
+              "width": 27,
+              "height": 25
+            },
+            "status.attribute.dex": {
+              "x": 172,
+              "y": 143,
+              "width": 27,
+              "height": 25
+            },
+            "status.attribute.luk": {
+              "x": 172,
+              "y": 170,
+              "width": 27,
+              "height": 25
+            }
+          },
+          "derived_values": {
+            "Atk": {
+              "x": 265,
+              "y": 35,
+              "width": 68,
+              "height": 25,
+              "format": "plus_zero"
+            },
+            "Def": {
+              "x": 413,
+              "y": 35,
+              "width": 63,
+              "height": 25,
+              "format": "def_split"
+            },
+            "MatkMin": {
+              "x": 251,
+              "y": 62,
+              "width": 38,
+              "height": 25,
+              "format": "integer"
+            },
+            "MatkMax": {
+              "x": 297,
+              "y": 62,
+              "width": 38,
+              "height": 25,
+              "format": "integer"
+            },
+            "Mdef": {
+              "x": 405,
+              "y": 62,
+              "width": 71,
+              "height": 25,
+              "format": "mdef_split"
+            },
+            "Hit": {
+              "x": 286,
+              "y": 89,
+              "width": 47,
+              "height": 25,
+              "format": "integer"
+            },
+            "Flee": {
+              "x": 418,
+              "y": 89,
+              "width": 58,
+              "height": 25,
+              "format": "flee_split"
+            },
+            "Critical": {
+              "x": 296,
+              "y": 116,
+              "width": 37,
+              "height": 25,
+              "format": "integer"
+            },
+            "Aspd": {
+              "x": 431,
+              "y": 116,
+              "width": 45,
+              "height": 25,
+              "format": "integer"
+            }
+          }
+        }
+      },
+      "gestures": [
+        "Drag",
+        "KeyCommand"
+      ],
+      "actions": [
+        {
+          "gesture": "Drag",
+          "action": "MoveWindow"
+        },
+        {
+          "gesture": "KeyCommand",
+          "key": "Escape",
+          "action": "CloseWindow"
+        }
+      ],
+      "controls": [
+        {
+          "id": "status.minimize",
+          "type": "Button",
+          "geometry": {
+            "x": 436,
+            "y": 5,
+            "width": 20,
+            "height": 20
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/status/status-minimize-idle.png",
+              "hover": "res://assets/image-79/status/status-minimize-hover.png",
+              "pressed": "res://assets/image-79/status/status-minimize-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "ToggleMinimized"
+            }
+          ]
+        },
+        {
+          "id": "status.close",
+          "type": "Button",
+          "geometry": {
+            "x": 461,
+            "y": 4,
+            "width": 18,
+            "height": 18
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "ready"
+          ],
+          "initial_semantic_state": "ready",
+          "state_set": {
+            "ready": {
+              "idle": "res://assets/image-79/status/status-close-idle.png",
+              "hover": "res://assets/image-79/status/status-close-hover.png",
+              "pressed": "res://assets/image-79/status/status-close-pressed.png"
+            }
+          },
+          "gestures": [
+            "Activate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "CloseWindow"
+            }
+          ]
+        },
+        {
+          "id": "status.attribute.str",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 35,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 1,
+            "maximum": 99,
+            "current": 1,
+            "target": 1,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-str-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-str-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-str-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "status.attribute.agi",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 62,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 1,
+            "maximum": 99,
+            "current": 1,
+            "target": 1,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-agi-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-agi-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-agi-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "status.attribute.vit",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 89,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 1,
+            "maximum": 99,
+            "current": 1,
+            "target": 1,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-vit-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-vit-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-vit-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "status.attribute.int",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 116,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "disabled",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 92,
+            "maximum": 99,
+            "current": 92,
+            "target": 92,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-int-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-int-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-int-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "status.attribute.dex",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 143,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 1,
+            "maximum": 99,
+            "current": 1,
+            "target": 1,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-dex-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-dex-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-dex-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "status.attribute.luk",
+          "type": "Stepper",
+          "geometry": {
+            "x": 91,
+            "y": 170,
+            "width": 108,
+            "height": 25
+          },
+          "interaction_phases": [
+            "idle",
+            "hover",
+            "pressed"
+          ],
+          "semantic_states": [
+            "available",
+            "disabled"
+          ],
+          "initial_semantic_state": "available",
+          "state_set": {
+            "available": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            },
+            "disabled": {
+              "idle": "res://assets/image-79/status/transparent.png",
+              "hover": "res://assets/image-79/status/transparent.png",
+              "pressed": "res://assets/image-79/status/transparent.png"
+            }
+          },
+          "gestures": [
+            "Activate",
+            "ContextActivate"
+          ],
+          "actions": [
+            {
+              "gesture": "Activate",
+              "action": "StepStatusAttribute"
+            },
+            {
+              "gesture": "ContextActivate",
+              "action": "StepStatusAttribute"
+            }
+          ],
+          "value": {
+            "minimum": 1,
+            "maximum": 99,
+            "current": 1,
+            "target": 1,
+            "step": 1
+          },
+          "surfaces": {
+            "decrement": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            },
+            "increment": {
+              "geometry": {
+                "x": 59,
+                "y": 0,
+                "width": 22,
+                "height": 25
+              },
+              "state_set": {
+                "available": {
+                  "idle": "res://assets/image-79/status/attribute-luk-arrow-idle.png",
+                  "hover": "res://assets/image-79/status/attribute-luk-arrow-hover.png",
+                  "pressed": "res://assets/image-79/status/attribute-luk-arrow-pressed.png"
+                },
+                "disabled": {
+                  "idle": "res://assets/image-79/status/transparent.png",
+                  "hover": "res://assets/image-79/status/transparent.png",
+                  "pressed": "res://assets/image-79/status/transparent.png"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   ]
 }

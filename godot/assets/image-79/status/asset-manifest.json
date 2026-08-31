@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "issue": 131,
+  "provider_requests": 0,
+  "source": {
+    "path": "artifacts/references/ro-desktop-b/reference-native.png",
+    "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+    "window_rect": [
+      0,
+      211,
+      484,
+      208
+    ]
+  },
+  "assembly": "deterministic source-pixel crops and source-palette State Sets",
+  "files": [
+    {
+      "path": "godot/assets/image-79/status/transparent.png",
+      "sha256": "f2bb5bbaca678ecad746b1fa5ecfa2c8a81dd18817be19f0187c036d25326317",
+      "size": [
+        1,
+        1
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-minimize-idle.png",
+      "sha256": "789da9b8039274e876a337d08aaf04bc5460d1b8b1b639860bc1ad877a31ddae",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-minimize-hover.png",
+      "sha256": "4c69b9fd15c0d371f20e8816d5ed539c65c8490a42e76e9ff77ccf2f68c83f6b",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-minimize-pressed.png",
+      "sha256": "eeb6db875f2b2e6c38d60452ab7c6c1ae98565f309c7493e5249a62b1e2c8b9b",
+      "size": [
+        20,
+        20
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-close-idle.png",
+      "sha256": "df26fbfb2ef7c79797869539fda1ed8d02bafec6f630e0cbfcd2e130bce1575e",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-close-hover.png",
+      "sha256": "abe054344cd0ea6802fd058b2cc38fa036dcee68f1e60065c262cfa0e11a3fe6",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/status-close-pressed.png",
+      "sha256": "88395a192deb1a07e199af71d3f948d7d99ae3fef50597ac20bf78e9f7194984",
+      "size": [
+        18,
+        18
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-str-arrow-idle.png",
+      "sha256": "2fb0db46f24fad5694761ea6caeab5e2b6658216268f60a78cd09794acfa454d",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-str-arrow-hover.png",
+      "sha256": "2ff2ce393e07ed2fb10dad28731366ec99701aae78aa51b46db9166c9e1ebfd3",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-str-arrow-pressed.png",
+      "sha256": "ec86ae8ba8e71191f1e65d27323540c250c5739da315d12228062f6ce37b5e99",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-agi-arrow-idle.png",
+      "sha256": "c08f2838f94a2316553f023c085edc75a43aadd30f6e67e59313a05658a4d763",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-agi-arrow-hover.png",
+      "sha256": "082f784606187fd1d342d55f4086a0e8a7e7a00c4ddf1ef8fbb0f52ef4fdce72",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-agi-arrow-pressed.png",
+      "sha256": "50678b1946fecc113c8216d16aa91a270abe78fcbb7c9987e0c6dda242270224",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-vit-arrow-idle.png",
+      "sha256": "28ff1de7d11f4f04e2292149f3d9e18cd47af9da15c27f2a99602dd3575fcfab",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-vit-arrow-hover.png",
+      "sha256": "4ba6da72db70027bee8017dfc107ddae90e1e1c00934930dc794fce240e53f4e",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-vit-arrow-pressed.png",
+      "sha256": "3f5719a92964d221a885103fb8a0a6a8776e17163c2e9c72be6ab6a5266f2eb7",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-int-arrow-idle.png",
+      "sha256": "c9cfe032e8cde1b995a560075a73cd5f9140eba7dffcb9a802b8c62e9a2f032d",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-int-arrow-hover.png",
+      "sha256": "a83564e25ec0534eb6a8f102d38917ebf9e82a96b2af96a3bff9e3bd29b23e46",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-int-arrow-pressed.png",
+      "sha256": "70b48ef800546cad327f88d04c3b1a02f5cda863938518a3973de2ab7a519f01",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-dex-arrow-idle.png",
+      "sha256": "671dcc233438a80549bc3263fff25420c8bf19f634597a551fd8ca614e8aa201",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-dex-arrow-hover.png",
+      "sha256": "5fbcbc1400a1a921ff84ae46233288b525eea68d914ba50fcd505f2c7cde7867",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-dex-arrow-pressed.png",
+      "sha256": "886c34baaef6e2097d5d19ab9415b15013e0ac2c661ec8a14b640e53f9eb213b",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-luk-arrow-idle.png",
+      "sha256": "ca1ab313fe7da3d62a62b2519ef6024ff17fc6e4a6d63394f74a7de839e700dc",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-luk-arrow-hover.png",
+      "sha256": "182b010665a4027cc337b345059a7fbcf6231bb2b9b8a6649afea14d536e5fd7",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/attribute-luk-arrow-pressed.png",
+      "sha256": "0dfe79c017a499c8020be741ea300957f227f5d93be6893ead05c3a1177bd29d",
+      "size": [
+        22,
+        25
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/source-plate.png",
+      "sha256": "5942b6696a45460ec1495c3547f816c7ba8686957b0565d123e3ddbfaa4c114d",
+      "size": [
+        484,
+        208
+      ]
+    },
+    {
+      "path": "godot/assets/image-79/status/minimized-plate.png",
+      "sha256": "2bee76e6655af29e67741cb176b20460912e6076393c781d5981da3e40ce3146",
+      "size": [
+        484,
+        28
+      ]
+    }
+  ]
+}
