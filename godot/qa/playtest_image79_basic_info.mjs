@@ -19,7 +19,10 @@ const CANDIDATE = process.env.CANDIDATE_SHA
   ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const DESIGN = { width: 1536, height: 1024 };
 const INTENDED = { x: 0, y: 0, width: 1536, height: 1024 };
-const INVARIANT = { x: 1400, y: 800, width: 100, height: 100 };
+// The final Chat Room occupies the old lower-right invariant. Use the exact
+// source-background seam between Skill Tree and Storage instead; no declared
+// Basic Info destination or drag path may touch it.
+const INVARIANT = { x: 700, y: 598, width: 100, height: 8 };
 mkdirSync(OUT, { recursive: true });
 
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
