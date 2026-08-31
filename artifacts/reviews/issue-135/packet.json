@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "issue": 135,
+  "pull_request": 82,
+  "candidate_commit": "1c63702616a238d84f713827b11a343f0d040379",
+  "acceptance_contract": "docs/reviews/issue-135-contract.md",
+  "references": [
+    {
+      "path": "artifacts/references/ro-desktop-b/reference-native.png",
+      "sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f"
+    },
+    {
+      "path": "artifacts/references/ro-desktop-b/chat-room/behaviour-card.md",
+      "sha256": "b41a623e977fe322ef6a926624d5ae42914b1706ba0bcd9b0127cecd40d3aeb9"
+    }
+  ],
+  "candidate": {
+    "evidence_manifests": [
+      "artifacts/reviews/issue-135/chat-room-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/options-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/skill-tree-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/inventory-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/storage-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/equipment-card-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/equipment-items-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/status-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/basic-info-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/party-regression-1c63702/evidence-manifest.json",
+      "artifacts/reviews/issue-135/system-menu-regression-1c63702/evidence-manifest.json"
+    ],
+    "evidence": [
+      "artifacts/reviews/issue-135/chat-room-1c63702/reference-chat-room-4x.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/candidate-chat-room-4x.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/assembled-desktop-browser.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/01-draft-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/02-submit-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/03-rows-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/04-wheel-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/04-wheel-reversed.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/05-arrow-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/05-arrow-reversed.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/06-thumb-mid.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/06-thumb-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/07-drag-mid.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/07-drag-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/08-close-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/10-toggle-after.png",
+      "artifacts/reviews/issue-135/chat-room-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/chat-room-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/chat-room-1c63702/image79-contracts.json",
+      "artifacts/reviews/issue-135/chat-room-1c63702/python-baseline.log",
+      "artifacts/reviews/issue-135/chat-room-1c63702/node-baseline.log",
+      "artifacts/reviews/issue-135/options-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/options-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/skill-tree-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/skill-tree-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/inventory-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/inventory-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/storage-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/storage-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/equipment-card-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/equipment-card-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/equipment-items-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/equipment-items-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/status-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/status-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/basic-info-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/basic-info-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/party-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/party-regression-1c63702/verdict.json",
+      "artifacts/reviews/issue-135/system-menu-regression-1c63702/play-log.json",
+      "artifacts/reviews/issue-135/system-menu-regression-1c63702/verdict.json"
+    ]
+  },
+  "launch": {
+    "command": "ISSUE135_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; DISPLAY=:100 __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json LIBGL_ALWAYS_SOFTWARE=1 \"$ISSUE135_GODOT_BIN\" --path godot res://image79_options.tscn -- --screen=image79",
+    "clean_state_command": "ISSUE135_GODOT_BIN=$HOME/.cache/qwen-ui-pipeline/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64; \"$ISSUE135_GODOT_BIN\" --headless --path godot --import"
+  }
+}

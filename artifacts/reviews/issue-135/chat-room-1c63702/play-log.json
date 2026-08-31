@@ -1,0 +1,992 @@
+{
+  "schema_version": "image79-play-log-v2",
+  "candidate": {
+    "issue": 135,
+    "commit_sha": "1c63702616a238d84f713827b11a343f0d040379",
+    "window_id": "chat_room"
+  },
+  "source_reference_sha256": "f4844fa9030b31b233f43244290f729db105f7256e0c0a6e889f0889bb88366f",
+  "required_controls": [
+    "chat_room.close",
+    "chat_room.input",
+    "chat_room.scroll"
+  ],
+  "required_actions": [
+    {
+      "control_id": "chat_room",
+      "gesture": "Drag",
+      "window_action": "MoveWindow"
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "ChangeChatRows"
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "ToggleWindow"
+    },
+    {
+      "control_id": "chat_room.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow"
+    },
+    {
+      "control_id": "chat_room.input",
+      "gesture": "KeyCommand",
+      "window_action": "SetChatDraft"
+    },
+    {
+      "control_id": "chat_room.input",
+      "gesture": "KeyCommand",
+      "window_action": "SubmitChat"
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollChatLog"
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Activate",
+      "window_action": "StepChatLog"
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Drag",
+      "window_action": "SetChatLogOffset"
+    }
+  ],
+  "invariant_frames": {
+    "before": {
+      "path": "00-invariant-before.png",
+      "sha256": "0795e49bfea0d687305bfc9f5e9f13b189384ff8d8188f0d6729421355c73f94"
+    },
+    "after": {
+      "path": "zz-invariant-after.png",
+      "sha256": "0795e49bfea0d687305bfc9f5e9f13b189384ff8d8188f0d6729421355c73f94"
+    }
+  },
+  "source_crop_ae": 0,
+  "provider_requests": 0,
+  "console_errors": [],
+  "qa_metrics": {
+    "fullPublishes": 5,
+    "patchPublishes": 12,
+    "lastPayloadBytes": 99786,
+    "maxPatchBytes": 7759,
+    "lastWasPatch": false
+  },
+  "checks": [
+    {
+      "name": "source-crop-exact",
+      "passed": true,
+      "source_ae": 0
+    },
+    {
+      "name": "modern-tabs-absent",
+      "passed": true
+    },
+    {
+      "name": "unidentified-icon-no-hit-target",
+      "passed": true
+    },
+    {
+      "name": "chat_room.input:KeyCommand:SetChatDraft",
+      "passed": true
+    },
+    {
+      "name": "chat_room.input:KeyCommand:SubmitChat",
+      "passed": true
+    },
+    {
+      "name": "modifier-party",
+      "passed": true
+    },
+    {
+      "name": "modifier-guild",
+      "passed": true
+    },
+    {
+      "name": "modifier-allied_guild",
+      "passed": true
+    },
+    {
+      "name": "chat_room:KeyCommand:ChangeChatRows",
+      "passed": true
+    },
+    {
+      "name": "chat_room.scroll:Wheel:ScrollChatLog",
+      "passed": true
+    },
+    {
+      "name": "chat_room.scroll:Activate:StepChatLog",
+      "passed": true
+    },
+    {
+      "name": "chat_room.scroll:Drag:SetChatLogOffset",
+      "passed": true
+    },
+    {
+      "name": "chat_room:Drag:MoveWindow",
+      "passed": true
+    },
+    {
+      "name": "chat_room.close:Activate:CloseWindow",
+      "passed": true
+    },
+    {
+      "name": "chat_room:KeyCommand:CloseWindow",
+      "passed": true
+    },
+    {
+      "name": "chat_room:KeyCommand:ToggleWindow",
+      "passed": true
+    },
+    {
+      "name": "basic-info-chat-route",
+      "passed": true
+    }
+  ],
+  "actions": [
+    {
+      "control_id": "chat_room.input",
+      "gesture": "KeyCommand",
+      "window_action": "SetChatDraft",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"state\":{\"draft\":\"draft\",\"last_action\":\"SetChatDraft\",\"last_scope\":\"screen\",\"lines\":[{\"kind\":\"chat\",\"text\":\"Sebas*：レイドリック終わったー\"},{\"kind\":\"chat\",\"text\":\"SakumaRiri：おつかれさま〜\"},{\"kind\":\"chat\",\"text\":\"ANRI：もう1周いきますか？\"},{\"kind\":\"chat\",\"text\":\"Show_A：いきましょう！\"},{\"kind\":\"system\",\"text\":\"経験値が 10800 上がりました。\"}],\"pending_delivery\":null,\"version\":5,\"visible_row_count\":5},\"patchMetrics\":{\"fullPublishes\":1,\"patchPublishes\":6,\"lastPayloadBytes\":3534,\"maxPatchBytes\":3534,\"lastWasPatch\":true}}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "exact_draft": true,
+        "rendered_text": true,
+        "changed_window_patch": true,
+        "smaller_than_full_state": true
+      },
+      "frames": {
+        "before": {
+          "path": "00-source-idle.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "01-draft-after.png",
+          "sha256": "878672207b7fd09c2274ff97f012444fc6ce85ce8e7317a8cccc74ef7d195f4e"
+        },
+        "reversed": {
+          "path": "01-draft-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 190,
+        "intended_region_changed_pixels": 190,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room.input",
+      "gesture": "KeyCommand",
+      "window_action": "SubmitChat",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"kind\":\"chat\",\"scope\":\"screen\",\"speaker\":\"SakumaRiri\",\"text\":\"hello\"}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "input_cleared": true,
+        "one_exact_echo": true,
+        "exact_text": true,
+        "screen_scope": true
+      },
+      "frames": {
+        "before": {
+          "path": "02-submit-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "02-submit-after.png",
+          "sha256": "fc031ee67e05f96f4e28f836feb2526ea3cd9aa9c48d6607d9b7059df4e8463f"
+        },
+        "reversed": {
+          "path": "02-submit-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 57271,
+        "intended_region_changed_pixels": 57271,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "ChangeChatRows",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"draft\":\"\",\"last_action\":\"ChangeChatRows\",\"last_scope\":\"screen\",\"lines\":[{\"kind\":\"chat\",\"text\":\"Sebas*：レイドリック終わったー\"},{\"kind\":\"chat\",\"text\":\"SakumaRiri：おつかれさま〜\"},{\"kind\":\"chat\",\"text\":\"ANRI：もう1周いきますか？\"},{\"kind\":\"chat\",\"text\":\"Show_A：いきましょう！\"},{\"kind\":\"system\",\"text\":\"経験値が 10800 上がりました。\"}],\"pending_delivery\":null,\"version\":1,\"visible_row_count\":7}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "seven_rows": true,
+        "cycle_reversed": true
+      },
+      "frames": {
+        "before": {
+          "path": "03-rows-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "03-rows-after.png",
+          "sha256": "d053097a9594348dad0193a523b7b474626794f624a3f1a841ac5d369fa0bd4d"
+        },
+        "reversed": {
+          "path": "03-rows-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 56026,
+        "intended_region_changed_pixels": 56026,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Wheel",
+      "window_action": "ScrollChatLog",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"track\",\"at_end\":false,\"at_start\":false,\"available\":true,\"geometry\":{\"height\":152,\"width\":20,\"x\":1507,\"y\":810},\"id\":\"chat_room.scroll\",\"interaction_phase\":\"idle\",\"last_action\":\"ScrollChatLog\",\"last_error\":null,\"last_gesture\":\"Wheel\",\"last_result\":{\"accepted\":true,\"action\":\"ScrollChatLog\",\"error\":null},\"maximum\":4,\"minimum\":0,\"offset\":1,\"rendered\":true,\"semantic_state\":\"between\",\"text\":\"\",\"thumb_y\":38,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":1,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "exactly_three_rows": true,
+        "clamp_reversed": true
+      },
+      "frames": {
+        "before": {
+          "path": "04-wheel-before.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        },
+        "after": {
+          "path": "04-wheel-after.png",
+          "sha256": "296fdeca7ef90d3e26da1ec638e9b5e75d9864767678fc15bd4c2058a9142eaa"
+        },
+        "reversed": {
+          "path": "04-wheel-reversed.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 6296,
+        "intended_region_changed_pixels": 6296,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Activate",
+      "window_action": "StepChatLog",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"decrement\",\"at_end\":false,\"at_start\":false,\"available\":true,\"geometry\":{\"height\":152,\"width\":20,\"x\":1507,\"y\":810},\"id\":\"chat_room.scroll\",\"interaction_phase\":\"hover\",\"last_action\":\"StepChatLog\",\"last_error\":null,\"last_gesture\":\"Activate\",\"last_result\":{\"accepted\":true,\"action\":\"StepChatLog\",\"error\":null},\"maximum\":4,\"minimum\":0,\"offset\":3,\"rendered\":true,\"semantic_state\":\"between\",\"text\":\"\",\"thumb_y\":73,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":3,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "exactly_one_row": true,
+        "reversed_to_end": true
+      },
+      "frames": {
+        "before": {
+          "path": "05-arrow-before.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        },
+        "after": {
+          "path": "05-arrow-after.png",
+          "sha256": "60ff01d4c026b82569860781cea13b71d379c1764f79c8328b67ba65de07ad99"
+        },
+        "reversed": {
+          "path": "05-arrow-reversed.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 4154,
+        "intended_region_changed_pixels": 4154,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room.scroll",
+      "gesture": "Drag",
+      "window_action": "SetChatLogOffset",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"active_surface\":\"thumb\",\"at_end\":false,\"at_start\":true,\"available\":true,\"geometry\":{\"height\":152,\"width\":20,\"x\":1507,\"y\":810},\"id\":\"chat_room.scroll\",\"interaction_phase\":\"dragging\",\"last_action\":\"SetChatLogOffset\",\"last_error\":null,\"last_gesture\":\"Drag\",\"last_result\":{\"accepted\":true,\"action\":\"SetChatLogOffset\",\"error\":null},\"maximum\":4,\"minimum\":0,\"offset\":0,\"rendered\":true,\"semantic_state\":\"at_start\",\"text\":\"\",\"thumb_y\":21,\"type\":\"ScrollView\",\"unavailable_reason\":\"\",\"value\":0,\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "clamped_at_start": true,
+        "reversed_at_end": true
+      },
+      "frames": {
+        "before": {
+          "path": "06-thumb-before.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        },
+        "mid": {
+          "path": "06-thumb-mid.png",
+          "sha256": "9382de953b73821f25a75b66866e00b1fa76f8a126e4ffcc086f82bfc87649dc"
+        },
+        "after": {
+          "path": "06-thumb-after.png",
+          "sha256": "0d34fb26a378c965ca9e813100f95d324babc5c8d60595a7af075ca62bf87b99"
+        },
+        "reversed": {
+          "path": "06-thumb-reversed.png",
+          "sha256": "d647c8656f4ec6fc954d9e34a1167954d531c4be4634f294d0f49b1b51c36c52"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 6860,
+        "intended_region_changed_pixels": 6860,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1517,
+          920
+        ],
+        [
+          1517,
+          917.7666666666667
+        ],
+        [
+          1517,
+          915.5333333333333
+        ],
+        [
+          1517,
+          913.3
+        ],
+        [
+          1517,
+          911.0666666666667
+        ],
+        [
+          1517,
+          908.8333333333334
+        ],
+        [
+          1517,
+          906.6
+        ],
+        [
+          1517,
+          904.3666666666667
+        ],
+        [
+          1517,
+          902.1333333333333
+        ],
+        [
+          1517,
+          899.9
+        ],
+        [
+          1517,
+          897.6666666666666
+        ],
+        [
+          1517,
+          895.4333333333333
+        ],
+        [
+          1517,
+          893.2
+        ],
+        [
+          1517,
+          890.9666666666667
+        ],
+        [
+          1517,
+          888.7333333333333
+        ],
+        [
+          1517,
+          886.5
+        ],
+        [
+          1517,
+          884.2666666666667
+        ],
+        [
+          1517,
+          882.0333333333333
+        ],
+        [
+          1517,
+          879.8
+        ],
+        [
+          1517,
+          877.5666666666667
+        ],
+        [
+          1517,
+          875.3333333333334
+        ],
+        [
+          1517,
+          873.1
+        ],
+        [
+          1517,
+          870.8666666666667
+        ],
+        [
+          1517,
+          868.6333333333333
+        ],
+        [
+          1517,
+          866.4
+        ],
+        [
+          1517,
+          864.1666666666666
+        ],
+        [
+          1517,
+          861.9333333333333
+        ],
+        [
+          1517,
+          859.7
+        ],
+        [
+          1517,
+          857.4666666666667
+        ],
+        [
+          1517,
+          855.2333333333333
+        ],
+        [
+          1517,
+          853
+        ]
+      ]
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "Drag",
+      "window_action": "MoveWindow",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"chat_room\",\"last_action\":\"MoveWindow\",\"last_error\":null,\"last_gesture\":\"Drag\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/chat-room/source-plate.png\",\"position\":[700,638],\"resize\":{\"active\":false,\"clamped\":[495,226],\"motion_samples\":0,\"requested\":[495,226],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[494.999267578125,226],\"view_mode\":\"tree\",\"visible\":true,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "moved": true,
+        "viewport_clamped": true,
+        "restored_home": true
+      },
+      "frames": {
+        "before": {
+          "path": "07-drag-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "mid": {
+          "path": "07-drag-mid.png",
+          "sha256": "c1f2c643d04202a9ca655e0c4388dffe8fb65dccf075543ece729f9ce11e8b45"
+        },
+        "after": {
+          "path": "07-drag-after.png",
+          "sha256": "6bc1cc93be5d6215a5e932ce2dc292613b9053b5589394cedac4ebdb75225f19"
+        },
+        "reversed": {
+          "path": "07-drag-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 203390,
+        "intended_region_changed_pixels": 203390,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      },
+      "motion_samples": [
+        [
+          1187,
+          794
+        ],
+        [
+          1175.7666666666667,
+          789.2
+        ],
+        [
+          1164.5333333333333,
+          784.4
+        ],
+        [
+          1153.3,
+          779.6
+        ],
+        [
+          1142.0666666666666,
+          774.8
+        ],
+        [
+          1130.8333333333333,
+          770
+        ],
+        [
+          1119.6,
+          765.2
+        ],
+        [
+          1108.3666666666666,
+          760.4
+        ],
+        [
+          1097.1333333333334,
+          755.6
+        ],
+        [
+          1085.9,
+          750.8
+        ],
+        [
+          1074.6666666666667,
+          746
+        ],
+        [
+          1063.4333333333334,
+          741.2
+        ],
+        [
+          1052.2,
+          736.4
+        ],
+        [
+          1040.9666666666667,
+          731.6
+        ],
+        [
+          1029.7333333333333,
+          726.8
+        ],
+        [
+          1018.5,
+          722
+        ],
+        [
+          1007.2666666666667,
+          717.2
+        ],
+        [
+          996.0333333333333,
+          712.4
+        ],
+        [
+          984.8,
+          707.6
+        ],
+        [
+          973.5666666666666,
+          702.8
+        ],
+        [
+          962.3333333333334,
+          698
+        ],
+        [
+          951.1,
+          693.2
+        ],
+        [
+          939.8666666666667,
+          688.4
+        ],
+        [
+          928.6333333333333,
+          683.6
+        ],
+        [
+          917.4,
+          678.8
+        ],
+        [
+          906.1666666666667,
+          674
+        ],
+        [
+          894.9333333333334,
+          669.2
+        ],
+        [
+          883.7,
+          664.4
+        ],
+        [
+          872.4666666666667,
+          659.6
+        ],
+        [
+          861.2333333333333,
+          654.8
+        ],
+        [
+          850,
+          650
+        ]
+      ]
+    },
+    {
+      "control_id": "chat_room.close",
+      "gesture": "Activate",
+      "window_action": "CloseWindow",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"chat_room\",\"last_action\":\"\",\"last_error\":null,\"last_gesture\":\"\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/chat-room/source-plate.png\",\"position\":[1037,782],\"resize\":{\"active\":false,\"clamped\":[495,226],\"motion_samples\":0,\"requested\":[495,226],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[495,226],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "08-close-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "08-close-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "08-close-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 111870,
+        "intended_region_changed_pixels": 111870,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "CloseWindow",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"chat_room\",\"last_action\":\"CloseWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/chat-room/source-plate.png\",\"position\":[1037,782],\"resize\":{\"active\":false,\"clamped\":[495,226],\"motion_samples\":0,\"requested\":[495,226],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[495,226],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true
+      },
+      "frames": {
+        "before": {
+          "path": "09-escape-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "09-escape-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "09-escape-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 111870,
+        "intended_region_changed_pixels": 111870,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    },
+    {
+      "control_id": "chat_room",
+      "gesture": "KeyCommand",
+      "window_action": "ToggleWindow",
+      "expected": "Issue 135 Chat Room Behaviour Card and frozen manifest",
+      "observed": "{\"detail_item\":\"\",\"geometry_version\":0,\"id\":\"chat_room\",\"last_action\":\"ToggleWindow\",\"last_error\":null,\"last_gesture\":\"KeyCommand\",\"minimized\":false,\"pending\":false,\"plate_asset\":\"res://assets/image-79/chat-room/source-plate.png\",\"position\":[1037,782],\"resize\":{\"active\":false,\"clamped\":[495,226],\"motion_samples\":0,\"requested\":[495,226],\"stale_footer_covered\":false,\"stale_footer_grip_covered\":false,\"stale_right_edge_covered\":false,\"stale_title_controls_covered\":false},\"size\":[495,226],\"view_mode\":\"tree\",\"visible\":false,\"z_index\":0}",
+      "responsive": true,
+      "matches_expected": true,
+      "expected_rejection": false,
+      "assertions": {
+        "hidden": true,
+        "restored": true
+      },
+      "frames": {
+        "before": {
+          "path": "10-toggle-before.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        },
+        "after": {
+          "path": "10-toggle-after.png",
+          "sha256": "085b1368ff5e4a60d608aa35147d6a9e1726dba7918d8e2d1f697ea9b5eea8f9"
+        },
+        "reversed": {
+          "path": "10-toggle-reversed.png",
+          "sha256": "51f09d9aac9f36d893f25156ec2b4b94bbdbeee8697725be1eb6cbf704497053"
+        }
+      },
+      "intended_region": {
+        "x": 0,
+        "y": 0,
+        "width": 1536,
+        "height": 1024
+      },
+      "invariant_region": {
+        "x": 720,
+        "y": 350,
+        "width": 80,
+        "height": 80
+      },
+      "pixel_metrics": {
+        "full_frame_changed_pixels": 111870,
+        "intended_region_changed_pixels": 111870,
+        "invariant_region_changed_pixels": 0
+      },
+      "reversal_pixel_metrics": {
+        "full_frame_changed_pixels": 0,
+        "intended_region_changed_pixels": 0,
+        "invariant_region_changed_pixels": 0
+      },
+      "contract_facts": {
+        "real_gesture_path": true,
+        "intended_region_changed": true,
+        "invariants_stable": true,
+        "source_approved": true,
+        "reversible": true
+      }
+    }
+  ]
+}
