@@ -186,9 +186,7 @@ def parse_region_verdict(region: str, payload: Any) -> RegionVerdict:
             )
 
     if not isinstance(payload, Mapping):
-        return RegionVerdict(
-            region=region, verdict=UNREADABLE, note="response was not an object"
-        )
+        return RegionVerdict(region=region, verdict=UNREADABLE, note="response was not an object")
 
     verdict = payload.get("verdict")
     if verdict not in VERDICTS:

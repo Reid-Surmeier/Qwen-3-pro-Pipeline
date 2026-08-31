@@ -106,9 +106,7 @@ class GateOrderingTests(unittest.TestCase):
             {"title": {"verdict": MATCH, "confidence": 0.9}, "footer": {"verdict": MATCH}}
         )
 
-        result = run_verification(
-            CONTRACT, passing_fidelity(), canvas(), canvas(), client=client
-        )
+        result = run_verification(CONTRACT, passing_fidelity(), canvas(), canvas(), client=client)
 
         self.assertTrue(result.verified)
         self.assertEqual(result.status, "verified")
@@ -130,7 +128,12 @@ class VerdictParsingTests(unittest.TestCase):
     def test_parses_a_localised_defect(self):
         verdict = parse_region_verdict(
             "title",
-            {"verdict": DEFECT, "defect_class": "geometry", "coordinates": [4, 9], "confidence": 0.8},
+            {
+                "verdict": DEFECT,
+                "defect_class": "geometry",
+                "coordinates": [4, 9],
+                "confidence": 0.8,
+            },
         )
 
         self.assertEqual(verdict.verdict, DEFECT)
@@ -195,9 +198,7 @@ class FindingRoutingTests(unittest.TestCase):
             }
         )
 
-        result = run_verification(
-            CONTRACT, passing_fidelity(), canvas(), canvas(), client=client
-        )
+        result = run_verification(CONTRACT, passing_fidelity(), canvas(), canvas(), client=client)
         routed = route_findings(result)
 
         self.assertFalse(result.verified)
@@ -261,6 +262,7 @@ class EndToEndGateTests(unittest.TestCase):
         self.assertFalse(fidelity.passed)
         self.assertFalse(result.verified)
         self.assertEqual(client.calls, [])
+
 
 class IntentTests(unittest.TestCase):
     def test_supplies_the_licensed_change_to_the_reviewer(self):

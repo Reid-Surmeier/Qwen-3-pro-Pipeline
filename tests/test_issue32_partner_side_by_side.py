@@ -28,12 +28,8 @@ class Issue32PartnerSideBySideEvidenceTests(unittest.TestCase):
         self.assertEqual(comparison["actual_cost_usd"], 0.086)
         self.assertFalse(comparison["paid_ci"])
         self.assertEqual(len(comparison["arms"]), 2)
-        self.assertTrue(
-            all(arm["status"] == "success" for arm in comparison["arms"])
-        )
-        self.assertEqual(
-            len({arm["attempt_id"] for arm in comparison["arms"]}), 2
-        )
+        self.assertTrue(all(arm["status"] == "success" for arm in comparison["arms"]))
+        self.assertEqual(len({arm["attempt_id"] for arm in comparison["arms"]}), 2)
 
         execution = _load_json(RUN / "execution.json")
         self.assertEqual(len(execution["attempts"]), 2)

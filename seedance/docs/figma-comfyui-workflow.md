@@ -16,4 +16,3 @@ and attach output/job hashes to the run—not hide provider state.
 
 The installer uses a dedicated ComfyUI checkout. Never install into or restart an unknown shared
 runtime. See `scripts/install_comfyui.sh`.
-

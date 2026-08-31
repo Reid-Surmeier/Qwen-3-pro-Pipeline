@@ -6,6 +6,7 @@ owns all chrome. Qwen candidates are retained as Render Pass evidence only and
 are never opened by this assembler. The museum screenshot is likewise never
 opened: its approved strings are represented below as data, not donor pixels.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -168,9 +169,7 @@ def draw_field(
         image.paste(arrow, arrow_box[:2])
 
 
-def draw_button(
-    image: Image.Image, box: tuple[int, int, int, int], text: str
-) -> None:
+def draw_button(image: Image.Image, box: tuple[int, int, int, int], text: str) -> None:
     x0, y0, x1, y1 = box
     draw = ImageDraw.Draw(image)
     draw.rectangle((x0, y0, x1 - 1, y1 - 1), fill=BUTTON_FILL, outline=(106, 106, 106, 255))
@@ -211,9 +210,7 @@ def assemble_closed(source: Image.Image) -> tuple[Image.Image, Image.Image]:
     # Narrow row boxes avoid importing any generated background or changing the
     # magenta edge bloom around the panel.
     for box in (ROW_ONE_EDIT_BOX, ROW_TWO_EDIT_BOX, ROW_THREE_EDIT_BOX):
-        ImageDraw.Draw(output).rectangle(
-            (box[0], box[1], box[2] - 1, box[3] - 1), fill=WHITE
-        )
+        ImageDraw.Draw(output).rectangle((box[0], box[1], box[2] - 1, box[3] - 1), fill=WHITE)
 
     arrow = baseline.crop(SOURCE_ARROW_BOX)
 
@@ -242,7 +239,9 @@ def assemble_closed(source: Image.Image) -> tuple[Image.Image, Image.Image]:
     actual = changed_pixel_mask(baseline, output)
     outside = ImageChops.multiply(actual, ImageChops.invert(permitted))
     if outside.getbbox() is not None:
-        raise RuntimeError(f"Assembly changed source pixels outside edit boxes: {outside.getbbox()}")
+        raise RuntimeError(
+            f"Assembly changed source pixels outside edit boxes: {outside.getbbox()}"
+        )
     return output, permitted
 
 
@@ -285,8 +284,20 @@ def make_contact_sheet(
     open_back = Image.new("RGB", open_review.size, WHITE[:3])
     open_back.paste(open_review, (0, 0), open_review.getchannel("A"))
 
-    width = max(24 + source_review.width + 12 + closed_review.width, 24 + raw_size[0] * 2 + 12, 24 + open_back.width)
-    height = 24 + max(source_review.height, closed_review.height) + 30 + raw_size[1] + 30 + open_back.height + 24
+    width = max(
+        24 + source_review.width + 12 + closed_review.width,
+        24 + raw_size[0] * 2 + 12,
+        24 + open_back.width,
+    )
+    height = (
+        24
+        + max(source_review.height, closed_review.height)
+        + 30
+        + raw_size[1]
+        + 30
+        + open_back.height
+        + 24
+    )
     sheet = Image.new("RGB", (width, height), (32, 35, 43))
     draw = ImageDraw.Draw(sheet)
     draw.text((12, 6), "style source / deterministic closed state", fill=(255, 255, 255))
@@ -296,9 +307,12 @@ def make_contact_sheet(
     y += max(source_review.height, closed_review.height)
     draw.text((12, y + 8), "Qwen Render Pass candidates (diagnostic only)", fill=(255, 255, 255))
     y += 30
-    sheet.paste(raw_one, (12, y)); sheet.paste(raw_two, (24 + raw_size[0], y))
+    sheet.paste(raw_one, (12, y))
+    sheet.paste(raw_two, (24 + raw_size[0], y))
     y += raw_size[1]
-    draw.text((12, y + 8), "deterministic open dropdown state — all nine options", fill=(255, 255, 255))
+    draw.text(
+        (12, y + 8), "deterministic open dropdown state — all nine options", fill=(255, 255, 255)
+    )
     y += 30
     sheet.paste(open_back, (12, y))
     return sheet
@@ -330,11 +344,17 @@ def main() -> int:
     contact = output_dir / "contact-sheet.png"
 
     closed.save(closed_native)
-    closed.resize((closed.width * SCALE, closed.height * SCALE), Image.Resampling.NEAREST).save(closed_review)
+    closed.resize((closed.width * SCALE, closed.height * SCALE), Image.Resampling.NEAREST).save(
+        closed_review
+    )
     open_state.save(open_native)
-    open_state.resize((open_state.width * SCALE, open_state.height * SCALE), Image.Resampling.NEAREST).save(open_review)
+    open_state.resize(
+        (open_state.width * SCALE, open_state.height * SCALE), Image.Resampling.NEAREST
+    ).save(open_review)
     permitted.save(mask_native)
-    permitted.resize((permitted.width * SCALE, permitted.height * SCALE), Image.Resampling.NEAREST).save(mask_review)
+    permitted.resize(
+        (permitted.width * SCALE, permitted.height * SCALE), Image.Resampling.NEAREST
+    ).save(mask_review)
     make_contact_sheet(
         source,
         Image.open(RAW_RUN / "image-01.png"),
@@ -346,7 +366,9 @@ def main() -> int:
     baseline = native_source(source)
     actual = changed_pixel_mask(baseline, closed)
     actual.save(actual_native)
-    actual.resize((actual.width * SCALE, actual.height * SCALE), Image.Resampling.NEAREST).save(actual_review)
+    actual.resize((actual.width * SCALE, actual.height * SCALE), Image.Resampling.NEAREST).save(
+        actual_review
+    )
     outside = ImageChops.multiply(actual, ImageChops.invert(permitted))
     verification = {
         "issue": 138,
@@ -369,7 +391,10 @@ def main() -> int:
         "closed_native_size": list(closed.size),
         "open_native_size": list(open_state.size),
         "exact_copy": {
-            **{key: list(value) if isinstance(value, tuple) else value for key, value in EXACT_COPY.items()},
+            **{
+                key: list(value) if isinstance(value, tuple) else value
+                for key, value in EXACT_COPY.items()
+            },
         },
         "sort_option_count": len(SORT_OPTIONS),
         "password_row_present": False,
@@ -419,9 +444,7 @@ def main() -> int:
             "actual_cost_usd": None,
         },
     }
-    (output_dir / "run.json").write_text(
-        json.dumps(run, indent=2) + "\n", encoding="utf-8"
-    )
+    (output_dir / "run.json").write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(verification, indent=2))
     return 0
 

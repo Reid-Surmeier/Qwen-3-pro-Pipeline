@@ -7,6 +7,7 @@ foreground silhouettes.  It also rebuilds the inactive material tab as a
 stepped shape over the original striped margin while preserving its v001 text
 pixels.  No generated image or rectangular donor background is used.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -71,12 +72,8 @@ def add_mask(canvas: Image.Image, local: Image.Image, xy: tuple[int, int]) -> No
 
 
 def header_bar() -> Image.Image:
-    reference = Image.open(
-        REFERENCE_DIR / "style-ro-options-window-flat-rgb.png"
-    ).convert("RGB")
-    return reference.crop((600, 45, 1372, 124)).resize(
-        TITLE_SIZE, Image.Resampling.LANCZOS
-    )
+    reference = Image.open(REFERENCE_DIR / "style-ro-options-window-flat-rgb.png").convert("RGB")
+    return reference.crop((600, 45, 1372, 124)).resize(TITLE_SIZE, Image.Resampling.LANCZOS)
 
 
 def bead_mask() -> Image.Image:
@@ -90,8 +87,7 @@ def close_mask() -> Image.Image:
     """The close-button silhouette, excluding its captured cyan surround."""
     mask = Image.new("L", (19, 19), 0)
     ImageDraw.Draw(mask).polygon(
-        ((4, 1), (15, 1), (16, 2), (16, 15), (15, 16),
-         (4, 16), (3, 15), (3, 2)),
+        ((4, 1), (15, 1), (16, 2), (16, 15), (15, 16), (4, 16), (3, 15), (3, 2)),
         fill=255,
     )
     return mask
@@ -102,10 +98,26 @@ def material_tab_mask() -> Image.Image:
     mask = Image.new("L", (16, 55), 0)
     ImageDraw.Draw(mask).polygon(
         (
-            (0, 0), (3, 0), (3, 2), (6, 2), (6, 4),
-            (9, 4), (9, 6), (12, 6), (12, 8), (15, 8),
-            (15, 46), (12, 46), (12, 48), (9, 48), (9, 50),
-            (6, 50), (6, 52), (3, 52), (3, 54), (0, 54),
+            (0, 0),
+            (3, 0),
+            (3, 2),
+            (6, 2),
+            (6, 4),
+            (9, 4),
+            (9, 6),
+            (12, 6),
+            (12, 8),
+            (15, 8),
+            (15, 46),
+            (12, 46),
+            (12, 48),
+            (9, 48),
+            (9, 50),
+            (6, 50),
+            (6, 52),
+            (3, 52),
+            (3, 54),
+            (0, 54),
         ),
         fill=255,
     )
@@ -146,8 +158,10 @@ def paste_header_icon(
     foreground: Image.Image,
 ) -> None:
     local_box = (
-        box[0] - TITLE_ORIGIN[0], box[1] - TITLE_ORIGIN[1],
-        box[2] - TITLE_ORIGIN[0], box[3] - TITLE_ORIGIN[1],
+        box[0] - TITLE_ORIGIN[0],
+        box[1] - TITLE_ORIGIN[1],
+        box[2] - TITLE_ORIGIN[0],
+        box[3] - TITLE_ORIGIN[1],
     )
     patch = bar.crop(local_box)
     icon = Image.open(SPRITES / f"{sprite_name}.png").convert("RGB")
@@ -157,9 +171,7 @@ def paste_header_icon(
     add_mask(declared, local_change, box[:2])
 
 
-def rebuild_material_tab(
-    output: Image.Image, baseline: Image.Image, declared: Image.Image
-) -> None:
+def rebuild_material_tab(output: Image.Image, baseline: Image.Image, declared: Image.Image) -> None:
     xy = MATERIAL_BOX[:2]
     old_tab = baseline.crop(MATERIAL_BOX)
     underlying = striped_margin(MATERIAL_BOX)
@@ -168,10 +180,26 @@ def rebuild_material_tab(
     edge = Image.new("L", shape.size, 0)
     edge_draw = ImageDraw.Draw(edge)
     points = (
-        (0, 0), (3, 0), (3, 2), (6, 2), (6, 4),
-        (9, 4), (9, 6), (12, 6), (12, 8), (15, 8),
-        (15, 46), (12, 46), (12, 48), (9, 48), (9, 50),
-        (6, 50), (6, 52), (3, 52), (3, 54), (0, 54),
+        (0, 0),
+        (3, 0),
+        (3, 2),
+        (6, 2),
+        (6, 4),
+        (9, 4),
+        (9, 6),
+        (12, 6),
+        (12, 8),
+        (15, 8),
+        (15, 46),
+        (12, 46),
+        (12, 48),
+        (9, 48),
+        (9, 50),
+        (6, 50),
+        (6, 52),
+        (3, 52),
+        (3, 54),
+        (0, 54),
     )
     edge_draw.line(points + (points[0],), fill=255, width=1)
     tab.paste(Image.new("RGB", tab.size, TAB_EDGE), (0, 0), edge)
@@ -222,17 +250,21 @@ def contact_sheet(baseline: Image.Image, candidate: Image.Image) -> Image.Image:
     )
     zooms = [(name, crop_zoom(baseline, box), crop_zoom(candidate, box)) for name, box in crops]
     row_width = max(full_before.width * 2 + 24, max(a.width + b.width + 24 for _, a, b in zooms))
-    total_height = 24 + full_before.height + sum(24 + max(a.height, b.height) for _, a, b in zooms) + 20
+    total_height = (
+        24 + full_before.height + sum(24 + max(a.height, b.height) for _, a, b in zooms) + 20
+    )
     sheet = Image.new("RGB", (row_width + 24, total_height), (32, 35, 43))
     draw = ImageDraw.Draw(sheet)
     draw.text((12, 6), "Assembly v001 (left) / Assembly v004 (right)", fill=WHITE)
     y = 24
-    sheet.paste(full_before, (12, y)); sheet.paste(full_after, (24 + full_before.width, y))
+    sheet.paste(full_before, (12, y))
+    sheet.paste(full_after, (24 + full_before.width, y))
     y += full_before.height
     for name, before, after in zooms:
         draw.text((12, y + 6), name, fill=WHITE)
         y += 24
-        sheet.paste(before, (12, y)); sheet.paste(after, (24 + before.width, y))
+        sheet.paste(before, (12, y))
+        sheet.paste(after, (24 + before.width, y))
         y += max(before.height, after.height)
     return sheet
 
@@ -290,7 +322,11 @@ def main() -> int:
     run = {
         "issue": 118,
         "method": "deterministic native-pixel Assembly from v001",
-        "scope": ["left header bead", "right header bead and close button", "inactive material tab"],
+        "scope": [
+            "left header bead",
+            "right header bead and close button",
+            "inactive material tab",
+        ],
         "frozen": "all pixels outside the declared three-region mask",
         "provider": None,
         "model": None,
@@ -306,9 +342,7 @@ def main() -> int:
             "verification": repo_path(output_dir / "verification.json"),
         },
     }
-    (output_dir / "run.json").write_text(
-        json.dumps(run, indent=2) + "\n", encoding="utf-8"
-    )
+    (output_dir / "run.json").write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(verification, indent=2))
     return 0
 

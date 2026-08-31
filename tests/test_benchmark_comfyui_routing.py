@@ -51,9 +51,7 @@ class ComfyUIRoutingBenchmarkTests(unittest.TestCase):
         self.assertEqual(len({job.payload for job in jobs}), 6)
         for job in jobs:
             payload = json.loads(job.payload)
-            self.assertEqual(
-                payload["prompt"]["1"]["class_type"], "SyntheticNoProviderNode"
-            )
+            self.assertEqual(payload["prompt"]["1"]["class_type"], "SyntheticNoProviderNode")
 
     @unittest.skipUnless(
         PINNED_GIT_OBJECTS_AVAILABLE,
@@ -70,6 +68,7 @@ class ComfyUIRoutingBenchmarkTests(unittest.TestCase):
             pins["resolved_branches"][BENCHMARK.CANDIDATE_BRANCH],
             BENCHMARK.CANDIDATE_COMMIT,
         )
+
     @unittest.skipUnless(
         PINNED_GIT_OBJECTS_AVAILABLE,
         "archive refs are unavailable in this checkout",
@@ -88,20 +87,12 @@ class ComfyUIRoutingBenchmarkTests(unittest.TestCase):
             self.assertTrue(manifest["summary"]["output_digest_parity"])
             self.assertEqual(manifest["summary"]["baseline"]["retry_count"], 0)
             self.assertEqual(manifest["summary"]["candidate"]["retry_count"], 0)
-            self.assertEqual(
-                manifest["summary"]["candidate"]["routing_failures"], 0
-            )
-            self.assertEqual(
-                manifest["summary"]["candidate"]["history_failures"], 0
-            )
+            self.assertEqual(manifest["summary"]["candidate"]["routing_failures"], 0)
+            self.assertEqual(manifest["summary"]["candidate"]["history_failures"], 0)
             self.assertEqual(manifest["summary"]["candidate"]["dropped_jobs"], 0)
             self.assertEqual(manifest["summary"]["candidate"]["timeout_count"], 0)
-            self.assertEqual(
-                manifest["summary"]["candidate"]["missing_observations"], 0
-            )
-            self.assertEqual(
-                len(manifest["summary"]["candidate"]["workers_observed"]), 5
-            )
+            self.assertEqual(manifest["summary"]["candidate"]["missing_observations"], 0)
+            self.assertEqual(len(manifest["summary"]["candidate"]["workers_observed"]), 5)
             self.assertEqual(manifest["summary"]["conclusion"], "promising")
             self.assertTrue((output / "results.json").is_file())
             self.assertTrue((output / "report.md").is_file())
@@ -113,9 +104,7 @@ class ComfyUIRoutingBenchmarkTests(unittest.TestCase):
                     self.assertIsNone(job["error"])
                     self.assertEqual(job["enqueue_attempts"], 1)
                     self.assertTrue(job["history_verified"])
-                    self.assertEqual(
-                        job["payload_sha256"], job["expected_payload_sha256"]
-                    )
+                    self.assertEqual(job["payload_sha256"], job["expected_payload_sha256"])
 
 
 if __name__ == "__main__":

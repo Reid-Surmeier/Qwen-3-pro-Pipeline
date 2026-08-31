@@ -169,14 +169,14 @@ def brief_for(seed: int, aspect_ratio: str = "4:3") -> dict[str, Any]:
     return brief
 
 
-def request_for(seed: int, aspect_ratio: str = "4:3", *, include_reference: bool = True) -> dict[str, Any]:
+def request_for(
+    seed: int, aspect_ratio: str = "4:3", *, include_reference: bool = True
+) -> dict[str, Any]:
     references = ()
     if include_reference:
         encoded = base64.b64encode(_validated_source_bytes()).decode("ascii")
         references = (f"data:image/png;base64,{encoded}",)
-    return build_openrouter_request(
-        brief_for(seed, aspect_ratio), reference_urls=references
-    )
+    return build_openrouter_request(brief_for(seed, aspect_ratio), reference_urls=references)
 
 
 def _request_identity(request: Mapping[str, Any], seed: int) -> tuple[str, str]:
@@ -254,9 +254,7 @@ def prepare() -> None:
             "seed",
             "output count",
         ],
-        "text_regions_xyxy_half_open": {
-            name: list(box) for name, box in TEXT_REGIONS.items()
-        },
+        "text_regions_xyxy_half_open": {name: list(box) for name, box in TEXT_REGIONS.items()},
         "artifact_classification": {
             "native_outputs": "comparison_evidence",
             "attempts_plan_and_manifests": "reproducibility_metadata",
@@ -274,9 +272,7 @@ def prepare() -> None:
     print("prepared Issue #72: four inherited outputs, four new requests maximum")
 
 
-def _validate_prepared_request(
-    seed: int, request_sha256: str, client_request_id: str
-) -> None:
+def _validate_prepared_request(seed: int, request_sha256: str, client_request_id: str) -> None:
     prepared_files = {
         OUT / "plan.json": PLAN_SHA256,
         OUT / "brief-4x3.json": BRIEF_SHA256,
@@ -331,9 +327,7 @@ def _release_lock(path: Path) -> None:
 def _safe_request(request: Mapping[str, Any]) -> dict[str, Any]:
     safe = dict(request)
     if "input_references" in safe:
-        safe["input_references"] = [
-            {"type": "image_url", "image_url": "[recorded separately]"}
-        ]
+        safe["input_references"] = [{"type": "image_url", "image_url": "[recorded separately]"}]
     return safe
 
 
@@ -350,7 +344,9 @@ def submit(seed: int) -> None:
         raise SystemExit(f"attempt exists for seed {seed}; refusing resubmission")
     blockers = _blocking_attempts()
     if blockers:
-        raise SystemExit("a prior ambiguous attempt blocks every later seed: " + ", ".join(blockers))
+        raise SystemExit(
+            "a prior ambiguous attempt blocks every later seed: " + ", ".join(blockers)
+        )
 
     request = request_for(seed)
     request_sha256, client_request_id = _request_identity(request, seed)
@@ -442,9 +438,7 @@ def submit(seed: int) -> None:
             error=str(error),
         )
         _write_json(attempt_path, attempt)
-        raise SystemExit(
-            "response persistence failed; keep global lock and stop"
-        ) from error
+        raise SystemExit("response persistence failed; keep global lock and stop") from error
     attempt.update(status="completed", completed_at=_now())
     _write_json(attempt_path, attempt)
     _release_lock(lock_path)
@@ -463,9 +457,7 @@ def review_crops() -> None:
         "schema_version": "issue-72-review-crops-v1",
         "source_sha256": SOURCE_SHA256,
         "normalization": "nearest-neighbour to 474x403 before cropping",
-        "regions_xyxy_half_open": {
-            name: list(box) for name, box in TEXT_REGIONS.items()
-        },
+        "regions_xyxy_half_open": {name: list(box) for name, box in TEXT_REGIONS.items()},
         "source_crops": {},
         "candidates": {},
     }

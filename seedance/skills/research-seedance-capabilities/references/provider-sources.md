@@ -9,4 +9,3 @@
 
 Use the live endpoint and schema for validation; descriptive pages explain intent but may not expose
 every current enumerated value.
-

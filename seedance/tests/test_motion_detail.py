@@ -13,7 +13,9 @@ FOUR_STATES = {"idle": "0-0.25", "hover": "0.25-0.5", "pressed": "0.5-0.75", "se
 def test_a_small_single_gesture_is_left_alone() -> None:
     """Batch 2's briefs were 25 words with no enumerated poses and certified at
     0.998-1.0. Short is not the problem; short-for-what-was-asked is."""
-    brief = {"motion": "The two wing tips shift up one step, return, then down one step, each pose held."}
+    brief = {
+        "motion": "The two wing tips shift up one step, return, then down one step, each pose held."
+    }
     assert check_motion_detail(brief) == []
 
 

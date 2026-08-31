@@ -32,7 +32,9 @@ MODEL = "qwen/qwen-image-3-pro"
 SEED = 2026054001
 
 CLUB_REF = "artifacts/benchmarks/issue-54-reference-count/refs/club-detail-3x.png"
-MATERIAL_REF = "artifacts/runs/maga-operating-system-xe-sticker-v001/maga-operating-system-xe-sticker-v001.png"
+MATERIAL_REF = (
+    "artifacts/runs/maga-operating-system-xe-sticker-v001/maga-operating-system-xe-sticker-v001.png"
+)
 
 TASKS = {
     "club-insertion": {
@@ -47,11 +49,13 @@ TASKS = {
                 "Keep the Windows-era grey chrome, navy title bar, aliased pixel edges, limited palette, and low-resolution raster character.",
                 "Do not change any text anywhere in the window.",
             ],
-            "regions": [{
-                "name": "red selection rectangle",
-                "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
-                "preserve": ["the red selection rectangle itself"],
-            }],
+            "regions": [
+                {
+                    "name": "red selection rectangle",
+                    "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
+                    "preserve": ["the red selection rectangle itself"],
+                }
+            ],
             "negative_constraints": [
                 "No global redraw, modernization, smoothing, or invented UI.",
                 "No golf ball, golfer, tee, flag, or any second golf object.",
@@ -86,15 +90,21 @@ TASKS = {
 
 def _upload(path: str) -> str:
     import uuid
+
     data = (ROOT / path).read_bytes()
     boundary = uuid.uuid4().hex
     name = Path(path).name
     body = (
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"image\"; "
-        f"filename=\"issue54-{name}\"\r\nContent-Type: image/png\r\n\r\n"
-    ).encode() + data + f"\r\n--{boundary}--\r\n".encode()
+        (
+            f'--{boundary}\r\nContent-Disposition: form-data; name="image"; '
+            f'filename="issue54-{name}"\r\nContent-Type: image/png\r\n\r\n'
+        ).encode()
+        + data
+        + f"\r\n--{boundary}--\r\n".encode()
+    )
     request = urllib.request.Request(
-        f"{COMFY}/upload/image", data=body,
+        f"{COMFY}/upload/image",
+        data=body,
         headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -112,8 +122,7 @@ def submit(task: str, arm: str) -> None:
     brief = json.loads(json.dumps(spec["brief"]))
     brief["provider"] = "openrouter"
     brief["model"] = MODEL
-    brief["output"] = {"resolution": "1K", "aspect_ratio": spec["aspect"],
-                       "count": 1, "seed": SEED}
+    brief["output"] = {"resolution": "1K", "aspect_ratio": spec["aspect"], "count": 1, "seed": SEED}
     if arm == "with-reference":
         brief["reference_role"] += " " + spec["extra_role_sentence"]
 
@@ -124,34 +133,56 @@ def submit(task: str, arm: str) -> None:
     if arm == "with-reference":
         uploaded_extra = _upload(spec["extra_reference"])
         graph["5"] = {"class_type": "LoadImage", "inputs": {"image": uploaded_extra}}
-        graph["6"] = {"class_type": "ImageBatch", "inputs": {
-            "image1": ["1", 0], "image2": ["5", 0],
-        }}
+        graph["6"] = {
+            "class_type": "ImageBatch",
+            "inputs": {
+                "image1": ["1", 0],
+                "image2": ["5", 0],
+            },
+        }
         image_input = ["6", 0]
     else:
         image_input = ["1", 0]
-    graph["2"] = {"class_type": "QwenImage3Render", "inputs": {
-        "edit_brief_json": json.dumps(brief),
-        "reference_images": image_input,
-    }}
-    graph["3"] = {"class_type": "SaveImage", "inputs": {
-        "images": ["2", 0], "filename_prefix": f"issue54/{task}--{arm}",
-    }}
-    graph["4"] = {"class_type": "SaveText", "inputs": {
-        "text": ["2", 1], "filename_prefix": f"issue54/{task}--{arm}-meta",
-        "format": "json",
-    }}
+    graph["2"] = {
+        "class_type": "QwenImage3Render",
+        "inputs": {
+            "edit_brief_json": json.dumps(brief),
+            "reference_images": image_input,
+        },
+    }
+    graph["3"] = {
+        "class_type": "SaveImage",
+        "inputs": {
+            "images": ["2", 0],
+            "filename_prefix": f"issue54/{task}--{arm}",
+        },
+    }
+    graph["4"] = {
+        "class_type": "SaveText",
+        "inputs": {
+            "text": ["2", 1],
+            "filename_prefix": f"issue54/{task}--{arm}-meta",
+            "format": "json",
+        },
+    }
 
     attempt = {
-        "task": task, "arm": arm, "seed": SEED, "provider": "openrouter",
-        "model": MODEL, "requested_outputs": 1, "status": "submitted",
+        "task": task,
+        "arm": arm,
+        "seed": SEED,
+        "provider": "openrouter",
+        "model": MODEL,
+        "requested_outputs": 1,
+        "status": "submitted",
         "source": {"path": spec["source"]},
         "extra_reference": spec["extra_reference"] if arm == "with-reference" else None,
     }
     attempt_path.write_text(json.dumps(attempt, indent=2) + "\n")
     request = urllib.request.Request(
-        f"{COMFY}/prompt", data=json.dumps({"prompt": graph}).encode(),
-        headers={"Content-Type": "application/json"}, method="POST",
+        f"{COMFY}/prompt",
+        data=json.dumps({"prompt": graph}).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST",
     )
     with urllib.request.urlopen(request, timeout=240) as response:
         result = json.loads(response.read())
@@ -161,7 +192,9 @@ def submit(task: str, arm: str) -> None:
     deadline = time.monotonic() + 600
     while time.monotonic() < deadline:
         time.sleep(5)
-        with urllib.request.urlopen(f"{COMFY}/history/{result['prompt_id']}", timeout=30) as response:
+        with urllib.request.urlopen(
+            f"{COMFY}/history/{result['prompt_id']}", timeout=30
+        ) as response:
             history = json.loads(response.read())
         if result["prompt_id"] in history:
             entry = history[result["prompt_id"]]
@@ -183,8 +216,12 @@ def collect() -> None:
     for attempt_path in sorted((OUT / "attempts").glob("*.json")):
         attempt = json.loads(attempt_path.read_text())
         key = f"{attempt['task']}--{attempt['arm']}"
-        record = {"status": attempt.get("status"), "prompt_id": attempt.get("prompt_id"),
-                  "files": [], "usage": None}
+        record = {
+            "status": attempt.get("status"),
+            "prompt_id": attempt.get("prompt_id"),
+            "files": [],
+            "usage": None,
+        }
         for node_output in attempt.get("outputs", {}).values():
             for text in node_output.get("text", []):
                 try:
@@ -196,19 +233,24 @@ def collect() -> None:
             for item in node_output.get("images", []):
                 if not isinstance(item, dict):
                     continue
-                query = urllib.parse.urlencode({
-                    "filename": item["filename"],
-                    "subfolder": item.get("subfolder", ""),
-                    "type": item.get("type", "output"),
-                })
+                query = urllib.parse.urlencode(
+                    {
+                        "filename": item["filename"],
+                        "subfolder": item.get("subfolder", ""),
+                        "type": item.get("type", "output"),
+                    }
+                )
                 with urllib.request.urlopen(f"{COMFY}/view?{query}", timeout=120) as response:
                     data = response.read()
                 local = outputs_dir / f"{key}.png"
                 local.write_bytes(data)
-                record["files"].append({
-                    "file": local.name, "bytes": len(data),
-                    "sha256": hashlib.sha256(data).hexdigest(),
-                })
+                record["files"].append(
+                    {
+                        "file": local.name,
+                        "bytes": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(),
+                    }
+                )
         manifest[key] = record
         print(key, record["status"])
     (OUT / "collection-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

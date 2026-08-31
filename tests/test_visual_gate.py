@@ -13,6 +13,7 @@ from pathlib import Path
 
 try:
     from PIL import Image
+
     HAVE_PIL = True
 except ImportError:
     HAVE_PIL = False
@@ -41,7 +42,8 @@ class VisualGateTests(unittest.TestCase):
     def _run(self, *argv):
         result = subprocess.run(
             [sys.executable, str(REPO / "scripts" / "visual_gate.py"), *argv],
-            capture_output=True, text=True,
+            capture_output=True,
+            text=True,
         )
         payload = json.loads(result.stdout) if result.stdout else {}
         return result.returncode, payload

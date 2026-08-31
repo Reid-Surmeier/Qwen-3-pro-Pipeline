@@ -28,26 +28,35 @@ def sha256(path: Path) -> str:
 
 
 def rel(rect: list[int]) -> dict[str, int]:
-    return {"x": rect[0] - WINDOW[0], "y": rect[1] - WINDOW[1],
-            "width": rect[2], "height": rect[3]}
+    return {"x": rect[0] - WINDOW[0], "y": rect[1] - WINDOW[1], "width": rect[2], "height": rect[3]}
 
 
 def box(geometry: dict[str, int]) -> tuple[int, int, int, int]:
-    return (geometry["x"], geometry["y"], geometry["x"] + geometry["width"],
-            geometry["y"] + geometry["height"])
+    return (
+        geometry["x"],
+        geometry["y"],
+        geometry["x"] + geometry["width"],
+        geometry["y"] + geometry["height"],
+    )
 
 
 def save(image: Image.Image, name: str, records: list[dict[str, object]]) -> str:
     path = OUTPUT / name
     image.save(path, optimize=True)
-    records.append({"path": str(path.relative_to(ROOT)), "sha256": sha256(path),
-                    "size": list(image.size)})
+    records.append(
+        {"path": str(path.relative_to(ROOT)), "sha256": sha256(path), "size": list(image.size)}
+    )
     return f"res://assets/image-79/inventory/{name}"
 
 
-def variant_set(image: Image.Image, stem: str, records: list[dict[str, object]],
-                outline: tuple[int, int, int, int] | None = None,
-                width: int = 1, dragging: bool = False) -> dict[str, str]:
+def variant_set(
+    image: Image.Image,
+    stem: str,
+    records: list[dict[str, object]],
+    outline: tuple[int, int, int, int] | None = None,
+    width: int = 1,
+    dragging: bool = False,
+) -> dict[str, str]:
     idle = image.convert("RGBA")
     if dragging:
         white = Image.new("RGBA", idle.size, WHITE)
@@ -55,43 +64,58 @@ def variant_set(image: Image.Image, stem: str, records: list[dict[str, object]],
         draw = ImageDraw.Draw(idle)
         for x in range(0, idle.width, 6):
             draw.line((x, 0, min(x + 3, idle.width - 1), 0), fill=BLUE)
-            draw.line((x, idle.height - 1, min(x + 3, idle.width - 1), idle.height - 1),
-                      fill=BLUE)
+            draw.line((x, idle.height - 1, min(x + 3, idle.width - 1), idle.height - 1), fill=BLUE)
         for y in range(0, idle.height, 6):
             draw.line((0, y, 0, min(y + 3, idle.height - 1)), fill=BLUE)
-            draw.line((idle.width - 1, y, idle.width - 1, min(y + 3, idle.height - 1)),
-                      fill=BLUE)
+            draw.line((idle.width - 1, y, idle.width - 1, min(y + 3, idle.height - 1)), fill=BLUE)
     elif outline is not None:
-        ImageDraw.Draw(idle).rectangle((0, 0, idle.width - 1, idle.height - 1),
-                                       outline=outline, width=width)
+        ImageDraw.Draw(idle).rectangle(
+            (0, 0, idle.width - 1, idle.height - 1), outline=outline, width=width
+        )
     hover = idle.copy()
-    ImageDraw.Draw(hover).rectangle((0, 0, hover.width - 1, hover.height - 1),
-                                    outline=HOVER, width=1)
+    ImageDraw.Draw(hover).rectangle(
+        (0, 0, hover.width - 1, hover.height - 1), outline=HOVER, width=1
+    )
     pressed = ImageEnhance.Brightness(idle).enhance(0.72)
-    return {"idle": save(idle, f"{stem}-idle.png", records),
-            "hover": save(hover, f"{stem}-hover.png", records),
-            "pressed": save(pressed, f"{stem}-pressed.png", records)}
+    return {
+        "idle": save(idle, f"{stem}-idle.png", records),
+        "hover": save(hover, f"{stem}-hover.png", records),
+        "pressed": save(pressed, f"{stem}-pressed.png", records),
+    }
 
 
-def control(control_id: str, control_type: str, geometry: dict[str, int],
-            state_set: dict[str, object], gestures: list[str],
-            actions: list[dict[str, str]], semantic_states: list[str] | None = None,
-            initial: str | None = None, **extra: object) -> dict[str, object]:
+def control(
+    control_id: str,
+    control_type: str,
+    geometry: dict[str, int],
+    state_set: dict[str, object],
+    gestures: list[str],
+    actions: list[dict[str, str]],
+    semantic_states: list[str] | None = None,
+    initial: str | None = None,
+    **extra: object,
+) -> dict[str, object]:
     states = semantic_states or ["ready"]
-    return {"id": control_id, "type": control_type, "geometry": geometry,
-            "interaction_phases": ["idle", "hover", "pressed"],
-            "semantic_states": states, "initial_semantic_state": initial or states[0],
-            "state_set": state_set, "gestures": gestures, "actions": actions, **extra}
+    return {
+        "id": control_id,
+        "type": control_type,
+        "geometry": geometry,
+        "interaction_phases": ["idle", "hover", "pressed"],
+        "semantic_states": states,
+        "initial_semantic_state": initial or states[0],
+        "state_set": state_set,
+        "gestures": gestures,
+        "actions": actions,
+        **extra,
+    }
 
 
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     source = Image.open(SOURCE).convert("RGBA")
-    window = source.crop((WINDOW[0], WINDOW[1], WINDOW[0] + WINDOW[2],
-                          WINDOW[1] + WINDOW[3]))
+    window = source.crop((WINDOW[0], WINDOW[1], WINDOW[0] + WINDOW[2], WINDOW[1] + WINDOW[3]))
     inventory = json.loads(INVENTORY.read_text())
-    controls = [entry for entry in inventory["controls"]
-                if entry.get("window") == "inventory"]
+    controls = [entry for entry in inventory["controls"] if entry.get("window") == "inventory"]
     records: list[dict[str, object]] = []
 
     clean = window.copy()
@@ -122,14 +146,12 @@ def main() -> None:
             "geometry": relative,
             "state_set": {
                 "unselected": variant_set(crop, f"cell-{item}-unselected", records),
-                "selected": variant_set(crop, f"cell-{item}-selected", records,
-                                        BLUE, 2),
-                "modifier_selected": variant_set(crop, f"cell-{item}-modifier", records,
-                                                 MODIFIER, 3),
-                "dragging": variant_set(crop, f"cell-{item}-dragging", records,
-                                        dragging=True),
-                "drop_target": variant_set(crop, f"cell-{item}-drop", records,
-                                           DROP, 3),
+                "selected": variant_set(crop, f"cell-{item}-selected", records, BLUE, 2),
+                "modifier_selected": variant_set(
+                    crop, f"cell-{item}-modifier", records, MODIFIER, 3
+                ),
+                "dragging": variant_set(crop, f"cell-{item}-dragging", records, dragging=True),
+                "drop_target": variant_set(crop, f"cell-{item}-drop", records, DROP, 3),
             },
         }
 
@@ -141,25 +163,39 @@ def main() -> None:
     detail_states = {"ready": variant_set(detail, "item-detail", records)}
 
     selection = control(
-        "inventory.items", "SelectionView", {"x": 42, "y": 30, "width": 378, "height": 244},
+        "inventory.items",
+        "SelectionView",
+        {"x": 42, "y": 30, "width": 378, "height": 244},
         {"unselected": parent_variants, "selected": parent_variants},
-        ["Activate", "DoubleActivate", "ModifierActivate", "ModifierDoubleActivate",
-         "DragDrop"],
-        [{"gesture": "Activate", "action": "SelectInventoryItem"},
-         {"gesture": "DoubleActivate", "action": "OpenInventoryItem"},
-         {"gesture": "ModifierActivate", "action": "ToggleInventorySelection"},
-         {"gesture": "ModifierDoubleActivate", "action": "TransferInventoryItem"},
-         {"gesture": "DragDrop", "action": "MoveInventoryItem"}],
-        ["unselected", "selected"], "unselected",
-        value={"items": item_ids, "initial": "r0c0", "details": item_details,
-               "value_control_ids": {}, "item_values": item_values,
-               "allowed_modifiers": ["ctrl"], "drop_targets": item_ids,
-               "initial_version": 0,
-               "detail_view": {"size": [156, 50], "offset": [8, 0],
-                               "padding": [8, 5],
-                               "font": "res://fonts/PixelMplus10-Regular.ttf",
-                               "font_size": 12, "font_color": "#2a252a",
-                               "state_set": detail_states}},
+        ["Activate", "DoubleActivate", "ModifierActivate", "ModifierDoubleActivate", "DragDrop"],
+        [
+            {"gesture": "Activate", "action": "SelectInventoryItem"},
+            {"gesture": "DoubleActivate", "action": "OpenInventoryItem"},
+            {"gesture": "ModifierActivate", "action": "ToggleInventorySelection"},
+            {"gesture": "ModifierDoubleActivate", "action": "TransferInventoryItem"},
+            {"gesture": "DragDrop", "action": "MoveInventoryItem"},
+        ],
+        ["unselected", "selected"],
+        "unselected",
+        value={
+            "items": item_ids,
+            "initial": "r0c0",
+            "details": item_details,
+            "value_control_ids": {},
+            "item_values": item_values,
+            "allowed_modifiers": ["ctrl"],
+            "drop_targets": item_ids,
+            "initial_version": 0,
+            "detail_view": {
+                "size": [156, 50],
+                "offset": [8, 0],
+                "padding": [8, 5],
+                "font": "res://fonts/PixelMplus10-Regular.ttf",
+                "font_size": 12,
+                "font_color": "#2a252a",
+                "state_set": detail_states,
+            },
+        },
         surfaces=item_surfaces,
     )
 
@@ -172,24 +208,35 @@ def main() -> None:
         relative = dict(geometry)
         relative["x"] -= 10
         relative["y"] -= 30
-        tab_surfaces[tab] = {"geometry": relative, "state_set": {
-            "unselected": variant_set(crop, f"tab-{tab}-unselected", records),
-            "selected": variant_set(crop, f"tab-{tab}-selected", records, BLUE, 2),
-        }}
+        tab_surfaces[tab] = {
+            "geometry": relative,
+            "state_set": {
+                "unselected": variant_set(crop, f"tab-{tab}-unselected", records),
+                "selected": variant_set(crop, f"tab-{tab}-selected", records, BLUE, 2),
+            },
+        }
     tabs = control(
-        "inventory.tabs", "Tabs", {"x": 10, "y": 30, "width": 26, "height": 192},
-        {"ready": parent_variants}, ["Activate"],
+        "inventory.tabs",
+        "Tabs",
+        {"x": 10, "y": 30, "width": 26, "height": 192},
+        {"ready": parent_variants},
+        ["Activate"],
         [{"gesture": "Activate", "action": "SelectInventoryTab"}],
-        value={"choices": tab_ids, "initial": "item"}, surfaces=tab_surfaces,
+        value={"choices": tab_ids, "initial": "item"},
+        surfaces=tab_surfaces,
     )
 
-    def bitmap_button(entry: dict[str, object], control_id: str,
-                      action: str) -> dict[str, object]:
+    def bitmap_button(entry: dict[str, object], control_id: str, action: str) -> dict[str, object]:
         geometry = rel(entry["rect"])
         crop = window.crop(box(geometry))
-        return control(control_id, "Button", geometry,
-                       {"ready": variant_set(crop, control_id.replace(".", "-"), records)},
-                       ["Activate"], [{"gesture": "Activate", "action": action}])
+        return control(
+            control_id,
+            "Button",
+            geometry,
+            {"ready": variant_set(crop, control_id.replace(".", "-"), records)},
+            ["Activate"],
+            [{"gesture": "Activate", "action": action}],
+        )
 
     minimize_entry = next(entry for entry in controls if entry["type"] == "minimize")
     close_entry = next(entry for entry in controls if entry["type"] == "close")
@@ -206,7 +253,9 @@ def main() -> None:
     footer_fill = window.crop((260, 279, 360, 303))
     right_edge = window.crop((480, 80, 484, 180))
     resize_frame = {
-        "home_size": [484, 303], "title_height": 24, "footer_height": 24,
+        "home_size": [484, 303],
+        "title_height": 24,
+        "footer_height": 24,
         "right_edge_width": 4,
         "anchored_right_controls": ["inventory.minimize", "inventory.close"],
         "stale_title_controls_geometry": {"x": 436, "y": 0, "width": 48, "height": 24},
@@ -227,41 +276,58 @@ def main() -> None:
 
     inventory_window = {
         "id": "inventory",
-        "geometry": {"x": WINDOW[0], "y": WINDOW[1],
-                     "width": WINDOW[2], "height": WINDOW[3]},
+        "geometry": {"x": WINDOW[0], "y": WINDOW[1], "width": WINDOW[2], "height": WINDOW[3]},
         "drag_geometry": {"x": 24, "y": 0, "width": 390, "height": 24},
-        "resize": {"grip_geometry": grip_geometry, "minimum": [332, 220],
-                   "maximum": [734, 512], "state_set": grip_states,
-                   "frame": resize_frame},
+        "resize": {
+            "grip_geometry": grip_geometry,
+            "minimum": [332, 220],
+            "maximum": [734, 512],
+            "state_set": grip_states,
+            "frame": resize_frame,
+        },
         "minimized_controls": ["inventory.minimize", "inventory.close"],
         "plates": {"expanded": expanded_path, "minimized": minimized_path},
         "gestures": ["Drag", "Resize", "KeyCommand"],
-        "actions": [{"gesture": "Drag", "action": "MoveWindow"},
-                    {"gesture": "Resize", "action": "ResizeWindow"},
-                    {"gesture": "KeyCommand", "key": "Escape",
-                     "action": "CloseWindow"}],
+        "actions": [
+            {"gesture": "Drag", "action": "MoveWindow"},
+            {"gesture": "Resize", "action": "ResizeWindow"},
+            {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+        ],
         "controls": [minimize, close, tabs, selection],
     }
 
     manifest = json.loads(CONTROL_SPEC.read_text())
-    manifest["windows"] = [window_spec for window_spec in manifest["windows"]
-                           if window_spec.get("id") != "inventory"]
+    manifest["windows"] = [
+        window_spec for window_spec in manifest["windows"] if window_spec.get("id") != "inventory"
+    ]
     manifest["windows"].append(inventory_window)
     CONTROL_SPEC.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     asset_manifest = {
         "schema_version": 1,
         "issue": 127,
-        "source": {"path": str(SOURCE.relative_to(ROOT)), "sha256": sha256(SOURCE),
-                   "window_rect": list(WINDOW)},
+        "source": {
+            "path": str(SOURCE.relative_to(ROOT)),
+            "sha256": sha256(SOURCE),
+            "window_rect": list(WINDOW),
+        },
         "assembly": "deterministic source-pixel crops and source-palette state transforms",
         "provider_requests": 0,
         "files": records,
     }
     (OUTPUT / "asset-manifest.json").write_text(
-        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n")
-    print(json.dumps({"window": "inventory", "controls": len(inventory_window["controls"]),
-                      "slots": len(item_ids), "assets": len(records),
-                      "provider_requests": 0}))
+        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n"
+    )
+    print(
+        json.dumps(
+            {
+                "window": "inventory",
+                "controls": len(inventory_window["controls"]),
+                "slots": len(item_ids),
+                "assets": len(records),
+                "provider_requests": 0,
+            }
+        )
+    )
 
 
 if __name__ == "__main__":

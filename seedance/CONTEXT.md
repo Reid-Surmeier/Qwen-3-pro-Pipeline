@@ -24,4 +24,3 @@ Produce small, style-locked icon animations through an inspectable OpenRouter/Se
 `briefed -> planned -> cost-approved -> submitted -> generated -> verified -> reviewed -> accepted`
 
 Failed or rejected candidates remain as evidence. They are not overwritten.
-

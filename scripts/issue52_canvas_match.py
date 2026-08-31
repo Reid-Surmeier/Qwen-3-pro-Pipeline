@@ -170,7 +170,11 @@ def request_for_arm(arm: str, *, include_reference: bool = True) -> dict[str, An
         "seed": SEED,
     }
     request.update(
-        {key: value for key, value in ARMS[arm].items() if key in {"size", "resolution", "aspect_ratio"}}
+        {
+            key: value
+            for key, value in ARMS[arm].items()
+            if key in {"size", "resolution", "aspect_ratio"}
+        }
     )
     if include_reference:
         request["input_references"] = [
@@ -214,7 +218,21 @@ def prepare() -> None:
             "observed_at": "2026-08-27",
             "source": "https://openrouter.ai/api/v1/images/models/qwen/qwen-image-3-pro/endpoints",
             "resolution": ["1K", "2K"],
-            "aspect_ratio": ["1:1", "1:2", "1:4", "2:1", "2:3", "3:2", "3:4", "4:1", "4:3", "4:5", "5:4", "9:16", "16:9"],
+            "aspect_ratio": [
+                "1:1",
+                "1:2",
+                "1:4",
+                "2:1",
+                "2:3",
+                "3:2",
+                "3:4",
+                "4:1",
+                "4:3",
+                "4:5",
+                "5:4",
+                "9:16",
+                "16:9",
+            ],
             "pricing_usd": {"input_reference": 0.003, "output_1k": 0.040, "output_2k": 0.075},
             "explicit_size_contract": "OpenRouter Images API documents explicit pixel size as authoritative",
         },
@@ -234,9 +252,7 @@ def prepare() -> None:
 def _safe_request(request: Mapping[str, Any]) -> dict[str, Any]:
     safe = dict(request)
     if "input_references" in safe:
-        safe["input_references"] = [
-            {"type": "image_url", "image_url": "[recorded separately]"}
-        ]
+        safe["input_references"] = [{"type": "image_url", "image_url": "[recorded separately]"}]
     return safe
 
 
@@ -268,6 +284,8 @@ def _acquire_image_submission_lock(arm: str) -> Path:
             "request before any later arm"
         ) from error
     return lock_path
+
+
 def _release_image_submission_lock(lock_path: Path) -> None:
     lock_path.unlink()
     _fsync_directory(lock_path.parent)
@@ -431,8 +449,7 @@ def submit(arm: str) -> None:
         )
         _write_json(attempt_path, attempt)
         raise SystemExit(
-            "provider response could not be durably persisted; keep the global "
-            "lock and stop"
+            "provider response could not be durably persisted; keep the global lock and stop"
         ) from error
     attempt.update(status="completed", completed_at=_now())
     _write_json(attempt_path, attempt)
@@ -490,9 +507,13 @@ def score_image(path: Path) -> dict[str, Any]:
     draw = ImageDraw.Draw(edge)
     edge_width = 8
     draw.rectangle((0, 0, reference.width - 1, edge_width - 1), fill=1)
-    draw.rectangle((0, reference.height - edge_width, reference.width - 1, reference.height - 1), fill=1)
+    draw.rectangle(
+        (0, reference.height - edge_width, reference.width - 1, reference.height - 1), fill=1
+    )
     draw.rectangle((0, 0, edge_width - 1, reference.height - 1), fill=1)
-    draw.rectangle((reference.width - edge_width, 0, reference.width - 1, reference.height - 1), fill=1)
+    draw.rectangle(
+        (reference.width - edge_width, 0, reference.width - 1, reference.height - 1), fill=1
+    )
 
     source_ratio = reference.width / reference.height
     output_ratio = original_dimensions[0] / original_dimensions[1]
@@ -552,9 +573,7 @@ def write_review_crops() -> None:
         "schema_version": "issue-52-review-crops-v1",
         "source_sha256": SOURCE_SHA256,
         "normalization": "nearest-neighbour to 474x403 before cropping",
-        "regions_xyxy_half_open": {
-            name: list(box) for name, box in REVIEW_REGIONS.items()
-        },
+        "regions_xyxy_half_open": {name: list(box) for name, box in REVIEW_REGIONS.items()},
         "source_crops": {},
         "candidate_crops": {},
     }
@@ -584,16 +603,12 @@ def write_review_crops() -> None:
                 "sha256": _sha256(path),
             }
     _write_json(crops_root / "manifest.json", manifest)
-    print(
-        f"wrote {len(REVIEW_REGIONS)} bounded crop pairs for {len(ARMS)} arms"
-    )
+    print(f"wrote {len(REVIEW_REGIONS)} bounded crop pairs for {len(ARMS)} arms")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        raise SystemExit(
-            "usage: issue52_canvas_match.py prepare|submit ARM|score|review-crops"
-        )
+        raise SystemExit("usage: issue52_canvas_match.py prepare|submit ARM|score|review-crops")
     command = sys.argv[1]
     if command == "prepare":
         prepare()
@@ -604,6 +619,4 @@ if __name__ == "__main__":
     elif command == "review-crops":
         write_review_crops()
     else:
-        raise SystemExit(
-            "usage: issue52_canvas_match.py prepare|submit ARM|score|review-crops"
-        )
+        raise SystemExit("usage: issue52_canvas_match.py prepare|submit ARM|score|review-crops")

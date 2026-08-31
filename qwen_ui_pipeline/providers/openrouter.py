@@ -159,8 +159,7 @@ def build_openrouter_request(
         request["seed"] = int(output["seed"])
     if reference_urls:
         request["input_references"] = [
-            {"type": "image_url", "image_url": {"url": url}}
-            for url in reference_urls
+            {"type": "image_url", "image_url": {"url": url}} for url in reference_urls
         ]
     return request
 

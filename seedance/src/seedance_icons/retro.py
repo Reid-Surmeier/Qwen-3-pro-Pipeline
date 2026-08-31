@@ -58,7 +58,6 @@ def _mask(frame: Image.Image, matte: tuple[int, int, int]) -> list[bool]:
     ]
 
 
-
 def mask_fill_ratio(image: Image.Image, matte: tuple[int, int, int]) -> float:
     """How completely the non-matte pixels fill their own bounding box.
 
@@ -127,7 +126,6 @@ def ink_silhouette_iou(
     return silhouette_iou(frame, anchor, ground)
 
 
-
 def border_leak(frame: Image.Image, anchor: Image.Image, matte: tuple[int, int, int]) -> float:
     """Fraction of the Anchor's border ring the frame has drawn into.
 
@@ -140,7 +138,7 @@ def border_leak(frame: Image.Image, anchor: Image.Image, matte: tuple[int, int, 
     fidelity metric tried for filled tiles, because it asks a question the framing
     actually answers.
     """
-    a = _mask(anchor, matte)   # True where the Anchor draws
+    a = _mask(anchor, matte)  # True where the Anchor draws
     f = _mask(frame, matte)
     ring = [i for i, on in enumerate(a) if not on]  # the Anchor's border
     if not ring:
@@ -177,11 +175,7 @@ def inner_margin(anchor: Image.Image, matte: tuple[int, int, int]) -> float:
     px = list(anchor.convert("RGB").getdata())
     inside = [p for i, p in enumerate(px) if on[i]]
     ground = max(set(inside), key=inside.count) if inside else (0, 0, 0)
-    ink = [
-        (i % w, i // w)
-        for i, p in enumerate(px)
-        if on[i] and p != ground
-    ]
+    ink = [(i % w, i // w) for i, p in enumerate(px) if on[i] and p != ground]
     if not ink:
         return 0.0
     xs = [p[0] for p in ink]
@@ -195,7 +189,9 @@ def inner_margin(anchor: Image.Image, matte: tuple[int, int, int]) -> float:
     return min(gaps) / max(1, tile[2] - tile[0] + 1)
 
 
-def silhouette_iou(frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]) -> float:
+def silhouette_iou(
+    frame: Image.Image, reference: Image.Image, matte: tuple[int, int, int]
+) -> float:
     a, b = _mask(frame, matte), _mask(reference, matte)
     inter = sum(1 for x, y in zip(a, b) if x and y)
     union = sum(1 for x, y in zip(a, b) if x or y)
@@ -256,9 +252,7 @@ def certify(report: dict, thresholds: RetroThresholds | None = None) -> dict:
         # certified by a person looking at the state-set GIF.
         checks["stayed_in_the_tile"] = report["max_border_leak"] <= MAX_BORDER_LEAK
     elif "anchor_silhouette_iou" in report:
-        checks["matches_anchor"] = (
-            report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
-        )
+        checks["matches_anchor"] = report["anchor_silhouette_iou"] >= t.min_anchor_silhouette_iou
     return {
         "checks": checks,
         "diagnostics": {"frame0_identity": report["frame0_identity"]},
@@ -289,8 +283,17 @@ def conform(
     out_dir.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         subprocess.run(
-            ["ffmpeg", "-loglevel", "error", "-y", "-i", str(video),
-             "-vf", f"fps={fps}", f"{tmp}/f%04d.png"],
+            [
+                "ffmpeg",
+                "-loglevel",
+                "error",
+                "-y",
+                "-i",
+                str(video),
+                "-vf",
+                f"fps={fps}",
+                f"{tmp}/f%04d.png",
+            ],
             check=True,
         )
         raw = [Image.open(p).convert("RGB") for p in sorted(Path(tmp).glob("f*.png"))]
@@ -325,10 +328,19 @@ def conform(
         frame.resize((delivery, delivery), Image.NEAREST).save(out_dir / f"frame{i:02d}.png")
     hold = max(1, round(24 / fps))
     subprocess.run(
-        ["ffmpeg", "-loglevel", "error", "-y", "-framerate", str(fps),
-         "-i", f"{out_dir}/frame%02d.png",
-         "-vf", "split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=none",
-         str(out_dir / "conformed.gif")],
+        [
+            "ffmpeg",
+            "-loglevel",
+            "error",
+            "-y",
+            "-framerate",
+            str(fps),
+            "-i",
+            f"{out_dir}/frame%02d.png",
+            "-vf",
+            "split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=none",
+            str(out_dir / "conformed.gif"),
+        ],
         check=True,
     )
     report["hold_frames_at_24fps"] = hold
@@ -386,7 +398,6 @@ def _segment(frames: list[Image.Image], span: tuple[float, float]) -> list[Image
     return frames[a:b] or frames[a : a + 1] or frames[-1:]
 
 
-
 def ink_centroid(frame: Image.Image, matte: tuple[int, int, int]) -> tuple[float, float] | None:
     """Centre of mass of everything that is not matte and not the tile's ground."""
     on = _mask(frame, matte)
@@ -417,9 +428,7 @@ def step_evenness(frames: list[Image.Image], matte: tuple[int, int, int]) -> flo
     """
     cents = [ink_centroid(f, matte) for f in frames]
     steps = [
-        ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5
-        for a, b in pairwise(cents)
-        if a and b
+        ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5 for a, b in pairwise(cents) if a and b
     ]
     if len(steps) < 2:
         return 0.0
@@ -427,7 +436,7 @@ def step_evenness(frames: list[Image.Image], matte: tuple[int, int, int]) -> flo
     if mean <= 1e-9:
         return 0.0
     var = sum((s - mean) ** 2 for s in steps) / len(steps)
-    return (var ** 0.5) / mean
+    return (var**0.5) / mean
 
 
 def resample_by_travel(
@@ -502,8 +511,17 @@ def conform_states(
 
     with tempfile.TemporaryDirectory() as tmp:
         subprocess.run(
-            ["ffmpeg", "-loglevel", "error", "-y", "-i", str(video),
-             "-vf", f"fps={fps}", f"{tmp}/f%04d.png"],
+            [
+                "ffmpeg",
+                "-loglevel",
+                "error",
+                "-y",
+                "-i",
+                str(video),
+                "-vf",
+                f"fps={fps}",
+                f"{tmp}/f%04d.png",
+            ],
             check=True,
         )
         raw = [Image.open(p).convert("RGB") for p in sorted(Path(tmp).glob("f*.png"))]
@@ -576,10 +594,19 @@ def conform_states(
         for i, frame in enumerate(snapped):
             frame.resize((delivery, delivery), Image.NEAREST).save(state_dir / f"frame{i:02d}.png")
         subprocess.run(
-            ["ffmpeg", "-loglevel", "error", "-y", "-framerate", str(fps),
-             "-i", f"{state_dir}/frame%02d.png",
-             "-vf", "split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=none",
-             str(state_dir / "conformed.gif")],
+            [
+                "ffmpeg",
+                "-loglevel",
+                "error",
+                "-y",
+                "-framerate",
+                str(fps),
+                "-i",
+                f"{state_dir}/frame%02d.png",
+                "-vf",
+                "split[a][b];[a]palettegen=max_colors=64[p];[b][p]paletteuse=dither=none",
+                str(state_dir / "conformed.gif"),
+            ],
             check=True,
         )
         report["hold_frames_at_24fps"] = max(1, round(24 / fps))
@@ -589,9 +616,7 @@ def conform_states(
     # The artifact a person actually judges: the four states cycling at the era cadence,
     # each held, substituted instantly. Per-state GIFs show what a state contains; this
     # shows what the icon does.
-    cycle = [
-        Image.open(out_dir / name / "frame00.png").convert("RGB") for name in spans
-    ]
+    cycle = [Image.open(out_dir / name / "frame00.png").convert("RGB") for name in spans]
     cycle[0].save(
         out_dir / "state-set.gif",
         save_all=True,
@@ -631,9 +656,7 @@ def conform_states(
             "figure is the model's own pacing, the resampled figure is what the cycle "
             "GIF plays. Sampling by distance rather than by time is what closes the gap."
         ),
-        "max_border_leak": max(r["max_border_leak"] for r in states.values())
-        if states
-        else 0.0,
+        "max_border_leak": max(r["max_border_leak"] for r in states.values()) if states else 0.0,
         "state_hold_ms": state_hold_ms,
         "state_order": list(spans),
         "total_source_frames": len(raw),

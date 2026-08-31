@@ -19,14 +19,15 @@ SPEC.loader.exec_module(MODULE)
 class Issue52CanvasMatchTest(unittest.TestCase):
     def test_arms_change_only_geometry(self):
         requests = {
-            arm: MODULE.request_for_arm(arm, include_reference=False)
-            for arm in MODULE.ARMS
+            arm: MODULE.request_for_arm(arm, include_reference=False) for arm in MODULE.ARMS
         }
         common = {"model", "prompt", "n", "seed"}
         baseline = {key: requests["exact-size"][key] for key in common}
         for request in requests.values():
             self.assertEqual(baseline, {key: request[key] for key in common})
-            self.assertEqual(set(request) - common, set(request) & {"size", "resolution", "aspect_ratio"})
+            self.assertEqual(
+                set(request) - common, set(request) & {"size", "resolution", "aspect_ratio"}
+            )
         self.assertEqual(requests["exact-size"]["size"], "948x806")
         self.assertNotIn("resolution", requests["exact-size"])
         self.assertNotIn("aspect_ratio", requests["exact-size"])
@@ -42,8 +43,9 @@ class Issue52CanvasMatchTest(unittest.TestCase):
             (out / "attempts" / "exact-size.json").write_text(
                 json.dumps({"status": "reserved-before-submit"}), encoding="utf-8"
             )
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
             ):
                 with self.assertRaisesRegex(SystemExit, "refusing resubmission"):
                     MODULE.submit("exact-size")
@@ -71,9 +73,11 @@ class Issue52CanvasMatchTest(unittest.TestCase):
                 json.dumps({"status": "ambiguous-transport-error"}),
                 encoding="utf-8",
             )
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(MODULE.urllib.request, "urlopen") as urlopen:
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(MODULE.urllib.request, "urlopen") as urlopen,
+            ):
                 with self.assertRaisesRegex(SystemExit, "blocks every later arm"):
                     MODULE.submit("nearest-1k")
                 urlopen.assert_not_called()
@@ -98,16 +102,17 @@ class Issue52CanvasMatchTest(unittest.TestCase):
                 hdrs=None,
                 fp=io.BytesIO(b'{"error":"temporary"}'),
             )
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(
-                MODULE, "request_for_arm", return_value={"model": MODULE.MODEL, "n": 1}
-            ), mock.patch.object(MODULE.urllib.request, "urlopen", side_effect=error):
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(
+                    MODULE, "request_for_arm", return_value={"model": MODULE.MODEL, "n": 1}
+                ),
+                mock.patch.object(MODULE.urllib.request, "urlopen", side_effect=error),
+            ):
                 with self.assertRaisesRegex(SystemExit, "keep the global lock"):
                     MODULE.submit("exact-size")
-            attempt = json.loads(
-                (out / "attempts" / "exact-size.json").read_text(encoding="utf-8")
-            )
+            attempt = json.loads((out / "attempts" / "exact-size.json").read_text(encoding="utf-8"))
             self.assertEqual(attempt["status"], "ambiguous-http-server-error")
             self.assertEqual(attempt["http_status"], 503)
             self.assertTrue((out / "image-submission.lock").exists())
@@ -117,8 +122,9 @@ class Issue52CanvasMatchTest(unittest.TestCase):
             source = Path(directory) / "source.png"
             source.write_bytes(b"tampered")
             expected = hashlib.sha256(b"expected").hexdigest()
-            with mock.patch.object(MODULE, "SOURCE", source), mock.patch.object(
-                MODULE, "SOURCE_SHA256", expected
+            with (
+                mock.patch.object(MODULE, "SOURCE", source),
+                mock.patch.object(MODULE, "SOURCE_SHA256", expected),
             ):
                 with self.assertRaisesRegex(RuntimeError, "identity"):
                     MODULE._validated_source_bytes()

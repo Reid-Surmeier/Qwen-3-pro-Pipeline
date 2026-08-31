@@ -1,5 +1,4 @@
 import hashlib
-import json
 import struct
 import tempfile
 import unittest
@@ -18,14 +17,28 @@ class PlayLogVerdictTests(unittest.TestCase):
         self.after = self._frame("after.png", b"after")
         self.invariant_before = self._frame("invariant-before.png", b"stable")
         self.invariant_after = self._frame("invariant-after.png", b"stable")
-        self.strict_before = self._png_frame("strict-before.png", [
-            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
-            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
-        ])
-        self.strict_after = self._png_frame("strict-after.png", [
-            (255, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
-            (0, 0, 0, 255), (0, 0, 0, 255), (0, 0, 0, 255),
-        ])
+        self.strict_before = self._png_frame(
+            "strict-before.png",
+            [
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+            ],
+        )
+        self.strict_after = self._png_frame(
+            "strict-after.png",
+            [
+                (255, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+                (0, 0, 0, 255),
+            ],
+        )
 
     def tearDown(self) -> None:
         self.tempdir.cleanup()
@@ -37,17 +50,23 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def _png_frame(self, name: str, pixels: list[tuple[int, int, int, int]]) -> dict[str, str]:
         def chunk(kind: bytes, content: bytes) -> bytes:
-            return (struct.pack(">I", len(content)) + kind + content
-                    + struct.pack(">I", zlib.crc32(kind + content) & 0xFFFFFFFF))
+            return (
+                struct.pack(">I", len(content))
+                + kind
+                + content
+                + struct.pack(">I", zlib.crc32(kind + content) & 0xFFFFFFFF)
+            )
 
         raw = b"".join(
-            b"\0" + b"".join(bytes(pixel) for pixel in pixels[row * 3:(row + 1) * 3])
+            b"\0" + b"".join(bytes(pixel) for pixel in pixels[row * 3 : (row + 1) * 3])
             for row in range(2)
         )
-        content = (b"\x89PNG\r\n\x1a\n"
-                   + chunk(b"IHDR", struct.pack(">IIBBBBB", 3, 2, 8, 6, 0, 0, 0))
-                   + chunk(b"IDAT", zlib.compress(raw))
-                   + chunk(b"IEND", b""))
+        content = (
+            b"\x89PNG\r\n\x1a\n"
+            + chunk(b"IHDR", struct.pack(">IIBBBBB", 3, 2, 8, 6, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(raw))
+            + chunk(b"IEND", b"")
+        )
         return self._frame(name, content)
 
     def _valid_log(self) -> dict:
@@ -64,7 +83,11 @@ class PlayLogVerdictTests(unittest.TestCase):
                 {"control_id": "options", "gesture": "Drag", "window_action": "MoveWindow"},
                 {"control_id": "options", "gesture": "KeyCommand", "window_action": "CloseWindow"},
                 {"control_id": "options.bgm", "gesture": "Drag", "window_action": "SetRange"},
-                {"control_id": "options.skin", "gesture": "Activate", "window_action": "ToggleDropdown"},
+                {
+                    "control_id": "options.skin",
+                    "gesture": "Activate",
+                    "window_action": "ToggleDropdown",
+                },
             ],
             "console_errors": [],
             "invariant_frames": {
@@ -134,21 +157,30 @@ class PlayLogVerdictTests(unittest.TestCase):
         log = self._valid_log()
         controls = []
         for control_id in log["required_controls"]:
-            controls.append({
-                "id": control_id,
-                "actions": [
-                    {"gesture": action["gesture"], "action": action["window_action"]}
-                    for action in log["required_actions"]
-                    if action["control_id"] == control_id
-                ],
-            })
-        return {"reference": {"sha256": "b" * 64},
-                "windows": [{"id": "options", "gestures": ["Drag", "KeyCommand"],
-                             "actions": [
-                                 {"gesture": "Drag", "action": "MoveWindow"},
-                                 {"gesture": "KeyCommand", "key": "Escape",
-                                  "action": "CloseWindow"},
-                             ], "controls": controls}]}
+            controls.append(
+                {
+                    "id": control_id,
+                    "actions": [
+                        {"gesture": action["gesture"], "action": action["window_action"]}
+                        for action in log["required_actions"]
+                        if action["control_id"] == control_id
+                    ],
+                }
+            )
+        return {
+            "reference": {"sha256": "b" * 64},
+            "windows": [
+                {
+                    "id": "options",
+                    "gestures": ["Drag", "KeyCommand"],
+                    "actions": [
+                        {"gesture": "Drag", "action": "MoveWindow"},
+                        {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+                    ],
+                    "controls": controls,
+                }
+            ],
+        }
 
     def _strict_log(self) -> dict:
         log = self._valid_log()
@@ -194,9 +226,13 @@ class PlayLogVerdictTests(unittest.TestCase):
     def test_read_only_meter_requires_no_synthetic_action(self) -> None:
         log = self._valid_log()
         manifest = self._manifest()
-        manifest["windows"][0]["controls"].append({
-            "id": "options.read_only_meter", "type": "Meter", "actions": [],
-        })
+        manifest["windows"][0]["controls"].append(
+            {
+                "id": "options.read_only_meter",
+                "type": "Meter",
+                "actions": [],
+            }
+        )
         verdict = evaluate_play_log(log, self.root, manifest)
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
@@ -215,15 +251,14 @@ class PlayLogVerdictTests(unittest.TestCase):
         action["reversal_pixel_metrics"]["full_frame_changed_pixels"] = 1
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"], verdict)
-        self.assertTrue(any("does not match hash-verified frames" in problem
-                            for problem in verdict["problems"]))
+        self.assertTrue(
+            any("does not match hash-verified frames" in problem for problem in verdict["problems"])
+        )
 
     def test_trusted_issue_cannot_be_downgraded_by_candidate(self) -> None:
         log = self._strict_log()
         log["candidate"]["issue"] = 127
-        verdict = evaluate_play_log(
-            log, self.root, self._strict_manifest(), trusted_issue=128
-        )
+        verdict = evaluate_play_log(log, self.root, self._strict_manifest(), trusted_issue=128)
         self.assertEqual("INVALID", verdict["verdict"], verdict)
         self.assertIn(
             "candidate.issue must match the frozen manifest evidence policy",
@@ -283,8 +318,13 @@ class PlayLogVerdictTests(unittest.TestCase):
         }
         verdict = evaluate_play_log(log, self.root, self._strict_manifest())
         self.assertEqual("FAIL", verdict["verdict"], verdict)
-        self.assertTrue(any("expected rejection had no transient feedback" in failure
-                            for failure in verdict["failures"]), verdict)
+        self.assertTrue(
+            any(
+                "expected rejection had no transient feedback" in failure
+                for failure in verdict["failures"]
+            ),
+            verdict,
+        )
 
     def test_strict_expected_rejection_fails_if_commit_frame_changes(self) -> None:
         log = self._strict_log()
@@ -298,13 +338,19 @@ class PlayLogVerdictTests(unittest.TestCase):
         }
         verdict = evaluate_play_log(log, self.root, self._strict_manifest())
         self.assertEqual("FAIL", verdict["verdict"], verdict)
-        self.assertTrue(any("expected rejection changed committed pixels" in failure
-                            for failure in verdict["failures"]), verdict)
+        self.assertTrue(
+            any(
+                "expected rejection changed committed pixels" in failure
+                for failure in verdict["failures"]
+            ),
+            verdict,
+        )
 
     def test_unexercised_control_is_incomplete(self) -> None:
         log = self._valid_log()
-        log["actions"] = [action for action in log["actions"]
-                          if action["control_id"] != "options.skin"]
+        log["actions"] = [
+            action for action in log["actions"] if action["control_id"] != "options.skin"
+        ]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INCOMPLETE", verdict["verdict"])
         self.assertEqual(["options.skin"], verdict["unexercised"])
@@ -320,14 +366,13 @@ class PlayLogVerdictTests(unittest.TestCase):
         )
         verdict = evaluate_play_log(log, self.root, manifest)
         self.assertEqual("INCOMPLETE", verdict["verdict"])
-        self.assertEqual(
-            ["options.bgm:Wheel:StepRange"], verdict["unexercised_actions"]
-        )
+        self.assertEqual(["options.bgm:Wheel:StepRange"], verdict["unexercised_actions"])
 
     def test_false_action_claim_fails(self) -> None:
         log = self._valid_log()
-        next(action for action in log["actions"]
-             if action["control_id"] == "options.skin")["matches_expected"] = False
+        next(action for action in log["actions"] if action["control_id"] == "options.skin")[
+            "matches_expected"
+        ] = False
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("FAIL", verdict["verdict"])
 
@@ -340,16 +385,19 @@ class PlayLogVerdictTests(unittest.TestCase):
     def test_missing_or_changed_frame_is_invalid(self) -> None:
         missing = self._valid_log()
         missing["actions"][1]["frames"]["after"]["path"] = "absent.png"
-        self.assertEqual("INVALID", evaluate_play_log(missing, self.root, self._manifest())["verdict"])
+        self.assertEqual(
+            "INVALID", evaluate_play_log(missing, self.root, self._manifest())["verdict"]
+        )
 
         changed = self._valid_log()
         (self.root / "after.png").write_bytes(b"changed")
-        self.assertEqual("INVALID", evaluate_play_log(changed, self.root, self._manifest())["verdict"])
+        self.assertEqual(
+            "INVALID", evaluate_play_log(changed, self.root, self._manifest())["verdict"]
+        )
 
     def test_drag_requires_mid_frame_and_thirty_motion_samples(self) -> None:
         log = self._valid_log()
-        drag = next(action for action in log["actions"]
-                    if action["control_id"] == "options.bgm")
+        drag = next(action for action in log["actions"] if action["control_id"] == "options.bgm")
         del drag["frames"]["mid"]
         drag["motion_samples"] = list(range(29))
         verdict = evaluate_play_log(log, self.root, self._manifest())
@@ -358,8 +406,7 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def test_window_drag_accepts_two_dimensional_motion_samples(self) -> None:
         log = self._valid_log()
-        drag = next(action for action in log["actions"]
-                    if action["control_id"] == "options")
+        drag = next(action for action in log["actions"] if action["control_id"] == "options")
         drag["motion_samples"] = [[index, index * 2] for index in range(31)]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
@@ -372,17 +419,18 @@ class PlayLogVerdictTests(unittest.TestCase):
                 log["actions"][0]["motion_samples"] = samples
                 verdict = evaluate_play_log(log, self.root, self._manifest())
                 self.assertEqual("INVALID", verdict["verdict"], verdict)
-                self.assertTrue(any(
-                    "two-dimensional" in problem or "threshold" in problem
-                    for problem in verdict["problems"]
-                ), verdict)
+                self.assertTrue(
+                    any(
+                        "two-dimensional" in problem or "threshold" in problem
+                        for problem in verdict["problems"]
+                    ),
+                    verdict,
+                )
 
     def test_legacy_window_drag_accepts_only_moving_scalar_motion(self) -> None:
         moving = self._valid_log()
         moving["actions"][0]["motion_samples"] = list(range(31))
-        self.assertEqual(
-            "PASS", evaluate_play_log(moving, self.root, self._manifest())["verdict"]
-        )
+        self.assertEqual("PASS", evaluate_play_log(moving, self.root, self._manifest())["verdict"])
         stationary = self._valid_log()
         stationary["actions"][0]["motion_samples"] = [0] * 31
         verdict = evaluate_play_log(stationary, self.root, self._manifest())
@@ -393,9 +441,7 @@ class PlayLogVerdictTests(unittest.TestCase):
         log = self._valid_log()
         log["candidate"]["issue"] = 125
         log["actions"][0]["motion_samples"] = list(range(31))
-        verdict = evaluate_play_log(
-            log, self.root, self._manifest(), trusted_issue=127
-        )
+        verdict = evaluate_play_log(log, self.root, self._manifest(), trusted_issue=127)
         self.assertEqual("INVALID", verdict["verdict"], verdict)
         self.assertTrue(
             any("two-dimensional" in problem for problem in verdict["problems"]),
@@ -417,9 +463,7 @@ class PlayLogVerdictTests(unittest.TestCase):
     def test_oversized_integer_motion_sample_is_invalid_not_an_exception(self) -> None:
         log = self._valid_log()
         log["candidate"]["issue"] = 127
-        log["actions"][0]["motion_samples"] = [
-            [index, 10 ** 400] for index in range(31)
-        ]
+        log["actions"][0]["motion_samples"] = [[index, 10**400] for index in range(31)]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"], verdict)
         self.assertTrue(
@@ -430,9 +474,7 @@ class PlayLogVerdictTests(unittest.TestCase):
     def test_large_finite_motion_uses_overflow_safe_distance(self) -> None:
         log = self._valid_log()
         log["candidate"]["issue"] = 127
-        log["actions"][0]["motion_samples"] = [
-            [index * 1e200, 0.0] for index in range(31)
-        ]
+        log["actions"][0]["motion_samples"] = [[index * 1e200, 0.0] for index in range(31)]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"], verdict)
 
@@ -451,10 +493,13 @@ class PlayLogVerdictTests(unittest.TestCase):
                     manifest["windows"][0]["actions"][0]["gesture"] = gesture
                     verdict = evaluate_play_log(log, self.root, manifest)
                     self.assertEqual("INVALID", verdict["verdict"], verdict)
-                    self.assertTrue(any(
-                        "two-dimensional" in problem or "threshold" in problem
-                        for problem in verdict["problems"]
-                    ), verdict)
+                    self.assertTrue(
+                        any(
+                            "two-dimensional" in problem or "threshold" in problem
+                            for problem in verdict["problems"]
+                        ),
+                        verdict,
+                    )
 
     def test_resize_and_drag_drop_require_motion_evidence(self) -> None:
         for gesture in ("Resize", "DragDrop"):
@@ -469,10 +514,13 @@ class PlayLogVerdictTests(unittest.TestCase):
                 manifest["windows"][0]["actions"][0]["gesture"] = gesture
                 verdict = evaluate_play_log(log, self.root, manifest)
                 self.assertEqual("INVALID", verdict["verdict"], verdict)
-                self.assertTrue(any(
-                    f"{gesture} requires at least 30 motion samples" in problem
-                    for problem in verdict["problems"]
-                ), verdict)
+                self.assertTrue(
+                    any(
+                        f"{gesture} requires at least 30 motion samples" in problem
+                        for problem in verdict["problems"]
+                    ),
+                    verdict,
+                )
 
     def test_malformed_root_is_invalid_without_throwing(self) -> None:
         verdict = evaluate_play_log({"schema_version": "wrong"}, self.root, self._manifest())
@@ -490,10 +538,10 @@ class PlayLogVerdictTests(unittest.TestCase):
 
     def test_required_actions_cannot_omit_a_window_binding(self) -> None:
         log = self._valid_log()
-        log["required_actions"] = [action for action in log["required_actions"]
-                                   if action["control_id"] != "options"]
-        log["actions"] = [action for action in log["actions"]
-                          if action["control_id"] != "options"]
+        log["required_actions"] = [
+            action for action in log["required_actions"] if action["control_id"] != "options"
+        ]
+        log["actions"] = [action for action in log["actions"] if action["control_id"] != "options"]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("INVALID", verdict["verdict"])
         self.assertTrue(any("frozen manifest" in problem for problem in verdict["problems"]))
@@ -501,10 +549,10 @@ class PlayLogVerdictTests(unittest.TestCase):
     def test_v1_log_remains_compatible_without_window_bindings(self) -> None:
         log = self._valid_log()
         log["schema_version"] = "image79-play-log-v1"
-        log["required_actions"] = [action for action in log["required_actions"]
-                                   if action["control_id"] != "options"]
-        log["actions"] = [action for action in log["actions"]
-                          if action["control_id"] != "options"]
+        log["required_actions"] = [
+            action for action in log["required_actions"] if action["control_id"] != "options"
+        ]
+        log["actions"] = [action for action in log["actions"] if action["control_id"] != "options"]
         verdict = evaluate_play_log(log, self.root, self._manifest())
         self.assertEqual("PASS", verdict["verdict"])
 

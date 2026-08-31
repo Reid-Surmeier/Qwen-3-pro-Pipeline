@@ -5,6 +5,7 @@ from pathlib import Path
 
 try:
     from PIL import Image, ImageChops
+
     HAVE_PIL = True
 except ImportError:
     HAVE_PIL = False
@@ -21,25 +22,20 @@ class ThreeRegionMuseumFilterAssemblyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.baseline = Image.open(
-            ROOT
-            / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
+            ROOT / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
         ).convert("RGB")
         cls.output, cls.declared = assembly.assemble_native(cls.baseline)
         cls.actual = assembly.changed_pixel_mask(cls.baseline, cls.output)
 
     def test_actual_changes_are_inside_only_three_declared_regions(self) -> None:
         self.assertEqual(self.actual.tobytes(), self.declared.tobytes())
-        outside = ImageChops.multiply(
-            self.actual, ImageChops.invert(self.declared)
-        )
+        outside = ImageChops.multiply(self.actual, ImageChops.invert(self.declared))
         self.assertIsNone(outside.getbbox())
 
         allowed = Image.new("L", self.baseline.size, 0)
         for box in assembly.EDIT_BOXES:
             allowed.paste(255, box)
-        outside_boxes = ImageChops.multiply(
-            self.actual, ImageChops.invert(allowed)
-        )
+        outside_boxes = ImageChops.multiply(self.actual, ImageChops.invert(allowed))
         self.assertIsNone(outside_boxes.getbbox())
 
         for box in assembly.EDIT_BOXES:

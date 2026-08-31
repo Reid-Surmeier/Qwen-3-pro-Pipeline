@@ -40,7 +40,9 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
     ):
         result = subprocess.run(
             ["git", "cat-file", "-e", f"{candidate}:{relative}"],
-            cwd=repository, capture_output=True, check=False,
+            cwd=repository,
+            capture_output=True,
+            check=False,
         )
         if result.returncode != 0:
             problems.append(f"candidate snapshot is missing {relative}")
@@ -54,14 +56,17 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
     else:
         for index, relative in enumerate(evidence):
             _require_file(repository, relative, f"candidate.evidence[{index}]", problems)
-    manifest_relatives = candidate_packet.get("evidence_manifests") \
-        if isinstance(candidate_packet, dict) else None
+    manifest_relatives = (
+        candidate_packet.get("evidence_manifests") if isinstance(candidate_packet, dict) else None
+    )
     if manifest_relatives is None:
         manifest_relatives = [
             f"artifacts/reviews/issue-{packet.get('issue')}/builder/evidence-manifest.json"
         ]
-    if not isinstance(manifest_relatives, list) or not manifest_relatives or not all(
-        isinstance(relative, str) and relative for relative in manifest_relatives
+    if (
+        not isinstance(manifest_relatives, list)
+        or not manifest_relatives
+        or not all(isinstance(relative, str) and relative for relative in manifest_relatives)
     ):
         problems.append("candidate.evidence_manifests must contain non-empty paths")
         manifest_relatives = []
@@ -81,7 +86,9 @@ def validate_packet(packet_path: Path, repository: Path, candidate: str) -> list
             repository, relative, f"candidate.evidence[{index}]", problems
         )
         if evidence_path is not None and evidence_path not in locked_paths:
-            problems.append(f"candidate.evidence[{index}] is not hash-locked by an evidence manifest")
+            problems.append(
+                f"candidate.evidence[{index}] is not hash-locked by an evidence manifest"
+            )
     return problems
 
 
@@ -114,8 +121,7 @@ def _validate_evidence_manifest(
         play_log_path = root / "play-log.json"
         try:
             play_log = json.loads(play_log_path.read_text())
-            play_candidate = play_log.get("candidate") \
-                if isinstance(play_log, dict) else None
+            play_candidate = play_log.get("candidate") if isinstance(play_log, dict) else None
             if not isinstance(play_candidate, dict):
                 problems.append("Play Log candidate must be an object")
             else:
@@ -123,12 +129,15 @@ def _validate_evidence_manifest(
                     problems.append("Play Log candidate commit does not match packet candidate")
             manifest_bytes = subprocess.run(
                 ["git", "show", f"{candidate}:godot/data/image-79-control-spec.json"],
-                cwd=repository, capture_output=True, check=True,
+                cwd=repository,
+                capture_output=True,
+                check=True,
             ).stdout
             control_manifest = json.loads(manifest_bytes)
             if str(repository) not in sys.path:
                 sys.path.insert(0, str(repository))
             from qwen_ui_pipeline.play_log import evaluate_play_log
+
             verdict = evaluate_play_log(
                 play_log,
                 root,
@@ -172,8 +181,7 @@ def main() -> int:
     parser.add_argument("packet_positional", nargs="?", type=Path)
     parser.add_argument("--packet", type=Path)
     parser.add_argument("--candidate", "--expect-sha", dest="candidate", required=True)
-    parser.add_argument("--repository", "--repo", dest="repository", type=Path,
-                        default=Path.cwd())
+    parser.add_argument("--repository", "--repo", dest="repository", type=Path, default=Path.cwd())
     args = parser.parse_args()
     packet = args.packet or args.packet_positional
     if packet is None:

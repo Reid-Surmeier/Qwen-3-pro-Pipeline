@@ -62,10 +62,10 @@ class OpenRouterImageClientTests(unittest.TestCase):
             captured["body"] = json.loads(request.data)
             captured["timeout"] = timeout
             return _Response(
-            {
-                "data": [{"b64_json": "aW1hZ2U=", "media_type": "image/png"}],
-                "usage": {"cost": 0.04},
-            }
+                {
+                    "data": [{"b64_json": "aW1hZ2U=", "media_type": "image/png"}],
+                    "usage": {"cost": 0.04},
+                }
             )
 
         client = OpenRouterImageClient("test-key", opener=open_request)
@@ -83,9 +83,7 @@ class OpenRouterImageClientTests(unittest.TestCase):
             captured["timeout"] = timeout
             return _Response({"data": []})
 
-        client = OpenRouterImageClient(
-            "test-key", opener=open_request, timeout=600.5
-        )
+        client = OpenRouterImageClient("test-key", opener=open_request, timeout=600.5)
         client.generate({"model": "qwen/qwen-image-3-pro", "prompt": "golf"})
 
         self.assertEqual(captured["timeout"], 600.5)
@@ -106,9 +104,7 @@ class OpenRouterImageClientTests(unittest.TestCase):
             with self.subTest(timeout=timeout):
                 opener = mock.Mock()
                 with self.assertRaisesRegex(ValueError, "timeout"):
-                    OpenRouterImageClient(
-                        "test-key", opener=opener, timeout=timeout
-                    )
+                    OpenRouterImageClient("test-key", opener=opener, timeout=timeout)
                 opener.assert_not_called()
 
     def test_writes_reproducible_artifacts_without_copying_base64_into_metadata(self):

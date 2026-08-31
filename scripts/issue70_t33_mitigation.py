@@ -76,8 +76,7 @@ def build_brief(source_key: str, arm: str) -> dict:
         "reference_role": spec["reference_role"],
         "provider": "openrouter",
         "model": MODEL,
-        "output": {"resolution": "1K", "aspect_ratio": spec["aspect"],
-                   "count": 1, "seed": SEED},
+        "output": {"resolution": "1K", "aspect_ratio": spec["aspect"], "count": 1, "seed": SEED},
         "preservation_invariants": list(BASE_INVARIANTS),
         "negative_constraints": [
             "No relayout, recentering, cleanup, or added elements.",
@@ -94,14 +93,20 @@ def build_brief(source_key: str, arm: str) -> dict:
 
 def _upload(path: str) -> str:
     import uuid
+
     data = (ROOT / path).read_bytes()
     boundary = uuid.uuid4().hex
     body = (
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"image\"; "
-        f"filename=\"issue70-{Path(path).name}\"\r\nContent-Type: image/png\r\n\r\n"
-    ).encode() + data + f"\r\n--{boundary}--\r\n".encode()
+        (
+            f'--{boundary}\r\nContent-Disposition: form-data; name="image"; '
+            f'filename="issue70-{Path(path).name}"\r\nContent-Type: image/png\r\n\r\n'
+        ).encode()
+        + data
+        + f"\r\n--{boundary}--\r\n".encode()
+    )
     request = urllib.request.Request(
-        f"{COMFY}/upload/image", data=body,
+        f"{COMFY}/upload/image",
+        data=body,
         headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -122,27 +127,45 @@ def submit(source_key: str, arm: str) -> None:
     if arm == "wordmark-ref":
         uploaded_ref = _upload(spec["wordmark_ref"])
         graph["5"] = {"class_type": "LoadImage", "inputs": {"image": uploaded_ref}}
-        graph["6"] = {"class_type": "ImageBatch", "inputs": {
-            "image1": ["1", 0], "image2": ["5", 0]}}
+        graph["6"] = {
+            "class_type": "ImageBatch",
+            "inputs": {"image1": ["1", 0], "image2": ["5", 0]},
+        }
         image_input = ["6", 0]
     else:
         image_input = ["1", 0]
-    graph["2"] = {"class_type": "QwenImage3Render", "inputs": {
-        "edit_brief_json": json.dumps(brief), "reference_images": image_input}}
-    graph["3"] = {"class_type": "SaveImage", "inputs": {
-        "images": ["2", 0], "filename_prefix": f"issue70/{source_key}--{arm}"}}
-    graph["4"] = {"class_type": "SaveText", "inputs": {
-        "text": ["2", 1], "filename_prefix": f"issue70/{source_key}--{arm}-meta",
-        "format": "json"}}
+    graph["2"] = {
+        "class_type": "QwenImage3Render",
+        "inputs": {"edit_brief_json": json.dumps(brief), "reference_images": image_input},
+    }
+    graph["3"] = {
+        "class_type": "SaveImage",
+        "inputs": {"images": ["2", 0], "filename_prefix": f"issue70/{source_key}--{arm}"},
+    }
+    graph["4"] = {
+        "class_type": "SaveText",
+        "inputs": {
+            "text": ["2", 1],
+            "filename_prefix": f"issue70/{source_key}--{arm}-meta",
+            "format": "json",
+        },
+    }
     attempt = {
-        "source": source_key, "arm": arm, "seed": SEED, "provider": "openrouter",
-        "model": MODEL, "requested_outputs": 1, "status": "submitted",
+        "source": source_key,
+        "arm": arm,
+        "seed": SEED,
+        "provider": "openrouter",
+        "model": MODEL,
+        "requested_outputs": 1,
+        "status": "submitted",
         "source_path": spec["path"],
     }
     attempt_path.write_text(json.dumps(attempt, indent=2) + "\n")
     request = urllib.request.Request(
-        f"{COMFY}/prompt", data=json.dumps({"prompt": graph}).encode(),
-        headers={"Content-Type": "application/json"}, method="POST",
+        f"{COMFY}/prompt",
+        data=json.dumps({"prompt": graph}).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST",
     )
     with urllib.request.urlopen(request, timeout=240) as response:
         result = json.loads(response.read())
@@ -152,7 +175,9 @@ def submit(source_key: str, arm: str) -> None:
     deadline = time.monotonic() + 600
     while time.monotonic() < deadline:
         time.sleep(5)
-        with urllib.request.urlopen(f"{COMFY}/history/{result['prompt_id']}", timeout=30) as response:
+        with urllib.request.urlopen(
+            f"{COMFY}/history/{result['prompt_id']}", timeout=30
+        ) as response:
             history = json.loads(response.read())
         if result["prompt_id"] in history:
             entry = history[result["prompt_id"]]
@@ -174,8 +199,12 @@ def collect() -> None:
     for attempt_path in sorted((OUT / "attempts").glob("*.json")):
         attempt = json.loads(attempt_path.read_text())
         key = f"{attempt['source']}--{attempt['arm']}"
-        record = {"status": attempt.get("status"), "prompt_id": attempt.get("prompt_id"),
-                  "files": [], "usage": None}
+        record = {
+            "status": attempt.get("status"),
+            "prompt_id": attempt.get("prompt_id"),
+            "files": [],
+            "usage": None,
+        }
         for node_output in attempt.get("outputs", {}).values():
             for text in node_output.get("text", []):
                 try:
@@ -187,19 +216,24 @@ def collect() -> None:
             for item in node_output.get("images", []):
                 if not isinstance(item, dict):
                     continue
-                query = urllib.parse.urlencode({
-                    "filename": item["filename"],
-                    "subfolder": item.get("subfolder", ""),
-                    "type": item.get("type", "output"),
-                })
+                query = urllib.parse.urlencode(
+                    {
+                        "filename": item["filename"],
+                        "subfolder": item.get("subfolder", ""),
+                        "type": item.get("type", "output"),
+                    }
+                )
                 with urllib.request.urlopen(f"{COMFY}/view?{query}", timeout=120) as response:
                     data = response.read()
                 local = outputs_dir / f"{key}.png"
                 local.write_bytes(data)
-                record["files"].append({
-                    "file": local.name, "bytes": len(data),
-                    "sha256": hashlib.sha256(data).hexdigest(),
-                })
+                record["files"].append(
+                    {
+                        "file": local.name,
+                        "bytes": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(),
+                    }
+                )
         manifest[key] = record
         print(key, record["status"])
     (OUT / "collection-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
@@ -207,6 +241,7 @@ def collect() -> None:
 
 def sheet() -> None:
     from PIL import Image, ImageDraw
+
     tiles = []
     for source_key, spec in SOURCES.items():
         tiles.append((f"{source_key} source", Image.open(ROOT / spec["path"]).convert("RGB")))

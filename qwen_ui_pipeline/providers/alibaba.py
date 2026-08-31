@@ -22,31 +22,44 @@ MODEL_NAMES = {
 
 SIZES = {
     "1K": {
-        "1:1": "1024*1024", "1:2": "720*1440", "1:4": "512*2048",
-        "2:1": "1440*720", "2:3": "832*1248", "3:2": "1248*832",
-        "3:4": "864*1152", "4:1": "2048*512", "4:3": "1152*864",
-        "4:5": "896*1120", "5:4": "1120*896", "9:16": "720*1280",
+        "1:1": "1024*1024",
+        "1:2": "720*1440",
+        "1:4": "512*2048",
+        "2:1": "1440*720",
+        "2:3": "832*1248",
+        "3:2": "1248*832",
+        "3:4": "864*1152",
+        "4:1": "2048*512",
+        "4:3": "1152*864",
+        "4:5": "896*1120",
+        "5:4": "1120*896",
+        "9:16": "720*1280",
         "16:9": "1280*720",
     },
     "2K": {
-        "1:1": "2048*2048", "1:2": "1024*2048", "1:4": "512*2048",
-        "2:1": "2048*1024", "2:3": "1344*2016", "3:2": "2016*1344",
-        "3:4": "1536*2048", "4:1": "2048*512", "4:3": "2048*1536",
-        "4:5": "1600*2000", "5:4": "2000*1600", "9:16": "1152*2048",
+        "1:1": "2048*2048",
+        "1:2": "1024*2048",
+        "1:4": "512*2048",
+        "2:1": "2048*1024",
+        "2:3": "1344*2016",
+        "3:2": "2016*1344",
+        "3:4": "1536*2048",
+        "4:1": "2048*512",
+        "4:3": "2048*1536",
+        "4:5": "1600*2000",
+        "5:4": "2000*1600",
+        "9:16": "1152*2048",
         "16:9": "2048*1152",
     },
 }
 
 DEFAULT_ENDPOINT = (
-    "https://dashscope-intl.aliyuncs.com"
-    "/api/v1/services/aigc/multimodal-generation/generation"
+    "https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation"
 )
 MAX_SEED = 2_147_483_647
 
 
-def _resolve_size(
-    output: Mapping[str, Any], *, allow_partner_auto: bool = False
-) -> str | None:
+def _resolve_size(output: Mapping[str, Any], *, allow_partner_auto: bool = False) -> str | None:
     if allow_partner_auto and output.get("size_mode") == "auto":
         return None
     explicit_size = output.get("size")
@@ -164,10 +177,7 @@ def build_alibaba_request(
     compiled = compile_edit_brief(brief)
     output = brief.get("output", {})
     interface = brief.get("interface", {})
-    is_partner = (
-        isinstance(interface, Mapping)
-        and interface.get("name") == "partner-compatible"
-    )
+    is_partner = isinstance(interface, Mapping) and interface.get("name") == "partner-compatible"
     size = _resolve_size(output, allow_partner_auto=is_partner)
     model = MODEL_NAMES.get(str(brief.get("model", "qwen/qwen-image-3-pro")))
     if model is None:

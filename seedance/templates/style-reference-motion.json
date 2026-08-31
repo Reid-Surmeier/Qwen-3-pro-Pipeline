@@ -7,4 +7,3 @@
   "background": "Use the approved solid matte.",
   "negative_constraints": ["no reference-content leakage", "no source identity drift", "no extra objects"]
 }
-

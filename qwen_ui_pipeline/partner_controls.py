@@ -98,8 +98,7 @@ def _validate_dimensions(width: int, height: int, *, max_area: int) -> None:
     area = width * height
     if not MIN_AREA <= area <= max_area:
         raise ValueError(
-            f"Image area must be between {MIN_AREA} and {max_area} pixels; "
-            f"got {width}x{height}."
+            f"Image area must be between {MIN_AREA} and {max_area} pixels; got {width}x{height}."
         )
     if width > MAX_ASPECT * height or height > MAX_ASPECT * width:
         raise ValueError(f"Aspect ratio must be between 1:8 and 8:1; got {width}x{height}.")
@@ -258,9 +257,7 @@ def build_partner_edit_brief(
             "height": requested_height,
         }
         if provider == "openrouter":
-            resolution, aspect_ratio = _openrouter_size(
-                requested_width, requested_height
-            )
+            resolution, aspect_ratio = _openrouter_size(requested_width, requested_height)
             output["resolution"] = resolution
             output["aspect_ratio"] = aspect_ratio
         else:

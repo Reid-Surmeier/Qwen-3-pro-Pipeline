@@ -6,6 +6,7 @@ the title/header, English lettering, and the object/material tab strip.  The
 Qwen candidates are registered to the baseline's magenta frame, reduced to the
 client's native 313x211 raster, and copied only through explicit rectangles.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -134,8 +135,8 @@ def assemble(
     # clear of every field edge and checkbox so those controls remain byte-for-
     # byte Assembly v001 pixels.
     text_regions = [
-        (31, 39, 74, 53),   # Search label
-        (31, 66, 72, 80),   # Match label
+        (31, 39, 74, 53),  # Search label
+        (31, 66, 72, 80),  # Match label
     ]
     for box in text_regions:
         copy_region(output, mask, text, _scaled(box, scale))
@@ -148,17 +149,23 @@ def assemble(
         _scaled((83, 39, 125, 53), scale),
     )
     copy_region(
-        output, mask, text,
+        output,
+        mask,
+        text,
         _scaled((90, 66, 116, 80), scale),
         _scaled((92, 66, 118, 80), scale),
     )
     copy_region(
-        output, mask, text,
+        output,
+        mask,
+        text,
         _scaled((142, 66, 165, 80), scale),
         _scaled((146, 66, 169, 80), scale),
     )
     copy_region(
-        output, mask, text,
+        output,
+        mask,
+        text,
         _scaled((167, 66, 257, 80), scale),
         _scaled((171, 66, 261, 80), scale),
     )
@@ -206,13 +213,13 @@ def main() -> int:
         )
     else:
         output.save(args.output.with_name(args.output.stem + "-native.png"))
-        output.resize(
-            (output.width * SCALE, output.height * SCALE), Image.Resampling.NEAREST
-        ).save(args.output)
+        output.resize((output.width * SCALE, output.height * SCALE), Image.Resampling.NEAREST).save(
+            args.output
+        )
         mask.save(args.mask_output.with_name(args.mask_output.stem + "-native.png"))
-        mask.resize(
-            (mask.width * SCALE, mask.height * SCALE), Image.Resampling.NEAREST
-        ).save(args.mask_output)
+        mask.resize((mask.width * SCALE, mask.height * SCALE), Image.Resampling.NEAREST).save(
+            args.mask_output
+        )
 
     changed = ImageChops.difference(baseline, output)
     changed_pixels = sum(1 for pixel in changed.getdata() if pixel != (0, 0, 0))

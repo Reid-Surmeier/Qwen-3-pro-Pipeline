@@ -23,4 +23,3 @@ multimodal fidelity matters. The live profile observed on 2026-08-22 supported 4
   `resolution + aspect_ratio`.
 
 Live OpenRouter metadata remains authority over this dated note.
-

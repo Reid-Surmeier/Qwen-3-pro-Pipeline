@@ -70,9 +70,7 @@ def main() -> int:
         json.dumps(
             {
                 "listener_audit": listener_audit,
-                "comfyui_version": system_stats.get("system", {}).get(
-                    "comfyui_version"
-                ),
+                "comfyui_version": system_stats.get("system", {}).get("comfyui_version"),
                 "queue_running": len(queue.get("queue_running", [])),
                 "queue_pending": len(queue.get("queue_pending", [])),
                 "nodes": ["QwenImage3TextToImage", "QwenImage3Edit"],

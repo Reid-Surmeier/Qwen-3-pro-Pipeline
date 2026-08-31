@@ -136,8 +136,7 @@ def _comparison_inputs() -> dict[str, Any]:
         "partner_request": partner_request,
         "reference_png_sha256": _sha256_bytes(reference_png),
         "reference_record": {
-            key: partner_records[0][key]
-            for key in ("role", "width", "height", "sha256")
+            key: partner_records[0][key] for key in ("role", "width", "height", "sha256")
         },
     }
 
@@ -262,9 +261,7 @@ def _write_failed_comparison(
         RUN / "comparison.json",
         {
             **plan,
-            "completed_outputs": sum(
-                item.get("completed_outputs", 0) for item in records
-            ),
+            "completed_outputs": sum(item.get("completed_outputs", 0) for item in records),
             "possibly_billed_outputs": sum(
                 item.get("possibly_billed_outputs", 0) for item in records
             ),
@@ -282,9 +279,7 @@ def execute() -> dict[str, Any]:
     ledger.assert_unexecuted(ARMS)
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     inputs = _comparison_inputs()
-    if plan["full_request_sha256"] != _sha256_bytes(
-        _json_bytes(inputs["legacy_request"])
-    ):
+    if plan["full_request_sha256"] != _sha256_bytes(_json_bytes(inputs["legacy_request"])):
         raise RuntimeError("Prepared request no longer matches the executable request")
 
     api_key = os.environ.get("OPENROUTER_API_KEY", "")
@@ -302,9 +297,7 @@ def execute() -> dict[str, Any]:
     records = []
     for slug, request, role in arms:
         request_sha256 = _sha256_bytes(_json_bytes(request))
-        attempt = ledger.begin(
-            slug, request_sha256=request_sha256, requested_outputs=1
-        )
+        attempt = ledger.begin(slug, request_sha256=request_sha256, requested_outputs=1)
         try:
             response = client.generate(request)
         except Exception as error:
@@ -322,9 +315,7 @@ def execute() -> dict[str, Any]:
                 "error": str(error),
             }
             records.append(failure)
-            _write_failed_comparison(
-                plan, records, "A request failed; it was not retried."
-            )
+            _write_failed_comparison(plan, records, "A request failed; it was not retried.")
             raise
 
         ledger.update(
@@ -346,9 +337,7 @@ def execute() -> dict[str, Any]:
                 "model": "qwen/qwen-image-3-pro",
                 "source_path": str(SOURCE.relative_to(ROOT)),
                 "source_sha256": _sha256(SOURCE),
-                "reference_node_encoding_sha256": inputs[
-                    "reference_png_sha256"
-                ],
+                "reference_node_encoding_sha256": inputs["reference_png_sha256"],
                 "full_request_sha256": plan["full_request_sha256"],
             },
         )
@@ -375,9 +364,7 @@ def execute() -> dict[str, Any]:
                 records,
                 "A response contained no image; it was not retried.",
             )
-            raise RuntimeError(
-                f"The {slug} response contained no image; stopping without retry"
-            )
+            raise RuntimeError(f"The {slug} response contained no image; stopping without retry")
         ledger.update(
             slug,
             status="completed",
@@ -408,9 +395,7 @@ def execute() -> dict[str, Any]:
         partner_pixels = np.asarray(partner_image.convert("RGB"))
     same_dimensions = legacy_pixels.shape == partner_pixels.shape
     different_pixels = (
-        int(np.any(legacy_pixels != partner_pixels, axis=2).sum())
-        if same_dimensions
-        else None
+        int(np.any(legacy_pixels != partner_pixels, axis=2).sum()) if same_dimensions else None
     )
     actual_costs = [
         item["usage"].get("cost")
@@ -422,14 +407,11 @@ def execute() -> dict[str, Any]:
         "completed_outputs": sum(item["completed_outputs"] for item in records),
         "possibly_billed_outputs": 0,
         "arms": records,
-        "side_by_side": _artifact(
-            RUN / "side-by-side.png", "labeled two-arm comparison"
-        ),
+        "side_by_side": _artifact(RUN / "side-by-side.png", "labeled two-arm comparison"),
         "comparison": {
             "same_dimensions": same_dimensions,
             "same_output_sha256": (
-                records[0]["output"]["sha256"]
-                == records[1]["output"]["sha256"]
+                records[0]["output"]["sha256"] == records[1]["output"]["sha256"]
             ),
             "different_rgb_pixels": different_pixels,
         },
@@ -456,15 +438,11 @@ def verify_node_replay() -> dict[str, Any]:
         return generate
 
     with patch.dict(os.environ, {"OPENROUTER_API_KEY": "offline-replay"}):
-        with patch.object(
-            OpenRouterImageClient, "generate", side_effect=replay("legacy")
-        ):
+        with patch.object(OpenRouterImageClient, "generate", side_effect=replay("legacy")):
             legacy_images, legacy_metadata_json = QwenImage3Render().render(
                 json.dumps(inputs["brief"]), source_batch
             )
-        with patch.object(
-            OpenRouterImageClient, "generate", side_effect=replay("partner")
-        ):
+        with patch.object(OpenRouterImageClient, "generate", side_effect=replay("partner")):
             (
                 partner_images,
                 partner_brief_json,
@@ -486,8 +464,7 @@ def verify_node_replay() -> dict[str, Any]:
 
     expected_hash = comparison["full_request_sha256"]
     captured_hashes = {
-        slug: _sha256_bytes(_json_bytes(request))
-        for slug, request in captured.items()
+        slug: _sha256_bytes(_json_bytes(request)) for slug, request in captured.items()
     }
     record = {
         "paid_requests": 0,
@@ -498,9 +475,7 @@ def verify_node_replay() -> dict[str, Any]:
             "captured_request_sha256": captured_hashes["legacy"],
             "matches_paid_request": captured_hashes["legacy"] == expected_hash,
             "output_pixel_sha256": _tensor_pixel_sha256(legacy_images),
-            "saved_output_pixel_sha256": _image_pixel_sha256(
-                RUN / "legacy/image-01.png"
-            ),
+            "saved_output_pixel_sha256": _image_pixel_sha256(RUN / "legacy/image-01.png"),
             "metadata": json.loads(legacy_metadata_json),
         },
         "partner": {
@@ -508,16 +483,13 @@ def verify_node_replay() -> dict[str, Any]:
             "captured_request_sha256": captured_hashes["partner"],
             "matches_paid_request": captured_hashes["partner"] == expected_hash,
             "output_pixel_sha256": _tensor_pixel_sha256(partner_images),
-            "saved_output_pixel_sha256": _image_pixel_sha256(
-                RUN / "partner/image-01.png"
-            ),
+            "saved_output_pixel_sha256": _image_pixel_sha256(RUN / "partner/image-01.png"),
             "brief": json.loads(partner_brief_json),
             "metadata": json.loads(partner_metadata_json),
         },
         "captured_requests_identical": captured["legacy"] == captured["partner"],
         "outputs_match_saved_pixels": (
-            _tensor_pixel_sha256(legacy_images)
-            == _image_pixel_sha256(RUN / "legacy/image-01.png")
+            _tensor_pixel_sha256(legacy_images) == _image_pixel_sha256(RUN / "legacy/image-01.png")
             and _tensor_pixel_sha256(partner_images)
             == _image_pixel_sha256(RUN / "partner/image-01.png")
         ),

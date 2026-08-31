@@ -43,11 +43,13 @@ BRIEF = {
         "Keep the Windows-era grey chrome, navy title bar, aliased pixel edges, limited palette, and low-resolution raster character.",
         "Do not change any text anywhere in the window.",
     ],
-    "regions": [{
-        "name": "red selection rectangle",
-        "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
-        "preserve": ["the red selection rectangle itself"],
-    }],
+    "regions": [
+        {
+            "name": "red selection rectangle",
+            "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
+            "preserve": ["the red selection rectangle itself"],
+        }
+    ],
     "negative_constraints": [
         "No global redraw, modernization, smoothing, anti-aliasing upgrade, or invented UI.",
         "No golf ball, golfer, tee, flag, or any second golf object.",
@@ -61,14 +63,20 @@ BRIEF = {
 
 def upload_source() -> str:
     import uuid
+
     data = (ROOT / SOURCE["path"]).read_bytes()
     boundary = uuid.uuid4().hex
     body = (
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"image\"; "
-        f"filename=\"issue53-plantstudio.png\"\r\nContent-Type: image/png\r\n\r\n"
-    ).encode() + data + f"\r\n--{boundary}--\r\n".encode()
+        (
+            f'--{boundary}\r\nContent-Disposition: form-data; name="image"; '
+            f'filename="issue53-plantstudio.png"\r\nContent-Type: image/png\r\n\r\n'
+        ).encode()
+        + data
+        + f"\r\n--{boundary}--\r\n".encode()
+    )
     request = urllib.request.Request(
-        f"{COMFY}/upload/image", data=body,
+        f"{COMFY}/upload/image",
+        data=body,
         headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -87,26 +95,43 @@ def submit(seed: int) -> None:
     uploaded = upload_source()
     graph = {
         "1": {"class_type": "LoadImage", "inputs": {"image": uploaded}},
-        "2": {"class_type": "QwenImage3Render", "inputs": {
-            "edit_brief_json": json.dumps(brief),
-            "reference_images": ["1", 0],
-        }},
-        "3": {"class_type": "SaveImage", "inputs": {
-            "images": ["2", 0], "filename_prefix": f"issue53/seed-{seed}",
-        }},
-        "4": {"class_type": "SaveText", "inputs": {
-            "text": ["2", 1], "filename_prefix": f"issue53/seed-{seed}-meta",
-            "format": "json",
-        }},
+        "2": {
+            "class_type": "QwenImage3Render",
+            "inputs": {
+                "edit_brief_json": json.dumps(brief),
+                "reference_images": ["1", 0],
+            },
+        },
+        "3": {
+            "class_type": "SaveImage",
+            "inputs": {
+                "images": ["2", 0],
+                "filename_prefix": f"issue53/seed-{seed}",
+            },
+        },
+        "4": {
+            "class_type": "SaveText",
+            "inputs": {
+                "text": ["2", 1],
+                "filename_prefix": f"issue53/seed-{seed}-meta",
+                "format": "json",
+            },
+        },
     }
     attempt = {
-        "seed": seed, "provider": "openrouter", "model": MODEL,
-        "requested_outputs": 1, "source": SOURCE, "status": "submitted",
+        "seed": seed,
+        "provider": "openrouter",
+        "model": MODEL,
+        "requested_outputs": 1,
+        "source": SOURCE,
+        "status": "submitted",
     }
     attempt_path.write_text(json.dumps(attempt, indent=2) + "\n")
     request = urllib.request.Request(
-        f"{COMFY}/prompt", data=json.dumps({"prompt": graph}).encode(),
-        headers={"Content-Type": "application/json"}, method="POST",
+        f"{COMFY}/prompt",
+        data=json.dumps({"prompt": graph}).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST",
     )
     with urllib.request.urlopen(request, timeout=240) as response:
         result = json.loads(response.read())
@@ -116,7 +141,9 @@ def submit(seed: int) -> None:
     deadline = time.monotonic() + 600
     while time.monotonic() < deadline:
         time.sleep(5)
-        with urllib.request.urlopen(f"{COMFY}/history/{result['prompt_id']}", timeout=30) as response:
+        with urllib.request.urlopen(
+            f"{COMFY}/history/{result['prompt_id']}", timeout=30
+        ) as response:
             history = json.loads(response.read())
         if result["prompt_id"] in history:
             entry = history[result["prompt_id"]]
@@ -138,8 +165,12 @@ def collect() -> None:
     for attempt_path in sorted((OUT / "attempts").glob("*.json")):
         attempt = json.loads(attempt_path.read_text())
         key = f"seed-{attempt['seed']}"
-        record = {"status": attempt.get("status"), "prompt_id": attempt.get("prompt_id"),
-                  "files": [], "usage": None}
+        record = {
+            "status": attempt.get("status"),
+            "prompt_id": attempt.get("prompt_id"),
+            "files": [],
+            "usage": None,
+        }
         for node_output in attempt.get("outputs", {}).values():
             for text in node_output.get("text", []):
                 try:
@@ -151,19 +182,24 @@ def collect() -> None:
             for item in node_output.get("images", []):
                 if not isinstance(item, dict):
                     continue
-                query = urllib.parse.urlencode({
-                    "filename": item["filename"],
-                    "subfolder": item.get("subfolder", ""),
-                    "type": item.get("type", "output"),
-                })
+                query = urllib.parse.urlencode(
+                    {
+                        "filename": item["filename"],
+                        "subfolder": item.get("subfolder", ""),
+                        "type": item.get("type", "output"),
+                    }
+                )
                 with urllib.request.urlopen(f"{COMFY}/view?{query}", timeout=120) as response:
                     data = response.read()
                 local = outputs_dir / f"{key}.png"
                 local.write_bytes(data)
-                record["files"].append({
-                    "file": local.name, "bytes": len(data),
-                    "sha256": hashlib.sha256(data).hexdigest(),
-                })
+                record["files"].append(
+                    {
+                        "file": local.name,
+                        "bytes": len(data),
+                        "sha256": hashlib.sha256(data).hexdigest(),
+                    }
+                )
         manifest[key] = record
         print(key, record["status"])
     (OUT / "collection-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

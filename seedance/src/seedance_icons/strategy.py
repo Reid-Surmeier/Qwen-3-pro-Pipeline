@@ -90,7 +90,6 @@ def _reference_resolves(value: str, brief_path: Path) -> bool:
     return False
 
 
-
 MIN_MULTI_STATE_MOTION_WORDS = 120
 POSE_MARKER = re.compile(
     r"\bpose (?:one|two|three|four|five|six|seven|eight|nine|ten|\d+)\b|\bbeat \d+\b",
@@ -145,14 +144,15 @@ def check_motion_detail(brief: dict[str, Any]) -> list[str]:
     return violations
 
 
-
 MOTION_KINDS = ("translate", "rotate", "scale", "reveal", "blink")
 
 
 def _reference_registry(brief_path: Path) -> dict[str, Any]:
     """The provenance record next to the reference assets, if it can be found."""
     for base in (brief_path.parent, *brief_path.parents):
-        candidate = base / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
+        candidate = (
+            base / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
+        )
         if candidate.exists():
             # A present but unreadable registry is a broken safety input. Let the
             # parse/read error stop planning instead of silently skipping the
@@ -188,9 +188,7 @@ def check_reference_matches_motion(
     reference = str(brief.get("real_reference") or "")
     registry = (_reference_registry(brief_path) or {}).get("assets") or {}
     named = [
-        name
-        for name in registry
-        if name in reference or name.replace(".gif", "") in reference
+        name for name in registry if name in reference or name.replace(".gif", "") in reference
     ]
     if not video_references:
         violations.append(
@@ -297,14 +295,10 @@ def check_strategy(
         )
         violations.append(f"real_reference is missing: {hint}")
     elif not _reference_resolves(reference, brief_path):
-        violations.append(
-            f"real_reference does not resolve to any existing file: {reference!r}"
-        )
+        violations.append(f"real_reference does not resolve to any existing file: {reference!r}")
 
     violations.extend(check_motion_detail(brief))
-    violations.extend(
-        check_reference_matches_motion(brief, brief_path, video_references)
-    )
+    violations.extend(check_reference_matches_motion(brief, brief_path, video_references))
 
     words = len(prompt.split())
     if words < MIN_PROMPT_WORDS:

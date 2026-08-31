@@ -227,15 +227,11 @@ def _as_pixel_rows(image: Any) -> tuple[int, int, Sequence[Any]]:
             or width <= 0
             or height <= 0
         ):
-            raise FidelityEvidenceError(
-                "explicit image dimensions must be positive integers"
-            )
+            raise FidelityEvidenceError("explicit image dimensions must be positive integers")
         try:
             pixel_rows = list(pixels)
         except TypeError as error:
-            raise FidelityEvidenceError(
-                "explicit image pixels must be an iterable"
-            ) from error
+            raise FidelityEvidenceError("explicit image pixels must be an iterable") from error
         expected = width * height
         if len(pixel_rows) != expected:
             raise FidelityEvidenceError(
@@ -321,9 +317,7 @@ def verify_against_baseline(
     )
 
 
-def _region_colours(
-    pixels: Sequence[Any], width: int, region: MutableRegion
-) -> set[Any]:
+def _region_colours(pixels: Sequence[Any], width: int, region: MutableRegion) -> set[Any]:
     colours: set[Any] = set()
     for y in range(region.y, region.bottom):
         row = y * width
@@ -419,11 +413,7 @@ def load_correction_prompts(path: Path) -> tuple[dict[str, Any], ...]:
     if not isinstance(document, Mapping):
         raise FidelityContractError("correction corpus must be a JSON object")
     prompts = document.get("prompts")
-    if (
-        not isinstance(prompts, Sequence)
-        or isinstance(prompts, (str, bytes))
-        or not prompts
-    ):
+    if not isinstance(prompts, Sequence) or isinstance(prompts, (str, bytes)) or not prompts:
         raise FidelityContractError("correction corpus must carry a non-empty prompts list")
 
     required = (
@@ -444,19 +434,13 @@ def load_correction_prompts(path: Path) -> tuple[dict[str, Any], ...]:
                     f"correction prompt {prompt.get('id', '<unnamed>')} is missing {field}"
                 )
         for field in ("applies_to", "required_evidence"):
-            if not isinstance(prompt[field], Sequence) or isinstance(
-                prompt[field], (str, bytes)
-            ):
+            if not isinstance(prompt[field], Sequence) or isinstance(prompt[field], (str, bytes)):
                 raise FidelityContractError(
                     f"correction prompt {prompt['id']} {field} must be a list"
                 )
-            if any(
-                not isinstance(value, str) or not value.strip()
-                for value in prompt[field]
-            ):
+            if any(not isinstance(value, str) or not value.strip() for value in prompt[field]):
                 raise FidelityContractError(
-                    f"correction prompt {prompt['id']} {field} must contain only "
-                    "non-empty strings"
+                    f"correction prompt {prompt['id']} {field} must contain only non-empty strings"
                 )
         if prompt["id"] in seen:
             raise FidelityContractError(f"duplicate correction prompt {prompt['id']}")

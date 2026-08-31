@@ -12,17 +12,19 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from qwen_ui_pipeline.play_log import evaluate_play_log
+from qwen_ui_pipeline.play_log import evaluate_play_log  # noqa: E402
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("play_log", type=Path)
     parser.add_argument("--evidence-root", type=Path)
-    parser.add_argument("--manifest", type=Path,
-                        default=ROOT / "godot/data/image-79-control-spec.json")
-    parser.add_argument("--review-issue", type=int,
-                        help="trusted review Issue that selects verifier policy")
+    parser.add_argument(
+        "--manifest", type=Path, default=ROOT / "godot/data/image-79-control-spec.json"
+    )
+    parser.add_argument(
+        "--review-issue", type=int, help="trusted review Issue that selects verifier policy"
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 

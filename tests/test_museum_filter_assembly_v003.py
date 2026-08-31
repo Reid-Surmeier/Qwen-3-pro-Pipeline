@@ -6,6 +6,7 @@ from pathlib import Path
 try:
     from PIL import Image, ImageChops
     from scripts import assemble_museum_filter_v003 as assembly
+
     HAVE_PIL = True
 except ImportError:
     HAVE_PIL = False
@@ -19,8 +20,7 @@ class ShapeAwareMuseumFilterAssemblyTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.baseline = Image.open(
-            ROOT
-            / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
+            ROOT / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
         ).convert("RGB")
         cls.output, cls.mask = assembly.assemble_native(cls.baseline)
 
@@ -58,9 +58,7 @@ class ShapeAwareMuseumFilterAssemblyTests(unittest.TestCase):
             title_box[3] - 3,
         )
         allowed.paste(255, local_title)
-        outside = ImageChops.multiply(
-            header_diff.convert("L"), ImageChops.invert(allowed)
-        )
+        outside = ImageChops.multiply(header_diff.convert("L"), ImageChops.invert(allowed))
         self.assertIsNone(outside.getbbox())
 
     def test_no_text_or_tab_edit_owns_its_enclosing_rectangle(self) -> None:

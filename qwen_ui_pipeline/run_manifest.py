@@ -28,9 +28,20 @@ _CREDENTIAL_VALUE = re.compile(
 _CREDENTIAL_KEY = re.compile(r"(api[_-]?key|secret|token|password|credential)", re.IGNORECASE)
 
 ALLOWED_TOP_LEVEL = {
-    "manifest_version", "run_id", "kind", "repository_commit", "created_at",
-    "status", "provider", "generation", "sources", "outputs", "approvals",
-    "region", "fidelity", "extensions",
+    "manifest_version",
+    "run_id",
+    "kind",
+    "repository_commit",
+    "created_at",
+    "status",
+    "provider",
+    "generation",
+    "sources",
+    "outputs",
+    "approvals",
+    "region",
+    "fidelity",
+    "extensions",
 }
 ALLOWED_KINDS = {"render", "assembly"}
 ALLOWED_STATUS = {"complete", "incomplete", "rejected"}
@@ -76,7 +87,9 @@ def _check_file_record(record: Any, path: str, errors: list[str], *, dimensions:
         return
     file_path = _require(record, "path", str, path, errors)
     if file_path is not None and _is_unsafe_path(file_path):
-        errors.append(f"{path}.path: absolute or escaping paths are not allowed; use repo-relative paths")
+        errors.append(
+            f"{path}.path: absolute or escaping paths are not allowed; use repo-relative paths"
+        )
     digest = _require(record, "sha256", str, path, errors)
     if digest is not None and not _SHA256.fullmatch(digest):
         errors.append(f"{path}.sha256: not a lowercase hex SHA-256")
@@ -203,9 +216,7 @@ def validate_manifest(manifest: Any) -> list[str]:
                     errors.append(f"$.region.{key}: must be a positive integer")
         fidelity = _require(manifest, "fidelity", dict, "$", errors)
         if fidelity is not None:
-            changed = _require(
-                fidelity, "outside_region_changed_pixels", int, "$.fidelity", errors
-            )
+            changed = _require(fidelity, "outside_region_changed_pixels", int, "$.fidelity", errors)
             if changed is not None and changed < 0:
                 errors.append("$.fidelity.outside_region_changed_pixels: cannot be negative")
 

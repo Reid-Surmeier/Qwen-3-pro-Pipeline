@@ -62,8 +62,9 @@ class PartnerControlsTests(unittest.TestCase):
                 "watermark": False,
             }
             controls[option] = "no gradients" if option == "negative_prompt" else True
-            with self.subTest(option=option), self.assertRaisesRegex(
-                ValueError, f"OpenRouter does not support {option}"
+            with (
+                self.subTest(option=option),
+                self.assertRaisesRegex(ValueError, f"OpenRouter does not support {option}"),
             ):
                 build_partner_text_brief(
                     provider="openrouter",

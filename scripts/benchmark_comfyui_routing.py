@@ -131,9 +131,7 @@ def _verify_pins(repository: Path) -> dict[str, Any]:
         remote_ref = f"refs/remotes/origin/{branch}"
         branch_commit = _git_text(repository, "rev-parse", remote_ref)
         if branch_commit != commit:
-            raise RuntimeError(
-                f"{remote_ref} resolved to {branch_commit}, expected {commit}"
-            )
+            raise RuntimeError(f"{remote_ref} resolved to {branch_commit}, expected {commit}")
         resolved[branch] = branch_commit
 
     baseline_deploy = _git_show(repository, BASELINE_COMMIT, BASELINE_DEPLOY_PATH)
@@ -141,7 +139,7 @@ def _verify_pins(repository: Path) -> dict[str, Any]:
     router_source = _git_show(repository, CANDIDATE_COMMIT, ROUTER_PATH)
     if baseline_deploy.count(b'"$COMFYUI_ROOT/main.py"') != 1:
         raise RuntimeError("baseline topology is not exactly one ComfyUI process")
-    if b'QWEN_COMFYUI_WORKERS:-5' not in candidate_deploy:
+    if b"QWEN_COMFYUI_WORKERS:-5" not in candidate_deploy:
         raise RuntimeError("candidate deployment no longer defaults to five workers")
 
     return {
@@ -221,13 +219,9 @@ class SimulatedComfyUITransport:
         state = self.workers[backend]
         if method == "GET" and target == "/queue":
             with state.condition:
-                running = (
-                    [[0, state.running.job_id]] if state.running is not None else []
-                )
+                running = [[0, state.running.job_id]] if state.running is not None else []
                 pending = [[0, job.job_id] for job in state.queue]
-            return _json_response(
-                {"queue_running": running, "queue_pending": pending}
-            )
+            return _json_response({"queue_running": running, "queue_pending": pending})
 
         if method == "POST" and target == "/prompt":
             payload = json.loads((body or b"{}").decode("utf-8"))
@@ -421,9 +415,7 @@ def _run_once(
             barrier.wait(timeout=5)
             transport.mark_submitted(job.job_id)
             if router is None:
-                response = transport.request(
-                    backends[0], "POST", "/prompt", body=job.payload
-                )
+                response = transport.request(backends[0], "POST", "/prompt", body=job.payload)
             else:
                 response = router.route("POST", "/prompt", body=job.payload)
             if not 200 <= response.status < 300:
@@ -441,29 +433,21 @@ def _run_once(
             if observation.status != "completed":
                 continue
             if router is None:
-                history = transport.request(
-                    backends[0], "GET", f"/history/{job.job_id}"
-                )
+                history = transport.request(backends[0], "GET", f"/history/{job.job_id}")
             else:
                 history = router.route("GET", f"/history/{job.job_id}")
             history_payload = json.loads(history.body)
             observation.history_verified = job.job_id in history_payload
 
         records = [
-            _observation_record(
-                job, transport.observations[job.job_id], configuration, commit_sha
-            )
+            _observation_record(job, transport.observations[job.job_id], configuration, commit_sha)
             for job in sorted(jobs, key=lambda item: item.job_id)
         ]
     finally:
         transport.close()
 
-    submitted = [
-        transport.observations[job.job_id].submitted_ns for job in jobs
-    ]
-    completed = [
-        transport.observations[job.job_id].completed_ns for job in jobs
-    ]
+    submitted = [transport.observations[job.job_id].submitted_ns for job in jobs]
+    completed = [transport.observations[job.job_id].completed_ns for job in jobs]
     if any(value is None for value in submitted + completed):
         raise RuntimeError("benchmark run has incomplete timestamps")
     queue_waits = [
@@ -482,9 +466,7 @@ def _run_once(
         "commit_sha": commit_sha,
         "worker_count": len(backends),
         "jobs": records,
-        "batch_makespan_seconds": round(
-            (max(completed) - min(submitted)) / 1_000_000_000, 6
-        ),
+        "batch_makespan_seconds": round((max(completed) - min(submitted)) / 1_000_000_000, 6),
         "mean_queue_wait_seconds": round(statistics.mean(queue_waits), 6),
         "max_queue_wait_seconds": round(max(queue_waits), 6),
         "mean_execution_time_seconds": round(statistics.mean(execution_times), 6),
@@ -492,8 +474,7 @@ def _run_once(
         "retry_count": sum(max(record["enqueue_attempts"] - 1, 0) for record in records),
         "history_failures": sum(not record["history_verified"] for record in records),
         "payload_mismatches": sum(
-            record["payload_sha256"] != record["expected_payload_sha256"]
-            for record in records
+            record["payload_sha256"] != record["expected_payload_sha256"] for record in records
         ),
     }
 
@@ -504,9 +485,7 @@ def _variation(values: Sequence[float]) -> dict[str, float]:
         "maximum": round(max(values), 6),
         "mean": round(statistics.mean(values), 6),
         "median": round(statistics.median(values), 6),
-        "sample_standard_deviation": round(statistics.stdev(values), 6)
-        if len(values) > 1
-        else 0.0,
+        "sample_standard_deviation": round(statistics.stdev(values), 6) if len(values) > 1 else 0.0,
     }
 
 
@@ -532,9 +511,7 @@ def _summarize(runs: Sequence[dict[str, Any]]) -> dict[str, Any]:
             "history_failures": sum(run["history_failures"] for run in selected),
             "payload_mismatches": sum(run["payload_mismatches"] for run in selected),
             "completed_jobs": sum(
-                job["status"] == "completed"
-                for run in selected
-                for job in run["jobs"]
+                job["status"] == "completed" for run in selected for job in run["jobs"]
             ),
             "dropped_jobs": sum(
                 job["status"] not in {"completed", "error"}
@@ -592,16 +569,19 @@ def _summarize(runs: Sequence[dict[str, Any]]) -> dict[str, Any]:
     output["mean_queue_wait_reduction_percent"] = round(
         (baseline_wait - candidate_wait) / baseline_wait * 100, 2
     )
-    has_integrity_failure = any(
-        output[configuration][key]
-        for configuration in ("baseline", "candidate")
-        for key in (
-            "routing_failures",
-            "retry_count",
-            "history_failures",
-            "payload_mismatches",
+    has_integrity_failure = (
+        any(
+            output[configuration][key]
+            for configuration in ("baseline", "candidate")
+            for key in (
+                "routing_failures",
+                "retry_count",
+                "history_failures",
+                "payload_mismatches",
+            )
         )
-    ) or not output["output_digest_parity"]
+        or not output["output_digest_parity"]
+    )
     if has_integrity_failure:
         output["conclusion"] = "unsafe/unreliable"
     elif candidate_makespan < baseline_makespan and candidate_wait < baseline_wait:
@@ -774,9 +754,7 @@ def run_benchmark(
     (output_directory / "results.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    (output_directory / "report.md").write_text(
-        _render_report(manifest), encoding="utf-8"
-    )
+    (output_directory / "report.md").write_text(_render_report(manifest), encoding="utf-8")
     return manifest
 
 

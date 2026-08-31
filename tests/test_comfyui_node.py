@@ -104,9 +104,7 @@ class QwenImage3RenderTests(unittest.TestCase):
         )
 
     def test_partner_node_rejects_an_unsupported_control_before_loading_a_key(self):
-        with self.assertRaisesRegex(
-            ValueError, "OpenRouter does not support negative_prompt"
-        ):
+        with self.assertRaisesRegex(ValueError, "OpenRouter does not support negative_prompt"):
             QwenImage3TextToImage().render(
                 provider="openrouter",
                 model="qwen-image-3.0-pro",

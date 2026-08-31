@@ -17,7 +17,7 @@ from .partner_controls import (
     build_partner_text_brief,
 )
 from .providers.alibaba import AlibabaImageClient
-from .providers.openrouter import DEFAULT_TIMEOUT_SECONDS, OpenRouterImageClient, resolve_timeout_seconds
+from .providers.openrouter import OpenRouterImageClient, resolve_timeout_seconds
 from .providers.router import generate_with_provider
 
 
@@ -311,9 +311,7 @@ class QwenImage3Render:
             brief,
             reference_urls=_reference_data_urls(reference_images),
             openrouter_client=(
-                OpenRouterImageClient(
-                    openrouter_key, timeout=_openrouter_timeout_seconds()
-                )
+                OpenRouterImageClient(openrouter_key, timeout=_openrouter_timeout_seconds())
                 if openrouter_key
                 else None
             ),
@@ -380,9 +378,7 @@ class ReferenceRegionComposite:
         # ComfyUI's SaveImage floors float-to-byte conversion. Centering each
         # reference value inside its original byte bucket prevents widespread
         # one-level drift after a LoadImage -> SaveImage round trip.
-        reference = (
-            ((reference_images[:1] * 255.0).round() + 0.25).clamp(0, 255) / 255.0
-        )
+        reference = ((reference_images[:1] * 255.0).round() + 0.25).clamp(0, 255) / 255.0
         target_height, target_width = reference.shape[1:3]
         if x + width > target_width or y + height > target_height:
             raise ValueError("Region extends outside the reference image")
@@ -393,9 +389,7 @@ class ReferenceRegionComposite:
             mode="nearest",
         ).movedim(1, -1)
         output = reference.expand(generated.shape[0], -1, -1, -1).clone()
-        output[:, y : y + height, x : x + width, :] = generated[
-            :, y : y + height, x : x + width, :
-        ]
+        output[:, y : y + height, x : x + width, :] = generated[:, y : y + height, x : x + width, :]
         return (output,)
 
 

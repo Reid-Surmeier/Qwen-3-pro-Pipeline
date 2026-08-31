@@ -38,21 +38,16 @@ class PaidAttemptLedger:
     def _assert_absent(self, paths: Iterable[Path], action: str) -> None:
         existing = [path for path in paths if path.exists()]
         if existing:
-            relative = ", ".join(
-                str(path.relative_to(self.run_directory)) for path in existing
-            )
+            relative = ", ".join(str(path.relative_to(self.run_directory)) for path in existing)
             raise RuntimeError(
-                f"Issue 32 evidence already exists ({relative}); refusing to "
-                f"{action}"
+                f"Issue 32 evidence already exists ({relative}); refusing to {action}"
             )
 
     def assert_unprepared(self, slugs: Iterable[str]) -> None:
         self._assert_absent(self.preparation_paths(slugs), "overwrite preparation")
 
     def assert_unexecuted(self, slugs: Iterable[str]) -> None:
-        self._assert_absent(
-            self.evidence_paths(slugs), "submit another paid request"
-        )
+        self._assert_absent(self.evidence_paths(slugs), "submit another paid request")
 
     @staticmethod
     def _fsync_directory(path: Path) -> None:

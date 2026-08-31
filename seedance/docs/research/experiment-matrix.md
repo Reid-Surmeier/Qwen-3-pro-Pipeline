@@ -12,4 +12,3 @@ Use one paid run per cell and keep rejected evidence.
 
 Do not combine frame anchors and references in the baseline. If mixed conditioning is necessary,
 run it as an explicitly experimental cell because documented precedence can mask references.
-

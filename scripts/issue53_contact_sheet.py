@@ -13,8 +13,7 @@ CELL_W, CELL_H, LABEL_H = 512, 410, 28
 
 def main():
     tiles = [("reference 474x403", Image.open(REFERENCE).convert("RGB"))]
-    for path in sorted(OUT.glob("outputs/seed-*.png"),
-                       key=lambda p: int(p.stem.split("-")[1])):
+    for path in sorted(OUT.glob("outputs/seed-*.png"), key=lambda p: int(p.stem.split("-")[1])):
         tiles.append((path.stem, Image.open(path).convert("RGB")))
     columns, rows = 3, (len(tiles) + 2) // 3
     sheet = Image.new("RGB", (columns * CELL_W, rows * (CELL_H + LABEL_H)), (24, 24, 24))
@@ -27,7 +26,8 @@ def main():
         sheet.paste(image, (x, y))
         draw.text(
             (col * CELL_W + 10, row * (CELL_H + LABEL_H) + CELL_H + 6),
-            label, fill=(255, 255, 255),
+            label,
+            fill=(255, 255, 255),
         )
     target = OUT / "contact-sheet.png"
     sheet.save(target)

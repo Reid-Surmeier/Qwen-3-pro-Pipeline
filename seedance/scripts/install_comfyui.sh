@@ -22,4 +22,3 @@ ln -s "$repo_dir/comfyui_custom_nodes/seedance_icon_animation" \
 
 echo "Installed an isolated ComfyUI v0.31.0 checkout at $target_dir"
 echo "No server was started or restarted. Add an MCP adapter only after reviewing its permissions."
-

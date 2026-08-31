@@ -87,11 +87,13 @@ TASKS = {
             "Keep the Windows-era grey chrome, navy title bar, aliased pixel edges, limited palette, and low-resolution raster character.",
             "Do not change any text anywhere in the window.",
         ],
-        regions=[{
-            "name": "red selection rectangle",
-            "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
-            "preserve": ["the red selection rectangle itself"],
-        }],
+        regions=[
+            {
+                "name": "red selection rectangle",
+                "change": "Remove the selected flower and draw one upright seven-iron golf club in the same narrow vertical footprint: grip at top, straight steel shaft, compact angled iron head near the bottom, rendered in the same pixel-art style.",
+                "preserve": ["the red selection rectangle itself"],
+            }
+        ],
         negative_constraints=[
             "No global redraw, modernization, smoothing, anti-aliasing upgrade, or invented UI.",
             "No golf ball, golfer, tee, flag, or any second golf object.",
@@ -106,10 +108,12 @@ TASKS = {
         "Reference image 1 is the authoritative PlantStudio main-window screenshot (474 by 403). Everything except the title-bar text must match it exactly.",
         "plantstudio",
         "5:4",
-        exact_copy=[{
-            "region": "navy title bar text",
-            "text": "PlantStudio - Prompt Length Test (11 plants)",
-        }],
+        exact_copy=[
+            {
+                "region": "navy title bar text",
+                "text": "PlantStudio - Prompt Length Test (11 plants)",
+            }
+        ],
         preservation_invariants=[
             "Keep the title-bar font, size, weight, color, and left alignment identical to the original title rendering.",
             "Keep the window icon and the minimize, maximize, and close buttons unchanged.",
@@ -171,9 +175,21 @@ TASKS = {
         "intel-crop",
         "3:2",
         regions=[
-            {"name": "band word", "change": "Replace the word Celeron with Pentium using the same font, size, slant, color, and position.", "preserve": ["every other letter on the sticker"]},
-            {"name": "lower band", "change": "Recolor the band background from blue to deep red while keeping its exact shape, size, and position.", "preserve": ["the text printed on the band"]},
-            {"name": "outer edge", "change": "Add a thin solid black border following the sticker's outer edge.", "preserve": ["the sticker's outer dimensions"]},
+            {
+                "name": "band word",
+                "change": "Replace the word Celeron with Pentium using the same font, size, slant, color, and position.",
+                "preserve": ["every other letter on the sticker"],
+            },
+            {
+                "name": "lower band",
+                "change": "Recolor the band background from blue to deep red while keeping its exact shape, size, and position.",
+                "preserve": ["the text printed on the band"],
+            },
+            {
+                "name": "outer edge",
+                "change": "Add a thin solid black border following the sticker's outer edge.",
+                "preserve": ["the sticker's outer dimensions"],
+            },
         ],
         preservation_invariants=[
             "Keep the intel inside oval, its swirl gap, and its lettering exactly as in the reference.",
@@ -238,9 +254,7 @@ def expand_brief(brief):
         template = RESTATEMENT_TEMPLATES[index % len(RESTATEMENT_TEMPLATES)]
         if index and index % len(reqs) == 0:
             pass_number += 1
-        restatements.append(
-            template.format(i=(index % len(reqs)) + 1, p=pass_number, req=req)
-        )
+        restatements.append(template.format(i=(index % len(reqs)) + 1, p=pass_number, req=req))
 
 
 def strip_private(brief):
@@ -255,9 +269,7 @@ def build():
         for arm, payload in (("canonical", brief), ("near-ceiling", expand_brief(brief))):
             clean = strip_private(payload)
             compiled = compile_edit_brief(clean)
-            (briefs_dir / f"{task}--{arm}.json").write_text(
-                json.dumps(clean, indent=2) + "\n"
-            )
+            (briefs_dir / f"{task}--{arm}.json").write_text(json.dumps(clean, indent=2) + "\n")
             (briefs_dir / f"{task}--{arm}.prompt.txt").write_text(compiled.prompt + "\n")
             summary[f"{task}--{arm}"] = {
                 "characters": compiled.metrics.characters,
@@ -271,25 +283,33 @@ def build():
 
 def _post(path, payload):
     request = urllib.request.Request(
-        f"{COMFY}{path}", data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json"}, method="POST",
+        f"{COMFY}{path}",
+        data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST",
     )
     with urllib.request.urlopen(request, timeout=240) as response:
         return json.loads(response.read())
 
 
 def upload_source(source_key):
-    import mimetypes, uuid
+    import uuid
+
     source = SOURCES[source_key]
     data = (ROOT / source["path"]).read_bytes()
     boundary = uuid.uuid4().hex
     name = f"issue18-{source_key}.png"
     body = (
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"image\"; "
-        f"filename=\"{name}\"\r\nContent-Type: image/png\r\n\r\n"
-    ).encode() + data + f"\r\n--{boundary}--\r\n".encode()
+        (
+            f'--{boundary}\r\nContent-Disposition: form-data; name="image"; '
+            f'filename="{name}"\r\nContent-Type: image/png\r\n\r\n'
+        ).encode()
+        + data
+        + f"\r\n--{boundary}--\r\n".encode()
+    )
     request = urllib.request.Request(
-        f"{COMFY}/upload/image", data=body,
+        f"{COMFY}/upload/image",
+        data=body,
         headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
     )
     with urllib.request.urlopen(request, timeout=120) as response:
@@ -309,22 +329,38 @@ def submit(task, arm):
     uploaded = upload_source(source_key)
     graph = {
         "1": {"class_type": "LoadImage", "inputs": {"image": uploaded}},
-        "2": {"class_type": "QwenImage3Render", "inputs": {
-            "edit_brief_json": json.dumps(brief),
-            "reference_images": ["1", 0],
-        }},
-        "3": {"class_type": "SaveImage", "inputs": {
-            "images": ["2", 0], "filename_prefix": f"issue18/{task}--{arm}",
-        }},
-        "4": {"class_type": "SaveText", "inputs": {
-            "text": ["2", 1], "filename_prefix": f"issue18/{task}--{arm}-meta",
-            "format": "json",
-        }},
+        "2": {
+            "class_type": "QwenImage3Render",
+            "inputs": {
+                "edit_brief_json": json.dumps(brief),
+                "reference_images": ["1", 0],
+            },
+        },
+        "3": {
+            "class_type": "SaveImage",
+            "inputs": {
+                "images": ["2", 0],
+                "filename_prefix": f"issue18/{task}--{arm}",
+            },
+        },
+        "4": {
+            "class_type": "SaveText",
+            "inputs": {
+                "text": ["2", 1],
+                "filename_prefix": f"issue18/{task}--{arm}-meta",
+                "format": "json",
+            },
+        },
     }
     attempt = {
-        "task": task, "arm": arm, "provider": PROVIDER, "model": MODEL,
-        "seed": SEED, "requested_outputs": 1,
-        "source": SOURCES[source_key], "status": "submitted",
+        "task": task,
+        "arm": arm,
+        "provider": PROVIDER,
+        "model": MODEL,
+        "seed": SEED,
+        "requested_outputs": 1,
+        "source": SOURCES[source_key],
+        "status": "submitted",
         "submitted_monotonic": time.monotonic(),
     }
     attempt_path.write_text(json.dumps(attempt, indent=2) + "\n")
@@ -355,6 +391,7 @@ def submit(task, arm):
 
 def collect():
     import hashlib
+
     outputs_dir = OUT / "outputs"
     outputs_dir.mkdir(parents=True, exist_ok=True)
     manifest = {}
@@ -380,11 +417,13 @@ def collect():
                 for item in node_output.get(kind, []):
                     if not isinstance(item, dict):
                         continue
-                    query = urllib.parse.urlencode({
-                        "filename": item["filename"],
-                        "subfolder": item.get("subfolder", ""),
-                        "type": item.get("type", "output"),
-                    })
+                    query = urllib.parse.urlencode(
+                        {
+                            "filename": item["filename"],
+                            "subfolder": item.get("subfolder", ""),
+                            "type": item.get("type", "output"),
+                        }
+                    )
                     with urllib.request.urlopen(f"{COMFY}/view?{query}", timeout=120) as response:
                         data = response.read()
                     suffix = Path(item["filename"]).suffix
@@ -392,18 +431,22 @@ def collect():
                         continue
                     local = outputs_dir / f"{key}{suffix}"
                     local.write_bytes(data)
-                    record["files"].append({
-                        "file": local.name,
-                        "bytes": len(data),
-                        "sha256": hashlib.sha256(data).hexdigest(),
-                    })
+                    record["files"].append(
+                        {
+                            "file": local.name,
+                            "bytes": len(data),
+                            "sha256": hashlib.sha256(data).hexdigest(),
+                        }
+                    )
         manifest[key] = record
         print(key, record["status"], [f["file"] for f in record["files"]])
     (OUT / "collection-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 
 
 def blind():
-    import random, shutil
+    import random
+    import shutil
+
     review_dir = OUT / "blind-review"
     review_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(SEED)
@@ -422,6 +465,7 @@ def blind():
 
 if __name__ == "__main__":
     import urllib.parse
+
     if sys.argv[1] == "build":
         build()
     elif sys.argv[1] == "submit":

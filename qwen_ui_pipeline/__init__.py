@@ -102,6 +102,7 @@ __all__ = [
     "ProviderResult",
     "build_comfyui_api_workflow",
     "build_comfyui_assembly_workflow",
+    "build_comfyui_component_extraction_workflow",
     "build_partner_edit_workflow",
     "build_partner_text_workflow",
     "compile_edit_brief",

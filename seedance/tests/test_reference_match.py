@@ -11,8 +11,8 @@ from pathlib import Path
 
 from seedance_icons.strategy import check_reference_matches_motion
 
-REFS = Path("docs/evidence/board-icons-test/references")
-BRIEF_PATH = Path("briefs/x.json")
+SEEDANCE_ROOT = Path(__file__).resolve().parents[1]
+BRIEF_PATH = SEEDANCE_ROOT / "briefs/x.json"
 COIN_VIDEO = ["https://example.test/references/ref-coin-spin.mp4"]
 ARROW_VIDEO = ["https://example.test/references/ref-textbox-arrow-bob.mp4"]
 

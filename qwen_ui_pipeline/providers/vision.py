@@ -68,9 +68,7 @@ def _encode(image: Any, scale: int = 1) -> str:
 
     image = image.convert("RGB")
     if scale > 1:
-        image = image.resize(
-            (image.width * scale, image.height * scale), NEAREST_NEIGHBOUR
-        )
+        image = image.resize((image.width * scale, image.height * scale), NEAREST_NEIGHBOUR)
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
     encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
@@ -122,12 +120,18 @@ class OpenRouterVisionClient(VisionClient):
                     "role": "user",
                     "content": [
                         {"type": "text", "text": "\n".join(instructions)},
-                        {"type": "text", "text": f"Approved baseline crop (shown at {self.scale}x nearest-neighbour magnification):"},
+                        {
+                            "type": "text",
+                            "text": f"Approved baseline crop (shown at {self.scale}x nearest-neighbour magnification):",
+                        },
                         {
                             "type": "image_url",
                             "image_url": {"url": _encode(review.baseline_crop, self.scale)},
                         },
-                        {"type": "text", "text": f"Candidate crop (same {self.scale}x magnification):"},
+                        {
+                            "type": "text",
+                            "text": f"Candidate crop (same {self.scale}x magnification):",
+                        },
                         {
                             "type": "image_url",
                             "image_url": {"url": _encode(review.candidate_crop, self.scale)},

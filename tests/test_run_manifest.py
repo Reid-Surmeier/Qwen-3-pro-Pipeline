@@ -34,8 +34,20 @@ VALID_RENDER = {
         }
     ],
     "outputs": [
-        {"path": "artifacts/runs/x/image-01.png", "sha256": SHA_B, "width": 948, "height": 806, "bytes": 1000},
-        {"path": "artifacts/runs/x/image-02.png", "sha256": SHA, "width": 948, "height": 806, "bytes": 1000},
+        {
+            "path": "artifacts/runs/x/image-01.png",
+            "sha256": SHA_B,
+            "width": 948,
+            "height": 806,
+            "bytes": 1000,
+        },
+        {
+            "path": "artifacts/runs/x/image-02.png",
+            "sha256": SHA,
+            "width": 948,
+            "height": 806,
+            "bytes": 1000,
+        },
     ],
     "approvals": [
         {
@@ -55,16 +67,30 @@ VALID_ASSEMBLY = {
     "created_at": "2026-08-26T21:30:00-04:00",
     "status": "complete",
     "sources": [
-        {"role": "reference_screen", "path": "artifacts/references/plantstudio-main-window.png", "sha256": SHA},
+        {
+            "role": "reference_screen",
+            "path": "artifacts/references/plantstudio-main-window.png",
+            "sha256": SHA,
+        },
         {"role": "approved_donor", "path": "artifacts/runs/x/image-02.png", "sha256": SHA_B},
     ],
     "outputs": [
-        {"path": "artifacts/runs/y/image-01.png", "sha256": SHA_B, "width": 474, "height": 403, "bytes": 500},
+        {
+            "path": "artifacts/runs/y/image-01.png",
+            "sha256": SHA_B,
+            "width": 474,
+            "height": 403,
+            "bytes": 500,
+        },
     ],
     "region": {"x": 182, "y": 78, "width": 37, "height": 165},
     "fidelity": {"outside_region_changed_pixels": 0},
     "approvals": [
-        {"decision": "pending", "actor": "repository-owner", "timestamp": "2026-08-26T22:00:00-04:00"}
+        {
+            "decision": "pending",
+            "actor": "repository-owner",
+            "timestamp": "2026-08-26T22:00:00-04:00",
+        }
     ],
 }
 

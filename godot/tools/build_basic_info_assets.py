@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Deterministic image-79 Basic Info Assembly; no provider request."""
+
 from __future__ import annotations
 
 import hashlib
@@ -23,32 +24,45 @@ def digest(path: Path) -> str:
 def save(image: Image.Image, name: str, records: list[dict]) -> str:
     path = OUTPUT / name
     image.save(path, optimize=True)
-    records.append({"path": str(path.relative_to(ROOT)), "sha256": digest(path),
-                    "size": list(image.size)})
+    records.append(
+        {"path": str(path.relative_to(ROOT)), "sha256": digest(path), "size": list(image.size)}
+    )
     return f"res://assets/image-79/basic-info/{name}"
 
 
 def variants(image: Image.Image, stem: str, records: list[dict], disabled=False) -> dict:
     idle = image.convert("RGBA")
     hover = idle.copy()
-    ImageDraw.Draw(hover).rectangle((0, 0, hover.width - 1, hover.height - 1),
-                                    outline=BLUE)
+    ImageDraw.Draw(hover).rectangle((0, 0, hover.width - 1, hover.height - 1), outline=BLUE)
     pressed = ImageEnhance.Brightness(idle).enhance(0.68)
     values = [("idle", idle), ("hover", hover), ("pressed", pressed)]
-    return {phase: save(value, f"{stem}-{phase}.png", records)
-            for phase, value in values}
+    return {phase: save(value, f"{stem}-{phase}.png", records) for phase, value in values}
 
 
-def control(control_id: str, control_type: str, rect: tuple[int, int, int, int],
-            state_set: dict, gestures: list[str], actions: list[dict],
-            states: list[str] | None = None, initial: str = "ready", **extra) -> dict:
+def control(
+    control_id: str,
+    control_type: str,
+    rect: tuple[int, int, int, int],
+    state_set: dict,
+    gestures: list[str],
+    actions: list[dict],
+    states: list[str] | None = None,
+    initial: str = "ready",
+    **extra,
+) -> dict:
     x, y, width, height = rect
-    return {"id": control_id, "type": control_type,
-            "geometry": {"x": x, "y": y, "width": width, "height": height},
-            "interaction_phases": ["idle", "hover", "pressed"],
-            "semantic_states": states or ["ready"],
-            "initial_semantic_state": initial, "state_set": state_set,
-            "gestures": gestures, "actions": actions, **extra}
+    return {
+        "id": control_id,
+        "type": control_type,
+        "geometry": {"x": x, "y": y, "width": width, "height": height},
+        "interaction_phases": ["idle", "hover", "pressed"],
+        "semantic_states": states or ["ready"],
+        "initial_semantic_state": initial,
+        "state_set": state_set,
+        "gestures": gestures,
+        "actions": actions,
+        **extra,
+    }
 
 
 def main() -> None:
@@ -71,10 +85,17 @@ def main() -> None:
         ("basic_info.minimize", (460, 6, 16, 16), "ToggleMinimized"),
     ]:
         x, y, w, h = rect
-        states = variants(window.crop((x, y, x + w, y + h)),
-                          control_id.replace(".", "-"), records)
-        controls.append(control(control_id, "Button", rect, {"ready": states},
-                                ["Activate"], [{"gesture": "Activate", "action": action}]))
+        states = variants(window.crop((x, y, x + w, y + h)), control_id.replace(".", "-"), records)
+        controls.append(
+            control(
+                control_id,
+                "Button",
+                rect,
+                {"ready": states},
+                ["Activate"],
+                [{"gesture": "Activate", "action": action}],
+            )
+        )
 
     destination_rows = [
         ("status", (356, 42, 48, 26), "status", True),
@@ -91,11 +112,19 @@ def main() -> None:
         crop = window.crop((x, y, x + w, y + h))
         variants_map = variants(crop, f"destination-{name}", records)
         semantic = "ready" if available else "disabled"
-        controls.append(control(
-            f"basic_info.destination.{name}", "Button", rect,
-            {semantic: variants_map}, ["Activate"],
-            [{"gesture": "Activate", "action": "OpenWindow"}],
-            [semantic], semantic, value={"target_window": target}))
+        controls.append(
+            control(
+                f"basic_info.destination.{name}",
+                "Button",
+                rect,
+                {semantic: variants_map},
+                ["Activate"],
+                [{"gesture": "Activate", "action": "OpenWindow"}],
+                [semantic],
+                semantic,
+                value={"target_window": target},
+            )
+        )
 
     meter_rows = [
         ("hp", (189, 37, 151, 15), 0, 1109, 1109, 151),
@@ -107,11 +136,23 @@ def main() -> None:
         x, y, w, h = rect
         crop = window.crop((x, y, x + w, y + h))
         meter_states = variants(crop, f"meter-{name}", records)
-        controls.append(control(
-            f"basic_info.meter.{name}", "Meter", rect,
-            {"ready": meter_states}, [], [], value={
-                "minimum": minimum, "maximum": maximum, "current": current,
-                "fill_axis": "horizontal", "fill_pixels": pixels}))
+        controls.append(
+            control(
+                f"basic_info.meter.{name}",
+                "Meter",
+                rect,
+                {"ready": meter_states},
+                [],
+                [],
+                value={
+                    "minimum": minimum,
+                    "maximum": maximum,
+                    "current": current,
+                    "fill_axis": "horizontal",
+                    "fill_pixels": pixels,
+                },
+            )
+        )
 
     display_facts = [
         {"id": "name", "text": "SakumaRiri", "geometry": [16, 37, 132, 23]},
@@ -126,7 +167,8 @@ def main() -> None:
         {"id": "zeny", "text": "Zeny : 321,584,092", "geometry": [178, 177, 169, 22]},
     ]
     window_spec = {
-        "id": "basic_info", "evidence_policy": {"issue": 132},
+        "id": "basic_info",
+        "evidence_policy": {"issue": 132},
         "geometry": {"x": 0, "y": 0, "width": 484, "height": 205},
         "drag_geometry": {"x": 24, "y": 0, "width": 434, "height": 24},
         "plates": {"expanded": expanded, "minimized": minimized},
@@ -135,25 +177,42 @@ def main() -> None:
         "minimized_controls": ["basic_info.minimize", "basic_info.close"],
         "display_facts": display_facts,
         "gestures": ["Drag", "KeyCommand"],
-        "actions": [{"gesture": "Drag", "action": "MoveWindow"},
-                    {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"}],
+        "actions": [
+            {"gesture": "Drag", "action": "MoveWindow"},
+            {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+        ],
         "controls": controls,
     }
     manifest = json.loads(CONTROL_SPEC.read_text())
-    manifest["windows"] = [entry for entry in manifest["windows"]
-                           if entry.get("id") != "basic_info"] + [window_spec]
+    manifest["windows"] = [
+        entry for entry in manifest["windows"] if entry.get("id") != "basic_info"
+    ] + [window_spec]
     CONTROL_SPEC.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     asset_manifest = {
-        "schema_version": 1, "issue": 132, "provider_requests": 0,
-        "source": {"path": str(SOURCE.relative_to(ROOT)), "sha256": digest(SOURCE),
-                   "window_rect": list(WINDOW)},
+        "schema_version": 1,
+        "issue": 132,
+        "provider_requests": 0,
+        "source": {
+            "path": str(SOURCE.relative_to(ROOT)),
+            "sha256": digest(SOURCE),
+            "window_rect": list(WINDOW),
+        },
         "assembly": "deterministic source-pixel crops and source-palette State Sets",
         "files": records,
     }
     (OUTPUT / "asset-manifest.json").write_text(
-        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n")
-    print(json.dumps({"window": "basic_info", "controls": len(controls),
-                      "assets": len(records), "provider_requests": 0}))
+        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n"
+    )
+    print(
+        json.dumps(
+            {
+                "window": "basic_info",
+                "controls": len(controls),
+                "assets": len(records),
+                "provider_requests": 0,
+            }
+        )
+    )
 
 
 if __name__ == "__main__":

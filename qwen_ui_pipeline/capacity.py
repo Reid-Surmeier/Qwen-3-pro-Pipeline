@@ -71,9 +71,7 @@ def _validate_evidence(snapshot: MemorySnapshot, policy: CapacityPolicy) -> None
         ("maximum measurement age", policy.max_measurement_age_seconds),
     )
     if policy.provider_concurrency_limit is not None:
-        numeric_evidence += (
-            ("provider concurrency limit", policy.provider_concurrency_limit),
-        )
+        numeric_evidence += (("provider concurrency limit", policy.provider_concurrency_limit),)
     for name, value in numeric_evidence:
         try:
             finite = isfinite(value)
@@ -101,10 +99,7 @@ def _validate_evidence(snapshot: MemorySnapshot, policy: CapacityPolicy) -> None
         raise CapacityPlanningError("queue limit must not be negative")
     if policy.max_measurement_age_seconds < 0:
         raise CapacityPlanningError("maximum measurement age must not be negative")
-    if (
-        policy.provider_concurrency_limit is not None
-        and policy.provider_concurrency_limit < 0
-    ):
+    if policy.provider_concurrency_limit is not None and policy.provider_concurrency_limit < 0:
         raise CapacityPlanningError("provider concurrency limit must not be negative")
     if not 0 <= snapshot.available_bytes <= snapshot.total_bytes:
         raise CapacityPlanningError("available memory must be within total memory")
@@ -129,16 +124,11 @@ def plan_worker_capacity(
     current_used_bytes = snapshot.total_bytes - snapshot.available_bytes
     non_service_used_bytes = current_used_bytes - snapshot.service_current_bytes
     fixed_service_bytes = max(
-        snapshot.service_current_bytes
-        - snapshot.configured_workers * policy.worker_reserved_bytes,
+        snapshot.service_current_bytes - snapshot.configured_workers * policy.worker_reserved_bytes,
         0,
     )
-    reserved_worker_bytes = ceil(
-        policy.worker_reserved_bytes * policy.worker_safety_factor
-    )
-    effective_ceiling_bytes = min(
-        snapshot.total_bytes, policy.memory_ceiling_bytes
-    )
+    reserved_worker_bytes = ceil(policy.worker_reserved_bytes * policy.worker_safety_factor)
+    effective_ceiling_bytes = min(snapshot.total_bytes, policy.memory_ceiling_bytes)
     worker_budget_bytes = (
         effective_ceiling_bytes
         - policy.host_reserve_bytes
@@ -150,10 +140,7 @@ def plan_worker_capacity(
     reasons: list[str] = []
     if requested_workers > memory_limited_workers:
         reasons.append("memory_limit")
-    if (
-        not policy.worker_peak_validated
-        and requested_workers > snapshot.configured_workers
-    ):
+    if not policy.worker_peak_validated and requested_workers > snapshot.configured_workers:
         recommended_workers = min(recommended_workers, snapshot.configured_workers)
         reasons.append("active_worker_peak_unvalidated")
     simultaneous_capacity = recommended_workers
@@ -164,9 +151,7 @@ def plan_worker_capacity(
         reasons.append("provider_concurrency_limit")
     accepted_jobs = min(submitted_jobs, simultaneous_capacity + policy.queue_limit)
     projected_total_used_bytes = (
-        non_service_used_bytes
-        + fixed_service_bytes
-        + recommended_workers * reserved_worker_bytes
+        non_service_used_bytes + fixed_service_bytes + recommended_workers * reserved_worker_bytes
     )
     if not reasons:
         reasons.append("within_memory_budget")
@@ -178,9 +163,7 @@ def plan_worker_capacity(
         queued_jobs=max(accepted_jobs - simultaneous_capacity, 0),
         rejected_jobs=submitted_jobs - accepted_jobs,
         projected_total_used_bytes=projected_total_used_bytes,
-        remaining_host_headroom_bytes=(
-            effective_ceiling_bytes - projected_total_used_bytes
-        ),
+        remaining_host_headroom_bytes=(effective_ceiling_bytes - projected_total_used_bytes),
         reasons=tuple(reasons),
     )
 

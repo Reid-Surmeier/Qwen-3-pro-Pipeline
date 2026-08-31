@@ -24,10 +24,12 @@ def freeze(root: Path, repository: Path, candidate: str) -> dict[str, object]:
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.name == "evidence-manifest.json":
             continue
-        files.append({
-            "path": path.relative_to(root).as_posix(),
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-        })
+        files.append(
+            {
+                "path": path.relative_to(root).as_posix(),
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+        )
     if not files:
         raise ValueError("evidence root contains no files")
     manifest: dict[str, object] = {
@@ -48,11 +50,15 @@ def main() -> int:
     parser.add_argument("--repository", type=Path, default=Path.cwd())
     args = parser.parse_args()
     manifest = freeze(args.root, args.repository, args.candidate)
-    print(json.dumps({
-        "candidate_commit": manifest["candidate_commit"],
-        "files": len(manifest["files"]),
-        "manifest": str((args.root / "evidence-manifest.json").resolve()),
-    }))
+    print(
+        json.dumps(
+            {
+                "candidate_commit": manifest["candidate_commit"],
+                "files": len(manifest["files"]),
+                "manifest": str((args.root / "evidence-manifest.json").resolve()),
+            }
+        )
+    )
     return 0
 
 

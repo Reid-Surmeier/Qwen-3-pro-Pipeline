@@ -224,9 +224,7 @@ def cmd_retro_conform_states(args: argparse.Namespace) -> None:
     )
     print(json.dumps(summary, indent=2))
     if not summary["certified"]:
-        raise SystemExit(
-            "uncertified states: " + ", ".join(summary["uncertified_states"])
-        )
+        raise SystemExit("uncertified states: " + ", ".join(summary["uncertified_states"]))
 
 
 def cmd_verify(args: argparse.Namespace) -> None:
@@ -307,7 +305,9 @@ def parser() -> argparse.ArgumentParser:
     )
     retro_states.add_argument("run")
     retro_states.add_argument("--reference", required=True, help="Exact Anchor image")
-    retro_states.add_argument("--state-map", help="JSON file carrying a state_map; defaults to the run's brief")
+    retro_states.add_argument(
+        "--state-map", help="JSON file carrying a state_map; defaults to the run's brief"
+    )
     retro_states.add_argument("--fps", type=int, default=6)
     retro_states.add_argument("--max-frames", type=int, default=8)
     retro_states.add_argument("--grid", type=int, default=160)
@@ -320,11 +320,15 @@ def parser() -> argparse.ArgumentParser:
         help="Hold per state in the state-set GIF; 134 ms is the era binary-swap cadence",
     )
     retro_states.add_argument(
-        "--cycle-poses", type=int, default=12,
+        "--cycle-poses",
+        type=int,
+        default=12,
         help="Poses in the whole-gesture cycle; set it to the number the brief enumerates",
     )
     retro_states.add_argument(
-        "--pose-hold-ms", type=int, default=100,
+        "--pose-hold-ms",
+        type=int,
+        default=100,
         help="Even hold per pose in the full-cycle GIF; the era beat is 67-134 ms",
     )
     retro_states.add_argument(

@@ -5,6 +5,7 @@ from pathlib import Path
 
 try:
     from PIL import Image, ImageChops
+
     HAVE_PIL = True
 except ImportError:
     HAVE_PIL = False

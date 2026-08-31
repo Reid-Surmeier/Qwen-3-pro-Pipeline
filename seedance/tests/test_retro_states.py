@@ -41,13 +41,13 @@ def test_missing_state_map_falls_back_to_quarters() -> None:
 @pytest.mark.parametrize(
     "bad",
     [
-        {"a": "0.0-0.4", "b": "0.5-1.0"},   # gap: which state owns 0.4-0.5?
-        {"a": "0.0-0.6", "b": "0.5-1.0"},   # overlap: two states own 0.5-0.6
-        {"a": "0.1-1.0"},                    # does not start at zero
-        {"a": "0.0-0.9"},                    # does not reach the end
-        {"a": "0.5-0.2"},                    # inverted
-        {"a": "0.0-1.5"},                    # outside the take
-        {"a": "nonsense"},                   # unparseable
+        {"a": "0.0-0.4", "b": "0.5-1.0"},  # gap: which state owns 0.4-0.5?
+        {"a": "0.0-0.6", "b": "0.5-1.0"},  # overlap: two states own 0.5-0.6
+        {"a": "0.1-1.0"},  # does not start at zero
+        {"a": "0.0-0.9"},  # does not reach the end
+        {"a": "0.5-0.2"},  # inverted
+        {"a": "0.0-1.5"},  # outside the take
+        {"a": "nonsense"},  # unparseable
     ],
 )
 def test_ambiguous_cuts_are_rejected(bad: dict) -> None:
@@ -192,13 +192,13 @@ def test_inner_margin_catches_an_anchor_with_nowhere_to_move() -> None:
     # green border, white tile, blue drawing — the real structure
     no_margin = Image.new("RGB", (40, 40), matte)
     no_margin.paste(Image.new("RGB", (24, 24), (255, 255, 255)), (8, 8))  # tile
-    no_margin.paste(Image.new("RGB", (24, 4), (0, 0, 255)), (8, 8))       # ink on the tile edge
+    no_margin.paste(Image.new("RGB", (24, 4), (0, 0, 255)), (8, 8))  # ink on the tile edge
     assert inner_margin(no_margin, matte) == 0.0
     assert inner_margin(no_margin, matte) < MIN_INNER_MARGIN
 
     with_margin = Image.new("RGB", (40, 40), matte)
     with_margin.paste(Image.new("RGB", (24, 24), (255, 255, 255)), (8, 8))  # tile
-    with_margin.paste(Image.new("RGB", (12, 12), (0, 0, 255)), (14, 14))    # ink inside it
+    with_margin.paste(Image.new("RGB", (12, 12), (0, 0, 255)), (14, 14))  # ink inside it
     assert inner_margin(with_margin, matte) >= MIN_INNER_MARGIN
 
 

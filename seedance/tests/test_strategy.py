@@ -55,12 +55,7 @@ def write_reference(tmp_path: Path) -> Path:
 
 def write_motion_registry(tmp_path: Path) -> None:
     registry = (
-        tmp_path
-        / "docs"
-        / "evidence"
-        / "board-icons-test"
-        / "references"
-        / "provenance.json"
+        tmp_path / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
     )
     registry.parent.mkdir(parents=True, exist_ok=True)
     registry.write_text(
@@ -93,12 +88,7 @@ def test_good_plan_passes(tmp_path):
 def test_malformed_reference_registry_stops_strategy_check(tmp_path):
     brief_path = write_reference(tmp_path)
     registry = (
-        tmp_path
-        / "docs"
-        / "evidence"
-        / "board-icons-test"
-        / "references"
-        / "provenance.json"
+        tmp_path / "docs" / "evidence" / "board-icons-test" / "references" / "provenance.json"
     )
     registry.parent.mkdir(parents=True)
     registry.write_text("not json")
@@ -146,9 +136,7 @@ def test_actual_video_reference_must_match_declared_motion(tmp_path):
         LONG_PROMPT,
         str(anchor),
         str(anchor),
-        video_references=[
-            "https://example.test/references/ref-textbox-arrow-bob.mp4"
-        ],
+        video_references=["https://example.test/references/ref-textbox-arrow-bob.mp4"],
     )
 
     assert any("does not match real_reference" in violation for violation in violations)

@@ -40,14 +40,19 @@ def digest(path: Path) -> str:
 def save(image: Image.Image, name: str, records: list[dict[str, object]]) -> str:
     path = OUTPUT / name
     image.save(path, optimize=True)
-    records.append({"path": str(path.relative_to(ROOT)), "sha256": digest(path),
-                    "size": list(image.size)})
+    records.append(
+        {"path": str(path.relative_to(ROOT)), "sha256": digest(path), "size": list(image.size)}
+    )
     return f"res://assets/image-79/equipment-items/{name}"
 
 
-def variants(image: Image.Image, stem: str, records: list[dict[str, object]],
-             outline: tuple[int, int, int, int] | None = None,
-             dragging: bool = False) -> dict[str, str]:
+def variants(
+    image: Image.Image,
+    stem: str,
+    records: list[dict[str, object]],
+    outline: tuple[int, int, int, int] | None = None,
+    dragging: bool = False,
+) -> dict[str, str]:
     idle = image.convert("RGBA")
     if dragging:
         idle = Image.blend(Image.new("RGBA", idle.size, WHITE), idle, 0.55)
@@ -56,25 +61,44 @@ def variants(image: Image.Image, stem: str, records: list[dict[str, object]],
             draw.line((x, 0, min(x + 3, idle.width - 1), 0), fill=BLUE)
             draw.line((x, idle.height - 1, min(x + 3, idle.width - 1), idle.height - 1), fill=BLUE)
     elif outline:
-        ImageDraw.Draw(idle).rectangle((0, 0, idle.width - 1, idle.height - 1),
-                                       outline=outline, width=2)
+        ImageDraw.Draw(idle).rectangle(
+            (0, 0, idle.width - 1, idle.height - 1), outline=outline, width=2
+        )
     hover = idle.copy()
-    ImageDraw.Draw(hover).rectangle((0, 0, hover.width - 1, hover.height - 1),
-                                    outline=HOVER, width=1)
+    ImageDraw.Draw(hover).rectangle(
+        (0, 0, hover.width - 1, hover.height - 1), outline=HOVER, width=1
+    )
     pressed = ImageEnhance.Brightness(idle).enhance(0.72)
-    return {phase: save(value, f"{stem}-{phase}.png", records)
-            for phase, value in [("idle", idle), ("hover", hover), ("pressed", pressed)]}
+    return {
+        phase: save(value, f"{stem}-{phase}.png", records)
+        for phase, value in [("idle", idle), ("hover", hover), ("pressed", pressed)]
+    }
 
 
-def control(control_id: str, control_type: str, geometry: dict[str, int],
-            state_set: dict[str, object], gestures: list[str],
-            actions: list[dict[str, str]], semantic_states: list[str] | None = None,
-            initial: str | None = None, **extra: object) -> dict[str, object]:
+def control(
+    control_id: str,
+    control_type: str,
+    geometry: dict[str, int],
+    state_set: dict[str, object],
+    gestures: list[str],
+    actions: list[dict[str, str]],
+    semantic_states: list[str] | None = None,
+    initial: str | None = None,
+    **extra: object,
+) -> dict[str, object]:
     states = semantic_states or ["ready"]
-    return {"id": control_id, "type": control_type, "geometry": geometry,
-            "interaction_phases": ["idle", "hover", "pressed"],
-            "semantic_states": states, "initial_semantic_state": initial or states[0],
-            "state_set": state_set, "gestures": gestures, "actions": actions, **extra}
+    return {
+        "id": control_id,
+        "type": control_type,
+        "geometry": geometry,
+        "interaction_phases": ["idle", "hover", "pressed"],
+        "semantic_states": states,
+        "initial_semantic_state": initial or states[0],
+        "state_set": state_set,
+        "gestures": gestures,
+        "actions": actions,
+        **extra,
+    }
 
 
 def main() -> None:
@@ -89,8 +113,10 @@ def main() -> None:
         crop = window.crop((x, y, x + width, y + height))
         available = Image.new("RGBA", crop.size, WHITE)
         draw = ImageDraw.Draw(available)
-        draw.line((0, available.height - 1, available.width - 1, available.height - 1),
-                  fill=(207, 210, 214, 255))
+        draw.line(
+            (0, available.height - 1, available.width - 1, available.height - 1),
+            fill=(207, 210, 214, 255),
+        )
         surfaces[slot] = {
             "geometry": {"x": x, "y": y - 28, "width": width, "height": height},
             "state_set": {
@@ -108,30 +134,53 @@ def main() -> None:
     detail_draw.rectangle((2, 2, 153, 47), outline=(151, 177, 210, 255), width=1)
     detail_states = {"ready": variants(detail, "slot-detail", records)}
     selection = control(
-        "equipment_items.slots", "SelectionView", {"x": 0, "y": 28, "width": 484, "height": 243},
+        "equipment_items.slots",
+        "SelectionView",
+        {"x": 0, "y": 28, "width": 484, "height": 243},
         {"unselected": parent, "selected": parent},
         ["Activate", "DoubleActivate", "DragDrop"],
-        [{"gesture": "Activate", "action": "SelectEquipmentSlot"},
-         {"gesture": "DoubleActivate", "action": "UnequipEquipmentItem"},
-         {"gesture": "DragDrop", "action": "MoveEquipmentItem"}],
-        ["unselected", "selected"], "unselected",
-        value={"items": slots, "initial": "head", "item_values": {slot: slot for slot in slots},
-               "details": {slot: slot.replace("_", " ") for slot in slots},
-               "identity_surfaces": {slot: slot for slot in slots}, "drop_targets": slots,
-               "initial_version": 0, "capacity": 9, "show_empty_slots": True,
-               "value_control_ids": {},
-               "detail_view": {"size": [156, 50], "offset": [8, 0],
-                               "padding": [8, 5],
-                               "font": "res://fonts/PixelMplus10-Regular.ttf",
-                               "font_size": 12, "font_color": "#2a252a",
-                               "state_set": detail_states}}, surfaces=surfaces)
+        [
+            {"gesture": "Activate", "action": "SelectEquipmentSlot"},
+            {"gesture": "DoubleActivate", "action": "UnequipEquipmentItem"},
+            {"gesture": "DragDrop", "action": "MoveEquipmentItem"},
+        ],
+        ["unselected", "selected"],
+        "unselected",
+        value={
+            "items": slots,
+            "initial": "head",
+            "item_values": {slot: slot for slot in slots},
+            "details": {slot: slot.replace("_", " ") for slot in slots},
+            "identity_surfaces": {slot: slot for slot in slots},
+            "drop_targets": slots,
+            "initial_version": 0,
+            "capacity": 9,
+            "show_empty_slots": True,
+            "value_control_ids": {},
+            "detail_view": {
+                "size": [156, 50],
+                "offset": [8, 0],
+                "padding": [8, 5],
+                "font": "res://fonts/PixelMplus10-Regular.ttf",
+                "font_size": 12,
+                "font_color": "#2a252a",
+                "state_set": detail_states,
+            },
+        },
+        surfaces=surfaces,
+    )
 
     def button(control_id: str, rect: tuple[int, int, int, int], action: str) -> dict[str, object]:
         x, y, width, height = rect
         crop = window.crop((x, y, x + width, y + height))
-        return control(control_id, "Button", {"x": x, "y": y, "width": width, "height": height},
-                       {"ready": variants(crop, control_id.replace(".", "-"), records)},
-                       ["Activate"], [{"gesture": "Activate", "action": action}])
+        return control(
+            control_id,
+            "Button",
+            {"x": x, "y": y, "width": width, "height": height},
+            {"ready": variants(crop, control_id.replace(".", "-"), records)},
+            ["Activate"],
+            [{"gesture": "Activate", "action": action}],
+        )
 
     minimize = button("equipment_items.minimize", (436, 5, 20, 20), "ToggleMinimized")
     close = button("equipment_items.close", (461, 4, 18, 18), "CloseWindow")
@@ -141,41 +190,62 @@ def main() -> None:
     minimized_image.paste(window.crop((0, 20, 484, 24)), (0, 24))
     minimized = save(minimized_image, "minimized-plate.png", records)
     window_spec = {
-        "id": "equipment_items", "evidence_policy": {"issue": 130},
+        "id": "equipment_items",
+        "evidence_policy": {"issue": 130},
         "geometry": {"x": 0, "y": 423, "width": 484, "height": 271},
         "drag_geometry": {"x": 30, "y": 0, "width": 400, "height": 28},
         "plates": {"expanded": expanded, "minimized": minimized},
         "minimized_controls": ["equipment_items.minimize", "equipment_items.close"],
         "gestures": ["Drag", "KeyCommand"],
-        "actions": [{"gesture": "Drag", "action": "MoveWindow"},
-                    {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"}],
+        "actions": [
+            {"gesture": "Drag", "action": "MoveWindow"},
+            {"gesture": "KeyCommand", "key": "Escape", "action": "CloseWindow"},
+        ],
         "controls": [minimize, close, selection],
     }
     manifest = json.loads(CONTROL_SPEC.read_text())
-    inventory_window = next(entry for entry in manifest["windows"]
-                            if entry.get("id") == "inventory")
-    inventory_selection = next(entry for entry in inventory_window["controls"]
-                               if entry.get("id") == "inventory.items")
+    inventory_window = next(
+        entry for entry in manifest["windows"] if entry.get("id") == "inventory"
+    )
+    inventory_selection = next(
+        entry for entry in inventory_window["controls"] if entry.get("id") == "inventory.items"
+    )
     inventory_selection["value"]["foreign_identity_assets"] = {
-        slot: surface["state_set"]["unselected"]["idle"]
-        for slot, surface in surfaces.items()
+        slot: surface["state_set"]["unselected"]["idle"] for slot, surface in surfaces.items()
     }
     selection["value"]["foreign_identity_assets"] = {
         item: surface["state_set"]["unselected"]["idle"]
         for item, surface in inventory_selection["surfaces"].items()
     }
-    manifest["windows"] = [entry for entry in manifest["windows"]
-                           if entry.get("id") != "equipment_items"] + [window_spec]
+    manifest["windows"] = [
+        entry for entry in manifest["windows"] if entry.get("id") != "equipment_items"
+    ] + [window_spec]
     CONTROL_SPEC.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
-    asset_manifest = {"schema_version": 1, "issue": 130, "provider_requests": 0,
-                      "source": {"path": str(SOURCE.relative_to(ROOT)), "sha256": digest(SOURCE),
-                                 "window_rect": list(WINDOW)},
-                      "assembly": "deterministic source-pixel crops and source-palette State Sets",
-                      "files": records}
+    asset_manifest = {
+        "schema_version": 1,
+        "issue": 130,
+        "provider_requests": 0,
+        "source": {
+            "path": str(SOURCE.relative_to(ROOT)),
+            "sha256": digest(SOURCE),
+            "window_rect": list(WINDOW),
+        },
+        "assembly": "deterministic source-pixel crops and source-palette State Sets",
+        "files": records,
+    }
     (OUTPUT / "asset-manifest.json").write_text(
-        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n")
-    print(json.dumps({"window": "equipment_items", "slots": len(slots),
-                      "assets": len(records), "provider_requests": 0}))
+        json.dumps(asset_manifest, indent=2, ensure_ascii=False) + "\n"
+    )
+    print(
+        json.dumps(
+            {
+                "window": "equipment_items",
+                "slots": len(slots),
+                "assets": len(records),
+                "provider_requests": 0,
+            }
+        )
+    )
 
 
 if __name__ == "__main__":

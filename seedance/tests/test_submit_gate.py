@@ -20,9 +20,7 @@ def test_submit_refuses_a_payload_changed_after_planning(tmp_path: Path) -> None
         "input_references": [
             {
                 "type": "video_url",
-                "video_url": {
-                    "url": "https://example.test/ref-textbox-arrow-bob.mp4"
-                },
+                "video_url": {"url": "https://example.test/ref-textbox-arrow-bob.mp4"},
             }
         ],
     }

@@ -50,7 +50,9 @@ class VisualFailureAnnotationTests(unittest.TestCase):
 
     def test_taxonomy_defines_classes(self):
         classes = taxonomy_class_ids()
-        self.assertGreaterEqual(len(classes), 15, f"unexpectedly few classes parsed: {sorted(classes)}")
+        self.assertGreaterEqual(
+            len(classes), 15, f"unexpectedly few classes parsed: {sorted(classes)}"
+        )
 
     def test_records_are_valid_and_hashes_match(self):
         classes = taxonomy_class_ids()
@@ -64,7 +66,9 @@ class VisualFailureAnnotationTests(unittest.TestCase):
                 artifact = REPO / record["artifact_path"]
                 self.assertTrue(artifact.is_file(), f"missing artifact {record['artifact_path']}")
                 digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
-                self.assertEqual(digest, record["sha256"], f"hash drift for {record['artifact_path']}")
+                self.assertEqual(
+                    digest, record["sha256"], f"hash drift for {record['artifact_path']}"
+                )
 
                 for defect in record["defects"]:
                     self.assertIn(defect["class"], classes, f"unknown class {defect['class']}")
@@ -72,7 +76,9 @@ class VisualFailureAnnotationTests(unittest.TestCase):
                     self.assertTrue(defect["note"].strip())
                     if defect["region"] is not None:
                         self.assertEqual(len(defect["region"]), 4)
-                        self.assertTrue(all(isinstance(v, int) and v >= 0 for v in defect["region"]))
+                        self.assertTrue(
+                            all(isinstance(v, int) and v >= 0 for v in defect["region"])
+                        )
 
     def test_rejections_cite_defects_and_acceptances_may_not_hard_fail(self):
         for path, record in annotation_records():

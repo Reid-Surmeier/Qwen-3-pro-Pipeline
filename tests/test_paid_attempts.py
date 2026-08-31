@@ -12,31 +12,21 @@ class PaidAttemptLedgerTests(unittest.TestCase):
     def test_attempt_sentinel_blocks_resubmission_even_before_a_response(self):
         with tempfile.TemporaryDirectory() as temporary:
             ledger = PaidAttemptLedger(Path(temporary))
-            record = ledger.begin(
-                "legacy", request_sha256="abc123", requested_outputs=1
-            )
+            record = ledger.begin("legacy", request_sha256="abc123", requested_outputs=1)
 
             self.assertEqual(record["status"], "submitting")
             with self.assertRaisesRegex(RuntimeError, "refusing to submit"):
                 ledger.assert_unexecuted(("legacy", "partner"))
             with self.assertRaisesRegex(RuntimeError, "refusing to resubmit"):
-                ledger.begin(
-                    "legacy", request_sha256="abc123", requested_outputs=1
-                )
+                ledger.begin("legacy", request_sha256="abc123", requested_outputs=1)
 
     def test_attempt_updates_preserve_identity_and_request_hash(self):
         with tempfile.TemporaryDirectory() as temporary:
             ledger = PaidAttemptLedger(Path(temporary))
-            started = ledger.begin(
-                "partner", request_sha256="request-hash", requested_outputs=1
-            )
-            completed = ledger.update(
-                "partner", status="completed", completed_outputs=1
-            )
+            started = ledger.begin("partner", request_sha256="request-hash", requested_outputs=1)
+            completed = ledger.update("partner", status="completed", completed_outputs=1)
             stored = json.loads(
-                (Path(temporary) / "partner/attempt.json").read_text(
-                    encoding="utf-8"
-                )
+                (Path(temporary) / "partner/attempt.json").read_text(encoding="utf-8")
             )
 
             self.assertEqual(completed["attempt_id"], started["attempt_id"])
@@ -57,12 +47,8 @@ class PaidAttemptLedgerTests(unittest.TestCase):
     def test_attempt_creation_and_updates_sync_files_and_directories(self):
         with tempfile.TemporaryDirectory() as temporary:
             ledger = PaidAttemptLedger(Path(temporary))
-            with patch(
-                "qwen_ui_pipeline.paid_attempts.os.fsync", wraps=os.fsync
-            ) as fsync:
-                ledger.begin(
-                    "legacy", request_sha256="request-hash", requested_outputs=1
-                )
+            with patch("qwen_ui_pipeline.paid_attempts.os.fsync", wraps=os.fsync) as fsync:
+                ledger.begin("legacy", request_sha256="request-hash", requested_outputs=1)
                 begin_syncs = fsync.call_count
                 ledger.update("legacy", status="completed")
 

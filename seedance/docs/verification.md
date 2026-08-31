@@ -26,4 +26,3 @@ Review a contact sheet and real-time playback at delivery scale. Confirm:
 - any audio is intentional and synchronized.
 
 Record review separately from machine verification. Only a human can mark a run accepted.
-

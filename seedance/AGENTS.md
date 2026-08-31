@@ -43,4 +43,3 @@ python scripts/validate_repo.py
 
 Runs and secrets are ignored. Commit briefs only after removing private references and large data
 URLs.
-

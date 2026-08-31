@@ -140,9 +140,7 @@ class AlibabaImageClientTests(unittest.TestCase):
             captured["authorization"] = request.get_header("Authorization")
             payload = {
                 "output": {
-                    "choices": [
-                        {"message": {"content": [{"image": "https://result/image.png"}]}}
-                    ]
+                    "choices": [{"message": {"content": [{"image": "https://result/image.png"}]}}]
                 },
                 "usage": {"output_image_count": 1},
                 "request_id": "request-1",

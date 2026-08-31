@@ -51,7 +51,7 @@ def check_outside_region(reference, candidate, region):
             "check": "T43-outside-region-change",
             "passed": False,
             "error": "candidate dimensions differ from reference; "
-                     "normalize deterministically before this check",
+            "normalize deterministically before this check",
         }
     x, y, w, h = region
     ref = reference.convert("RGBA")
@@ -108,7 +108,7 @@ def run_gate(reference_path, candidate_path, region=None, aspect_tolerance=0.02)
         "checks": checks,
         "hard_gate_passed": all(c["passed"] for c in checks),
         "note": "passing means eligible for advisory critique and human "
-                "review; it is not an approval",
+        "review; it is not an approval",
     }
 
 

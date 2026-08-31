@@ -5,6 +5,7 @@ from pathlib import Path
 
 try:
     from PIL import Image, ImageChops
+
     HAVE_PIL = True
 except ImportError:
     HAVE_PIL = False
@@ -21,8 +22,7 @@ class ThreeRegionMuseumFilterAssemblyV005Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.baseline = Image.open(
-            ROOT
-            / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
+            ROOT / "artifacts/runs/museum-filter-assembly-v001/assembly-v001-native.png"
         ).convert("RGB")
         cls.output, cls.declared = assembly.assemble_native(cls.baseline)
         cls.actual = assembly.changed_pixel_mask(cls.baseline, cls.output)

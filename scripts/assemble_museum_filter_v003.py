@@ -7,6 +7,7 @@ rectangular donor background is copied. The permitted mask is computed from
 the old and new glyph silhouettes before composition, then checked against the
 actual baseline-to-candidate difference.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -20,8 +21,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE = ROOT / (
-    "artifacts/references/museum-filter-retro-skin-v001/"
-    "style-ro-options-window-flat-rgb.png"
+    "artifacts/references/museum-filter-retro-skin-v001/style-ro-options-window-flat-rgb.png"
 )
 BODY_FONT = ROOT / "godot/fonts/PixelMplus10-Regular.ttf"
 TITLE_FONT = ROOT / "godot/fonts/PixelMplus12-Regular.ttf"
@@ -137,16 +137,12 @@ def repo_path(path: Path) -> str:
 def changed_pixel_mask(before: Image.Image, after: Image.Image) -> Image.Image:
     if before.size != after.size:
         raise ValueError(f"image sizes differ: {before.size} != {after.size}")
-    red, green, blue = ImageChops.difference(
-        before.convert("RGB"), after.convert("RGB")
-    ).split()
+    red, green, blue = ImageChops.difference(before.convert("RGB"), after.convert("RGB")).split()
     maximum = ImageChops.lighter(ImageChops.lighter(red, green), blue)
     return maximum.point(lambda value: 255 if value else 0)
 
 
-def add_mask(
-    declared: Image.Image, local: Image.Image, xy: tuple[int, int]
-) -> None:
+def add_mask(declared: Image.Image, local: Image.Image, xy: tuple[int, int]) -> None:
     box = (xy[0], xy[1], xy[0] + local.width, xy[1] + local.height)
     combined = ImageChops.lighter(declared.crop(box), local.convert("L"))
     declared.paste(combined, xy)
@@ -192,14 +188,10 @@ def clear_and_draw_rule(
     rule: TextRule,
 ) -> None:
     old_mask = exact_ink_mask(baseline, rule.box, rule.old_inks)
-    output.paste(
-        Image.new("RGB", old_mask.size, rule.background), rule.box[:2], old_mask
-    )
+    output.paste(Image.new("RGB", old_mask.size, rule.background), rule.box[:2], old_mask)
     add_mask(declared, old_mask, rule.box[:2])
 
-    glyph = binary_text_mask(
-        rule.text, rule.font_path, rule.font_size, vertical=rule.vertical
-    )
+    glyph = binary_text_mask(rule.text, rule.font_path, rule.font_size, vertical=rule.vertical)
     output.paste(Image.new("RGB", glyph.size, rule.fill), rule.xy, glyph)
     add_mask(declared, glyph, rule.xy)
 
@@ -212,26 +204,19 @@ def restore_title_background(
         (baseline.width - 6, 20), Image.Resampling.LANCZOS
     )
     target = (20, 6, 160, 21)
-    baseline_patch = baseline.crop(target)
     bar_patch = bar.crop((target[0] - 3, target[1] - 3, target[2] - 3, target[3] - 3))
     # v001's title was drawn with exact black and white palette entries. Use
     # those source-owned glyph pixels as the predeclared erase mask; comparing
     # two whole gradient crops would incorrectly license incidental glass
     # resampling differences.
-    old_title = exact_ink_mask(
-        baseline, target, (BODY_INK, WHITE)
-    )
+    old_title = exact_ink_mask(baseline, target, (BODY_INK, WHITE))
     output.paste(bar_patch, target[:2], old_title)
     add_mask(declared, old_title, target[:2])
 
 
-def replace_title(
-    output: Image.Image, baseline: Image.Image, declared: Image.Image
-) -> None:
+def replace_title(output: Image.Image, baseline: Image.Image, declared: Image.Image) -> None:
     restore_title_background(output, baseline, declared)
-    glyph = binary_text_mask(
-        TITLE_TEXT, TITLE_FONT, 12
-    )
+    glyph = binary_text_mask(TITLE_TEXT, TITLE_FONT, 12)
     xy = (20, 6)
     highlight_xy = (xy[0] - 1, xy[1] - 1)
     # The source uses a one-pixel upper-left highlight, not a dilation halo.
@@ -251,20 +236,31 @@ def assemble_native(baseline: Image.Image) -> tuple[Image.Image, Image.Image]:
 
     replace_title(output, baseline, declared)
     rules = (
-        TextRule(OBJECT_TAB, OBJECT_TAB_TEXT, (10, 30), TAB_ON_INK, WHITE,
-                 (TAB_ON_INK,), vertical=True),
-        TextRule(MATERIAL_TAB, MATERIAL_TAB_TEXT, (10, 76), TAB_OFF_INK,
-                 TAB_OFF_FILL, (TAB_OFF_INK,), vertical=True),
-        TextRule(SEARCH_LABEL, SEARCH_TEXT, (31, 41), LABEL_INK, WHITE,
-                 (LABEL_INK,)),
-        TextRule(SEARCH_PLACEHOLDER_TARGET, SEARCH_TEXT, (81, 41), PLACEHOLDER,
-                 FIELD_FILL, (PLACEHOLDER,)),
-        TextRule(MATCH_LABEL, MATCH_TEXT, (31, 68), LABEL_INK, WHITE,
-                 (LABEL_INK,)),
+        TextRule(
+            OBJECT_TAB, OBJECT_TAB_TEXT, (10, 30), TAB_ON_INK, WHITE, (TAB_ON_INK,), vertical=True
+        ),
+        TextRule(
+            MATERIAL_TAB,
+            MATERIAL_TAB_TEXT,
+            (10, 76),
+            TAB_OFF_INK,
+            TAB_OFF_FILL,
+            (TAB_OFF_INK,),
+            vertical=True,
+        ),
+        TextRule(SEARCH_LABEL, SEARCH_TEXT, (31, 41), LABEL_INK, WHITE, (LABEL_INK,)),
+        TextRule(
+            SEARCH_PLACEHOLDER_TARGET,
+            SEARCH_TEXT,
+            (81, 41),
+            PLACEHOLDER,
+            FIELD_FILL,
+            (PLACEHOLDER,),
+        ),
+        TextRule(MATCH_LABEL, MATCH_TEXT, (31, 68), LABEL_INK, WHITE, (LABEL_INK,)),
         TextRule(ANY_TARGET, ANY_TEXT, (90, 68), BODY_INK, WHITE, (BODY_INK,)),
         TextRule(ALL_TARGET, ALL_TEXT, (142, 68), BODY_INK, WHITE, (BODY_INK,)),
-        TextRule(TRAILING_TARGET, TRAILING_TEXT, (167, 68), BODY_INK,
-                 WHITE, (BODY_INK,)),
+        TextRule(TRAILING_TARGET, TRAILING_TEXT, (167, 68), BODY_INK, WHITE, (BODY_INK,)),
     )
     for rule in rules:
         clear_and_draw_rule(output, baseline, declared, rule)
@@ -281,13 +277,11 @@ def assemble_native(baseline: Image.Image) -> tuple[Image.Image, Image.Image]:
             name, count = entry.rsplit(" ", 1)
             y = box[1] + 4 + row * ROW_STRIDE
             name_mask = binary_text_mask(name, BODY_FONT, 10)
-            output.paste(Image.new("RGB", name_mask.size, BODY_INK),
-                         (box[0], y), name_mask)
+            output.paste(Image.new("RGB", name_mask.size, BODY_INK), (box[0], y), name_mask)
             add_mask(declared, name_mask, (box[0], y))
             count_x = box[0] + name_mask.width + 4
             count_mask = binary_text_mask(count, BODY_FONT, 10)
-            output.paste(Image.new("RGB", count_mask.size, COUNT_INK),
-                         (count_x, y), count_mask)
+            output.paste(Image.new("RGB", count_mask.size, COUNT_INK), (count_x, y), count_mask)
             add_mask(declared, count_mask, (count_x, y))
 
     actual = changed_pixel_mask(baseline, output)
@@ -324,9 +318,7 @@ def make_contact_sheet(
     )
     sheet = Image.new("RGB", sheet_size, (24, 22, 29))
     draw = ImageDraw.Draw(sheet)
-    font = ImageFont.truetype(
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24
-    )
+    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
     panels = (
         (full_baseline, "Assembly v001 — background authority", 0, 0),
         (rejected, "Rejected Assembly v002 — rectangle seams", 1, 0),
@@ -357,8 +349,12 @@ def write_verification(
         changed = count_mask_pixels(region)
         area = region.width * region.height
         densities.append(
-            {"box": list(box), "changed_pixels": changed, "area": area,
-             "fill_fraction": changed / area}
+            {
+                "box": list(box),
+                "changed_pixels": changed,
+                "area": area,
+                "fill_fraction": changed / area,
+            }
         )
     record = {
         "baseline": {"path": repo_path(baseline_path), "sha256": sha256(baseline_path)},
@@ -371,22 +367,20 @@ def write_verification(
         "candidate_native": {"path": repo_path(native_path), "sha256": sha256(native_path)},
         "edit_mask": {"path": repo_path(mask_path), "sha256": sha256(mask_path)},
         "edit_mask_native": {
-            "path": repo_path(native_mask_path), "sha256": sha256(native_mask_path)
+            "path": repo_path(native_mask_path),
+            "sha256": sha256(native_mask_path),
         },
         "dimensions": {"native": list(NATIVE_SIZE), "review": list(REVIEW_SIZE)},
         "fidelity_check": {
             "changed_pixels_native": count_mask_pixels(actual_mask),
             "declared_mask_pixels_native": count_mask_pixels(declared_mask),
-            "mask_equals_actual_changed_pixels": (
-                declared_mask.tobytes() == actual_mask.tobytes()
-            ),
+            "mask_equals_actual_changed_pixels": (declared_mask.tobytes() == actual_mask.tobytes()),
             "changed_pixels_outside_declared_mask": count_mask_pixels(
                 ImageChops.multiply(actual_mask, ImageChops.invert(declared_mask))
             ),
             "outside_declared_mask_max_channel_error": 0,
-            "passed": ImageChops.multiply(
-                actual_mask, ImageChops.invert(declared_mask)
-            ).getbbox() is None,
+            "passed": ImageChops.multiply(actual_mask, ImageChops.invert(declared_mask)).getbbox()
+            is None,
         },
         "shape_mask_density": densities,
         "immutable": {

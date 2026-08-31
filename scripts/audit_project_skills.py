@@ -133,11 +133,7 @@ def audit_repository(repo_root: Path) -> list[str]:
     compatibility_roots = [
         path
         for index, value in enumerate(compatibility_values)
-        if (
-            path := _project_relative_path(
-                value, f"compatibility_links[{index}]", errors
-            )
-        )
+        if (path := _project_relative_path(value, f"compatibility_links[{index}]", errors))
         is not None
     ]
     if canonical_relative is None:
@@ -159,7 +155,9 @@ def audit_repository(repo_root: Path) -> list[str]:
         skill_dir = canonical_root / name
         skill_file = skill_dir / "SKILL.md"
         if skill_dir.is_symlink():
-            errors.append(f"canonical skill must not be a symlink: {skill_dir.relative_to(repo_root)}")
+            errors.append(
+                f"canonical skill must not be a symlink: {skill_dir.relative_to(repo_root)}"
+            )
         try:
             contents = skill_file.read_text(encoding="utf-8")
         except (OSError, UnicodeError) as exc:
@@ -213,7 +211,9 @@ def audit_repository(repo_root: Path) -> list[str]:
         for name in skills:
             link = link_root / name
             if not link.is_symlink():
-                errors.append(f"compatibility entry is not a symlink: {link.relative_to(repo_root)}")
+                errors.append(
+                    f"compatibility entry is not a symlink: {link.relative_to(repo_root)}"
+                )
                 continue
             expected_target = (canonical_root / name).resolve()
             try:
@@ -228,7 +228,9 @@ def audit_repository(repo_root: Path) -> list[str]:
             try:
                 actual_target.relative_to(repo_root)
             except ValueError:
-                errors.append(f"compatibility link leaves the project: {link.relative_to(repo_root)}")
+                errors.append(
+                    f"compatibility link leaves the project: {link.relative_to(repo_root)}"
+                )
 
     return errors
 

@@ -15,4 +15,3 @@ Research and experiments should isolate one variable at a time:
 
 Start with a Mini factorial screen on the most uncertain variable, then transfer the winning motion
 brief to 2.5. Do not infer that a Mini seed reproduces identical motion in 2.5.
-

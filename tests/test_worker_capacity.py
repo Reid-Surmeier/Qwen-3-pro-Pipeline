@@ -328,15 +328,9 @@ class WorkerCapacityTests(unittest.TestCase):
         self.assertEqual(len(scenarios), 15)
         self.assertEqual(
             {(item.requested_workers, item.submitted_jobs) for item in scenarios},
-            {
-                (workers, jobs)
-                for workers in (5, 6, 8, 10, 12)
-                for jobs in (6, 12, 24)
-            },
+            {(workers, jobs) for workers in (5, 6, 8, 10, 12) for jobs in (6, 12, 24)},
         )
-        self.assertTrue(
-            all(item.recommendation.recommended_workers <= 5 for item in scenarios)
-        )
+        self.assertTrue(all(item.recommendation.recommended_workers <= 5 for item in scenarios))
         self.assertTrue(
             all(
                 "active_worker_peak_unvalidated" in item.recommendation.reasons

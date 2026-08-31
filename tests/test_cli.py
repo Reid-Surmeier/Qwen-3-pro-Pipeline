@@ -57,6 +57,7 @@ class RecordComfyRunTests(unittest.TestCase):
             self.assertEqual(run["provenance"]["figma_file_key"], "figma-key")
             self.assertEqual(len(run["provenance"]["reference_sha256"]), 64)
 
+
 class ComponentWorkflowTests(unittest.TestCase):
     def test_writes_an_exact_component_extraction_workflow(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -252,9 +252,7 @@ class CorrectionCorpusTests(unittest.TestCase):
                 malformed[field] = [value]
                 with tempfile.TemporaryDirectory() as directory:
                     path = Path(directory) / "corpus.json"
-                    path.write_text(
-                        json.dumps({"prompts": [malformed]}), encoding="utf-8"
-                    )
+                    path.write_text(json.dumps({"prompts": [malformed]}), encoding="utf-8")
 
                     with self.assertRaisesRegex(FidelityContractError, "non-empty strings"):
                         load_correction_prompts(path)
@@ -300,9 +298,7 @@ class PaletteComparisonTests(unittest.TestCase):
         candidate = with_pixel(with_pixel(baseline, 2, 1, BLUE), 3, 2, (0, 128, 0, 255))
 
         title = next(
-            c
-            for c in compare_palettes(self.contract, candidate, baseline)
-            if c.region == "title"
+            c for c in compare_palettes(self.contract, candidate, baseline) if c.region == "title"
         )
 
         self.assertEqual(title.candidate_colours, 3)

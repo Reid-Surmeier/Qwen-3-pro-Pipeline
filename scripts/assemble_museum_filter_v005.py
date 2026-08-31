@@ -6,13 +6,14 @@ padding from the full-resolution source instead of the tight 13px sprite crop.
 The inactive material tab is widened and its stairs run from wide tips to a
 narrower middle, matching the source orientation. No generation is used.
 """
+
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw
+from PIL import Image, ImageDraw
 
 try:
     from scripts import assemble_museum_filter_v004 as v004
@@ -53,9 +54,7 @@ count_pixels = v004.count_pixels
 
 def bead_asset() -> tuple[Image.Image, Image.Image]:
     """Return a 15px bead with a guaranteed one-pixel transparent margin."""
-    reference = Image.open(
-        REFERENCE_DIR / "style-ro-options-window-flat-rgb.png"
-    ).convert("RGB")
+    reference = Image.open(REFERENCE_DIR / "style-ro-options-window-flat-rgb.png").convert("RGB")
     # The full-resolution source bead occupies roughly x/y 60..109. The 64px
     # crop keeps real header pixels around it so the downsampled orb is not cut
     # off like the earlier tight 13px sprite.
@@ -79,9 +78,21 @@ def bead_asset() -> tuple[Image.Image, Image.Image]:
 def material_tab_points() -> tuple[tuple[int, int], ...]:
     """Wide tips step inward to the narrower body—the source orientation."""
     return (
-        (0, 0), (19, 0), (19, 1), (18, 1), (18, 3),
-        (17, 3), (17, 5), (16, 5), (16, 49), (17, 49),
-        (17, 51), (18, 51), (18, 53), (19, 53), (19, 54),
+        (0, 0),
+        (19, 0),
+        (19, 1),
+        (18, 1),
+        (18, 3),
+        (17, 3),
+        (17, 5),
+        (16, 5),
+        (16, 49),
+        (17, 49),
+        (17, 51),
+        (18, 51),
+        (18, 53),
+        (19, 53),
+        (19, 54),
         (0, 54),
     )
 
@@ -100,8 +111,10 @@ def paste_bead(
     box: tuple[int, int, int, int],
 ) -> None:
     local_box = (
-        box[0] - TITLE_ORIGIN[0], box[1] - TITLE_ORIGIN[1],
-        box[2] - TITLE_ORIGIN[0], box[3] - TITLE_ORIGIN[1],
+        box[0] - TITLE_ORIGIN[0],
+        box[1] - TITLE_ORIGIN[1],
+        box[2] - TITLE_ORIGIN[0],
+        box[3] - TITLE_ORIGIN[1],
     )
     patch = bar.crop(local_box)
     bead, alpha = bead_asset()
@@ -128,9 +141,7 @@ def paste_close(
     )
 
 
-def rebuild_material_tab(
-    output: Image.Image, baseline: Image.Image, declared: Image.Image
-) -> None:
+def rebuild_material_tab(output: Image.Image, baseline: Image.Image, declared: Image.Image) -> None:
     final = baseline.crop(MATERIAL_BOX)
 
     # Clear only the old v001 tab rectangle back to its correctly phased body
@@ -173,9 +184,7 @@ def assemble_native(baseline: Image.Image) -> tuple[Image.Image, Image.Image]:
 
 def zoom(image: Image.Image, box: tuple[int, int, int, int], scale: int = 8) -> Image.Image:
     crop = image.crop(box)
-    return crop.resize(
-        (crop.width * scale, crop.height * scale), Image.Resampling.NEAREST
-    )
+    return crop.resize((crop.width * scale, crop.height * scale), Image.Resampling.NEAREST)
 
 
 def contact_sheet(
@@ -190,23 +199,24 @@ def contact_sheet(
         ("right bead and close", (262, 2, 310, 23)),
         ("material tab", (1, 65, 25, 128)),
     )
-    crop_rows = [
-        (name, zoom(parent, box), zoom(candidate, box))
-        for name, box in crop_boxes
-    ]
+    crop_rows = [(name, zoom(parent, box), zoom(candidate, box)) for name, box in crop_boxes]
     width = max(
         sum(image.width for image in fulls) + 48,
         max(before.width + after.width + 36 for _, before, after in crop_rows),
     )
-    height = 26 + fulls[0].height + sum(
-        26 + max(before.height, after.height) for _, before, after in crop_rows
-    ) + 20
+    height = (
+        26
+        + fulls[0].height
+        + sum(26 + max(before.height, after.height) for _, before, after in crop_rows)
+        + 20
+    )
     sheet = Image.new("RGB", (width, height), (32, 35, 43))
     draw = ImageDraw.Draw(sheet)
     draw.text((12, 7), "v001 / rejected v004 / corrected v005", fill=(255, 255, 255))
     x, y = 12, 26
     for image in fulls:
-        sheet.paste(image, (x, y)); x += image.width + 12
+        sheet.paste(image, (x, y))
+        x += image.width + 12
     y += fulls[0].height
     for name, before, after in crop_rows:
         draw.text((12, y + 7), f"{name}: v004 left / v005 right", fill=(255, 255, 255))
@@ -293,9 +303,7 @@ def main() -> int:
             "verification": repo_path(output_dir / "verification.json"),
         },
     }
-    (output_dir / "run.json").write_text(
-        json.dumps(run, indent=2) + "\n", encoding="utf-8"
-    )
+    (output_dir / "run.json").write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(verification, indent=2))
     return 0
 

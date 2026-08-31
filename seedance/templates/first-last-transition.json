@@ -7,4 +7,3 @@
   "background": "Use the exact background present in the endpoint frames.",
   "negative_constraints": ["no cut", "no camera move", "no typography drift", "no unrequested effects"]
 }
-

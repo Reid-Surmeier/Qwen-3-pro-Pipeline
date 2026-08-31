@@ -63,9 +63,7 @@ class Issue72AspectTextTest(unittest.TestCase):
                 plan = json.loads((out / "plan.json").read_text(encoding="utf-8"))
                 for seed in MODULE.SEEDS:
                     request = MODULE.request_for(seed)
-                    request_sha256, client_request_id = MODULE._request_identity(
-                        request, seed
-                    )
+                    request_sha256, client_request_id = MODULE._request_identity(request, seed)
                     self.assertEqual(
                         plan["new_arm"]["requests"][str(seed)],
                         {
@@ -85,9 +83,11 @@ class Issue72AspectTextTest(unittest.TestCase):
             (out / "attempts" / "seed-11-4x3.json").write_text(
                 json.dumps({"status": "ambiguous-provider-error"}), encoding="utf-8"
             )
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(MODULE.OpenRouterImageClient, "generate") as generate:
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(MODULE.OpenRouterImageClient, "generate") as generate,
+            ):
                 with self.assertRaisesRegex(SystemExit, "blocks every later seed"):
                     MODULE.submit(733)
                 generate.assert_not_called()
@@ -96,19 +96,19 @@ class Issue72AspectTextTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             out = Path(directory)
             self._copy_prepared_packet(out)
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(
-                MODULE.OpenRouterImageClient,
-                "generate",
-                side_effect=TimeoutError("test timeout"),
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(
+                    MODULE.OpenRouterImageClient,
+                    "generate",
+                    side_effect=TimeoutError("test timeout"),
+                ),
             ):
                 with self.assertRaisesRegex(SystemExit, "may be billed"):
                     MODULE.submit(11)
             attempt = json.loads(
-                (out / "attempts" / "seed-11-4x3.json").read_text(
-                    encoding="utf-8"
-                )
+                (out / "attempts" / "seed-11-4x3.json").read_text(encoding="utf-8")
             )
             self.assertEqual(attempt["status"], "ambiguous-provider-error")
             self.assertTrue((out / "image-submission.lock").exists())
@@ -118,17 +118,15 @@ class Issue72AspectTextTest(unittest.TestCase):
             out = Path(directory)
             self._copy_prepared_packet(out)
             response = {"data": [], "usage": {"cost": 0.043}}
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(
-                MODULE.OpenRouterImageClient, "generate", return_value=response
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(MODULE.OpenRouterImageClient, "generate", return_value=response),
             ):
                 with self.assertRaisesRegex(SystemExit, "unexpected output count"):
                     MODULE.submit(11)
             attempt = json.loads(
-                (out / "attempts" / "seed-11-4x3.json").read_text(
-                    encoding="utf-8"
-                )
+                (out / "attempts" / "seed-11-4x3.json").read_text(encoding="utf-8")
             )
             self.assertEqual(attempt["status"], "ambiguous-output-count")
             self.assertTrue((out / "image-submission.lock").exists())
@@ -138,19 +136,16 @@ class Issue72AspectTextTest(unittest.TestCase):
             out = Path(directory)
             self._copy_prepared_packet(out)
             response = {"data": [{"b64_json": "AAAA"}], "usage": {"cost": 0.043}}
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(
-                MODULE.OpenRouterImageClient, "generate", return_value=response
-            ), mock.patch.object(
-                MODULE, "write_run_artifacts", side_effect=OSError("disk full")
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(MODULE.OpenRouterImageClient, "generate", return_value=response),
+                mock.patch.object(MODULE, "write_run_artifacts", side_effect=OSError("disk full")),
             ):
                 with self.assertRaisesRegex(SystemExit, "persistence failed"):
                     MODULE.submit(11)
             attempt = json.loads(
-                (out / "attempts" / "seed-11-4x3.json").read_text(
-                    encoding="utf-8"
-                )
+                (out / "attempts" / "seed-11-4x3.json").read_text(encoding="utf-8")
             )
             self.assertEqual(attempt["status"], "ambiguous-persistence-error")
             self.assertTrue((out / "image-submission.lock").exists())
@@ -160,18 +155,17 @@ class Issue72AspectTextTest(unittest.TestCase):
             out = Path(directory)
             self._copy_prepared_packet(out)
             response = {"data": [{"b64_json": "AAAA"}], "usage": {"cost": 0.043}}
-            with mock.patch.object(MODULE, "OUT", out), mock.patch.dict(
-                "os.environ", {"OPENROUTER_API_KEY": "test-only"}
-            ), mock.patch.object(
-                MODULE.OpenRouterImageClient, "generate", return_value=response
-            ), mock.patch.object(
-                MODULE, "write_run_artifacts", return_value={"usage": {"cost": 0.043}}
+            with (
+                mock.patch.object(MODULE, "OUT", out),
+                mock.patch.dict("os.environ", {"OPENROUTER_API_KEY": "test-only"}),
+                mock.patch.object(MODULE.OpenRouterImageClient, "generate", return_value=response),
+                mock.patch.object(
+                    MODULE, "write_run_artifacts", return_value={"usage": {"cost": 0.043}}
+                ),
             ):
                 MODULE.submit(11)
             attempt = json.loads(
-                (out / "attempts" / "seed-11-4x3.json").read_text(
-                    encoding="utf-8"
-                )
+                (out / "attempts" / "seed-11-4x3.json").read_text(encoding="utf-8")
             )
             self.assertEqual(attempt["status"], "completed")
             self.assertFalse((out / "image-submission.lock").exists())
@@ -183,9 +177,7 @@ class Issue72AspectTextTest(unittest.TestCase):
     def test_completed_new_outputs_have_native_provenance_and_cost(self):
         for seed in MODULE.SEEDS:
             with self.subTest(seed=seed):
-                attempt_path = (
-                    MODULE.OUT / "attempts" / f"seed-{seed}-4x3.json"
-                )
+                attempt_path = MODULE.OUT / "attempts" / f"seed-{seed}-4x3.json"
                 run_dir = MODULE.OUT / "runs" / f"seed-{seed}-4x3"
                 attempt = json.loads(attempt_path.read_text(encoding="utf-8"))
                 run = json.loads((run_dir / "run.json").read_text(encoding="utf-8"))
@@ -209,9 +201,7 @@ class Issue72AspectTextTest(unittest.TestCase):
 
     def test_bounded_review_records_null_incidence(self):
         review = json.loads(
-            (MODULE.OUT / "bounded-advisory-review.json").read_text(
-                encoding="utf-8"
-            )
+            (MODULE.OUT / "bounded-advisory-review.json").read_text(encoding="utf-8")
         )
         self.assertFalse(review["conclusion"]["clean_separation"])
         self.assertFalse(review["conclusion"]["taxonomy_change_supported"])
@@ -224,9 +214,7 @@ class Issue72AspectTextTest(unittest.TestCase):
                 )
 
     def test_figjam_delivery_is_one_native_image_node_per_source(self):
-        placement = json.loads(
-            (MODULE.OUT / "figjam-placement.json").read_text(encoding="utf-8")
-        )
+        placement = json.loads((MODULE.OUT / "figjam-placement.json").read_text(encoding="utf-8"))
         self.assertEqual(placement["status"], "completed")
         self.assertEqual(placement["sessionId"], "issue-72-aspect-text")
         self.assertEqual(placement["layout"]["visibleTextCount"], 0)

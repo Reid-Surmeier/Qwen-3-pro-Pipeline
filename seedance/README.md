@@ -101,4 +101,3 @@ This is an independent video-focused successor to the source-locked design philo
 `2a890169e6f2293676d06f2c1bdb6e8b67978de3`. It does not use Qwen. It preserves the useful
 Figma/ComfyUI principles: source authority, non-destructive variants, visible provenance,
 focused readback, and explicit acceptance gates.
-
