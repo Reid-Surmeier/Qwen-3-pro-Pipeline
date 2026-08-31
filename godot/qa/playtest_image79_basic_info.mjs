@@ -1,7 +1,7 @@
 // Issue #132 real-Chromium Play Log. Every manifest action is driven through
 // pointer or keyboard input and hash-bound to the reviewed candidate.
 import { createHash } from "node:crypto";
-import { spawnSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 import { mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -16,7 +16,7 @@ const URL = process.env.IMAGE79_URL ?? "http://127.0.0.1:8878/?screen=image79";
 const OUT = resolve(process.env.IMAGE79_PLAYTEST_OUT
   ?? resolve(SCRIPT_DIR, "out/image79-basic-info-browser"));
 const CANDIDATE = process.env.CANDIDATE_SHA
-  ?? "3813795d82d37aa38d22a3e5b299348c4ee661e0";
+  ?? execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const DESIGN = { width: 1536, height: 1024 };
 const INTENDED = { x: 0, y: 0, width: 1536, height: 1024 };
 const INVARIANT = { x: 1400, y: 800, width: 100, height: 100 };
